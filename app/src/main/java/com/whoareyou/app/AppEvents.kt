@@ -39,6 +39,13 @@ object AppEvents {
         "profile_challenge",
         mapOf("quiz_id" to quizId, "score" to score)
     )
+    fun dailyQuestionView(questionId: String) = log("daily_question_view", mapOf("question_id" to questionId))
+    fun dailyQuestionVote(questionId: String, option: Int) = log(
+        "daily_question_vote",
+        mapOf("question_id" to questionId, "option" to option.coerceIn(0, 1))
+    )
+    fun streakContinue(streak: Int) = log("streak_continue", mapOf("streak" to streak))
+    fun achievementUnlock(achievementId: String) = log("achievement_unlock", mapOf("achievement_id" to achievementId))
     fun premiumView() = log("premium_view")
     fun purchaseSuccess(productId: String) = log("purchase_success", mapOf("product_id" to productId))
     fun adImpression(placement: String) = log("ad_impression", mapOf("placement" to placement))
