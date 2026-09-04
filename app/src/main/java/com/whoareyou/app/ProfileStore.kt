@@ -16,7 +16,8 @@ data class StoredProfile(
     val completedQuizIds: Set<String> = emptySet(),
     val latestScores: Map<String, Int> = emptyMap(),
     val adsRemoved: Boolean = false,
-    val onboardingComplete: Boolean = false,
+    // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
+    val onboardingComplete: Boolean = true,
     val daily: DailyState = DailyState()
 )
 
