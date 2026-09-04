@@ -55,14 +55,14 @@ object ResultShare {
                         file
                     )
 
-                    val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
-                        ChallengeShare.buildUri(quizId, score).toString()
-                    }
+                    val quizId = QuizRepository.load(context).firstOrNull { it.title == quizTitle }?.id
+                    val challengeUri = quizId?.let { ChallengeShare.buildUri(it, score).toString() }
 
                     val shareText = buildString {
-                        append("I got $resultTitle — $score% on $quizTitle. What are you?")
+                        append(context.getString(R.string.result_share_text, resultTitle, score, quizTitle))
                         if (challengeUri != null) {
-                            append("\n\nTake the same test and compare with me: $challengeUri")
+                            append("\n\n")
+                            append(context.getString(R.string.result_share_challenge, challengeUri))
                         }
                     }
 
@@ -73,7 +73,7 @@ object ResultShare {
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
 
-                    Intent.createChooser(intent, "Share your result")
+                    Intent.createChooser(intent, context.getString(R.string.result_share_chooser))
                 } finally {
                     bitmap.recycle()
                 }
@@ -81,15 +81,6 @@ object ResultShare {
 
             context.startActivity(chooser)
         }
-    }
-
-    private fun quizIdFromTitle(title: String): String? = when (title) {
-        "Social Battery" -> "social_battery"
-        "Logic vs Emotion" -> "logic_emotion"
-        "Overthinker" -> "overthinker"
-        "Chaos vs Control" -> "chaos_control"
-        "Risk Taker" -> "risk_taker"
-        else -> null
     }
 
     private fun render(
