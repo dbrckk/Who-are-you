@@ -57,17 +57,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme(
-                colorScheme = androidx.compose.material3.darkColorScheme(
-                    background = Ink,
-                    surface = Panel,
-                    primary = Violet,
-                    secondary = Cyan
-                )
-            ) {
-                Surface(modifier = Modifier.fillMaxSize(), color = Ink) {
-                    WhoAreYouApp()
-                }
+            MaterialTheme(colorScheme = androidx.compose.material3.darkColorScheme(background = Ink, surface = Panel, primary = Violet, secondary = Cyan)) {
+                Surface(modifier = Modifier.fillMaxSize(), color = Ink) { WhoAreYouApp() }
             }
         }
     }
@@ -80,6 +71,7 @@ private fun WhoAreYouApp() {
     val context = LocalContext.current
     val activity = context as? Activity
     val scope = rememberCoroutineScope()
+    val quizCatalog = remember(context) { QuizRepository.load(context) }
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
 
     var premiumOverride by remember { mutableStateOf(false) }
@@ -94,12 +86,13 @@ private fun WhoAreYouApp() {
     }
 
     var screen by remember { mutableStateOf(Screen.DISCOVER) }
-    var selectedQuiz by remember { mutableStateOf(quizzes.first()) }
+    var selectedQuiz by remember(quizCatalog) { mutableStateOf(quizCatalog.first()) }
     var finalScore by remember { mutableIntStateOf(0) }
 
     AnimatedContent(targetState = screen, label = "screen") { destination ->
         when (destination) {
             Screen.DISCOVER -> DiscoverScreen(
+                quizzes = quizCatalog,
                 completed = storedProfile.completedQuizIds,
                 adsRemoved = adsRemoved,
                 onQuizSelected = {
@@ -107,9 +100,7 @@ private fun WhoAreYouApp() {
                     AppEvents.testStart(it.id)
                     screen = Screen.QUIZ
                 },
-                onRemoveAds = {
-                    if (!adsRemoved && activity != null) billingManager.launchPurchase(activity)
-                }
+                onRemoveAds = { if (!adsRemoved && activity != null) billingManager.launchPurchase(activity) }
             )
 
             Screen.QUIZ -> QuizScreen(
@@ -127,11 +118,8 @@ private fun WhoAreYouApp() {
                 quiz = selectedQuiz,
                 score = finalScore,
                 completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
-                onDone = {
-                    adManager.onResultFinished(activity, adsRemoved) {
-                        screen = Screen.DISCOVER
-                    }
-                },
+                totalQuizCount = quizCatalog.size,
+                onDone = { adManager.onResultFinished(activity, adsRemoved) { screen = Screen.DISCOVER } },
                 onRetry = {
                     AppEvents.testStart(selectedQuiz.id)
                     screen = Screen.QUIZ
@@ -143,6 +131,7 @@ private fun WhoAreYouApp() {
 
 @Composable
 private fun DiscoverScreen(
+    quizzes: List<Quiz>,
     completed: Set<String>,
     adsRemoved: Boolean,
     onQuizSelected: (Quiz) -> Unit,
@@ -160,12 +149,12 @@ private fun DiscoverScreen(
             Spacer(Modifier.height(10.dp))
             Text("Fast personality tests. Visual results. Compare with friends.", color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
-            ProfileProgress(completed.size)
+            ProfileProgress(completed.size, quizzes.size)
             Spacer(Modifier.height(10.dp))
             Text("TRENDING TESTS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
 
-        items(quizzes) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
+        items(quizzes, key = { it.id }) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
 
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
@@ -210,8 +199,8 @@ private fun DiscoverScreen(
 }
 
 @Composable
-private fun ProfileProgress(completedCount: Int) {
-    val progress by animateFloatAsState((completedCount / quizzes.size.toFloat()).coerceIn(0f, 1f), label = "profileProgress")
+private fun ProfileProgress(completedCount: Int, totalQuizCount: Int) {
+    val progress by animateFloatAsState((completedCount / totalQuizCount.toFloat()).coerceIn(0f, 1f), label = "profileProgress")
     Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(22.dp)) {
         Column(Modifier.padding(18.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -221,18 +210,14 @@ private fun ProfileProgress(completedCount: Int) {
             Spacer(Modifier.height(10.dp))
             LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
             Spacer(Modifier.height(8.dp))
-            Text("$completedCount/${quizzes.size} dimensions discovered", color = Muted, fontSize = 12.sp)
+            Text("$completedCount/$totalQuizCount dimensions discovered", color = Muted, fontSize = 12.sp)
         }
     }
 }
 
 @Composable
 private fun QuizCard(quiz: Quiz, completed: Boolean, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = Panel),
-        shape = RoundedCornerShape(26.dp)
-    ) {
+    Card(modifier = Modifier.fillMaxWidth().clickable(onClick = onClick), colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(26.dp)) {
         Column(Modifier.padding(22.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(quiz.accent, fontSize = 26.sp)
@@ -273,12 +258,8 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
                 Card(
                     modifier = Modifier.fillMaxWidth().clickable {
                         val newScore = score + answer.score
-                        if (questionIndex == quiz.questions.lastIndex) {
-                            onFinished(((newScore.toFloat() / (quiz.questions.size * 3)) * 100).toInt())
-                        } else {
-                            score = newScore
-                            questionIndex++
-                        }
+                        if (questionIndex == quiz.questions.lastIndex) onFinished(((newScore.toFloat() / (quiz.questions.size * 3)) * 100).toInt())
+                        else { score = newScore; questionIndex++ }
                     },
                     colors = CardDefaults.cardColors(containerColor = Panel),
                     shape = RoundedCornerShape(18.dp)
@@ -295,23 +276,19 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
 }
 
 @Composable
-private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: () -> Unit, onRetry: () -> Unit) {
+private fun ResultScreen(
+    quiz: Quiz,
+    score: Int,
+    completedCount: Int,
+    totalQuizCount: Int,
+    onDone: () -> Unit,
+    onRetry: () -> Unit
+) {
     val context = LocalContext.current
-    val resultTitle = when {
-        score < 35 -> quiz.lowTitle
-        score < 70 -> quiz.midTitle
-        else -> quiz.highTitle
-    }
-    val description = when {
-        score < 35 -> quiz.lowDescription
-        score < 70 -> quiz.midDescription
-        else -> quiz.highDescription
-    }
+    val resultTitle = when { score < 35 -> quiz.lowTitle; score < 70 -> quiz.midTitle; else -> quiz.highTitle }
+    val description = when { score < 35 -> quiz.lowDescription; score < 70 -> quiz.midDescription; else -> quiz.highDescription }
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Spacer(Modifier.height(32.dp))
             Text("YOUR RESULT", color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -343,7 +320,7 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
                 Column(Modifier.padding(18.dp)) {
                     Text("PROFILE PROGRESS", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
-                    Text("$completedCount/${quizzes.size} dimensions discovered", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    Text("$completedCount/$totalQuizCount dimensions discovered", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 
