@@ -48,8 +48,18 @@ private val ChallengeMuted = Color(0xFFA4A7B5)
 class ChallengeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val incoming = ChallengeShare.parse(intent?.data)
+        val incomingUri = intent?.data
+        val incoming = ChallengeShare.parse(incomingUri)
         val quiz = incoming?.let { QuizRepository.find(this, it.quizId) }
+
+        if (incomingUri?.scheme == "https") {
+            AppEvents.appLinkOpen(incomingUri.path.orEmpty())
+        }
+        if (incoming != null) {
+            val source = if (incomingUri?.scheme == "https") "https" else "legacy_scheme"
+            AppEvents.challengeOpen(incoming.quizId, source)
+        }
+
         setContent {
             MaterialTheme(colorScheme = androidx.compose.material3.darkColorScheme(background = ChallengeInk, surface = ChallengePanel, primary = ChallengeViolet, secondary = ChallengeCyan)) {
                 Surface(modifier = Modifier.fillMaxSize(), color = ChallengeInk) {
