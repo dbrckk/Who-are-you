@@ -47,17 +47,34 @@ object ResultShare {
             file
         )
 
+        val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
+            ChallengeShare.buildUri(quizId, score).toString()
+        }
+
+        val shareText = buildString {
+            append("I got $resultTitle — $score% on $quizTitle. What are you?")
+            if (challengeUri != null) {
+                append("\n\nTake the same test and compare with me: $challengeUri")
+            }
+        }
+
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "image/png"
             putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(
-                Intent.EXTRA_TEXT,
-                "I got $resultTitle — $score% on $quizTitle. What are you?"
-            )
+            putExtra(Intent.EXTRA_TEXT, shareText)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
 
         context.startActivity(Intent.createChooser(intent, "Share your result"))
+    }
+
+    private fun quizIdFromTitle(title: String): String? = when (title) {
+        "Social Battery" -> "social_battery"
+        "Logic vs Emotion" -> "logic_emotion"
+        "Overthinker" -> "overthinker"
+        "Chaos vs Control" -> "chaos_control"
+        "Risk Taker" -> "risk_taker"
+        else -> null
     }
 
     private fun render(
