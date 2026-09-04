@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "social_battery", "title": "Batterie sociale", "hook": "Combien de temps peux-tu vraiment supporter les interactions sociales ?", "time": "45 SEC", "accent": "◉", "metricLow": "SOLITUDE", "metricHigh": "ÉNERGIE SOCIALE",
+      "results": {"low": {"title": "Le noyau calme", "description": "Ton énergie se recharge surtout dans le calme. Tu peux apprécier les autres, mais trop d’interactions te fatiguent rapidement."}, "mid": {"title": "Le social sélectif", "description": "Tu apprécies les interactions quand le contexte te convient. Ton énergie sociale dépend beaucoup des personnes, du lieu et de ton humeur."}, "high": {"title": "La batterie humaine", "description": "Les interactions te donnent souvent de l’élan. Tu as tendance à te recharger grâce aux autres, à l’activité et aux expériences partagées."}},
+      "questions": [
+        {"text": "Après une journée entière entouré de monde, qu’est-ce que tu veux le plus ?", "answers": [{"text": "Un silence total", "score": 0}, {"text": "Une seule personne proche", "score": 1}, {"text": "Un petit groupe tranquille", "score": 2}, {"text": "Encore des sorties", "score": 3}]},
+        {"text": "Un samedi totalement libre se présente. Ton premier réflexe ?", "answers": [{"text": "Rester seul chez moi", "score": 0}, {"text": "Faire quelque chose de calme", "score": 1}, {"text": "Voir quelques personnes", "score": 2}, {"text": "Remplir toute la journée", "score": 3}]},
+        {"text": "À une soirée où tu ne connais presque personne…", "answers": [{"text": "Je cherche la sortie", "score": 0}, {"text": "Je reste près d’une personne", "score": 1}, {"text": "Je me détends progressivement", "score": 2}, {"text": "Je lance des conversations", "score": 3}]},
+        {"text": "Les discussions de groupe te semblent généralement…", "answers": [{"text": "Épuisantes", "score": 0}, {"text": "Faciles à ignorer", "score": 1}, {"text": "Bien à petite dose", "score": 2}, {"text": "C’est moi qui les anime", "score": 3}]},
+        {"text": "Après avoir annulé une sortie, tu te sens généralement…", "answers": [{"text": "Soulagé", "score": 0}, {"text": "Plutôt bien", "score": 1}, {"text": "Un peu déçu", "score": 2}, {"text": "Comme si j’avais raté quelque chose", "score": 3}]}
+      ]
+    },
+    {
+      "id": "logic_emotion", "title": "Logique ou émotion", "hook": "Qu’est-ce qui guide vraiment tes décisions ?", "time": "50 SEC", "accent": "◇", "metricLow": "LOGIQUE", "metricHigh": "ÉMOTION",
+      "results": {"low": {"title": "L’esprit rationnel", "description": "Tu fais d’abord confiance aux faits, à la cohérence et à la structure. Les émotions comptent, mais elles ont rarement le dernier mot."}, "mid": {"title": "L’intégrateur", "description": "Tu combines naturellement analyse et ressenti. Selon l’enjeu, tu sais passer des faits à l’intuition."}, "high": {"title": "Le cœur intuitif", "description": "Ton ressenti intérieur influence fortement tes choix. L’impact humain compte souvent davantage qu’une logique parfaite."}},
+      "questions": [
+        {"text": "Deux choix sont aussi pratiques l’un que l’autre. Qu’est-ce qui les départage ?", "answers": [{"text": "Les chiffres", "score": 0}, {"text": "La logique à long terme", "score": 1}, {"text": "Mon instinct", "score": 2}, {"text": "Ce qui me semble juste", "score": 3}]},
+        {"text": "Un ami prend une décision irrationnelle. Tu commences par…", "answers": [{"text": "Montrer le problème", "score": 0}, {"text": "Demander son raisonnement", "score": 1}, {"text": "Essayer de comprendre", "score": 2}, {"text": "Me concentrer sur son ressenti", "score": 3}]},
+        {"text": "Pour un achat coûteux, tu fais surtout confiance…", "answers": [{"text": "Aux comparatifs", "score": 0}, {"text": "Aux recherches et à mon instinct", "score": 1}, {"text": "À mon impression générale", "score": 2}, {"text": "À ce que cela me fait ressentir", "score": 3}]},
+        {"text": "Dans une dispute, qu’est-ce qui t’agace le plus ?", "answers": [{"text": "Un mauvais raisonnement", "score": 0}, {"text": "Les contradictions", "score": 1}, {"text": "Être mal compris", "score": 2}, {"text": "La froideur émotionnelle", "score": 3}]},
+        {"text": "Quand un plan échoue soudainement…", "answers": [{"text": "J’analyse la cause", "score": 0}, {"text": "Je recalcule", "score": 1}, {"text": "Je suis mon intuition", "score": 2}, {"text": "Je regarde comment chacun le vit", "score": 3}]}
+      ]
+    },
+    {
+      "id": "overthinker", "title": "Suranalyse", "hook": "Ton cerveau s’arrête-t-il vraiment parfois ?", "time": "40 SEC", "accent": "∞", "metricLow": "LÂCHER-PRISE", "metricHigh": "SURANALYSE",
+      "results": {"low": {"title": "Le décideur clair", "description": "Tu traites généralement l’essentiel puis tu avances. L’incertitude peut te gêner, mais elle emprisonne rarement ton esprit longtemps."}, "mid": {"title": "L’analyste", "description": "Tu réfléchis profondément et rejoues souvent les situations importantes. L’analyse t’aide, même si elle peut parfois devenir du bruit mental."}, "high": {"title": "La boucle infinie", "description": "Ton esprit génère presque automatiquement des alternatives, des scénarios et leurs conséquences. Arrêter de penser peut être plus difficile que décider."}},
+      "questions": [
+        {"text": "Après avoir envoyé un message important, tu…", "answers": [{"text": "L’oublie", "score": 0}, {"text": "Vérifie une fois", "score": 1}, {"text": "Le relis", "score": 2}, {"text": "Analyse toutes les interprétations possibles", "score": 3}]},
+        {"text": "Avant une décision simple, combien de scénarios apparaissent ?", "answers": [{"text": "Un", "score": 0}, {"text": "Deux ou trois", "score": 1}, {"text": "Plusieurs", "score": 2}, {"text": "Pratiquement un arbre de décision", "score": 3}]},
+        {"text": "Un moment gênant vieux de plusieurs années te revient…", "answers": [{"text": "Presque jamais", "score": 0}, {"text": "Rarement", "score": 1}, {"text": "Parfois", "score": 2}, {"text": "Beaucoup trop facilement", "score": 3}]},
+        {"text": "Quelqu’un répond seulement « ok ». Tu penses…", "answers": [{"text": "Rien de particulier", "score": 0}, {"text": "La personne est occupée", "score": 1}, {"text": "Il y a peut-être un problème", "score": 2}, {"text": "Qu’est-ce que cet « ok » voulait exactement dire ?", "score": 3}]},
+        {"text": "Le soir, ton cerveau est généralement…", "answers": [{"text": "Calme", "score": 0}, {"text": "En train de ralentir", "score": 1}, {"text": "En train de revoir la journée", "score": 2}, {"text": "Avec douze onglets ouverts en même temps", "score": 3}]}
+      ]
+    },
+    {
+      "id": "chaos_control", "title": "Chaos ou contrôle", "hook": "Planificateur, improvisateur ou magnifiquement imprévisible ?", "time": "45 SEC", "accent": "✦", "metricLow": "CONTRÔLE", "metricHigh": "CHAOS",
+      "results": {"low": {"title": "L’architecte", "description": "La structure te donne de la liberté. Tu préfères savoir ce qui arrive et réduire les surprises évitables avant qu’elles ne surviennent."}, "mid": {"title": "Le planificateur adaptable", "description": "Tu apprécies un cadre sans vouloir en devenir prisonnier. Un plan est utile, mais tu sais l’abandonner quand la réalité change."}, "high": {"title": "Le surfeur du chaos", "description": "Tu es à l’aise sans carte complète. L’improvisation, la nouveauté et les décisions de dernière minute peuvent te sembler plus vivantes qu’un plan rigide."}},
+      "questions": [
+        {"text": "Tu pars en voyage la semaine prochaine. Ton programme est…", "answers": [{"text": "Déjà détaillé", "score": 0}, {"text": "Presque entièrement prévu", "score": 1}, {"text": "Quelques points de repère", "score": 2}, {"text": "Quel programme ?", "score": 3}]},
+        {"text": "Ton espace de travail ressemble généralement à…", "answers": [{"text": "Quelque chose de parfaitement organisé", "score": 0}, {"text": "Un endroit plutôt rangé", "score": 1}, {"text": "Un chaos fonctionnel", "score": 2}, {"text": "Une quête secondaire qui a explosé", "score": 3}]},
+        {"text": "Quand les plans changent soudainement…", "answers": [{"text": "Je déteste ça", "score": 0}, {"text": "Il me faut un moment", "score": 1}, {"text": "Je m’adapte", "score": 2}, {"text": "Ça rend les choses intéressantes", "score": 3}]},
+        {"text": "Les échéances te poussent à…", "answers": [{"text": "Finir en avance", "score": 0}, {"text": "Respecter le planning", "score": 1}, {"text": "Sprinter vers la fin", "score": 2}, {"text": "Devenir incroyablement efficace à 2 h du matin", "score": 3}]},
+        {"text": "Choisis ton style de week-end.", "answers": [{"text": "Tout est programmé", "score": 0}, {"text": "Planifié sans rigidité", "score": 1}, {"text": "Décidé le matin même", "score": 2}, {"text": "Je suis ce qui arrive", "score": 3}]}
+      ]
+    },
+    {
+      "id": "risk_taker", "title": "Goût du risque", "hook": "Jusqu’où vas-tu quand rien n’est certain ?", "time": "45 SEC", "accent": "△", "metricLow": "SÉCURITÉ", "metricHigh": "RISQUE",
+      "results": {"low": {"title": "Le stratège", "description": "Tu préfères protéger d’abord le scénario défavorable avant d’avancer. La sécurité et la prévisibilité ont une vraie valeur pour toi."}, "mid": {"title": "Le risque calculé", "description": "Tu prends des risques significatifs lorsque le potentiel le justifie. Tu n’es ni téméraire ni systématiquement prudent."}, "high": {"title": "Le chercheur de limites", "description": "L’incertitude peut te stimuler plutôt que t’effrayer. Quand quelque chose compte, tu es souvent prêt à agir avant d’avoir toutes les garanties."}},
+      "questions": [
+        {"text": "Une nouvelle opportunité offre un gros potentiel sans aucune garantie. Tu…", "answers": [{"text": "Passes ton tour", "score": 0}, {"text": "Fais longtemps des recherches", "score": 1}, {"text": "Tentes le coup de façon mesurée", "score": 2}, {"text": "Te lances", "score": 3}]},
+        {"text": "Essayer quelque chose avec un vrai risque d’échec public te semble…", "answers": [{"text": "Ne pas en valoir la peine", "score": 0}, {"text": "Inconfortable", "score": 1}, {"text": "Acceptable", "score": 2}, {"text": "Stimulant", "score": 3}]},
+        {"text": "Avec de l’argent disponible, tu préfères…", "answers": [{"text": "Le protéger", "score": 0}, {"text": "Des options surtout sûres", "score": 1}, {"text": "Un mélange équilibré", "score": 2}, {"text": "Des paris à fort potentiel", "score": 3}]},
+        {"text": "Tu as 70 % des informations nécessaires. Est-ce que tu agis ?", "answers": [{"text": "Non", "score": 0}, {"text": "J’attends généralement", "score": 1}, {"text": "Souvent oui", "score": 2}, {"text": "Clairement", "score": 3}]},
+        {"text": "Qu’est-ce qui te semble le plus douloureux ?", "answers": [{"text": "Perdre ce que j’ai", "score": 0}, {"text": "Prendre une mauvaise décision", "score": 1}, {"text": "Rater une occasion", "score": 2}, {"text": "Ne jamais savoir ce qui aurait pu arriver", "score": 3}]}
+      ]
+    }
+  ]
+}
