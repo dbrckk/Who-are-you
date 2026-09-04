@@ -21,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -81,8 +82,8 @@ fun DailyQuestionCard(
     ) {
         Column(Modifier.padding(22.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("DAILY QUESTION", color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                Text("STREAK ${state.currentStreak}", color = RetentionViolet, fontSize = 12.sp, fontWeight = FontWeight.Black)
+                Text(stringResource(R.string.daily_question), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.streak_count, state.currentStreak), color = RetentionViolet, fontSize = 12.sp, fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(10.dp))
             Text(question.prompt, color = Color.White, fontSize = 20.sp, lineHeight = 26.sp, fontWeight = FontWeight.Bold)
@@ -92,8 +93,8 @@ fun DailyQuestionCard(
             DailyChoice(question.optionB, selected = answered && state.selectedOption == 1, enabled = !answered) { onVote(1) }
             Spacer(Modifier.height(12.dp))
             Text(
-                if (answered) "Answer locked for today • longest streak ${state.longestStreak} days"
-                else "Pick one. A new question appears tomorrow.",
+                if (answered) stringResource(R.string.daily_answer_locked, state.longestStreak)
+                else stringResource(R.string.daily_pick_prompt),
                 color = RetentionMuted,
                 fontSize = 12.sp
             )
@@ -128,12 +129,12 @@ fun AchievementStrip(achievements: List<Achievement>) {
     ) {
         Column(Modifier.padding(20.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("ACHIEVEMENTS", color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.achievements), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                 Text("${unlocked.size}/${achievements.size}", color = RetentionViolet, fontSize = 12.sp, fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(10.dp))
             if (unlocked.isEmpty()) {
-                Text("Complete your first test to unlock your first badge.", color = RetentionMuted, fontSize = 13.sp)
+                Text(stringResource(R.string.achievement_first_hint), color = RetentionMuted, fontSize = 13.sp)
             } else {
                 unlocked.take(3).forEach { achievement ->
                     Text("✓  ${achievement.title}", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
@@ -141,7 +142,7 @@ fun AchievementStrip(achievements: List<Achievement>) {
                     Spacer(Modifier.height(7.dp))
                 }
                 if (unlocked.size > 3) {
-                    Text("+${unlocked.size - 3} more unlocked", color = RetentionMuted, fontSize = 12.sp)
+                    Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
                 }
             }
         }
