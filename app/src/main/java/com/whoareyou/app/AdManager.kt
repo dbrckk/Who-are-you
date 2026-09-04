@@ -13,8 +13,6 @@ import com.google.android.ump.UserMessagingPlatform
 
 class AdManager(private val context: Context) {
     companion object {
-        // Google test interstitial. Replace with the production unit before release.
-        private const val INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
         private const val RESULTS_BETWEEN_ADS = 3
         private const val MIN_MILLIS_BETWEEN_ADS = 7 * 60 * 1000L
     }
@@ -78,6 +76,7 @@ class AdManager(private val context: Context) {
             }
 
             override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
+                AppEvents.recordError(adError, mapOf("placement" to "result_interstitial", "stage" to "show"))
                 load()
                 onContinue()
             }
@@ -104,11 +103,15 @@ class AdManager(private val context: Context) {
         if (!adsInitialized || !consentInformation.canRequestAds() || interstitial != null) return
         InterstitialAd.load(
             context,
-            INTERSTITIAL_AD_UNIT_ID,
+            BuildConfig.ADMOB_INTERSTITIAL_ID,
             AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     interstitial = ad
+                }
+
+                override fun onAdFailedToLoad(error: com.google.android.gms.ads.LoadAdError) {
+                    AppEvents.recordError(error, mapOf("placement" to "result_interstitial", "stage" to "load"))
                 }
             }
         )
