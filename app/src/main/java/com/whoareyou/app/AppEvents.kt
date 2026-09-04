@@ -1,13 +1,22 @@
 package com.whoareyou.app
 
-import android.util.Log
-
 object AppEvents {
-    private const val tag = "WhoAreYouEvents"
+    @Volatile
+    private var sink: EventSink = LogEventSink
+
+    fun configure() {
+        sink = BuildConfig.TELEMETRY_ENDPOINT
+            .takeIf { it.startsWith("https://") }
+            ?.let(::HttpEventSink)
+            ?: LogEventSink
+    }
 
     fun log(name: String, params: Map<String, Any?> = emptyMap()) {
-        val payload = params.entries.joinToString(", ") { "${it.key}=${it.value}" }
-        Log.d(tag, if (payload.isBlank()) name else "$name | $payload")
+        sink.send(name, params)
+    }
+
+    fun recordError(throwable: Throwable, context: Map<String, Any?> = emptyMap()) {
+        sink.recordError(throwable, context)
     }
 
     fun testStart(quizId: String) = log("test_start", mapOf("quiz_id" to quizId))
