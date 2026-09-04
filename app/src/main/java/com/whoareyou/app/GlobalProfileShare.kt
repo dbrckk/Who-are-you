@@ -9,30 +9,37 @@ import android.graphics.Paint
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 object GlobalProfileShare {
-    suspend fun share(context: Context, summary: GlobalProfileSummary) {
-        val chooser = withContext(Dispatchers.IO) {
-            val bitmap = render(summary)
-            try {
-                val dir = File(context.cacheDir, "shared_results").apply { mkdirs() }
-                val file = File(dir, "who_are_you_profile.png")
-                FileOutputStream(file).use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
-                val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-                val intent = Intent(Intent.ACTION_SEND).apply {
-                    type = "image/png"
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    putExtra(Intent.EXTRA_TEXT, "My Who Are You? profile: ${summary.dominantArchetype}. What does yours look like?")
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    private val shareScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+
+    fun share(context: Context, summary: GlobalProfileSummary) {
+        shareScope.launch {
+            val chooser = withContext(Dispatchers.IO) {
+                val bitmap = render(summary)
+                try {
+                    val dir = File(context.cacheDir, "shared_results").apply { mkdirs() }
+                    val file = File(dir, "who_are_you_profile.png")
+                    FileOutputStream(file).use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "image/png"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        putExtra(Intent.EXTRA_TEXT, "My Who Are You? profile: ${summary.dominantArchetype}. What does yours look like?")
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    Intent.createChooser(intent, "Share your profile")
+                } finally {
+                    bitmap.recycle()
                 }
-                Intent.createChooser(intent, "Share your profile")
-            } finally {
-                bitmap.recycle()
             }
+            context.startActivity(chooser)
         }
-        context.startActivity(chooser)
     }
 
     private fun render(summary: GlobalProfileSummary): Bitmap {
