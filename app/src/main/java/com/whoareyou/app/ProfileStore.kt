@@ -16,6 +16,7 @@ data class StoredProfile(
     val completedQuizIds: Set<String> = emptySet(),
     val latestScores: Map<String, Int> = emptyMap(),
     val adsRemoved: Boolean = false,
+    val onboardingComplete: Boolean = false,
     val daily: DailyState = DailyState()
 )
 
@@ -23,6 +24,7 @@ object ProfileStore {
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
+    private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val dailyAnsweredDateKey = stringPreferencesKey("daily_answered_date")
     private val dailyQuestionIdKey = stringPreferencesKey("daily_question_id")
     private val dailySelectedOptionKey = intPreferencesKey("daily_selected_option")
@@ -35,6 +37,7 @@ object ProfileStore {
             completedQuizIds = decodeSet(prefs[completedKey]),
             latestScores = decodeScores(prefs[scoresKey]),
             adsRemoved = prefs[adsRemovedKey] ?: false,
+            onboardingComplete = prefs[onboardingCompleteKey] ?: false,
             daily = DailyState(
                 answeredDate = prefs[dailyAnsweredDateKey],
                 questionId = prefs[dailyQuestionIdKey],
@@ -99,6 +102,10 @@ object ProfileStore {
 
     suspend fun setAdsRemoved(context: Context, removed: Boolean) {
         context.profileDataStore.edit { it[adsRemovedKey] = removed }
+    }
+
+    suspend fun setOnboardingComplete(context: Context, complete: Boolean = true) {
+        context.profileDataStore.edit { it[onboardingCompleteKey] = complete }
     }
 
     private fun decodeSet(raw: String?): Set<String> = raw
