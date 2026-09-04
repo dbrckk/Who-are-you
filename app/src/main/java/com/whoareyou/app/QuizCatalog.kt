@@ -3,6 +3,7 @@ package com.whoareyou.app
 import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.Locale
 
 data class Answer(val text: String, val score: Int)
 data class Question(val text: String, val answers: List<Answer>)
@@ -24,20 +25,33 @@ data class Quiz(
 )
 
 object QuizRepository {
-    private val ASSET_NAMES = listOf("quizzes.json", "quizzes-extra.json")
+    private val defaultAssets = listOf("quizzes.json", "quizzes-extra.json")
+    private val frenchAssets = listOf("quizzes-fr.json", "quizzes-extra-fr.json")
+    @Volatile private var cachedLanguage: String? = null
     @Volatile private var cached: List<Quiz>? = null
 
-    fun load(context: Context): List<Quiz> = cached ?: synchronized(this) {
-        cached ?: ASSET_NAMES.flatMap { assetName ->
-            parse(context.assets.open(assetName).bufferedReader().use { it.readText() })
-        }.also { catalog ->
-            require(catalog.isNotEmpty()) { "Quiz catalog cannot be empty" }
-            require(catalog.map { it.id }.distinct().size == catalog.size) { "Quiz IDs must be unique" }
-            cached = catalog
+    fun load(context: Context): List<Quiz> {
+        val language = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
+        val assets = if (language == "fr" && frenchAssets.all { assetExists(context, it) }) frenchAssets else defaultAssets
+        val current = cached
+        if (current != null && cachedLanguage == language) return current
+
+        return synchronized(this) {
+            cached?.takeIf { cachedLanguage == language } ?: assets.flatMap { assetName ->
+                parse(context.assets.open(assetName).bufferedReader().use { it.readText() })
+            }.also { catalog ->
+                require(catalog.isNotEmpty()) { "Quiz catalog cannot be empty" }
+                require(catalog.map { it.id }.distinct().size == catalog.size) { "Quiz IDs must be unique" }
+                cachedLanguage = language
+                cached = catalog
+            }
         }
     }
 
     fun find(context: Context, id: String): Quiz? = load(context).firstOrNull { it.id == id }
+
+    private fun assetExists(context: Context, name: String): Boolean =
+        runCatching { context.assets.open(name).close() }.isSuccess
 
     private fun parse(raw: String): List<Quiz> {
         val root = JSONObject(raw)
