@@ -24,5 +24,35 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
+      - name: Validate quiz catalog
+        run: |
+          python - <<'PY'
+          import glob
+          import json
+
+          files = sorted(glob.glob('app/src/main/assets/quizzes*.json'))
+          assert files, 'No quiz catalog assets found'
+
+          ids = set()
+          total = 0
+          for path in files:
+              with open(path, encoding='utf-8') as handle:
+                  payload = json.load(handle)
+              for quiz in payload.get('quizzes', []):
+                  quiz_id = quiz['id']
+                  assert quiz_id not in ids, f'Duplicate quiz id: {quiz_id}'
+                  ids.add(quiz_id)
+                  total += 1
+                  assert len(quiz['questions']) >= 5, f'{quiz_id}: expected at least 5 questions'
+                  for index, question in enumerate(quiz['questions'], start=1):
+                      answers = question['answers']
+                      assert len(answers) == 4, f'{quiz_id} Q{index}: expected 4 answers'
+                      scores = sorted(answer['score'] for answer in answers)
+                      assert scores == [0, 1, 2, 3], f'{quiz_id} Q{index}: scores must be 0,1,2,3'
+
+          assert total >= 15, f'Expected at least 15 quizzes, found {total}'
+          print(f'Validated {total} quizzes across {len(files)} asset files')
+          PY
+
       - name: Build debug APK
         run: gradle :app:assembleDebug --stacktrace
