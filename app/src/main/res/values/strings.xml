@@ -44,4 +44,12 @@
     <string name="retry">RETRY</string>
     <string name="done_button">DONE</string>
     <string name="disclaimer">For entertainment and self-reflection only — not a psychological diagnosis.</string>
+
+    <string name="daily_question">DAILY QUESTION</string>
+    <string name="streak_count">STREAK %1$d</string>
+    <string name="daily_answer_locked">Answer locked for today • longest streak %1$d days</string>
+    <string name="daily_pick_prompt">Pick one. A new question appears tomorrow.</string>
+    <string name="achievements">ACHIEVEMENTS</string>
+    <string name="achievement_first_hint">Complete your first test to unlock your first badge.</string>
+    <string name="achievement_more_unlocked">+%1$d more unlocked</string>
 </resources>
