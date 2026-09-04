@@ -8,6 +8,8 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.ump.ConsentRequestParameters
+import com.google.android.ump.UserMessagingPlatform
 
 class AdManager(private val context: Context) {
     companion object {
@@ -17,19 +19,36 @@ class AdManager(private val context: Context) {
         private const val MIN_MILLIS_BETWEEN_ADS = 7 * 60 * 1000L
     }
 
+    private val consentInformation = UserMessagingPlatform.getConsentInformation(context)
     private var interstitial: InterstitialAd? = null
     private var resultTransitionsSinceAd = 0
     private var lastAdShownAtElapsedRealtime = Long.MIN_VALUE
-    private var initialized = false
+    private var consentRequested = false
+    private var adsInitialized = false
 
-    fun start() {
-        if (initialized) return
-        initialized = true
-        MobileAds.initialize(context) { load() }
+    fun start(activity: Activity?) {
+        if (activity == null || consentRequested) return
+        consentRequested = true
+
+        val params = ConsentRequestParameters.Builder().build()
+        consentInformation.requestConsentInfoUpdate(
+            activity,
+            params,
+            {
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) {
+                    tryInitializeAds()
+                }
+                tryInitializeAds()
+            },
+            {
+                // Cached consent may still allow requests if the network update fails.
+                tryInitializeAds()
+            }
+        )
     }
 
     fun onResultFinished(activity: Activity?, adsRemoved: Boolean, onContinue: () -> Unit) {
-        if (adsRemoved || activity == null) {
+        if (adsRemoved || activity == null || !adsInitialized || !consentInformation.canRequestAds()) {
             onContinue()
             return
         }
@@ -68,13 +87,19 @@ class AdManager(private val context: Context) {
         ad.show(activity)
     }
 
+    private fun tryInitializeAds() {
+        if (adsInitialized || !consentInformation.canRequestAds()) return
+        adsInitialized = true
+        MobileAds.initialize(context) { load() }
+    }
+
     private fun timeCapSatisfied(): Boolean {
         if (lastAdShownAtElapsedRealtime == Long.MIN_VALUE) return true
         return SystemClock.elapsedRealtime() - lastAdShownAtElapsedRealtime >= MIN_MILLIS_BETWEEN_ADS
     }
 
     private fun load() {
-        if (interstitial != null) return
+        if (!adsInitialized || !consentInformation.canRequestAds() || interstitial != null) return
         InterstitialAd.load(
             context,
             INTERSTITIAL_AD_UNIT_ID,
