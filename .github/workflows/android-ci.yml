@@ -54,5 +54,27 @@ jobs:
           print(f'Validated {total} quizzes across {len(files)} asset files')
           PY
 
-      - name: Build debug APK
-        run: gradle :app:assembleDebug --stacktrace
+      - name: Validate release configuration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          gradle = Path('app/build.gradle.kts').read_text(encoding='utf-8')
+          manifest = Path('app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')
+          ad_manager = Path('app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')
+
+          assert 'WHO_ARE_YOU_ADMOB_APP_ID' in gradle
+          assert 'WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID' in gradle
+          assert 'WHO_ARE_YOU_TELEMETRY_ENDPOINT' in gradle
+          assert '${admobAppId}' in manifest
+          assert 'BuildConfig.ADMOB_INTERSTITIAL_ID' in ad_manager
+          assert 'ca-app-pub-3940256099942544~3347511713' in gradle, 'Missing safe development AdMob fallback'
+          assert 'ca-app-pub-3940256099942544/1033173712' in gradle, 'Missing safe development interstitial fallback'
+          print('Release configuration is injectable and development-safe')
+          PY
+
+      - name: Android lint
+        run: gradle :app:lintDebug --stacktrace
+
+      - name: Build debug and release APKs
+        run: gradle :app:assembleDebug :app:assembleRelease --stacktrace
