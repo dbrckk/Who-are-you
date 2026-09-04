@@ -26,13 +26,13 @@ object ChallengeShare {
 
     fun share(context: Context, quizId: String, quizTitle: String, inviterScore: Int) {
         val uri = buildUri(quizId, inviterScore)
-        val text = "I challenge you on $quizTitle. Take the same test and see how compatible we are: $uri"
+        val text = context.getString(R.string.challenge_share_text, quizTitle, uri.toString())
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_SUBJECT, "Who Are You? challenge")
+            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.challenge_share_subject))
             putExtra(Intent.EXTRA_TEXT, text)
         }
-        context.startActivity(Intent.createChooser(intent, "Challenge a friend"))
+        context.startActivity(Intent.createChooser(intent, context.getString(R.string.challenge_share_chooser)))
     }
 
     fun parse(uri: Uri?): IncomingChallenge? {
