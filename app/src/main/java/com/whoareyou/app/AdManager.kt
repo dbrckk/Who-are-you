@@ -26,6 +26,8 @@ class AdManager(private val context: Context) {
     private var consentRequested = false
     private var adsInitialized = false
 
+    fun start() = start(context as? Activity)
+
     fun start(activity: Activity?) {
         if (activity == null || consentRequested) return
         consentRequested = true
