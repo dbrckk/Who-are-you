@@ -29,29 +29,51 @@ jobs:
           python - <<'PY'
           import glob
           import json
+          import os
+          import re
 
           files = sorted(glob.glob('app/src/main/assets/quizzes*.json'))
           assert files, 'No quiz catalog assets found'
 
-          ids = set()
-          total = 0
-          for path in files:
-              with open(path, encoding='utf-8') as handle:
-                  payload = json.load(handle)
-              for quiz in payload.get('quizzes', []):
-                  quiz_id = quiz['id']
-                  assert quiz_id not in ids, f'Duplicate quiz id: {quiz_id}'
-                  ids.add(quiz_id)
-                  total += 1
-                  assert len(quiz['questions']) >= 5, f'{quiz_id}: expected at least 5 questions'
-                  for index, question in enumerate(quiz['questions'], start=1):
-                      answers = question['answers']
-                      assert len(answers) == 4, f'{quiz_id} Q{index}: expected 4 answers'
-                      scores = sorted(answer['score'] for answer in answers)
-                      assert scores == [0, 1, 2, 3], f'{quiz_id} Q{index}: scores must be 0,1,2,3'
+          def locale_for(path):
+              name = os.path.basename(path)
+              match = re.search(r'-(?P<locale>[a-z]{2})(?=\.json$)', name)
+              return match.group('locale') if match else 'en'
 
-          assert total >= 15, f'Expected at least 15 quizzes, found {total}'
-          print(f'Validated {total} quizzes across {len(files)} asset files')
+          by_locale = {}
+          for path in files:
+              by_locale.setdefault(locale_for(path), []).append(path)
+
+          english_ids = set()
+          english_total = 0
+
+          for locale, locale_files in sorted(by_locale.items()):
+              ids = set()
+              total = 0
+              for path in locale_files:
+                  with open(path, encoding='utf-8') as handle:
+                      payload = json.load(handle)
+                  for quiz in payload.get('quizzes', []):
+                      quiz_id = quiz['id']
+                      assert quiz_id not in ids, f'{locale}: duplicate quiz id: {quiz_id}'
+                      ids.add(quiz_id)
+                      total += 1
+                      assert len(quiz['questions']) >= 5, f'{locale}/{quiz_id}: expected at least 5 questions'
+                      for index, question in enumerate(quiz['questions'], start=1):
+                          answers = question['answers']
+                          assert len(answers) == 4, f'{locale}/{quiz_id} Q{index}: expected 4 answers'
+                          scores = sorted(answer['score'] for answer in answers)
+                          assert scores == [0, 1, 2, 3], f'{locale}/{quiz_id} Q{index}: scores must be 0,1,2,3'
+
+              if locale == 'en':
+                  english_ids = ids
+                  english_total = total
+              else:
+                  assert ids <= english_ids, f'{locale}: localized catalog contains unknown quiz ids: {sorted(ids - english_ids)}'
+
+              print(f'Validated {total} {locale} quizzes across {len(locale_files)} asset files')
+
+          assert english_total >= 15, f'Expected at least 15 English quizzes, found {english_total}'
           PY
 
       - name: Validate release configuration
