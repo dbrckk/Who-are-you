@@ -18,7 +18,8 @@ import kotlinx.coroutines.launch
 
 class BillingManager(
     private val context: Context,
-    private val onPremiumChanged: (Boolean) -> Unit
+    private val onPremiumChanged: (Boolean) -> Unit,
+    private val onPriceChanged: (String?) -> Unit = {}
 ) {
     companion object {
         const val REMOVE_ADS_PRODUCT_ID = "remove_ads_lifetime"
@@ -96,6 +97,12 @@ class BillingManager(
         billingClient.queryProductDetailsAsync(params) { result, response ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 removeAdsProduct = response.productDetailsList.firstOrNull()
+                val localizedPrice = removeAdsProduct
+                    ?.oneTimePurchaseOfferDetailsList
+                    ?.firstOrNull()
+                    ?.formattedPrice
+                    ?: removeAdsProduct?.oneTimePurchaseOfferDetails?.formattedPrice
+                onPriceChanged(localizedPrice)
             }
         }
     }
