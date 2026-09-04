@@ -200,17 +200,41 @@ private fun DiscoverScreen(
 
 @Composable
 private fun ProfileProgress(completedCount: Int, totalQuizCount: Int) {
+    val context = LocalContext.current
+    val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+    val catalog = remember(context) { QuizRepository.load(context) }
+    val summary = remember(catalog, storedProfile.latestScores) { GlobalProfileEngine.build(catalog, storedProfile.latestScores) }
     val progress by animateFloatAsState((completedCount / totalQuizCount.toFloat()).coerceIn(0f, 1f), label = "profileProgress")
+    val snapshot = summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(3)
+
     Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(22.dp)) {
         Column(Modifier.padding(18.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text("YOUR PROFILE", color = Color.White, fontWeight = FontWeight.Bold)
                 Text("${(progress * 100).toInt()}%", color = Violet, fontWeight = FontWeight.Black)
             }
+            Spacer(Modifier.height(8.dp))
+            Text(summary.dominantArchetype.uppercase(), color = if (summary.dimensions.isEmpty()) Muted else Cyan, fontSize = 19.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(10.dp))
             LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
             Spacer(Modifier.height(8.dp))
             Text("$completedCount/$totalQuizCount dimensions discovered", color = Muted, fontSize = 12.sp)
+
+            if (snapshot.isNotEmpty()) {
+                Spacer(Modifier.height(16.dp))
+                Text("PROFILE SNAPSHOT", color = Muted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(8.dp))
+                snapshot.forEach { dimension ->
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Column(Modifier.weight(1f)) {
+                            Text(dimension.title, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                            Text(dimension.metricLabel, color = Muted, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                        }
+                        Text("${dimension.score}%", color = Violet, fontSize = 14.sp, fontWeight = FontWeight.Black)
+                    }
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
         }
     }
 }
@@ -285,8 +309,8 @@ private fun ResultScreen(
     onRetry: () -> Unit
 ) {
     val context = LocalContext.current
-    val resultTitle = when { score < 35 -> quiz.lowTitle; score < 70 -> quiz.midTitle; else -> quiz.highTitle }
-    val description = when { score < 35 -> quiz.lowDescription; score < 70 -> quiz.midDescription; else -> quiz.highDescription }
+    val resultTitle = quiz.resultTitleFor(score)
+    val description = quiz.resultDescriptionFor(score)
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
