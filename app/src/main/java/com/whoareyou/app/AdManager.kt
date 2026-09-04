@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import android.app.Activity
 import android.content.Context
+import android.os.SystemClock
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
@@ -13,10 +14,12 @@ class AdManager(private val context: Context) {
         // Google test interstitial. Replace with the production unit before release.
         private const val INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712"
         private const val RESULTS_BETWEEN_ADS = 3
+        private const val MIN_MILLIS_BETWEEN_ADS = 7 * 60 * 1000L
     }
 
     private var interstitial: InterstitialAd? = null
     private var resultTransitionsSinceAd = 0
+    private var lastAdShownAtElapsedRealtime = Long.MIN_VALUE
     private var initialized = false
 
     fun start() {
@@ -32,7 +35,7 @@ class AdManager(private val context: Context) {
         }
 
         resultTransitionsSinceAd++
-        if (resultTransitionsSinceAd < RESULTS_BETWEEN_ADS) {
+        if (resultTransitionsSinceAd < RESULTS_BETWEEN_ADS || !timeCapSatisfied()) {
             onContinue()
             return
         }
@@ -45,6 +48,7 @@ class AdManager(private val context: Context) {
         }
 
         resultTransitionsSinceAd = 0
+        lastAdShownAtElapsedRealtime = SystemClock.elapsedRealtime()
         interstitial = null
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
@@ -62,6 +66,11 @@ class AdManager(private val context: Context) {
             }
         }
         ad.show(activity)
+    }
+
+    private fun timeCapSatisfied(): Boolean {
+        if (lastAdShownAtElapsedRealtime == Long.MIN_VALUE) return true
+        return SystemClock.elapsedRealtime() - lastAdShownAtElapsedRealtime >= MIN_MILLIS_BETWEEN_ADS
     }
 
     private fun load() {
