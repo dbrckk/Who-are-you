@@ -38,7 +38,7 @@ fun RetentionSection() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
-    val question = remember { DailyQuestionEngine.forDate(context) }
+    val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile) { AchievementEngine.build(storedProfile) }
 
     LaunchedEffect(question.id) {
