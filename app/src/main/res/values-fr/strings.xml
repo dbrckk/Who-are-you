@@ -44,4 +44,12 @@
     <string name="retry">REFAIRE</string>
     <string name="done_button">TERMINER</string>
     <string name="disclaimer">Pour le divertissement et la réflexion personnelle uniquement — ce n’est pas un diagnostic psychologique.</string>
+
+    <string name="daily_question">QUESTION DU JOUR</string>
+    <string name="streak_count">SÉRIE %1$d</string>
+    <string name="daily_answer_locked">Réponse verrouillée pour aujourd’hui • meilleure série : %1$d jours</string>
+    <string name="daily_pick_prompt">Choisis une réponse. Une nouvelle question apparaît demain.</string>
+    <string name="achievements">SUCCÈS</string>
+    <string name="achievement_first_hint">Termine ton premier test pour débloquer ton premier badge.</string>
+    <string name="achievement_more_unlocked">+%1$d autres débloqués</string>
 </resources>
