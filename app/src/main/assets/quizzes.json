@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "social_battery",
+      "title": "Social Battery",
+      "hook": "How much people can you actually handle?",
+      "time": "45 SEC",
+      "accent": "◉",
+      "metricLow": "SOLITUDE",
+      "metricHigh": "SOCIAL ENERGY",
+      "results": {
+        "low": {"title": "The Quiet Core", "description": "Your energy tends to recover in quiet spaces. You can enjoy people, but too much social input drains you quickly."},
+        "mid": {"title": "The Selective Social", "description": "You enjoy connection when the context feels right. Your social energy depends heavily on the people, place and mood."},
+        "high": {"title": "The Human Charger", "description": "Interaction often gives you momentum. You tend to recharge through people, activity and shared experiences."}
+      },
+      "questions": [
+        {"text": "After a full day around people, what do you want most?", "answers": [{"text": "Total silence", "score": 0}, {"text": "One close person", "score": 1}, {"text": "A relaxed group", "score": 2}, {"text": "More plans", "score": 3}]},
+        {"text": "A free Saturday appears. Your first instinct?", "answers": [{"text": "Stay home alone", "score": 0}, {"text": "Keep it low-key", "score": 1}, {"text": "Meet a few people", "score": 2}, {"text": "Fill the day with plans", "score": 3}]},
+        {"text": "At a party where you know almost nobody...", "answers": [{"text": "I look for an exit", "score": 0}, {"text": "I stay near one person", "score": 1}, {"text": "I warm up eventually", "score": 2}, {"text": "I start conversations", "score": 3}]},
+        {"text": "How do group chats usually feel?", "answers": [{"text": "Exhausting", "score": 0}, {"text": "Easy to ignore", "score": 1}, {"text": "Fine in moderation", "score": 2}, {"text": "I keep them alive", "score": 3}]},
+        {"text": "After cancelling social plans, you usually feel...", "answers": [{"text": "Relieved", "score": 0}, {"text": "Mostly fine", "score": 1}, {"text": "A little disappointed", "score": 2}, {"text": "Like I missed out", "score": 3}]}
+      ]
+    },
+    {
+      "id": "logic_emotion",
+      "title": "Logic vs Emotion",
+      "hook": "What really drives your decisions?",
+      "time": "50 SEC",
+      "accent": "◇",
+      "metricLow": "LOGIC",
+      "metricHigh": "EMOTION",
+      "results": {
+        "low": {"title": "The Rational Mind", "description": "You tend to trust evidence, consistency and structure before feelings. Emotions matter, but they rarely get the final vote."},
+        "mid": {"title": "The Integrator", "description": "You naturally combine analysis and feeling. You can switch between evidence and intuition depending on what is at stake."},
+        "high": {"title": "The Intuitive Heart", "description": "Your internal sense of what feels right strongly shapes your choices. Human impact often matters more than perfect logic."}
+      },
+      "questions": [
+        {"text": "Two choices are equally practical. What breaks the tie?", "answers": [{"text": "The numbers", "score": 0}, {"text": "Long-term logic", "score": 1}, {"text": "My instinct", "score": 2}, {"text": "What feels right", "score": 3}]},
+        {"text": "A friend makes an irrational decision. You first...", "answers": [{"text": "Point out the flaw", "score": 0}, {"text": "Ask for the reasoning", "score": 1}, {"text": "Try to understand", "score": 2}, {"text": "Focus on how they feel", "score": 3}]},
+        {"text": "When buying something expensive, you trust...", "answers": [{"text": "Comparison data", "score": 0}, {"text": "Research plus instinct", "score": 1}, {"text": "My overall impression", "score": 2}, {"text": "The feeling it gives me", "score": 3}]},
+        {"text": "In an argument, what bothers you most?", "answers": [{"text": "Bad logic", "score": 0}, {"text": "Contradictions", "score": 1}, {"text": "Being misunderstood", "score": 2}, {"text": "Emotional coldness", "score": 3}]},
+        {"text": "When a plan fails unexpectedly...", "answers": [{"text": "Diagnose the cause", "score": 0}, {"text": "Recalculate", "score": 1}, {"text": "Follow my gut", "score": 2}, {"text": "Check how everyone feels", "score": 3}]}
+      ]
+    },
+    {
+      "id": "overthinker",
+      "title": "Overthinker",
+      "hook": "Does your brain ever actually switch off?",
+      "time": "40 SEC",
+      "accent": "∞",
+      "metricLow": "LET GO",
+      "metricHigh": "OVERTHINK",
+      "results": {
+        "low": {"title": "The Clear Decider", "description": "You usually process what matters and move forward. Uncertainty may bother you, but it rarely keeps your mind trapped for long."},
+        "mid": {"title": "The Analyzer", "description": "You think deeply and often replay important situations. Analysis helps you, though it can occasionally become mental noise."},
+        "high": {"title": "The Infinite Loop", "description": "Your mind generates branches, alternatives and second-order consequences almost automatically. Switching off can be harder than deciding."}
+      },
+      "questions": [
+        {"text": "After sending an important message, you...", "answers": [{"text": "Forget about it", "score": 0}, {"text": "Check once", "score": 1}, {"text": "Reread it", "score": 2}, {"text": "Analyze every possible interpretation", "score": 3}]},
+        {"text": "Before a simple decision, how many scenarios appear?", "answers": [{"text": "One", "score": 0}, {"text": "A couple", "score": 1}, {"text": "Several", "score": 2}, {"text": "Basically a decision tree", "score": 3}]},
+        {"text": "An awkward moment from years ago appears in your mind...", "answers": [{"text": "Almost never", "score": 0}, {"text": "Rarely", "score": 1}, {"text": "Sometimes", "score": 2}, {"text": "Far too easily", "score": 3}]},
+        {"text": "Someone replies with just 'ok'. You think...", "answers": [{"text": "Nothing", "score": 0}, {"text": "They're busy", "score": 1}, {"text": "Maybe something is off", "score": 2}, {"text": "What exactly did that 'ok' mean?", "score": 3}]},
+        {"text": "At night, your brain is usually...", "answers": [{"text": "Quiet", "score": 0}, {"text": "Slowing down", "score": 1}, {"text": "Reviewing the day", "score": 2}, {"text": "Running twelve tabs at once", "score": 3}]}
+      ]
+    },
+    {
+      "id": "chaos_control",
+      "title": "Chaos vs Control",
+      "hook": "Planner, improviser, or beautifully unpredictable?",
+      "time": "45 SEC",
+      "accent": "✦",
+      "metricLow": "CONTROL",
+      "metricHigh": "CHAOS",
+      "results": {
+        "low": {"title": "The Architect", "description": "Structure gives you freedom. You prefer knowing what comes next and reducing avoidable surprises before they happen."},
+        "mid": {"title": "The Adaptive Planner", "description": "You like having a framework without becoming trapped by it. A plan is useful, but you can abandon it when reality changes."},
+        "high": {"title": "The Chaos Surfer", "description": "You are comfortable moving without a complete map. Improvisation, novelty and last-minute decisions can feel more alive than rigid plans."}
+      },
+      "questions": [
+        {"text": "A trip is next week. Your itinerary is...", "answers": [{"text": "Already detailed", "score": 0}, {"text": "Mostly planned", "score": 1}, {"text": "A few anchors", "score": 2}, {"text": "What itinerary?", "score": 3}]},
+        {"text": "Your workspace usually looks...", "answers": [{"text": "Precisely organized", "score": 0}, {"text": "Mostly tidy", "score": 1}, {"text": "Functional chaos", "score": 2}, {"text": "Like a side quest exploded", "score": 3}]},
+        {"text": "When plans suddenly change...", "answers": [{"text": "I hate it", "score": 0}, {"text": "I need a moment", "score": 1}, {"text": "I adapt", "score": 2}, {"text": "That makes it interesting", "score": 3}]},
+        {"text": "Deadlines make you...", "answers": [{"text": "Finish early", "score": 0}, {"text": "Stay on schedule", "score": 1}, {"text": "Sprint near the end", "score": 2}, {"text": "Become incredibly powerful at 2 AM", "score": 3}]},
+        {"text": "Choose a weekend style.", "answers": [{"text": "Scheduled", "score": 0}, {"text": "Planned loosely", "score": 1}, {"text": "Decide that morning", "score": 2}, {"text": "Follow whatever happens", "score": 3}]}
+      ]
+    },
+    {
+      "id": "risk_taker",
+      "title": "Risk Taker",
+      "hook": "How far outside certainty will you go?",
+      "time": "45 SEC",
+      "accent": "△",
+      "metricLow": "SECURITY",
+      "metricHigh": "RISK",
+      "results": {
+        "low": {"title": "The Strategist", "description": "You prefer asymmetric bets: protect the downside first, then move. Security and predictability carry real value for you."},
+        "mid": {"title": "The Calculated Risk", "description": "You will take meaningful risks when the upside is justified. You are neither reckless nor automatically conservative."},
+        "high": {"title": "The Edge Seeker", "description": "Uncertainty can feel energizing rather than threatening. When something matters, you are often willing to move before certainty arrives."}
+      },
+      "questions": [
+        {"text": "A new opportunity has a big upside but no guarantee. You...", "answers": [{"text": "Pass", "score": 0}, {"text": "Research for a long time", "score": 1}, {"text": "Take a measured shot", "score": 2}, {"text": "Jump in", "score": 3}]},
+        {"text": "Trying something with a real chance of public failure feels...", "answers": [{"text": "Not worth it", "score": 0}, {"text": "Uncomfortable", "score": 1}, {"text": "Acceptable", "score": 2}, {"text": "Exciting", "score": 3}]},
+        {"text": "With spare money, you prefer...", "answers": [{"text": "Protect it", "score": 0}, {"text": "Mostly safe options", "score": 1}, {"text": "A balanced mix", "score": 2}, {"text": "High-upside bets", "score": 3}]},
+        {"text": "You have 70% of the information needed. Do you act?", "answers": [{"text": "No", "score": 0}, {"text": "Usually wait", "score": 1}, {"text": "Often yes", "score": 2}, {"text": "Definitely", "score": 3}]},
+        {"text": "Which sounds more painful?", "answers": [{"text": "Losing what I have", "score": 0}, {"text": "Making a bad call", "score": 1}, {"text": "Missing a chance", "score": 2}, {"text": "Never finding out", "score": 3}]}
+      ]
+    }
+  ]
+}
