@@ -38,7 +38,7 @@ fun RetentionSection() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
-    val question = remember { DailyQuestionEngine.forDate() }
+    val question = remember { DailyQuestionEngine.forDate(context) }
     val achievements = remember(storedProfile) { AchievementEngine.build(storedProfile) }
 
     LaunchedEffect(question.id) {
@@ -137,8 +137,9 @@ fun AchievementStrip(achievements: List<Achievement>) {
                 Text(stringResource(R.string.achievement_first_hint), color = RetentionMuted, fontSize = 13.sp)
             } else {
                 unlocked.take(3).forEach { achievement ->
-                    Text("✓  ${achievement.title}", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                    Text(achievement.description, color = RetentionMuted, fontSize = 11.sp)
+                    val (title, description) = localizedAchievement(achievement.id, achievement.title, achievement.description)
+                    Text("✓  $title", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                    Text(description, color = RetentionMuted, fontSize = 11.sp)
                     Spacer(Modifier.height(7.dp))
                 }
                 if (unlocked.size > 3) {
@@ -147,4 +148,16 @@ fun AchievementStrip(achievements: List<Achievement>) {
             }
         }
     }
+}
+
+@Composable
+private fun localizedAchievement(id: String, fallbackTitle: String, fallbackDescription: String): Pair<String, String> = when (id) {
+    "first_test" -> stringResource(R.string.achievement_first_test_title) to stringResource(R.string.achievement_first_test_description)
+    "ten_tests" -> stringResource(R.string.achievement_ten_tests_title) to stringResource(R.string.achievement_ten_tests_description)
+    "profile_builder" -> stringResource(R.string.achievement_profile_builder_title) to stringResource(R.string.achievement_profile_builder_description)
+    "profile_complete" -> stringResource(R.string.achievement_profile_complete_title) to stringResource(R.string.achievement_profile_complete_description)
+    "streak_3" -> stringResource(R.string.achievement_streak_3_title) to stringResource(R.string.achievement_streak_3_description)
+    "streak_7" -> stringResource(R.string.achievement_streak_7_title) to stringResource(R.string.achievement_streak_7_description)
+    "streak_30" -> stringResource(R.string.achievement_streak_30_title) to stringResource(R.string.achievement_streak_30_description)
+    else -> fallbackTitle to fallbackDescription
 }
