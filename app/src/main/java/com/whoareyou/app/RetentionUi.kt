@@ -40,7 +40,7 @@ fun DailyQuestionCard(
         Column(Modifier.padding(22.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text("DAILY QUESTION", color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                Text("🔥 ${state.currentStreak}", color = RetentionViolet, fontSize = 12.sp, fontWeight = FontWeight.Black)
+                Text("STREAK ${state.currentStreak}", color = RetentionViolet, fontSize = 12.sp, fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(10.dp))
             Text(question.prompt, color = Color.White, fontSize = 20.sp, lineHeight = 26.sp, fontWeight = FontWeight.Bold)
@@ -94,8 +94,9 @@ fun AchievementStrip(achievements: List<Achievement>) {
                 Text("Complete your first test to unlock your first badge.", color = RetentionMuted, fontSize = 13.sp)
             } else {
                 unlocked.take(3).forEach { achievement ->
-                    Text("${achievement.icon}  ${achievement.title}", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                    Spacer(Modifier.height(5.dp))
+                    Text("✓  ${achievement.title}", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                    Text(achievement.description, color = RetentionMuted, fontSize = 11.sp)
+                    Spacer(Modifier.height(7.dp))
                 }
                 if (unlocked.size > 3) {
                     Text("+${unlocked.size - 3} more unlocked", color = RetentionMuted, fontSize = 12.sp)
