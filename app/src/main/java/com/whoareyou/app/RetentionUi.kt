@@ -13,17 +13,59 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 
 private val RetentionPanel = Color(0xFF14151D)
 private val RetentionPanelSoft = Color(0xFF1B1D27)
 private val RetentionViolet = Color(0xFF9C7BFF)
 private val RetentionCyan = Color(0xFF6EE7F9)
 private val RetentionMuted = Color(0xFFA4A7B5)
+
+@Composable
+fun RetentionSection() {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+    val question = remember { DailyQuestionEngine.forDate() }
+    val achievements = remember(storedProfile) { AchievementEngine.build(storedProfile) }
+
+    LaunchedEffect(question.id) {
+        AppEvents.dailyQuestionView(question.id)
+    }
+
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        DailyQuestionCard(
+            question = question,
+            state = storedProfile.daily,
+            onVote = { option ->
+                if (!storedProfile.daily.answeredToday()) {
+                    scope.launch {
+                        val beforeUnlocked = AchievementEngine.unlocked(storedProfile).map { it.id }.toSet()
+                        val result = ProfileStore.saveDailyAnswer(context, question.id, option)
+                        AppEvents.dailyQuestionVote(question.id, option)
+                        AppEvents.streakContinue(result.currentStreak)
+                        val afterProfile = storedProfile.copy(daily = result)
+                        AchievementEngine.unlocked(afterProfile)
+                            .filterNot { it.id in beforeUnlocked }
+                            .forEach { AppEvents.achievementUnlock(it.id) }
+                    }
+                }
+            }
+        )
+        AchievementStrip(achievements)
+    }
+}
 
 @Composable
 fun DailyQuestionCard(
