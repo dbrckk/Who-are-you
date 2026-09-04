@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,11 +28,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 
 private val Ink = Color(0xFF090A0F)
 private val Panel = Color(0xFF14151D)
@@ -92,39 +96,71 @@ private enum class Screen { DISCOVER, QUIZ, RESULT }
 
 @Composable
 private fun WhoAreYouApp() {
+    val context = LocalContext.current
+    val activity = context as? Activity
+    val scope = rememberCoroutineScope()
+    val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+
+    var premiumOverride by remember { mutableStateOf(false) }
+    val adsRemoved = storedProfile.adsRemoved || premiumOverride
+    val billingManager = remember(context) {
+        BillingManager(context) { premiumOverride = it }
+    }
+
+    DisposableEffect(billingManager) {
+        billingManager.start()
+        onDispose { billingManager.close() }
+    }
+
     var screen by remember { mutableStateOf(Screen.DISCOVER) }
     var selectedQuiz by remember { mutableStateOf(quizzes.first()) }
     var finalScore by remember { mutableIntStateOf(0) }
-    val completed = remember { mutableStateListOf<String>() }
 
     AnimatedContent(targetState = screen, label = "screen") { destination ->
         when (destination) {
-            Screen.DISCOVER -> DiscoverScreen(completed) {
-                selectedQuiz = it
-                screen = Screen.QUIZ
-            }
+            Screen.DISCOVER -> DiscoverScreen(
+                completed = storedProfile.completedQuizIds,
+                adsRemoved = adsRemoved,
+                onQuizSelected = {
+                    selectedQuiz = it
+                    AppEvents.testStart(it.id)
+                    screen = Screen.QUIZ
+                },
+                onRemoveAds = {
+                    if (!adsRemoved && activity != null) billingManager.launchPurchase(activity)
+                }
+            )
             Screen.QUIZ -> QuizScreen(
                 quiz = selectedQuiz,
                 onBack = { screen = Screen.DISCOVER },
                 onFinished = { score ->
                     finalScore = score
-                    if (selectedQuiz.id !in completed) completed.add(selectedQuiz.id)
+                    AppEvents.testComplete(selectedQuiz.id, score)
+                    scope.launch { ProfileStore.saveQuizResult(context, selectedQuiz.id, score) }
                     screen = Screen.RESULT
                 }
             )
             Screen.RESULT -> ResultScreen(
                 quiz = selectedQuiz,
                 score = finalScore,
-                completedCount = completed.size,
+                completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                 onDone = { screen = Screen.DISCOVER },
-                onRetry = { screen = Screen.QUIZ }
+                onRetry = {
+                    AppEvents.testStart(selectedQuiz.id)
+                    screen = Screen.QUIZ
+                }
             )
         }
     }
 }
 
 @Composable
-private fun DiscoverScreen(completed: List<String>, onQuizSelected: (Quiz) -> Unit) {
+private fun DiscoverScreen(
+    completed: Set<String>,
+    adsRemoved: Boolean,
+    onQuizSelected: (Quiz) -> Unit,
+    onRemoveAds: () -> Unit
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
@@ -143,6 +179,33 @@ private fun DiscoverScreen(completed: List<String>, onQuizSelected: (Quiz) -> Un
         }
 
         items(quizzes) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
+
+        item {
+            Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(22.dp)) {
+                    Text(if (adsRemoved) "LIFETIME UPGRADE ACTIVE" else "REMOVE ADS FOREVER", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Spacer(Modifier.height(9.dp))
+                    Text(if (adsRemoved) "No ads. Ever." else "€1.99 once. No subscription.", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
+                    Spacer(Modifier.height(7.dp))
+                    Text(
+                        if (adsRemoved) "Your purchase is stored and restored automatically."
+                        else "Keep every test, result, share and friend challenge. Only the ads disappear.",
+                        color = Muted,
+                        fontSize = 13.sp,
+                        lineHeight = 19.sp
+                    )
+                    if (!adsRemoved) {
+                        Spacer(Modifier.height(15.dp))
+                        Button(
+                            onClick = onRemoveAds,
+                            modifier = Modifier.fillMaxWidth().height(50.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Violet),
+                            shape = RoundedCornerShape(16.dp)
+                        ) { Text("REMOVE ADS — €1.99", fontWeight = FontWeight.Black) }
+                    }
+                }
+            }
+        }
 
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
@@ -299,7 +362,10 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
 
             Spacer(Modifier.height(22.dp))
             Button(
-                onClick = { ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description) },
+                onClick = {
+                    AppEvents.resultShare(quiz.id)
+                    ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
+                },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Violet),
                 shape = RoundedCornerShape(18.dp)
@@ -307,7 +373,10 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
 
             Spacer(Modifier.height(10.dp))
             Button(
-                onClick = { ChallengeShare.share(context, quiz.id, quiz.title, score) },
+                onClick = {
+                    AppEvents.challengeCreate(quiz.id)
+                    ChallengeShare.share(context, quiz.id, quiz.title, score)
+                },
                 modifier = Modifier.fillMaxWidth().height(54.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PanelSoft),
                 shape = RoundedCornerShape(18.dp)
