@@ -142,9 +142,7 @@ private fun DiscoverScreen(completed: List<String>, onQuizSelected: (Quiz) -> Un
             Text("TRENDING TESTS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
 
-        items(quizzes) { quiz ->
-            QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) }
-        }
+        items(quizzes) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
 
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
@@ -301,27 +299,21 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
 
             Spacer(Modifier.height(22.dp))
             Button(
-                onClick = {
-                    ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
-                },
+                onClick = { ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description) },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Violet),
                 shape = RoundedCornerShape(18.dp)
-            ) {
-                Text("SHARE MY RESULT  ↗", fontWeight = FontWeight.Black)
-            }
+            ) { Text("SHARE MY RESULT  ↗", fontWeight = FontWeight.Black) }
 
             Spacer(Modifier.height(10.dp))
             Button(
-                onClick = { },
+                onClick = { ChallengeShare.share(context, quiz.id, quiz.title, score) },
                 modifier = Modifier.fillMaxWidth().height(54.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PanelSoft),
                 shape = RoundedCornerShape(18.dp)
-            ) {
-                Text("COMPARE WITH A FRIEND  →", fontWeight = FontWeight.Bold)
-            }
+            ) { Text("COMPARE WITH A FRIEND  →", fontWeight = FontWeight.Bold) }
             Spacer(Modifier.height(8.dp))
-            Text("Friend challenge is the next viral milestone", color = Muted, fontSize = 12.sp)
+            Text("Your friend takes the same test and gets an instant match score", color = Muted, fontSize = 12.sp, textAlign = TextAlign.Center)
 
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
