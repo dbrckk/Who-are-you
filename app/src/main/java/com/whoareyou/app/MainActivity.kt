@@ -8,7 +8,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -89,7 +88,7 @@ data class Quiz(
     val questions: List<Question>
 )
 
-enum class Screen { DISCOVER, QUIZ, RESULT }
+private enum class Screen { DISCOVER, QUIZ, RESULT }
 
 @Composable
 private fun WhoAreYouApp() {
@@ -100,13 +99,10 @@ private fun WhoAreYouApp() {
 
     AnimatedContent(targetState = screen, label = "screen") { destination ->
         when (destination) {
-            Screen.DISCOVER -> DiscoverScreen(
-                completed = completed,
-                onQuizSelected = {
-                    selectedQuiz = it
-                    screen = Screen.QUIZ
-                }
-            )
+            Screen.DISCOVER -> DiscoverScreen(completed) {
+                selectedQuiz = it
+                screen = Screen.QUIZ
+            }
             Screen.QUIZ -> QuizScreen(
                 quiz = selectedQuiz,
                 onBack = { screen = Screen.DISCOVER },
@@ -130,30 +126,16 @@ private fun WhoAreYouApp() {
 @Composable
 private fun DiscoverScreen(completed: List<String>, onQuizSelected: (Quiz) -> Unit) {
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Ink)
-            .padding(horizontal = 20.dp),
+        modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
             Spacer(Modifier.height(28.dp))
             Text("WHO ARE YOU?", color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
-            Text(
-                "Discover what\nmakes you, you.",
-                color = Color.White,
-                fontSize = 38.sp,
-                lineHeight = 41.sp,
-                fontWeight = FontWeight.Black
-            )
+            Text("Discover what\nmakes you, you.", color = Color.White, fontSize = 38.sp, lineHeight = 41.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(10.dp))
-            Text(
-                "Fast personality tests. Visual results. Compare with friends.",
-                color = Muted,
-                fontSize = 16.sp,
-                lineHeight = 23.sp
-            )
+            Text("Fast personality tests. Visual results. Compare with friends.", color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
             ProfileProgress(completed.size)
             Spacer(Modifier.height(10.dp))
@@ -161,26 +143,17 @@ private fun DiscoverScreen(completed: List<String>, onQuizSelected: (Quiz) -> Un
         }
 
         items(quizzes) { quiz ->
-            QuizCard(
-                quiz = quiz,
-                completed = quiz.id in completed,
-                onClick = { onQuizSelected(quiz) }
-            )
+            QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) }
         }
 
         item {
-            Spacer(Modifier.height(4.dp))
-            Card(
-                colors = CardDefaults.cardColors(containerColor = Panel),
-                shape = RoundedCornerShape(24.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(22.dp)) {
                     Text("DAILY QUESTION", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(10.dp))
                     Text("Would you rather know when you die or how you die?", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(8.dp))
-                    Text("Coming next: global votes + friend sharing", color = Muted, fontSize = 13.sp)
+                    Text("Global votes + friend sharing coming next", color = Muted, fontSize = 13.sp)
                 }
             }
             Spacer(Modifier.height(28.dp))
@@ -198,14 +171,9 @@ private fun ProfileProgress(completedCount: Int) {
                 Text("${(progress * 100).toInt()}%", color = Violet, fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(10.dp))
-            LinearProgressIndicator(
-                progress = { progress },
-                modifier = Modifier.fillMaxWidth().height(8.dp),
-                color = Violet,
-                trackColor = PanelSoft
-            )
+            LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
             Spacer(Modifier.height(8.dp))
-            Text("$completedCount/${quizzes.size} prototype tests completed", color = Muted, fontSize = 12.sp)
+            Text("$completedCount/${quizzes.size} dimensions discovered", color = Muted, fontSize = 12.sp)
         }
     }
 }
@@ -239,24 +207,13 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
     val question = quiz.questions[questionIndex]
     val progress = (questionIndex + 1f) / quiz.questions.size
 
-    Column(
-        modifier = Modifier.fillMaxSize().background(Ink).padding(20.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+    Column(Modifier.fillMaxSize().background(Ink).padding(20.dp)) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Text("← BACK", color = Muted, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(onClick = onBack))
             Text("${questionIndex + 1} / ${quiz.questions.size}", color = Muted, fontSize = 13.sp)
         }
         Spacer(Modifier.height(20.dp))
-        LinearProgressIndicator(
-            progress = { progress },
-            modifier = Modifier.fillMaxWidth().height(8.dp),
-            color = Violet,
-            trackColor = PanelSoft
-        )
+        LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
         Spacer(Modifier.height(38.dp))
         Text(quiz.title.uppercase(), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(12.dp))
@@ -269,8 +226,7 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
                     modifier = Modifier.fillMaxWidth().clickable {
                         val newScore = score + answer.score
                         if (questionIndex == quiz.questions.lastIndex) {
-                            val maxScore = quiz.questions.size * 3
-                            onFinished(((newScore.toFloat() / maxScore) * 100).toInt())
+                            onFinished(((newScore.toFloat() / (quiz.questions.size * 3)) * 100).toInt())
                         } else {
                             score = newScore
                             questionIndex++
@@ -279,16 +235,11 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
                     colors = CardDefaults.cardColors(containerColor = Panel),
                     shape = RoundedCornerShape(18.dp)
                 ) {
-                    Text(
-                        answer.text,
-                        modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp),
-                        color = Color.White,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    Text(answer.text, modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp), color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
         }
+
         Spacer(Modifier.weight(1f))
         Text("No right answers. Pick what feels most like you.", color = Muted, fontSize = 12.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(Modifier.height(10.dp))
@@ -297,6 +248,7 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
 
 @Composable
 private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: () -> Unit, onRetry: () -> Unit) {
+    val context = LocalContext.current
     val resultTitle = when {
         score < 35 -> quiz.lowTitle
         score < 70 -> quiz.midTitle
@@ -323,11 +275,7 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
             Text(quiz.title, color = Muted, fontSize = 14.sp)
             Spacer(Modifier.height(26.dp))
 
-            Card(
-                colors = CardDefaults.cardColors(containerColor = Panel),
-                shape = RoundedCornerShape(28.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(28.dp), modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("$score%", color = Violet, fontSize = 54.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(8.dp))
@@ -336,12 +284,7 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
                         Text(quiz.metricHigh, color = Muted, fontSize = 12.sp)
                     }
                     Spacer(Modifier.height(6.dp))
-                    LinearProgressIndicator(
-                        progress = { score / 100f },
-                        modifier = Modifier.fillMaxWidth().height(10.dp),
-                        color = Violet,
-                        trackColor = PanelSoft
-                    )
+                    LinearProgressIndicator(progress = { score / 100f }, modifier = Modifier.fillMaxWidth().height(10.dp), color = Violet, trackColor = PanelSoft)
                     Spacer(Modifier.height(20.dp))
                     Text(description, color = Color.White, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
                 }
@@ -352,31 +295,40 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
                 Column(Modifier.padding(18.dp)) {
                     Text("PROFILE PROGRESS", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
-                    Text("$completedCount/${quizzes.size} prototype dimensions discovered", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    Text("$completedCount/${quizzes.size} dimensions discovered", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 
             Spacer(Modifier.height(22.dp))
             Button(
-                onClick = { },
+                onClick = {
+                    ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
+                },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Violet),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text("COMPARE WITH A FRIEND  →", fontWeight = FontWeight.Black)
+                Text("SHARE MY RESULT  ↗", fontWeight = FontWeight.Black)
             }
+
             Spacer(Modifier.height(10.dp))
-            Text("Friend challenges are the next milestone", color = Muted, fontSize = 12.sp)
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth().height(54.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = PanelSoft),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text("COMPARE WITH A FRIEND  →", fontWeight = FontWeight.Bold)
+            }
+            Spacer(Modifier.height(8.dp))
+            Text("Friend challenge is the next viral milestone", color = Muted, fontSize = 12.sp)
+
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                Button(onClick = onRetry, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft)) {
-                    Text("RETRY")
-                }
-                Spacer(Modifier.width(2.dp))
-                Button(onClick = onDone, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Ink)) {
-                    Text("DONE", fontWeight = FontWeight.Bold)
-                }
+                Button(onClick = onRetry, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft)) { Text("RETRY") }
+                Button(onClick = onDone, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Ink)) { Text("DONE", fontWeight = FontWeight.Bold) }
             }
+
             Spacer(Modifier.height(30.dp))
             Text("For entertainment and self-reflection only — not a psychological diagnosis.", color = Muted, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center)
             Spacer(Modifier.height(28.dp))
@@ -384,27 +336,17 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, onDone: ()
     }
 }
 
-private fun q(text: String, a: String, b: String, c: String, d: String) = Question(
-    text,
-    listOf(Answer(a, 0), Answer(b, 1), Answer(c, 2), Answer(d, 3))
-)
+private fun q(text: String, a: String, b: String, c: String, d: String) = Question(text, listOf(Answer(a, 0), Answer(b, 1), Answer(c, 2), Answer(d, 3)))
 
 private val quizzes = listOf(
     Quiz(
-        id = "social_battery",
-        title = "Social Battery",
-        hook = "How much people can you actually handle?",
-        time = "45 SEC",
-        accent = "◉",
-        lowTitle = "The Quiet Core",
-        midTitle = "The Selective Social",
-        highTitle = "The Human Charger",
-        lowDescription = "Your energy tends to recover in quiet spaces. You can enjoy people, but too much social input drains you quickly.",
-        midDescription = "You enjoy connection when the context feels right. Your social energy depends heavily on the people, place and mood.",
-        highDescription = "Interaction often gives you momentum. You tend to recharge through people, activity and shared experiences.",
-        metricLow = "SOLITUDE",
-        metricHigh = "SOCIAL ENERGY",
-        questions = listOf(
+        "social_battery", "Social Battery", "How much people can you actually handle?", "45 SEC", "◉",
+        "The Quiet Core", "The Selective Social", "The Human Charger",
+        "Your energy tends to recover in quiet spaces. You can enjoy people, but too much social input drains you quickly.",
+        "You enjoy connection when the context feels right. Your social energy depends heavily on the people, place and mood.",
+        "Interaction often gives you momentum. You tend to recharge through people, activity and shared experiences.",
+        "SOLITUDE", "SOCIAL ENERGY",
+        listOf(
             q("After a full day around people, what do you want most?", "Total silence", "One close person", "A relaxed group", "More plans"),
             q("A free Saturday appears. Your first instinct?", "Stay home alone", "Keep it low-key", "Meet a few people", "Fill the day with plans"),
             q("At a party where you know almost nobody...", "I look for an exit", "I stay near one person", "I warm up eventually", "I start conversations"),
@@ -413,20 +355,13 @@ private val quizzes = listOf(
         )
     ),
     Quiz(
-        id = "logic_emotion",
-        title = "Logic vs Emotion",
-        hook = "What really drives your decisions?",
-        time = "50 SEC",
-        accent = "◇",
-        lowTitle = "The Rational Mind",
-        midTitle = "The Integrator",
-        highTitle = "The Intuitive Heart",
-        lowDescription = "You tend to trust evidence, consistency and structure before feelings. Emotions matter, but they rarely get the final vote.",
-        midDescription = "You naturally combine analysis and feeling. You can switch between evidence and intuition depending on what is at stake.",
-        highDescription = "Your internal sense of what feels right strongly shapes your choices. Human impact often matters more than perfect logic.",
-        metricLow = "LOGIC",
-        metricHigh = "EMOTION",
-        questions = listOf(
+        "logic_emotion", "Logic vs Emotion", "What really drives your decisions?", "50 SEC", "◇",
+        "The Rational Mind", "The Integrator", "The Intuitive Heart",
+        "You tend to trust evidence, consistency and structure before feelings. Emotions matter, but they rarely get the final vote.",
+        "You naturally combine analysis and feeling. You can switch between evidence and intuition depending on what is at stake.",
+        "Your internal sense of what feels right strongly shapes your choices. Human impact often matters more than perfect logic.",
+        "LOGIC", "EMOTION",
+        listOf(
             q("Two choices are equally practical. What breaks the tie?", "The numbers", "Long-term logic", "My instinct", "What feels right"),
             q("A friend makes an irrational decision. You first...", "Point out the flaw", "Ask for the reasoning", "Try to understand", "Focus on how they feel"),
             q("When buying something expensive, you trust...", "Comparison data", "Research plus instinct", "My overall impression", "The feeling it gives me"),
@@ -435,20 +370,13 @@ private val quizzes = listOf(
         )
     ),
     Quiz(
-        id = "overthinker",
-        title = "Overthinker",
-        hook = "Does your brain ever actually switch off?",
-        time = "40 SEC",
-        accent = "∞",
-        lowTitle = "The Clear Decider",
-        midTitle = "The Analyzer",
-        highTitle = "The Infinite Loop",
-        lowDescription = "You usually process what matters and move forward. Uncertainty may bother you, but it rarely keeps your mind trapped for long.",
-        midDescription = "You think deeply and often replay important situations. Analysis helps you, though it can occasionally become mental noise.",
-        highDescription = "Your mind generates branches, alternatives and second-order consequences almost automatically. Switching off can be harder than deciding.",
-        metricLow = "LET GO",
-        metricHigh = "OVERTHINK",
-        questions = listOf(
+        "overthinker", "Overthinker", "Does your brain ever actually switch off?", "40 SEC", "∞",
+        "The Clear Decider", "The Analyzer", "The Infinite Loop",
+        "You usually process what matters and move forward. Uncertainty may bother you, but it rarely keeps your mind trapped for long.",
+        "You think deeply and often replay important situations. Analysis helps you, though it can occasionally become mental noise.",
+        "Your mind generates branches, alternatives and second-order consequences almost automatically. Switching off can be harder than deciding.",
+        "LET GO", "OVERTHINK",
+        listOf(
             q("After sending an important message, you...", "Forget about it", "Check once", "Reread it", "Analyze every possible interpretation"),
             q("Before a simple decision, how many scenarios appear?", "One", "A couple", "Several", "Basically a decision tree"),
             q("An awkward moment from years ago appears in your mind...", "Almost never", "Rarely", "Sometimes", "Far too easily"),
@@ -457,20 +385,13 @@ private val quizzes = listOf(
         )
     ),
     Quiz(
-        id = "chaos_control",
-        title = "Chaos vs Control",
-        hook = "Planner, improviser, or beautifully unpredictable?",
-        time = "45 SEC",
-        accent = "✦",
-        lowTitle = "The Architect",
-        midTitle = "The Adaptive Planner",
-        highTitle = "The Chaos Surfer",
-        lowDescription = "Structure gives you freedom. You prefer knowing what comes next and reducing avoidable surprises before they happen.",
-        midDescription = "You like having a framework without becoming trapped by it. A plan is useful, but you can abandon it when reality changes.",
-        highDescription = "You are comfortable moving without a complete map. Improvisation, novelty and last-minute decisions can feel more alive than rigid plans.",
-        metricLow = "CONTROL",
-        metricHigh = "CHAOS",
-        questions = listOf(
+        "chaos_control", "Chaos vs Control", "Planner, improviser, or beautifully unpredictable?", "45 SEC", "✦",
+        "The Architect", "The Adaptive Planner", "The Chaos Surfer",
+        "Structure gives you freedom. You prefer knowing what comes next and reducing avoidable surprises before they happen.",
+        "You like having a framework without becoming trapped by it. A plan is useful, but you can abandon it when reality changes.",
+        "You are comfortable moving without a complete map. Improvisation, novelty and last-minute decisions can feel more alive than rigid plans.",
+        "CONTROL", "CHAOS",
+        listOf(
             q("A trip is next week. Your itinerary is...", "Already detailed", "Mostly planned", "A few anchors", "What itinerary?"),
             q("Your workspace usually looks...", "Precisely organized", "Mostly tidy", "Functional chaos", "Like a side quest exploded"),
             q("When plans suddenly change...", "I hate it", "I need a moment", "I adapt", "That makes it interesting"),
@@ -479,20 +400,13 @@ private val quizzes = listOf(
         )
     ),
     Quiz(
-        id = "risk_taker",
-        title = "Risk Taker",
-        hook = "How far outside certainty will you go?",
-        time = "45 SEC",
-        accent = "△",
-        lowTitle = "The Strategist",
-        midTitle = "The Calculated Risk",
-        highTitle = "The Edge Seeker",
-        lowDescription = "You prefer asymmetric bets: protect the downside first, then move. Security and predictability carry real value for you.",
-        midDescription = "You will take meaningful risks when the upside is justified. You are neither reckless nor automatically conservative.",
-        highDescription = "Uncertainty can feel energizing rather than threatening. When something matters, you are often willing to move before certainty arrives.",
-        metricLow = "SECURITY",
-        metricHigh = "RISK",
-        questions = listOf(
+        "risk_taker", "Risk Taker", "How far outside certainty will you go?", "45 SEC", "△",
+        "The Strategist", "The Calculated Risk", "The Edge Seeker",
+        "You prefer asymmetric bets: protect the downside first, then move. Security and predictability carry real value for you.",
+        "You will take meaningful risks when the upside is justified. You are neither reckless nor automatically conservative.",
+        "Uncertainty can feel energizing rather than threatening. When something matters, you are often willing to move before certainty arrives.",
+        "SECURITY", "RISK",
+        listOf(
             q("A new opportunity has a big upside but no guarantee. You...", "Pass", "Research for a long time", "Take a measured shot", "Jump in"),
             q("Trying something with a real chance of public failure feels...", "Not worth it", "Uncomfortable", "Acceptable", "Exciting"),
             q("With spare money, you prefer...", "Protect it", "Mostly safe options", "A balanced mix", "High-upside bets"),
