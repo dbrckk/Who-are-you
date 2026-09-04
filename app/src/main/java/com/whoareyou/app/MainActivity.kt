@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -90,6 +91,13 @@ private fun WhoAreYouApp() {
         billingManager.start()
         adManager.start()
         onDispose { billingManager.close() }
+    }
+
+    if (!storedProfile.onboardingComplete) {
+        OnboardingScreen(
+            onStart = { scope.launch { ProfileStore.setOnboardingComplete(context) } }
+        )
+        return
     }
 
     var screen by remember { mutableStateOf(Screen.DISCOVER) }
@@ -145,6 +153,34 @@ private fun WhoAreYouApp() {
 }
 
 @Composable
+private fun OnboardingScreen(onStart: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 28.dp, vertical = 36.dp),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column {
+            Text(stringResource(R.string.onboarding_title), color = Color.White, fontSize = 58.sp, lineHeight = 56.sp, fontWeight = FontWeight.Black)
+            Spacer(Modifier.height(22.dp))
+            Text(stringResource(R.string.onboarding_subtitle), color = Violet, fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(12.dp))
+            Text(stringResource(R.string.onboarding_body), color = Muted, fontSize = 16.sp, lineHeight = 24.sp)
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(
+                onClick = onStart,
+                modifier = Modifier.fillMaxWidth().height(58.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Violet),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text(stringResource(R.string.onboarding_start), fontWeight = FontWeight.Black)
+            }
+            Spacer(Modifier.height(12.dp))
+            Text(stringResource(R.string.onboarding_no_account), color = Muted, fontSize = 12.sp)
+        }
+    }
+}
+
+@Composable
 private fun DiscoverScreen(
     quizzes: List<Quiz>,
     profile: GlobalProfileSummary,
@@ -159,17 +195,17 @@ private fun DiscoverScreen(
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
             Spacer(Modifier.height(28.dp))
-            Text("WHO ARE YOU?", color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.app_name), color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
-            Text("Discover what\nmakes you, you.", color = Color.White, fontSize = 38.sp, lineHeight = 41.sp, fontWeight = FontWeight.Black)
+            Text(stringResource(R.string.discover_headline), color = Color.White, fontSize = 38.sp, lineHeight = 41.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(10.dp))
-            Text("Fast personality tests. Visual results. Compare with friends.", color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
+            Text(stringResource(R.string.discover_subtitle), color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
             ProfileProgress(profile, onOpenProfile)
             Spacer(Modifier.height(14.dp))
             RetentionSection()
             Spacer(Modifier.height(10.dp))
-            Text("TRENDING TESTS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.trending_tests), color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
 
         items(quizzes, key = { it.id }) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
@@ -177,15 +213,15 @@ private fun DiscoverScreen(
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(22.dp)) {
-                    Text(if (adsRemoved) "LIFETIME UPGRADE ACTIVE" else "REMOVE ADS FOREVER", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(if (adsRemoved) R.string.lifetime_upgrade_active else R.string.remove_ads_forever), color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(9.dp))
-                    Text(if (adsRemoved) "No ads. Ever." else "$premiumPrice once. No subscription.", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
+                    Text(if (adsRemoved) stringResource(R.string.no_ads_ever) else stringResource(R.string.premium_once_no_subscription, premiumPrice), color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(7.dp))
-                    Text(if (adsRemoved) "Your purchase is stored and restored automatically." else "Keep every test, result, share and friend challenge. Only the ads disappear.", color = Muted, fontSize = 13.sp, lineHeight = 19.sp)
+                    Text(stringResource(if (adsRemoved) R.string.premium_restore_copy else R.string.premium_copy), color = Muted, fontSize = 13.sp, lineHeight = 19.sp)
                     if (!adsRemoved) {
                         Spacer(Modifier.height(15.dp))
                         Button(onClick = onRemoveAds, modifier = Modifier.fillMaxWidth().height(50.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(16.dp)) {
-                            Text("REMOVE ADS — $premiumPrice", fontWeight = FontWeight.Black)
+                            Text(stringResource(R.string.remove_ads_button, premiumPrice), fontWeight = FontWeight.Black)
                         }
                     }
                 }
@@ -203,7 +239,7 @@ private fun ProfileProgress(summary: GlobalProfileSummary, onOpenProfile: () -> 
     Card(modifier = Modifier.fillMaxWidth().clickable(onClick = onOpenProfile), colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(22.dp)) {
         Column(Modifier.padding(18.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("YOUR PROFILE", color = Color.White, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.your_profile), color = Color.White, fontWeight = FontWeight.Bold)
                 Text("${summary.completionPercent}%", color = Violet, fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(8.dp))
@@ -211,11 +247,11 @@ private fun ProfileProgress(summary: GlobalProfileSummary, onOpenProfile: () -> 
             Spacer(Modifier.height(10.dp))
             LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
             Spacer(Modifier.height(8.dp))
-            Text("${summary.completedCount}/${summary.totalCount} dimensions discovered", color = Muted, fontSize = 12.sp)
+            Text(stringResource(R.string.profile_dimensions_discovered, summary.completedCount, summary.totalCount), color = Muted, fontSize = 12.sp)
 
             if (snapshot.isNotEmpty()) {
                 Spacer(Modifier.height(16.dp))
-                Text("PROFILE SNAPSHOT", color = Muted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.profile_snapshot), color = Muted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(8.dp))
                 snapshot.forEach { dimension ->
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -229,7 +265,7 @@ private fun ProfileProgress(summary: GlobalProfileSummary, onOpenProfile: () -> 
                 }
             }
             Spacer(Modifier.height(6.dp))
-            Text("OPEN FULL PROFILE  →", color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.open_full_profile), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -243,19 +279,19 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Spacer(Modifier.height(24.dp))
-            Text("← BACK", color = Muted, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(onClick = onBack))
+            Text(stringResource(R.string.back), color = Muted, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(onClick = onBack))
             Spacer(Modifier.height(26.dp))
-            Text("YOUR PROFILE", color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.your_profile), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(10.dp))
             Text(summary.dominantArchetype.uppercase(), color = Color.White, fontSize = 34.sp, lineHeight = 39.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(8.dp))
-            Text("${summary.completedCount}/${summary.totalCount} dimensions • ${summary.completionPercent}% complete", color = Muted, fontSize = 14.sp)
+            Text("${summary.completedCount}/${summary.totalCount} dimensions • ${summary.completionPercent}%", color = Muted, fontSize = 14.sp)
             Spacer(Modifier.height(20.dp))
             Button(onClick = {
                 AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
                 GlobalProfileShare.share(context, summary)
             }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(18.dp)) {
-                Text("SHARE MY PROFILE  ↗", fontWeight = FontWeight.Black)
+                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Black)
             }
             Spacer(Modifier.height(10.dp))
             Button(
@@ -270,28 +306,28 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
                 colors = ButtonDefaults.buttonColors(containerColor = PanelSoft),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text("COMPARE PROFILE WITH A FRIEND  →", fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.compare_profile_friend), fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(8.dp))
             Text(
-                if (strongestDimension == null) "Complete one test to unlock profile comparison."
-                else "Starts with your most distinctive dimension: ${strongestDimension.title}.",
+                if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
+                else stringResource(R.string.starts_with_dimension, strongestDimension.title),
                 color = Muted,
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(Modifier.height(14.dp))
-            Text("ALL DIMENSIONS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.all_dimensions), color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
 
         if (summary.dimensions.isEmpty()) {
             item {
                 Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(22.dp), modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(22.dp)) {
-                        Text("PROFILE UNDISCOVERED", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Black)
+                        Text(stringResource(R.string.profile_undiscovered), color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Black)
                         Spacer(Modifier.height(7.dp))
-                        Text("Complete your first test to start building your profile.", color = Muted, fontSize = 14.sp, lineHeight = 20.sp)
+                        Text(stringResource(R.string.complete_first_test_profile), color = Muted, fontSize = 14.sp, lineHeight = 20.sp)
                     }
                 }
             }
@@ -318,7 +354,7 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
 
         item {
             Spacer(Modifier.height(12.dp))
-            Text("For entertainment and self-reflection only — not a psychological diagnosis.", color = Muted, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+            Text(stringResource(R.string.disclaimer), color = Muted, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
             Spacer(Modifier.height(28.dp))
         }
     }
@@ -330,14 +366,14 @@ private fun QuizCard(quiz: Quiz, completed: Boolean, onClick: () -> Unit) {
         Column(Modifier.padding(22.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(quiz.accent, fontSize = 26.sp)
-                Text(if (completed) "DONE" else quiz.time, color = if (completed) Cyan else Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                Text(if (completed) stringResource(R.string.done) else quiz.time, color = if (completed) Cyan else Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(16.dp))
             Text(quiz.title.uppercase(), color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(5.dp))
             Text(quiz.hook, color = Muted, fontSize = 14.sp)
             Spacer(Modifier.height(14.dp))
-            Text(if (completed) "TAKE AGAIN  →" else "START  →", color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(if (completed) R.string.take_again else R.string.start), color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -351,8 +387,8 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
 
     Column(Modifier.fillMaxSize().background(Ink).padding(20.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text("← BACK", color = Muted, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(onClick = onBack))
-            Text("${questionIndex + 1} / ${quiz.questions.size}", color = Muted, fontSize = 13.sp)
+            Text(stringResource(R.string.back), color = Muted, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(onClick = onBack))
+            Text(stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size), color = Muted, fontSize = 13.sp)
         }
         Spacer(Modifier.height(20.dp))
         LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
@@ -375,7 +411,7 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
         }
 
         Spacer(Modifier.weight(1f))
-        Text("No right answers. Pick what feels most like you.", color = Muted, fontSize = 12.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
+        Text(stringResource(R.string.no_right_answers), color = Muted, fontSize = 12.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(Modifier.height(10.dp))
     }
 }
@@ -389,7 +425,7 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizC
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Spacer(Modifier.height(32.dp))
-            Text("YOUR RESULT", color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.your_result), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(18.dp))
             Text(quiz.accent, fontSize = 44.sp)
             Spacer(Modifier.height(12.dp))
@@ -416,9 +452,9 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizC
             Spacer(Modifier.height(16.dp))
             Card(colors = CardDefaults.cardColors(containerColor = PanelSoft), shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp)) {
-                    Text("PROFILE PROGRESS", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.profile_progress), color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
-                    Text("$completedCount/$totalQuizCount dimensions discovered", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 
@@ -427,7 +463,7 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizC
                 AppEvents.resultShare(quiz.id, score)
                 ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
             }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(18.dp)) {
-                Text("SHARE MY RESULT  ↗", fontWeight = FontWeight.Black)
+                Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Black)
             }
 
             Spacer(Modifier.height(10.dp))
@@ -435,19 +471,19 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizC
                 AppEvents.challengeCreate(quiz.id, score)
                 ChallengeShare.share(context, quiz.id, quiz.title, score)
             }, modifier = Modifier.fillMaxWidth().height(54.dp), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft), shape = RoundedCornerShape(18.dp)) {
-                Text("COMPARE WITH A FRIEND  →", fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.compare_with_friend), fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(8.dp))
-            Text("Your friend takes the same test and gets an instant match score", color = Muted, fontSize = 12.sp, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.friend_match_explainer), color = Muted, fontSize = 12.sp, textAlign = TextAlign.Center)
 
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                Button(onClick = onRetry, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft)) { Text("RETRY") }
-                Button(onClick = onDone, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Ink)) { Text("DONE", fontWeight = FontWeight.Bold) }
+                Button(onClick = onRetry, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft)) { Text(stringResource(R.string.retry)) }
+                Button(onClick = onDone, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Ink)) { Text(stringResource(R.string.done_button), fontWeight = FontWeight.Bold) }
             }
 
             Spacer(Modifier.height(30.dp))
-            Text("For entertainment and self-reflection only — not a psychological diagnosis.", color = Muted, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.disclaimer), color = Muted, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center)
             Spacer(Modifier.height(28.dp))
         }
     }
