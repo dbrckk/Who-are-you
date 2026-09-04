@@ -12,8 +12,20 @@ object AppEvents {
 
     fun testStart(quizId: String) = log("test_start", mapOf("quiz_id" to quizId))
     fun testComplete(quizId: String, score: Int) = log("test_complete", mapOf("quiz_id" to quizId, "score" to score))
-    fun resultShare(quizId: String, score: Int) = log("result_share", mapOf("quiz_id" to quizId, "score" to score))
-    fun challengeCreate(quizId: String, score: Int) = log("challenge_create", mapOf("quiz_id" to quizId, "score" to score))
+    fun resultShare(quizId: String, score: Int? = null) = log(
+        "result_share",
+        buildMap {
+            put("quiz_id", quizId)
+            if (score != null) put("score", score)
+        }
+    )
+    fun challengeCreate(quizId: String, score: Int? = null) = log(
+        "challenge_create",
+        buildMap {
+            put("quiz_id", quizId)
+            if (score != null) put("score", score)
+        }
+    )
     fun premiumView() = log("premium_view")
     fun purchaseSuccess(productId: String) = log("purchase_success", mapOf("product_id" to productId))
     fun adImpression(placement: String) = log("ad_impression", mapOf("placement" to placement))
