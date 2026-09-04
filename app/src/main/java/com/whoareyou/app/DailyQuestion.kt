@@ -1,7 +1,7 @@
 package com.whoareyou.app
 
 import java.time.LocalDate
-import kotlin.math.abs
+import java.util.Locale
 
 data class DailyQuestion(
     val id: String,
@@ -11,8 +11,8 @@ data class DailyQuestion(
 )
 
 object DailyQuestionEngine {
-    private val questions = listOf(
-        DailyQuestion("know_when_or_how", "Would you rather know when you die or how you die?", "Know when", "Know how"),
+    private val english = listOf(
+        DailyQuestion("perfect_skill_or_language", "Would you rather instantly master any skill or speak every language?", "Master any skill", "Speak every language"),
         DailyQuestion("future_or_past", "Would you rather see 10 years into your future or relive one day from your past?", "See my future", "Relive one day"),
         DailyQuestion("truth_or_comfort", "Would you rather always hear the truth or sometimes keep the comforting version?", "Always the truth", "Sometimes comfort"),
         DailyQuestion("famous_or_free", "Would you rather be famous everywhere or completely free from other people's opinions?", "Be famous", "Be free"),
@@ -28,12 +28,32 @@ object DailyQuestionEngine {
         DailyQuestion("money_or_time", "Would you rather have twice as much money or twice as much free time?", "More money", "More free time")
     )
 
+    private val french = listOf(
+        DailyQuestion("perfect_skill_or_language", "Tu préfères maîtriser instantanément n’importe quelle compétence ou parler toutes les langues ?", "Maîtriser une compétence", "Parler toutes les langues"),
+        DailyQuestion("future_or_past", "Tu préfères voir ta vie dans 10 ans ou revivre une journée de ton passé ?", "Voir mon avenir", "Revivre une journée"),
+        DailyQuestion("truth_or_comfort", "Tu préfères toujours entendre la vérité ou parfois conserver une version rassurante ?", "Toujours la vérité", "Parfois le réconfort"),
+        DailyQuestion("famous_or_free", "Tu préfères être célèbre partout ou totalement libre du regard des autres ?", "Être célèbre", "Être libre"),
+        DailyQuestion("plan_or_spontaneous", "Tu préfères planifier tous tes week-ends ou tout décider au dernier moment ?", "Tout planifier", "Rester spontané"),
+        DailyQuestion("mind_or_memory", "Tu préfères lire dans les pensées ou avoir une mémoire parfaite ?", "Lire les pensées", "Mémoire parfaite"),
+        DailyQuestion("city_or_nature", "Tu préfères vivre au centre d’une immense ville ou loin de tout dans la nature ?", "Grande ville", "Nature"),
+        DailyQuestion("risk_or_regret", "Tu préfères tenter une chance risquée ou choisir la sécurité en te demandant ce qui aurait pu arriver ?", "Tenter ma chance", "Rester prudent"),
+        DailyQuestion("lead_or_support", "Tu préfères diriger le groupe ou être la personne fiable sur laquelle tout le monde s’appuie ?", "Diriger", "Soutenir"),
+        DailyQuestion("love_or_success", "Tu préfères trouver ta relation idéale ou atteindre d’abord ton plus grand objectif professionnel ?", "Relation", "Objectif professionnel"),
+        DailyQuestion("alone_or_crowd", "Tu préfères passer une journée libre totalement seul ou entouré de personnes que tu apprécies ?", "Totalement seul", "Avec les autres"),
+        DailyQuestion("logic_or_instinct", "Pour une décision importante, tu préfères utiliser uniquement la logique ou suivre ton instinct ?", "Logique pure", "Suivre mon instinct"),
+        DailyQuestion("repeat_or_unknown", "Tu préfères revivre la meilleure année de ta vie ou entrer dans une année totalement inconnue ?", "Revivre la meilleure", "Choisir l’inconnu"),
+        DailyQuestion("money_or_time", "Tu préfères avoir deux fois plus d’argent ou deux fois plus de temps libre ?", "Plus d’argent", "Plus de temps libre")
+    )
+
+    private fun questions(): List<DailyQuestion> = if (Locale.getDefault().language == "fr") french else english
+
     fun forDate(date: LocalDate = LocalDate.now()): DailyQuestion {
+        val questions = questions()
         val index = Math.floorMod(date.toEpochDay(), questions.size.toLong()).toInt()
         return questions[index]
     }
 
-    fun all(): List<DailyQuestion> = questions
+    fun all(): List<DailyQuestion> = questions()
 }
 
 data class DailyState(
