@@ -158,6 +158,8 @@ private fun DiscoverScreen(
             Text("Fast personality tests. Visual results. Compare with friends.", color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
             ProfileProgress(profile, onOpenProfile)
+            Spacer(Modifier.height(14.dp))
+            RetentionSection()
             Spacer(Modifier.height(10.dp))
             Text("TRENDING TESTS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
@@ -178,18 +180,6 @@ private fun DiscoverScreen(
                             Text("REMOVE ADS — €1.99", fontWeight = FontWeight.Black)
                         }
                     }
-                }
-            }
-        }
-
-        item {
-            Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(22.dp)) {
-                    Text("DAILY QUESTION", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                    Spacer(Modifier.height(10.dp))
-                    Text("Would you rather know when you die or how you die?", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                    Spacer(Modifier.height(8.dp))
-                    Text("Global votes + friend sharing coming next", color = Muted, fontSize = 13.sp)
                 }
             }
             Spacer(Modifier.height(28.dp))
