@@ -26,6 +26,11 @@ object AppEvents {
             if (score != null) put("score", score)
         }
     )
+    fun challengeOpen(quizId: String, source: String) = log(
+        "challenge_open",
+        mapOf("quiz_id" to quizId, "source" to source)
+    )
+    fun appLinkOpen(path: String) = log("app_link_open", mapOf("path" to path))
     fun profileShare(archetype: String, completedCount: Int) = log(
         "profile_share",
         mapOf("archetype" to archetype, "completed_count" to completedCount)
