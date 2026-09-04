@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "social_confidence", "title": "Confiance sociale", "hook": "Avec quelle facilité prends-tu ta place parmi les autres ?", "time": "45 SEC", "accent": "✹", "metricLow": "RÉSERVÉ", "metricHigh": "ASSURÉ",
+      "results": {"low": {"title": "L'Observateur", "description": "Tu entres prudemment dans les situations sociales et préfères repérer des signes de sécurité avant de te rendre visible."}, "mid": {"title": "L'Échauffement", "description": "Ta confiance augmente une fois que tu comprends l'ambiance. Tu peux participer confortablement sans avoir besoin de dominer."}, "high": {"title": "Le Lecteur de la pièce", "description": "Tu te fais généralement confiance socialement et tu es à l'aise pour initier, prendre la parole et être remarqué."}},
+      "questions": [
+        {"text": "Tu entres dans une pièce où tu ne connais qu'une personne. Tu...", "answers": [{"text": "Restes près d'elle", "score": 0}, {"text": "Attends une ouverture", "score": 1}, {"text": "Te présentes aux personnes proches", "score": 2}, {"text": "Commences à rencontrer du monde", "score": 3}]},
+        {"text": "Quelqu'un te comprend mal dans un groupe. Tu...", "answers": [{"text": "Laisses passer", "score": 0}, {"text": "Clarifies plus tard", "score": 1}, {"text": "Corriges calmement", "score": 2}, {"text": "Réagis immédiatement", "score": 3}]},
+        {"text": "Quand tout le monde se tait, tu...", "answers": [{"text": "Restes silencieux", "score": 0}, {"text": "Attends un peu", "score": 1}, {"text": "Parles si c'est utile", "score": 2}, {"text": "Brises le silence", "score": 3}]},
+        {"text": "Un inconnu te fait un compliment. Tu...", "answers": [{"text": "Te figes un peu", "score": 0}, {"text": "Remercies rapidement", "score": 1}, {"text": "L'acceptes avec naturel", "score": 2}, {"text": "En fais une conversation", "score": 3}]},
+        {"text": "Dans les décisions de groupe, ton avis est...", "answers": [{"text": "Souvent gardé pour toi", "score": 0}, {"text": "Partagé si on te le demande", "score": 1}, {"text": "Généralement exprimé", "score": 2}, {"text": "Défendu activement", "score": 3}]}
+      ]
+    },
+    {
+      "id": "decision_style", "title": "Style de décision", "hook": "Instinct rapide ou analyse réfléchie ?", "time": "40 SEC", "accent": "↯", "metricLow": "RÉFLÉCHI", "metricHigh": "INSTINCTIF",
+      "results": {"low": {"title": "Le Délibérateur", "description": "Tu préfères réduire l'incertitude avant de t'engager. Obtenir davantage d'informations te semble souvent valoir le temps investi."}, "mid": {"title": "L'Équilibriste", "description": "Tu recueilles assez d'informations pour te sentir solide, puis tu avances sans exiger une certitude parfaite."}, "high": {"title": "L'Instinctif", "description": "Tu décides vite et fais davantage confiance à ta capacité d'adaptation qu'à une analyse exhaustive."}},
+      "questions": [
+        {"text": "Pour choisir entre deux bonnes options, tu...", "answers": [{"text": "Fais une liste", "score": 0}, {"text": "Compares les compromis essentiels", "score": 1}, {"text": "Suis l'option qui t'attire le plus", "score": 2}, {"text": "Choisis rapidement", "score": 3}]},
+        {"text": "Une échéance est encore loin. Tu décides...", "answers": [{"text": "Vers la fin après beaucoup de recherches", "score": 0}, {"text": "Quand tu as assez d'informations", "score": 1}, {"text": "Assez tôt", "score": 2}, {"text": "Immédiatement", "score": 3}]},
+        {"text": "Quand les conseils se contredisent, tu...", "answers": [{"text": "Continues à chercher", "score": 0}, {"text": "Évalues les sources", "score": 1}, {"text": "Fais confiance à ton jugement", "score": 2}, {"text": "Ignores la plupart des avis", "score": 3}]},
+        {"text": "Un menu propose 80 plats. Tu...", "answers": [{"text": "Étudies tout", "score": 0}, {"text": "Fais une courte sélection", "score": 1}, {"text": "Choisis ce qui attire ton regard", "score": 2}, {"text": "Choisis presque instantanément", "score": 3}]},
+        {"text": "Après avoir décidé, tu...", "answers": [{"text": "Rouvres la question", "score": 0}, {"text": "Revérifies une fois", "score": 1}, {"text": "Passes généralement à autre chose", "score": 2}, {"text": "Ne regardes jamais en arrière", "score": 3}]}
+      ]
+    },
+    {
+      "id": "love_style", "title": "Style amoureux", "hook": "Comment montres-tu naturellement qu'une personne compte pour toi ?", "time": "50 SEC", "accent": "♡", "metricLow": "CONSTANT", "metricHigh": "EXPRESSIF",
+      "results": {"low": {"title": "La Présence stable", "description": "Tu montres surtout ton attachement par la fiabilité, l'aide concrète et une présence régulière."}, "mid": {"title": "Le Partenaire attentif", "description": "Tu combines actions fiables et attention émotionnelle, en t'adaptant à ce dont la relation a besoin."}, "high": {"title": "Le Cœur expressif", "description": "Tu exprimes naturellement ton affection de façon visible, par les mots, les gestes, la proximité et l'enthousiasme."}},
+      "questions": [
+        {"text": "Une personne que tu aimes passe une mauvaise journée. D'abord, tu...", "answers": [{"text": "Règles quelque chose de concret", "score": 0}, {"text": "Restes à proximité", "score": 1}, {"text": "Demandes ce dont elle a besoin", "score": 2}, {"text": "Montres beaucoup d'affection", "score": 3}]},
+        {"text": "Ta manière idéale de montrer ton affection est de...", "answers": [{"text": "Faire quelque chose d'utile", "score": 0}, {"text": "Donner de ton temps", "score": 1}, {"text": "Dire ce que cette personne représente pour toi", "score": 2}, {"text": "Créer un geste mémorable", "score": 3}]},
+        {"text": "À quelle fréquence dis-tu des choses affectueuses ?", "answers": [{"text": "Rarement", "score": 0}, {"text": "Quand c'est important", "score": 1}, {"text": "Assez souvent", "score": 2}, {"text": "Très souvent", "score": 3}]},
+        {"text": "Une étape importante de la relation arrive. Tu...", "answers": [{"text": "Restes simple", "score": 0}, {"text": "Prépares quelque chose d'attentionné", "score": 1}, {"text": "Rends le moment spécial", "score": 2}, {"text": "Vois les choses en grand", "score": 3}]},
+        {"text": "Quand quelqu'un te manque, tu...", "answers": [{"text": "Attends de le revoir", "score": 0}, {"text": "Envoies un petit message", "score": 1}, {"text": "Le dis directement", "score": 2}, {"text": "Fais en sorte qu'il le sache vraiment", "score": 3}]}
+      ]
+    },
+    {
+      "id": "friendship_type", "title": "Type d'amitié", "hook": "Quel genre d'ami es-tu quand cela compte vraiment ?", "time": "45 SEC", "accent": "⌁", "metricLow": "PROFONDEUR", "metricHigh": "RÉSEAU",
+      "results": {"low": {"title": "L'Ancre", "description": "Tu valorises la loyauté, la profondeur et la constance. Quelques amitiés solides comptent souvent plus pour toi qu'un large réseau."}, "mid": {"title": "Le Cercle proche", "description": "Tu combines profondeur et diversité, avec des liens forts tout en restant ouvert à différents groupes."}, "high": {"title": "Le Connecteur", "description": "Tu crées naturellement des ponts entre les gens et apprécies d'entretenir un réseau large et actif."}},
+      "questions": [
+        {"text": "Ton groupe d'amis idéal ressemble à...", "answers": [{"text": "Deux ou trois personnes très proches", "score": 0}, {"text": "Un petit cercle de confiance", "score": 1}, {"text": "Plusieurs groupes différents", "score": 2}, {"text": "Un grand réseau connecté", "score": 3}]},
+        {"text": "Un ami disparaît pendant des mois. Tu...", "answers": [{"text": "Le considères toujours comme proche", "score": 0}, {"text": "Prends de ses nouvelles plus tard", "score": 1}, {"text": "Reprends contact si cela semble naturel", "score": 2}, {"text": "Restes surtout avec ton cercle actif", "score": 3}]},
+        {"text": "Lors d'une soirée, tu préfères...", "answers": [{"text": "Une conversation profonde", "score": 0}, {"text": "Quelques échanges significatifs", "score": 1}, {"text": "Circuler entre les gens", "score": 2}, {"text": "Faire se rencontrer tout le monde", "score": 3}]},
+        {"text": "Tes amis comptent surtout sur toi pour...", "answers": [{"text": "La stabilité", "score": 0}, {"text": "La compréhension", "score": 1}, {"text": "Le recul", "score": 2}, {"text": "Les rencontres et l'énergie", "score": 3}]},
+        {"text": "Ton agenda social est...", "answers": [{"text": "Très sélectif", "score": 0}, {"text": "Surtout réservé aux proches", "score": 1}, {"text": "Varié", "score": 2}, {"text": "Toujours entre plusieurs cercles", "score": 3}]}
+      ]
+    },
+    {
+      "id": "money_personality", "title": "Personnalité financière", "hook": "Sécurité, équilibre ou opportunités ?", "time": "45 SEC", "accent": "¤", "metricLow": "SÉCURITÉ", "metricHigh": "OPPORTUNITÉ",
+      "results": {"low": {"title": "Le Protecteur", "description": "Tu privilégies naturellement les réserves, la prévisibilité et la protection de tes options futures."}, "mid": {"title": "Le Répartiteur", "description": "Tu cherches un équilibre entre sécurité et plaisir en répartissant ton argent entre plusieurs objectifs."}, "high": {"title": "L'Opportuniste", "description": "Tu es plus disposé à échanger une partie de ta sécurité financière contre des expériences, de la rapidité ou des opportunités à fort potentiel."}},
+      "questions": [
+        {"text": "Une somme d'argent inattendue arrive. Tu...", "answers": [{"text": "Épargnes presque tout", "score": 0}, {"text": "Épargnes la majorité", "score": 1}, {"text": "Partages entre épargne et dépenses", "score": 2}, {"text": "L'utilises pour quelque chose d'important", "score": 3}]},
+        {"text": "Un achat pourrait te faire gagner beaucoup de temps. Tu...", "answers": [{"text": "L'évites sauf nécessité", "score": 0}, {"text": "Fais beaucoup de recherches", "score": 1}, {"text": "Achètes si la valeur est claire", "score": 2}, {"text": "Achètes vite si cela t'aide", "score": 3}]},
+        {"text": "Ton fonds d'urgence te paraît...", "answers": [{"text": "Indispensable", "score": 0}, {"text": "Très important", "score": 1}, {"text": "Utile", "score": 2}, {"text": "Moins important que la flexibilité", "score": 3}]},
+        {"text": "Un investissement à fort potentiel est incertain. Tu...", "answers": [{"text": "L'évites", "score": 0}, {"text": "Mets une somme minime", "score": 1}, {"text": "Prends une position mesurée", "score": 2}, {"text": "Mises davantage sur le potentiel", "score": 3}]},
+        {"text": "Qu'est-ce qui te satisfait le plus ?", "answers": [{"text": "De l'argent intact", "score": 0}, {"text": "Une solide réserve", "score": 1}, {"text": "Des dépenses équilibrées", "score": 2}, {"text": "De l'argent qui crée des expériences", "score": 3}]}
+      ]
+    },
+    {
+      "id": "productivity_type", "title": "Type de productivité", "hook": "Structure, élan ou puissance de dernière minute ?", "time": "45 SEC", "accent": "▣", "metricLow": "STRUCTURE", "metricHigh": "SPRINT",
+      "results": {"low": {"title": "Le Bâtisseur de systèmes", "description": "Tu travailles mieux avec des systèmes clairs, des routines prévisibles et une progression commencée tôt."}, "mid": {"title": "Le Travailleur d'élan", "description": "Tu comptes davantage sur l'élan que sur un planning rigide. Une fois lancé, tu peux avancer vite et régulièrement."}, "high": {"title": "Le Finisseur en sprint", "description": "La pression déclenche souvent ta meilleure concentration. Tu peux attendre puis produire des efforts très intenses près de l'échéance."}},
+      "questions": [
+        {"text": "Un projet est à rendre dans deux semaines. Tu...", "answers": [{"text": "Planifies aujourd'hui", "score": 0}, {"text": "Commences bientôt", "score": 1}, {"text": "Attends d'avoir de l'élan", "score": 2}, {"text": "Fais ton meilleur travail tard", "score": 3}]},
+        {"text": "Ta liste de tâches est...", "answers": [{"text": "Détaillée", "score": 0}, {"text": "Courte et priorisée", "score": 1}, {"text": "Surtout mentale", "score": 2}, {"text": "Reconstruite sous pression", "score": 3}]},
+        {"text": "Quand la motivation baisse, tu...", "answers": [{"text": "Suis la routine", "score": 0}, {"text": "Fais une version plus petite", "score": 1}, {"text": "Changes de tâche", "score": 2}, {"text": "Attends l'urgence", "score": 3}]},
+        {"text": "Le travail profond fonctionne mieux quand...", "answers": [{"text": "Il est planifié", "score": 0}, {"text": "Tu as de l'élan", "score": 1}, {"text": "L'humeur est bonne", "score": 2}, {"text": "L'échéance approche", "score": 3}]},
+        {"text": "Finir en avance te paraît...", "answers": [{"text": "Normal", "score": 0}, {"text": "Excellent", "score": 1}, {"text": "Possible", "score": 2}, {"text": "Étrangement contre nature", "score": 3}]}
+      ]
+    },
+    {
+      "id": "night_owl", "title": "Oiseau de nuit", "hook": "À quel moment ton cerveau se met-il vraiment en marche ?", "time": "35 SEC", "accent": "☾", "metricLow": "MATIN", "metricHigh": "NUIT",
+      "results": {"low": {"title": "Le Lève-tôt", "description": "Tu tends à te sentir plus clair et opérationnel plus tôt dans la journée, surtout avec un rythme régulier."}, "mid": {"title": "L'Horloge flexible", "description": "Ton énergie dépend davantage du sommeil et du contexte que d'une heure précise, et tu peux t'adapter dans les deux sens."}, "high": {"title": "Le Moteur nocturne", "description": "Ta concentration et ta créativité augmentent souvent plus tard, et les soirées peuvent te sembler plus naturelles mentalement que les matinées."}},
+      "questions": [
+        {"text": "Un jour libre, quand te sens-tu naturellement le plus vif ?", "answers": [{"text": "Le matin", "score": 0}, {"text": "En fin de matinée", "score": 1}, {"text": "L'après-midi", "score": 2}, {"text": "Le soir", "score": 3}]},
+        {"text": "Un rendez-vous à 7 h te paraît...", "answers": [{"text": "Très bien", "score": 0}, {"text": "Gérable", "score": 1}, {"text": "Douloureux", "score": 2}, {"text": "Comme une attaque personnelle", "score": 3}]},
+        {"text": "Si rien ne t'en empêche, ton heure de coucher dérive...", "answers": [{"text": "Plus tôt", "score": 0}, {"text": "Vers minuit", "score": 1}, {"text": "Tard", "score": 2}, {"text": "Très tard", "score": 3}]},
+        {"text": "Tes meilleures idées apparaissent...", "answers": [{"text": "Au réveil", "score": 0}, {"text": "À midi", "score": 1}, {"text": "En fin d'après-midi", "score": 2}, {"text": "La nuit", "score": 3}]},
+        {"text": "À 22 h, tu es généralement...", "answers": [{"text": "Éteint", "score": 0}, {"text": "En train de ralentir", "score": 1}, {"text": "Encore actif", "score": 2}, {"text": "À peine en train de commencer", "score": 3}]}
+      ]
+    },
+    {
+      "id": "conflict_style", "title": "Style de conflit", "hook": "Que se passe-t-il quand la tension entre dans la pièce ?", "time": "45 SEC", "accent": "⚖", "metricLow": "HARMONIE", "metricHigh": "FRANCHISE",
+      "results": {"low": {"title": "L'Apaisant", "description": "Tu préfères réduire la tension et protéger la relation avant de pousser ta position."}, "mid": {"title": "Le Négociateur", "description": "Tu abordes les désaccords tout en recherchant un terrain d'entente praticable."}, "high": {"title": "Le Challenger direct", "description": "Tu es à l'aise pour confronter directement un désaccord et préfères résoudre le vrai problème plutôt qu'éviter l'inconfort."}},
+      "questions": [
+        {"text": "Quelqu'un franchit une petite limite. Tu...", "answers": [{"text": "Laisses passer", "score": 0}, {"text": "Le mentionnes doucement", "score": 1}, {"text": "L'abordes clairement", "score": 2}, {"text": "Le signales immédiatement", "score": 3}]},
+        {"text": "Pendant une dispute, tu te concentres sur...", "answers": [{"text": "Faire retomber la tension", "score": 0}, {"text": "Comprendre les deux côtés", "score": 1}, {"text": "Résoudre le problème", "score": 2}, {"text": "Arriver vite à la vérité", "score": 3}]},
+        {"text": "Un ami a clairement tort. Tu...", "answers": [{"text": "Évites d'insister", "score": 0}, {"text": "Poses des questions", "score": 1}, {"text": "Expliques pourquoi", "score": 2}, {"text": "Le lui dis directement", "score": 3}]},
+        {"text": "La tension dans un groupe te pousse à...", "answers": [{"text": "Te retirer", "score": 0}, {"text": "Essayer de l'adoucir", "score": 1}, {"text": "Rester engagé", "score": 2}, {"text": "Prendre le problème de front", "score": 3}]},
+        {"text": "Après un conflit, tu préfères...", "answers": [{"text": "De l'espace", "score": 0}, {"text": "Un échange calme", "score": 1}, {"text": "Une résolution claire", "score": 2}, {"text": "Que tout soit dit ouvertement", "score": 3}]}
+      ]
+    },
+    {
+      "id": "curiosity", "title": "Curiosité", "hook": "Jusqu'où ton cerveau poursuit-il la prochaine question ?", "time": "40 SEC", "accent": "?", "metricLow": "CIBLÉ", "metricHigh": "CURIEUX",
+      "results": {"low": {"title": "Le Connaisseur ciblé", "description": "Tu apprends généralement avec un objectif et préfères approfondir l'utile plutôt que d'ouvrir sans cesse de nouveaux sujets."}, "mid": {"title": "L'Explorateur", "description": "Tu aimes découvrir de nouvelles idées tout en gardant assez de concentration pour revenir à ce qui compte."}, "high": {"title": "Le Plongeur de terriers", "description": "Une question en entraîne souvent dix autres. La nouveauté, les motifs et les détails inexpliqués peuvent t'entraîner très loin dans un sujet."}},
+      "questions": [
+        {"text": "Tu entends un terme inconnu. Tu...", "answers": [{"text": "L'ignores sauf s'il est utile", "score": 0}, {"text": "Le notes", "score": 1}, {"text": "Le recherches", "score": 2}, {"text": "Ouvres six onglets", "score": 3}]},
+        {"text": "Un documentaire mentionne un fait étrange. Tu...", "answers": [{"text": "Continues à regarder", "score": 0}, {"text": "Le gardes en mémoire", "score": 1}, {"text": "Cherches plus tard", "score": 2}, {"text": "Mets en pause et enquêtes tout de suite", "score": 3}]},
+        {"text": "Tes centres d'intérêt sont...", "answers": [{"text": "Quelques-uns, assez stables", "score": 0}, {"text": "Plusieurs qui reviennent souvent", "score": 1}, {"text": "Toujours en expansion", "score": 2}, {"text": "Une constellation de terriers", "score": 3}]},
+        {"text": "Quand tu apprends quelque chose, tu demandes...", "answers": [{"text": "De quoi ai-je besoin ?", "score": 0}, {"text": "Comment cela fonctionne ?", "score": 1}, {"text": "À quoi d'autre cela se relie ?", "score": 2}, {"text": "Pourquoi tout cela existe-t-il ?", "score": 3}]},
+        {"text": "Un mystère sans valeur pratique te semble...", "answers": [{"text": "Facile à laisser de côté", "score": 0}, {"text": "Un peu intéressant", "score": 1}, {"text": "Difficile à ignorer", "score": 2}, {"text": "Impossible à ne pas explorer", "score": 3}]}
+      ]
+    },
+    {
+      "id": "novelty_seek", "title": "Recherche de nouveauté", "hook": "Routine ou prochaine nouvelle expérience ?", "time": "40 SEC", "accent": "✧", "metricLow": "FAMILIER", "metricHigh": "NOUVEAU",
+      "results": {"low": {"title": "Le Familier", "description": "Tu apprécies ce que tu connais déjà et préfères améliorer les expériences familières plutôt que de les remplacer en permanence."}, "mid": {"title": "L'Explorateur sélectif", "description": "Tu apprécies la nouveauté lorsqu'elle a du sens, tout en accordant de la valeur à tes favoris et à certaines routines stables."}, "high": {"title": "Le Chasseur de nouveauté", "description": "Les nouveaux lieux, idées et expériences te donnent de l'énergie, tandis que la répétition peut vite devenir lassante."}},
+      "questions": [
+        {"text": "Dans ton restaurant préféré, tu...", "answers": [{"text": "Commandes toujours la même chose", "score": 0}, {"text": "Commandes généralement la même chose", "score": 1}, {"text": "Essaies parfois quelque chose de nouveau", "score": 2}, {"text": "Essaies presque toujours quelque chose de nouveau", "score": 3}]},
+        {"text": "Un week-end libre apparaît. Tu préfères...", "answers": [{"text": "Une routine familière", "score": 0}, {"text": "Quelque chose de confortable", "score": 1}, {"text": "Une nouvelle activité", "score": 2}, {"text": "Un programme totalement nouveau", "score": 3}]},
+        {"text": "Ta rotation musicale est...", "answers": [{"text": "Surtout composée de favoris", "score": 0}, {"text": "Stable avec quelques ajouts", "score": 1}, {"text": "Souvent renouvelée", "score": 2}, {"text": "En découverte constante", "score": 3}]},
+        {"text": "Quand un hobby devient prévisible, tu...", "answers": [{"text": "Apprécies de le maîtriser", "score": 0}, {"text": "Continues", "score": 1}, {"text": "Ajoutes une variation", "score": 2}, {"text": "Cherches un nouveau hobby", "score": 3}]},
+        {"text": "Le voyage idéal est...", "answers": [{"text": "Confortable", "score": 0}, {"text": "Connu avec une surprise", "score": 1}, {"text": "Majoritairement nouveau", "score": 2}, {"text": "Aussi dépaysant que possible", "score": 3}]}
+      ]
+    }
+  ]
+}
