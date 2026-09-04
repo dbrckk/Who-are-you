@@ -10,15 +10,19 @@ import android.graphics.Typeface
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.max
 
 object ResultShare {
     private const val WIDTH = 1080
     private const val HEIGHT = 1920
+    private val shareScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    suspend fun share(
+    fun share(
         context: Context,
         quizTitle: String,
         resultTitle: String,
@@ -27,54 +31,56 @@ object ResultShare {
         metricHigh: String,
         description: String
     ) {
-        val chooser = withContext(Dispatchers.IO) {
-            val bitmap = render(
-                quizTitle = quizTitle,
-                resultTitle = resultTitle,
-                score = score,
-                metricLow = metricLow,
-                metricHigh = metricHigh,
-                description = description
-            )
-
-            try {
-                val directory = File(context.cacheDir, "shared_results").apply { mkdirs() }
-                val file = File(directory, "who_are_you_${System.currentTimeMillis()}.png")
-                FileOutputStream(file).use { output ->
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
-                }
-
-                val uri = FileProvider.getUriForFile(
-                    context,
-                    "${context.packageName}.fileprovider",
-                    file
+        shareScope.launch {
+            val chooser = withContext(Dispatchers.IO) {
+                val bitmap = render(
+                    quizTitle = quizTitle,
+                    resultTitle = resultTitle,
+                    score = score,
+                    metricLow = metricLow,
+                    metricHigh = metricHigh,
+                    description = description
                 )
 
-                val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
-                    ChallengeShare.buildUri(quizId, score).toString()
-                }
-
-                val shareText = buildString {
-                    append("I got $resultTitle — $score% on $quizTitle. What are you?")
-                    if (challengeUri != null) {
-                        append("\n\nTake the same test and compare with me: $challengeUri")
+                try {
+                    val directory = File(context.cacheDir, "shared_results").apply { mkdirs() }
+                    val file = File(directory, "who_are_you_${System.currentTimeMillis()}.png")
+                    FileOutputStream(file).use { output ->
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
                     }
-                }
 
-                val intent = Intent(Intent.ACTION_SEND).apply {
-                    type = "image/png"
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    putExtra(Intent.EXTRA_TEXT, shareText)
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                }
+                    val uri = FileProvider.getUriForFile(
+                        context,
+                        "${context.packageName}.fileprovider",
+                        file
+                    )
 
-                Intent.createChooser(intent, "Share your result")
-            } finally {
-                bitmap.recycle()
+                    val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
+                        ChallengeShare.buildUri(quizId, score).toString()
+                    }
+
+                    val shareText = buildString {
+                        append("I got $resultTitle — $score% on $quizTitle. What are you?")
+                        if (challengeUri != null) {
+                            append("\n\nTake the same test and compare with me: $challengeUri")
+                        }
+                    }
+
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "image/png"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        putExtra(Intent.EXTRA_TEXT, shareText)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+
+                    Intent.createChooser(intent, "Share your result")
+                } finally {
+                    bitmap.recycle()
+                }
             }
-        }
 
-        context.startActivity(chooser)
+            context.startActivity(chooser)
+        }
     }
 
     private fun quizIdFromTitle(title: String): String? = when (title) {
