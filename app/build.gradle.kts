@@ -13,10 +13,14 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
+
+        val telemetryEndpoint = providers.gradleProperty("WHO_ARE_YOU_TELEMETRY_ENDPOINT").orNull.orEmpty()
+        buildConfigField("String", "TELEMETRY_ENDPOINT", "\"${telemetryEndpoint.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
     }
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     compileOptions {
