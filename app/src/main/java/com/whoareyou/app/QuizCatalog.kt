@@ -26,13 +26,15 @@ data class Quiz(
 
 object QuizRepository {
     private val defaultAssets = listOf("quizzes.json", "quizzes-extra.json")
-    private val frenchAssets = listOf("quizzes-fr.json", "quizzes-extra-fr.json")
     @Volatile private var cachedLanguage: String? = null
     @Volatile private var cached: List<Quiz>? = null
 
     fun load(context: Context): List<Quiz> {
         val language = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
-        val assets = if (language == "fr" && frenchAssets.all { assetExists(context, it) }) frenchAssets else defaultAssets
+        val assets = defaultAssets.map { defaultName ->
+            val localizedName = defaultName.removeSuffix(".json") + "-$language.json"
+            if (language != "en" && assetExists(context, localizedName)) localizedName else defaultName
+        }
         val current = cached
         if (current != null && cachedLanguage == language) return current
 
