@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "social_confidence", "title": "Social Confidence", "hook": "How easily do you take up space around people?", "time": "45 SEC", "accent": "✹", "metricLow": "RESERVED", "metricHigh": "CONFIDENT",
+      "results": {"low": {"title": "The Observer", "description": "You enter social situations carefully and prefer signals of safety before becoming visible."}, "mid": {"title": "The Warm-Up", "description": "Confidence grows once you understand the room. You can participate comfortably without needing to dominate."}, "high": {"title": "The Room Reader", "description": "You usually trust yourself socially and are comfortable initiating, speaking up and being noticed."}},
+      "questions": [
+        {"text": "You enter a room where you know one person. You...", "answers": [{"text": "Stay close to them", "score": 0}, {"text": "Wait for an opening", "score": 1}, {"text": "Introduce yourself nearby", "score": 2}, {"text": "Start meeting people", "score": 3}]},
+        {"text": "Someone misunderstands you in a group. You...", "answers": [{"text": "Let it go", "score": 0}, {"text": "Clarify later", "score": 1}, {"text": "Correct it calmly", "score": 2}, {"text": "Address it immediately", "score": 3}]},
+        {"text": "When everyone is quiet, you...", "answers": [{"text": "Stay quiet", "score": 0}, {"text": "Wait a little", "score": 1}, {"text": "Say something if useful", "score": 2}, {"text": "Break the silence", "score": 3}]},
+        {"text": "A stranger gives you a compliment. You...", "answers": [{"text": "Freeze a little", "score": 0}, {"text": "Say thanks quickly", "score": 1}, {"text": "Accept it comfortably", "score": 2}, {"text": "Turn it into a conversation", "score": 3}]},
+        {"text": "In group decisions, your opinion is...", "answers": [{"text": "Often unspoken", "score": 0}, {"text": "Shared if asked", "score": 1}, {"text": "Usually stated", "score": 2}, {"text": "Actively advocated", "score": 3}]}
+      ]
+    },
+    {
+      "id": "decision_style", "title": "Decision Style", "hook": "Fast instinct or deliberate analysis?", "time": "40 SEC", "accent": "↯", "metricLow": "DELIBERATE", "metricHigh": "INSTINCTIVE",
+      "results": {"low": {"title": "The Deliberator", "description": "You prefer reducing uncertainty before committing. Extra information often feels worth the time."}, "mid": {"title": "The Balancer", "description": "You gather enough information to feel grounded, then move without needing perfect certainty."}, "high": {"title": "The Instinct Mover", "description": "You decide quickly and trust adaptation more than exhaustive analysis."}},
+      "questions": [
+        {"text": "Choosing between two good options, you...", "answers": [{"text": "Make a list", "score": 0}, {"text": "Compare key tradeoffs", "score": 1}, {"text": "Go with the stronger pull", "score": 2}, {"text": "Pick quickly", "score": 3}]},
+        {"text": "A deadline is far away. You decide...", "answers": [{"text": "Near the end after research", "score": 0}, {"text": "After enough information", "score": 1}, {"text": "Fairly early", "score": 2}, {"text": "Immediately", "score": 3}]},
+        {"text": "When advice conflicts, you...", "answers": [{"text": "Keep researching", "score": 0}, {"text": "Weight the sources", "score": 1}, {"text": "Trust your judgment", "score": 2}, {"text": "Ignore most advice", "score": 3}]},
+        {"text": "A restaurant menu has 80 items. You...", "answers": [{"text": "Study everything", "score": 0}, {"text": "Shortlist a few", "score": 1}, {"text": "Pick what catches your eye", "score": 2}, {"text": "Choose almost instantly", "score": 3}]},
+        {"text": "After deciding, you...", "answers": [{"text": "Reopen the question", "score": 0}, {"text": "Double-check once", "score": 1}, {"text": "Mostly move on", "score": 2}, {"text": "Never look back", "score": 3}]}
+      ]
+    },
+    {
+      "id": "love_style", "title": "Love Style", "hook": "How do you naturally show that someone matters?", "time": "50 SEC", "accent": "♡", "metricLow": "STEADY", "metricHigh": "EXPRESSIVE",
+      "results": {"low": {"title": "The Steady Presence", "description": "You tend to show care through reliability, practical support and being there consistently."}, "mid": {"title": "The Attuned Partner", "description": "You mix dependable action with emotional attention and adapt to what the relationship needs."}, "high": {"title": "The Expressive Heart", "description": "You naturally communicate affection openly through words, gestures, closeness and visible enthusiasm."}},
+      "questions": [
+        {"text": "Someone you love has a hard day. You first...", "answers": [{"text": "Handle something practical", "score": 0}, {"text": "Stay nearby", "score": 1}, {"text": "Ask what they need", "score": 2}, {"text": "Show a lot of affection", "score": 3}]},
+        {"text": "Your ideal way to show care is...", "answers": [{"text": "Do something useful", "score": 0}, {"text": "Make time", "score": 1}, {"text": "Say what they mean to me", "score": 2}, {"text": "Create a memorable gesture", "score": 3}]},
+        {"text": "How often do you say affectionate things?", "answers": [{"text": "Rarely", "score": 0}, {"text": "When it matters", "score": 1}, {"text": "Pretty often", "score": 2}, {"text": "Very often", "score": 3}]},
+        {"text": "A relationship milestone arrives. You...", "answers": [{"text": "Keep it simple", "score": 0}, {"text": "Plan something thoughtful", "score": 1}, {"text": "Make it special", "score": 2}, {"text": "Go all out", "score": 3}]},
+        {"text": "When you miss someone, you...", "answers": [{"text": "Wait until we meet", "score": 0}, {"text": "Send a small message", "score": 1}, {"text": "Tell them directly", "score": 2}, {"text": "Make sure they know", "score": 3}]}
+      ]
+    },
+    {
+      "id": "friendship_type", "title": "Friendship Type", "hook": "What kind of friend are you when it counts?", "time": "45 SEC", "accent": "⌁", "metricLow": "DEPTH", "metricHigh": "NETWORK",
+      "results": {"low": {"title": "The Anchor", "description": "You value loyalty, depth and consistency. A few durable friendships often matter more than a wide network."}, "mid": {"title": "The Inner Circle", "description": "You balance depth with variety, keeping close bonds while remaining open to different circles."}, "high": {"title": "The Connector", "description": "You naturally build bridges between people and enjoy maintaining a broad, active network."}},
+      "questions": [
+        {"text": "Your ideal friend group is...", "answers": [{"text": "Two or three close people", "score": 0}, {"text": "A small trusted circle", "score": 1}, {"text": "Several different groups", "score": 2}, {"text": "A big connected network", "score": 3}]},
+        {"text": "A friend disappears for months. You...", "answers": [{"text": "Still consider them close", "score": 0}, {"text": "Check in eventually", "score": 1}, {"text": "Reconnect if it feels natural", "score": 2}, {"text": "Move with the active circle", "score": 3}]},
+        {"text": "At a gathering, you prefer...", "answers": [{"text": "One deep conversation", "score": 0}, {"text": "A few meaningful chats", "score": 1}, {"text": "Move around", "score": 2}, {"text": "Connect everyone", "score": 3}]},
+        {"text": "Friends usually rely on you for...", "answers": [{"text": "Stability", "score": 0}, {"text": "Understanding", "score": 1}, {"text": "Perspective", "score": 2}, {"text": "Introductions and energy", "score": 3}]},
+        {"text": "Your social calendar is...", "answers": [{"text": "Very selective", "score": 0}, {"text": "Mostly close friends", "score": 1}, {"text": "Mixed", "score": 2}, {"text": "Always crossing circles", "score": 3}]}
+      ]
+    },
+    {
+      "id": "money_personality", "title": "Money Personality", "hook": "Security, balance, or opportunity?", "time": "45 SEC", "accent": "¤", "metricLow": "SECURITY", "metricHigh": "OPPORTUNITY",
+      "results": {"low": {"title": "The Protector", "description": "You naturally prioritize buffers, predictability and protecting future options."}, "mid": {"title": "The Allocator", "description": "You prefer balancing security with enjoyment and allocating money across competing goals."}, "high": {"title": "The Opportunity Spender", "description": "You are more willing to trade financial certainty for experiences, speed or high-upside opportunities."}},
+      "questions": [
+        {"text": "Unexpected extra money arrives. You...", "answers": [{"text": "Save nearly all of it", "score": 0}, {"text": "Save most of it", "score": 1}, {"text": "Split it", "score": 2}, {"text": "Use it for something meaningful", "score": 3}]},
+        {"text": "A purchase could save you lots of time. You...", "answers": [{"text": "Avoid unless necessary", "score": 0}, {"text": "Research hard", "score": 1}, {"text": "Buy if value is clear", "score": 2}, {"text": "Buy quickly if it helps", "score": 3}]},
+        {"text": "Your emergency fund feels...", "answers": [{"text": "Essential", "score": 0}, {"text": "Very important", "score": 1}, {"text": "Useful", "score": 2}, {"text": "Less important than flexibility", "score": 3}]},
+        {"text": "A high-upside investment is uncertain. You...", "answers": [{"text": "Avoid it", "score": 0}, {"text": "Use a tiny amount", "score": 1}, {"text": "Take a measured position", "score": 2}, {"text": "Lean into the upside", "score": 3}]},
+        {"text": "Which feels better?", "answers": [{"text": "Money untouched", "score": 0}, {"text": "A strong buffer", "score": 1}, {"text": "Balanced spending", "score": 2}, {"text": "Money creating experiences", "score": 3}]}
+      ]
+    },
+    {
+      "id": "productivity_type", "title": "Productivity Type", "hook": "Structure, momentum, or deadline power?", "time": "45 SEC", "accent": "▣", "metricLow": "STRUCTURE", "metricHigh": "SPRINT",
+      "results": {"low": {"title": "The Systems Builder", "description": "You work best with clear systems, predictable routines and progress that starts early."}, "mid": {"title": "The Momentum Worker", "description": "You rely on momentum more than rigid scheduling. Once engaged, you can move quickly and consistently."}, "high": {"title": "The Sprint Finisher", "description": "Pressure often unlocks your strongest focus. You may delay, then produce intense bursts near the deadline."}},
+      "questions": [
+        {"text": "A project is due in two weeks. You...", "answers": [{"text": "Plan today", "score": 0}, {"text": "Start soon", "score": 1}, {"text": "Wait for momentum", "score": 2}, {"text": "Do your best work late", "score": 3}]},
+        {"text": "Your task list is...", "answers": [{"text": "Detailed", "score": 0}, {"text": "Short and prioritized", "score": 1}, {"text": "Mostly mental", "score": 2}, {"text": "Rebuilt under pressure", "score": 3}]},
+        {"text": "When motivation drops, you...", "answers": [{"text": "Follow the routine", "score": 0}, {"text": "Do a smaller version", "score": 1}, {"text": "Switch tasks", "score": 2}, {"text": "Wait for urgency", "score": 3}]},
+        {"text": "Deep work happens best when...", "answers": [{"text": "Scheduled", "score": 0}, {"text": "I have momentum", "score": 1}, {"text": "The mood is right", "score": 2}, {"text": "The deadline is close", "score": 3}]},
+        {"text": "Finishing early feels...", "answers": [{"text": "Normal", "score": 0}, {"text": "Great", "score": 1}, {"text": "Possible", "score": 2}, {"text": "Suspiciously unnatural", "score": 3}]}
+      ]
+    },
+    {
+      "id": "night_owl", "title": "Night Owl", "hook": "When does your brain actually come online?", "time": "35 SEC", "accent": "☾", "metricLow": "MORNING", "metricHigh": "NIGHT",
+      "results": {"low": {"title": "The Early Starter", "description": "You tend to feel clearer and more usable earlier in the day, especially with a consistent schedule."}, "mid": {"title": "The Flexible Clock", "description": "Your energy depends more on sleep and context than a fixed time of day, and you can adapt in either direction."}, "high": {"title": "The Night Engine", "description": "Your focus and creativity often rise later, and evenings can feel more mentally natural than mornings."}},
+      "questions": [
+        {"text": "On a free day, when do you naturally feel sharpest?", "answers": [{"text": "Morning", "score": 0}, {"text": "Late morning", "score": 1}, {"text": "Afternoon", "score": 2}, {"text": "Evening", "score": 3}]},
+        {"text": "A 7 AM appointment feels...", "answers": [{"text": "Fine", "score": 0}, {"text": "Manageable", "score": 1}, {"text": "Painful", "score": 2}, {"text": "Like a personal attack", "score": 3}]},
+        {"text": "If nobody stops you, bedtime drifts...", "answers": [{"text": "Earlier", "score": 0}, {"text": "Around midnight", "score": 1}, {"text": "Late", "score": 2}, {"text": "Very late", "score": 3}]},
+        {"text": "Your best ideas appear...", "answers": [{"text": "After waking", "score": 0}, {"text": "Midday", "score": 1}, {"text": "Late afternoon", "score": 2}, {"text": "At night", "score": 3}]},
+        {"text": "At 10 PM you are usually...", "answers": [{"text": "Done", "score": 0}, {"text": "Winding down", "score": 1}, {"text": "Still active", "score": 2}, {"text": "Just getting started", "score": 3}]}
+      ]
+    },
+    {
+      "id": "conflict_style", "title": "Conflict Style", "hook": "What happens when tension enters the room?", "time": "45 SEC", "accent": "⚖", "metricLow": "HARMONY", "metricHigh": "DIRECTNESS",
+      "results": {"low": {"title": "The De-Escalator", "description": "You prefer lowering tension and protecting the relationship before pushing your position."}, "mid": {"title": "The Negotiator", "description": "You tend to address disagreements while looking for a workable middle ground."}, "high": {"title": "The Direct Challenger", "description": "You are comfortable confronting disagreement directly and would rather resolve the real issue than avoid discomfort."}},
+      "questions": [
+        {"text": "Someone crosses a small boundary. You...", "answers": [{"text": "Let it pass", "score": 0}, {"text": "Mention it gently", "score": 1}, {"text": "Address it clearly", "score": 2}, {"text": "Call it out immediately", "score": 3}]},
+        {"text": "During an argument, you focus on...", "answers": [{"text": "Calming things down", "score": 0}, {"text": "Understanding both sides", "score": 1}, {"text": "Solving the issue", "score": 2}, {"text": "Getting to the truth fast", "score": 3}]},
+        {"text": "A friend is clearly wrong. You...", "answers": [{"text": "Avoid pushing", "score": 0}, {"text": "Ask questions", "score": 1}, {"text": "Explain why", "score": 2}, {"text": "Tell them directly", "score": 3}]},
+        {"text": "Tension in a group makes you...", "answers": [{"text": "Withdraw", "score": 0}, {"text": "Try to soften it", "score": 1}, {"text": "Stay engaged", "score": 2}, {"text": "Take the issue head-on", "score": 3}]},
+        {"text": "After conflict, you prefer...", "answers": [{"text": "Space", "score": 0}, {"text": "A calm check-in", "score": 1}, {"text": "A clear resolution", "score": 2}, {"text": "Everything said openly", "score": 3}]}
+      ]
+    },
+    {
+      "id": "curiosity", "title": "Curiosity", "hook": "How hard does your brain chase the next question?", "time": "40 SEC", "accent": "?", "metricLow": "FOCUSED", "metricHigh": "CURIOUS",
+      "results": {"low": {"title": "The Focused Knower", "description": "You usually learn with purpose and prefer useful depth over constantly opening new topics."}, "mid": {"title": "The Explorer", "description": "You enjoy exploring new ideas while keeping enough focus to return to what matters."}, "high": {"title": "The Rabbit-Hole Diver", "description": "One question often leads to ten more. Novelty, patterns and unexplained details can pull you deep into a topic."}},
+      "questions": [
+        {"text": "You hear an unfamiliar term. You...", "answers": [{"text": "Ignore it unless useful", "score": 0}, {"text": "Make a note", "score": 1}, {"text": "Look it up", "score": 2}, {"text": "Open six tabs", "score": 3}]},
+        {"text": "A documentary mentions a strange fact. You...", "answers": [{"text": "Keep watching", "score": 0}, {"text": "Remember it", "score": 1}, {"text": "Search later", "score": 2}, {"text": "Pause and investigate now", "score": 3}]},
+        {"text": "Your interests are...", "answers": [{"text": "A few stable ones", "score": 0}, {"text": "Several recurring ones", "score": 1}, {"text": "Always expanding", "score": 2}, {"text": "A constellation of rabbit holes", "score": 3}]},
+        {"text": "When learning something, you ask...", "answers": [{"text": "What do I need?", "score": 0}, {"text": "How does it work?", "score": 1}, {"text": "What else connects to this?", "score": 2}, {"text": "Why does any of this exist?", "score": 3}]},
+        {"text": "A mystery with no practical value feels...", "answers": [{"text": "Easy to leave", "score": 0}, {"text": "Mildly interesting", "score": 1}, {"text": "Hard to ignore", "score": 2}, {"text": "Impossible not to investigate", "score": 3}]}
+      ]
+    },
+    {
+      "id": "novelty_seek", "title": "Novelty Seeker", "hook": "Routine or the next new thing?", "time": "40 SEC", "accent": "✧", "metricLow": "FAMILIAR", "metricHigh": "NOVEL",
+      "results": {"low": {"title": "The Familiarist", "description": "You appreciate familiarity and prefer improving known experiences rather than constantly replacing them."}, "mid": {"title": "The Selective Explorer", "description": "You like novelty when it feels meaningful, but also value reliable favorites and stable routines."}, "high": {"title": "The Novelty Hunter", "description": "New places, ideas and experiences generate energy for you, while repetition can become stale quickly."}},
+      "questions": [
+        {"text": "At your favorite restaurant, you...", "answers": [{"text": "Order the usual", "score": 0}, {"text": "Usually order the usual", "score": 1}, {"text": "Try something new sometimes", "score": 2}, {"text": "Almost always try something new", "score": 3}]},
+        {"text": "A free weekend appears. You prefer...", "answers": [{"text": "A familiar routine", "score": 0}, {"text": "Something comfortable", "score": 1}, {"text": "One new activity", "score": 2}, {"text": "A completely new plan", "score": 3}]},
+        {"text": "Your music rotation is...", "answers": [{"text": "Mostly favorites", "score": 0}, {"text": "Stable with additions", "score": 1}, {"text": "Frequently changing", "score": 2}, {"text": "Constant discovery", "score": 3}]},
+        {"text": "When a hobby becomes predictable, you...", "answers": [{"text": "Enjoy the mastery", "score": 0}, {"text": "Keep going", "score": 1}, {"text": "Add a twist", "score": 2}, {"text": "Find a new hobby", "score": 3}]},
+        {"text": "Travel sounds best when it is...", "answers": [{"text": "Comfortable", "score": 0}, {"text": "Known plus one surprise", "score": 1}, {"text": "Mostly new", "score": 2}, {"text": "As unfamiliar as possible", "score": 3}]}
+      ]
+    }
+  ]
+}
