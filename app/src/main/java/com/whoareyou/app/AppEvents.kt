@@ -26,6 +26,14 @@ object AppEvents {
             if (score != null) put("score", score)
         }
     )
+    fun profileShare(archetype: String, completedCount: Int) = log(
+        "profile_share",
+        mapOf("archetype" to archetype, "completed_count" to completedCount)
+    )
+    fun profileChallenge(quizId: String, score: Int) = log(
+        "profile_challenge",
+        mapOf("quiz_id" to quizId, "score" to score)
+    )
     fun premiumView() = log("premium_view")
     fun purchaseSuccess(productId: String) = log("purchase_success", mapOf("product_id" to productId))
     fun adImpression(placement: String) = log("ad_impression", mapOf("placement" to placement))
