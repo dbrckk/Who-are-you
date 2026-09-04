@@ -9,6 +9,7 @@ import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetails
+import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +26,7 @@ class BillingManager(
 
     private var removeAdsProduct: ProductDetails? = null
 
-    private val billingClient = BillingClient.newBuilder(context)
+    private val billingClient: BillingClient = BillingClient.newBuilder(context)
         .enablePendingPurchases(
             PendingPurchasesParams.newBuilder()
                 .enableOneTimeProducts()
@@ -33,16 +34,7 @@ class BillingManager(
         )
         .setListener { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                purchases.orEmpty().forEach { purchase ->
-                    if (REMOVE_ADS_PRODUCT_ID in purchase.products && purchase.purchaseState == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
-                        if (!purchase.isAcknowledged) {
-                            billingClient.acknowledgePurchase(
-                                AcknowledgePurchaseParams.newBuilder().setPurchaseToken(purchase.purchaseToken).build()
-                            ) { }
-                        }
-                        grantPremium()
-                    }
-                }
+                handlePurchases(purchases.orEmpty())
             }
         }
         .build()
@@ -75,12 +67,32 @@ class BillingManager(
         billingClient.endConnection()
     }
 
+    private fun handlePurchases(purchases: List<Purchase>) {
+        purchases.forEach { purchase ->
+            if (
+                REMOVE_ADS_PRODUCT_ID in purchase.products &&
+                purchase.purchaseState == Purchase.PurchaseState.PURCHASED
+            ) {
+                if (!purchase.isAcknowledged) {
+                    val params = AcknowledgePurchaseParams.newBuilder()
+                        .setPurchaseToken(purchase.purchaseToken)
+                        .build()
+                    billingClient.acknowledgePurchase(params) { }
+                }
+                grantPremium()
+            }
+        }
+    }
+
     private fun queryProduct() {
         val product = QueryProductDetailsParams.Product.newBuilder()
             .setProductId(REMOVE_ADS_PRODUCT_ID)
             .setProductType(BillingClient.ProductType.INAPP)
             .build()
-        val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
+        val params = QueryProductDetailsParams.newBuilder()
+            .setProductList(listOf(product))
+            .build()
+
         billingClient.queryProductDetailsAsync(params) { result, response ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 removeAdsProduct = response.productDetailsList.firstOrNull()
@@ -89,13 +101,13 @@ class BillingManager(
     }
 
     private fun restorePurchases() {
-        val params = QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
+        val params = QueryPurchasesParams.newBuilder()
+            .setProductType(BillingClient.ProductType.INAPP)
+            .build()
+
         billingClient.queryPurchasesAsync(params) { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                val owned = purchases.any {
-                    REMOVE_ADS_PRODUCT_ID in it.products && it.purchaseState == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED
-                }
-                if (owned) grantPremium()
+                handlePurchases(purchases)
             }
         }
     }
@@ -103,6 +115,8 @@ class BillingManager(
     private fun grantPremium() {
         onPremiumChanged(true)
         AppEvents.purchaseSuccess(REMOVE_ADS_PRODUCT_ID)
-        CoroutineScope(Dispatchers.IO).launch { ProfileStore.setAdsRemoved(context, true) }
+        CoroutineScope(Dispatchers.IO).launch {
+            ProfileStore.setAdsRemoved(context, true)
+        }
     }
 }
