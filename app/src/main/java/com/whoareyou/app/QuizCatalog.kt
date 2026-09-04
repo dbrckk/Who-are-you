@@ -24,16 +24,17 @@ data class Quiz(
 )
 
 object QuizRepository {
-    private const val ASSET_NAME = "quizzes.json"
+    private val ASSET_NAMES = listOf("quizzes.json", "quizzes-extra.json")
     @Volatile private var cached: List<Quiz>? = null
 
     fun load(context: Context): List<Quiz> = cached ?: synchronized(this) {
-        cached ?: parse(context.assets.open(ASSET_NAME).bufferedReader().use { it.readText() })
-            .also { catalog ->
-                require(catalog.isNotEmpty()) { "Quiz catalog cannot be empty" }
-                require(catalog.map { it.id }.distinct().size == catalog.size) { "Quiz IDs must be unique" }
-                cached = catalog
-            }
+        cached ?: ASSET_NAMES.flatMap { assetName ->
+            parse(context.assets.open(assetName).bufferedReader().use { it.readText() })
+        }.also { catalog ->
+            require(catalog.isNotEmpty()) { "Quiz catalog cannot be empty" }
+            require(catalog.map { it.id }.distinct().size == catalog.size) { "Quiz IDs must be unique" }
+            cached = catalog
+        }
     }
 
     fun find(context: Context, id: String): Quiz? = load(context).firstOrNull { it.id == id }
