@@ -108,6 +108,7 @@ private fun WhoAreYouApp() {
 
             Screen.PROFILE -> GlobalProfileScreen(
                 summary = globalProfile,
+                catalog = quizCatalog,
                 onBack = { screen = Screen.DISCOVER }
             )
 
@@ -236,8 +237,11 @@ private fun ProfileProgress(summary: GlobalProfileSummary, onOpenProfile: () -> 
 }
 
 @Composable
-private fun GlobalProfileScreen(summary: GlobalProfileSummary, onBack: () -> Unit) {
+private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Quiz>, onBack: () -> Unit) {
     val context = LocalContext.current
+    val strongestDimension = summary.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
+    val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
+
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Spacer(Modifier.height(24.dp))
@@ -249,11 +253,36 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, onBack: () -> Uni
             Spacer(Modifier.height(8.dp))
             Text("${summary.completedCount}/${summary.totalCount} dimensions • ${summary.completionPercent}% complete", color = Muted, fontSize = 14.sp)
             Spacer(Modifier.height(20.dp))
-            Button(onClick = { GlobalProfileShare.share(context, summary) }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(18.dp)) {
+            Button(onClick = {
+                AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
+                GlobalProfileShare.share(context, summary)
+            }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(18.dp)) {
                 Text("SHARE MY PROFILE  ↗", fontWeight = FontWeight.Black)
             }
+            Spacer(Modifier.height(10.dp))
+            Button(
+                enabled = strongestDimension != null && strongestQuiz != null,
+                onClick = {
+                    val dimension = strongestDimension ?: return@Button
+                    val quiz = strongestQuiz ?: return@Button
+                    AppEvents.profileChallenge(quiz.id, dimension.score)
+                    ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
+                },
+                modifier = Modifier.fillMaxWidth().height(54.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = PanelSoft),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text("COMPARE PROFILE WITH A FRIEND  →", fontWeight = FontWeight.Bold)
+            }
             Spacer(Modifier.height(8.dp))
-            Text("Your strongest dimensions are shown first on the share card.", color = Muted, fontSize = 12.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+            Text(
+                if (strongestDimension == null) "Complete one test to unlock profile comparison."
+                else "Starts with your most distinctive dimension: ${strongestDimension.title}.",
+                color = Muted,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
             Spacer(Modifier.height(14.dp))
             Text("ALL DIMENSIONS", color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
