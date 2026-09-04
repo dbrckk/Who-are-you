@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Who Are You?</string>
+    <string name="onboarding_title">WHO\nARE\nYOU?</string>
+    <string name="onboarding_subtitle">Discover what makes you, you.</string>
+    <string name="onboarding_body">Fast personality tests. Visual results. Compare with friends.</string>
+    <string name="onboarding_start">START</string>
+    <string name="onboarding_no_account">No account required</string>
+
+    <string name="discover_headline">Discover what\nmakes you, you.</string>
+    <string name="discover_subtitle">Fast personality tests. Visual results. Compare with friends.</string>
+    <string name="trending_tests">TRENDING TESTS</string>
+    <string name="your_profile">YOUR PROFILE</string>
+    <string name="profile_dimensions_discovered">%1$d/%2$d dimensions discovered</string>
+    <string name="open_full_profile">OPEN FULL PROFILE  →</string>
+    <string name="profile_snapshot">PROFILE SNAPSHOT</string>
+    <string name="back">← BACK</string>
+    <string name="share_my_profile">SHARE MY PROFILE  ↗</string>
+    <string name="compare_profile_friend">COMPARE PROFILE WITH A FRIEND  →</string>
+    <string name="complete_test_unlock_compare">Complete one test to unlock profile comparison.</string>
+    <string name="starts_with_dimension">Starts with your most distinctive dimension: %1$s.</string>
+    <string name="all_dimensions">ALL DIMENSIONS</string>
+    <string name="profile_undiscovered">PROFILE UNDISCOVERED</string>
+    <string name="complete_first_test_profile">Complete your first test to start building your profile.</string>
+
+    <string name="lifetime_upgrade_active">LIFETIME UPGRADE ACTIVE</string>
+    <string name="remove_ads_forever">REMOVE ADS FOREVER</string>
+    <string name="no_ads_ever">No ads. Ever.</string>
+    <string name="premium_once_no_subscription">%1$s once. No subscription.</string>
+    <string name="premium_restore_copy">Your purchase is stored and restored automatically.</string>
+    <string name="premium_copy">Keep every test, result, share and friend challenge. Only the ads disappear.</string>
+    <string name="remove_ads_button">REMOVE ADS — %1$s</string>
+
+    <string name="done">DONE</string>
+    <string name="take_again">TAKE AGAIN  →</string>
+    <string name="start">START  →</string>
+    <string name="question_progress">%1$d / %2$d</string>
+    <string name="no_right_answers">No right answers. Pick what feels most like you.</string>
+    <string name="your_result">YOUR RESULT</string>
+    <string name="profile_progress">PROFILE PROGRESS</string>
+    <string name="share_my_result">SHARE MY RESULT  ↗</string>
+    <string name="compare_with_friend">COMPARE WITH A FRIEND  →</string>
+    <string name="friend_match_explainer">Your friend takes the same test and gets an instant match score</string>
+    <string name="retry">RETRY</string>
+    <string name="done_button">DONE</string>
+    <string name="disclaimer">For entertainment and self-reflection only — not a psychological diagnosis.</string>
+</resources>
