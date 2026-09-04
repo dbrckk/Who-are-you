@@ -76,7 +76,10 @@ class AdManager(private val context: Context) {
             }
 
             override fun onAdFailedToShowFullScreenContent(adError: com.google.android.gms.ads.AdError) {
-                AppEvents.recordError(adError, mapOf("placement" to "result_interstitial", "stage" to "show"))
+                AppEvents.recordError(
+                    IllegalStateException("Ad show failed [${adError.code}]: ${adError.message}"),
+                    mapOf("placement" to "result_interstitial", "stage" to "show", "domain" to adError.domain)
+                )
                 load()
                 onContinue()
             }
@@ -111,7 +114,10 @@ class AdManager(private val context: Context) {
                 }
 
                 override fun onAdFailedToLoad(error: com.google.android.gms.ads.LoadAdError) {
-                    AppEvents.recordError(error, mapOf("placement" to "result_interstitial", "stage" to "load"))
+                    AppEvents.recordError(
+                        IllegalStateException("Ad load failed [${error.code}]: ${error.message}"),
+                        mapOf("placement" to "result_interstitial", "stage" to "load", "domain" to error.domain)
+                    )
                 }
             }
         )
