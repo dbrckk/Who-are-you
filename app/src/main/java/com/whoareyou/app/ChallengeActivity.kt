@@ -49,10 +49,10 @@ class ChallengeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val incoming = ChallengeShare.parse(intent?.data)
+        val quiz = incoming?.let { QuizRepository.find(this, it.quizId) }
         setContent {
             MaterialTheme(colorScheme = androidx.compose.material3.darkColorScheme(background = ChallengeInk, surface = ChallengePanel, primary = ChallengeViolet, secondary = ChallengeCyan)) {
                 Surface(modifier = Modifier.fillMaxSize(), color = ChallengeInk) {
-                    val quiz = incoming?.let { challengeQuiz(it.quizId) }
                     if (incoming == null || quiz == null) InvalidChallengeScreen { finish() }
                     else ChallengeFlow(quiz, incoming.inviterScore) { finish() }
                 }
@@ -60,8 +60,6 @@ class ChallengeActivity : ComponentActivity() {
         }
     }
 }
-
-private fun challengeQuiz(id: String): Quiz? = quizzes.firstOrNull { it.id == id }
 
 @Composable
 private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
