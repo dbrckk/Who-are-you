@@ -77,7 +77,13 @@ private fun WhoAreYouApp() {
 
     var premiumOverride by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
-    val billingManager = remember(context) { BillingManager(context) { premiumOverride = it } }
+    val billingManager = remember(context) {
+        BillingManager(
+            context = context,
+            onPremiumChanged = { premiumOverride = it },
+            onPriceChanged = BillingPriceState::update
+        )
+    }
     val adManager = remember(context) { AdManager(context) }
 
     DisposableEffect(billingManager, adManager) {
@@ -148,6 +154,8 @@ private fun DiscoverScreen(
     onQuizSelected: (Quiz) -> Unit,
     onRemoveAds: () -> Unit
 ) {
+    val premiumPrice = BillingPriceState.displayPrice
+
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
             Spacer(Modifier.height(28.dp))
@@ -171,13 +179,13 @@ private fun DiscoverScreen(
                 Column(Modifier.padding(22.dp)) {
                     Text(if (adsRemoved) "LIFETIME UPGRADE ACTIVE" else "REMOVE ADS FOREVER", color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(9.dp))
-                    Text(if (adsRemoved) "No ads. Ever." else "€1.99 once. No subscription.", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
+                    Text(if (adsRemoved) "No ads. Ever." else "$premiumPrice once. No subscription.", color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(7.dp))
                     Text(if (adsRemoved) "Your purchase is stored and restored automatically." else "Keep every test, result, share and friend challenge. Only the ads disappear.", color = Muted, fontSize = 13.sp, lineHeight = 19.sp)
                     if (!adsRemoved) {
                         Spacer(Modifier.height(15.dp))
                         Button(onClick = onRemoveAds, modifier = Modifier.fillMaxWidth().height(50.dp), colors = ButtonDefaults.buttonColors(containerColor = Violet), shape = RoundedCornerShape(16.dp)) {
-                            Text("REMOVE ADS — €1.99", fontWeight = FontWeight.Black)
+                            Text("REMOVE ADS — $premiumPrice", fontWeight = FontWeight.Black)
                         }
                     }
                 }
