@@ -14,8 +14,17 @@ android {
         versionCode = 1
         versionName = "0.1.0"
 
+        fun escapedBuildConfig(value: String): String = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+
         val telemetryEndpoint = providers.gradleProperty("WHO_ARE_YOU_TELEMETRY_ENDPOINT").orNull.orEmpty()
-        buildConfigField("String", "TELEMETRY_ENDPOINT", "\"${telemetryEndpoint.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
+        val admobAppId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_APP_ID").orNull
+            ?: "ca-app-pub-3940256099942544~3347511713"
+        val admobInterstitialId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID").orNull
+            ?: "ca-app-pub-3940256099942544/1033173712"
+
+        buildConfigField("String", "TELEMETRY_ENDPOINT", escapedBuildConfig(telemetryEndpoint))
+        buildConfigField("String", "ADMOB_INTERSTITIAL_ID", escapedBuildConfig(admobInterstitialId))
+        manifestPlaceholders["admobAppId"] = admobAppId
     }
 
     buildFeatures {
