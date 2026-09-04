@@ -10,13 +10,15 @@ import android.graphics.Typeface
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlin.math.max
 
 object ResultShare {
     private const val WIDTH = 1080
     private const val HEIGHT = 1920
 
-    fun share(
+    suspend fun share(
         context: Context,
         quizTitle: String,
         resultTitle: String,
@@ -25,47 +27,54 @@ object ResultShare {
         metricHigh: String,
         description: String
     ) {
-        val bitmap = render(
-            quizTitle = quizTitle,
-            resultTitle = resultTitle,
-            score = score,
-            metricLow = metricLow,
-            metricHigh = metricHigh,
-            description = description
-        )
+        val chooser = withContext(Dispatchers.IO) {
+            val bitmap = render(
+                quizTitle = quizTitle,
+                resultTitle = resultTitle,
+                score = score,
+                metricLow = metricLow,
+                metricHigh = metricHigh,
+                description = description
+            )
 
-        val directory = File(context.cacheDir, "shared_results").apply { mkdirs() }
-        val file = File(directory, "who_are_you_${System.currentTimeMillis()}.png")
-        FileOutputStream(file).use { output ->
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
-        }
-        bitmap.recycle()
+            try {
+                val directory = File(context.cacheDir, "shared_results").apply { mkdirs() }
+                val file = File(directory, "who_are_you_${System.currentTimeMillis()}.png")
+                FileOutputStream(file).use { output ->
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+                }
 
-        val uri = FileProvider.getUriForFile(
-            context,
-            "${context.packageName}.fileprovider",
-            file
-        )
+                val uri = FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    file
+                )
 
-        val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
-            ChallengeShare.buildUri(quizId, score).toString()
-        }
+                val challengeUri = quizIdFromTitle(quizTitle)?.let { quizId ->
+                    ChallengeShare.buildUri(quizId, score).toString()
+                }
 
-        val shareText = buildString {
-            append("I got $resultTitle — $score% on $quizTitle. What are you?")
-            if (challengeUri != null) {
-                append("\n\nTake the same test and compare with me: $challengeUri")
+                val shareText = buildString {
+                    append("I got $resultTitle — $score% on $quizTitle. What are you?")
+                    if (challengeUri != null) {
+                        append("\n\nTake the same test and compare with me: $challengeUri")
+                    }
+                }
+
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/png"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+
+                Intent.createChooser(intent, "Share your result")
+            } finally {
+                bitmap.recycle()
             }
         }
 
-        val intent = Intent(Intent.ACTION_SEND).apply {
-            type = "image/png"
-            putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, shareText)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
-
-        context.startActivity(Intent.createChooser(intent, "Share your result"))
+        context.startActivity(chooser)
     }
 
     private fun quizIdFromTitle(title: String): String? = when (title) {
