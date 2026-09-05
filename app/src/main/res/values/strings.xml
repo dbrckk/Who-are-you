@@ -6,7 +6,6 @@
     <string name="onboarding_body">Fast personality tests. Visual results. Compare with friends.</string>
     <string name="onboarding_start">START</string>
     <string name="onboarding_no_account">No account required</string>
-
     <string name="discover_headline">Discover what\nmakes you, you.</string>
     <string name="discover_subtitle">Fast personality tests. Visual results. Compare with friends.</string>
     <string name="trending_tests">TRENDING TESTS</string>
@@ -22,7 +21,6 @@
     <string name="all_dimensions">ALL DIMENSIONS</string>
     <string name="profile_undiscovered">PROFILE UNDISCOVERED</string>
     <string name="complete_first_test_profile">Complete your first test to start building your profile.</string>
-
     <string name="lifetime_upgrade_active">LIFETIME UPGRADE ACTIVE</string>
     <string name="remove_ads_forever">REMOVE ADS FOREVER</string>
     <string name="no_ads_ever">No ads. Ever.</string>
@@ -30,7 +28,6 @@
     <string name="premium_restore_copy">Your purchase is stored and restored automatically.</string>
     <string name="premium_copy">Keep every test, result, share and friend challenge. Only the ads disappear.</string>
     <string name="remove_ads_button">REMOVE ADS — %1$s</string>
-
     <string name="done">DONE</string>
     <string name="take_again">TAKE AGAIN  →</string>
     <string name="start">START  →</string>
@@ -44,7 +41,6 @@
     <string name="retry">RETRY</string>
     <string name="done_button">DONE</string>
     <string name="disclaimer">For entertainment and self-reflection only — not a psychological diagnosis.</string>
-
     <string name="daily_question">DAILY QUESTION</string>
     <string name="streak_count">STREAK %1$d</string>
     <string name="daily_answer_locked">Answer locked for today • longest streak %1$d days</string>
@@ -52,7 +48,6 @@
     <string name="achievements">ACHIEVEMENTS</string>
     <string name="achievement_first_hint">Complete your first test to unlock your first badge.</string>
     <string name="achievement_more_unlocked">+%1$d more unlocked</string>
-
     <string name="achievement_first_test_title">First Test</string>
     <string name="achievement_first_test_description">Complete your first personality test.</string>
     <string name="achievement_ten_tests_title">10 Tests</string>
@@ -61,20 +56,24 @@
     <string name="achievement_profile_builder_description">Discover five profile dimensions.</string>
     <string name="achievement_profile_complete_title">Know Yourself</string>
     <string name="achievement_profile_complete_description">Discover every available profile dimension.</string>
+    <string name="achievement_strong_match_title">Strong Match</string>
+    <string name="achievement_strong_match_description">Reach at least 90% compatibility with a friend.</string>
+    <string name="achievement_opposites_title">Opposites</string>
+    <string name="achievement_opposites_description">Find a friend match at 45% compatibility or lower.</string>
+    <string name="achievement_social_butterfly_title">Social Butterfly</string>
+    <string name="achievement_social_butterfly_description">Complete five friend comparisons.</string>
     <string name="achievement_streak_3_title">Coming Back</string>
     <string name="achievement_streak_3_description">Keep a 3 day Daily Question streak.</string>
     <string name="achievement_streak_7_title">7 Day Streak</string>
     <string name="achievement_streak_7_description">Keep a 7 day Daily Question streak.</string>
     <string name="achievement_streak_30_title">30 Day Streak</string>
     <string name="achievement_streak_30_description">Keep a 30 day Daily Question streak.</string>
-
     <string name="challenge_share_text">I challenge you on %1$s. Take the same test and see how compatible we are: %2$s</string>
     <string name="challenge_share_subject">Who Are You? challenge</string>
     <string name="challenge_share_chooser">Challenge a friend</string>
     <string name="result_share_text">I got %1$s — %2$d%% on %3$s. What are you?</string>
     <string name="result_share_challenge">Take the same test and compare with me: %1$s</string>
     <string name="result_share_chooser">Share your result</string>
-
     <string name="challenge_header">FRIEND CHALLENGE</string>
     <string name="challenge_intro">Take the same test. Your compatibility appears instantly.</string>
     <string name="challenge_disclaimer">For entertainment and self-reflection only.</string>
