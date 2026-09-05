@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "communication_style",
+      "title": "Communication Style",
+      "hook": "Do you hint, explain, or say exactly what you mean?",
+      "time": "45 SEC",
+      "accent": "✎",
+      "metricLow": "SUBTLE",
+      "metricHigh": "EXPLICIT",
+      "results": {
+        "low": {"title": "The Subtext Reader", "description": "You communicate with context, tone and implication and often expect other people to notice the signals around the words."},
+        "mid": {"title": "The Context Builder", "description": "You usually make your point clear while adjusting how direct you are to the person and situation."},
+        "high": {"title": "The Clear Signal", "description": "You prefer explicit language, concrete expectations and saying what you mean rather than relying on interpretation."}
+      },
+      "questions": [
+        {"text": "You want a friend to stop doing something annoying. You...", "answers": [{"text": "Hope they notice", "score": 0}, {"text": "Drop a hint", "score": 1}, {"text": "Explain it politely", "score": 2}, {"text": "Ask directly", "score": 3}]},
+        {"text": "When giving instructions, you...", "answers": [{"text": "Keep them loose", "score": 0}, {"text": "Give the basics", "score": 1}, {"text": "Clarify key details", "score": 2}, {"text": "Make expectations explicit", "score": 3}]},
+        {"text": "Someone says 'I'm fine' but seems upset. You...", "answers": [{"text": "Read the mood", "score": 0}, {"text": "Give them space", "score": 1}, {"text": "Ask once", "score": 2}, {"text": "Ask clearly what is wrong", "score": 3}]},
+        {"text": "Your messages tend to be...", "answers": [{"text": "Short and contextual", "score": 0}, {"text": "Casual", "score": 1}, {"text": "Clear", "score": 2}, {"text": "Detailed and explicit", "score": 3}]},
+        {"text": "A misunderstanding happens. You prefer to...", "answers": [{"text": "Let context fix it", "score": 0}, {"text": "Clarify if needed", "score": 1}, {"text": "Explain your intention", "score": 2}, {"text": "Resolve the wording precisely", "score": 3}]}
+      ]
+    },
+    {
+      "id": "trust_style",
+      "title": "Trust Style",
+      "hook": "Is trust your starting point or something people earn?",
+      "time": "45 SEC",
+      "accent": "◎",
+      "metricLow": "CAUTIOUS",
+      "metricHigh": "OPEN TRUST",
+      "results": {
+        "low": {"title": "The Verifier", "description": "You prefer evidence and consistency before relying on someone, especially when the cost of being wrong is meaningful."},
+        "mid": {"title": "The Gradual Truster", "description": "You begin reasonably open but let repeated behavior determine how much access and confidence someone receives."},
+        "high": {"title": "The Open Hand", "description": "You tend to start from goodwill and are comfortable giving people a meaningful chance before they fully prove themselves."}
+      },
+      "questions": [
+        {"text": "A new coworker offers to handle an important task. You...", "answers": [{"text": "Check everything closely", "score": 0}, {"text": "Give a small part first", "score": 1}, {"text": "Let them handle it with a check-in", "score": 2}, {"text": "Trust them unless given a reason not to", "score": 3}]},
+        {"text": "Someone you just met tells you something personal. You...", "answers": [{"text": "Stay guarded", "score": 0}, {"text": "Listen but share little", "score": 1}, {"text": "Open up somewhat", "score": 2}, {"text": "Feel comfortable reciprocating", "score": 3}]},
+        {"text": "A friend breaks a promise once. You...", "answers": [{"text": "Trust drops sharply", "score": 0}, {"text": "Watch what happens next", "score": 1}, {"text": "Ask what happened", "score": 2}, {"text": "Assume there was a reason", "score": 3}]},
+        {"text": "When joining a new group, you...", "answers": [{"text": "Observe for a long time", "score": 0}, {"text": "Open slowly", "score": 1}, {"text": "Participate fairly quickly", "score": 2}, {"text": "Assume good intentions", "score": 3}]},
+        {"text": "Which feels safer?", "answers": [{"text": "Trust after proof", "score": 0}, {"text": "Trust in stages", "score": 1}, {"text": "Trust with awareness", "score": 2}, {"text": "Trust until something changes", "score": 3}]}
+      ]
+    },
+    {
+      "id": "self_discipline",
+      "title": "Self-Discipline",
+      "hook": "Can you keep going when motivation disappears?",
+      "time": "45 SEC",
+      "accent": "▰",
+      "metricLow": "MOTIVATION",
+      "metricHigh": "DISCIPLINE",
+      "results": {
+        "low": {"title": "The Motivation Surfer", "description": "Your output is strongly shaped by interest and energy, and forcing low-motivation work can be difficult."},
+        "mid": {"title": "The Momentum Keeper", "description": "You can follow through without perfect motivation when the goal matters and the system is manageable."},
+        "high": {"title": "The Finisher", "description": "You are relatively good at acting from commitment rather than mood and can keep moving through repetitive or unexciting work."}
+      },
+      "questions": [
+        {"text": "You planned a workout but do not feel like it. You...", "answers": [{"text": "Usually skip it", "score": 0}, {"text": "Do it if motivation returns", "score": 1}, {"text": "Do a smaller version", "score": 2}, {"text": "Do what I planned", "score": 3}]},
+        {"text": "A task is boring but important. You...", "answers": [{"text": "Delay it a lot", "score": 0}, {"text": "Need pressure", "score": 1}, {"text": "Break it into pieces", "score": 2}, {"text": "Get through it", "score": 3}]},
+        {"text": "After missing one day of a routine, you...", "answers": [{"text": "Often lose the routine", "score": 0}, {"text": "Struggle to restart", "score": 1}, {"text": "Resume soon", "score": 2}, {"text": "Resume the next opportunity", "score": 3}]},
+        {"text": "Temptation appears while you are saving for something. You...", "answers": [{"text": "Often give in", "score": 0}, {"text": "Debate with myself", "score": 1}, {"text": "Usually stay on target", "score": 2}, {"text": "Protect the goal", "score": 3}]},
+        {"text": "Long-term consistency is...", "answers": [{"text": "Very hard", "score": 0}, {"text": "Possible with motivation", "score": 1}, {"text": "Manageable with systems", "score": 2}, {"text": "One of my strengths", "score": 3}]}
+      ]
+    },
+    {
+      "id": "optimism",
+      "title": "Optimism",
+      "hook": "When the future is uncertain, what does your mind predict first?",
+      "time": "40 SEC",
+      "accent": "☀",
+      "metricLow": "CAUTIOUS",
+      "metricHigh": "OPTIMISTIC",
+      "results": {
+        "low": {"title": "The Risk Scanner", "description": "Your mind naturally looks for what could go wrong, which can help you prepare but may make uncertainty feel heavier."},
+        "mid": {"title": "The Realistic Hopeful", "description": "You can see both risk and possibility and usually adjust your expectations to the evidence in front of you."},
+        "high": {"title": "The Possibility Seeker", "description": "You naturally notice upside and often expect that problems can be solved even when the path is not yet obvious."}
+      },
+      "questions": [
+        {"text": "You send an important application and hear nothing. You think...", "answers": [{"text": "Probably bad news", "score": 0}, {"text": "Hard to know", "score": 1}, {"text": "It could still work out", "score": 2}, {"text": "I stay hopeful", "score": 3}]},
+        {"text": "A plan hits a setback. Your first thought is...", "answers": [{"text": "This may fall apart", "score": 0}, {"text": "We need to reassess", "score": 1}, {"text": "There is probably another route", "score": 2}, {"text": "We will figure it out", "score": 3}]},
+        {"text": "Thinking five years ahead feels...", "answers": [{"text": "Mostly uncertain", "score": 0}, {"text": "Mixed", "score": 1}, {"text": "Promising", "score": 2}, {"text": "Exciting", "score": 3}]},
+        {"text": "A new opportunity has unknowns. You notice...", "answers": [{"text": "The risks first", "score": 0}, {"text": "Both sides", "score": 1}, {"text": "The potential", "score": 2}, {"text": "What could become possible", "score": 3}]},
+        {"text": "After a difficult week, you expect next week to be...", "answers": [{"text": "Potentially more of the same", "score": 0}, {"text": "Impossible to predict", "score": 1}, {"text": "Probably better", "score": 2}, {"text": "A fresh start", "score": 3}]}
+      ]
+    },
+    {
+      "id": "stress_response",
+      "title": "Stress Response",
+      "hook": "Under pressure, do you slow down, stabilize, or accelerate?",
+      "time": "45 SEC",
+      "accent": "≈",
+      "metricLow": "PAUSE",
+      "metricHigh": "MOBILIZE",
+      "results": {
+        "low": {"title": "The Pause Response", "description": "Pressure tends to make you stop, withdraw or reduce input until you can regain a sense of control."},
+        "mid": {"title": "The Stabilizer", "description": "You may feel the pressure, but you usually regain enough structure to choose a next step without fully shutting down or speeding up."},
+        "high": {"title": "The Mobilizer", "description": "Pressure often pushes you toward action, problem-solving and increased pace, especially when there is something concrete to do."}
+      },
+      "questions": [
+        {"text": "Several urgent problems arrive at once. You first...", "answers": [{"text": "Freeze for a moment", "score": 0}, {"text": "Step away to think", "score": 1}, {"text": "Prioritize them", "score": 2}, {"text": "Start acting immediately", "score": 3}]},
+        {"text": "A deadline suddenly moves closer. You...", "answers": [{"text": "Feel blocked", "score": 0}, {"text": "Need time to reset", "score": 1}, {"text": "Replan quickly", "score": 2}, {"text": "Increase pace", "score": 3}]},
+        {"text": "During a tense situation, your attention...", "answers": [{"text": "Narrows and stalls", "score": 0}, {"text": "Turns inward", "score": 1}, {"text": "Focuses on priorities", "score": 2}, {"text": "Locks onto action", "score": 3}]},
+        {"text": "When overwhelmed, you are more likely to...", "answers": [{"text": "Withdraw", "score": 0}, {"text": "Reduce stimulation", "score": 1}, {"text": "Make a short plan", "score": 2}, {"text": "Do something immediately", "score": 3}]},
+        {"text": "Pressure usually changes your speed by making you...", "answers": [{"text": "Much slower", "score": 0}, {"text": "Somewhat slower", "score": 1}, {"text": "More focused", "score": 2}, {"text": "Faster", "score": 3}]}
+      ]
+    }
+  ]
+}
