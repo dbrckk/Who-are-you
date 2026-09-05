@@ -11,6 +11,7 @@
     <string name="continue_discovering">CONTINUE À TE DÉCOUVRIR</string>
     <string name="recommended_for_you">RECOMMANDÉ POUR TOI</string>
     <string name="recommended_reason">Une dimension de plus rend ton profil plus complet.</string>
+    <string name="recommended_signature_reason">Cette dimension peut préciser la signature qui commence à se dessiner dans tes réponses.</string>
     <string name="recommended_all_done">PROFIL COMPLET — refais une dimension pour voir si tu as changé.</string>
     <string name="trending_tests">TESTS POPULAIRES</string>
     <string name="your_social_stats">TES STATS SOCIALES</string>
