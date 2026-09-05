@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "conflict_style",
+      "title": "Conflict Style",
+      "hook": "Do you keep the peace or face tension head-on?",
+      "time": "45 SEC",
+      "accent": "⚡",
+      "metricLow": "HARMONY",
+      "metricHigh": "DIRECT",
+      "results": {
+        "low": {"title": "The Peacemaker", "description": "You naturally reduce friction and prefer protecting the relationship before pushing a disagreement."},
+        "mid": {"title": "The Diplomat", "description": "You can address tension directly while still watching tone, timing and the relationship around it."},
+        "high": {"title": "The Straight Shooter", "description": "You prefer naming problems clearly and resolving them rather than letting tension sit unresolved."}
+      },
+      "questions": [
+        {"text": "A friend says something that bothers you. You...", "answers": [{"text": "Let it pass", "score": 0}, {"text": "Wait for a better moment", "score": 1}, {"text": "Bring it up calmly", "score": 2}, {"text": "Address it right away", "score": 3}]},
+        {"text": "Two people are arguing around you. You...", "answers": [{"text": "Try to calm everyone", "score": 0}, {"text": "Listen first", "score": 1}, {"text": "Help clarify the issue", "score": 2}, {"text": "Say what needs to be said", "score": 3}]},
+        {"text": "Someone repeatedly crosses a boundary. You...", "answers": [{"text": "Distance yourself quietly", "score": 0}, {"text": "Hint that it bothers you", "score": 1}, {"text": "State the boundary clearly", "score": 2}, {"text": "Confront the pattern directly", "score": 3}]},
+        {"text": "During disagreement, silence feels...", "answers": [{"text": "Safer", "score": 0}, {"text": "Useful for cooling down", "score": 1}, {"text": "Fine for a while", "score": 2}, {"text": "Frustrating if nothing gets solved", "score": 3}]},
+        {"text": "Your ideal ending to conflict is...", "answers": [{"text": "Everyone feels okay", "score": 0}, {"text": "Mutual understanding", "score": 1}, {"text": "A clear agreement", "score": 2}, {"text": "The real issue is fully resolved", "score": 3}]}
+      ]
+    },
+    {
+      "id": "curiosity",
+      "title": "Curiosity",
+      "hook": "How hard is it for you to leave a question unanswered?",
+      "time": "40 SEC",
+      "accent": "?",
+      "metricLow": "FOCUSED",
+      "metricHigh": "CURIOUS",
+      "results": {
+        "low": {"title": "The Focused Mind", "description": "You prefer useful depth over endless exploration and rarely chase questions that do not serve a clear purpose."},
+        "mid": {"title": "The Selective Explorer", "description": "You enjoy learning when something catches your attention, but you can leave less important questions alone."},
+        "high": {"title": "The Question Engine", "description": "Questions naturally multiply for you. Understanding how things work can be rewarding even without an immediate use."}
+      },
+      "questions": [
+        {"text": "You hear an unfamiliar term in conversation. You...", "answers": [{"text": "Ignore it unless important", "score": 0}, {"text": "Remember it for later", "score": 1}, {"text": "Ask what it means", "score": 2}, {"text": "Look it up immediately", "score": 3}]},
+        {"text": "A documentary mentions a strange fact. You...", "answers": [{"text": "Keep watching", "score": 0}, {"text": "Notice it", "score": 1}, {"text": "Want more context", "score": 2}, {"text": "Fall into a research rabbit hole", "score": 3}]},
+        {"text": "When learning a new skill, you care about...", "answers": [{"text": "What works", "score": 0}, {"text": "The main principles", "score": 1}, {"text": "Why the principles work", "score": 2}, {"text": "The whole system behind it", "score": 3}]},
+        {"text": "A mystery has no practical importance. You...", "answers": [{"text": "Can leave it alone", "score": 0}, {"text": "Wonder briefly", "score": 1}, {"text": "Try to solve it", "score": 2}, {"text": "Need to know", "score": 3}]},
+        {"text": "Your browser tabs usually contain...", "answers": [{"text": "Only what I need", "score": 0}, {"text": "A few useful extras", "score": 1}, {"text": "Several things to explore", "score": 2}, {"text": "A small museum of unanswered questions", "score": 3}]}
+      ]
+    },
+    {
+      "id": "novelty_seeker",
+      "title": "Novelty Seeker",
+      "hook": "Comfort in the familiar, or energy from the new?",
+      "time": "40 SEC",
+      "accent": "✦",
+      "metricLow": "FAMILIAR",
+      "metricHigh": "NOVELTY",
+      "results": {
+        "low": {"title": "The Familiarist", "description": "You get value from known favorites, reliable routines and experiences you already know suit you."},
+        "mid": {"title": "The Selective Adventurer", "description": "You enjoy novelty when the upside is clear, while keeping enough familiar structure to feel grounded."},
+        "high": {"title": "The Novelty Hunter", "description": "New places, ideas and experiences tend to energize you, and repetition can become stale quickly."}
+      },
+      "questions": [
+        {"text": "At your favorite restaurant, you...", "answers": [{"text": "Order the usual", "score": 0}, {"text": "Rotate between favorites", "score": 1}, {"text": "Try something new sometimes", "score": 2}, {"text": "Almost always try something new", "score": 3}]},
+        {"text": "A free weekend appears. You prefer...", "answers": [{"text": "A familiar routine", "score": 0}, {"text": "A known place", "score": 1}, {"text": "A new activity", "score": 2}, {"text": "Something completely different", "score": 3}]},
+        {"text": "When a hobby becomes predictable, you...", "answers": [{"text": "Enjoy the mastery", "score": 0}, {"text": "Keep going if it works", "score": 1}, {"text": "Add a new challenge", "score": 2}, {"text": "Start looking for the next thing", "score": 3}]},
+        {"text": "Travel is most appealing because of...", "answers": [{"text": "Rest", "score": 0}, {"text": "A change of scenery", "score": 1}, {"text": "Discovering new places", "score": 2}, {"text": "Being somewhere totally unfamiliar", "score": 3}]},
+        {"text": "A major app redesign arrives. You...", "answers": [{"text": "Want the old version back", "score": 0}, {"text": "Need time to adjust", "score": 1}, {"text": "Explore the changes", "score": 2}, {"text": "Enjoy learning the new system", "score": 3}]}
+      ]
+    },
+    {
+      "id": "planning_style",
+      "title": "Planning Style",
+      "hook": "Do plans create freedom or kill spontaneity?",
+      "time": "40 SEC",
+      "accent": "▤",
+      "metricLow": "SPONTANEOUS",
+      "metricHigh": "PLANNED",
+      "results": {
+        "low": {"title": "The Improviser", "description": "You prefer keeping options open and adapting in real time rather than committing too early."},
+        "mid": {"title": "The Flexible Planner", "description": "You like enough structure to reduce friction while leaving room to change direction when reality shifts."},
+        "high": {"title": "The Architect", "description": "Clear plans reduce mental load for you. You prefer knowing the sequence, timing and next steps in advance."}
+      },
+      "questions": [
+        {"text": "Before a day trip, you usually...", "answers": [{"text": "Just go", "score": 0}, {"text": "Pick one main idea", "score": 1}, {"text": "Plan key stops", "score": 2}, {"text": "Map out the day", "score": 3}]},
+        {"text": "Your calendar is...", "answers": [{"text": "Mostly empty", "score": 0}, {"text": "For important events", "score": 1}, {"text": "Used regularly", "score": 2}, {"text": "Central to how I operate", "score": 3}]},
+        {"text": "Plans change at the last minute. You feel...", "answers": [{"text": "Energized", "score": 0}, {"text": "Fine", "score": 1}, {"text": "A little thrown off", "score": 2}, {"text": "Strongly disrupted", "score": 3}]},
+        {"text": "For a big goal, your first move is...", "answers": [{"text": "Start somewhere", "score": 0}, {"text": "Choose a direction", "score": 1}, {"text": "Break it into steps", "score": 2}, {"text": "Build a full roadmap", "score": 3}]},
+        {"text": "A detailed itinerary feels...", "answers": [{"text": "Restrictive", "score": 0}, {"text": "A bit much", "score": 1}, {"text": "Helpful", "score": 2}, {"text": "Relaxing", "score": 3}]}
+      ]
+    },
+    {
+      "id": "emotional_openness",
+      "title": "Emotional Openness",
+      "hook": "How visible is your inner world to other people?",
+      "time": "45 SEC",
+      "accent": "◇",
+      "metricLow": "PRIVATE",
+      "metricHigh": "OPEN",
+      "results": {
+        "low": {"title": "The Private Core", "description": "You tend to process feelings internally and share selectively, often only after you understand them yourself."},
+        "mid": {"title": "The Trusted Window", "description": "You can be emotionally open with the right people and context without needing everyone to see what is happening inside."},
+        "high": {"title": "The Open Book", "description": "You naturally put feelings into words and often prefer being understood in real time rather than processing everything alone."}
+      },
+      "questions": [
+        {"text": "When something deeply affects you, you...", "answers": [{"text": "Keep it to yourself", "score": 0}, {"text": "Process first", "score": 1}, {"text": "Tell someone trusted", "score": 2}, {"text": "Talk about it openly", "score": 3}]},
+        {"text": "A close friend asks how you really feel. You...", "answers": [{"text": "Keep it brief", "score": 0}, {"text": "Share the basics", "score": 1}, {"text": "Explain honestly", "score": 2}, {"text": "Say exactly what is going on", "score": 3}]},
+        {"text": "Crying in front of someone feels...", "answers": [{"text": "Very uncomfortable", "score": 0}, {"text": "Difficult", "score": 1}, {"text": "Okay with trusted people", "score": 2}, {"text": "Natural if that is what I feel", "score": 3}]},
+        {"text": "During conflict, your feelings are...", "answers": [{"text": "Mostly hidden", "score": 0}, {"text": "Carefully controlled", "score": 1}, {"text": "Usually explained", "score": 2}, {"text": "Very visible", "score": 3}]},
+        {"text": "People close to you know your inner world...", "answers": [{"text": "Only partly", "score": 0}, {"text": "More than most people", "score": 1}, {"text": "Pretty well", "score": 2}, {"text": "Extremely well", "score": 3}]}
+      ]
+    }
+  ]
+}
