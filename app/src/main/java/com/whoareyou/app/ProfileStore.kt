@@ -20,6 +20,7 @@ data class StoredProfile(
     // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
     val onboardingComplete: Boolean = true,
     val announcedAchievementIds: Set<String> = emptySet(),
+    val pendingAchievementIds: List<String> = emptyList(),
     val matchCount: Int = 0,
     val bestMatchPercent: Int? = null,
     val lowestMatchPercent: Int? = null,
@@ -33,6 +34,7 @@ object ProfileStore {
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
+    private val pendingAchievementsKey = stringPreferencesKey("pending_achievement_ids")
     private val matchCountKey = intPreferencesKey("match_count")
     private val bestMatchKey = intPreferencesKey("best_match_percent")
     private val lowestMatchKey = intPreferencesKey("lowest_match_percent")
@@ -127,6 +129,13 @@ object ProfileStore {
         context.profileDataStore.edit { it[onboardingCompleteKey] = complete }
     }
 
+    suspend fun consumeAchievementUnlock(context: Context, achievementId: String) {
+        context.profileDataStore.edit { prefs ->
+            val pending = decodeList(prefs[pendingAchievementsKey])
+            prefs[pendingAchievementsKey] = AchievementUnlockQueue.consume(pending, achievementId).joinToString(",")
+        }
+    }
+
     private suspend fun announceNewAchievements(context: Context) {
         val newlyUnlocked = mutableListOf<String>()
         val totalQuizCount = QuizRepository.load(context).size
@@ -138,6 +147,10 @@ object ProfileStore {
                 .filterNot { it in announced }
             if (newlyUnlocked.isNotEmpty()) {
                 prefs[announcedAchievementsKey] = (announced + newlyUnlocked).sorted().joinToString(",")
+                prefs[pendingAchievementsKey] = AchievementUnlockQueue.enqueue(
+                    pendingIds = profile.pendingAchievementIds,
+                    newlyUnlockedIds = newlyUnlocked
+                ).joinToString(",")
             }
         }
         newlyUnlocked.forEach(AppEvents::achievementUnlock)
@@ -150,6 +163,7 @@ object ProfileStore {
         adsRemoved = prefs[adsRemovedKey] ?: false,
         onboardingComplete = prefs[onboardingCompleteKey] ?: false,
         announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
+        pendingAchievementIds = decodeList(prefs[pendingAchievementsKey]),
         matchCount = prefs[matchCountKey] ?: 0,
         bestMatchPercent = prefs[bestMatchKey],
         lowestMatchPercent = prefs[lowestMatchKey],
@@ -163,12 +177,14 @@ object ProfileStore {
         )
     )
 
-    private fun decodeSet(raw: String?): Set<String> = raw
+    private fun decodeSet(raw: String?): Set<String> = decodeList(raw).toSet()
+
+    private fun decodeList(raw: String?): List<String> = raw
         ?.split(',')
         ?.map { it.trim() }
         ?.filter { it.isNotEmpty() }
-        ?.toSet()
-        ?: emptySet()
+        ?.distinct()
+        ?: emptyList()
 
     private fun encodeScores(scores: Map<String, Int>): String = scores.entries
         .sortedBy { it.key }
