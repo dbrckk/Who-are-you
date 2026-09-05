@@ -105,8 +105,12 @@
     <string name="challenge_match_opposite_copy">Vous abordez cette dimension très différemment — ce qui peut rendre la comparaison encore plus intéressante.</string>
     <string name="compatibility_share_button">PARTAGER NOTRE COMPATIBILITÉ  ↗</string>
     <string name="compatibility_share_text">On a obtenu %1$d%% de compatibilité sur %2$s dans Who Are You? Quel serait ton score ?</string>
+    <string name="compatibility_share_challenge">Fais le même test et compare-toi avec moi : %1$s</string>
     <string name="compatibility_share_subject">Compatibilité Who Are You?</string>
     <string name="compatibility_share_chooser">Partager votre compatibilité</string>
+    <string name="compatibility_card_hook">MATCH ENTRE AMIS</string>
+    <string name="compatibility_card_cta">À quel point es-tu compatible avec tes amis ?</string>
+    <string name="compatibility_card_subtitle">Faites le même test, comparez-vous instantanément puis transmettez le défi.</string>
     <string name="challenge_another_friend">DÉFIER UN AUTRE AMI  ↗</string>
     <string name="close">FERMER</string>
     <string name="invalid_challenge">DÉFI INVALIDE</string>
