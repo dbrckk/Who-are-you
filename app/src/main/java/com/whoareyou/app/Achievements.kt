@@ -15,51 +15,18 @@ object AchievementEngine {
         val completeTarget = totalQuizCount.coerceAtLeast(1)
 
         return listOf(
-            Achievement(
-                id = "first_test",
-                title = "First Test",
-                description = "Complete your first personality test.",
-                unlocked = completed >= 1
-            ),
-            Achievement(
-                id = "ten_tests",
-                title = "10 Tests",
-                description = "Complete ten different tests.",
-                unlocked = completed >= 10
-            ),
-            Achievement(
-                id = "profile_builder",
-                title = "Profile Builder",
-                description = "Discover five profile dimensions.",
-                unlocked = dimensions >= 5
-            ),
-            Achievement(
-                id = "profile_complete",
-                title = "Know Yourself",
-                description = "Discover every available profile dimension.",
-                unlocked = completed >= completeTarget
-            ),
-            Achievement(
-                id = "streak_3",
-                title = "Coming Back",
-                description = "Keep a 3 day Daily Question streak.",
-                unlocked = streak >= 3
-            ),
-            Achievement(
-                id = "streak_7",
-                title = "7 Day Streak",
-                description = "Keep a 7 day Daily Question streak.",
-                unlocked = streak >= 7
-            ),
-            Achievement(
-                id = "streak_30",
-                title = "30 Day Streak",
-                description = "Keep a 30 day Daily Question streak.",
-                unlocked = streak >= 30
-            )
+            Achievement("first_test", "First Test", "Complete your first personality test.", completed >= 1),
+            Achievement("ten_tests", "10 Tests", "Complete ten different tests.", completed >= 10),
+            Achievement("profile_builder", "Profile Builder", "Discover five profile dimensions.", dimensions >= 5),
+            Achievement("profile_complete", "Know Yourself", "Discover every available profile dimension.", completed >= completeTarget),
+            Achievement("strong_match", "Strong Match", "Reach at least 90% compatibility with a friend.", (profile.bestMatchPercent ?: -1) >= 90),
+            Achievement("opposites", "Opposites", "Find a friend match at 45% compatibility or lower.", (profile.lowestMatchPercent ?: 101) <= 45),
+            Achievement("social_butterfly", "Social Butterfly", "Complete five friend comparisons.", profile.matchCount >= 5),
+            Achievement("streak_3", "Coming Back", "Keep a 3 day Daily Question streak.", streak >= 3),
+            Achievement("streak_7", "7 Day Streak", "Keep a 7 day Daily Question streak.", streak >= 7),
+            Achievement("streak_30", "30 Day Streak", "Keep a 30 day Daily Question streak.", streak >= 30)
         )
     }
 
-    fun unlocked(profile: StoredProfile, totalQuizCount: Int): List<Achievement> =
-        build(profile, totalQuizCount).filter { it.unlocked }
+    fun unlocked(profile: StoredProfile, totalQuizCount: Int): List<Achievement> = build(profile, totalQuizCount).filter { it.unlocked }
 }
