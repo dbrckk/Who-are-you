@@ -172,8 +172,9 @@ fun AchievementStrip(achievements: List<Achievement>) {
 @Composable
 private fun localizedAchievement(id: String, fallbackTitle: String, fallbackDescription: String): Pair<String, String> = when (id) {
     "first_test" -> stringResource(R.string.achievement_first_test_title) to stringResource(R.string.achievement_first_test_description)
-    "ten_tests" -> stringResource(R.string.achievement_ten_tests_title) to stringResource(R.string.achievement_ten_tests_description)
     "profile_builder" -> stringResource(R.string.achievement_profile_builder_title) to stringResource(R.string.achievement_profile_builder_description)
+    "ten_tests" -> stringResource(R.string.achievement_ten_tests_title) to stringResource(R.string.achievement_ten_tests_description)
+    "twenty_five_tests" -> stringResource(R.string.achievement_twenty_five_tests_title) to stringResource(R.string.achievement_twenty_five_tests_description)
     "profile_complete" -> stringResource(R.string.achievement_profile_complete_title) to stringResource(R.string.achievement_profile_complete_description)
     "strong_match" -> stringResource(R.string.achievement_strong_match_title) to stringResource(R.string.achievement_strong_match_description)
     "opposites" -> stringResource(R.string.achievement_opposites_title) to stringResource(R.string.achievement_opposites_description)
