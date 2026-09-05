@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="evolution_snapshot_title">TON ÉVOLUTION</string>
+    <string name="evolution_snapshot_coverage">Suivi de %1$d dimensions sur %2$d • %3$d%% couvert</string>
+    <string name="evolution_snapshot_most_changed">PLUS FORTE ÉVOLUTION RÉCENTE</string>
+    <string name="evolution_snapshot_higher">%1$s • +%2$d points depuis le résultat précédent</string>
+    <string name="evolution_snapshot_lower">%1$s • −%2$d points depuis le résultat précédent</string>
+    <string name="evolution_snapshot_same">%1$s • inchangé depuis le résultat précédent</string>
+</resources>
