@@ -30,7 +30,8 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val signature = summary.signature
     val insights = ProfileInsights.derive(summary.dimensions)
-    if (signature == null && insights.isEmpty()) return
+    val evolution = ProfileEvolutionSummary.derive(summary.dimensions)
+    if (signature == null && insights.isEmpty() && evolution == null) return
 
     LaunchedEffect(signature?.key) {
         if (signature != null) AppEvents.signatureUnlock(signature)
@@ -65,6 +66,10 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
                 }
             }
             Spacer(Modifier.height(16.dp))
+        }
+
+        if (evolution != null) {
+            ProfileEvolutionCard(summary)
         }
 
         if (insights.isNotEmpty()) {
