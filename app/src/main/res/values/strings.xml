@@ -58,6 +58,7 @@
     <string name="daily_share_text">Who Are You? daily question: %1$s — would you pick “%2$s” or “%3$s”?</string>
     <string name="daily_share_chooser">Share daily question</string>
     <string name="achievements">ACHIEVEMENTS</string>
+    <string name="next_achievement">NEXT UNLOCK</string>
     <string name="achievement_first_hint">Complete your first test to unlock your first badge.</string>
     <string name="achievement_more_unlocked">+%1$d more unlocked</string>
     <string name="achievement_first_test_title">First Test</string>
