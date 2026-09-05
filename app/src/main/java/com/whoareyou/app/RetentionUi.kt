@@ -45,21 +45,32 @@ fun RetentionSection() {
     LaunchedEffect(question.id) { AppEvents.dailyQuestionView(question.id) }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        DailyQuestionCard(question = question, state = storedProfile.daily, onVote = { option ->
-            if (!storedProfile.daily.answeredToday()) {
-                scope.launch {
-                    val result = ProfileStore.saveDailyAnswer(context, question.id, option)
-                    AppEvents.dailyQuestionVote(question.id, option)
-                    AppEvents.streakContinue(result.currentStreak)
+        DailyQuestionCard(
+            question = question,
+            state = storedProfile.daily,
+            onVote = { option ->
+                if (!storedProfile.daily.answeredToday()) {
+                    scope.launch {
+                        val result = ProfileStore.saveDailyAnswer(context, question.id, option)
+                        AppEvents.dailyQuestionVote(question.id, option)
+                        AppEvents.streakContinue(result.currentStreak)
+                    }
                 }
-            }
-        })
+            },
+            onShare = { DailyQuestionShare.share(context, question) }
+        )
+        SocialStatsCard(storedProfile)
         AchievementStrip(achievements)
     }
 }
 
 @Composable
-fun DailyQuestionCard(question: DailyQuestion, state: DailyState, onVote: (Int) -> Unit) {
+fun DailyQuestionCard(
+    question: DailyQuestion,
+    state: DailyState,
+    onVote: (Int) -> Unit,
+    onShare: () -> Unit
+) {
     val answered = state.answeredToday() && state.questionId == question.id
     Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(22.dp)) {
@@ -74,15 +85,65 @@ fun DailyQuestionCard(question: DailyQuestion, state: DailyState, onVote: (Int) 
             Spacer(Modifier.height(9.dp))
             DailyChoice(question.optionB, selected = answered && state.selectedOption == 1, enabled = !answered) { onVote(1) }
             Spacer(Modifier.height(12.dp))
-            Text(if (answered) stringResource(R.string.daily_answer_locked, state.longestStreak) else stringResource(R.string.daily_pick_prompt), color = RetentionMuted, fontSize = 12.sp)
+            Text(
+                if (answered) stringResource(R.string.daily_answer_locked, state.longestStreak) else stringResource(R.string.daily_pick_prompt),
+                color = RetentionMuted,
+                fontSize = 12.sp
+            )
+            Spacer(Modifier.height(12.dp))
+            Text(
+                stringResource(R.string.daily_share),
+                color = RetentionViolet,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable(onClick = onShare)
+            )
         }
     }
 }
 
 @Composable
 private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onClick: () -> Unit) {
-    Card(modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick), colors = CardDefaults.cardColors(containerColor = if (selected) RetentionViolet else RetentionPanelSoft), shape = RoundedCornerShape(16.dp)) {
-        Text(if (selected) "✓  $label" else label, modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp), color = if (selected) Color(0xFF090A0F) else Color.White, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = if (selected) RetentionViolet else RetentionPanelSoft),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Text(
+            if (selected) "✓  $label" else label,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+            color = if (selected) Color(0xFF090A0F) else Color.White,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+private fun SocialStatsCard(profile: StoredProfile) {
+    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(20.dp)) {
+            Text(stringResource(R.string.your_social_stats), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(12.dp))
+            if (profile.matchCount == 0) {
+                Text(stringResource(R.string.social_no_matches), color = RetentionMuted, fontSize = 13.sp, lineHeight = 19.sp)
+            } else {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    SocialMetric(stringResource(R.string.social_comparisons), profile.matchCount.toString())
+                    SocialMetric(stringResource(R.string.social_best_match), "${profile.bestMatchPercent ?: 0}%")
+                    SocialMetric(stringResource(R.string.social_most_different), "${profile.lowestMatchPercent ?: 0}%")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialMetric(label: String, value: String) {
+    Column {
+        Text(value, color = RetentionViolet, fontSize = 20.sp, fontWeight = FontWeight.Black)
+        Spacer(Modifier.height(3.dp))
+        Text(label, color = RetentionMuted, fontSize = 10.sp, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -105,7 +166,9 @@ fun AchievementStrip(achievements: List<Achievement>) {
                     Text(description, color = RetentionMuted, fontSize = 11.sp)
                     Spacer(Modifier.height(7.dp))
                 }
-                if (unlocked.size > 3) Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
+                if (unlocked.size > 3) {
+                    Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
+                }
             }
         }
     }
