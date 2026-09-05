@@ -23,17 +23,17 @@
       ]
     },
     {
-      "id": "curiosity",
-      "title": "Curiosité",
-      "hook": "À quel point est-il difficile pour toi de laisser une question sans réponse ?",
+      "id": "learning_drive",
+      "title": "Appétit d’apprendre",
+      "hook": "À quel point cherches-tu à comprendre en profondeur lorsqu’un sujet t’accroche ?",
       "time": "40 SEC",
       "accent": "?",
-      "metricLow": "FOCALISÉ",
-      "metricHigh": "CURIEUX",
+      "metricLow": "PRATIQUE",
+      "metricHigh": "APPRENTISSAGE PROFOND",
       "results": {
-        "low": {"title": "L’Esprit focalisé", "description": "Tu privilégies la profondeur utile plutôt que l’exploration sans fin et poursuis rarement une question sans intérêt concret."},
-        "mid": {"title": "L’Explorateur sélectif", "description": "Tu aimes apprendre quand quelque chose capte ton attention, tout en sachant laisser les questions secondaires de côté."},
-        "high": {"title": "Le Moteur à questions", "description": "Chez toi, une question en entraîne naturellement d’autres. Comprendre comment les choses fonctionnent peut suffire à te motiver."}
+        "low": {"title": "L’Apprenant pratique", "description": "Tu préfères apprendre ce qui est utile et vas rarement plus loin si les connaissances supplémentaires n’ont pas d’objectif clair."},
+        "mid": {"title": "L’Apprenant sélectif", "description": "Tu aimes comprendre les sujets qui comptent pour toi et sais équilibrer exploration et concentration."},
+        "high": {"title": "L’Apprenant profond", "description": "Lorsqu’un sujet attire ton attention, tu veux naturellement comprendre le contexte, les mécanismes et le système qui se cache derrière."}
       },
       "questions": [
         {"text": "Tu entends un terme inconnu dans une conversation. Tu...", "answers": [{"text": "L’ignores sauf s’il est important", "score": 0}, {"text": "Le gardes en tête", "score": 1}, {"text": "Demandes ce qu’il signifie", "score": 2}, {"text": "Le recherches immédiatement", "score": 3}]},
