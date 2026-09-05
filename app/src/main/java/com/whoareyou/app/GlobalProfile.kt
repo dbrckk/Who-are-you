@@ -7,7 +7,10 @@ data class ProfileDimension(
     val resultTitle: String,
     val metricLabel: String,
     val change: ScoreChange? = null
-)
+) {
+    val scoreChange: ScoreChange?
+        get() = change
+}
 
 data class GlobalProfileSummary(
     val dominantArchetype: String,
