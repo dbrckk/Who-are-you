@@ -25,6 +25,12 @@ data class SignatureRecommendation(
     val target: SignatureProfileKey
 )
 
+data class SignaturePathProgress(
+    val completedRequirements: Int,
+    val totalRequirements: Int,
+    val percent: Int
+)
+
 object SignatureProfiles {
     private const val MIN_COMPLETED_DIMENSIONS = 8
 
@@ -47,6 +53,15 @@ object SignatureProfiles {
         val completedWeight: Int,
         val averageStrength: Int,
         val missing: Requirement
+    )
+
+    private data class ProgressPath(
+        val ruleIndex: Int,
+        val completedRequirements: Int,
+        val totalRequirements: Int,
+        val completedWeight: Int,
+        val totalWeight: Int,
+        val averageStrength: Int
     )
 
     private val rules = listOf(
@@ -204,6 +219,51 @@ object SignatureProfiles {
         ) ?: return null
 
         return SignatureRecommendation(quizId = best.missing.quizId, target = best.key)
+    }
+
+    fun pathProgress(scores: Map<String, Int>): SignaturePathProgress? {
+        if (scores.isEmpty()) return null
+
+        val paths = rules.mapIndexedNotNull { ruleIndex, rule ->
+            val contradicted = rule.contradictions.any { requirement ->
+                scores[requirement.quizId]?.let { score -> satisfies(score, requirement) } == true
+            }
+            if (contradicted) return@mapIndexedNotNull null
+
+            val completed = rule.requirements.filter { it.quizId in scores }
+            if (completed.isEmpty()) return@mapIndexedNotNull null
+            if (completed.any { requirement -> !satisfies(scores.getValue(requirement.quizId), requirement) }) {
+                return@mapIndexedNotNull null
+            }
+
+            val completedWeight = completed.sumOf { it.weight }
+            val totalWeight = rule.requirements.sumOf { it.weight }
+            val weightedStrength = completed.sumOf { requirement ->
+                requirementStrength(scores.getValue(requirement.quizId).coerceIn(0, 100), requirement) * requirement.weight
+            }
+            val averageStrength = weightedStrength / completedWeight.coerceAtLeast(1)
+
+            ProgressPath(
+                ruleIndex = ruleIndex,
+                completedRequirements = completed.size,
+                totalRequirements = rule.requirements.size,
+                completedWeight = completedWeight,
+                totalWeight = totalWeight,
+                averageStrength = averageStrength
+            )
+        }
+
+        val best = paths.maxWithOrNull(
+            compareBy<ProgressPath> { it.completedWeight }
+                .thenBy { it.averageStrength }
+                .thenBy { -it.ruleIndex }
+        ) ?: return null
+
+        return SignaturePathProgress(
+            completedRequirements = best.completedRequirements,
+            totalRequirements = best.totalRequirements,
+            percent = (best.completedWeight * 100 / best.totalWeight.coerceAtLeast(1)).coerceIn(0, 100)
+        )
     }
 
     fun copy(key: SignatureProfileKey, french: Boolean): SignatureProfileCopy = when (key) {
