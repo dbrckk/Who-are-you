@@ -6,7 +6,6 @@
     <string name="onboarding_body">Tests de personnalité rapides. Résultats visuels. Compare-toi avec tes amis.</string>
     <string name="onboarding_start">COMMENCER</string>
     <string name="onboarding_no_account">Aucun compte requis</string>
-
     <string name="discover_headline">Découvre ce qui\nfait de toi, toi.</string>
     <string name="discover_subtitle">Tests de personnalité rapides. Résultats visuels. Compare-toi avec tes amis.</string>
     <string name="trending_tests">TESTS POPULAIRES</string>
@@ -22,7 +21,6 @@
     <string name="all_dimensions">TOUTES LES DIMENSIONS</string>
     <string name="profile_undiscovered">PROFIL À DÉCOUVRIR</string>
     <string name="complete_first_test_profile">Termine ton premier test pour commencer à construire ton profil.</string>
-
     <string name="lifetime_upgrade_active">ACHAT À VIE ACTIF</string>
     <string name="remove_ads_forever">SUPPRIMER LES PUBS À VIE</string>
     <string name="no_ads_ever">Plus aucune pub.</string>
@@ -30,7 +28,6 @@
     <string name="premium_restore_copy">Ton achat est enregistré et restauré automatiquement.</string>
     <string name="premium_copy">Tous les tests, résultats, partages et défis restent disponibles. Seules les pubs disparaissent.</string>
     <string name="remove_ads_button">SUPPRIMER LES PUBS — %1$s</string>
-
     <string name="done">FAIT</string>
     <string name="take_again">REFAIRE  →</string>
     <string name="start">COMMENCER  →</string>
@@ -44,7 +41,6 @@
     <string name="retry">REFAIRE</string>
     <string name="done_button">TERMINER</string>
     <string name="disclaimer">Pour le divertissement et la réflexion personnelle uniquement — ce n’est pas un diagnostic psychologique.</string>
-
     <string name="daily_question">QUESTION DU JOUR</string>
     <string name="streak_count">SÉRIE %1$d</string>
     <string name="daily_answer_locked">Réponse verrouillée pour aujourd’hui • meilleure série : %1$d jours</string>
@@ -52,7 +48,6 @@
     <string name="achievements">SUCCÈS</string>
     <string name="achievement_first_hint">Termine ton premier test pour débloquer ton premier badge.</string>
     <string name="achievement_more_unlocked">+%1$d autres débloqués</string>
-
     <string name="achievement_first_test_title">Premier test</string>
     <string name="achievement_first_test_description">Termine ton premier test de personnalité.</string>
     <string name="achievement_ten_tests_title">10 tests</string>
@@ -61,20 +56,24 @@
     <string name="achievement_profile_builder_description">Découvre cinq dimensions de ton profil.</string>
     <string name="achievement_profile_complete_title">Apprends à te connaître</string>
     <string name="achievement_profile_complete_description">Découvre toutes les dimensions disponibles de ton profil.</string>
+    <string name="achievement_strong_match_title">Forte compatibilité</string>
+    <string name="achievement_strong_match_description">Atteins au moins 90 % de compatibilité avec un ami.</string>
+    <string name="achievement_opposites_title">Opposés</string>
+    <string name="achievement_opposites_description">Obtiens une compatibilité de 45 % ou moins avec un ami.</string>
+    <string name="achievement_social_butterfly_title">Papillon social</string>
+    <string name="achievement_social_butterfly_description">Termine cinq comparaisons entre amis.</string>
     <string name="achievement_streak_3_title">Tu reviens</string>
     <string name="achievement_streak_3_description">Maintiens une série de 3 jours sur la Question du jour.</string>
     <string name="achievement_streak_7_title">Série de 7 jours</string>
     <string name="achievement_streak_7_description">Maintiens une série de 7 jours sur la Question du jour.</string>
     <string name="achievement_streak_30_title">Série de 30 jours</string>
     <string name="achievement_streak_30_description">Maintiens une série de 30 jours sur la Question du jour.</string>
-
     <string name="challenge_share_text">Je te défie sur %1$s. Fais le même test et découvre notre compatibilité : %2$s</string>
     <string name="challenge_share_subject">Défi Who Are You?</string>
     <string name="challenge_share_chooser">Défier un ami</string>
     <string name="result_share_text">J’ai obtenu %1$s — %2$d%% sur %3$s. Et toi ?</string>
     <string name="result_share_challenge">Fais le même test et compare-toi avec moi : %1$s</string>
     <string name="result_share_chooser">Partager ton résultat</string>
-
     <string name="challenge_header">DÉFI ENTRE AMIS</string>
     <string name="challenge_intro">Fais le même test. Votre compatibilité apparaît immédiatement.</string>
     <string name="challenge_disclaimer">Pour le divertissement et la réflexion personnelle uniquement.</string>
