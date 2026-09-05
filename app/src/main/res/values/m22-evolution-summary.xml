@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="evolution_snapshot_title">YOUR EVOLUTION</string>
+    <string name="evolution_snapshot_coverage">Tracking %1$d of %2$d dimensions • %3$d%% covered</string>
+    <string name="evolution_snapshot_most_changed">MOST CHANGED RECENTLY</string>
+    <string name="evolution_snapshot_higher">%1$s • +%2$d points since the previous result</string>
+    <string name="evolution_snapshot_lower">%1$s • −%2$d points since the previous result</string>
+    <string name="evolution_snapshot_same">%1$s • unchanged since the previous result</string>
+</resources>
