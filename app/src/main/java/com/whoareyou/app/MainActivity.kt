@@ -79,7 +79,9 @@ private fun WhoAreYouApp() {
     }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
     val storedProfile = storedProfileState ?: return
-    val globalProfile = remember(quizCatalog, storedProfile.latestScores) { GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores) }
+    val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
+        GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
+    }
 
     var premiumOverride by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
@@ -493,6 +495,28 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
                         LinearProgressIndicator(progress = { dimension.score / 100f }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
                         Spacer(Modifier.height(7.dp))
                         Text(dimension.metricLabel, color = Muted, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                        dimension.scoreChange?.let { change ->
+                            Spacer(Modifier.height(12.dp))
+                            Text(stringResource(R.string.profile_evolution), color = Cyan, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                            Spacer(Modifier.height(4.dp))
+                            Text(
+                                stringResource(R.string.profile_evolution_values, change.previousScore, change.currentScore),
+                                color = Color.White,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Spacer(Modifier.height(3.dp))
+                            Text(
+                                when (change.direction) {
+                                    ScoreChangeDirection.HIGHER -> stringResource(R.string.profile_evolution_higher, change.absoluteDelta)
+                                    ScoreChangeDirection.LOWER -> stringResource(R.string.profile_evolution_lower, change.absoluteDelta)
+                                    ScoreChangeDirection.SAME -> stringResource(R.string.profile_evolution_same)
+                                },
+                                color = Muted,
+                                fontSize = 11.sp,
+                                lineHeight = 16.sp
+                            )
+                        }
                     }
                 }
             }
