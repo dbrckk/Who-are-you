@@ -5,9 +5,10 @@ Current migration state:
 - Shared challenge URLs use HTTPS: `https://dbrckk.github.io/Who-are-you/challenge/?quiz=<id>&score=<0-100>`.
 - `ChallengeActivity` accepts both the HTTPS URL and the legacy `whoareyou://challenge?...` custom scheme.
 - `docs/challenge/index.html` provides the browser/install fallback and preserves the challenge parameters.
-- The HTTPS intent filter is intentionally not marked `android:autoVerify="true"` yet.
+- The HTTPS intent filter is marked `android:autoVerify="true"` so production verification can activate automatically once the host publishes a valid Digital Asset Links file.
+- `docs/assetlinks.template.json` contains the production-ready Digital Asset Links template for package `com.whoareyou.app`.
 
-## Why verification is not enabled yet
+## Verification dependency
 
 Verified Android App Links require a Digital Asset Links file at:
 
@@ -15,22 +16,20 @@ Verified Android App Links require a Digital Asset Links file at:
 
 That file must contain the SHA-256 fingerprint of the certificate that signs the installed production app. If Google Play App Signing is used, use the **App signing key certificate** fingerprint from Play Console, not a local debug/upload certificate.
 
-The current GitHub Pages project URL is suitable as a temporary HTTPS landing page, but its project path does not provide control of `https://dbrckk.github.io/.well-known/assetlinks.json` from this repository. Production verification therefore needs either:
+The current GitHub Pages project URL is suitable as the HTTPS landing page, but Android verifies the host at the root path `https://dbrckk.github.io/.well-known/assetlinks.json`. Publishing that file therefore requires control of the root `dbrckk.github.io` user site (or moving challenge links to another controlled production host).
 
-1. a dedicated domain controlled by the project, or
-2. control of the root `dbrckk.github.io` user site.
+Until the correct file is published at the host root, Android can still open the HTTPS challenge in the browser and the landing page can hand off to the custom `whoareyou://challenge` scheme or Play Store fallback. The missing Digital Asset Links file affects verified direct-open behavior only; it does not break challenge sharing.
 
 ## Final production steps
 
-1. Choose the production HTTPS host.
-2. Serve `/.well-known/assetlinks.json` over HTTPS with `Content-Type: application/json` and no redirect.
-3. Insert package name `com.whoareyou.app` and the Play App Signing SHA-256 fingerprint.
-4. Change the HTTPS intent filter host/path to the production host if necessary.
-5. Add `android:autoVerify="true"` to that HTTPS intent filter.
-6. Update `ChallengeShare.WEB_HOST` / path to the same host.
-7. Validate the domain with Play Console Deep Links or Android Studio App Links Assistant.
+1. Configure Google Play App Signing.
+2. Copy the **App signing key certificate SHA-256 fingerprint** from Play Console.
+3. Copy `docs/assetlinks.template.json`, replace `REPLACE_WITH_PLAY_APP_SIGNING_SHA256`, and publish it as `/.well-known/assetlinks.json` on the production host.
+4. Serve it over HTTPS with `Content-Type: application/json` and no redirect.
+5. If the production host changes, update both the manifest HTTPS intent filter and `ChallengeShare.WEB_HOST` / path.
+6. Validate the domain with Play Console Deep Links or Android Studio App Links Assistant.
 
-Example `assetlinks.json` once the production fingerprint is known:
+Expected production file:
 
 ```json
 [
