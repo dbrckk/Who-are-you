@@ -40,44 +40,28 @@ fun RetentionSection() {
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
     val totalQuizCount = remember(context) { QuizRepository.load(context).size }
     val question = remember { DailyQuestionEngine.forDate() }
-    val achievements = remember(storedProfile, totalQuizCount) {
-        AchievementEngine.build(storedProfile, totalQuizCount)
-    }
+    val achievements = remember(storedProfile, totalQuizCount) { AchievementEngine.build(storedProfile, totalQuizCount) }
 
-    LaunchedEffect(question.id) {
-        AppEvents.dailyQuestionView(question.id)
-    }
+    LaunchedEffect(question.id) { AppEvents.dailyQuestionView(question.id) }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        DailyQuestionCard(
-            question = question,
-            state = storedProfile.daily,
-            onVote = { option ->
-                if (!storedProfile.daily.answeredToday()) {
-                    scope.launch {
-                        val result = ProfileStore.saveDailyAnswer(context, question.id, option)
-                        AppEvents.dailyQuestionVote(question.id, option)
-                        AppEvents.streakContinue(result.currentStreak)
-                    }
+        DailyQuestionCard(question = question, state = storedProfile.daily, onVote = { option ->
+            if (!storedProfile.daily.answeredToday()) {
+                scope.launch {
+                    val result = ProfileStore.saveDailyAnswer(context, question.id, option)
+                    AppEvents.dailyQuestionVote(question.id, option)
+                    AppEvents.streakContinue(result.currentStreak)
                 }
             }
-        )
+        })
         AchievementStrip(achievements)
     }
 }
 
 @Composable
-fun DailyQuestionCard(
-    question: DailyQuestion,
-    state: DailyState,
-    onVote: (Int) -> Unit
-) {
+fun DailyQuestionCard(question: DailyQuestion, state: DailyState, onVote: (Int) -> Unit) {
     val answered = state.answeredToday() && state.questionId == question.id
-    Card(
-        colors = CardDefaults.cardColors(containerColor = RetentionPanel),
-        shape = RoundedCornerShape(24.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(22.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(stringResource(R.string.daily_question), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -90,41 +74,22 @@ fun DailyQuestionCard(
             Spacer(Modifier.height(9.dp))
             DailyChoice(question.optionB, selected = answered && state.selectedOption == 1, enabled = !answered) { onVote(1) }
             Spacer(Modifier.height(12.dp))
-            Text(
-                if (answered) stringResource(R.string.daily_answer_locked, state.longestStreak)
-                else stringResource(R.string.daily_pick_prompt),
-                color = RetentionMuted,
-                fontSize = 12.sp
-            )
+            Text(if (answered) stringResource(R.string.daily_answer_locked, state.longestStreak) else stringResource(R.string.daily_pick_prompt), color = RetentionMuted, fontSize = 12.sp)
         }
     }
 }
 
 @Composable
 private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = if (selected) RetentionViolet else RetentionPanelSoft),
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        Text(
-            if (selected) "✓  $label" else label,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-            color = if (selected) Color(0xFF090A0F) else Color.White,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Bold
-        )
+    Card(modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick), colors = CardDefaults.cardColors(containerColor = if (selected) RetentionViolet else RetentionPanelSoft), shape = RoundedCornerShape(16.dp)) {
+        Text(if (selected) "✓  $label" else label, modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp), color = if (selected) Color(0xFF090A0F) else Color.White, fontSize = 15.sp, fontWeight = FontWeight.Bold)
     }
 }
 
 @Composable
 fun AchievementStrip(achievements: List<Achievement>) {
     val unlocked = achievements.filter { it.unlocked }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = RetentionPanel),
-        shape = RoundedCornerShape(24.dp),
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(20.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(stringResource(R.string.achievements), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -140,9 +105,7 @@ fun AchievementStrip(achievements: List<Achievement>) {
                     Text(description, color = RetentionMuted, fontSize = 11.sp)
                     Spacer(Modifier.height(7.dp))
                 }
-                if (unlocked.size > 3) {
-                    Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
-                }
+                if (unlocked.size > 3) Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
             }
         }
     }
@@ -154,6 +117,9 @@ private fun localizedAchievement(id: String, fallbackTitle: String, fallbackDesc
     "ten_tests" -> stringResource(R.string.achievement_ten_tests_title) to stringResource(R.string.achievement_ten_tests_description)
     "profile_builder" -> stringResource(R.string.achievement_profile_builder_title) to stringResource(R.string.achievement_profile_builder_description)
     "profile_complete" -> stringResource(R.string.achievement_profile_complete_title) to stringResource(R.string.achievement_profile_complete_description)
+    "strong_match" -> stringResource(R.string.achievement_strong_match_title) to stringResource(R.string.achievement_strong_match_description)
+    "opposites" -> stringResource(R.string.achievement_opposites_title) to stringResource(R.string.achievement_opposites_description)
+    "social_butterfly" -> stringResource(R.string.achievement_social_butterfly_title) to stringResource(R.string.achievement_social_butterfly_description)
     "streak_3" -> stringResource(R.string.achievement_streak_3_title) to stringResource(R.string.achievement_streak_3_description)
     "streak_7" -> stringResource(R.string.achievement_streak_7_title) to stringResource(R.string.achievement_streak_7_description)
     "streak_30" -> stringResource(R.string.achievement_streak_30_title) to stringResource(R.string.achievement_streak_30_description)
