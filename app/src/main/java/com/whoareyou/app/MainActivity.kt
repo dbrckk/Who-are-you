@@ -297,8 +297,16 @@ private fun SignaturePathProgressCard(progress: SignaturePathProgress) {
 
 @Composable
 private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, signatureGuided: Boolean, onClick: () -> Unit) {
+    DisposableEffect(quiz.id, signatureGuided) {
+        AppEvents.recommendationView(quiz.id, signatureGuided)
+        onDispose { }
+    }
+
     Card(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
+        modifier = Modifier.fillMaxWidth().clickable {
+            AppEvents.recommendationStart(quiz.id, signatureGuided)
+            onClick()
+        },
         colors = CardDefaults.cardColors(containerColor = PanelSoft),
         shape = RoundedCornerShape(24.dp)
     ) {
