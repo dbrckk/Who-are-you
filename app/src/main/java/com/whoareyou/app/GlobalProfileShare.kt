@@ -145,6 +145,21 @@ object GlobalProfileShare {
             paint.textSize = 40f
             paint.textAlign = Paint.Align.RIGHT
             canvas.drawText("${dimension.score}%", width - 84f, y + 10f, paint)
+
+            dimension.scoreChange?.let { change ->
+                paint.color = Color.rgb(110, 231, 249)
+                paint.textSize = 21f
+                drawFittedText(
+                    canvas = canvas,
+                    text = ProfileEvolutionShare.deltaLabel(change, copy.french),
+                    x = width - 84f,
+                    y = y + 42f,
+                    maxWidth = 330f,
+                    paint = paint,
+                    preferredSize = 21f,
+                    minSize = 17f
+                )
+            }
             paint.textAlign = Paint.Align.LEFT
 
             val left = 84f
