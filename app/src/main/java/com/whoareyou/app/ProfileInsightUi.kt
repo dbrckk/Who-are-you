@@ -10,6 +10,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -26,34 +27,71 @@ private data class InsightCopy(val title: String, val body: String)
 
 @Composable
 fun ProfileInsightCards(summary: GlobalProfileSummary) {
-    val insights = ProfileInsights.derive(summary.dimensions)
-    if (insights.isEmpty()) return
-
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
+    val signature = summary.signature
+    val insights = ProfileInsights.derive(summary.dimensions)
+    if (signature == null && insights.isEmpty()) return
+
+    LaunchedEffect(signature?.key) {
+        if (signature != null) AppEvents.signatureUnlock(signature)
+    }
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = if (french) "CE QUE TON PROFIL RÉVÈLE" else "WHAT YOUR PROFILE REVEALS",
-            color = InsightCyan,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(Modifier.height(10.dp))
-        insights.forEach { key ->
-            val copy = localizedCopy(key, french)
+        if (signature != null) {
+            val copy = SignatureProfiles.copy(signature.key, french)
+            Text(
+                text = if (french) "TA SIGNATURE" else "YOUR SIGNATURE",
+                color = InsightCyan,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(Modifier.height(10.dp))
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = InsightPanel),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(22.dp)
             ) {
-                Column(Modifier.padding(18.dp)) {
-                    Text(copy.title, color = InsightViolet, fontSize = 15.sp, fontWeight = FontWeight.Black)
-                    Spacer(Modifier.height(6.dp))
-                    Text(copy.body, color = InsightMuted, fontSize = 13.sp, lineHeight = 19.sp)
+                Column(Modifier.padding(20.dp)) {
+                    Text(copy.title, color = InsightViolet, fontSize = 19.sp, fontWeight = FontWeight.Black)
+                    Spacer(Modifier.height(7.dp))
+                    Text(copy.description, color = Color.White, fontSize = 14.sp, lineHeight = 21.sp)
+                    Spacer(Modifier.height(9.dp))
+                    Text(
+                        text = if (french) "Confiance de correspondance : ${signature.confidence}%" else "Match confidence: ${signature.confidence}%",
+                        color = InsightMuted,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(16.dp))
         }
+
+        if (insights.isNotEmpty()) {
+            Text(
+                text = if (french) "CE QUE TON PROFIL RÉVÈLE" else "WHAT YOUR PROFILE REVEALS",
+                color = InsightCyan,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(Modifier.height(10.dp))
+            insights.forEach { key ->
+                val copy = localizedCopy(key, french)
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = InsightPanel),
+                    shape = RoundedCornerShape(20.dp)
+                ) {
+                    Column(Modifier.padding(18.dp)) {
+                        Text(copy.title, color = InsightViolet, fontSize = 15.sp, fontWeight = FontWeight.Black)
+                        Spacer(Modifier.height(6.dp))
+                        Text(copy.body, color = InsightMuted, fontSize = 13.sp, lineHeight = 19.sp)
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+            }
+        }
+
         Text(
             text = if (french) "Interprétation ludique basée uniquement sur tes réponses." else "A playful interpretation based only on your answers.",
             color = InsightMuted,
