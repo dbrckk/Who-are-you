@@ -15,6 +15,7 @@ private val Context.profileDataStore by preferencesDataStore(name = "who_are_you
 data class StoredProfile(
     val completedQuizIds: Set<String> = emptySet(),
     val latestScores: Map<String, Int> = emptyMap(),
+    val previousScores: Map<String, Int> = emptyMap(),
     val adsRemoved: Boolean = false,
     // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
     val onboardingComplete: Boolean = true,
@@ -28,6 +29,7 @@ data class StoredProfile(
 object ProfileStore {
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
+    private val previousScoresKey = stringPreferencesKey("previous_scores")
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
@@ -46,9 +48,15 @@ object ProfileStore {
     suspend fun saveQuizResult(context: Context, quizId: String, score: Int) {
         context.profileDataStore.edit { prefs ->
             val completed = decodeSet(prefs[completedKey]).toMutableSet().apply { add(quizId) }
-            val scores = decodeScores(prefs[scoresKey]).toMutableMap().apply { put(quizId, score.coerceIn(0, 100)) }
+            val history = ScoreHistoryEngine.update(
+                latestScores = decodeScores(prefs[scoresKey]),
+                previousScores = decodeScores(prefs[previousScoresKey]),
+                quizId = quizId,
+                score = score
+            )
             prefs[completedKey] = completed.sorted().joinToString(",")
-            prefs[scoresKey] = scores.entries.sortedBy { it.key }.joinToString(";") { "${it.key}:${it.value}" }
+            prefs[scoresKey] = encodeScores(history.latestScores)
+            prefs[previousScoresKey] = encodeScores(history.previousScores)
         }
         announceNewAchievements(context)
     }
@@ -138,6 +146,7 @@ object ProfileStore {
     private fun decodeProfile(prefs: androidx.datastore.preferences.core.Preferences): StoredProfile = StoredProfile(
         completedQuizIds = decodeSet(prefs[completedKey]),
         latestScores = decodeScores(prefs[scoresKey]),
+        previousScores = decodeScores(prefs[previousScoresKey]),
         adsRemoved = prefs[adsRemovedKey] ?: false,
         onboardingComplete = prefs[onboardingCompleteKey] ?: false,
         announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
@@ -160,6 +169,10 @@ object ProfileStore {
         ?.filter { it.isNotEmpty() }
         ?.toSet()
         ?: emptySet()
+
+    private fun encodeScores(scores: Map<String, Int>): String = scores.entries
+        .sortedBy { it.key }
+        .joinToString(";") { "${it.key}:${it.value.coerceIn(0, 100)}" }
 
     private fun decodeScores(raw: String?): Map<String, Int> = raw
         ?.split(';')
