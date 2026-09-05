@@ -61,7 +61,6 @@ fun RetentionSection() {
             },
             onShare = { DailyQuestionShare.share(context, question) }
         )
-        SocialStatsCard(storedProfile)
         AchievementStrip(achievements)
     }
 }
@@ -122,36 +121,9 @@ private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onCl
 }
 
 @Composable
-private fun SocialStatsCard(profile: StoredProfile) {
-    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(20.dp)) {
-            Text(stringResource(R.string.your_social_stats), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(12.dp))
-            if (profile.matchCount == 0) {
-                Text(stringResource(R.string.social_no_matches), color = RetentionMuted, fontSize = 13.sp, lineHeight = 19.sp)
-            } else {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    SocialMetric(stringResource(R.string.social_comparisons), profile.matchCount.toString())
-                    SocialMetric(stringResource(R.string.social_best_match), "${profile.bestMatchPercent ?: 0}%")
-                    SocialMetric(stringResource(R.string.social_most_different), "${profile.lowestMatchPercent ?: 0}%")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun SocialMetric(label: String, value: String) {
-    Column {
-        Text(value, color = RetentionViolet, fontSize = 20.sp, fontWeight = FontWeight.Black)
-        Spacer(Modifier.height(3.dp))
-        Text(label, color = RetentionMuted, fontSize = 10.sp, fontWeight = FontWeight.Bold)
-    }
-}
-
-@Composable
 fun AchievementStrip(achievements: List<Achievement>) {
     val unlocked = achievements.filter { it.unlocked }
+    val nextLocked = achievements.firstOrNull { !it.unlocked }
     var expanded by remember { mutableStateOf(false) }
     val visibleAchievements = if (expanded) achievements else unlocked.take(3)
 
@@ -183,6 +155,15 @@ fun AchievementStrip(achievements: List<Achievement>) {
                 if (!expanded && unlocked.size > 3) {
                     Text(stringResource(R.string.achievement_more_unlocked, unlocked.size - 3), color = RetentionMuted, fontSize = 12.sp)
                 }
+            }
+
+            if (!expanded && nextLocked != null) {
+                Spacer(Modifier.height(10.dp))
+                Text(stringResource(R.string.next_achievement), color = RetentionViolet, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(5.dp))
+                val (title, description) = localizedAchievement(nextLocked.id, nextLocked.title, nextLocked.description)
+                Text("○  $title", color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+                Text(description, color = RetentionMuted, fontSize = 11.sp, lineHeight = 16.sp)
             }
         }
     }
