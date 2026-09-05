@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "boundaries",
+      "title": "Limites personnelles",
+      "hook": "À quel point protèges-tu facilement ton temps, ton énergie et tes limites ?",
+      "time": "45 SEC",
+      "accent": "◫",
+      "metricLow": "ACCOMMODANT",
+      "metricHigh": "LIMITES CLAIRES",
+      "results": {
+        "low": {"title": "L’Accommodant", "description": "Tu fais souvent passer les autres en premier et peux accepter davantage que ce que tu souhaiterais réellement."},
+        "mid": {"title": "La Limite flexible", "description": "Tu sais t’adapter pour les personnes qui comptent tout en reconnaissant quand une limite doit être exprimée."},
+        "high": {"title": "Le Gardien", "description": "Tu es à l’aise pour protéger ton temps, ton énergie et tes standards même si dire non crée un inconfort temporaire."}
+      },
+      "questions": [
+        {"text": "Quelqu’un te demande un service alors que tu es déjà épuisé. Tu...", "answers": [{"text": "Dis généralement oui", "score": 0}, {"text": "Essaies quand même d’aider", "score": 1}, {"text": "Vérifies si tu peux vraiment", "score": 2}, {"text": "Dis non si nécessaire", "score": 3}]},
+        {"text": "Un ami appelle régulièrement au mauvais moment. Tu...", "answers": [{"text": "Continues à répondre", "score": 0}, {"text": "Réponds moins souvent", "score": 1}, {"text": "Expliques quand tu es disponible", "score": 2}, {"text": "Poses une limite claire", "score": 3}]},
+        {"text": "Quelqu’un est déçu parce que tu as dit non. Tu...", "answers": [{"text": "Changes souvent d’avis", "score": 0}, {"text": "Culpabilises un moment", "score": 1}, {"text": "Restes gentil mais maintiens ton choix", "score": 2}, {"text": "Acceptes sa déception", "score": 3}]},
+        {"text": "Tu constates qu’on profite régulièrement de ta disponibilité. Tu...", "answers": [{"text": "Espères que ça change", "score": 0}, {"text": "Prends un peu de recul", "score": 1}, {"text": "En parles", "score": 2}, {"text": "Changes clairement ce que tu acceptes", "score": 3}]},
+        {"text": "Ton temps libre est...", "answers": [{"text": "Facilement pris par les autres", "score": 0}, {"text": "Souvent négociable", "score": 1}, {"text": "Protégé quand nécessaire", "score": 2}, {"text": "Quelque chose que je défends activement", "score": 3}]}
+      ]
+    },
+    {
+      "id": "adaptability",
+      "title": "Adaptabilité",
+      "hook": "Que se passe-t-il quand la réalité ignore ton plan ?",
+      "time": "40 SEC",
+      "accent": "↝",
+      "metricLow": "STABLE",
+      "metricHigh": "ADAPTABLE",
+      "results": {
+        "low": {"title": "Le Stabilisateur", "description": "Tu fonctionnes mieux lorsque les attentes restent cohérentes et préfères disposer de temps pour t’ajuster aux changements."},
+        "mid": {"title": "Le Réajusteur", "description": "Le changement peut te perturber brièvement, mais tu reconstruis généralement un plan viable une fois la nouvelle situation comprise."},
+        "high": {"title": "Le Caméléon", "description": "Tu pivotes rapidement quand les conditions changent et considères souvent les nouvelles contraintes comme de simples informations."}
+      },
+      "questions": [
+        {"text": "Un plan est annulé une heure avant. Tu...", "answers": [{"text": "Te sens déstabilisé", "score": 0}, {"text": "As besoin d’un petit temps de reset", "score": 1}, {"text": "Trouves une alternative", "score": 2}, {"text": "Pivotes immédiatement", "score": 3}]},
+        {"text": "Un outil que tu utilises beaucoup change complètement. Tu...", "answers": [{"text": "Résistes au changement", "score": 0}, {"text": "Apprends lentement", "score": 1}, {"text": "T’adaptes après exploration", "score": 2}, {"text": "Aimes comprendre le nouveau fonctionnement", "score": 3}]},
+        {"text": "Un problème imprévu apparaît en plein projet. Tu...", "answers": [{"text": "Perds ton élan", "score": 0}, {"text": "Fais une pause pour te réorganiser", "score": 1}, {"text": "Modifies le plan", "score": 2}, {"text": "Construis rapidement autour du problème", "score": 3}]},
+        {"text": "En voyage, rater une correspondance te semble...", "answers": [{"text": "Très stressant", "score": 0}, {"text": "Frustrant", "score": 1}, {"text": "Gérable", "score": 2}, {"text": "Faire partie de l’aventure", "score": 3}]},
+        {"text": "Face à de nouvelles règles, tu penses plutôt...", "answers": [{"text": "Pourquoi changer ce qui marchait ?", "score": 0}, {"text": "Il me faut du temps", "score": 1}, {"text": "J’apprends le nouveau système", "score": 2}, {"text": "Je m’adapte vite", "score": 3}]}
+      ]
+    },
+    {
+      "id": "competitiveness",
+      "title": "Esprit de compétition",
+      "hook": "La comparaison te pousse-t-elle à te dépasser ou t’importe-t-elle peu ?",
+      "time": "40 SEC",
+      "accent": "◆",
+      "metricLow": "RYTHME PERSONNEL",
+      "metricHigh": "COMPÉTITIF",
+      "results": {
+        "low": {"title": "Le Rythme personnel", "description": "Tu accordes davantage d’importance à tes propres standards et au plaisir qu’au fait de battre quelqu’un."},
+        "mid": {"title": "Le Rival amical", "description": "La compétition peut t’apporter de l’énergie sans définir toute l’expérience, surtout lorsque les enjeux restent sains."},
+        "high": {"title": "Le Challenger", "description": "Un benchmark visible ou un rival peut déclencher chez toi davantage de concentration, d’effort et de satisfaction."}
+      },
+      "questions": [
+        {"text": "Une partie amicale devient très serrée. Tu...", "answers": [{"text": "Te soucies toujours peu du résultat", "score": 0}, {"text": "Essaies un peu plus", "score": 1}, {"text": "Veux vraiment gagner", "score": 2}, {"text": "Passes en mode compétition totale", "score": 3}]},
+        {"text": "Quelqu’un de ton niveau progresse plus vite. Tu...", "answers": [{"text": "Es content pour lui", "score": 0}, {"text": "Le remarques", "score": 1}, {"text": "T’en sers comme motivation", "score": 2}, {"text": "Veux immédiatement le rattraper", "score": 3}]},
+        {"text": "Les classements te rendent...", "answers": [{"text": "Moins intéressé", "score": 0}, {"text": "Plutôt neutre", "score": 1}, {"text": "Plus impliqué", "score": 2}, {"text": "Beaucoup plus motivé", "score": 3}]},
+        {"text": "Quand tu apprends une compétence, tu préfères te comparer à...", "answers": [{"text": "Mon ancien niveau", "score": 0}, {"text": "Un objectif personnel", "score": 1}, {"text": "Des gens de mon niveau", "score": 2}, {"text": "La meilleure référence disponible", "score": 3}]},
+        {"text": "Perdre après avoir beaucoup essayé te semble...", "answers": [{"text": "Acceptable", "score": 0}, {"text": "Un peu agaçant", "score": 1}, {"text": "Motivant", "score": 2}, {"text": "Comme une affaire non terminée", "score": 3}]}
+      ]
+    },
+    {
+      "id": "patience",
+      "title": "Patience",
+      "hook": "Comment supportes-tu l’attente, la répétition et les progrès lents ?",
+      "time": "40 SEC",
+      "accent": "⌛",
+      "metricLow": "IMMÉDIAT",
+      "metricHigh": "PATIENT",
+      "results": {
+        "low": {"title": "Le Rapide", "description": "Tu préfères le mouvement visible et les retours rapides ; les processus lents peuvent vite épuiser ton attention."},
+        "mid": {"title": "Le Patient pragmatique", "description": "Tu sais accepter les délais lorsqu’ils ont une raison claire, mais l’attente inutile continue de t’agacer."},
+        "high": {"title": "Le Joueur long terme", "description": "Tu es relativement à l’aise avec les récompenses différées, la répétition et les progrès qui mettent du temps à devenir visibles."}
+      },
+      "questions": [
+        {"text": "Une page met dix secondes à charger. Tu...", "answers": [{"text": "As déjà envie de partir", "score": 0}, {"text": "T’agaces", "score": 1}, {"text": "Attends sans trop de problème", "score": 2}, {"text": "Le remarques à peine", "score": 3}]},
+        {"text": "Une compétence demande des mois de répétition. Tu...", "answers": [{"text": "Perds rapidement l’intérêt", "score": 0}, {"text": "As besoin de nombreux petits objectifs", "score": 1}, {"text": "Peux continuer", "score": 2}, {"text": "Fais confiance au processus long", "score": 3}]},
+        {"text": "Quelqu’un raconte une histoire très lentement. Tu...", "answers": [{"text": "Veux qu’il aille au but", "score": 0}, {"text": "Deviens impatient", "score": 1}, {"text": "Continues à écouter", "score": 2}, {"text": "Écoutes tranquillement", "score": 3}]},
+        {"text": "Un objectif ne montre aucun progrès visible pendant des semaines. Tu...", "answers": [{"text": "Remets tout en question", "score": 0}, {"text": "As besoin d’être rassuré", "score": 1}, {"text": "Continues si la méthode est bonne", "score": 2}, {"text": "Poursuis régulièrement", "score": 3}]},
+        {"text": "Attendre dans une longue file te semble...", "answers": [{"text": "Insupportable", "score": 0}, {"text": "Agaçant", "score": 1}, {"text": "Acceptable", "score": 2}, {"text": "Juste une partie de la journée", "score": 3}]}
+      ]
+    },
+    {
+      "id": "independence",
+      "title": "Indépendance",
+      "hook": "À quel point préfères-tu trouver tes solutions seul ?",
+      "time": "45 SEC",
+      "accent": "↑",
+      "metricLow": "COLLABORATIF",
+      "metricHigh": "INDÉPENDANT",
+      "results": {
+        "low": {"title": "Le Copilote", "description": "Tu réfléchis naturellement avec les autres et prends souvent de meilleures décisions grâce au partage d’idées et au soutien."},
+        "mid": {"title": "Le Soliste sélectif", "description": "Tu valorises ton autonomie mais sais reconnaître quand un autre regard, une compétence ou une aide améliore le résultat."},
+        "high": {"title": "L’Opérateur solo", "description": "Tu préfères fortement l’autonomie et essaies généralement de résoudre les choses seul avant d’impliquer quelqu’un d’autre."}
+      },
+      "questions": [
+        {"text": "Tu dois accomplir une nouvelle tâche complexe. D’abord, tu...", "answers": [{"text": "Demandes à quelqu’un de réfléchir avec toi", "score": 0}, {"text": "Demandes des conseils", "score": 1}, {"text": "Essaies seul avant", "score": 2}, {"text": "Trouves la solution toi-même", "score": 3}]},
+        {"text": "Pour une décision importante, tu préfères...", "answers": [{"text": "En parler à plusieurs personnes", "score": 0}, {"text": "Avoir l’avis d’une personne de confiance", "score": 1}, {"text": "Réfléchir seul puis vérifier", "score": 2}, {"text": "Décider toi-même", "score": 3}]},
+        {"text": "Un projet de groupe fonctionne mieux pour toi quand...", "answers": [{"text": "Tout le monde travaille ensemble", "score": 0}, {"text": "Les rôles sont partagés", "score": 1}, {"text": "Je suis responsable de ma partie", "score": 2}, {"text": "Je peux travailler surtout seul", "score": 3}]},
+        {"text": "Quand tu bloques, demander de l’aide est...", "answers": [{"text": "Mon premier réflexe", "score": 0}, {"text": "Assez facile", "score": 1}, {"text": "Quelque chose que je fais après avoir essayé", "score": 2}, {"text": "Un dernier recours", "score": 3}]},
+        {"text": "N’avoir personne disponible pendant une journée te semble...", "answers": [{"text": "Limitant", "score": 0}, {"text": "Un peu gênant", "score": 1}, {"text": "Plutôt normal", "score": 2}, {"text": "Totalement normal", "score": 3}]}
+      ]
+    }
+  ]
+}
