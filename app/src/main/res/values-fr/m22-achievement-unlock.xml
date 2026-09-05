@@ -1,0 +1,4 @@
+<resources>
+    <string name="achievement_unlocked_label">SUCCÈS DÉBLOQUÉ</string>
+    <string name="achievement_unlocked_dismiss">COMPRIS</string>
+</resources>
