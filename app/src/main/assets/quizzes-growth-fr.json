@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "conflict_style",
+      "title": "Style de conflit",
+      "hook": "Tu protèges la paix ou tu affrontes directement les tensions ?",
+      "time": "45 SEC",
+      "accent": "⚡",
+      "metricLow": "HARMONIE",
+      "metricHigh": "DIRECT",
+      "results": {
+        "low": {"title": "Le Médiateur", "description": "Tu cherches naturellement à réduire les frictions et à préserver la relation avant de pousser un désaccord."},
+        "mid": {"title": "Le Diplomate", "description": "Tu sais aborder une tension directement tout en faisant attention au ton, au moment et à la relation."},
+        "high": {"title": "Le Franc-parleur", "description": "Tu préfères nommer clairement les problèmes et les résoudre plutôt que laisser une tension s’installer."}
+      },
+      "questions": [
+        {"text": "Un ami dit quelque chose qui te dérange. Tu...", "answers": [{"text": "Laisses passer", "score": 0}, {"text": "Attends un meilleur moment", "score": 1}, {"text": "En parles calmement", "score": 2}, {"text": "Réagis tout de suite", "score": 3}]},
+        {"text": "Deux personnes se disputent près de toi. Tu...", "answers": [{"text": "Essaies de calmer tout le monde", "score": 0}, {"text": "Écoutes d’abord", "score": 1}, {"text": "Aides à clarifier le problème", "score": 2}, {"text": "Dis ce qui doit être dit", "score": 3}]},
+        {"text": "Quelqu’un dépasse plusieurs fois une limite. Tu...", "answers": [{"text": "Prends tes distances discrètement", "score": 0}, {"text": "Fais comprendre que ça te dérange", "score": 1}, {"text": "Énonces clairement la limite", "score": 2}, {"text": "Confrontes directement le comportement", "score": 3}]},
+        {"text": "Pendant un désaccord, le silence te semble...", "answers": [{"text": "Plus sûr", "score": 0}, {"text": "Utile pour redescendre", "score": 1}, {"text": "Acceptable un moment", "score": 2}, {"text": "Frustrant si rien ne se règle", "score": 3}]},
+        {"text": "La meilleure fin d’un conflit, pour toi, c’est...", "answers": [{"text": "Que tout le monde se sente bien", "score": 0}, {"text": "Une compréhension mutuelle", "score": 1}, {"text": "Un accord clair", "score": 2}, {"text": "Que le vrai problème soit résolu", "score": 3}]}
+      ]
+    },
+    {
+      "id": "curiosity",
+      "title": "Curiosité",
+      "hook": "À quel point est-il difficile pour toi de laisser une question sans réponse ?",
+      "time": "40 SEC",
+      "accent": "?",
+      "metricLow": "FOCALISÉ",
+      "metricHigh": "CURIEUX",
+      "results": {
+        "low": {"title": "L’Esprit focalisé", "description": "Tu privilégies la profondeur utile plutôt que l’exploration sans fin et poursuis rarement une question sans intérêt concret."},
+        "mid": {"title": "L’Explorateur sélectif", "description": "Tu aimes apprendre quand quelque chose capte ton attention, tout en sachant laisser les questions secondaires de côté."},
+        "high": {"title": "Le Moteur à questions", "description": "Chez toi, une question en entraîne naturellement d’autres. Comprendre comment les choses fonctionnent peut suffire à te motiver."}
+      },
+      "questions": [
+        {"text": "Tu entends un terme inconnu dans une conversation. Tu...", "answers": [{"text": "L’ignores sauf s’il est important", "score": 0}, {"text": "Le gardes en tête", "score": 1}, {"text": "Demandes ce qu’il signifie", "score": 2}, {"text": "Le recherches immédiatement", "score": 3}]},
+        {"text": "Un documentaire mentionne un fait étrange. Tu...", "answers": [{"text": "Continues simplement", "score": 0}, {"text": "Le remarques", "score": 1}, {"text": "Veux plus de contexte", "score": 2}, {"text": "Pars dans des recherches pendant longtemps", "score": 3}]},
+        {"text": "Quand tu apprends une compétence, tu t’intéresses surtout à...", "answers": [{"text": "Ce qui fonctionne", "score": 0}, {"text": "Les principes principaux", "score": 1}, {"text": "Pourquoi ces principes fonctionnent", "score": 2}, {"text": "Tout le système derrière", "score": 3}]},
+        {"text": "Un mystère n’a aucune importance pratique. Tu...", "answers": [{"text": "Peux le laisser de côté", "score": 0}, {"text": "Y penses brièvement", "score": 1}, {"text": "Essaies de le résoudre", "score": 2}, {"text": "As besoin de savoir", "score": 3}]},
+        {"text": "Tes onglets de navigateur contiennent souvent...", "answers": [{"text": "Uniquement ce dont j’ai besoin", "score": 0}, {"text": "Quelques extras utiles", "score": 1}, {"text": "Plusieurs choses à explorer", "score": 2}, {"text": "Un petit musée de questions sans réponse", "score": 3}]}
+      ]
+    },
+    {
+      "id": "novelty_seeker",
+      "title": "Recherche de nouveauté",
+      "hook": "Le familier te rassure ou le nouveau te donne de l’énergie ?",
+      "time": "40 SEC",
+      "accent": "✦",
+      "metricLow": "FAMILIER",
+      "metricHigh": "NOUVEAUTÉ",
+      "results": {
+        "low": {"title": "L’Amateur de repères", "description": "Tu apprécies les valeurs sûres, les routines fiables et les expériences dont tu sais déjà qu’elles te conviennent."},
+        "mid": {"title": "L’Aventurier sélectif", "description": "Tu apprécies la nouveauté quand son intérêt est clair, tout en gardant assez de repères pour rester à l’aise."},
+        "high": {"title": "Le Chasseur de nouveauté", "description": "Les nouveaux lieux, idées et expériences ont tendance à t’énergiser, tandis que la répétition peut vite devenir monotone."}
+      },
+      "questions": [
+        {"text": "Dans ton restaurant préféré, tu...", "answers": [{"text": "Prends toujours la même chose", "score": 0}, {"text": "Alternes entre tes favoris", "score": 1}, {"text": "Essaies parfois autre chose", "score": 2}, {"text": "Choisis presque toujours quelque chose de nouveau", "score": 3}]},
+        {"text": "Un week-end totalement libre apparaît. Tu préfères...", "answers": [{"text": "Une routine familière", "score": 0}, {"text": "Un endroit connu", "score": 1}, {"text": "Une nouvelle activité", "score": 2}, {"text": "Quelque chose de complètement différent", "score": 3}]},
+        {"text": "Quand un loisir devient prévisible, tu...", "answers": [{"text": "Apprécies la maîtrise", "score": 0}, {"text": "Continues s’il te convient", "score": 1}, {"text": "Ajoutes un nouveau défi", "score": 2}, {"text": "Commences à chercher autre chose", "score": 3}]},
+        {"text": "Ce qui t’attire le plus dans un voyage, c’est...", "answers": [{"text": "Le repos", "score": 0}, {"text": "Changer de décor", "score": 1}, {"text": "Découvrir de nouveaux lieux", "score": 2}, {"text": "Être dans un endroit totalement inconnu", "score": 3}]},
+        {"text": "Une application change complètement de design. Tu...", "answers": [{"text": "Veux récupérer l’ancienne version", "score": 0}, {"text": "As besoin d’un temps d’adaptation", "score": 1}, {"text": "Explores les changements", "score": 2}, {"text": "Aimes découvrir le nouveau système", "score": 3}]}
+      ]
+    },
+    {
+      "id": "planning_style",
+      "title": "Style de planification",
+      "hook": "Les plans te libèrent ou tuent-ils la spontanéité ?",
+      "time": "40 SEC",
+      "accent": "▤",
+      "metricLow": "SPONTANÉ",
+      "metricHigh": "PLANIFIÉ",
+      "results": {
+        "low": {"title": "L’Improvisateur", "description": "Tu préfères garder les options ouvertes et t’adapter en temps réel plutôt que décider trop tôt."},
+        "mid": {"title": "Le Planificateur flexible", "description": "Tu aimes disposer d’assez de structure pour réduire les frictions tout en gardant la possibilité de changer de direction."},
+        "high": {"title": "L’Architecte", "description": "Les plans clairs réduisent ta charge mentale. Tu préfères connaître à l’avance la séquence, le timing et les prochaines étapes."}
+      },
+      "questions": [
+        {"text": "Avant une excursion d’une journée, tu...", "answers": [{"text": "Pars simplement", "score": 0}, {"text": "Choisis une idée principale", "score": 1}, {"text": "Planifies les étapes importantes", "score": 2}, {"text": "Organises toute la journée", "score": 3}]},
+        {"text": "Ton calendrier est...", "answers": [{"text": "Presque vide", "score": 0}, {"text": "Réservé aux événements importants", "score": 1}, {"text": "Utilisé régulièrement", "score": 2}, {"text": "Central dans mon organisation", "score": 3}]},
+        {"text": "Les plans changent au dernier moment. Tu te sens...", "answers": [{"text": "Stimulé", "score": 0}, {"text": "À l’aise", "score": 1}, {"text": "Un peu perturbé", "score": 2}, {"text": "Fortement déstabilisé", "score": 3}]},
+        {"text": "Pour un grand objectif, ton premier réflexe est...", "answers": [{"text": "Commencer quelque part", "score": 0}, {"text": "Choisir une direction", "score": 1}, {"text": "Le découper en étapes", "score": 2}, {"text": "Construire une feuille de route complète", "score": 3}]},
+        {"text": "Un itinéraire très détaillé te semble...", "answers": [{"text": "Contraignant", "score": 0}, {"text": "Un peu excessif", "score": 1}, {"text": "Utile", "score": 2}, {"text": "Rassurant", "score": 3}]}
+      ]
+    },
+    {
+      "id": "emotional_openness",
+      "title": "Ouverture émotionnelle",
+      "hook": "À quel point ton monde intérieur est-il visible pour les autres ?",
+      "time": "45 SEC",
+      "accent": "◇",
+      "metricLow": "PRIVÉ",
+      "metricHigh": "OUVERT",
+      "results": {
+        "low": {"title": "Le Jardin secret", "description": "Tu as tendance à traiter tes émotions intérieurement et à les partager de façon sélective, souvent après les avoir comprises toi-même."},
+        "mid": {"title": "La Fenêtre de confiance", "description": "Tu peux être émotionnellement ouvert avec les bonnes personnes et dans le bon contexte, sans avoir besoin de tout montrer à chacun."},
+        "high": {"title": "Le Livre ouvert", "description": "Tu mets naturellement tes émotions en mots et préfères souvent être compris sur le moment plutôt que tout gérer seul."}
+      },
+      "questions": [
+        {"text": "Quand quelque chose te touche profondément, tu...", "answers": [{"text": "Le gardes pour toi", "score": 0}, {"text": "Prends d’abord le temps de comprendre", "score": 1}, {"text": "En parles à quelqu’un de confiance", "score": 2}, {"text": "En parles ouvertement", "score": 3}]},
+        {"text": "Un proche te demande comment tu te sens vraiment. Tu...", "answers": [{"text": "Restes bref", "score": 0}, {"text": "Donnes l’essentiel", "score": 1}, {"text": "Expliques honnêtement", "score": 2}, {"text": "Dis exactement ce qui se passe en toi", "score": 3}]},
+        {"text": "Pleurer devant quelqu’un te semble...", "answers": [{"text": "Très inconfortable", "score": 0}, {"text": "Difficile", "score": 1}, {"text": "Acceptable avec des proches", "score": 2}, {"text": "Naturel si c’est ce que je ressens", "score": 3}]},
+        {"text": "Pendant un conflit, tes émotions sont...", "answers": [{"text": "Principalement cachées", "score": 0}, {"text": "Très contrôlées", "score": 1}, {"text": "Généralement expliquées", "score": 2}, {"text": "Très visibles", "score": 3}]},
+        {"text": "Tes proches connaissent ton monde intérieur...", "answers": [{"text": "Seulement en partie", "score": 0}, {"text": "Mieux que la plupart des gens", "score": 1}, {"text": "Plutôt bien", "score": 2}, {"text": "Extrêmement bien", "score": 3}]}
+      ]
+    }
+  ]
+}
