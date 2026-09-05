@@ -207,6 +207,9 @@ private fun DiscoverScreen(
         ?.let { recommendation -> quizzes.firstOrNull { it.id == recommendation.quizId && it.id !in completed } }
         ?: fallbackQuiz
     val signatureGuided = recommendedQuiz != null && signatureRecommendation?.quizId == recommendedQuiz.id
+    val signaturePathProgress = remember(storedProfile.latestScores) {
+        SignatureProfiles.pathProgress(storedProfile.latestScores)
+    }
     val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
     val orderedQuizzes = remember(quizzes, completed) { quizzes.sortedBy { it.id in completed } }
 
@@ -220,6 +223,10 @@ private fun DiscoverScreen(
             Text(stringResource(R.string.discover_subtitle), color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
             ProfileProgress(profile, onOpenProfile)
+            if (signatureGuided && signaturePathProgress != null && !allCompleted) {
+                Spacer(Modifier.height(14.dp))
+                SignaturePathProgressCard(signaturePathProgress)
+            }
             if (recommendedQuiz != null) {
                 Spacer(Modifier.height(14.dp))
                 RecommendedQuizCard(recommendedQuiz, allCompleted, signatureGuided) { onQuizSelected(recommendedQuiz) }
@@ -251,6 +258,39 @@ private fun DiscoverScreen(
                 }
             }
             Spacer(Modifier.height(28.dp))
+        }
+    }
+}
+
+@Composable
+private fun SignaturePathProgressCard(progress: SignaturePathProgress) {
+    val animatedProgress by animateFloatAsState(progress.percent / 100f, label = "signaturePathProgress")
+    Card(
+        colors = CardDefaults.cardColors(containerColor = Panel),
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(stringResource(R.string.profile_path), color = Cyan, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text("${progress.percent}%", color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Black)
+            }
+            Spacer(Modifier.height(9.dp))
+            LinearProgressIndicator(
+                progress = { animatedProgress },
+                modifier = Modifier.fillMaxWidth().height(7.dp),
+                color = Violet,
+                trackColor = PanelSoft
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                stringResource(R.string.profile_path_progress, progress.completedRequirements, progress.totalRequirements),
+                color = Color.White,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+            Spacer(Modifier.height(5.dp))
+            Text(stringResource(R.string.profile_path_reason), color = Muted, fontSize = 12.sp, lineHeight = 18.sp)
         }
     }
 }
