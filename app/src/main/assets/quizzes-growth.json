@@ -23,17 +23,17 @@
       ]
     },
     {
-      "id": "curiosity",
-      "title": "Curiosity",
-      "hook": "How hard is it for you to leave a question unanswered?",
+      "id": "learning_drive",
+      "title": "Learning Drive",
+      "hook": "How strongly do you chase understanding once a topic catches you?",
       "time": "40 SEC",
       "accent": "?",
-      "metricLow": "FOCUSED",
-      "metricHigh": "CURIOUS",
+      "metricLow": "PRACTICAL",
+      "metricHigh": "DEEP LEARNER",
       "results": {
-        "low": {"title": "The Focused Mind", "description": "You prefer useful depth over endless exploration and rarely chase questions that do not serve a clear purpose."},
-        "mid": {"title": "The Selective Explorer", "description": "You enjoy learning when something catches your attention, but you can leave less important questions alone."},
-        "high": {"title": "The Question Engine", "description": "Questions naturally multiply for you. Understanding how things work can be rewarding even without an immediate use."}
+        "low": {"title": "The Practical Learner", "description": "You prefer learning what is useful and rarely go deeper unless the extra knowledge serves a clear purpose."},
+        "mid": {"title": "The Selective Learner", "description": "You enjoy understanding topics that matter to you and can balance exploration with staying focused."},
+        "high": {"title": "The Deep Learner", "description": "Once something catches your attention, you naturally want context, mechanisms and the larger system behind it."}
       },
       "questions": [
         {"text": "You hear an unfamiliar term in conversation. You...", "answers": [{"text": "Ignore it unless important", "score": 0}, {"text": "Remember it for later", "score": 1}, {"text": "Ask what it means", "score": 2}, {"text": "Look it up immediately", "score": 3}]},
