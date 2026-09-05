@@ -8,7 +8,16 @@
     <string name="onboarding_no_account">No account required</string>
     <string name="discover_headline">Discover what\nmakes you, you.</string>
     <string name="discover_subtitle">Fast personality tests. Visual results. Compare with friends.</string>
+    <string name="continue_discovering">CONTINUE DISCOVERING</string>
+    <string name="recommended_for_you">RECOMMENDED FOR YOU</string>
+    <string name="recommended_reason">One more dimension makes your profile more complete.</string>
+    <string name="recommended_all_done">PROFILE COMPLETE — revisit a dimension and see if you changed.</string>
     <string name="trending_tests">TRENDING TESTS</string>
+    <string name="your_social_stats">YOUR SOCIAL STATS</string>
+    <string name="social_comparisons">Comparisons</string>
+    <string name="social_best_match">Best match</string>
+    <string name="social_most_different">Most different</string>
+    <string name="social_no_matches">No friend comparisons yet. Challenge someone from any result.</string>
     <string name="your_profile">YOUR PROFILE</string>
     <string name="profile_dimensions_discovered">%1$d/%2$d dimensions discovered</string>
     <string name="open_full_profile">OPEN FULL PROFILE  →</string>
