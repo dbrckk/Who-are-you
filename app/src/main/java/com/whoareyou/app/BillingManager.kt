@@ -26,6 +26,7 @@ class BillingManager(
     }
 
     private var removeAdsProduct: ProductDetails? = null
+    private var removeAdsOfferToken: String? = null
 
     private val billingClient: BillingClient = BillingClient.newBuilder(context)
         .enablePendingPurchases(
@@ -54,11 +55,12 @@ class BillingManager(
 
     fun launchPurchase(activity: Activity) {
         val product = removeAdsProduct ?: return
-        val productParams = BillingFlowParams.ProductDetailsParams.newBuilder()
+        val productBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
             .setProductDetails(product)
-            .build()
+        removeAdsOfferToken?.let(productBuilder::setOfferToken)
+
         val params = BillingFlowParams.newBuilder()
-            .setProductDetailsParamsList(listOf(productParams))
+            .setProductDetailsParamsList(listOf(productBuilder.build()))
             .build()
         AppEvents.premiumView()
         billingClient.launchBillingFlow(activity, params)
@@ -97,10 +99,11 @@ class BillingManager(
         billingClient.queryProductDetailsAsync(params) { result, response ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 removeAdsProduct = response.productDetailsList.firstOrNull()
-                val localizedPrice = removeAdsProduct
+                val selectedOffer = removeAdsProduct
                     ?.oneTimePurchaseOfferDetailsList
                     ?.firstOrNull()
-                    ?.formattedPrice
+                removeAdsOfferToken = selectedOffer?.offerToken
+                val localizedPrice = selectedOffer?.formattedPrice
                     ?: removeAdsProduct?.oneTimePurchaseOfferDetails?.formattedPrice
                 onPriceChanged(localizedPrice)
             }
