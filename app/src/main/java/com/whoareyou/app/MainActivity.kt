@@ -198,7 +198,15 @@ private fun DiscoverScreen(
     onRemoveAds: () -> Unit
 ) {
     val premiumPrice = BillingPriceState.displayPrice
-    val recommendedQuiz = quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
+    val unfinishedIds = remember(quizzes, completed) { quizzes.asSequence().map { it.id }.filterNot { it in completed }.toSet() }
+    val signatureRecommendation = remember(storedProfile.latestScores, unfinishedIds) {
+        SignatureProfiles.recommendNext(storedProfile.latestScores, unfinishedIds)
+    }
+    val fallbackQuiz = quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
+    val recommendedQuiz = signatureRecommendation
+        ?.let { recommendation -> quizzes.firstOrNull { it.id == recommendation.quizId && it.id !in completed } }
+        ?: fallbackQuiz
+    val signatureGuided = recommendedQuiz != null && signatureRecommendation?.quizId == recommendedQuiz.id
     val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
     val orderedQuizzes = remember(quizzes, completed) { quizzes.sortedBy { it.id in completed } }
 
@@ -214,7 +222,7 @@ private fun DiscoverScreen(
             ProfileProgress(profile, onOpenProfile)
             if (recommendedQuiz != null) {
                 Spacer(Modifier.height(14.dp))
-                RecommendedQuizCard(recommendedQuiz, allCompleted) { onQuizSelected(recommendedQuiz) }
+                RecommendedQuizCard(recommendedQuiz, allCompleted, signatureGuided) { onQuizSelected(recommendedQuiz) }
             }
             Spacer(Modifier.height(14.dp))
             RetentionSection()
@@ -248,7 +256,7 @@ private fun DiscoverScreen(
 }
 
 @Composable
-private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, onClick: () -> Unit) {
+private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, signatureGuided: Boolean, onClick: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = PanelSoft),
@@ -256,14 +264,25 @@ private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, onClick: () -
     ) {
         Column(Modifier.padding(20.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(stringResource(R.string.recommended_for_you), color = Cyan, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    stringResource(if (signatureGuided) R.string.recommended_signature_label else R.string.recommended_for_you),
+                    color = Cyan,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Text(quiz.accent, fontSize = 22.sp)
             }
             Spacer(Modifier.height(8.dp))
             Text(quiz.title.uppercase(), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(5.dp))
             Text(
-                stringResource(if (allCompleted) R.string.recommended_all_done else R.string.recommended_reason),
+                stringResource(
+                    when {
+                        allCompleted -> R.string.recommended_all_done
+                        signatureGuided -> R.string.recommended_signature_reason
+                        else -> R.string.recommended_reason
+                    }
+                ),
                 color = Muted,
                 fontSize = 13.sp,
                 lineHeight = 19.sp
