@@ -58,6 +58,7 @@
     <string name="daily_share_text">Question du jour Who Are You? : %1$s — tu choisis « %2$s » ou « %3$s » ?</string>
     <string name="daily_share_chooser">Partager la question du jour</string>
     <string name="achievements">SUCCÈS</string>
+    <string name="next_achievement">PROCHAIN SUCCÈS</string>
     <string name="achievement_first_hint">Termine ton premier test pour débloquer ton premier badge.</string>
     <string name="achievement_more_unlocked">+%1$d autres débloqués</string>
     <string name="achievement_first_test_title">Premier test</string>
