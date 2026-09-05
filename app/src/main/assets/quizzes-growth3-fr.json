@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "communication_style",
+      "title": "Style de communication",
+      "hook": "Tu suggères, tu expliques ou tu dis exactement ce que tu veux dire ?",
+      "time": "45 SEC",
+      "accent": "✎",
+      "metricLow": "SUBTIL",
+      "metricHigh": "EXPLICITE",
+      "results": {
+        "low": {"title": "Le Lecteur du sous-texte", "description": "Tu communiques beaucoup par le contexte, le ton et les sous-entendus et attends souvent des autres qu’ils remarquent les signaux autour des mots."},
+        "mid": {"title": "Le Constructeur de contexte", "description": "Tu rends généralement ton message clair tout en adaptant ton niveau de franchise à la personne et à la situation."},
+        "high": {"title": "Le Signal clair", "description": "Tu préfères un langage explicite, des attentes concrètes et dire ce que tu penses plutôt que compter sur l’interprétation."}
+      },
+      "questions": [
+        {"text": "Tu veux qu’un ami arrête un comportement agaçant. Tu...", "answers": [{"text": "Espères qu’il le remarque", "score": 0}, {"text": "Lances un indice", "score": 1}, {"text": "L’expliques poliment", "score": 2}, {"text": "Le demandes directement", "score": 3}]},
+        {"text": "Quand tu donnes des instructions, tu...", "answers": [{"text": "Restes vague", "score": 0}, {"text": "Donnes l’essentiel", "score": 1}, {"text": "Précises les points importants", "score": 2}, {"text": "Rends les attentes très explicites", "score": 3}]},
+        {"text": "Quelqu’un dit « ça va » mais semble contrarié. Tu...", "answers": [{"text": "Lis surtout son attitude", "score": 0}, {"text": "Lui laisses de l’espace", "score": 1}, {"text": "Demandes une fois", "score": 2}, {"text": "Demandes clairement ce qui ne va pas", "score": 3}]},
+        {"text": "Tes messages ont tendance à être...", "answers": [{"text": "Courts et contextuels", "score": 0}, {"text": "Décontractés", "score": 1}, {"text": "Clairs", "score": 2}, {"text": "Détaillés et explicites", "score": 3}]},
+        {"text": "Un malentendu survient. Tu préfères...", "answers": [{"text": "Laisser le contexte le corriger", "score": 0}, {"text": "Clarifier si nécessaire", "score": 1}, {"text": "Expliquer ton intention", "score": 2}, {"text": "Régler précisément la formulation", "score": 3}]}
+      ]
+    },
+    {
+      "id": "trust_style",
+      "title": "Style de confiance",
+      "hook": "La confiance est-elle ton point de départ ou quelque chose qui se gagne ?",
+      "time": "45 SEC",
+      "accent": "◎",
+      "metricLow": "PRUDENT",
+      "metricHigh": "CONFIANT",
+      "results": {
+        "low": {"title": "Le Vérificateur", "description": "Tu préfères les preuves et la constance avant de compter sur quelqu’un, surtout lorsque le coût d’une erreur est important."},
+        "mid": {"title": "La Confiance progressive", "description": "Tu commences assez ouvert, puis la répétition des comportements détermine progressivement la confiance et l’accès que tu accordes."},
+        "high": {"title": "La Main ouverte", "description": "Tu pars volontiers d’une intention positive et es à l’aise pour donner une vraie chance aux gens avant qu’ils aient tout prouvé."}
+      },
+      "questions": [
+        {"text": "Un nouveau collègue propose de gérer une tâche importante. Tu...", "answers": [{"text": "Vérifies tout de près", "score": 0}, {"text": "Lui donnes d’abord une petite partie", "score": 1}, {"text": "Le laisses faire avec un point de contrôle", "score": 2}, {"text": "Lui fais confiance sans raison contraire", "score": 3}]},
+        {"text": "Quelqu’un que tu viens de rencontrer te confie quelque chose de personnel. Tu...", "answers": [{"text": "Restes sur tes gardes", "score": 0}, {"text": "Écoutes mais partages peu", "score": 1}, {"text": "T’ouvres un peu", "score": 2}, {"text": "Te sens à l’aise pour partager aussi", "score": 3}]},
+        {"text": "Un ami ne tient pas une promesse une fois. Tu...", "answers": [{"text": "Perds beaucoup de confiance", "score": 0}, {"text": "Observes ce qui se passe ensuite", "score": 1}, {"text": "Demandes ce qui s’est passé", "score": 2}, {"text": "Supposes qu’il avait une raison", "score": 3}]},
+        {"text": "Quand tu rejoins un nouveau groupe, tu...", "answers": [{"text": "Observes longtemps", "score": 0}, {"text": "T’ouvres lentement", "score": 1}, {"text": "Participes assez vite", "score": 2}, {"text": "Pars du principe que les intentions sont bonnes", "score": 3}]},
+        {"text": "Qu’est-ce qui te semble le plus sûr ?", "answers": [{"text": "Faire confiance après preuve", "score": 0}, {"text": "Faire confiance par étapes", "score": 1}, {"text": "Faire confiance avec vigilance", "score": 2}, {"text": "Faire confiance jusqu’à preuve du contraire", "score": 3}]}
+      ]
+    },
+    {
+      "id": "self_discipline",
+      "title": "Autodiscipline",
+      "hook": "Peux-tu continuer lorsque la motivation disparaît ?",
+      "time": "45 SEC",
+      "accent": "▰",
+      "metricLow": "MOTIVATION",
+      "metricHigh": "DISCIPLINE",
+      "results": {
+        "low": {"title": "Le Surfeur de motivation", "description": "Ta productivité dépend fortement de ton intérêt et de ton énergie, et forcer une tâche peu motivante peut être difficile."},
+        "mid": {"title": "Le Gardien de l’élan", "description": "Tu sais avancer sans motivation parfaite lorsque l’objectif compte et que le système reste gérable."},
+        "high": {"title": "Le Finisseur", "description": "Tu es relativement capable d’agir à partir de ton engagement plutôt que de ton humeur et de poursuivre un travail répétitif ou peu stimulant."}
+      },
+      "questions": [
+        {"text": "Tu avais prévu du sport mais tu n’en as pas envie. Tu...", "answers": [{"text": "Annules généralement", "score": 0}, {"text": "Le fais si la motivation revient", "score": 1}, {"text": "Fais une version plus courte", "score": 2}, {"text": "Fais ce que tu avais prévu", "score": 3}]},
+        {"text": "Une tâche est ennuyeuse mais importante. Tu...", "answers": [{"text": "La repousses beaucoup", "score": 0}, {"text": "As besoin de pression", "score": 1}, {"text": "La découpes en petites parties", "score": 2}, {"text": "La termines malgré tout", "score": 3}]},
+        {"text": "Après avoir manqué un jour d’une routine, tu...", "answers": [{"text": "Perds souvent la routine", "score": 0}, {"text": "As du mal à reprendre", "score": 1}, {"text": "Reprends assez vite", "score": 2}, {"text": "Reprends dès la prochaine occasion", "score": 3}]},
+        {"text": "Une tentation apparaît alors que tu économises pour un objectif. Tu...", "answers": [{"text": "Cèdes souvent", "score": 0}, {"text": "Hésites longtemps", "score": 1}, {"text": "Restes généralement sur ton objectif", "score": 2}, {"text": "Protèges l’objectif", "score": 3}]},
+        {"text": "La régularité sur le long terme est...", "answers": [{"text": "Très difficile", "score": 0}, {"text": "Possible avec de la motivation", "score": 1}, {"text": "Gérable avec de bons systèmes", "score": 2}, {"text": "L’une de mes forces", "score": 3}]}
+      ]
+    },
+    {
+      "id": "optimism",
+      "title": "Optimisme",
+      "hook": "Quand l’avenir est incertain, que prédit ton esprit en premier ?",
+      "time": "40 SEC",
+      "accent": "☀",
+      "metricLow": "PRUDENT",
+      "metricHigh": "OPTIMISTE",
+      "results": {
+        "low": {"title": "Le Scanner de risques", "description": "Ton esprit repère naturellement ce qui pourrait mal tourner, ce qui peut t’aider à anticiper mais aussi rendre l’incertitude plus lourde."},
+        "mid": {"title": "L’Espoir réaliste", "description": "Tu vois à la fois les risques et les possibilités et adaptes généralement tes attentes aux éléments disponibles."},
+        "high": {"title": "Le Chercheur de possibilités", "description": "Tu remarques naturellement le potentiel positif et t’attends souvent à ce qu’une solution existe même lorsque le chemin n’est pas encore clair."}
+      },
+      "questions": [
+        {"text": "Tu envoies une candidature importante et n’as aucune réponse. Tu penses...", "answers": [{"text": "Probablement une mauvaise nouvelle", "score": 0}, {"text": "Impossible de savoir", "score": 1}, {"text": "Ça peut encore fonctionner", "score": 2}, {"text": "Je reste confiant", "score": 3}]},
+        {"text": "Un projet rencontre un obstacle. Ta première pensée est...", "answers": [{"text": "Ça risque de s’effondrer", "score": 0}, {"text": "Il faut réévaluer", "score": 1}, {"text": "Il existe probablement une autre voie", "score": 2}, {"text": "On trouvera une solution", "score": 3}]},
+        {"text": "Penser à ta vie dans cinq ans te semble...", "answers": [{"text": "Surtout incertain", "score": 0}, {"text": "Mitigé", "score": 1}, {"text": "Prometteur", "score": 2}, {"text": "Stimulant", "score": 3}]},
+        {"text": "Une nouvelle opportunité comporte beaucoup d’inconnues. Tu remarques...", "answers": [{"text": "Les risques d’abord", "score": 0}, {"text": "Les deux côtés", "score": 1}, {"text": "Le potentiel", "score": 2}, {"text": "Tout ce qui pourrait devenir possible", "score": 3}]},
+        {"text": "Après une semaine difficile, tu t’attends à ce que la suivante soit...", "answers": [{"text": "Peut-être similaire", "score": 0}, {"text": "Impossible à prévoir", "score": 1}, {"text": "Probablement meilleure", "score": 2}, {"text": "Un nouveau départ", "score": 3}]}
+      ]
+    },
+    {
+      "id": "stress_response",
+      "title": "Réponse à la pression",
+      "hook": "Sous pression, tu ralentis, tu te stabilises ou tu accélères ?",
+      "time": "45 SEC",
+      "accent": "≈",
+      "metricLow": "PAUSE",
+      "metricHigh": "MOBILISATION",
+      "results": {
+        "low": {"title": "La Réponse pause", "description": "La pression a tendance à te faire arrêter, te retirer ou réduire les sollicitations jusqu’à retrouver un sentiment de contrôle."},
+        "mid": {"title": "Le Stabilisateur", "description": "Tu ressens la pression mais retrouves généralement assez de structure pour choisir une prochaine étape sans complètement t’arrêter ni accélérer."},
+        "high": {"title": "Le Mobilisateur", "description": "La pression te pousse souvent vers l’action, la résolution de problèmes et une augmentation du rythme, surtout lorsqu’une action concrète est possible."}
+      },
+      "questions": [
+        {"text": "Plusieurs problèmes urgents arrivent en même temps. D’abord, tu...", "answers": [{"text": "Te figes un moment", "score": 0}, {"text": "Prends du recul pour réfléchir", "score": 1}, {"text": "Les classes par priorité", "score": 2}, {"text": "Commences immédiatement à agir", "score": 3}]},
+        {"text": "Une échéance est soudainement avancée. Tu...", "answers": [{"text": "Te sens bloqué", "score": 0}, {"text": "As besoin d’un temps de reset", "score": 1}, {"text": "Replanifies rapidement", "score": 2}, {"text": "Accélères le rythme", "score": 3}]},
+        {"text": "Dans une situation tendue, ton attention...", "answers": [{"text": "Se rétrécit et se bloque", "score": 0}, {"text": "Se tourne vers l’intérieur", "score": 1}, {"text": "Se concentre sur les priorités", "score": 2}, {"text": "Se verrouille sur l’action", "score": 3}]},
+        {"text": "Quand tu es débordé, tu as plus tendance à...", "answers": [{"text": "Te retirer", "score": 0}, {"text": "Réduire les stimulations", "score": 1}, {"text": "Faire un plan court", "score": 2}, {"text": "Faire immédiatement quelque chose", "score": 3}]},
+        {"text": "La pression modifie généralement ton rythme en te rendant...", "answers": [{"text": "Beaucoup plus lent", "score": 0}, {"text": "Un peu plus lent", "score": 1}, {"text": "Plus focalisé", "score": 2}, {"text": "Plus rapide", "score": 3}]}
+      ]
+    }
+  ]
+}
