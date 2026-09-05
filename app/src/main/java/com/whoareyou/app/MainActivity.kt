@@ -473,7 +473,7 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
             question.answers.forEach { answer ->
                 Card(modifier = Modifier.fillMaxWidth().clickable {
                     val newScore = score + answer.score
-                    if (questionIndex == quiz.questions.lastIndex) onFinished(((newScore.toFloat() / (quiz.questions.size * 3)) * 100).toInt())
+                    if (questionIndex == quiz.questions.lastIndex) onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
                     else { score = newScore; questionIndex++ }
                 }, colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(18.dp)) {
                     Text(answer.text, modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp), color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
