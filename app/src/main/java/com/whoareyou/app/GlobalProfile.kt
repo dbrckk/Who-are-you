@@ -13,7 +13,8 @@ data class GlobalProfileSummary(
     val completionPercent: Int,
     val completedCount: Int,
     val totalCount: Int,
-    val dimensions: List<ProfileDimension>
+    val dimensions: List<ProfileDimension>,
+    val signature: SignatureProfileMatch? = null
 )
 
 object GlobalProfileEngine {
@@ -33,13 +34,15 @@ object GlobalProfileEngine {
 
         val dominant = dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
         val completion = if (catalog.isEmpty()) 0 else ((dimensions.size * 100f) / catalog.size).toInt().coerceIn(0, 100)
+        val stableScores = dimensions.associate { it.quizId to it.score }
 
         return GlobalProfileSummary(
             dominantArchetype = dominant?.resultTitle ?: "Profile undiscovered",
             completionPercent = completion,
             completedCount = dimensions.size,
             totalCount = catalog.size,
-            dimensions = dimensions
+            dimensions = dimensions,
+            signature = SignatureProfiles.primary(stableScores)
         )
     }
 }
