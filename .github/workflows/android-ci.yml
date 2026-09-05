@@ -103,6 +103,9 @@ jobs:
           print('Release configuration is injectable and development-safe')
           PY
 
+      - name: JVM unit tests
+        run: gradle :app:testDebugUnitTest --stacktrace
+
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
