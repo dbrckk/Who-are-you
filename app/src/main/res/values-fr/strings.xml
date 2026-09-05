@@ -13,6 +13,9 @@
     <string name="recommended_reason">Une dimension de plus rend ton profil plus complet.</string>
     <string name="recommended_signature_reason">Cette dimension peut préciser la signature qui commence à se dessiner dans tes réponses.</string>
     <string name="recommended_all_done">PROFIL COMPLET — refais une dimension pour voir si tu as changé.</string>
+    <string name="profile_path">PARCOURS DE PROFIL</string>
+    <string name="profile_path_progress">%1$d signaux alignés sur %2$d</string>
+    <string name="profile_path_reason">Tes réponses forment un motif plus clair. Le test recommandé fait avancer ce parcours sans t’enfermer dans un type.</string>
     <string name="trending_tests">TESTS POPULAIRES</string>
     <string name="your_social_stats">TES STATS SOCIALES</string>
     <string name="social_comparisons">Comparaisons</string>
