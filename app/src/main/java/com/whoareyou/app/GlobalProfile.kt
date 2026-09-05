@@ -5,7 +5,8 @@ data class ProfileDimension(
     val title: String,
     val score: Int,
     val resultTitle: String,
-    val metricLabel: String
+    val metricLabel: String,
+    val change: ScoreChange? = null
 )
 
 data class GlobalProfileSummary(
@@ -18,7 +19,11 @@ data class GlobalProfileSummary(
 )
 
 object GlobalProfileEngine {
-    fun build(catalog: List<Quiz>, latestScores: Map<String, Int>): GlobalProfileSummary {
+    fun build(
+        catalog: List<Quiz>,
+        latestScores: Map<String, Int>,
+        previousScores: Map<String, Int> = emptyMap()
+    ): GlobalProfileSummary {
         val dimensions = catalog.mapNotNull { quiz ->
             latestScores[quiz.id]?.let { rawScore ->
                 val score = rawScore.coerceIn(0, 100)
@@ -27,7 +32,8 @@ object GlobalProfileEngine {
                     title = quiz.title,
                     score = score,
                     resultTitle = quiz.resultTitleFor(score),
-                    metricLabel = if (score >= 50) quiz.metricHigh else quiz.metricLow
+                    metricLabel = if (score >= 50) quiz.metricHigh else quiz.metricLow,
+                    change = ScoreChangeEngine.compare(previousScores[quiz.id], score)
                 )
             }
         }
