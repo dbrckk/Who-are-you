@@ -21,56 +21,26 @@ class SignatureProfilesTest {
 
     @Test
     fun requiresEnoughCompletedDimensions() {
-        val result = SignatureProfiles.primary(
-            mapOf(
-                "learning_drive" to 90,
-                "novelty_seeker" to 90,
-                "independence" to 90
-            )
-        )
+        val result = SignatureProfiles.primary(mapOf("learning_drive" to 90, "novelty_seeker" to 90, "independence" to 90))
         assertNull(result)
     }
 
     @Test
     fun matchesIndependentExplorerAtBoundary() {
-        val result = SignatureProfiles.primary(
-            withEvidence(
-                mapOf(
-                    "learning_drive" to 65,
-                    "novelty_seeker" to 65,
-                    "independence" to 65
-                )
-            )
-        )
+        val result = SignatureProfiles.primary(withEvidence(mapOf("learning_drive" to 65, "novelty_seeker" to 65, "independence" to 65)))
         assertEquals(SignatureProfileKey.INDEPENDENT_EXPLORER, result?.key)
         assertEquals(listOf("learning_drive", "novelty_seeker", "independence"), result?.supportingQuizIds)
     }
 
     @Test
     fun doesNotMatchIndependentExplorerBelowRequirement() {
-        val result = SignatureProfiles.primary(
-            withEvidence(
-                mapOf(
-                    "learning_drive" to 80,
-                    "novelty_seeker" to 64,
-                    "independence" to 80
-                )
-            )
-        )
+        val result = SignatureProfiles.primary(withEvidence(mapOf("learning_drive" to 80, "novelty_seeker" to 64, "independence" to 80)))
         assertNull(result)
     }
 
     @Test
     fun contradictoryEvidenceBlocksAdaptiveDiplomat() {
-        val result = SignatureProfiles.primary(
-            withEvidence(
-                mapOf(
-                    "adaptability" to 80,
-                    "patience" to 80,
-                    "assertiveness" to 92
-                )
-            )
-        )
+        val result = SignatureProfiles.primary(withEvidence(mapOf("adaptability" to 80, "patience" to 80, "assertiveness" to 92)))
         assertNull(result)
     }
 
@@ -84,24 +54,12 @@ class SignatureProfilesTest {
             SignatureProfileKey.DRIVEN_CHALLENGER to mapOf("assertiveness" to 85, "competitiveness" to 90, "stress_response" to 75),
             SignatureProfileKey.CALM_STRATEGIST to mapOf("patience" to 90, "self_discipline" to 85, "stress_response" to 30)
         )
-
-        cases.forEach { (expected, required) ->
-            assertEquals(expected, SignatureProfiles.primary(withEvidence(required))?.key)
-        }
+        cases.forEach { (expected, required) -> assertEquals(expected, SignatureProfiles.primary(withEvidence(required))?.key) }
     }
 
     @Test
     fun strongerMatchingSignatureWinsRanking() {
-        val scores = withEvidence(
-            mapOf(
-                "planning_style" to 68,
-                "self_discipline" to 70,
-                "communication_style" to 82,
-                "emotional_openness" to 95,
-                "trust_style" to 95
-            )
-        )
-
+        val scores = withEvidence(mapOf("planning_style" to 68, "self_discipline" to 70, "communication_style" to 82, "emotional_openness" to 95, "trust_style" to 95))
         val matches = SignatureProfiles.matches(scores)
         assertTrue(matches.any { it.key == SignatureProfileKey.STRUCTURED_BUILDER })
         assertTrue(matches.any { it.key == SignatureProfileKey.OPEN_CONNECTOR })
@@ -110,16 +68,52 @@ class SignatureProfilesTest {
 
     @Test
     fun outOfRangeScoresAreClampedForMatching() {
-        val result = SignatureProfiles.primary(
-            withEvidence(
-                mapOf(
-                    "assertiveness" to 130,
-                    "competitiveness" to 120,
-                    "stress_response" to 110
-                )
-            )
-        )
+        val result = SignatureProfiles.primary(withEvidence(mapOf("assertiveness" to 130, "competitiveness" to 120, "stress_response" to 110)))
         assertEquals(SignatureProfileKey.DRIVEN_CHALLENGER, result?.key)
         assertTrue((result?.confidence ?: 0) in 65..100)
+    }
+
+    @Test
+    fun recommendationNeedsExistingSignal() {
+        assertNull(SignatureProfiles.recommendNext(emptyMap(), setOf("learning_drive", "novelty_seeker")))
+    }
+
+    @Test
+    fun recommendationFollowsStrongPartialSignature() {
+        val result = SignatureProfiles.recommendNext(
+            scores = mapOf("learning_drive" to 92),
+            availableQuizIds = setOf("learning_drive", "novelty_seeker", "independence", "planning_style")
+        )
+        assertEquals("novelty_seeker", result?.quizId)
+        assertEquals(SignatureProfileKey.INDEPENDENT_EXPLORER, result?.target)
+    }
+
+    @Test
+    fun recommendationIgnoresContradictedPath() {
+        val result = SignatureProfiles.recommendNext(
+            scores = mapOf("adaptability" to 82, "assertiveness" to 95, "planning_style" to 85),
+            availableQuizIds = setOf("patience", "self_discipline", "communication_style")
+        )
+        assertEquals("self_discipline", result?.quizId)
+        assertEquals(SignatureProfileKey.STRUCTURED_BUILDER, result?.target)
+    }
+
+    @Test
+    fun recommendationNeverReturnsCompletedRequirement() {
+        val result = SignatureProfiles.recommendNext(
+            scores = mapOf("learning_drive" to 90, "novelty_seeker" to 90),
+            availableQuizIds = setOf("learning_drive", "novelty_seeker", "independence")
+        )
+        assertEquals("independence", result?.quizId)
+    }
+
+    @Test
+    fun recommendationRankingIsDeterministic() {
+        val result = SignatureProfiles.recommendNext(
+            scores = mapOf("learning_drive" to 80, "planning_style" to 80),
+            availableQuizIds = setOf("novelty_seeker", "independence", "self_discipline", "communication_style")
+        )
+        assertEquals("novelty_seeker", result?.quizId)
+        assertEquals(SignatureProfileKey.INDEPENDENT_EXPLORER, result?.target)
     }
 }
