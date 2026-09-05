@@ -55,17 +55,9 @@ fun RetentionSection() {
             onVote = { option ->
                 if (!storedProfile.daily.answeredToday()) {
                     scope.launch {
-                        val beforeUnlocked = AchievementEngine
-                            .unlocked(storedProfile, totalQuizCount)
-                            .map { it.id }
-                            .toSet()
                         val result = ProfileStore.saveDailyAnswer(context, question.id, option)
                         AppEvents.dailyQuestionVote(question.id, option)
                         AppEvents.streakContinue(result.currentStreak)
-                        val afterProfile = storedProfile.copy(daily = result)
-                        AchievementEngine.unlocked(afterProfile, totalQuizCount)
-                            .filterNot { it.id in beforeUnlocked }
-                            .forEach { AppEvents.achievementUnlock(it.id) }
                     }
                 }
             }
