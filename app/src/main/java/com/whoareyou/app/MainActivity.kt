@@ -108,6 +108,7 @@ private fun WhoAreYouApp() {
     var screen by remember { mutableStateOf(Screen.DISCOVER) }
     var selectedQuiz by remember(quizCatalog) { mutableStateOf(quizCatalog.first()) }
     var finalScore by remember { mutableIntStateOf(0) }
+    var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
 
     AnimatedContent(targetState = screen, label = "screen") { destination ->
         when (destination) {
@@ -119,6 +120,7 @@ private fun WhoAreYouApp() {
                 adsRemoved = adsRemoved,
                 onOpenProfile = { screen = Screen.PROFILE },
                 onQuizSelected = {
+                    previousScoreForAttempt = storedProfile.latestScores[it.id]
                     selectedQuiz = it
                     AppEvents.testStart(it.id)
                     screen = Screen.QUIZ
@@ -146,10 +148,12 @@ private fun WhoAreYouApp() {
             Screen.RESULT -> ResultScreen(
                 quiz = selectedQuiz,
                 score = finalScore,
+                previousScore = previousScoreForAttempt,
                 completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                 totalQuizCount = quizCatalog.size,
                 onDone = { adManager.onResultFinished(activity, adsRemoved) { screen = Screen.DISCOVER } },
                 onRetry = {
+                    previousScoreForAttempt = finalScore
                     AppEvents.testStart(selectedQuiz.id)
                     screen = Screen.QUIZ
                 }
@@ -559,10 +563,19 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
 }
 
 @Composable
-private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizCount: Int, onDone: () -> Unit, onRetry: () -> Unit) {
+private fun ResultScreen(
+    quiz: Quiz,
+    score: Int,
+    previousScore: Int?,
+    completedCount: Int,
+    totalQuizCount: Int,
+    onDone: () -> Unit,
+    onRetry: () -> Unit
+) {
     val context = LocalContext.current
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
+    val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         item {
@@ -588,6 +601,34 @@ private fun ResultScreen(quiz: Quiz, score: Int, completedCount: Int, totalQuizC
                     LinearProgressIndicator(progress = { score / 100f }, modifier = Modifier.fillMaxWidth().height(10.dp), color = Violet, trackColor = PanelSoft)
                     Spacer(Modifier.height(20.dp))
                     Text(description, color = Color.White, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
+                }
+            }
+
+            if (scoreChange != null) {
+                Spacer(Modifier.height(16.dp))
+                Card(colors = CardDefaults.cardColors(containerColor = PanelSoft), shape = RoundedCornerShape(20.dp), modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(stringResource(R.string.retake_change_title), color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Spacer(Modifier.height(7.dp))
+                        Text(
+                            stringResource(R.string.retake_change_values, scoreChange.previousScore, scoreChange.currentScore),
+                            color = Color.White,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            when (scoreChange.direction) {
+                                ScoreChangeDirection.HIGHER -> stringResource(R.string.retake_change_higher, scoreChange.absoluteDelta)
+                                ScoreChangeDirection.LOWER -> stringResource(R.string.retake_change_lower, scoreChange.absoluteDelta)
+                                ScoreChangeDirection.SAME -> stringResource(R.string.retake_change_same)
+                            },
+                            color = Muted,
+                            fontSize = 12.sp,
+                            lineHeight = 18.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
 
