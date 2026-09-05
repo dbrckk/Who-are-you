@@ -21,6 +21,14 @@ object AppEvents {
 
     fun testStart(quizId: String) = log("test_start", mapOf("quiz_id" to quizId))
     fun testComplete(quizId: String, score: Int) = log("test_complete", mapOf("quiz_id" to quizId, "score" to score))
+    fun recommendationView(quizId: String, signatureGuided: Boolean) = log(
+        "recommendation_view",
+        RecommendationTelemetry.params(quizId, signatureGuided)
+    )
+    fun recommendationStart(quizId: String, signatureGuided: Boolean) = log(
+        "recommendation_start",
+        RecommendationTelemetry.params(quizId, signatureGuided)
+    )
     fun resultShare(quizId: String, score: Int? = null) = log("result_share", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeCreate(quizId: String, score: Int? = null) = log("challenge_create", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeOpen(quizId: String, source: String) = log("challenge_open", mapOf("quiz_id" to quizId, "source" to source))
