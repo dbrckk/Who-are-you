@@ -204,19 +204,38 @@ private fun DiscoverScreen(
     onRemoveAds: () -> Unit
 ) {
     val premiumPrice = BillingPriceState.displayPrice
+    val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
     val unfinishedIds = remember(quizzes, completed) { quizzes.asSequence().map { it.id }.filterNot { it in completed }.toSet() }
     val signatureRecommendation = remember(storedProfile.latestScores, unfinishedIds) {
         SignatureProfiles.recommendNext(storedProfile.latestScores, unfinishedIds)
     }
-    val fallbackQuiz = quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
-    val recommendedQuiz = signatureRecommendation
-        ?.let { recommendation -> quizzes.firstOrNull { it.id == recommendation.quizId && it.id !in completed } }
-        ?: fallbackQuiz
-    val signatureGuided = recommendedQuiz != null && signatureRecommendation?.quizId == recommendedQuiz.id
+    val retakeRecommendation = remember(quizzes, allCompleted, storedProfile.latestScores, storedProfile.previousScores) {
+        if (allCompleted) {
+            RetakeRecommendationEngine.recommend(
+                quizIds = quizzes.map { it.id },
+                latestScores = storedProfile.latestScores,
+                previousScores = storedProfile.previousScores
+            )
+        } else null
+    }
+    val fallbackQuiz = if (allCompleted) {
+        retakeRecommendation?.let { recommendation -> quizzes.firstOrNull { it.id == recommendation.quizId } }
+            ?: quizzes.firstOrNull()
+    } else {
+        quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
+    }
+    val recommendedQuiz = if (allCompleted) {
+        fallbackQuiz
+    } else {
+        signatureRecommendation
+            ?.let { recommendation -> quizzes.firstOrNull { it.id == recommendation.quizId && it.id !in completed } }
+            ?: fallbackQuiz
+    }
+    val signatureGuided = !allCompleted && recommendedQuiz != null && signatureRecommendation?.quizId == recommendedQuiz.id
+    val retakeReason = if (allCompleted && recommendedQuiz?.id == retakeRecommendation?.quizId) retakeRecommendation.reason else null
     val signaturePathProgress = remember(storedProfile.latestScores) {
         SignatureProfiles.pathProgress(storedProfile.latestScores)
     }
-    val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
     val orderedQuizzes = remember(quizzes, completed) { quizzes.sortedBy { it.id in completed } }
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -235,7 +254,7 @@ private fun DiscoverScreen(
             }
             if (recommendedQuiz != null) {
                 Spacer(Modifier.height(14.dp))
-                RecommendedQuizCard(recommendedQuiz, allCompleted, signatureGuided) { onQuizSelected(recommendedQuiz) }
+                RecommendedQuizCard(recommendedQuiz, allCompleted, signatureGuided, retakeReason) { onQuizSelected(recommendedQuiz) }
             }
             Spacer(Modifier.height(14.dp))
             RetentionSection()
@@ -302,7 +321,13 @@ private fun SignaturePathProgressCard(progress: SignaturePathProgress) {
 }
 
 @Composable
-private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, signatureGuided: Boolean, onClick: () -> Unit) {
+private fun RecommendedQuizCard(
+    quiz: Quiz,
+    allCompleted: Boolean,
+    signatureGuided: Boolean,
+    retakeReason: RetakeRecommendationReason?,
+    onClick: () -> Unit
+) {
     DisposableEffect(quiz.id, signatureGuided) {
         AppEvents.recommendationView(quiz.id, signatureGuided)
         onDispose { }
@@ -319,7 +344,13 @@ private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, signatureGuid
         Column(Modifier.padding(20.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
-                    stringResource(if (signatureGuided) R.string.recommended_signature_label else R.string.recommended_for_you),
+                    stringResource(
+                        when {
+                            retakeReason != null -> R.string.recommended_retake_label
+                            signatureGuided -> R.string.recommended_signature_label
+                            else -> R.string.recommended_for_you
+                        }
+                    ),
                     color = Cyan,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold
@@ -332,6 +363,8 @@ private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, signatureGuid
             Text(
                 stringResource(
                     when {
+                        retakeReason == RetakeRecommendationReason.START_TRACKING -> R.string.recommended_retake_start_reason
+                        retakeReason == RetakeRecommendationReason.RECHECK_CHANGE -> R.string.recommended_retake_change_reason
                         allCompleted -> R.string.recommended_all_done
                         signatureGuided -> R.string.recommended_signature_reason
                         else -> R.string.recommended_reason
