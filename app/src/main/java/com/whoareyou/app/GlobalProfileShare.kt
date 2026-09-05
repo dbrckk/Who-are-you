@@ -18,10 +18,20 @@ import kotlinx.coroutines.withContext
 object GlobalProfileShare {
     private val shareScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
+    private data class CardCopy(
+        val profileTitle: String,
+        val progress: (Int, Int, Int) -> String,
+        val cta: String,
+        val disclaimer: String,
+        val shareText: (String) -> String,
+        val chooser: String
+    )
+
     fun share(context: Context, summary: GlobalProfileSummary) {
         shareScope.launch {
             val chooser = withContext(Dispatchers.IO) {
-                val bitmap = render(summary)
+                val copy = cardCopy(context)
+                val bitmap = render(summary, copy)
                 try {
                     val dir = File(context.cacheDir, "shared_results").apply { mkdirs() }
                     val file = File(dir, "who_are_you_profile.png")
@@ -30,10 +40,10 @@ object GlobalProfileShare {
                     val intent = Intent(Intent.ACTION_SEND).apply {
                         type = "image/png"
                         putExtra(Intent.EXTRA_STREAM, uri)
-                        putExtra(Intent.EXTRA_TEXT, "My Who Are You? profile: ${summary.dominantArchetype}. What does yours look like?")
+                        putExtra(Intent.EXTRA_TEXT, copy.shareText(summary.dominantArchetype))
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
-                    Intent.createChooser(intent, "Share your profile")
+                    Intent.createChooser(intent, copy.chooser)
                 } finally {
                     bitmap.recycle()
                 }
@@ -42,7 +52,30 @@ object GlobalProfileShare {
         }
     }
 
-    private fun render(summary: GlobalProfileSummary): Bitmap {
+    private fun cardCopy(context: Context): CardCopy {
+        val french = context.resources.configuration.locales[0]?.language == "fr"
+        return if (french) {
+            CardCopy(
+                profileTitle = "TON PROFIL",
+                progress = { completed, total, percent -> "$completed/$total dimensions découvertes • $percent% complété" },
+                cta = "Découvre le tien. Compare-toi avec tes amis.",
+                disclaimer = "Pour le divertissement et la réflexion personnelle uniquement.",
+                shareText = { archetype -> "Mon profil Who Are You? : $archetype. À quoi ressemble le tien ?" },
+                chooser = "Partager ton profil"
+            )
+        } else {
+            CardCopy(
+                profileTitle = "YOUR PROFILE",
+                progress = { completed, total, percent -> "$completed/$total dimensions discovered • $percent% complete" },
+                cta = "Discover yours. Compare with friends.",
+                disclaimer = "For entertainment and self-reflection only.",
+                shareText = { archetype -> "My Who Are You? profile: $archetype. What does yours look like?" },
+                chooser = "Share your profile"
+            )
+        }
+    }
+
+    private fun render(summary: GlobalProfileSummary, copy: CardCopy): Bitmap {
         val width = 1080
         val height = 1920
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -57,7 +90,7 @@ object GlobalProfileShare {
 
         paint.color = Color.WHITE
         paint.textSize = 86f
-        canvas.drawText("YOUR PROFILE", 84f, 290f, paint)
+        canvas.drawText(copy.profileTitle, 84f, 290f, paint)
 
         paint.color = Color.rgb(110, 231, 249)
         paint.textSize = 62f
@@ -65,7 +98,7 @@ object GlobalProfileShare {
 
         paint.color = Color.rgb(164, 167, 181)
         paint.textSize = 32f
-        canvas.drawText("${summary.completedCount}/${summary.totalCount} dimensions discovered • ${summary.completionPercent}% complete", 84f, 600f, paint)
+        drawFittedText(canvas, copy.progress(summary.completedCount, summary.totalCount, summary.completionPercent), 84f, 600f, width - 168f, paint, 32f, 24f)
 
         var y = 720f
         val dimensions = summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(6)
@@ -96,11 +129,17 @@ object GlobalProfileShare {
 
         paint.color = Color.WHITE
         paint.textSize = 34f
-        canvas.drawText("Discover yours. Compare with friends.", 84f, 1740f, paint)
+        drawFittedText(canvas, copy.cta, 84f, 1740f, width - 168f, paint, 34f, 26f)
         paint.color = Color.rgb(164, 167, 181)
         paint.textSize = 25f
-        canvas.drawText("For entertainment and self-reflection only.", 84f, 1800f, paint)
+        drawFittedText(canvas, copy.disclaimer, 84f, 1800f, width - 168f, paint, 25f, 19f)
         return bitmap
+    }
+
+    private fun drawFittedText(canvas: Canvas, text: String, x: Float, y: Float, maxWidth: Float, paint: Paint, preferredSize: Float, minSize: Float) {
+        paint.textSize = preferredSize
+        while (paint.measureText(text) > maxWidth && paint.textSize > minSize) paint.textSize -= 1f
+        canvas.drawText(text, x, y, paint)
     }
 
     private fun drawMultiline(canvas: Canvas, text: String, x: Float, startY: Float, maxWidth: Float, paint: Paint, lineHeight: Float) {
