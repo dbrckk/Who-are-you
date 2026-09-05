@@ -13,6 +13,9 @@
     <string name="recommended_reason">One more dimension makes your profile more complete.</string>
     <string name="recommended_signature_reason">This dimension can sharpen the signature emerging from your answers.</string>
     <string name="recommended_all_done">PROFILE COMPLETE — revisit a dimension and see if you changed.</string>
+    <string name="profile_path">PROFILE PATH</string>
+    <string name="profile_path_progress">%1$d of %2$d signals aligned</string>
+    <string name="profile_path_reason">Your answers are forming a clearer pattern. The recommended test advances this path without locking you into a type.</string>
     <string name="trending_tests">TRENDING TESTS</string>
     <string name="your_social_stats">YOUR SOCIAL STATS</string>
     <string name="social_comparisons">Comparisons</string>
