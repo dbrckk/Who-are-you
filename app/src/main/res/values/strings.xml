@@ -65,6 +65,8 @@
     <string name="achievement_first_test_description">Complete your first personality test.</string>
     <string name="achievement_ten_tests_title">10 Tests</string>
     <string name="achievement_ten_tests_description">Complete ten different tests.</string>
+    <string name="achievement_twenty_five_tests_title">25 Tests</string>
+    <string name="achievement_twenty_five_tests_description">Complete twenty-five different tests.</string>
     <string name="achievement_profile_builder_title">Profile Builder</string>
     <string name="achievement_profile_builder_description">Discover five profile dimensions.</string>
     <string name="achievement_profile_complete_title">Know Yourself</string>
@@ -101,6 +103,10 @@
     <string name="challenge_match_strong_copy">Your answers differ, but your overall pattern is strongly aligned.</string>
     <string name="challenge_match_mixed_copy">You share some tendencies while diverging on others.</string>
     <string name="challenge_match_opposite_copy">You approach this dimension very differently — which can make the comparison more interesting.</string>
+    <string name="compatibility_share_button">SHARE OUR MATCH  ↗</string>
+    <string name="compatibility_share_text">We got %1$d%% compatibility on %2$s in Who Are You? What would your match be?</string>
+    <string name="compatibility_share_subject">Who Are You? match</string>
+    <string name="compatibility_share_chooser">Share your match</string>
     <string name="challenge_another_friend">CHALLENGE ANOTHER FRIEND  ↗</string>
     <string name="close">CLOSE</string>
     <string name="invalid_challenge">INVALID CHALLENGE</string>
