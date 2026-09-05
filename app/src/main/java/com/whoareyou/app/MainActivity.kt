@@ -232,7 +232,9 @@ private fun DiscoverScreen(
             ?: fallbackQuiz
     }
     val signatureGuided = !allCompleted && recommendedQuiz != null && signatureRecommendation?.quizId == recommendedQuiz.id
-    val retakeReason = if (allCompleted && recommendedQuiz?.id == retakeRecommendation?.quizId) retakeRecommendation.reason else null
+    val retakeReason = retakeRecommendation
+        ?.takeIf { recommendation -> allCompleted && recommendedQuiz?.id == recommendation.quizId }
+        ?.reason
     val signaturePathProgress = remember(storedProfile.latestScores) {
         SignatureProfiles.pathProgress(storedProfile.latestScores)
     }
