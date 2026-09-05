@@ -18,6 +18,7 @@ data class StoredProfile(
     val adsRemoved: Boolean = false,
     // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
     val onboardingComplete: Boolean = true,
+    val announcedAchievementIds: Set<String> = emptySet(),
     val daily: DailyState = DailyState()
 )
 
@@ -26,6 +27,7 @@ object ProfileStore {
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
+    private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
     private val dailyAnsweredDateKey = stringPreferencesKey("daily_answered_date")
     private val dailyQuestionIdKey = stringPreferencesKey("daily_question_id")
     private val dailySelectedOptionKey = intPreferencesKey("daily_selected_option")
@@ -33,22 +35,7 @@ object ProfileStore {
     private val longestStreakKey = intPreferencesKey("longest_streak")
     private val lastActiveDateKey = stringPreferencesKey("last_active_date")
 
-    fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map { prefs ->
-        StoredProfile(
-            completedQuizIds = decodeSet(prefs[completedKey]),
-            latestScores = decodeScores(prefs[scoresKey]),
-            adsRemoved = prefs[adsRemovedKey] ?: false,
-            onboardingComplete = prefs[onboardingCompleteKey] ?: false,
-            daily = DailyState(
-                answeredDate = prefs[dailyAnsweredDateKey],
-                questionId = prefs[dailyQuestionIdKey],
-                selectedOption = prefs[dailySelectedOptionKey],
-                currentStreak = prefs[currentStreakKey] ?: 0,
-                longestStreak = prefs[longestStreakKey] ?: 0,
-                lastActiveDate = prefs[lastActiveDateKey]
-            )
-        )
-    }
+    fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map(::decodeProfile)
 
     suspend fun saveQuizResult(context: Context, quizId: String, score: Int) {
         context.profileDataStore.edit { prefs ->
@@ -57,6 +44,7 @@ object ProfileStore {
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = scores.entries.sortedBy { it.key }.joinToString(";") { "${it.key}:${it.value}" }
         }
+        announceNewAchievements(context)
     }
 
     suspend fun saveDailyAnswer(
@@ -66,6 +54,7 @@ object ProfileStore {
         date: LocalDate = LocalDate.now()
     ): DailyState {
         var result = DailyState()
+        var changed = false
         context.profileDataStore.edit { prefs ->
             val current = DailyState(
                 answeredDate = prefs[dailyAnsweredDateKey],
@@ -90,6 +79,7 @@ object ProfileStore {
                 longestStreak = longest,
                 lastActiveDate = date.toString()
             )
+            changed = true
 
             prefs[dailyAnsweredDateKey] = result.answeredDate!!
             prefs[dailyQuestionIdKey] = result.questionId!!
@@ -98,6 +88,7 @@ object ProfileStore {
             prefs[longestStreakKey] = result.longestStreak
             prefs[lastActiveDateKey] = result.lastActiveDate!!
         }
+        if (changed) announceNewAchievements(context)
         return result
     }
 
@@ -108,6 +99,38 @@ object ProfileStore {
     suspend fun setOnboardingComplete(context: Context, complete: Boolean = true) {
         context.profileDataStore.edit { it[onboardingCompleteKey] = complete }
     }
+
+    private suspend fun announceNewAchievements(context: Context) {
+        val newlyUnlocked = mutableListOf<String>()
+        val totalQuizCount = QuizRepository.load(context).size
+        context.profileDataStore.edit { prefs ->
+            val profile = decodeProfile(prefs)
+            val announced = profile.announcedAchievementIds
+            newlyUnlocked += AchievementEngine.unlocked(profile, totalQuizCount)
+                .map { it.id }
+                .filterNot { it in announced }
+            if (newlyUnlocked.isNotEmpty()) {
+                prefs[announcedAchievementsKey] = (announced + newlyUnlocked).sorted().joinToString(",")
+            }
+        }
+        newlyUnlocked.forEach(AppEvents::achievementUnlock)
+    }
+
+    private fun decodeProfile(prefs: androidx.datastore.preferences.core.Preferences): StoredProfile = StoredProfile(
+        completedQuizIds = decodeSet(prefs[completedKey]),
+        latestScores = decodeScores(prefs[scoresKey]),
+        adsRemoved = prefs[adsRemovedKey] ?: false,
+        onboardingComplete = prefs[onboardingCompleteKey] ?: false,
+        announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
+        daily = DailyState(
+            answeredDate = prefs[dailyAnsweredDateKey],
+            questionId = prefs[dailyQuestionIdKey],
+            selectedOption = prefs[dailySelectedOptionKey],
+            currentStreak = prefs[currentStreakKey] ?: 0,
+            longestStreak = prefs[longestStreakKey] ?: 0,
+            lastActiveDate = prefs[lastActiveDateKey]
+        )
+    )
 
     private fun decodeSet(raw: String?): Set<String> = raw
         ?.split(',')
