@@ -116,4 +116,34 @@ class SignatureProfilesTest {
         assertEquals("novelty_seeker", result?.quizId)
         assertEquals(SignatureProfileKey.INDEPENDENT_EXPLORER, result?.target)
     }
+
+    @Test
+    fun pathProgressNeedsExistingPlausibleSignal() {
+        assertNull(SignatureProfiles.pathProgress(emptyMap()))
+        assertNull(SignatureProfiles.pathProgress(mapOf("learning_drive" to 20)))
+    }
+
+    @Test
+    fun pathProgressTracksBestPartialPathWithoutIdentity() {
+        val progress = SignatureProfiles.pathProgress(
+            mapOf("learning_drive" to 90, "novelty_seeker" to 88)
+        )
+        assertEquals(2, progress?.completedRequirements)
+        assertEquals(3, progress?.totalRequirements)
+        assertEquals(66, progress?.percent)
+    }
+
+    @Test
+    fun pathProgressIgnoresContradictedEvidence() {
+        val progress = SignatureProfiles.pathProgress(
+            mapOf(
+                "adaptability" to 82,
+                "assertiveness" to 95,
+                "planning_style" to 85
+            )
+        )
+        assertEquals(1, progress?.completedRequirements)
+        assertEquals(3, progress?.totalRequirements)
+        assertEquals(40, progress?.percent)
+    }
 }
