@@ -38,7 +38,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlin.math.abs
 
 private val ChallengeInk = Color(0xFF090A0F)
 private val ChallengePanel = Color(0xFF14151D)
@@ -95,7 +94,7 @@ private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
                 question.answers.forEach { answer ->
                     Card(modifier = Modifier.fillMaxWidth().clickable {
                         val updated = rawScore + answer.score
-                        if (questionIndex == quiz.questions.lastIndex) myScore = ((updated.toFloat() / (quiz.questions.size * 3)) * 100).toInt()
+                        if (questionIndex == quiz.questions.lastIndex) myScore = Scoring.quizPercent(updated, quiz.questions.size)
                         else { rawScore = updated; questionIndex++ }
                     }, colors = CardDefaults.cardColors(containerColor = ChallengePanel), shape = RoundedCornerShape(18.dp)) {
                         Text(answer.text, modifier = Modifier.padding(18.dp), color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
@@ -111,7 +110,7 @@ private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
 @Composable
 private fun CompatibilityScreen(quiz: Quiz, inviterScore: Int, myScore: Int, onClose: () -> Unit) {
     val context = LocalContext.current
-    val compatibility = (100 - abs(inviterScore - myScore)).coerceIn(0, 100)
+    val compatibility = Scoring.compatibility(inviterScore, myScore)
     val label = when {
         compatibility >= 90 -> stringResource(R.string.challenge_match_identical)
         compatibility >= 75 -> stringResource(R.string.challenge_match_strong)
