@@ -1,6 +1,7 @@
 package com.whoareyou.app
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -45,6 +46,7 @@ class GlobalProfileEngineTest {
         assertEquals(4, summary.totalCount)
         assertEquals(100, summary.dimensions.first { it.quizId == "a" }.score)
         assertEquals(0, summary.dimensions.first { it.quizId == "b" }.score)
+        assertNull(summary.signature)
     }
 
     @Test
@@ -57,11 +59,43 @@ class GlobalProfileEngineTest {
     }
 
     @Test
+    fun build_attachesSignatureFromStableQuizIds() {
+        val ids = listOf(
+            "learning_drive",
+            "novelty_seeker",
+            "independence",
+            "communication_style",
+            "planning_style",
+            "self_discipline",
+            "patience",
+            "stress_response"
+        )
+        val catalog = ids.map(::quiz)
+        val summary = GlobalProfileEngine.build(
+            catalog,
+            mapOf(
+                "learning_drive" to 82,
+                "novelty_seeker" to 78,
+                "independence" to 88,
+                "communication_style" to 50,
+                "planning_style" to 50,
+                "self_discipline" to 50,
+                "patience" to 50,
+                "stress_response" to 50
+            )
+        )
+
+        assertEquals(SignatureProfileKey.INDEPENDENT_EXPLORER, summary.signature?.key)
+        assertTrue((summary.signature?.confidence ?: 0) >= 65)
+    }
+
+    @Test
     fun emptyCatalog_isSafe() {
         val summary = GlobalProfileEngine.build(emptyList(), emptyMap())
         assertEquals(0, summary.completionPercent)
         assertEquals(0, summary.completedCount)
         assertEquals(0, summary.totalCount)
         assertTrue(summary.dimensions.isEmpty())
+        assertNull(summary.signature)
     }
 }
