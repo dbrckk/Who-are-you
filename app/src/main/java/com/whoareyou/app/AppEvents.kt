@@ -29,6 +29,21 @@ object AppEvents {
     fun appLinkOpen(path: String) = log("app_link_open", mapOf("path" to path))
     fun profileShare(archetype: String, completedCount: Int) = log("profile_share", mapOf("archetype" to archetype, "completed_count" to completedCount))
     fun profileChallenge(quizId: String, score: Int) = log("profile_challenge", mapOf("quiz_id" to quizId, "score" to score))
+    fun signatureUnlock(signature: SignatureProfileMatch) = log(
+        "signature_unlock",
+        mapOf(
+            "signature_key" to signature.key.name.lowercase(),
+            "confidence" to signature.confidence.coerceIn(0, 100),
+            "evidence_count" to signature.supportingQuizIds.size
+        )
+    )
+    fun signatureShare(signature: SignatureProfileMatch) = log(
+        "signature_share",
+        mapOf(
+            "signature_key" to signature.key.name.lowercase(),
+            "confidence" to signature.confidence.coerceIn(0, 100)
+        )
+    )
     fun dailyQuestionView(questionId: String) = log("daily_question_view", mapOf("question_id" to questionId))
     fun dailyQuestionVote(questionId: String, option: Int) = log("daily_question_vote", mapOf("question_id" to questionId, "option" to option.coerceIn(0, 1)))
     fun streakContinue(streak: Int) = log("streak_continue", mapOf("streak" to streak))
