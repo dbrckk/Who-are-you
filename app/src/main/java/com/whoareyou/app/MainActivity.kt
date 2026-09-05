@@ -109,6 +109,7 @@ private fun WhoAreYouApp() {
             Screen.DISCOVER -> DiscoverScreen(
                 quizzes = quizCatalog,
                 profile = globalProfile,
+                storedProfile = storedProfile,
                 completed = storedProfile.completedQuizIds,
                 adsRemoved = adsRemoved,
                 onOpenProfile = { screen = Screen.PROFILE },
@@ -184,6 +185,7 @@ private fun OnboardingScreen(onStart: () -> Unit) {
 private fun DiscoverScreen(
     quizzes: List<Quiz>,
     profile: GlobalProfileSummary,
+    storedProfile: StoredProfile,
     completed: Set<String>,
     adsRemoved: Boolean,
     onOpenProfile: () -> Unit,
@@ -191,6 +193,8 @@ private fun DiscoverScreen(
     onRemoveAds: () -> Unit
 ) {
     val premiumPrice = BillingPriceState.displayPrice
+    val recommendedQuiz = quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
+    val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
@@ -202,8 +206,14 @@ private fun DiscoverScreen(
             Text(stringResource(R.string.discover_subtitle), color = Muted, fontSize = 16.sp, lineHeight = 23.sp)
             Spacer(Modifier.height(22.dp))
             ProfileProgress(profile, onOpenProfile)
+            if (recommendedQuiz != null) {
+                Spacer(Modifier.height(14.dp))
+                RecommendedQuizCard(recommendedQuiz, allCompleted) { onQuizSelected(recommendedQuiz) }
+            }
             Spacer(Modifier.height(14.dp))
             RetentionSection()
+            Spacer(Modifier.height(14.dp))
+            SocialStatsCard(storedProfile)
             Spacer(Modifier.height(10.dp))
             Text(stringResource(R.string.trending_tests), color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
@@ -228,6 +238,61 @@ private fun DiscoverScreen(
             }
             Spacer(Modifier.height(28.dp))
         }
+    }
+}
+
+@Composable
+private fun RecommendedQuizCard(quiz: Quiz, allCompleted: Boolean, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(containerColor = PanelSoft),
+        shape = RoundedCornerShape(24.dp)
+    ) {
+        Column(Modifier.padding(20.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(stringResource(R.string.recommended_for_you), color = Cyan, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                Text(quiz.accent, fontSize = 22.sp)
+            }
+            Spacer(Modifier.height(8.dp))
+            Text(quiz.title.uppercase(), color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Black)
+            Spacer(Modifier.height(5.dp))
+            Text(
+                stringResource(if (allCompleted) R.string.recommended_all_done else R.string.recommended_reason),
+                color = Muted,
+                fontSize = 13.sp,
+                lineHeight = 19.sp
+            )
+            Spacer(Modifier.height(12.dp))
+            Text(stringResource(R.string.continue_discovering), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+@Composable
+private fun SocialStatsCard(profile: StoredProfile) {
+    Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(20.dp)) {
+            Text(stringResource(R.string.your_social_stats), color = Cyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(12.dp))
+            if (profile.matchCount == 0) {
+                Text(stringResource(R.string.social_no_matches), color = Muted, fontSize = 13.sp, lineHeight = 19.sp)
+            } else {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    SocialStat(stringResource(R.string.social_comparisons), profile.matchCount.toString(), Modifier.weight(1f))
+                    SocialStat(stringResource(R.string.social_best_match), "${profile.bestMatchPercent ?: 0}%", Modifier.weight(1f))
+                    SocialStat(stringResource(R.string.social_most_different), "${profile.lowestMatchPercent ?: 0}%", Modifier.weight(1f))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialStat(label: String, value: String, modifier: Modifier = Modifier) {
+    Column(modifier) {
+        Text(value, color = Violet, fontSize = 20.sp, fontWeight = FontWeight.Black)
+        Spacer(Modifier.height(3.dp))
+        Text(label, color = Muted, fontSize = 10.sp, lineHeight = 14.sp)
     }
 }
 
