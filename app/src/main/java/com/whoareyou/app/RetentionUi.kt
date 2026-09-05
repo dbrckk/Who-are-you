@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
@@ -61,6 +63,7 @@ fun RetentionSection() {
             },
             onShare = { DailyQuestionShare.share(context, question) }
         )
+        SocialStatsCard(storedProfile)
         AchievementStrip(achievements)
     }
 }
@@ -117,6 +120,34 @@ private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onCl
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold
         )
+    }
+}
+
+@Composable
+private fun SocialStatsCard(profile: StoredProfile) {
+    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(20.dp)) {
+            Text(stringResource(R.string.your_social_stats), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(12.dp))
+            if (profile.matchCount == 0) {
+                Text(stringResource(R.string.social_no_matches), color = RetentionMuted, fontSize = 13.sp, lineHeight = 19.sp)
+            } else {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    SocialMetric(stringResource(R.string.social_comparisons), profile.matchCount.toString(), Modifier.weight(1f))
+                    SocialMetric(stringResource(R.string.social_best_match), "${profile.bestMatchPercent ?: 0}%", Modifier.weight(1f))
+                    SocialMetric(stringResource(R.string.social_most_different), "${profile.lowestMatchPercent ?: 0}%", Modifier.weight(1f))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialMetric(label: String, value: String, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(value, modifier = Modifier.fillMaxWidth(), color = RetentionViolet, fontSize = 20.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+        Spacer(Modifier.height(3.dp))
+        Text(label, modifier = Modifier.fillMaxWidth(), color = RetentionMuted, fontSize = 10.sp, lineHeight = 13.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
     }
 }
 
