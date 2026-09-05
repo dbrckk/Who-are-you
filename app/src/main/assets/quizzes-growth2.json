@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "boundaries",
+      "title": "Boundaries",
+      "hook": "How easily do you protect your time, energy and limits?",
+      "time": "45 SEC",
+      "accent": "◫",
+      "metricLow": "ACCOMMODATING",
+      "metricHigh": "BOUNDARIED",
+      "results": {
+        "low": {"title": "The Accommodator", "description": "You often make room for other people first and may tolerate more than you actually want to."},
+        "mid": {"title": "The Flexible Boundary", "description": "You can adapt for people you care about while still recognizing when a limit needs to be stated."},
+        "high": {"title": "The Gatekeeper", "description": "You are comfortable protecting your time, energy and standards even when saying no creates temporary discomfort."}
+      },
+      "questions": [
+        {"text": "Someone asks for a favor when you are already drained. You...", "answers": [{"text": "Usually say yes", "score": 0}, {"text": "Try to help somehow", "score": 1}, {"text": "Check whether I really can", "score": 2}, {"text": "Say no if I need to", "score": 3}]},
+        {"text": "A friend keeps calling at bad times. You...", "answers": [{"text": "Keep answering", "score": 0}, {"text": "Answer less often", "score": 1}, {"text": "Explain when I am available", "score": 2}, {"text": "Set a clear limit", "score": 3}]},
+        {"text": "When someone is disappointed by your no, you...", "answers": [{"text": "Often reverse the decision", "score": 0}, {"text": "Feel guilty for a while", "score": 1}, {"text": "Stay kind but hold it", "score": 2}, {"text": "Accept their disappointment", "score": 3}]},
+        {"text": "You notice a pattern of being taken for granted. You...", "answers": [{"text": "Hope it changes", "score": 0}, {"text": "Pull back a little", "score": 1}, {"text": "Talk about it", "score": 2}, {"text": "Change what I allow", "score": 3}]},
+        {"text": "Your free time is...", "answers": [{"text": "Easy for others to claim", "score": 0}, {"text": "Often negotiable", "score": 1}, {"text": "Protected when needed", "score": 2}, {"text": "Something I actively defend", "score": 3}]}
+      ]
+    },
+    {
+      "id": "adaptability",
+      "title": "Adaptability",
+      "hook": "What happens when reality ignores your plan?",
+      "time": "40 SEC",
+      "accent": "↝",
+      "metricLow": "STEADY",
+      "metricHigh": "ADAPTIVE",
+      "results": {
+        "low": {"title": "The Stabilizer", "description": "You work best when expectations stay consistent and prefer enough time to adjust when circumstances change."},
+        "mid": {"title": "The Recalibrator", "description": "Change can disrupt you briefly, but you usually rebuild a workable plan once you understand the new situation."},
+        "high": {"title": "The Shape-Shifter", "description": "You pivot quickly when conditions change and often treat new constraints as information rather than disruption."}
+      },
+      "questions": [
+        {"text": "A plan gets cancelled one hour before. You...", "answers": [{"text": "Feel thrown off", "score": 0}, {"text": "Need a little reset", "score": 1}, {"text": "Find an alternative", "score": 2}, {"text": "Pivot immediately", "score": 3}]},
+        {"text": "A tool you rely on changes completely. You...", "answers": [{"text": "Resist switching", "score": 0}, {"text": "Learn slowly", "score": 1}, {"text": "Adapt after exploring", "score": 2}, {"text": "Enjoy figuring it out", "score": 3}]},
+        {"text": "An unexpected problem appears mid-project. You...", "answers": [{"text": "Lose momentum", "score": 0}, {"text": "Pause and regroup", "score": 1}, {"text": "Modify the plan", "score": 2}, {"text": "Build around it quickly", "score": 3}]},
+        {"text": "When travelling, a missed connection feels...", "answers": [{"text": "Very stressful", "score": 0}, {"text": "Frustrating", "score": 1}, {"text": "Manageable", "score": 2}, {"text": "Like part of the adventure", "score": 3}]},
+        {"text": "Your response to new rules is usually...", "answers": [{"text": "Why change what worked?", "score": 0}, {"text": "I need time", "score": 1}, {"text": "I learn the new system", "score": 2}, {"text": "I adjust fast", "score": 3}]}
+      ]
+    },
+    {
+      "id": "competitiveness",
+      "title": "Competitiveness",
+      "hook": "Does comparison sharpen you or barely matter?",
+      "time": "40 SEC",
+      "accent": "◆",
+      "metricLow": "SELF-PACED",
+      "metricHigh": "COMPETITIVE",
+      "results": {
+        "low": {"title": "The Self-Pacer", "description": "You care more about your own standard and enjoyment than beating someone else."},
+        "mid": {"title": "The Friendly Rival", "description": "Competition can add energy without defining the whole experience, especially when stakes remain healthy."},
+        "high": {"title": "The Challenger", "description": "A visible benchmark or rival can unlock extra focus, effort and satisfaction for you."}
+      },
+      "questions": [
+        {"text": "A casual game becomes close. You...", "answers": [{"text": "Still barely care who wins", "score": 0}, {"text": "Try a little harder", "score": 1}, {"text": "Really want the win", "score": 2}, {"text": "Lock in completely", "score": 3}]},
+        {"text": "Someone your level improves faster than you. You...", "answers": [{"text": "Good for them", "score": 0}, {"text": "Notice it", "score": 1}, {"text": "Use it as motivation", "score": 2}, {"text": "Immediately want to catch them", "score": 3}]},
+        {"text": "Leaderboards make you...", "answers": [{"text": "Less interested", "score": 0}, {"text": "Mostly neutral", "score": 1}, {"text": "More engaged", "score": 2}, {"text": "Much more driven", "score": 3}]},
+        {"text": "When learning a skill, you prefer measuring against...", "answers": [{"text": "My past self", "score": 0}, {"text": "A personal target", "score": 1}, {"text": "People around my level", "score": 2}, {"text": "The best available benchmark", "score": 3}]},
+        {"text": "Losing after trying hard feels...", "answers": [{"text": "Fine", "score": 0}, {"text": "A little annoying", "score": 1}, {"text": "Motivating", "score": 2}, {"text": "Like unfinished business", "score": 3}]}
+      ]
+    },
+    {
+      "id": "patience",
+      "title": "Patience",
+      "hook": "How well do you tolerate waiting, repetition and slow progress?",
+      "time": "40 SEC",
+      "accent": "⌛",
+      "metricLow": "IMMEDIATE",
+      "metricHigh": "PATIENT",
+      "results": {
+        "low": {"title": "The Fast Mover", "description": "You prefer visible movement and quick feedback, and slow processes can drain your attention fast."},
+        "mid": {"title": "The Practical Waiter", "description": "You can tolerate delay when the reason is clear, but unnecessary waiting still tests you."},
+        "high": {"title": "The Long-Gamer", "description": "You are relatively comfortable with delayed rewards, repetition and progress that takes time to become visible."}
+      },
+      "questions": [
+        {"text": "A page takes ten seconds to load. You...", "answers": [{"text": "Already want to leave", "score": 0}, {"text": "Get irritated", "score": 1}, {"text": "Wait without much issue", "score": 2}, {"text": "Barely notice", "score": 3}]},
+        {"text": "A skill needs months of repetitive practice. You...", "answers": [{"text": "Lose interest quickly", "score": 0}, {"text": "Need frequent milestones", "score": 1}, {"text": "Can keep going", "score": 2}, {"text": "Trust the long process", "score": 3}]},
+        {"text": "Someone tells a story very slowly. You...", "answers": [{"text": "Want them to get to the point", "score": 0}, {"text": "Feel restless", "score": 1}, {"text": "Stay with it", "score": 2}, {"text": "Listen comfortably", "score": 3}]},
+        {"text": "A goal has no visible progress for weeks. You...", "answers": [{"text": "Question the whole thing", "score": 0}, {"text": "Need reassurance", "score": 1}, {"text": "Continue if the process is sound", "score": 2}, {"text": "Keep going steadily", "score": 3}]},
+        {"text": "Waiting in a long line feels...", "answers": [{"text": "Unbearable", "score": 0}, {"text": "Annoying", "score": 1}, {"text": "Fine", "score": 2}, {"text": "Just part of the day", "score": 3}]}
+      ]
+    },
+    {
+      "id": "independence",
+      "title": "Independence",
+      "hook": "How much do you prefer figuring life out on your own?",
+      "time": "45 SEC",
+      "accent": "↑",
+      "metricLow": "COLLABORATIVE",
+      "metricHigh": "INDEPENDENT",
+      "results": {
+        "low": {"title": "The Co-Pilot", "description": "You naturally think with other people and often make better decisions through shared input and support."},
+        "mid": {"title": "The Selective Soloist", "description": "You value autonomy but know when another perspective, skill or hand makes the outcome better."},
+        "high": {"title": "The Solo Operator", "description": "You strongly prefer self-direction and usually try to solve things independently before involving anyone else."}
+      },
+      "questions": [
+        {"text": "You face a complicated new task. You first...", "answers": [{"text": "Ask someone to work through it", "score": 0}, {"text": "Get advice", "score": 1}, {"text": "Try alone first", "score": 2}, {"text": "Figure it out myself", "score": 3}]},
+        {"text": "For a major decision, you prefer...", "answers": [{"text": "Talking with several people", "score": 0}, {"text": "One trusted opinion", "score": 1}, {"text": "Thinking alone then checking", "score": 2}, {"text": "Making the call myself", "score": 3}]},
+        {"text": "A group project feels best when...", "answers": [{"text": "Everyone works closely", "score": 0}, {"text": "Roles are shared", "score": 1}, {"text": "I own my part", "score": 2}, {"text": "I can work mostly alone", "score": 3}]},
+        {"text": "When you are stuck, asking for help is...", "answers": [{"text": "My first move", "score": 0}, {"text": "Easy enough", "score": 1}, {"text": "Something I do after trying", "score": 2}, {"text": "A last resort", "score": 3}]},
+        {"text": "Having nobody available for a day feels...", "answers": [{"text": "Limiting", "score": 0}, {"text": "A little inconvenient", "score": 1}, {"text": "Mostly fine", "score": 2}, {"text": "Completely normal", "score": 3}]}
+      ]
+    }
+  ]
+}
