@@ -21,38 +21,15 @@ object AppEvents {
 
     fun testStart(quizId: String) = log("test_start", mapOf("quiz_id" to quizId))
     fun testComplete(quizId: String, score: Int) = log("test_complete", mapOf("quiz_id" to quizId, "score" to score))
-    fun resultShare(quizId: String, score: Int? = null) = log(
-        "result_share",
-        buildMap {
-            put("quiz_id", quizId)
-            if (score != null) put("score", score)
-        }
-    )
-    fun challengeCreate(quizId: String, score: Int? = null) = log(
-        "challenge_create",
-        buildMap {
-            put("quiz_id", quizId)
-            if (score != null) put("score", score)
-        }
-    )
-    fun challengeOpen(quizId: String, source: String) = log(
-        "challenge_open",
-        mapOf("quiz_id" to quizId, "source" to source)
-    )
+    fun resultShare(quizId: String, score: Int? = null) = log("result_share", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
+    fun challengeCreate(quizId: String, score: Int? = null) = log("challenge_create", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
+    fun challengeOpen(quizId: String, source: String) = log("challenge_open", mapOf("quiz_id" to quizId, "source" to source))
+    fun challengeComplete(quizId: String, compatibility: Int) = log("challenge_complete", mapOf("quiz_id" to quizId, "compatibility" to compatibility.coerceIn(0, 100)))
     fun appLinkOpen(path: String) = log("app_link_open", mapOf("path" to path))
-    fun profileShare(archetype: String, completedCount: Int) = log(
-        "profile_share",
-        mapOf("archetype" to archetype, "completed_count" to completedCount)
-    )
-    fun profileChallenge(quizId: String, score: Int) = log(
-        "profile_challenge",
-        mapOf("quiz_id" to quizId, "score" to score)
-    )
+    fun profileShare(archetype: String, completedCount: Int) = log("profile_share", mapOf("archetype" to archetype, "completed_count" to completedCount))
+    fun profileChallenge(quizId: String, score: Int) = log("profile_challenge", mapOf("quiz_id" to quizId, "score" to score))
     fun dailyQuestionView(questionId: String) = log("daily_question_view", mapOf("question_id" to questionId))
-    fun dailyQuestionVote(questionId: String, option: Int) = log(
-        "daily_question_vote",
-        mapOf("question_id" to questionId, "option" to option.coerceIn(0, 1))
-    )
+    fun dailyQuestionVote(questionId: String, option: Int) = log("daily_question_vote", mapOf("question_id" to questionId, "option" to option.coerceIn(0, 1)))
     fun streakContinue(streak: Int) = log("streak_continue", mapOf("streak" to streak))
     fun achievementUnlock(achievementId: String) = log("achievement_unlock", mapOf("achievement_id" to achievementId))
     fun premiumView() = log("premium_view")
