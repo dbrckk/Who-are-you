@@ -20,6 +20,11 @@ data class SignatureProfileCopy(
     val description: String
 )
 
+data class SignatureRecommendation(
+    val quizId: String,
+    val target: SignatureProfileKey
+)
+
 object SignatureProfiles {
     private const val MIN_COMPLETED_DIMENSIONS = 8
 
@@ -34,6 +39,14 @@ object SignatureProfiles {
         val key: SignatureProfileKey,
         val requirements: List<Requirement>,
         val contradictions: List<Requirement> = emptyList()
+    )
+
+    private data class RecommendationPath(
+        val ruleIndex: Int,
+        val key: SignatureProfileKey,
+        val completedWeight: Int,
+        val averageStrength: Int,
+        val missing: Requirement
     )
 
     private val rules = listOf(
@@ -145,6 +158,52 @@ object SignatureProfiles {
                 supportingQuizIds = rule.requirements.map { it.quizId }
             )
         }
+    }
+
+    fun recommendNext(scores: Map<String, Int>, availableQuizIds: Set<String>): SignatureRecommendation? {
+        if (scores.isEmpty() || availableQuizIds.isEmpty()) return null
+
+        val paths = rules.mapIndexedNotNull { ruleIndex, rule ->
+            val contradicted = rule.contradictions.any { requirement ->
+                scores[requirement.quizId]?.let { score -> satisfies(score, requirement) } == true
+            }
+            if (contradicted) return@mapIndexedNotNull null
+
+            val completed = rule.requirements.filter { it.quizId in scores }
+            if (completed.isEmpty()) return@mapIndexedNotNull null
+            if (completed.any { requirement -> !satisfies(scores.getValue(requirement.quizId), requirement) }) {
+                return@mapIndexedNotNull null
+            }
+
+            val missing = rule.requirements
+                .filter { it.quizId !in scores && it.quizId in availableQuizIds }
+                .maxWithOrNull(
+                    compareBy<Requirement> { it.weight }
+                        .thenByDescending { -rule.requirements.indexOf(it) }
+                ) ?: return@mapIndexedNotNull null
+
+            val completedWeight = completed.sumOf { it.weight }
+            val weightedStrength = completed.sumOf { requirement ->
+                requirementStrength(scores.getValue(requirement.quizId).coerceIn(0, 100), requirement) * requirement.weight
+            }
+            val averageStrength = weightedStrength / completedWeight.coerceAtLeast(1)
+
+            RecommendationPath(
+                ruleIndex = ruleIndex,
+                key = rule.key,
+                completedWeight = completedWeight,
+                averageStrength = averageStrength,
+                missing = missing
+            )
+        }
+
+        val best = paths.maxWithOrNull(
+            compareBy<RecommendationPath> { it.completedWeight }
+                .thenBy { it.averageStrength }
+                .thenByDescending { -it.ruleIndex }
+        ) ?: return null
+
+        return SignatureRecommendation(quizId = best.missing.quizId, target = best.key)
     }
 
     fun copy(key: SignatureProfileKey, french: Boolean): SignatureProfileCopy = when (key) {
