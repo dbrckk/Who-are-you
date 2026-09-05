@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -81,11 +82,11 @@ private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
         val question = quiz.questions[questionIndex]
         val progress = (questionIndex + 1f) / quiz.questions.size
         Column(Modifier.fillMaxSize().background(ChallengeInk).padding(20.dp)) {
-            Text("FRIEND CHALLENGE", color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.challenge_header), color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
             Text(quiz.title, color = Color.White, fontSize = 30.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(6.dp))
-            Text("Take the same test. Your compatibility appears instantly.", color = ChallengeMuted, fontSize = 14.sp)
+            Text(stringResource(R.string.challenge_intro), color = ChallengeMuted, fontSize = 14.sp)
             Spacer(Modifier.height(22.dp))
             LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = ChallengeViolet, trackColor = ChallengePanelSoft)
             Spacer(Modifier.height(32.dp))
@@ -103,7 +104,7 @@ private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
                 }
             }
             Spacer(Modifier.weight(1f))
-            Text("For entertainment and self-reflection only.", color = ChallengeMuted, fontSize = 11.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
+            Text(stringResource(R.string.challenge_disclaimer), color = ChallengeMuted, fontSize = 11.sp, modifier = Modifier.align(Alignment.CenterHorizontally))
         }
     } else CompatibilityScreen(quiz, inviterScore, result, onClose)
 }
@@ -112,36 +113,68 @@ private fun ChallengeFlow(quiz: Quiz, inviterScore: Int, onClose: () -> Unit) {
 private fun CompatibilityScreen(quiz: Quiz, inviterScore: Int, myScore: Int, onClose: () -> Unit) {
     val context = LocalContext.current
     val compatibility = (100 - abs(inviterScore - myScore)).coerceIn(0, 100)
-    val label = when { compatibility >= 90 -> "ALMOST IDENTICAL"; compatibility >= 75 -> "STRONG MATCH"; compatibility >= 55 -> "MIXED MATCH"; else -> "OPPOSITE ENERGY" }
+    val label = when {
+        compatibility >= 90 -> stringResource(R.string.challenge_match_identical)
+        compatibility >= 75 -> stringResource(R.string.challenge_match_strong)
+        compatibility >= 55 -> stringResource(R.string.challenge_match_mixed)
+        else -> stringResource(R.string.challenge_match_opposite)
+    }
+    val explanation = when {
+        compatibility >= 90 -> stringResource(R.string.challenge_match_identical_copy)
+        compatibility >= 75 -> stringResource(R.string.challenge_match_strong_copy)
+        compatibility >= 55 -> stringResource(R.string.challenge_match_mixed_copy)
+        else -> stringResource(R.string.challenge_match_opposite_copy)
+    }
+
     Column(modifier = Modifier.fillMaxSize().background(ChallengeInk).padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Spacer(Modifier.height(34.dp)); Text("YOUR MATCH", color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold); Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(34.dp))
+        Text(stringResource(R.string.challenge_match_header), color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(16.dp))
         Text("$compatibility%", color = ChallengeViolet, fontSize = 76.sp, fontWeight = FontWeight.Black)
         Text(label, color = Color.White, fontSize = 25.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
-        Spacer(Modifier.height(8.dp)); Text(quiz.title, color = ChallengeMuted, fontSize = 14.sp); Spacer(Modifier.height(28.dp))
+        Spacer(Modifier.height(8.dp))
+        Text(quiz.title, color = ChallengeMuted, fontSize = 14.sp)
+        Spacer(Modifier.height(28.dp))
         Card(colors = CardDefaults.cardColors(containerColor = ChallengePanel), shape = RoundedCornerShape(26.dp), modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(22.dp)) { ScoreRow("FRIEND", inviterScore, quiz.metricLow, quiz.metricHigh); Spacer(Modifier.height(22.dp)); ScoreRow("YOU", myScore, quiz.metricLow, quiz.metricHigh) }
+            Column(Modifier.padding(22.dp)) {
+                ScoreRow(stringResource(R.string.challenge_friend), inviterScore, quiz.metricLow, quiz.metricHigh)
+                Spacer(Modifier.height(22.dp))
+                ScoreRow(stringResource(R.string.challenge_you), myScore, quiz.metricLow, quiz.metricHigh)
+            }
         }
         Spacer(Modifier.height(20.dp))
-        Text(when { compatibility >= 90 -> "You landed in nearly the same place on this dimension."; compatibility >= 75 -> "Your answers differ, but your overall pattern is strongly aligned."; compatibility >= 55 -> "You share some tendencies while diverging on others."; else -> "You approach this dimension very differently — which can make the comparison more interesting." }, color = Color.White, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
+        Text(explanation, color = Color.White, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
         Spacer(Modifier.weight(1f))
-        Button(onClick = { ChallengeShare.share(context, quiz.id, quiz.title, myScore) }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengeViolet), shape = RoundedCornerShape(18.dp)) { Text("CHALLENGE ANOTHER FRIEND  ↗", fontWeight = FontWeight.Black) }
+        Button(onClick = { ChallengeShare.share(context, quiz.id, quiz.title, myScore) }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengeViolet), shape = RoundedCornerShape(18.dp)) {
+            Text(stringResource(R.string.challenge_another_friend), fontWeight = FontWeight.Black)
+        }
         Spacer(Modifier.height(10.dp))
-        Button(onClick = onClose, modifier = Modifier.fillMaxWidth().height(52.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengePanelSoft), shape = RoundedCornerShape(18.dp)) { Text("CLOSE", fontWeight = FontWeight.Bold) }
+        Button(onClick = onClose, modifier = Modifier.fillMaxWidth().height(52.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengePanelSoft), shape = RoundedCornerShape(18.dp)) {
+            Text(stringResource(R.string.close), fontWeight = FontWeight.Bold)
+        }
         Spacer(Modifier.height(18.dp))
     }
 }
 
 @Composable
 private fun ScoreRow(label: String, score: Int, low: String, high: String) {
-    Text(label, color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold); Spacer(Modifier.height(6.dp))
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) { Text("$score%", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Black); Text(if (score >= 50) high else low, color = ChallengeMuted, fontSize = 12.sp, fontWeight = FontWeight.Bold) }
-    Spacer(Modifier.height(7.dp)); LinearProgressIndicator(progress = { score / 100f }, modifier = Modifier.fillMaxWidth().height(9.dp), color = ChallengeViolet, trackColor = ChallengePanelSoft)
+    Text(label, color = ChallengeCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+    Spacer(Modifier.height(6.dp))
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Text("$score%", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Black)
+        Text(if (score >= 50) high else low, color = ChallengeMuted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+    }
+    Spacer(Modifier.height(7.dp))
+    LinearProgressIndicator(progress = { score / 100f }, modifier = Modifier.fillMaxWidth().height(9.dp), color = ChallengeViolet, trackColor = ChallengePanelSoft)
 }
 
 @Composable
 private fun InvalidChallengeScreen(onClose: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().background(ChallengeInk).padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text("INVALID CHALLENGE", color = Color.White, fontSize = 28.sp, fontWeight = FontWeight.Black); Spacer(Modifier.height(10.dp))
-        Text("This challenge link is incomplete or no longer supported.", color = ChallengeMuted, textAlign = TextAlign.Center); Spacer(Modifier.height(24.dp)); Button(onClick = onClose) { Text("CLOSE") }
+        Text(stringResource(R.string.invalid_challenge), color = Color.White, fontSize = 28.sp, fontWeight = FontWeight.Black)
+        Spacer(Modifier.height(10.dp))
+        Text(stringResource(R.string.invalid_challenge_copy), color = ChallengeMuted, textAlign = TextAlign.Center)
+        Spacer(Modifier.height(24.dp))
+        Button(onClick = onClose) { Text(stringResource(R.string.close)) }
     }
 }
