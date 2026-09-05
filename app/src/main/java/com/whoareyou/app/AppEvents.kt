@@ -25,6 +25,7 @@ object AppEvents {
     fun challengeCreate(quizId: String, score: Int? = null) = log("challenge_create", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeOpen(quizId: String, source: String) = log("challenge_open", mapOf("quiz_id" to quizId, "source" to source))
     fun challengeComplete(quizId: String, compatibility: Int) = log("challenge_complete", mapOf("quiz_id" to quizId, "compatibility" to compatibility.coerceIn(0, 100)))
+    fun compatibilityShare(quizId: String, compatibility: Int) = log("compatibility_share", mapOf("quiz_id" to quizId, "compatibility" to compatibility.coerceIn(0, 100)))
     fun appLinkOpen(path: String) = log("app_link_open", mapOf("path" to path))
     fun profileShare(archetype: String, completedCount: Int) = log("profile_share", mapOf("archetype" to archetype, "completed_count" to completedCount))
     fun profileChallenge(quizId: String, score: Int) = log("profile_challenge", mapOf("quiz_id" to quizId, "score" to score))
