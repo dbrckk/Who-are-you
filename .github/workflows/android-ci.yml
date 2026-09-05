@@ -92,11 +92,20 @@ jobs:
           assert 'BuildConfig.ADMOB_INTERSTITIAL_ID' in ad_manager
           assert 'ca-app-pub-3940256099942544~3347511713' in gradle, 'Missing safe development AdMob fallback'
           assert 'ca-app-pub-3940256099942544/1033173712' in gradle, 'Missing safe development interstitial fallback'
+          assert 'android:autoVerify="true"' in manifest, 'HTTPS App Link must request automatic verification'
           print('Release configuration is injectable and development-safe')
           PY
 
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
-      - name: Build debug and release APKs
-        run: gradle :app:assembleDebug :app:assembleRelease --stacktrace
+      - name: Build debug APK, release APK and release AAB
+        run: gradle :app:assembleDebug :app:assembleRelease :app:bundleRelease --stacktrace
+
+      - name: Upload release AAB
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: who-are-you-release-aab
+          path: app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
