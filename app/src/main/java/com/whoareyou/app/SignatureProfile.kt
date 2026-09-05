@@ -5,7 +5,8 @@ enum class SignatureProfileKey {
     STRUCTURED_BUILDER,
     OPEN_CONNECTOR,
     ADAPTIVE_DIPLOMAT,
-    DRIVEN_CHALLENGER
+    DRIVEN_CHALLENGER,
+    CALM_STRATEGIST
 }
 
 data class SignatureProfileMatch(
@@ -15,6 +16,8 @@ data class SignatureProfileMatch(
 )
 
 object SignatureProfiles {
+    private const val MIN_COMPLETED_DIMENSIONS = 8
+
     private data class Requirement(
         val quizId: String,
         val min: Int? = null,
@@ -89,38 +92,54 @@ object SignatureProfiles {
                 Requirement("assertiveness", max = 34),
                 Requirement("competitiveness", max = 34)
             )
+        ),
+        Rule(
+            key = SignatureProfileKey.CALM_STRATEGIST,
+            requirements = listOf(
+                Requirement("patience", min = 65, weight = 2),
+                Requirement("self_discipline", min = 65, weight = 2),
+                Requirement("stress_response", max = 45, weight = 2)
+            ),
+            contradictions = listOf(
+                Requirement("patience", max = 34),
+                Requirement("self_discipline", max = 34),
+                Requirement("stress_response", min = 80)
+            )
         )
     )
 
     fun primary(scores: Map<String, Int>): SignatureProfileMatch? {
-        if (scores.size < 5) return null
+        if (scores.size < MIN_COMPLETED_DIMENSIONS) return null
         return matches(scores).maxWithOrNull(
             compareBy<SignatureProfileMatch> { it.confidence }
                 .thenByDescending { -rules.indexOfFirst { rule -> rule.key == it.key } }
         )
     }
 
-    fun matches(scores: Map<String, Int>): List<SignatureProfileMatch> = rules.mapNotNull { rule ->
-        if (rule.requirements.any { scores[it.quizId] == null }) return@mapNotNull null
-        if (rule.contradictions.any { requirement ->
-                scores[requirement.quizId]?.let { score -> satisfies(score, requirement) } == true
-            }) return@mapNotNull null
-        if (rule.requirements.any { requirement -> !satisfies(scores.getValue(requirement.quizId), requirement) }) {
-            return@mapNotNull null
-        }
+    fun matches(scores: Map<String, Int>): List<SignatureProfileMatch> {
+        if (scores.size < MIN_COMPLETED_DIMENSIONS) return emptyList()
+        return rules.mapNotNull { rule ->
+            if (rule.requirements.any { scores[it.quizId] == null }) return@mapNotNull null
+            if (rule.contradictions.any { requirement ->
+                    scores[requirement.quizId]?.let { score -> satisfies(score, requirement) } == true
+                }) return@mapNotNull null
+            if (rule.requirements.any { requirement -> !satisfies(scores.getValue(requirement.quizId), requirement) }) {
+                return@mapNotNull null
+            }
 
-        val weighted = rule.requirements.sumOf { requirement ->
-            val score = scores.getValue(requirement.quizId).coerceIn(0, 100)
-            val strength = requirementStrength(score, requirement)
-            strength * requirement.weight
+            val weighted = rule.requirements.sumOf { requirement ->
+                val score = scores.getValue(requirement.quizId).coerceIn(0, 100)
+                val strength = requirementStrength(score, requirement)
+                strength * requirement.weight
+            }
+            val totalWeight = rule.requirements.sumOf { it.weight }
+            val confidence = (weighted / totalWeight).coerceIn(0, 100)
+            SignatureProfileMatch(
+                key = rule.key,
+                confidence = confidence,
+                supportingQuizIds = rule.requirements.map { it.quizId }
+            )
         }
-        val totalWeight = rule.requirements.sumOf { it.weight }
-        val confidence = (weighted / totalWeight).coerceIn(0, 100)
-        SignatureProfileMatch(
-            key = rule.key,
-            confidence = confidence,
-            supportingQuizIds = rule.requirements.map { it.quizId }
-        )
     }
 
     private fun satisfies(rawScore: Int, requirement: Requirement): Boolean {
