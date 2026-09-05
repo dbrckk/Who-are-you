@@ -11,7 +11,10 @@ class SignatureProfilesTest {
         "boundaries" to 50,
         "risk_taker" to 50,
         "social_battery" to 50,
-        "decision_style" to 50
+        "decision_style" to 50,
+        "love_style" to 50,
+        "friendship_type" to 50,
+        "money_personality" to 50
     )
 
     private fun withEvidence(required: Map<String, Int>): Map<String, Int> = neutralEvidence + required
@@ -79,7 +82,7 @@ class SignatureProfilesTest {
             SignatureProfileKey.OPEN_CONNECTOR to mapOf("emotional_openness" to 80, "trust_style" to 75, "communication_style" to 70),
             SignatureProfileKey.ADAPTIVE_DIPLOMAT to mapOf("adaptability" to 80, "patience" to 85, "assertiveness" to 60),
             SignatureProfileKey.DRIVEN_CHALLENGER to mapOf("assertiveness" to 85, "competitiveness" to 90, "stress_response" to 75),
-            SignatureProfileKey.CALM_STRATEGIST to mapOf("planning_style" to 85, "patience" to 90, "stress_response" to 30)
+            SignatureProfileKey.CALM_STRATEGIST to mapOf("patience" to 90, "self_discipline" to 85, "stress_response" to 30)
         )
 
         cases.forEach { (expected, required) ->
