@@ -62,5 +62,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:25.4.0")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
 
+    testImplementation("junit:junit:4.13.2")
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
