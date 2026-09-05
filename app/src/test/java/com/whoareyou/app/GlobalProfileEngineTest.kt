@@ -59,6 +59,23 @@ class GlobalProfileEngineTest {
     }
 
     @Test
+    fun build_exposesPreviousToLatestEvolutionWithoutChangingLatestScore() {
+        val summary = GlobalProfileEngine.build(
+            catalog = listOf(quiz("planning_style"), quiz("adaptability")),
+            latestScores = mapOf("planning_style" to 74, "adaptability" to 82),
+            previousScores = mapOf("planning_style" to 61)
+        )
+
+        val planning = summary.dimensions.first { it.quizId == "planning_style" }
+        val adaptability = summary.dimensions.first { it.quizId == "adaptability" }
+        assertEquals(74, planning.score)
+        assertEquals(61, planning.change?.previousScore)
+        assertEquals(13, planning.change?.delta)
+        assertEquals(ScoreChangeDirection.HIGHER, planning.change?.direction)
+        assertNull(adaptability.change)
+    }
+
+    @Test
     fun build_attachesSignatureFromStableQuizIds() {
         val ids = listOf(
             "learning_drive",
