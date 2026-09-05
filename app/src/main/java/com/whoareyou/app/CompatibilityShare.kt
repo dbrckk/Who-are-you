@@ -125,33 +125,10 @@ object CompatibilityShare {
 
         paint.color = white
         paint.textSize = 48f
-        val labelWidth = paint.measureText(matchLabel)
-        canvas.drawText(matchLabel, (WIDTH - labelWidth) / 2f, 810f, paint)
+        drawCenteredFittedText(canvas, matchLabel, paint, 72f, 1008f, 810f, minTextSize = 30f)
 
-        drawScoreBar(
-            canvas = canvas,
-            paint = paint,
-            label = context.getString(R.string.challenge_friend),
-            score = inviterScore,
-            y = 910f,
-            cyan = cyan,
-            white = white,
-            muted = muted,
-            panelSoft = panelSoft,
-            violet = violet
-        )
-        drawScoreBar(
-            canvas = canvas,
-            paint = paint,
-            label = context.getString(R.string.challenge_you),
-            score = myScore,
-            y = 1010f,
-            cyan = cyan,
-            white = white,
-            muted = muted,
-            panelSoft = panelSoft,
-            violet = violet
-        )
+        drawScoreBar(canvas, paint, context.getString(R.string.challenge_friend), inviterScore, 910f, cyan, white, panelSoft, violet)
+        drawScoreBar(canvas, paint, context.getString(R.string.challenge_you), myScore, 1010f, cyan, white, panelSoft, violet)
 
         paint.color = cyan
         paint.textSize = 31f
@@ -178,8 +155,7 @@ object CompatibilityShare {
         paint.color = muted
         paint.textSize = 24f
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-        val disclaimer = context.getString(R.string.challenge_disclaimer)
-        canvas.drawText(disclaimer, (WIDTH - paint.measureText(disclaimer)) / 2f, 1860f, paint)
+        drawCenteredFittedText(canvas, context.getString(R.string.challenge_disclaimer), paint, 72f, 1008f, 1860f, minTextSize = 18f)
 
         return bitmap
     }
@@ -192,7 +168,6 @@ object CompatibilityShare {
         y: Float,
         cyan: Int,
         white: Int,
-        muted: Int,
         panelSoft: Int,
         violet: Int
     ) {
@@ -211,8 +186,22 @@ object CompatibilityShare {
         paint.color = violet
         val progressRight = 126f + 828f * score / 100f
         canvas.drawRoundRect(126f, y + 28f, progressRight, y + 56f, 14f, 14f, paint)
+    }
 
-        paint.color = muted
+    private fun drawCenteredFittedText(
+        canvas: Canvas,
+        text: String,
+        paint: Paint,
+        left: Float,
+        right: Float,
+        y: Float,
+        minTextSize: Float
+    ) {
+        val maxWidth = right - left
+        while (paint.measureText(text) > maxWidth && paint.textSize > minTextSize) {
+            paint.textSize -= 2f
+        }
+        canvas.drawText(text, left + (maxWidth - paint.measureText(text)) / 2f, y, paint)
     }
 
     private fun drawWrappedText(
