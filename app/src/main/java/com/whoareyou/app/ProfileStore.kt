@@ -19,6 +19,9 @@ data class StoredProfile(
     // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
     val onboardingComplete: Boolean = true,
     val announcedAchievementIds: Set<String> = emptySet(),
+    val matchCount: Int = 0,
+    val bestMatchPercent: Int? = null,
+    val lowestMatchPercent: Int? = null,
     val daily: DailyState = DailyState()
 )
 
@@ -28,6 +31,9 @@ object ProfileStore {
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
+    private val matchCountKey = intPreferencesKey("match_count")
+    private val bestMatchKey = intPreferencesKey("best_match_percent")
+    private val lowestMatchKey = intPreferencesKey("lowest_match_percent")
     private val dailyAnsweredDateKey = stringPreferencesKey("daily_answered_date")
     private val dailyQuestionIdKey = stringPreferencesKey("daily_question_id")
     private val dailySelectedOptionKey = intPreferencesKey("daily_selected_option")
@@ -43,6 +49,19 @@ object ProfileStore {
             val scores = decodeScores(prefs[scoresKey]).toMutableMap().apply { put(quizId, score.coerceIn(0, 100)) }
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = scores.entries.sortedBy { it.key }.joinToString(";") { "${it.key}:${it.value}" }
+        }
+        announceNewAchievements(context)
+    }
+
+    suspend fun saveMatchResult(context: Context, compatibility: Int) {
+        val score = compatibility.coerceIn(0, 100)
+        context.profileDataStore.edit { prefs ->
+            val count = (prefs[matchCountKey] ?: 0) + 1
+            val best = prefs[bestMatchKey]
+            val lowest = prefs[lowestMatchKey]
+            prefs[matchCountKey] = count
+            prefs[bestMatchKey] = maxOf(best ?: score, score)
+            prefs[lowestMatchKey] = minOf(lowest ?: score, score)
         }
         announceNewAchievements(context)
     }
@@ -122,6 +141,9 @@ object ProfileStore {
         adsRemoved = prefs[adsRemovedKey] ?: false,
         onboardingComplete = prefs[onboardingCompleteKey] ?: false,
         announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
+        matchCount = prefs[matchCountKey] ?: 0,
+        bestMatchPercent = prefs[bestMatchKey],
+        lowestMatchPercent = prefs[lowestMatchKey],
         daily = DailyState(
             answeredDate = prefs[dailyAnsweredDateKey],
             questionId = prefs[dailyQuestionIdKey],
