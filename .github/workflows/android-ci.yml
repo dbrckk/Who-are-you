@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: '17'
@@ -44,8 +44,8 @@ jobs:
           for path in files:
               by_locale.setdefault(locale_for(path), []).append(path)
 
-          english_ids = set()
-          english_total = 0
+          locale_ids = {}
+          locale_totals = {}
 
           for locale, locale_files in sorted(by_locale.items()):
               ids = set()
@@ -65,15 +65,22 @@ jobs:
                           scores = sorted(answer['score'] for answer in answers)
                           assert scores == [0, 1, 2, 3], f'{locale}/{quiz_id} Q{index}: scores must be 0,1,2,3'
 
-              if locale == 'en':
-                  english_ids = ids
-                  english_total = total
-              else:
-                  assert ids <= english_ids, f'{locale}: localized catalog contains unknown quiz ids: {sorted(ids - english_ids)}'
-
+              locale_ids[locale] = ids
+              locale_totals[locale] = total
               print(f'Validated {total} {locale} quizzes across {len(locale_files)} asset files')
 
-          assert english_total >= 15, f'Expected at least 15 English quizzes, found {english_total}'
+          english_ids = locale_ids.get('en', set())
+          french_ids = locale_ids.get('fr', set())
+          english_total = locale_totals.get('en', 0)
+          french_total = locale_totals.get('fr', 0)
+
+          assert english_total >= 30, f'Expected at least 30 English quizzes, found {english_total}'
+          assert french_total >= 30, f'Expected at least 30 French quizzes, found {french_total}'
+          assert french_ids == english_ids, (
+              f'FR/EN quiz IDs differ. Missing in FR: {sorted(english_ids - french_ids)}; '
+              f'unknown in FR: {sorted(french_ids - english_ids)}'
+          )
+          print(f'Bilingual catalog parity confirmed: {english_total} EN / {french_total} FR')
           PY
 
       - name: Validate release configuration
@@ -104,7 +111,7 @@ jobs:
 
       - name: Upload release AAB
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: who-are-you-release-aab
           path: app/build/outputs/bundle/release/app-release.aab
