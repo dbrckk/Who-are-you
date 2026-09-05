@@ -43,10 +43,22 @@ fun RetentionSection() {
     val totalQuizCount = remember(context) { QuizRepository.load(context).size }
     val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile, totalQuizCount) { AchievementEngine.build(storedProfile, totalQuizCount) }
+    val pendingAchievementId = storedProfile.pendingAchievementIds.firstOrNull()
+    val pendingAchievement = pendingAchievementId?.let { id -> achievements.firstOrNull { it.id == id } }
 
     LaunchedEffect(question.id) { AppEvents.dailyQuestionView(question.id) }
+    LaunchedEffect(pendingAchievementId, pendingAchievement) {
+        if (pendingAchievementId != null && pendingAchievement == null) {
+            ProfileStore.consumeAchievementUnlock(context, pendingAchievementId)
+        }
+    }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        if (pendingAchievement != null) {
+            AchievementUnlockCard(pendingAchievement) {
+                scope.launch { ProfileStore.consumeAchievementUnlock(context, pendingAchievement.id) }
+            }
+        }
         DailyQuestionCard(
             question = question,
             state = storedProfile.daily,
@@ -62,6 +74,35 @@ fun RetentionSection() {
             onShare = { DailyQuestionShare.share(context, question) }
         )
         AchievementStrip(achievements)
+    }
+}
+
+@Composable
+private fun AchievementUnlockCard(achievement: Achievement, onDismiss: () -> Unit) {
+    val (title, description) = localizedAchievement(achievement.id, achievement.title, achievement.description)
+    Card(
+        colors = CardDefaults.cardColors(containerColor = RetentionPanelSoft),
+        shape = RoundedCornerShape(24.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(Modifier.padding(22.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(stringResource(R.string.achievement_unlocked_label), color = RetentionCyan, fontSize = 11.sp, fontWeight = FontWeight.Black)
+                Text("★", color = RetentionViolet, fontSize = 20.sp, fontWeight = FontWeight.Black)
+            }
+            Spacer(Modifier.height(9.dp))
+            Text(title, color = Color.White, fontSize = 21.sp, fontWeight = FontWeight.Black)
+            Spacer(Modifier.height(5.dp))
+            Text(description, color = RetentionMuted, fontSize = 13.sp, lineHeight = 19.sp)
+            Spacer(Modifier.height(14.dp))
+            Text(
+                stringResource(R.string.achievement_unlocked_dismiss),
+                color = RetentionViolet,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier.clickable(onClick = onDismiss)
+            )
+        }
     }
 }
 
