@@ -20,14 +20,17 @@ object GlobalProfileShare {
 
     private data class CardCopy(
         val profileTitle: String,
+        val signatureLabel: String,
         val progress: (Int, Int, Int) -> String,
         val cta: String,
         val disclaimer: String,
         val shareText: (String) -> String,
-        val chooser: String
+        val chooser: String,
+        val french: Boolean
     )
 
     fun share(context: Context, summary: GlobalProfileSummary) {
+        summary.signature?.let(AppEvents::signatureShare)
         shareScope.launch {
             val chooser = withContext(Dispatchers.IO) {
                 val copy = cardCopy(context)
@@ -37,10 +40,13 @@ object GlobalProfileShare {
                     val file = File(dir, "who_are_you_profile.png")
                     FileOutputStream(file).use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
                     val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                    val shareArchetype = summary.signature
+                        ?.let { SignatureProfiles.copy(it.key, copy.french).title }
+                        ?: summary.dominantArchetype
                     val intent = Intent(Intent.ACTION_SEND).apply {
                         type = "image/png"
                         putExtra(Intent.EXTRA_STREAM, uri)
-                        putExtra(Intent.EXTRA_TEXT, copy.shareText(summary.dominantArchetype))
+                        putExtra(Intent.EXTRA_TEXT, copy.shareText(shareArchetype))
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
                     Intent.createChooser(intent, copy.chooser)
@@ -57,20 +63,24 @@ object GlobalProfileShare {
         return if (french) {
             CardCopy(
                 profileTitle = "TON PROFIL",
+                signatureLabel = "TA SIGNATURE",
                 progress = { completed, total, percent -> "$completed/$total dimensions découvertes • $percent% complété" },
                 cta = "Découvre le tien. Compare-toi avec tes amis.",
                 disclaimer = "Pour le divertissement et la réflexion personnelle uniquement.",
                 shareText = { archetype -> "Mon profil Who Are You? : $archetype. À quoi ressemble le tien ?" },
-                chooser = "Partager ton profil"
+                chooser = "Partager ton profil",
+                french = true
             )
         } else {
             CardCopy(
                 profileTitle = "YOUR PROFILE",
+                signatureLabel = "YOUR SIGNATURE",
                 progress = { completed, total, percent -> "$completed/$total dimensions discovered • $percent% complete" },
                 cta = "Discover yours. Compare with friends.",
                 disclaimer = "For entertainment and self-reflection only.",
                 shareText = { archetype -> "My Who Are You? profile: $archetype. What does yours look like?" },
-                chooser = "Share your profile"
+                chooser = "Share your profile",
+                french = false
             )
         }
     }
@@ -100,8 +110,28 @@ object GlobalProfileShare {
         paint.textSize = 32f
         drawFittedText(canvas, copy.progress(summary.completedCount, summary.totalCount, summary.completionPercent), 84f, 600f, width - 168f, paint, 32f, 24f)
 
-        var y = 720f
-        val dimensions = summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(6)
+        val signature = summary.signature
+        var y: Float
+        val dimensions: List<ProfileDimension>
+        if (signature != null) {
+            val signatureCopy = SignatureProfiles.copy(signature.key, copy.french)
+            paint.color = Color.rgb(110, 231, 249)
+            paint.textSize = 24f
+            canvas.drawText(copy.signatureLabel, 84f, 680f, paint)
+            paint.color = Color.rgb(156, 123, 255)
+            paint.textSize = 42f
+            drawFittedText(canvas, signatureCopy.title, 84f, 735f, width - 168f, paint, 42f, 30f)
+            paint.color = Color.rgb(164, 167, 181)
+            paint.textSize = 24f
+            val confidence = if (copy.french) "Correspondance ${signature.confidence}%" else "${signature.confidence}% match confidence"
+            canvas.drawText(confidence, 84f, 778f, paint)
+            y = 865f
+            dimensions = summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(5)
+        } else {
+            y = 720f
+            dimensions = summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(6)
+        }
+
         dimensions.forEach { dimension ->
             paint.color = Color.WHITE
             paint.textSize = 38f
