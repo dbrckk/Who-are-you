@@ -105,8 +105,12 @@
     <string name="challenge_match_opposite_copy">You approach this dimension very differently — which can make the comparison more interesting.</string>
     <string name="compatibility_share_button">SHARE OUR MATCH  ↗</string>
     <string name="compatibility_share_text">We got %1$d%% compatibility on %2$s in Who Are You? What would your match be?</string>
+    <string name="compatibility_share_challenge">Take the same test and compare with me: %1$s</string>
     <string name="compatibility_share_subject">Who Are You? match</string>
     <string name="compatibility_share_chooser">Share your match</string>
+    <string name="compatibility_card_hook">FRIEND MATCH</string>
+    <string name="compatibility_card_cta">How compatible are you with your friends?</string>
+    <string name="compatibility_card_subtitle">Take the same test, compare instantly, then pass the challenge on.</string>
     <string name="challenge_another_friend">CHALLENGE ANOTHER FRIEND  ↗</string>
     <string name="close">CLOSE</string>
     <string name="invalid_challenge">INVALID CHALLENGE</string>
