@@ -2,24 +2,24 @@
   "version": 1,
   "quizzes": [
     {
-      "id": "conflict_style",
-      "title": "Style de conflit",
-      "hook": "Tu protèges la paix ou tu affrontes directement les tensions ?",
+      "id": "assertiveness",
+      "title": "Affirmation de soi",
+      "hook": "À quel point exprimes-tu clairement tes besoins et ton point de vue ?",
       "time": "45 SEC",
       "accent": "⚡",
-      "metricLow": "HARMONIE",
-      "metricHigh": "DIRECT",
+      "metricLow": "ACCOMMODANT",
+      "metricHigh": "AFFIRMÉ",
       "results": {
-        "low": {"title": "Le Médiateur", "description": "Tu cherches naturellement à réduire les frictions et à préserver la relation avant de pousser un désaccord."},
-        "mid": {"title": "Le Diplomate", "description": "Tu sais aborder une tension directement tout en faisant attention au ton, au moment et à la relation."},
-        "high": {"title": "Le Franc-parleur", "description": "Tu préfères nommer clairement les problèmes et les résoudre plutôt que laisser une tension s’installer."}
+        "low": {"title": "L’Accommodant", "description": "Tu protèges souvent l’harmonie en premier et peux retenir ton point de vue lorsque parler risque de créer des frictions."},
+        "mid": {"title": "Le Défenseur calme", "description": "Tu sais exprimer ce dont tu as besoin tout en adaptant ton ton et ton timing à la personne et à la situation."},
+        "high": {"title": "Le Défenseur clair", "description": "Tu es à l’aise pour exprimer clairement tes besoins, tes limites et tes opinions même si cela crée un inconfort temporaire."}
       },
       "questions": [
         {"text": "Un ami dit quelque chose qui te dérange. Tu...", "answers": [{"text": "Laisses passer", "score": 0}, {"text": "Attends un meilleur moment", "score": 1}, {"text": "En parles calmement", "score": 2}, {"text": "Réagis tout de suite", "score": 3}]},
-        {"text": "Deux personnes se disputent près de toi. Tu...", "answers": [{"text": "Essaies de calmer tout le monde", "score": 0}, {"text": "Écoutes d’abord", "score": 1}, {"text": "Aides à clarifier le problème", "score": 2}, {"text": "Dis ce qui doit être dit", "score": 3}]},
+        {"text": "Ton opinion diffère de celle de tout le monde. Tu...", "answers": [{"text": "La gardes pour toi", "score": 0}, {"text": "La partages si on te demande", "score": 1}, {"text": "L’exprimes avec respect", "score": 2}, {"text": "T’assures qu’elle soit entendue", "score": 3}]},
         {"text": "Quelqu’un dépasse plusieurs fois une limite. Tu...", "answers": [{"text": "Prends tes distances discrètement", "score": 0}, {"text": "Fais comprendre que ça te dérange", "score": 1}, {"text": "Énonces clairement la limite", "score": 2}, {"text": "Confrontes directement le comportement", "score": 3}]},
-        {"text": "Pendant un désaccord, le silence te semble...", "answers": [{"text": "Plus sûr", "score": 0}, {"text": "Utile pour redescendre", "score": 1}, {"text": "Acceptable un moment", "score": 2}, {"text": "Frustrant si rien ne se règle", "score": 3}]},
-        {"text": "La meilleure fin d’un conflit, pour toi, c’est...", "answers": [{"text": "Que tout le monde se sente bien", "score": 0}, {"text": "Une compréhension mutuelle", "score": 1}, {"text": "Un accord clair", "score": 2}, {"text": "Que le vrai problème soit résolu", "score": 3}]}
+        {"text": "On te sert quelque chose de différent de ce que tu as commandé. Tu...", "answers": [{"text": "Acceptes généralement", "score": 0}, {"text": "Le signales seulement si c’est important", "score": 1}, {"text": "Demandes une correction", "score": 2}, {"text": "Demandes clairement ce qui était prévu", "score": 3}]},
+        {"text": "Dire non à une demande raisonnable te semble...", "answers": [{"text": "Très difficile", "score": 0}, {"text": "Un peu inconfortable", "score": 1}, {"text": "Gérable", "score": 2}, {"text": "Tout à fait normal si nécessaire", "score": 3}]}
       ]
     },
     {
