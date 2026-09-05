@@ -130,7 +130,7 @@ object SignatureProfiles {
         if (scores.size < MIN_COMPLETED_DIMENSIONS) return null
         return matches(scores).maxWithOrNull(
             compareBy<SignatureProfileMatch> { it.confidence }
-                .thenByDescending { -rules.indexOfFirst { rule -> rule.key == it.key } }
+                .thenBy { -rules.indexOfFirst { rule -> rule.key == it.key } }
         )
     }
 
@@ -179,7 +179,7 @@ object SignatureProfiles {
                 .filter { it.quizId !in scores && it.quizId in availableQuizIds }
                 .maxWithOrNull(
                     compareBy<Requirement> { it.weight }
-                        .thenByDescending { -rule.requirements.indexOf(it) }
+                        .thenBy { -rule.requirements.indexOf(it) }
                 ) ?: return@mapIndexedNotNull null
 
             val completedWeight = completed.sumOf { it.weight }
@@ -200,7 +200,7 @@ object SignatureProfiles {
         val best = paths.maxWithOrNull(
             compareBy<RecommendationPath> { it.completedWeight }
                 .thenBy { it.averageStrength }
-                .thenByDescending { -it.ruleIndex }
+                .thenBy { -it.ruleIndex }
         ) ?: return null
 
         return SignatureRecommendation(quizId = best.missing.quizId, target = best.key)
