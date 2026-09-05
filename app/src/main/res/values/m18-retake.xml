@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retake_change_title">SINCE LAST TIME</string>
+    <string name="retake_change_values">%1$d%% → %2$d%%</string>
+    <string name="retake_change_higher">Your score is %1$d points higher than your previous result.</string>
+    <string name="retake_change_lower">Your score is %1$d points lower than your previous result.</string>
+    <string name="retake_change_same">Your score is unchanged from your previous result.</string>
+</resources>
