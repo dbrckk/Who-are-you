@@ -16,8 +16,9 @@ object AchievementEngine {
 
         return listOf(
             Achievement("first_test", "First Test", "Complete your first personality test.", completed >= 1),
-            Achievement("ten_tests", "10 Tests", "Complete ten different tests.", completed >= 10),
             Achievement("profile_builder", "Profile Builder", "Discover five profile dimensions.", dimensions >= 5),
+            Achievement("ten_tests", "10 Tests", "Complete ten different tests.", completed >= 10),
+            Achievement("twenty_five_tests", "25 Tests", "Complete twenty-five different tests.", completed >= 25),
             Achievement("profile_complete", "Know Yourself", "Discover every available profile dimension.", completed >= completeTarget),
             Achievement("strong_match", "Strong Match", "Reach at least 90% compatibility with a friend.", (profile.bestMatchPercent ?: -1) >= 90),
             Achievement("opposites", "Opposites", "Find a friend match at 45% compatibility or lower.", (profile.lowestMatchPercent ?: 101) <= 45),
