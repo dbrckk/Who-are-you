@@ -45,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 private val Ink = Color(0xFF090A0F)
@@ -73,7 +74,10 @@ private fun WhoAreYouApp() {
     val activity = context as? Activity
     val scope = rememberCoroutineScope()
     val quizCatalog = remember(context) { QuizRepository.load(context) }
-    val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+    val storedProfileState by ProfileStore.observe(context)
+        .map<StoredProfile, StoredProfile?> { it }
+        .collectAsState(initial = null)
+    val storedProfile = storedProfileState ?: return
     val globalProfile = remember(quizCatalog, storedProfile.latestScores) { GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores) }
 
     var premiumOverride by remember { mutableStateOf(false) }
@@ -195,6 +199,7 @@ private fun DiscoverScreen(
     val premiumPrice = BillingPriceState.displayPrice
     val recommendedQuiz = quizzes.firstOrNull { it.id !in completed } ?: quizzes.firstOrNull()
     val allCompleted = quizzes.isNotEmpty() && completed.containsAll(quizzes.map { it.id })
+    val orderedQuizzes = remember(quizzes, completed) { quizzes.sortedBy { it.id in completed } }
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
@@ -218,7 +223,7 @@ private fun DiscoverScreen(
             Text(stringResource(R.string.trending_tests), color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
 
-        items(quizzes, key = { it.id }) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
+        items(orderedQuizzes, key = { it.id }) { quiz -> QuizCard(quiz, quiz.id in completed) { onQuizSelected(quiz) } }
 
         item {
             Card(colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
