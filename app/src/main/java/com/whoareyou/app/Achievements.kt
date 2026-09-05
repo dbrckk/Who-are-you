@@ -8,10 +8,11 @@ data class Achievement(
 )
 
 object AchievementEngine {
-    fun build(profile: StoredProfile): List<Achievement> {
+    fun build(profile: StoredProfile, totalQuizCount: Int): List<Achievement> {
         val completed = profile.completedQuizIds.size
         val dimensions = profile.latestScores.size
         val streak = profile.daily.longestStreak
+        val completeTarget = totalQuizCount.coerceAtLeast(1)
 
         return listOf(
             Achievement(
@@ -36,7 +37,7 @@ object AchievementEngine {
                 id = "profile_complete",
                 title = "Know Yourself",
                 description = "Discover every available profile dimension.",
-                unlocked = completed >= 15
+                unlocked = completed >= completeTarget
             ),
             Achievement(
                 id = "streak_3",
@@ -59,5 +60,6 @@ object AchievementEngine {
         )
     }
 
-    fun unlocked(profile: StoredProfile): List<Achievement> = build(profile).filter { it.unlocked }
+    fun unlocked(profile: StoredProfile, totalQuizCount: Int): List<Achievement> =
+        build(profile, totalQuizCount).filter { it.unlocked }
 }
