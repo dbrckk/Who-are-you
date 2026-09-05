@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recommended_retake_label">SUIS TON ÉVOLUTION</string>
+    <string name="recommended_retake_start_reason">Refais cette dimension pour créer sa première comparaison avant/après.</string>
+    <string name="recommended_retake_change_reason">C’est la dimension qui a le plus bougé dans tes retests récents. Refais-la pour voir où elle se situe maintenant.</string>
+</resources>
