@@ -388,6 +388,10 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+            if (summary.dimensions.size >= 5) {
+                Spacer(Modifier.height(18.dp))
+                ProfileInsightCards(summary)
+            }
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.all_dimensions), color = Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
