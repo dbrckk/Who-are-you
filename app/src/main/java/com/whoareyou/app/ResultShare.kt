@@ -22,6 +22,14 @@ object ResultShare {
     private const val HEIGHT = 1920
     private val shareScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
+    private data class CardCopy(
+        val compare: String,
+        val question: String,
+        val subtitle: String,
+        val brand: String,
+        val disclaimer: String
+    )
+
     fun share(
         context: Context,
         quizTitle: String,
@@ -33,13 +41,15 @@ object ResultShare {
     ) {
         shareScope.launch {
             val chooser = withContext(Dispatchers.IO) {
+                val copy = cardCopy(context)
                 val bitmap = render(
                     quizTitle = quizTitle,
                     resultTitle = resultTitle,
                     score = score,
                     metricLow = metricLow,
                     metricHigh = metricHigh,
-                    description = description
+                    description = description,
+                    copy = copy
                 )
 
                 try {
@@ -83,13 +93,35 @@ object ResultShare {
         }
     }
 
+    private fun cardCopy(context: Context): CardCopy {
+        val french = context.resources.configuration.locales[0]?.language == "fr"
+        return if (french) {
+            CardCopy(
+                compare = "COMPARE TON RÉSULTAT",
+                question = "Et toi, qui es-tu ?",
+                subtitle = "Fais le test. Compare-toi avec tes amis.",
+                brand = "WHO ARE YOU?  •  ANDROID",
+                disclaimer = "Pour le divertissement et la réflexion personnelle uniquement."
+            )
+        } else {
+            CardCopy(
+                compare = "COMPARE YOUR RESULT",
+                question = "What are you?",
+                subtitle = "Take the test. Compare with friends.",
+                brand = "WHO ARE YOU?  •  ANDROID",
+                disclaimer = "For entertainment and self-reflection only."
+            )
+        }
+    }
+
     private fun render(
         quizTitle: String,
         resultTitle: String,
         score: Int,
         metricLow: String,
         metricHigh: String,
-        description: String
+        description: String,
+        copy: CardCopy
     ): Bitmap {
         val bitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -157,34 +189,37 @@ object ResultShare {
         paint.color = cyan
         paint.textSize = 29f
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-        canvas.drawText("COMPARE YOUR RESULT", 72f, 1435f, paint)
+        canvas.drawText(copy.compare, 72f, 1435f, paint)
 
         paint.color = white
         paint.textSize = 52f
-        canvas.drawText("What are you?", 72f, 1510f, paint)
+        canvas.drawText(copy.question, 72f, 1510f, paint)
 
         paint.color = muted
         paint.textSize = 31f
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-        canvas.drawText("Take the test. Compare with friends.", 72f, 1570f, paint)
+        drawWrappedText(canvas, copy.subtitle, paint, 72f, 1570f, 936f, 42f)
 
         paint.color = panel
         canvas.drawRoundRect(72f, 1660f, 1008f, 1780f, 38f, 38f, paint)
         paint.color = violet
         paint.textSize = 34f
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-        val brand = "WHO ARE YOU?  •  ANDROID"
-        val brandWidth = paint.measureText(brand)
-        canvas.drawText(brand, max(72f, (WIDTH - brandWidth) / 2f), 1735f, paint)
+        val brandWidth = paint.measureText(copy.brand)
+        canvas.drawText(copy.brand, max(72f, (WIDTH - brandWidth) / 2f), 1735f, paint)
 
         paint.color = muted
         paint.textSize = 24f
         paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-        val disclaimer = "For entertainment and self-reflection only."
-        val disclaimerWidth = paint.measureText(disclaimer)
-        canvas.drawText(disclaimer, (WIDTH - disclaimerWidth) / 2f, 1855f, paint)
+        drawCenteredFittedText(canvas, copy.disclaimer, paint, 1855f, 900f, 24f, 19f)
 
         return bitmap
+    }
+
+    private fun drawCenteredFittedText(canvas: Canvas, text: String, paint: Paint, y: Float, maxWidth: Float, preferredSize: Float, minSize: Float) {
+        paint.textSize = preferredSize
+        while (paint.measureText(text) > maxWidth && paint.textSize > minSize) paint.textSize -= 1f
+        canvas.drawText(text, (WIDTH - paint.measureText(text)) / 2f, y, paint)
     }
 
     private fun drawWrappedText(
