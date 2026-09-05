@@ -8,7 +8,16 @@
     <string name="onboarding_no_account">Aucun compte requis</string>
     <string name="discover_headline">Découvre ce qui\nfait de toi, toi.</string>
     <string name="discover_subtitle">Tests de personnalité rapides. Résultats visuels. Compare-toi avec tes amis.</string>
+    <string name="continue_discovering">CONTINUE À TE DÉCOUVRIR</string>
+    <string name="recommended_for_you">RECOMMANDÉ POUR TOI</string>
+    <string name="recommended_reason">Une dimension de plus rend ton profil plus complet.</string>
+    <string name="recommended_all_done">PROFIL COMPLET — refais une dimension pour voir si tu as changé.</string>
     <string name="trending_tests">TESTS POPULAIRES</string>
+    <string name="your_social_stats">TES STATS SOCIALES</string>
+    <string name="social_comparisons">Comparaisons</string>
+    <string name="social_best_match">Meilleure compatibilité</string>
+    <string name="social_most_different">Plus grande différence</string>
+    <string name="social_no_matches">Aucune comparaison pour le moment. Défie un ami depuis n’importe quel résultat.</string>
     <string name="your_profile">TON PROFIL</string>
     <string name="profile_dimensions_discovered">%1$d/%2$d dimensions découvertes</string>
     <string name="open_full_profile">OUVRIR LE PROFIL COMPLET  →</string>
