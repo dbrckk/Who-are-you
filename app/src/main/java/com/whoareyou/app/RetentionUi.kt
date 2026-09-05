@@ -34,12 +34,14 @@ private val RetentionCyan = Color(0xFF6EE7F9)
 private val RetentionMuted = Color(0xFFA4A7B5)
 
 @Composable
-fun RetentionSection() {
+fun RetentionSection(totalQuizCount: Int) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
     val question = remember { DailyQuestionEngine.forDate() }
-    val achievements = remember(storedProfile) { AchievementEngine.build(storedProfile) }
+    val achievements = remember(storedProfile, totalQuizCount) {
+        AchievementEngine.build(storedProfile, totalQuizCount)
+    }
 
     LaunchedEffect(question.id) {
         AppEvents.dailyQuestionView(question.id)
@@ -52,12 +54,15 @@ fun RetentionSection() {
             onVote = { option ->
                 if (!storedProfile.daily.answeredToday()) {
                     scope.launch {
-                        val beforeUnlocked = AchievementEngine.unlocked(storedProfile).map { it.id }.toSet()
+                        val beforeUnlocked = AchievementEngine
+                            .unlocked(storedProfile, totalQuizCount)
+                            .map { it.id }
+                            .toSet()
                         val result = ProfileStore.saveDailyAnswer(context, question.id, option)
                         AppEvents.dailyQuestionVote(question.id, option)
                         AppEvents.streakContinue(result.currentStreak)
                         val afterProfile = storedProfile.copy(daily = result)
-                        AchievementEngine.unlocked(afterProfile)
+                        AchievementEngine.unlocked(afterProfile, totalQuizCount)
                             .filterNot { it.id in beforeUnlocked }
                             .forEach { AppEvents.achievementUnlock(it.id) }
                     }
