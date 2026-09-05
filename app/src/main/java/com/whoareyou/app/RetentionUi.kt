@@ -61,7 +61,6 @@ fun RetentionSection() {
             },
             onShare = { DailyQuestionShare.share(context, question) }
         )
-        SocialStatsCard(storedProfile)
         AchievementStrip(achievements)
     }
 }
@@ -118,33 +117,6 @@ private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onCl
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold
         )
-    }
-}
-
-@Composable
-private fun SocialStatsCard(profile: StoredProfile) {
-    Card(colors = CardDefaults.cardColors(containerColor = RetentionPanel), shape = RoundedCornerShape(24.dp), modifier = Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(20.dp)) {
-            Text(stringResource(R.string.your_social_stats), color = RetentionCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(12.dp))
-            if (profile.matchCount == 0) {
-                Text(stringResource(R.string.social_no_matches), color = RetentionMuted, fontSize = 13.sp, lineHeight = 19.sp)
-            } else {
-                SocialMetric(stringResource(R.string.social_comparisons), profile.matchCount.toString())
-                Spacer(Modifier.height(8.dp))
-                SocialMetric(stringResource(R.string.social_best_match), "${profile.bestMatchPercent ?: 0}%")
-                Spacer(Modifier.height(8.dp))
-                SocialMetric(stringResource(R.string.social_most_different), "${profile.lowestMatchPercent ?: 0}%")
-            }
-        }
-    }
-}
-
-@Composable
-private fun SocialMetric(label: String, value: String) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(label, color = RetentionMuted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-        Text(value, color = RetentionViolet, fontSize = 16.sp, fontWeight = FontWeight.Black)
     }
 }
 
