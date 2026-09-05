@@ -74,4 +74,23 @@
     <string name="result_share_text">I got %1$s — %2$d%% on %3$s. What are you?</string>
     <string name="result_share_challenge">Take the same test and compare with me: %1$s</string>
     <string name="result_share_chooser">Share your result</string>
+
+    <string name="challenge_header">FRIEND CHALLENGE</string>
+    <string name="challenge_intro">Take the same test. Your compatibility appears instantly.</string>
+    <string name="challenge_disclaimer">For entertainment and self-reflection only.</string>
+    <string name="challenge_match_header">YOUR MATCH</string>
+    <string name="challenge_match_identical">ALMOST IDENTICAL</string>
+    <string name="challenge_match_strong">STRONG MATCH</string>
+    <string name="challenge_match_mixed">MIXED MATCH</string>
+    <string name="challenge_match_opposite">OPPOSITE ENERGY</string>
+    <string name="challenge_friend">FRIEND</string>
+    <string name="challenge_you">YOU</string>
+    <string name="challenge_match_identical_copy">You landed in nearly the same place on this dimension.</string>
+    <string name="challenge_match_strong_copy">Your answers differ, but your overall pattern is strongly aligned.</string>
+    <string name="challenge_match_mixed_copy">You share some tendencies while diverging on others.</string>
+    <string name="challenge_match_opposite_copy">You approach this dimension very differently — which can make the comparison more interesting.</string>
+    <string name="challenge_another_friend">CHALLENGE ANOTHER FRIEND  ↗</string>
+    <string name="close">CLOSE</string>
+    <string name="invalid_challenge">INVALID CHALLENGE</string>
+    <string name="invalid_challenge_copy">This challenge link is incomplete or no longer supported.</string>
 </resources>
