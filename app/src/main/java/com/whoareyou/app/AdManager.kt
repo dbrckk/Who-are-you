@@ -66,10 +66,14 @@ class AdManager(private val context: Context) {
             return
         }
 
-        resultTransitionsSinceAd = 0
-        lastAdShownAtElapsedRealtime = SystemClock.elapsedRealtime()
         interstitial = null
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdShowedFullScreenContent() {
+                // Only consume the frequency cap once Google confirms the ad is actually visible.
+                resultTransitionsSinceAd = 0
+                lastAdShownAtElapsedRealtime = SystemClock.elapsedRealtime()
+            }
+
             override fun onAdDismissedFullScreenContent() {
                 load()
                 onContinue()
