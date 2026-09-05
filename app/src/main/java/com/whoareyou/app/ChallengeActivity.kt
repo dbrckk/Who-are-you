@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -53,9 +54,7 @@ class ChallengeActivity : ComponentActivity() {
         val incoming = ChallengeShare.parse(incomingUri)
         val quiz = incoming?.let { QuizRepository.find(this, it.quizId) }
 
-        if (incomingUri?.scheme == "https") {
-            AppEvents.appLinkOpen(incomingUri.path.orEmpty())
-        }
+        if (incomingUri?.scheme == "https") AppEvents.appLinkOpen(incomingUri.path.orEmpty())
         if (incoming != null) {
             val source = if (incomingUri?.scheme == "https") "https" else "legacy_scheme"
             AppEvents.challengeOpen(incoming.quizId, source)
@@ -124,6 +123,11 @@ private fun CompatibilityScreen(quiz: Quiz, inviterScore: Int, myScore: Int, onC
         compatibility >= 75 -> stringResource(R.string.challenge_match_strong_copy)
         compatibility >= 55 -> stringResource(R.string.challenge_match_mixed_copy)
         else -> stringResource(R.string.challenge_match_opposite_copy)
+    }
+
+    LaunchedEffect(quiz.id, inviterScore, myScore) {
+        ProfileStore.saveMatchResult(context, compatibility)
+        AppEvents.challengeComplete(quiz.id, compatibility)
     }
 
     Column(modifier = Modifier.fillMaxSize().background(ChallengeInk).padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
