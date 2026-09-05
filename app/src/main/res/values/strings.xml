@@ -57,9 +57,9 @@
     <string name="achievement_profile_complete_title">Know Yourself</string>
     <string name="achievement_profile_complete_description">Discover every available profile dimension.</string>
     <string name="achievement_strong_match_title">Strong Match</string>
-    <string name="achievement_strong_match_description">Reach at least 90% compatibility with a friend.</string>
+    <string name="achievement_strong_match_description">Reach at least 90%% compatibility with a friend.</string>
     <string name="achievement_opposites_title">Opposites</string>
-    <string name="achievement_opposites_description">Find a friend match at 45% compatibility or lower.</string>
+    <string name="achievement_opposites_description">Find a friend match at 45%% compatibility or lower.</string>
     <string name="achievement_social_butterfly_title">Social Butterfly</string>
     <string name="achievement_social_butterfly_description">Complete five friend comparisons.</string>
     <string name="achievement_streak_3_title">Coming Back</string>
