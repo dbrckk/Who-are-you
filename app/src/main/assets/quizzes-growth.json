@@ -2,24 +2,24 @@
   "version": 1,
   "quizzes": [
     {
-      "id": "conflict_style",
-      "title": "Conflict Style",
-      "hook": "Do you keep the peace or face tension head-on?",
+      "id": "assertiveness",
+      "title": "Assertiveness",
+      "hook": "How clearly do you stand up for your needs and point of view?",
       "time": "45 SEC",
       "accent": "⚡",
-      "metricLow": "HARMONY",
-      "metricHigh": "DIRECT",
+      "metricLow": "ACCOMMODATING",
+      "metricHigh": "ASSERTIVE",
       "results": {
-        "low": {"title": "The Peacemaker", "description": "You naturally reduce friction and prefer protecting the relationship before pushing a disagreement."},
-        "mid": {"title": "The Diplomat", "description": "You can address tension directly while still watching tone, timing and the relationship around it."},
-        "high": {"title": "The Straight Shooter", "description": "You prefer naming problems clearly and resolving them rather than letting tension sit unresolved."}
+        "low": {"title": "The Accommodator", "description": "You often protect harmony first and may hold back your position when speaking up could create friction."},
+        "mid": {"title": "The Calm Advocate", "description": "You can state what you need while still adapting your tone and timing to the person and situation."},
+        "high": {"title": "The Clear Advocate", "description": "You are comfortable stating needs, boundaries and opinions clearly even when doing so creates temporary discomfort."}
       },
       "questions": [
         {"text": "A friend says something that bothers you. You...", "answers": [{"text": "Let it pass", "score": 0}, {"text": "Wait for a better moment", "score": 1}, {"text": "Bring it up calmly", "score": 2}, {"text": "Address it right away", "score": 3}]},
-        {"text": "Two people are arguing around you. You...", "answers": [{"text": "Try to calm everyone", "score": 0}, {"text": "Listen first", "score": 1}, {"text": "Help clarify the issue", "score": 2}, {"text": "Say what needs to be said", "score": 3}]},
+        {"text": "Your opinion differs from everyone else in the room. You...", "answers": [{"text": "Keep it to yourself", "score": 0}, {"text": "Share it if asked", "score": 1}, {"text": "State it respectfully", "score": 2}, {"text": "Make sure it is heard", "score": 3}]},
         {"text": "Someone repeatedly crosses a boundary. You...", "answers": [{"text": "Distance yourself quietly", "score": 0}, {"text": "Hint that it bothers you", "score": 1}, {"text": "State the boundary clearly", "score": 2}, {"text": "Confront the pattern directly", "score": 3}]},
-        {"text": "During disagreement, silence feels...", "answers": [{"text": "Safer", "score": 0}, {"text": "Useful for cooling down", "score": 1}, {"text": "Fine for a while", "score": 2}, {"text": "Frustrating if nothing gets solved", "score": 3}]},
-        {"text": "Your ideal ending to conflict is...", "answers": [{"text": "Everyone feels okay", "score": 0}, {"text": "Mutual understanding", "score": 1}, {"text": "A clear agreement", "score": 2}, {"text": "The real issue is fully resolved", "score": 3}]}
+        {"text": "You receive something different from what you ordered. You...", "answers": [{"text": "Usually accept it", "score": 0}, {"text": "Mention it only if important", "score": 1}, {"text": "Ask for it to be corrected", "score": 2}, {"text": "Clearly request the correct outcome", "score": 3}]},
+        {"text": "Saying no to a reasonable request feels...", "answers": [{"text": "Very difficult", "score": 0}, {"text": "A little uncomfortable", "score": 1}, {"text": "Manageable", "score": 2}, {"text": "Completely normal when needed", "score": 3}]}
       ]
     },
     {
