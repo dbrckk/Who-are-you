@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recommended_retake_label">TRACK YOUR CHANGE</string>
+    <string name="recommended_retake_start_reason">Retake this dimension to create its first before-and-after comparison.</string>
+    <string name="recommended_retake_change_reason">This dimension moved the most in your recent retests. Revisit it to see where it lands now.</string>
+</resources>
