@@ -34,10 +34,11 @@ private val RetentionCyan = Color(0xFF6EE7F9)
 private val RetentionMuted = Color(0xFFA4A7B5)
 
 @Composable
-fun RetentionSection(totalQuizCount: Int) {
+fun RetentionSection() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+    val totalQuizCount = remember(context) { QuizRepository.load(context).size }
     val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile, totalQuizCount) {
         AchievementEngine.build(storedProfile, totalQuizCount)
