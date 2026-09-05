@@ -9,18 +9,19 @@ Discover your personality, build your profile and compare with friends.
 ## Full description
 Who Are You? turns quick personality questions into a profile you can actually use and share.
 
-Explore 30 fast, visual personality tests covering social energy, decision style, curiosity, risk tolerance, relationships, productivity, boundaries, adaptability, communication, trust, optimism and more. Every result adds another dimension to your evolving profile.
+Take 30 fast, visual tests about your social energy, decision style, curiosity, risk tolerance, relationships, productivity and more. Every result adds another dimension to your evolving profile.
 
-Compare results with friends through challenge links, see your compatibility score instantly, share the match, answer a new Daily Question and unlock achievements as your profile grows.
+Compare results with friends through challenge links, discover how closely you match, share visual match cards, answer a new Daily Question and unlock achievements as your profile grows.
 
 No account is required to start.
 
 ### What you can do
-- Take 30 fast personality tests in English or French.
+- Take 30 fast personality tests.
 - Build an evolving multi-dimensional profile.
 - Share visual result cards.
 - Challenge friends to the same test.
-- Compare and share compatibility scores.
+- Compare compatibility scores and share visual match cards.
+- Pass the challenge on directly from a completed match.
 - Answer the Daily Question.
 - Build streaks and unlock achievements.
 - Remove ads forever with one optional lifetime purchase — no subscription.
@@ -30,4 +31,4 @@ Who Are You? is designed for entertainment and self-reflection. It is not a psyc
 ## Store notes
 - Primary category: Entertainment / Lifestyle.
 - Core promise: "Discover your profile in 60 seconds. Compare it with friends."
-- Recommended screenshots: onboarding, 30-test Discover/profile progress, quiz, result card, friend match/share, Daily Question.
+- Recommended screenshots: onboarding, Discover/profile progress, quiz, result card, visual friend match, Daily Question.
