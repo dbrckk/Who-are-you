@@ -54,6 +54,9 @@
     <string name="streak_count">STREAK %1$d</string>
     <string name="daily_answer_locked">Answer locked for today • longest streak %1$d days</string>
     <string name="daily_pick_prompt">Pick one. A new question appears tomorrow.</string>
+    <string name="daily_share">SHARE DAILY QUESTION  ↗</string>
+    <string name="daily_share_text">Who Are You? daily question: %1$s — would you pick “%2$s” or “%3$s”?</string>
+    <string name="daily_share_chooser">Share daily question</string>
     <string name="achievements">ACHIEVEMENTS</string>
     <string name="achievement_first_hint">Complete your first test to unlock your first badge.</string>
     <string name="achievement_more_unlocked">+%1$d more unlocked</string>
