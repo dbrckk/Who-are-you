@@ -57,9 +57,9 @@
     <string name="achievement_profile_complete_title">Apprends à te connaître</string>
     <string name="achievement_profile_complete_description">Découvre toutes les dimensions disponibles de ton profil.</string>
     <string name="achievement_strong_match_title">Forte compatibilité</string>
-    <string name="achievement_strong_match_description">Atteins au moins 90 % de compatibilité avec un ami.</string>
+    <string name="achievement_strong_match_description">Atteins au moins 90 %% de compatibilité avec un ami.</string>
     <string name="achievement_opposites_title">Opposés</string>
-    <string name="achievement_opposites_description">Obtiens une compatibilité de 45 % ou moins avec un ami.</string>
+    <string name="achievement_opposites_description">Obtiens une compatibilité de 45 %% ou moins avec un ami.</string>
     <string name="achievement_social_butterfly_title">Papillon social</string>
     <string name="achievement_social_butterfly_description">Termine cinq comparaisons entre amis.</string>
     <string name="achievement_streak_3_title">Tu reviens</string>
