@@ -1,0 +1,4 @@
+<resources>
+    <string name="achievement_unlocked_label">ACHIEVEMENT UNLOCKED</string>
+    <string name="achievement_unlocked_dismiss">GOT IT</string>
+</resources>
