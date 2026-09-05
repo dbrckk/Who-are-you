@@ -65,6 +65,8 @@
     <string name="achievement_first_test_description">Termine ton premier test de personnalité.</string>
     <string name="achievement_ten_tests_title">10 tests</string>
     <string name="achievement_ten_tests_description">Termine dix tests différents.</string>
+    <string name="achievement_twenty_five_tests_title">25 tests</string>
+    <string name="achievement_twenty_five_tests_description">Termine vingt-cinq tests différents.</string>
     <string name="achievement_profile_builder_title">Constructeur de profil</string>
     <string name="achievement_profile_builder_description">Découvre cinq dimensions de ton profil.</string>
     <string name="achievement_profile_complete_title">Apprends à te connaître</string>
@@ -101,6 +103,10 @@
     <string name="challenge_match_strong_copy">Vos réponses diffèrent, mais votre tendance générale est très proche.</string>
     <string name="challenge_match_mixed_copy">Vous partagez certaines tendances tout en divergeant sur d’autres.</string>
     <string name="challenge_match_opposite_copy">Vous abordez cette dimension très différemment — ce qui peut rendre la comparaison encore plus intéressante.</string>
+    <string name="compatibility_share_button">PARTAGER NOTRE COMPATIBILITÉ  ↗</string>
+    <string name="compatibility_share_text">On a obtenu %1$d%% de compatibilité sur %2$s dans Who Are You? Quel serait ton score ?</string>
+    <string name="compatibility_share_subject">Compatibilité Who Are You?</string>
+    <string name="compatibility_share_chooser">Partager votre compatibilité</string>
     <string name="challenge_another_friend">DÉFIER UN AUTRE AMI  ↗</string>
     <string name="close">FERMER</string>
     <string name="invalid_challenge">DÉFI INVALIDE</string>
