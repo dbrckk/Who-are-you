@@ -149,7 +149,7 @@ private fun CompatibilityScreen(quiz: Quiz, inviterScore: Int, myScore: Int, onC
         Spacer(Modifier.height(20.dp))
         Text(explanation, color = Color.White, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
         Spacer(Modifier.weight(1f))
-        Button(onClick = { CompatibilityShare.share(context, quiz.id, quiz.title, compatibility) }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengeCyan), shape = RoundedCornerShape(18.dp)) {
+        Button(onClick = { CompatibilityShare.share(context, quiz.id, quiz.title, inviterScore, myScore, compatibility) }, modifier = Modifier.fillMaxWidth().height(56.dp), colors = ButtonDefaults.buttonColors(containerColor = ChallengeCyan), shape = RoundedCornerShape(18.dp)) {
             Text(stringResource(R.string.compatibility_share_button), color = ChallengeInk, fontWeight = FontWeight.Black)
         }
         Spacer(Modifier.height(10.dp))
