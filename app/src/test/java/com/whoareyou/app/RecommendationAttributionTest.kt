@@ -12,7 +12,7 @@ class RecommendationAttributionTest {
         val attempt = RecommendationAttribution.start("values", signatureGuided = true)
 
         assertEquals("values", attempt.quizId)
-        assertEquals(RecommendationMode.SIGNATURE_GUIDIDED, attempt.mode)
+        assertEquals(RecommendationMode.SIGNATURE_GUIDED, attempt.mode)
     }
 
     @Test
