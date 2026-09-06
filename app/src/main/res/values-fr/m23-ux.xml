@@ -1,0 +1,4 @@
+<resources>
+    <string name="catalog_unavailable_title">Tests indisponibles</string>
+    <string name="catalog_unavailable_body">Le catalogue de tests n’a pas pu être chargé. Ferme puis rouvre l’application. Si le problème continue, installe la dernière version.</string>
+</resources>
