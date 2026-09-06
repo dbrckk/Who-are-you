@@ -1,0 +1,39 @@
+{
+  "applicationId": "com.whoareyou.app",
+  "versionCode": 1,
+  "versionName": "0.1.0",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "compileSdk": 37,
+  "release": {
+    "minifyEnabled": false,
+    "artifact": "app/build/outputs/bundle/release/app-release.aab",
+    "githubArtifactName": "who-are-you-release-aab"
+  },
+  "billing": {
+    "removeAdsProductId": "remove_ads_lifetime"
+  },
+  "network": {
+    "telemetryEndpointScheme": "https",
+    "appPermissions": [
+      "android.permission.INTERNET"
+    ]
+  },
+  "admob": {
+    "ciFallbackUsesGoogleTestIds": true,
+    "productionIdsRequiredBeforePlayTesting": true
+  },
+  "appLinks": {
+    "host": "dbrckk.github.io",
+    "pathPrefix": "/Who-are-you/challenge/",
+    "autoVerify": true,
+    "productionAssetLinksRequired": true
+  },
+  "externalRequirementsBeforeRealInternalTest": [
+    "Configure Play App Signing/upload key",
+    "Create Play Billing product remove_ads_lifetime",
+    "Provide production AdMob app and interstitial IDs",
+    "Publish production assetlinks.json using Play App Signing SHA-256",
+    "Publish privacy policy at a stable HTTPS URL and complete Play Console forms"
+  ]
+}
