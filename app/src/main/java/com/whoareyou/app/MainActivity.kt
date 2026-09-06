@@ -3,6 +3,7 @@ package com.whoareyou.app
 import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.animateFloatAsState
@@ -107,10 +108,19 @@ private fun WhoAreYouApp() {
         return
     }
 
+    if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
+        CatalogUnavailableScreen()
+        return
+    }
+
     var screen by remember { mutableStateOf(Screen.DISCOVER) }
     var selectedQuiz by remember(quizCatalog) { mutableStateOf(quizCatalog.first()) }
     var finalScore by remember { mutableIntStateOf(0) }
     var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
+
+    BackHandler(enabled = screen != Screen.DISCOVER) {
+        screen = Screen.DISCOVER
+    }
 
     AnimatedContent(targetState = screen, label = "screen") { destination ->
         when (destination) {
@@ -161,6 +171,19 @@ private fun WhoAreYouApp() {
                 }
             )
         }
+    }
+}
+
+@Composable
+private fun CatalogUnavailableScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize().background(Ink).padding(horizontal = 28.dp, vertical = 36.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(stringResource(R.string.catalog_unavailable_title), color = Color.White, fontSize = 28.sp, lineHeight = 34.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+        Spacer(Modifier.height(12.dp))
+        Text(stringResource(R.string.catalog_unavailable_body), color = Muted, fontSize = 15.sp, lineHeight = 22.sp, textAlign = TextAlign.Center)
     }
 }
 
@@ -717,7 +740,6 @@ private fun ResultScreen(
             }
             Spacer(Modifier.height(8.dp))
             Text(stringResource(R.string.friend_match_explainer), color = Muted, fontSize = 12.sp, textAlign = TextAlign.Center)
-
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Button(onClick = onRetry, modifier = Modifier.weight(1f), colors = ButtonDefaults.buttonColors(containerColor = PanelSoft)) { Text(stringResource(R.string.retry)) }
