@@ -14,6 +14,10 @@ import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class BillingManager(
@@ -27,6 +31,11 @@ class BillingManager(
 
     private var removeAdsProduct: ProductDetails? = null
     private var removeAdsOfferToken: String? = null
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private var reconnectJob: Job? = null
+    private var reconnectAttempt = 0
+    private var closed = false
+    private val loggedLivePurchaseTokens = mutableSetOf<String>()
 
     private val billingClient: BillingClient = BillingClient.newBuilder(context)
         .enablePendingPurchases(
@@ -37,20 +46,15 @@ class BillingManager(
         .setListener { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 handlePurchases(purchases.orEmpty(), PurchaseGrantSource.LIVE_PURCHASE)
+            } else if (result.responseCode != BillingClient.BillingResponseCode.USER_CANCELED) {
+                recordBillingError("purchase_update", result)
             }
         }
         .build()
 
     fun start() {
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(result: BillingResult) {
-                if (result.responseCode != BillingClient.BillingResponseCode.OK) return
-                queryProduct()
-                restorePurchases()
-            }
-
-            override fun onBillingServiceDisconnected() = Unit
-        })
+        closed = false
+        connect()
     }
 
     fun launchPurchase(activity: Activity) {
@@ -63,11 +67,52 @@ class BillingManager(
             .setProductDetailsParamsList(listOf(productBuilder.build()))
             .build()
         AppEvents.premiumView()
-        billingClient.launchBillingFlow(activity, params)
+        val result = billingClient.launchBillingFlow(activity, params)
+        if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+            recordBillingError("launch", result)
+        }
     }
 
     fun close() {
+        closed = true
+        reconnectJob?.cancel()
+        reconnectJob = null
+        scope.cancel()
         billingClient.endConnection()
+    }
+
+    private fun connect() {
+        if (closed || billingClient.isReady) return
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(result: BillingResult) {
+                if (closed) return
+                if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                    reconnectAttempt = 0
+                    reconnectJob?.cancel()
+                    reconnectJob = null
+                    queryProduct()
+                    restorePurchases()
+                } else {
+                    recordBillingError("setup", result)
+                    scheduleReconnect()
+                }
+            }
+
+            override fun onBillingServiceDisconnected() {
+                scheduleReconnect()
+            }
+        })
+    }
+
+    private fun scheduleReconnect() {
+        if (closed || reconnectJob?.isActive == true) return
+        val delayMillis = BillingReconnectPolicy.delayMillis(reconnectAttempt)
+        reconnectAttempt = BillingReconnectPolicy.nextAttempt(reconnectAttempt)
+        reconnectJob = scope.launch {
+            delay(delayMillis)
+            reconnectJob = null
+            connect()
+        }
     }
 
     private fun handlePurchases(purchases: List<Purchase>, source: PurchaseGrantSource) {
@@ -80,9 +125,13 @@ class BillingManager(
                     val params = AcknowledgePurchaseParams.newBuilder()
                         .setPurchaseToken(purchase.purchaseToken)
                         .build()
-                    billingClient.acknowledgePurchase(params) { }
+                    billingClient.acknowledgePurchase(params) { result ->
+                        if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                            recordBillingError("acknowledge", result)
+                        }
+                    }
                 }
-                grantPremium(source)
+                grantPremium(source, purchase.purchaseToken)
             }
         }
     }
@@ -106,6 +155,8 @@ class BillingManager(
                 val localizedPrice = selectedOffer?.formattedPrice
                     ?: removeAdsProduct?.oneTimePurchaseOfferDetails?.formattedPrice
                 onPriceChanged(localizedPrice)
+            } else {
+                recordBillingError("product_query", result)
             }
         }
     }
@@ -118,17 +169,28 @@ class BillingManager(
         billingClient.queryPurchasesAsync(params) { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 handlePurchases(purchases, PurchaseGrantSource.RESTORE)
+            } else {
+                recordBillingError("restore", result)
             }
         }
     }
 
-    private fun grantPremium(source: PurchaseGrantSource) {
+    private fun grantPremium(source: PurchaseGrantSource, purchaseToken: String) {
         onPremiumChanged(true)
-        if (PurchaseGrantPolicy.shouldLogPurchaseSuccess(source)) {
+        val shouldLogSuccess = PurchaseGrantPolicy.shouldLogPurchaseSuccess(source) &&
+            loggedLivePurchaseTokens.add(purchaseToken)
+        if (shouldLogSuccess) {
             AppEvents.purchaseSuccess(REMOVE_ADS_PRODUCT_ID)
         }
         CoroutineScope(Dispatchers.IO).launch {
             ProfileStore.setAdsRemoved(context, true)
         }
+    }
+
+    private fun recordBillingError(stage: String, result: BillingResult) {
+        AppEvents.recordError(
+            IllegalStateException("Billing $stage failed [${result.responseCode}]: ${result.debugMessage}"),
+            mapOf("component" to "billing", "stage" to stage, "response_code" to result.responseCode)
+        )
     }
 }
