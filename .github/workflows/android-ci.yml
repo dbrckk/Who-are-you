@@ -255,8 +255,9 @@ jobs:
             -PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD="$CI_PASSWORD" \
             --stacktrace
 
-          PLAY_AAB="app/build/outputs/bundle/playRelease/app-play-release.aab"
-          test -f "$PLAY_AAB"
+          PLAY_AAB=$(find app/build/outputs/bundle -type f -name '*.aab' -path '*playRelease*' -print -quit)
+          test -n "$PLAY_AAB"
+          echo "Verifying signed Play candidate: $PLAY_AAB"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
 
       - name: JVM unit tests
