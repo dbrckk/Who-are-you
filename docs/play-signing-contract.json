@@ -1,0 +1,15 @@
+{
+  "buildType": "playRelease",
+  "bundleTask": ":app:bundlePlayRelease",
+  "artifact": "app/build/outputs/bundle/playRelease/app-play-release.aab",
+  "requiredSigningProperties": [
+    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH",
+    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD",
+    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS",
+    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
+  ],
+  "productionAdMobRequired": true,
+  "telemetryOptionalHttpsOnly": true,
+  "signatureVerification": "jarsigner -verify -verbose -certs",
+  "keystoreMayBeCommitted": false
+}
