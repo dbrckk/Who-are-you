@@ -1,0 +1,23 @@
+{
+  "milestone": "M32",
+  "goal": "Secure GitHub Actions Play candidate generation",
+  "repoReady": [
+    "manual_play_candidate_workflow",
+    "environment_scoped_secret_contract",
+    "temporary_keystore_materialization",
+    "playRelease_build_path",
+    "signature_verification",
+    "sha256_output",
+    "candidate_artifact_upload",
+    "keystore_cleanup"
+  ],
+  "externalRequiredBeforeFirstRealRun": [
+    "create_play-internal_github_environment",
+    "add_real_admob_ids_as_secrets",
+    "add_base64_upload_keystore_secret",
+    "add_upload_keystore_password_secret",
+    "add_upload_key_alias_secret",
+    "add_upload_key_password_secret"
+  ],
+  "playPublishing": "manual_after_candidate_generation"
+}
