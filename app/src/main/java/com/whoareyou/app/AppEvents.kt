@@ -4,6 +4,9 @@ object AppEvents {
     @Volatile
     private var sink: EventSink = LogEventSink
 
+    @Volatile
+    private var recommendationSession = RecommendationAttributionSession()
+
     fun configure() {
         sink = BuildConfig.TELEMETRY_ENDPOINT
             .takeIf { it.startsWith("https://") }
@@ -19,16 +22,31 @@ object AppEvents {
         sink.recordError(throwable, context)
     }
 
-    fun testStart(quizId: String) = log("test_start", mapOf("quiz_id" to quizId))
-    fun testComplete(quizId: String, score: Int) = log("test_complete", mapOf("quiz_id" to quizId, "score" to score))
+    fun testStart(quizId: String) {
+        recommendationSession = RecommendationAttribution.testStarted(recommendationSession, quizId)
+        log("test_start", mapOf("quiz_id" to quizId))
+    }
+
+    fun testComplete(quizId: String, score: Int) {
+        log("test_complete", mapOf("quiz_id" to quizId, "score" to score))
+        val (completion, clearedSession) = RecommendationAttribution.testCompleted(recommendationSession, quizId)
+        recommendationSession = clearedSession
+        completion?.let(::recommendationComplete)
+    }
+
     fun recommendationView(quizId: String, signatureGuided: Boolean) = log(
         "recommendation_view",
         RecommendationTelemetry.params(quizId, signatureGuided)
     )
-    fun recommendationStart(quizId: String, signatureGuided: Boolean) = log(
-        "recommendation_start",
-        RecommendationTelemetry.params(quizId, signatureGuided)
-    )
+
+    fun recommendationStart(quizId: String, signatureGuided: Boolean) {
+        recommendationSession = RecommendationAttribution.recommendationStarted(quizId, signatureGuided)
+        log(
+            "recommendation_start",
+            RecommendationTelemetry.params(quizId, signatureGuided)
+        )
+    }
+
     fun recommendationComplete(attempt: RecommendationAttempt) = log(
         "recommendation_complete",
         mapOf(
@@ -36,6 +54,7 @@ object AppEvents {
             "mode" to attempt.mode.wireValue
         )
     )
+
     fun resultShare(quizId: String, score: Int? = null) = log("result_share", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeCreate(quizId: String, score: Int? = null) = log("challenge_create", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeOpen(quizId: String, source: String) = log("challenge_open", mapOf("quiz_id" to quizId, "source" to source))
