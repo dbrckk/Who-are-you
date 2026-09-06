@@ -3,6 +3,29 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+private const val GOOGLE_TEST_ADMOB_APP_ID = "ca-app-pub-3940256099942544~3347511713"
+private const val GOOGLE_TEST_ADMOB_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
+
+fun isProductionAdMobAppId(value: String): Boolean =
+    Regex("^ca-app-pub-\\d{16}~\\d{10}$").matches(value) && value != GOOGLE_TEST_ADMOB_APP_ID
+
+fun isProductionAdMobInterstitialId(value: String): Boolean =
+    Regex("^ca-app-pub-\\d{16}/\\d{10}$").matches(value) && value != GOOGLE_TEST_ADMOB_INTERSTITIAL_ID
+
+val requestedTasks = gradle.startParameter.taskNames
+val playReleaseRequested = requestedTasks.any { task -> task.contains("playRelease", ignoreCase = true) }
+val configuredAdMobAppId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_APP_ID").orNull
+val configuredAdMobInterstitialId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID").orNull
+
+if (playReleaseRequested) {
+    require(configuredAdMobAppId != null && isProductionAdMobAppId(configuredAdMobAppId)) {
+        "playRelease requires a production WHO_ARE_YOU_ADMOB_APP_ID and rejects Google's test app ID"
+    }
+    require(configuredAdMobInterstitialId != null && isProductionAdMobInterstitialId(configuredAdMobInterstitialId)) {
+        "playRelease requires a production WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID and rejects Google's test interstitial ID"
+    }
+}
+
 android {
     namespace = "com.whoareyou.app"
     compileSdk = 37
@@ -20,10 +43,8 @@ android {
         require(telemetryEndpoint.isBlank() || telemetryEndpoint.startsWith("https://")) {
             "WHO_ARE_YOU_TELEMETRY_ENDPOINT must use HTTPS when configured"
         }
-        val admobAppId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_APP_ID").orNull
-            ?: "ca-app-pub-3940256099942544~3347511713"
-        val admobInterstitialId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID").orNull
-            ?: "ca-app-pub-3940256099942544/1033173712"
+        val admobAppId = configuredAdMobAppId ?: GOOGLE_TEST_ADMOB_APP_ID
+        val admobInterstitialId = configuredAdMobInterstitialId ?: GOOGLE_TEST_ADMOB_INTERSTITIAL_ID
 
         buildConfigField("String", "TELEMETRY_ENDPOINT", escapedBuildConfig(telemetryEndpoint))
         buildConfigField("String", "ADMOB_INTERSTITIAL_ID", escapedBuildConfig(admobInterstitialId))
@@ -44,6 +65,10 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        create("playRelease") {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
         }
     }
 }
