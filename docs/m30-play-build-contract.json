@@ -1,0 +1,26 @@
+{
+  "milestone": "M30",
+  "applicationId": "com.whoareyou.app",
+  "versionCode": 1,
+  "versionName": "0.1.0",
+  "ciBuildType": "release",
+  "playBuildType": "playRelease",
+  "playBundleTask": ":app:bundlePlayRelease",
+  "playGuardProbeTask": ":app:playReleaseGuardProbe",
+  "adMob": {
+    "requiredForPlayRelease": true,
+    "appIdProperty": "WHO_ARE_YOU_ADMOB_APP_ID",
+    "interstitialIdProperty": "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
+    "googleTestAppIdRejected": "ca-app-pub-3940256099942544~3347511713",
+    "googleTestInterstitialIdRejected": "ca-app-pub-3940256099942544/1033173712"
+  },
+  "telemetry": {
+    "property": "WHO_ARE_YOU_TELEMETRY_ENDPOINT",
+    "required": false,
+    "whenConfigured": "https_only"
+  },
+  "semantics": {
+    "release": "CI/development release artifact; may use Google's test AdMob fallback IDs",
+    "playRelease": "Google Play candidate; production-shaped non-test AdMob IDs are mandatory"
+  }
+}
