@@ -1,0 +1,43 @@
+{
+  "track": "internal",
+  "applicationId": "com.whoareyou.app",
+  "versionCode": 1,
+  "versionName": "0.1.0",
+  "containsAds": true,
+  "accountRequired": false,
+  "billingProducts": [
+    {
+      "id": "remove_ads_lifetime",
+      "type": "one_time"
+    }
+  ],
+  "listing": {
+    "defaultLanguage": "en-US",
+    "additionalLanguages": ["fr-FR"],
+    "englishSource": "docs/store-listing-en.md",
+    "frenchSource": "docs/store-listing-fr.md",
+    "releaseNotesSource": "docs/release-notes-0.1.0.md"
+  },
+  "privacy": {
+    "policySource": "docs/privacy-policy.md",
+    "dataSafetyWorksheet": "docs/play-data-safety.md",
+    "publicHttpsUrlRequired": true,
+    "supportContactRequired": true
+  },
+  "assetsRequired": [
+    "app_icon",
+    "phone_screenshots",
+    "feature_graphic"
+  ],
+  "productionServicesRequired": [
+    "play_app_signing_and_upload_key",
+    "admob_app_id",
+    "admob_interstitial_id",
+    "billing_remove_ads_lifetime",
+    "privacy_policy_https_url"
+  ],
+  "postPlaySigning": [
+    "publish_assetlinks_with_play_signing_sha256",
+    "verify_https_app_links_on_play_installed_build"
+  ]
+}
