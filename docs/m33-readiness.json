@@ -1,0 +1,29 @@
+{
+  "milestone": "M33",
+  "workflow": ".github/workflows/play-internal-publish.yml",
+  "publisher": "tools/play_publisher.py",
+  "applicationId": "com.whoareyou.app",
+  "track": "internal",
+  "versionCode": 1,
+  "versionName": "0.1.0",
+  "publishDefault": false,
+  "releaseStatuses": ["draft", "completed"],
+  "environment": "play-internal",
+  "serviceAccountSecret": "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64",
+  "editFlow": [
+    "insert",
+    "bundle_upload",
+    "track_update",
+    "validate",
+    "commit"
+  ],
+  "externalBlockers": [
+    "play_console_app_exists",
+    "play_app_signing_configured",
+    "service_account_created",
+    "service_account_play_permissions_granted",
+    "google_play_service_account_secret_configured",
+    "production_admob_secrets_configured",
+    "upload_key_secrets_configured"
+  ]
+}
