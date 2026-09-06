@@ -95,6 +95,7 @@ jobs:
           ad_manager = Path('app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')
           billing = Path('app/src/main/java/com/whoareyou/app/BillingManager.kt').read_text(encoding='utf-8')
           contract = json.loads(Path('docs/internal-test-release.json').read_text(encoding='utf-8'))
+          play = json.loads(Path('docs/play-internal-test-metadata.json').read_text(encoding='utf-8'))
 
           def expect(pattern, value, source=gradle):
               assert re.search(pattern, source), f'Missing locked release value: {value}'
@@ -116,6 +117,26 @@ jobs:
           assert contract['release']['minifyEnabled'] is False
           assert contract['release']['artifact'] == 'app/build/outputs/bundle/release/app-release.aab'
           assert contract['release']['githubArtifactName'] == 'who-are-you-release-aab'
+
+          assert play['track'] == 'internal'
+          assert play['applicationId'] == contract['applicationId']
+          assert play['versionCode'] == contract['versionCode']
+          assert play['versionName'] == contract['versionName']
+          assert play['containsAds'] is True
+          assert play['accountRequired'] is False
+          assert play['billingProducts'] == [{'id': 'remove_ads_lifetime', 'type': 'one_time'}]
+          for path in (
+              play['listing']['englishSource'],
+              play['listing']['frenchSource'],
+              play['listing']['releaseNotesSource'],
+              play['privacy']['policySource'],
+              play['privacy']['dataSafetyWorksheet'],
+              'docs/m28-play-internal-submission.md'
+          ):
+              assert Path(path).is_file(), f'Missing Play submission source: {path}'
+          assert play['privacy']['publicHttpsUrlRequired'] is True
+          assert play['privacy']['supportContactRequired'] is True
+          assert set(play['assetsRequired']) == {'app_icon', 'phone_screenshots', 'feature_graphic'}
 
           assert 'WHO_ARE_YOU_ADMOB_APP_ID' in gradle
           assert 'WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID' in gradle
@@ -140,7 +161,7 @@ jobs:
           assert contract['appLinks']['pathPrefix'] == '/Who-are-you/challenge/'
           assert contract['appLinks']['autoVerify'] is True
 
-          print('Locked internal release contract confirmed: com.whoareyou.app 0.1.0 (1)')
+          print('Locked internal Play submission contract confirmed: com.whoareyou.app 0.1.0 (1)')
           PY
 
       - name: JVM unit tests
