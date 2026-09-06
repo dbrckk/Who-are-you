@@ -1,0 +1,29 @@
+{
+  "workflow": ".github/workflows/play-candidate.yml",
+  "trigger": "workflow_dispatch",
+  "environment": "play-internal",
+  "permissions": {
+    "contents": "read"
+  },
+  "buildTask": ":app:bundlePlayRelease",
+  "artifactName": "who-are-you-play-candidate-0.1.0-1",
+  "artifactFiles": [
+    "who-are-you-play-0.1.0-1.aab",
+    "play-candidate.sha256"
+  ],
+  "requiredSecrets": [
+    "WHO_ARE_YOU_ADMOB_APP_ID",
+    "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
+    "WHO_ARE_YOU_UPLOAD_KEYSTORE_B64",
+    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD",
+    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS",
+    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
+  ],
+  "optionalSecrets": [
+    "WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+  ],
+  "keystoreLocation": "RUNNER_TEMP",
+  "signatureVerification": "jarsigner -verify -verbose -certs",
+  "checksum": "sha256",
+  "playUploadAutomated": false
+}
