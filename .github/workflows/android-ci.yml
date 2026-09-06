@@ -86,21 +86,61 @@ jobs:
       - name: Validate release configuration
         run: |
           python - <<'PY'
+          import json
+          import re
           from pathlib import Path
 
           gradle = Path('app/build.gradle.kts').read_text(encoding='utf-8')
           manifest = Path('app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')
           ad_manager = Path('app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')
+          billing = Path('app/src/main/java/com/whoareyou/app/BillingManager.kt').read_text(encoding='utf-8')
+          contract = json.loads(Path('docs/internal-test-release.json').read_text(encoding='utf-8'))
+
+          def expect(pattern, value, source=gradle):
+              assert re.search(pattern, source), f'Missing locked release value: {value}'
+
+          expect(r'applicationId\s*=\s*"com\.whoareyou\.app"', 'applicationId')
+          expect(r'minSdk\s*=\s*26\b', 'minSdk')
+          expect(r'targetSdk\s*=\s*36\b', 'targetSdk')
+          expect(r'compileSdk\s*=\s*37\b', 'compileSdk')
+          expect(r'versionCode\s*=\s*1\b', 'versionCode')
+          expect(r'versionName\s*=\s*"0\.1\.0"', 'versionName')
+          expect(r'isMinifyEnabled\s*=\s*false', 'release minify setting')
+
+          assert contract['applicationId'] == 'com.whoareyou.app'
+          assert contract['versionCode'] == 1
+          assert contract['versionName'] == '0.1.0'
+          assert contract['minSdk'] == 26
+          assert contract['targetSdk'] == 36
+          assert contract['compileSdk'] == 37
+          assert contract['release']['minifyEnabled'] is False
+          assert contract['release']['artifact'] == 'app/build/outputs/bundle/release/app-release.aab'
+          assert contract['release']['githubArtifactName'] == 'who-are-you-release-aab'
 
           assert 'WHO_ARE_YOU_ADMOB_APP_ID' in gradle
           assert 'WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID' in gradle
           assert 'WHO_ARE_YOU_TELEMETRY_ENDPOINT' in gradle
+          assert 'telemetryEndpoint.startsWith("https://")' in gradle, 'Configured telemetry must require HTTPS'
           assert '${admobAppId}' in manifest
           assert 'BuildConfig.ADMOB_INTERSTITIAL_ID' in ad_manager
           assert 'ca-app-pub-3940256099942544~3347511713' in gradle, 'Missing safe development AdMob fallback'
           assert 'ca-app-pub-3940256099942544/1033173712' in gradle, 'Missing safe development interstitial fallback'
+
+          assert 'const val REMOVE_ADS_PRODUCT_ID = "remove_ads_lifetime"' in billing
+          assert contract['billing']['removeAdsProductId'] == 'remove_ads_lifetime'
+
+          permissions = re.findall(r'<uses-permission\s+android:name="([^"]+)"\s*/>', manifest)
+          assert permissions == ['android.permission.INTERNET'], f'Unexpected app-level permissions: {permissions}'
+          assert contract['network']['appPermissions'] == ['android.permission.INTERNET']
+
           assert 'android:autoVerify="true"' in manifest, 'HTTPS App Link must request automatic verification'
-          print('Release configuration is injectable and development-safe')
+          assert 'android:host="dbrckk.github.io"' in manifest
+          assert 'android:pathPrefix="/Who-are-you/challenge/"' in manifest
+          assert contract['appLinks']['host'] == 'dbrckk.github.io'
+          assert contract['appLinks']['pathPrefix'] == '/Who-are-you/challenge/'
+          assert contract['appLinks']['autoVerify'] is True
+
+          print('Locked internal release contract confirmed: com.whoareyou.app 0.1.0 (1)')
           PY
 
       - name: JVM unit tests
