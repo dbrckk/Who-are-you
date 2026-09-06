@@ -1,7 +1,9 @@
 package com.whoareyou.app
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class RecommendationAttributionTest {
@@ -10,7 +12,7 @@ class RecommendationAttributionTest {
         val attempt = RecommendationAttribution.start("values", signatureGuided = true)
 
         assertEquals("values", attempt.quizId)
-        assertEquals(RecommendationMode.SIGNATURE_GUIDED, attempt.mode)
+        assertEquals(RecommendationMode.SIGNATURE_GUIDIDED, attempt.mode)
     }
 
     @Test
@@ -21,21 +23,58 @@ class RecommendationAttributionTest {
     }
 
     @Test
-    fun `completion returns matching recommendation attempt`() {
-        val attempt = RecommendationAttempt("values", RecommendationMode.SIGNATURE_GUIDED)
+    fun `recommended launch survives its immediate matching test start`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(started, "values")
 
-        assertEquals(attempt, RecommendationAttribution.completion(attempt, "values"))
+        assertEquals("values", active.attempt?.quizId)
+        assertFalse(active.awaitingTestStart)
     }
 
     @Test
-    fun `completion ignores different quiz`() {
-        val attempt = RecommendationAttempt("values", RecommendationMode.SIGNATURE_GUIDED)
+    fun `later normal start clears abandoned recommendation even for same quiz`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(started, "values")
+        val cleared = RecommendationAttribution.testStarted(active, "values")
 
-        assertNull(RecommendationAttribution.completion(attempt, "social"))
+        assertNull(cleared.attempt)
+        assertFalse(cleared.awaitingTestStart)
     }
 
     @Test
-    fun `completion ignores missing attribution`() {
-        assertNull(RecommendationAttribution.completion(null, "values"))
+    fun `different test start clears recommendation attribution`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val cleared = RecommendationAttribution.testStarted(started, "social")
+
+        assertNull(cleared.attempt)
+    }
+
+    @Test
+    fun `matching completion emits attempt and consumes session`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(started, "values")
+        val (completion, cleared) = RecommendationAttribution.testCompleted(active, "values")
+
+        assertEquals(active.attempt, completion)
+        assertNull(cleared.attempt)
+        assertFalse(cleared.awaitingTestStart)
+    }
+
+    @Test
+    fun `mismatched completion does not emit and still consumes session`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(started, "values")
+        val (completion, cleared) = RecommendationAttribution.testCompleted(active, "social")
+
+        assertNull(completion)
+        assertNull(cleared.attempt)
+    }
+
+    @Test
+    fun `recommendation started marks pending handoff`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = false)
+
+        assertTrue(started.awaitingTestStart)
+        assertEquals(RecommendationMode.GENERIC, started.attempt?.mode)
     }
 }
