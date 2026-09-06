@@ -92,11 +92,13 @@ jobs:
 
           gradle = Path('app/build.gradle.kts').read_text(encoding='utf-8')
           manifest = Path('app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')
+          gitignore = Path('.gitignore').read_text(encoding='utf-8')
           ad_manager = Path('app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')
           billing = Path('app/src/main/java/com/whoareyou/app/BillingManager.kt').read_text(encoding='utf-8')
           contract = json.loads(Path('docs/internal-test-release.json').read_text(encoding='utf-8'))
           play = json.loads(Path('docs/play-internal-test-metadata.json').read_text(encoding='utf-8'))
           m30 = json.loads(Path('docs/m30-play-build-contract.json').read_text(encoding='utf-8'))
+          signing = json.loads(Path('docs/play-signing-contract.json').read_text(encoding='utf-8'))
 
           def expect(pattern, value, source=gradle):
               assert re.search(pattern, source), f'Missing locked release value: {value}'
@@ -110,6 +112,9 @@ jobs:
           expect(r'isMinifyEnabled\s*=\s*false', 'release minify setting')
           assert 'create("playRelease")' in gradle
           assert 'playReleaseGuardProbe' in gradle
+          assert 'create("playUpload")' in gradle
+          for prop in signing['requiredSigningProperties']:
+              assert prop in gradle, f'Missing signing property in Gradle: {prop}'
 
           assert contract['applicationId'] == 'com.whoareyou.app'
           assert contract['versionCode'] == 1
@@ -137,6 +142,14 @@ jobs:
           assert m30['playBundleTask'] == ':app:bundlePlayRelease'
           assert m30['adMob']['requiredForPlayRelease'] is True
 
+          assert signing['buildType'] == 'playRelease'
+          assert signing['bundleTask'] == ':app:bundlePlayRelease'
+          assert signing['artifact'] == 'app/build/outputs/bundle/playRelease/app-play-release.aab'
+          assert signing['productionAdMobRequired'] is True
+          assert signing['keystoreMayBeCommitted'] is False
+          for pattern in ('*.jks', '*.keystore', '*.p12', '*.pfx'):
+              assert pattern in gitignore, f'Missing keystore ignore pattern: {pattern}'
+
           for path in (
               play['listing']['englishSource'],
               play['listing']['frenchSource'],
@@ -144,7 +157,9 @@ jobs:
               play['privacy']['policySource'],
               play['privacy']['dataSafetyWorksheet'],
               'docs/m28-play-internal-submission.md',
-              'docs/m30-play-release.md'
+              'docs/m30-play-release.md',
+              'docs/m31-play-signing.md',
+              'docs/m31-readiness.json'
           ):
               assert Path(path).is_file(), f'Missing Play submission source: {path}'
           assert play['privacy']['publicHttpsUrlRequired'] is True
@@ -174,13 +189,13 @@ jobs:
           assert contract['appLinks']['pathPrefix'] == '/Who-are-you/challenge/'
           assert contract['appLinks']['autoVerify'] is True
 
-          print('Locked internal Play submission contract confirmed: com.whoareyou.app 0.1.0 (1)')
+          print('Locked internal Play submission + signing contract confirmed: com.whoareyou.app 0.1.0 (1)')
           PY
 
       - name: Play submission generator tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
-      - name: Validate strict Play release guard
+      - name: Validate strict Play release and signing guards
         run: |
           expect_guard_failure() {
             local label="$1"
@@ -203,10 +218,46 @@ jobs:
           expect_guard_failure "Google test AdMob IDs" \
             -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713 \
             -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-3940256099942544/1033173712
-
-          gradle :app:playReleaseGuardProbe \
+          expect_guard_failure "missing upload signing inputs" \
             -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-1111111111111111~2222222222 \
             -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-1111111111111111/3333333333
+          expect_guard_failure "missing keystore file" \
+            -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-1111111111111111~2222222222 \
+            -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-1111111111111111/3333333333 \
+            -PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=/tmp/does-not-exist.jks \
+            -PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=CiSigningPass123 \
+            -PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=ci-upload \
+            -PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=CiSigningPass123
+
+      - name: Build and verify ephemeral signed Play candidate
+        run: |
+          CI_KEYSTORE="$RUNNER_TEMP/who-are-you-ci-upload.jks"
+          CI_PASSWORD="CiSigningPass123"
+          CI_ALIAS="ci-upload"
+
+          keytool -genkeypair -v \
+            -keystore "$CI_KEYSTORE" \
+            -storetype JKS \
+            -storepass "$CI_PASSWORD" \
+            -keypass "$CI_PASSWORD" \
+            -alias "$CI_ALIAS" \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 3650 \
+            -dname "CN=Who Are You CI,O=CI,C=US"
+
+          gradle :app:bundlePlayRelease \
+            -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-1111111111111111~2222222222 \
+            -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-1111111111111111/3333333333 \
+            -PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH="$CI_KEYSTORE" \
+            -PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD="$CI_PASSWORD" \
+            -PWHO_ARE_YOU_UPLOAD_KEY_ALIAS="$CI_ALIAS" \
+            -PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD="$CI_PASSWORD" \
+            --stacktrace
+
+          PLAY_AAB="app/build/outputs/bundle/playRelease/app-play-release.aab"
+          test -f "$PLAY_AAB"
+          jarsigner -verify -verbose -certs "$PLAY_AAB"
 
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
