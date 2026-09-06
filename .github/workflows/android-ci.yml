@@ -96,6 +96,7 @@ jobs:
           billing = Path('app/src/main/java/com/whoareyou/app/BillingManager.kt').read_text(encoding='utf-8')
           contract = json.loads(Path('docs/internal-test-release.json').read_text(encoding='utf-8'))
           play = json.loads(Path('docs/play-internal-test-metadata.json').read_text(encoding='utf-8'))
+          m30 = json.loads(Path('docs/m30-play-build-contract.json').read_text(encoding='utf-8'))
 
           def expect(pattern, value, source=gradle):
               assert re.search(pattern, source), f'Missing locked release value: {value}'
@@ -107,6 +108,8 @@ jobs:
           expect(r'versionCode\s*=\s*1\b', 'versionCode')
           expect(r'versionName\s*=\s*"0\.1\.0"', 'versionName')
           expect(r'isMinifyEnabled\s*=\s*false', 'release minify setting')
+          assert 'create("playRelease")' in gradle
+          assert 'playReleaseGuardProbe' in gradle
 
           assert contract['applicationId'] == 'com.whoareyou.app'
           assert contract['versionCode'] == 1
@@ -125,13 +128,23 @@ jobs:
           assert play['containsAds'] is True
           assert play['accountRequired'] is False
           assert play['billingProducts'] == [{'id': 'remove_ads_lifetime', 'type': 'one_time'}]
+
+          assert m30['applicationId'] == contract['applicationId']
+          assert m30['versionCode'] == contract['versionCode']
+          assert m30['versionName'] == contract['versionName']
+          assert m30['ciBuildType'] == 'release'
+          assert m30['playBuildType'] == 'playRelease'
+          assert m30['playBundleTask'] == ':app:bundlePlayRelease'
+          assert m30['adMob']['requiredForPlayRelease'] is True
+
           for path in (
               play['listing']['englishSource'],
               play['listing']['frenchSource'],
               play['listing']['releaseNotesSource'],
               play['privacy']['policySource'],
               play['privacy']['dataSafetyWorksheet'],
-              'docs/m28-play-internal-submission.md'
+              'docs/m28-play-internal-submission.md',
+              'docs/m30-play-release.md'
           ):
               assert Path(path).is_file(), f'Missing Play submission source: {path}'
           assert play['privacy']['publicHttpsUrlRequired'] is True
@@ -166,6 +179,34 @@ jobs:
 
       - name: Play submission generator tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
+      - name: Validate strict Play release guard
+        run: |
+          expect_guard_failure() {
+            local label="$1"
+            shift
+            set +e
+            output=$(gradle :app:playReleaseGuardProbe "$@" 2>&1)
+            status=$?
+            set -e
+            if [ "$status" -eq 0 ]; then
+              echo "Expected playRelease guard to reject: $label"
+              exit 1
+            fi
+            echo "Guard correctly rejected: $label"
+          }
+
+          expect_guard_failure "missing production AdMob IDs"
+          expect_guard_failure "malformed production AdMob IDs" \
+            -PWHO_ARE_YOU_ADMOB_APP_ID=bad \
+            -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=bad
+          expect_guard_failure "Google test AdMob IDs" \
+            -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713 \
+            -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-3940256099942544/1033173712
+
+          gradle :app:playReleaseGuardProbe \
+            -PWHO_ARE_YOU_ADMOB_APP_ID=ca-app-pub-1111111111111111~2222222222 \
+            -PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=ca-app-pub-1111111111111111/3333333333
 
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
