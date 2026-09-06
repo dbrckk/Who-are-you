@@ -29,6 +29,13 @@ object AppEvents {
         "recommendation_start",
         RecommendationTelemetry.params(quizId, signatureGuided)
     )
+    fun recommendationComplete(attempt: RecommendationAttempt) = log(
+        "recommendation_complete",
+        mapOf(
+            "quiz_id" to attempt.quizId,
+            "mode" to attempt.mode.wireValue
+        )
+    )
     fun resultShare(quizId: String, score: Int? = null) = log("result_share", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeCreate(quizId: String, score: Int? = null) = log("challenge_create", buildMap { put("quiz_id", quizId); if (score != null) put("score", score) })
     fun challengeOpen(quizId: String, source: String) = log("challenge_open", mapOf("quiz_id" to quizId, "source" to source))
