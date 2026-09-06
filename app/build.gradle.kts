@@ -17,6 +17,9 @@ android {
         fun escapedBuildConfig(value: String): String = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
 
         val telemetryEndpoint = providers.gradleProperty("WHO_ARE_YOU_TELEMETRY_ENDPOINT").orNull.orEmpty()
+        require(telemetryEndpoint.isBlank() || telemetryEndpoint.startsWith("https://")) {
+            "WHO_ARE_YOU_TELEMETRY_ENDPOINT must use HTTPS when configured"
+        }
         val admobAppId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_APP_ID").orNull
             ?: "ca-app-pub-3940256099942544~3347511713"
         val admobInterstitialId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID").orNull
