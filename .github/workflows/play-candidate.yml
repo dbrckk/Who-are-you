@@ -1,0 +1,127 @@
+name: Play Candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      telemetry_enabled:
+        description: "Build with the configured production telemetry endpoint"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  play-candidate:
+    runs-on: ubuntu-latest
+    environment: play-internal
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle 9.5
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+
+      - name: Validate required secrets
+        env:
+          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
+          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
+          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
+        run: |
+          set -euo pipefail
+          required=(
+            ADMOB_APP_ID
+            ADMOB_INTERSTITIAL_ID
+            UPLOAD_KEYSTORE_B64
+            UPLOAD_KEYSTORE_PASSWORD
+            UPLOAD_KEY_ALIAS
+            UPLOAD_KEY_PASSWORD
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing required Play candidate secret: $name"
+              exit 1
+            fi
+          done
+          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
+            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+            exit 1
+          fi
+
+      - name: Materialize upload keystore
+        env:
+          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$UPLOAD_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/who-are-you-upload.jks"
+          test -s "$RUNNER_TEMP/who-are-you-upload.jks"
+          chmod 600 "$RUNNER_TEMP/who-are-you-upload.jks"
+
+      - name: Build signed Play candidate
+        env:
+          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
+          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
+        run: |
+          set -euo pipefail
+          args=(
+            :app:bundlePlayRelease
+            "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
+            "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"
+            --stacktrace
+          )
+          if [ "$TELEMETRY_ENABLED" = "true" ]; then
+            args+=("-PWHO_ARE_YOU_TELEMETRY_ENDPOINT=$TELEMETRY_ENDPOINT")
+          fi
+          gradle "${args[@]}"
+
+      - name: Locate and verify signed AAB
+        id: bundle
+        run: |
+          set -euo pipefail
+          mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -maxdepth 1 -type f -name '*.aab' -print)
+          if [ "${#bundles[@]}" -ne 1 ]; then
+            echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
+            printf '%s\n' "${bundles[@]:-}"
+            exit 1
+          fi
+          PLAY_AAB="${bundles[0]}"
+          jarsigner -verify -verbose -certs "$PLAY_AAB"
+          sha256sum "$PLAY_AAB" | tee play-candidate.sha256
+          cp "$PLAY_AAB" who-are-you-play-0.1.0-1.aab
+
+      - name: Upload signed Play candidate
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-play-candidate-0.1.0-1
+          path: |
+            who-are-you-play-0.1.0-1.aab
+            play-candidate.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove materialized keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
