@@ -1,0 +1,16 @@
+{
+  "supportEmail": "REPLACE_BEFORE_SUBMISSION",
+  "privacyPolicyUrl": "https://REPLACE_BEFORE_SUBMISSION",
+  "admob": {
+    "appId": "REPLACE_BEFORE_SUBMISSION",
+    "interstitialId": "REPLACE_BEFORE_SUBMISSION"
+  },
+  "playAppSigningSha256": "REPLACE_AFTER_PLAY_APP_SIGNING",
+  "billing": {
+    "remove_ads_lifetime": {
+      "active": false,
+      "priceConfiguredInPlayConsole": false
+    }
+  },
+  "testerGroup": "REPLACE_BEFORE_INTERNAL_ROLLOUT"
+}
