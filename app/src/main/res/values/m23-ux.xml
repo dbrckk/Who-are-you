@@ -1,0 +1,4 @@
+<resources>
+    <string name="catalog_unavailable_title">Tests unavailable</string>
+    <string name="catalog_unavailable_body">The test catalog could not be loaded. Close and reopen the app. If the problem continues, install the latest version.</string>
+</resources>
