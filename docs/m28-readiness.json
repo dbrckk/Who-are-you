@@ -1,0 +1,28 @@
+{
+  "milestone": "M28",
+  "goal": "Play Internal testing submission handoff",
+  "repoReady": [
+    "release_contract_locked",
+    "play_metadata_manifested",
+    "store_copy_en_fr",
+    "internal_release_notes_en_fr",
+    "privacy_policy_draft",
+    "data_safety_decision_sheet",
+    "store_asset_capture_plan",
+    "internal_smoke_test_matrix",
+    "ci_release_aab"
+  ],
+  "externalBlockingInputs": [
+    "play_console_app_and_app_signing",
+    "upload_key",
+    "production_admob_ids",
+    "active_remove_ads_lifetime_product",
+    "support_email",
+    "published_privacy_policy_https_url",
+    "completed_data_safety_and_policy_declarations",
+    "play_signing_sha256_assetlinks",
+    "final_store_graphics_and_real_app_screenshots",
+    "tester_list_or_group"
+  ],
+  "recommendedTelemetryForFirstInternalCandidate": "disabled_until_production_endpoint_is_documented"
+}
