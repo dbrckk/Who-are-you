@@ -1,0 +1,19 @@
+{
+  "milestone": "M31",
+  "goal": "Signed Google Play candidate without repository-stored credentials",
+  "repoReadyWhen": [
+    "playRelease_requires_production_admob",
+    "playRelease_requires_upload_signing_inputs",
+    "playRelease_bundle_signature_verifies",
+    "keystore_patterns_ignored_by_git",
+    "ci_exercises_ephemeral_signing_only"
+  ],
+  "externalStillRequired": [
+    "real_upload_keystore",
+    "real_upload_keystore_password",
+    "real_upload_key_alias",
+    "real_upload_key_password",
+    "production_admob_app_id",
+    "production_admob_interstitial_id"
+  ]
+}
