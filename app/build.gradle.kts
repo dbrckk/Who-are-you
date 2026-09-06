@@ -12,6 +12,10 @@ val requestedTasks = gradle.startParameter.taskNames
 val playReleaseRequested = requestedTasks.any { task -> task.contains("playRelease", ignoreCase = true) }
 val configuredAdMobAppId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_APP_ID").orNull
 val configuredAdMobInterstitialId = providers.gradleProperty("WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID").orNull
+val uploadKeystorePath = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH").orNull
+val uploadKeystorePassword = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD").orNull
+val uploadKeyAlias = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEY_ALIAS").orNull
+val uploadKeyPassword = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEY_PASSWORD").orNull
 
 if (playReleaseRequested) {
     require(
@@ -27,6 +31,21 @@ if (playReleaseRequested) {
             configuredAdMobInterstitialId != googleTestAdMobInterstitialId
     ) {
         "playRelease requires a production WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID and rejects Google's test interstitial ID"
+    }
+    require(!uploadKeystorePath.isNullOrBlank()) {
+        "playRelease requires WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH"
+    }
+    require(file(uploadKeystorePath).isFile) {
+        "WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH must point to an existing keystore file"
+    }
+    require(!uploadKeystorePassword.isNullOrBlank()) {
+        "playRelease requires WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD"
+    }
+    require(!uploadKeyAlias.isNullOrBlank()) {
+        "playRelease requires WHO_ARE_YOU_UPLOAD_KEY_ALIAS"
+    }
+    require(!uploadKeyPassword.isNullOrBlank()) {
+        "playRelease requires WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
     }
 }
 
@@ -65,6 +84,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    signingConfigs {
+        if (playReleaseRequested) {
+            create("playUpload") {
+                storeFile = file(uploadKeystorePath!!)
+                storePassword = uploadKeystorePassword
+                keyAlias = uploadKeyAlias
+                keyPassword = uploadKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -73,6 +103,9 @@ android {
         create("playRelease") {
             initWith(getByName("release"))
             matchingFallbacks += listOf("release")
+            if (playReleaseRequested) {
+                signingConfig = signingConfigs.getByName("playUpload")
+            }
         }
     }
 }
