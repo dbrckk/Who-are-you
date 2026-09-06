@@ -36,7 +36,7 @@ class BillingManager(
         )
         .setListener { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                handlePurchases(purchases.orEmpty())
+                handlePurchases(purchases.orEmpty(), PurchaseGrantSource.LIVE_PURCHASE)
             }
         }
         .build()
@@ -70,7 +70,7 @@ class BillingManager(
         billingClient.endConnection()
     }
 
-    private fun handlePurchases(purchases: List<Purchase>) {
+    private fun handlePurchases(purchases: List<Purchase>, source: PurchaseGrantSource) {
         purchases.forEach { purchase ->
             if (
                 REMOVE_ADS_PRODUCT_ID in purchase.products &&
@@ -82,7 +82,7 @@ class BillingManager(
                         .build()
                     billingClient.acknowledgePurchase(params) { }
                 }
-                grantPremium()
+                grantPremium(source)
             }
         }
     }
@@ -117,14 +117,16 @@ class BillingManager(
 
         billingClient.queryPurchasesAsync(params) { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                handlePurchases(purchases)
+                handlePurchases(purchases, PurchaseGrantSource.RESTORE)
             }
         }
     }
 
-    private fun grantPremium() {
+    private fun grantPremium(source: PurchaseGrantSource) {
         onPremiumChanged(true)
-        AppEvents.purchaseSuccess(REMOVE_ADS_PRODUCT_ID)
+        if (PurchaseGrantPolicy.shouldLogPurchaseSuccess(source)) {
+            AppEvents.purchaseSuccess(REMOVE_ADS_PRODUCT_ID)
+        }
         CoroutineScope(Dispatchers.IO).launch {
             ProfileStore.setAdsRemoved(context, true)
         }
