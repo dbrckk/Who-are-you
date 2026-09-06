@@ -73,6 +73,11 @@ android {
     }
 }
 
+tasks.register("playReleaseGuardProbe") {
+    group = "verification"
+    description = "Validates that strict Play release configuration can be evaluated."
+}
+
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2026.08.00")
     implementation(composeBom)
