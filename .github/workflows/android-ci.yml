@@ -164,6 +164,9 @@ jobs:
           print('Locked internal Play submission contract confirmed: com.whoareyou.app 0.1.0 (1)')
           PY
 
+      - name: Play submission generator tests
+        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
 
