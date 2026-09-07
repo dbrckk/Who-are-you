@@ -1,13 +1,16 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -20,7 +23,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -34,6 +40,8 @@ private val RetentionPanelSoft = Color(0xFF1B1D27)
 private val RetentionViolet = Color(0xFF9C7BFF)
 private val RetentionCyan = Color(0xFF6EE7F9)
 private val RetentionMuted = Color(0xFFA4A7B5)
+private val RetentionPink = Color(0xFFF08ACB)
+private val RetentionGold = Color(0xFFF4C56A)
 
 @Composable
 fun RetentionSection() {
@@ -54,6 +62,12 @@ fun RetentionSection() {
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        JourneyPulse(
+            completed = storedProfile.completedQuizIds.size,
+            total = totalQuizCount,
+            streak = storedProfile.daily.currentStreak,
+            unlocked = achievements.count { it.unlocked }
+        )
         if (pendingAchievement != null) {
             AchievementUnlockCard(pendingAchievement) {
                 scope.launch { ProfileStore.consumeAchievementUnlock(context, pendingAchievement.id) }
@@ -74,6 +88,103 @@ fun RetentionSection() {
             onShare = { DailyQuestionShare.share(context, question) }
         )
         AchievementStrip(achievements)
+    }
+}
+
+@Composable
+private fun JourneyPulse(completed: Int, total: Int, streak: Int, unlocked: Int) {
+    val progress = if (total <= 0) 0 else ((completed * 100f) / total).toInt().coerceIn(0, 100)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(30.dp))
+            .background(
+                Brush.linearGradient(
+                    listOf(
+                        Color(0xFF211939),
+                        Color(0xFF132334),
+                        Color(0xFF14151D)
+                    )
+                )
+            )
+            .padding(20.dp)
+    ) {
+        Column {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        stringResource(R.string.your_profile),
+                        color = RetentionCyan,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        "$progress%",
+                        color = Color.White,
+                        fontSize = 34.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                    Text(
+                        stringResource(R.string.profile_dimensions_discovered, completed, total),
+                        color = RetentionMuted,
+                        fontSize = 11.sp
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .width(62.dp)
+                        .height(62.dp)
+                        .clip(RoundedCornerShape(22.dp))
+                        .background(Color.White.copy(alpha = 0.07f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("✦", color = RetentionViolet, fontSize = 28.sp, fontWeight = FontWeight.Black)
+                }
+            }
+            Spacer(Modifier.height(18.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                PulseStat(
+                    label = stringResource(R.string.achievements),
+                    value = unlocked.toString(),
+                    accent = RetentionGold,
+                    modifier = Modifier.weight(1f)
+                )
+                PulseStat(
+                    label = stringResource(R.string.daily_question),
+                    value = "${streak}d",
+                    accent = RetentionPink,
+                    modifier = Modifier.weight(1f)
+                )
+                PulseStat(
+                    label = stringResource(R.string.trending_tests),
+                    value = (total - completed).coerceAtLeast(0).toString(),
+                    accent = RetentionCyan,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PulseStat(label: String, value: String, accent: Color, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(18.dp))
+            .background(Color.White.copy(alpha = 0.055f))
+            .padding(horizontal = 12.dp, vertical = 12.dp)
+    ) {
+        Text(value, color = accent, fontSize = 18.sp, fontWeight = FontWeight.Black)
+        Spacer(Modifier.height(3.dp))
+        Text(label, color = RetentionMuted, fontSize = 9.sp, lineHeight = 12.sp, maxLines = 1)
     }
 }
 
