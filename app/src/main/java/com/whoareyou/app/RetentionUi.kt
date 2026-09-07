@@ -48,7 +48,8 @@ fun RetentionSection() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
-    val totalQuizCount = remember(context) { QuizRepository.load(context).size }
+    val quizCatalog = remember(context) { QuizRepository.load(context) }
+    val totalQuizCount = quizCatalog.size
     val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile, totalQuizCount) { AchievementEngine.build(storedProfile, totalQuizCount) }
     val pendingAchievementId = storedProfile.pendingAchievementIds.firstOrNull()
@@ -67,6 +68,10 @@ fun RetentionSection() {
             total = totalQuizCount,
             streak = storedProfile.daily.currentStreak,
             unlocked = achievements.count { it.unlocked }
+        )
+        DiscoverCollections(
+            quizzes = quizCatalog,
+            completed = storedProfile.completedQuizIds
         )
         if (pendingAchievement != null) {
             AchievementUnlockCard(pendingAchievement) {
