@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discover_collections_title">Explore your inner landscape</string>
+    <string name="discover_collections_subtitle">Choose a theme and follow what feels relevant today.</string>
+    <string name="discover_collection_identity">Identity</string>
+    <string name="discover_collection_relationships">Relationships</string>
+    <string name="discover_collection_mind">Mind</string>
+    <string name="discover_collection_growth">Growth</string>
+    <string name="discover_collection_energy">Energy</string>
+    <string name="discover_collection_values">Values</string>
+    <string name="discover_collection_social">Social</string>
+    <string name="discover_collection_control">Control &amp; risk</string>
+    <string name="discover_collection_lifestyle">Lifestyle</string>
+    <string name="discover_collection_count">%1$d tests</string>
+    <string name="discover_collection_open">Explore</string>
+    <string name="discover_library_title">All discoveries</string>
+    <string name="discover_library_subtitle">Continue through the complete library at your own pace.</string>
+</resources>
