@@ -73,7 +73,7 @@ fun DiscoverCollections(
         Spacer(Modifier.height(6.dp))
         Text(
             stringResource(R.string.discover_collections_subtitle),
-            color = V2Colors.TextMuted,
+            color = V2Colors.TextSecondary,
             fontSize = 13.sp,
             lineHeight = 19.sp
         )
@@ -109,7 +109,7 @@ private fun CollectionCard(
     }
     Card(
         modifier = cardModifier,
-        shape = RoundedCornerShape(V2Radius.Large),
+        shape = RoundedCornerShape(V2Radius.Card),
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
     ) {
         Column {
@@ -117,7 +117,7 @@ private fun CollectionCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(128.dp)
-                    .clip(RoundedCornerShape(topStart = V2Radius.Large, topEnd = V2Radius.Large))
+                    .clip(RoundedCornerShape(topStart = V2Radius.Card, topEnd = V2Radius.Card))
             ) {
                 QuizArtwork(quiz, compact = true)
                 Box(
@@ -150,7 +150,7 @@ private fun CollectionCard(
                 Spacer(Modifier.height(5.dp))
                 Text(
                     stringResource(R.string.discover_collection_count, count),
-                    color = V2Colors.TextMuted,
+                    color = V2Colors.TextSecondary,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -183,7 +183,7 @@ fun DiscoverLibraryHeader() {
         Spacer(Modifier.height(5.dp))
         Text(
             stringResource(R.string.discover_library_subtitle),
-            color = V2Colors.TextMuted,
+            color = V2Colors.TextSecondary,
             fontSize = 12.sp,
             lineHeight = 18.sp
         )
