@@ -51,7 +51,7 @@ private val discoverCollections = listOf(
 fun DiscoverCollections(
     quizzes: List<Quiz>,
     completed: Set<String>,
-    onQuizSelected: (Quiz) -> Unit
+    onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
     val populated = remember(quizzes) {
         discoverCollections.mapNotNull { collection ->
@@ -87,7 +87,7 @@ fun DiscoverCollections(
                     count = matching.size,
                     accent = collection.accent,
                     quiz = previewQuiz,
-                    onClick = { onQuizSelected(previewQuiz) }
+                    onClick = onQuizSelected?.let { callback -> { callback(previewQuiz) } }
                 )
             }
         }
@@ -100,12 +100,15 @@ private fun CollectionCard(
     count: Int,
     accent: Color,
     quiz: Quiz,
-    onClick: () -> Unit
+    onClick: (() -> Unit)?
 ) {
+    val cardModifier = if (onClick != null) {
+        Modifier.width(236.dp).clickable(onClick = onClick)
+    } else {
+        Modifier.width(236.dp)
+    }
     Card(
-        modifier = Modifier
-            .width(236.dp)
-            .clickable(onClick = onClick),
+        modifier = cardModifier,
         shape = RoundedCornerShape(V2Radius.Large),
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
     ) {
@@ -128,9 +131,7 @@ private fun CollectionCard(
                 )
                 Text(
                     quiz.accent,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(12.dp),
+                    modifier = Modifier.align(Alignment.TopEnd).padding(12.dp),
                     fontSize = 25.sp
                 )
             }
@@ -141,18 +142,9 @@ private fun CollectionCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        title,
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Black
-                    )
+                    Text(title, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Black)
                     Box(
-                        Modifier
-                            .height(9.dp)
-                            .width(9.dp)
-                            .clip(RoundedCornerShape(99.dp))
-                            .background(accent)
+                        Modifier.height(9.dp).width(9.dp).clip(RoundedCornerShape(99.dp)).background(accent)
                     )
                 }
                 Spacer(Modifier.height(5.dp))
@@ -170,13 +162,15 @@ private fun CollectionCard(
                     lineHeight = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    stringResource(R.string.discover_collection_open),
-                    color = accent,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Black
-                )
+                if (onClick != null) {
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        stringResource(R.string.discover_collection_open),
+                        color = accent,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                }
             }
         }
     }
@@ -185,12 +179,7 @@ private fun CollectionCard(
 @Composable
 fun DiscoverLibraryHeader() {
     Column {
-        Text(
-            stringResource(R.string.discover_library_title),
-            color = Color.White,
-            fontSize = 23.sp,
-            fontWeight = FontWeight.Black
-        )
+        Text(stringResource(R.string.discover_library_title), color = Color.White, fontSize = 23.sp, fontWeight = FontWeight.Black)
         Spacer(Modifier.height(5.dp))
         Text(
             stringResource(R.string.discover_library_subtitle),
