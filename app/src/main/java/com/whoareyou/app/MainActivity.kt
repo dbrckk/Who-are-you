@@ -366,7 +366,9 @@ private fun RecommendedQuizCard(
         colors = CardDefaults.cardColors(containerColor = PanelSoft),
         shape = RoundedCornerShape(24.dp)
     ) {
-        Column(Modifier.padding(20.dp)) {
+        Column(Modifier.padding(16.dp)) {
+            QuizArtwork(quiz)
+            Spacer(Modifier.height(16.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     stringResource(
@@ -591,17 +593,20 @@ private fun GlobalProfileScreen(summary: GlobalProfileSummary, catalog: List<Qui
 @Composable
 private fun QuizCard(quiz: Quiz, completed: Boolean, onClick: () -> Unit) {
     Card(modifier = Modifier.fillMaxWidth().clickable(onClick = onClick), colors = CardDefaults.cardColors(containerColor = Panel), shape = RoundedCornerShape(26.dp)) {
-        Column(Modifier.padding(22.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(quiz.accent, fontSize = 26.sp)
-                Text(if (completed) stringResource(R.string.done) else quiz.time, color = if (completed) Cyan else Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+        Column {
+            QuizArtwork(quiz)
+            Column(Modifier.padding(20.dp)) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(quiz.accent, fontSize = 26.sp)
+                    Text(if (completed) stringResource(R.string.done) else quiz.time, color = if (completed) Cyan else Muted, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                }
+                Spacer(Modifier.height(14.dp))
+                Text(quiz.title.uppercase(), color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Black)
+                Spacer(Modifier.height(5.dp))
+                Text(quiz.hook, color = Muted, fontSize = 14.sp)
+                Spacer(Modifier.height(14.dp))
+                Text(stringResource(if (completed) R.string.take_again else R.string.start), color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
             }
-            Spacer(Modifier.height(16.dp))
-            Text(quiz.title.uppercase(), color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Black)
-            Spacer(Modifier.height(5.dp))
-            Text(quiz.hook, color = Muted, fontSize = 14.sp)
-            Spacer(Modifier.height(14.dp))
-            Text(stringResource(if (completed) R.string.take_again else R.string.start), color = Violet, fontSize = 13.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -620,7 +625,9 @@ private fun QuizScreen(quiz: Quiz, onBack: () -> Unit, onFinished: (Int) -> Unit
         }
         Spacer(Modifier.height(20.dp))
         LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth().height(8.dp), color = Violet, trackColor = PanelSoft)
-        Spacer(Modifier.height(38.dp))
+        Spacer(Modifier.height(20.dp))
+        QuizArtwork(quiz, compact = true)
+        Spacer(Modifier.height(24.dp))
         Text(quiz.title.uppercase(), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(12.dp))
         Text(question.text, color = Color.White, fontSize = 29.sp, lineHeight = 35.sp, fontWeight = FontWeight.Black)
@@ -664,8 +671,8 @@ private fun ResultScreen(
             Spacer(Modifier.height(32.dp))
             Text(stringResource(R.string.your_result), color = Violet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(18.dp))
-            Text(quiz.accent, fontSize = 44.sp)
-            Spacer(Modifier.height(12.dp))
+            QuizArtwork(quiz)
+            Spacer(Modifier.height(20.dp))
             Text(resultTitle.uppercase(), color = Color.White, fontSize = 34.sp, lineHeight = 38.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
             Spacer(Modifier.height(8.dp))
             Text(quiz.title, color = Muted, fontSize = 14.sp)
