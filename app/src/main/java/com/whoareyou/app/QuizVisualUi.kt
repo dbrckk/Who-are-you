@@ -65,14 +65,14 @@ object QuizVisuals {
     }
 
     fun accentFor(quiz: Quiz): Color = when (themeFor(quiz)) {
-        QuizVisualTheme.SOCIAL -> Color(0xFF74E4F4)
+        QuizVisualTheme.SOCIAL -> V2Colors.Cyan
         QuizVisualTheme.EMOTION -> Color(0xFFFF89B8)
-        QuizVisualTheme.MIND -> Color(0xFFAD91FF)
+        QuizVisualTheme.MIND -> V2Colors.Violet
         QuizVisualTheme.CONTROL -> Color(0xFFFFBF69)
         QuizVisualTheme.GROWTH -> Color(0xFF8CE6A7)
         QuizVisualTheme.VALUES -> Color(0xFFFFD77A)
         QuizVisualTheme.ENERGY -> Color(0xFFA38BFF)
-        QuizVisualTheme.LIFESTYLE -> Color(0xFF6EE7F9)
+        QuizVisualTheme.LIFESTYLE -> V2Colors.Cyan
         QuizVisualTheme.IDENTITY -> Color(0xFFC5A8FF)
     }
 
@@ -85,7 +85,7 @@ fun QuizArtwork(
     modifier: Modifier = Modifier,
     compact: Boolean = false
 ) {
-    val shape = RoundedCornerShape(if (compact) 20.dp else 26.dp)
+    val shape = RoundedCornerShape(if (compact) V2Radius.Compact else V2Radius.Card)
     val accent = QuizVisuals.accentFor(quiz)
 
     Box(
@@ -93,7 +93,7 @@ fun QuizArtwork(
             .fillMaxWidth()
             .height(if (compact) 118.dp else 172.dp)
             .clip(shape)
-            .border(1.dp, Color.White.copy(alpha = 0.08f), shape)
+            .border(1.dp, V2Colors.Hairline, shape)
     ) {
         Image(
             painter = painterResource(QuizVisuals.drawableFor(quiz)),
@@ -109,8 +109,8 @@ fun QuizArtwork(
                     Brush.verticalGradient(
                         listOf(
                             Color.Transparent,
-                            Color(0x22090A0F),
-                            Color(0xCC090A0F)
+                            V2Colors.OverlaySoft,
+                            V2Colors.OverlayStrong
                         )
                     )
                 )
@@ -122,13 +122,13 @@ fun QuizArtwork(
                 .size(if (compact) 38.dp else 46.dp)
                 .align(Alignment.TopEnd)
                 .clip(CircleShape)
-                .background(Color(0xB814151D))
+                .background(V2Colors.SurfaceGlass)
                 .border(1.dp, accent.copy(alpha = 0.45f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = quiz.accent,
-                color = Color.White,
+                color = V2Colors.TextPrimary,
                 fontSize = if (compact) 18.sp else 22.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -138,14 +138,14 @@ fun QuizArtwork(
             modifier = Modifier
                 .padding(start = 14.dp, bottom = 13.dp)
                 .align(Alignment.BottomStart)
-                .clip(RoundedCornerShape(50))
+                .clip(RoundedCornerShape(V2Radius.Pill))
                 .background(accent.copy(alpha = 0.18f))
-                .border(1.dp, accent.copy(alpha = 0.28f), RoundedCornerShape(50))
+                .border(1.dp, accent.copy(alpha = 0.28f), RoundedCornerShape(V2Radius.Pill))
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         ) {
             Text(
                 text = quiz.time,
-                color = Color.White.copy(alpha = 0.88f),
+                color = V2Colors.TextPrimary.copy(alpha = 0.88f),
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Bold
             )
