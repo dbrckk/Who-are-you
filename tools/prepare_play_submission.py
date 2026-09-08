@@ -12,6 +12,20 @@ ADMOB_APP_RE = re.compile(r"^ca-app-pub-\d{16}~\d{10}$")
 ADMOB_UNIT_RE = re.compile(r"^ca-app-pub-\d{16}/\d{10}$")
 SHA256_RE = re.compile(r"^(?:[0-9A-Fa-f]{2}:){31}[0-9A-Fa-f]{2}$")
 
+MARKDOWN_CONTACT_PLACEHOLDER = (
+    "**REQUIRED BEFORE PUBLIC RELEASE:** replace this line with the public developer/privacy "
+    "support email or other valid support contact used for the Google Play listing."
+)
+HTML_CONTACT_PLACEHOLDER = (
+    "<p><strong>REQUIRED BEFORE PUBLIC RELEASE:</strong> insert the public developer/privacy "
+    "support email or support contact used for the Google Play listing.</p>"
+)
+HTML_PRERELEASE_NOTICE = (
+    '<p class="notice"><strong>Pre-release notice:</strong> the privacy terms below reflect the current '
+    "application architecture. A public developer/privacy support contact must be inserted before the "
+    "first public Google Play release.</p>"
+)
+
 
 class InputError(ValueError):
     pass
@@ -94,10 +108,19 @@ def render_gradle_properties(values):
 
 
 def render_privacy_policy(template, support_email):
-    marker = "Before public release, replace this section with the developer support/contact address used in the Google Play listing."
-    if marker not in template:
-        raise InputError("privacy policy contact placeholder was not found")
-    return template.replace(marker, f"Contact: {support_email}")
+    if MARKDOWN_CONTACT_PLACEHOLDER not in template:
+        raise InputError("privacy policy Markdown contact placeholder was not found")
+    return template.replace(MARKDOWN_CONTACT_PLACEHOLDER, f"Contact: {support_email}")
+
+
+def render_privacy_html(template, support_email):
+    if HTML_CONTACT_PLACEHOLDER not in template:
+        raise InputError("privacy policy HTML contact placeholder was not found")
+    rendered = template.replace(
+        HTML_CONTACT_PLACEHOLDER,
+        f'<p>Privacy/support contact: <a href="mailto:{support_email}">{support_email}</a></p>',
+    )
+    return rendered.replace(HTML_PRERELEASE_NOTICE, "")
 
 
 def render_summary(values):
@@ -110,21 +133,29 @@ def render_summary(values):
         "- Billing product `remove_ads_lifetime`: active + priced\n"
         "- Custom telemetry: disabled by default\n\n"
         "## Generated files\n\n"
-        "- `assetlinks.json` — publish at `/.well-known/assetlinks.json`.\n"
+        "- `assetlinks.json` — publish at the production host root `/.well-known/assetlinks.json`.\n"
         "- `production-gradle.properties` — pass these values only to the production Play build.\n"
-        "- `privacy-policy-final.md` — publish at the configured HTTPS privacy-policy URL.\n"
+        "- `privacy-policy-final.md` — final Markdown privacy policy.\n"
+        "- `privacy-policy-final.html` — final static privacy page with the pre-release warning removed.\n"
     )
 
 
 def generate(input_path, repo_root, output_dir):
     payload = json.loads(Path(input_path).read_text(encoding="utf-8"))
     values = validate_inputs(payload)
-    template = (Path(repo_root) / "docs/privacy-policy.md").read_text(encoding="utf-8")
+    repo = Path(repo_root)
+    markdown_template = (repo / "docs/privacy-policy.md").read_text(encoding="utf-8")
+    html_template = (repo / "docs/privacy/index.html").read_text(encoding="utf-8")
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / "assetlinks.json").write_text(render_assetlinks(values), encoding="utf-8")
     (out / "production-gradle.properties").write_text(render_gradle_properties(values), encoding="utf-8")
-    (out / "privacy-policy-final.md").write_text(render_privacy_policy(template, values["supportEmail"]), encoding="utf-8")
+    (out / "privacy-policy-final.md").write_text(
+        render_privacy_policy(markdown_template, values["supportEmail"]), encoding="utf-8"
+    )
+    (out / "privacy-policy-final.html").write_text(
+        render_privacy_html(html_template, values["supportEmail"]), encoding="utf-8"
+    )
     (out / "submission-summary.md").write_text(render_summary(values), encoding="utf-8")
     return values
 
