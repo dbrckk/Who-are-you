@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="personalized_snapshot_label">YOUR CURRENT MAP</string>
+    <string name="personalized_stage_new">START YOUR MAP</string>
+    <string name="personalized_stage_emerging">YOUR MAP IS TAKING SHAPE</string>
+    <string name="personalized_stage_mapped">YOUR PERSONAL PATTERN</string>
     <string name="personalized_dimensions">dimensions</string>
     <string name="personalized_left">left to explore</string>
     <string name="personalized_signal">strongest signal</string>
@@ -9,5 +12,7 @@
     <string name="personalized_signature_confidence">%1$d%% match</string>
     <string name="personalized_signals_label">STRONGEST DIMENSIONS</string>
     <string name="personalized_next_label">NEXT BEST EXPLORATION</string>
-    <string name="personalized_next_reason">Chosen to reveal a part of your profile that is still less explored.</string>
+    <string name="personalized_next_new_theme">This opens a side of you that your current map has not measured yet.</string>
+    <string name="personalized_next_unfinished">Continue building your map with one of the dimensions still waiting to be explored.</string>
+    <string name="personalized_next_retake">Your map is complete. Retake a dimension to see whether your profile is evolving.</string>
 </resources>
