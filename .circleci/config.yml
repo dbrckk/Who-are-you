@@ -45,13 +45,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v4-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-            - v4-gradle-
+            - v5-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+            - v5-gradle-
 
   save_gradle_cache:
     steps:
       - save_cache:
-          key: v4-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+          key: v5-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
           paths:
             - ~/.gradle/caches
             - ~/.gradle/daemon
@@ -126,6 +126,19 @@ jobs:
           command: gradle :app:assembleDebug --stacktrace
 
       - run:
+          name: Verify installable APK candidate
+          command: |
+            set -euo pipefail
+            APK="app/build/outputs/apk/debug/app-debug.apk"
+            test -s "$APK"
+            zipalign -c -v 4 "$APK"
+            apksigner verify --verbose --print-certs "$APK" | tee /tmp/apk-signature.txt
+            aapt dump badging "$APK" | tee /tmp/apk-badging.txt
+            grep -F "package: name='com.whoareyou.app' versionCode='1' versionName='0.1.0'" /tmp/apk-badging.txt
+            grep -F "sdkVersion:'26'" /tmp/apk-badging.txt
+            grep -F "targetSdkVersion:'36'" /tmp/apk-badging.txt
+
+      - run:
           name: Build optimized release AAB
           command: gradle :app:bundleRelease --stacktrace
 
@@ -139,6 +152,8 @@ jobs:
             test -s "$APK"
             cp "$APK" dist/who-are-you-0.1.0-debug.apk
             sha256sum dist/who-are-you-0.1.0-debug.apk > dist/who-are-you-0.1.0-debug.apk.sha256
+            cp /tmp/apk-signature.txt dist/who-are-you-0.1.0-debug.apk.signature.txt
+            cp /tmp/apk-badging.txt dist/who-are-you-0.1.0-debug.apk.badging.txt
 
             mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
             if [ "${#bundles[@]}" -ne 1 ]; then
@@ -147,6 +162,31 @@ jobs:
             fi
             cp "${bundles[0]}" dist/who-are-you-0.1.0-release-unsigned.aab
             sha256sum dist/who-are-you-0.1.0-release-unsigned.aab > dist/who-are-you-0.1.0-release-unsigned.aab.sha256
+
+            python - <<'PY'
+            import hashlib, json, os
+            apk = 'dist/who-are-you-0.1.0-debug.apk'
+            with open(apk, 'rb') as handle:
+                digest = hashlib.sha256(handle.read()).hexdigest()
+            report = {
+                'candidate': 'who-are-you-0.1.0-debug.apk',
+                'package': 'com.whoareyou.app',
+                'versionCode': 1,
+                'versionName': '0.1.0',
+                'minSdk': 26,
+                'targetSdk': 36,
+                'gitRevision': os.environ.get('CIRCLE_SHA1', ''),
+                'sha256': digest,
+                'signed': True,
+                'zipAligned': True,
+                'adConfiguration': 'Google test IDs',
+                'telemetry': 'disabled unless explicitly configured',
+                'purpose': 'direct device acceptance testing; not a Play production artifact'
+            }
+            with open('dist/release-candidate.json', 'w', encoding='utf-8') as handle:
+                json.dump(report, handle, indent=2)
+                handle.write('\n')
+            PY
 
       - store_test_results:
           path: app/build/test-results
