@@ -8,6 +8,7 @@
     <string name="library_empty_title">Nothing matches yet</string>
     <string name="library_empty_body">Try another search or clear one of the filters.</string>
     <string name="library_more_results">+%1$d more tests</string>
+    <string name="library_show_more">Show %1$d more · %2$d remaining</string>
     <string name="library_theme_identity">Identity</string>
     <string name="library_theme_emotion">Relationships</string>
     <string name="library_theme_mind">Mind</string>
