@@ -51,8 +51,7 @@ object GuidedJourneyEngine {
         val matching = quizzes
             .filter { QuizVisuals.themeFor(it) in definition.themes }
             .sortedWith(
-                compareBy<Quiz> { it.id in completed }
-                    .thenBy { definition.themes.indexOf(QuizVisuals.themeFor(it)) }
+                compareBy<Quiz> { definition.themes.indexOf(QuizVisuals.themeFor(it)) }
                     .thenBy { it.id }
             )
             .take(maxQuizzesPerJourney.coerceAtLeast(1))
