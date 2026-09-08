@@ -41,6 +41,9 @@
     <string name="premium_restore_copy">Your purchase is stored and restored automatically.</string>
     <string name="premium_copy">Keep every test, result, share and friend challenge. Only the ads disappear.</string>
     <string name="remove_ads_button">REMOVE ADS — %1$s</string>
+    <string name="privacy_options_title">PRIVACY OPTIONS</string>
+    <string name="privacy_options_body">Review or change your advertising privacy choices.</string>
+    <string name="privacy_options_button">MANAGE PRIVACY OPTIONS</string>
     <string name="done">DONE</string>
     <string name="take_again">TAKE AGAIN  →</string>
     <string name="start">START  →</string>
