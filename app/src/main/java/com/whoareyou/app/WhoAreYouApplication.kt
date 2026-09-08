@@ -14,6 +14,7 @@ class WhoAreYouApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         AppEvents.configure()
+        AppEvents.appOpen()
         reportPreviousFatalCrash()
         installFatalCrashBuffer()
     }
@@ -21,13 +22,18 @@ class WhoAreYouApplication : Application() {
     private fun reportPreviousFatalCrash() {
         val prefs = getSharedPreferences(CRASH_PREFS, MODE_PRIVATE)
         val errorClass = prefs.getString(KEY_CLASS, null) ?: return
+        val timestamp = prefs.getLong(KEY_TIMESTAMP, 0L)
+        val ageMinutes = if (timestamp > 0L) {
+            ((System.currentTimeMillis() - timestamp).coerceAtLeast(0L) / 60_000L).coerceAtMost(10_080L)
+        } else {
+            -1L
+        }
+
         AppEvents.log(
             "fatal_crash_previous_session",
             mapOf(
-                "error" to errorClass,
-                "message" to prefs.getString(KEY_MESSAGE, "").orEmpty(),
-                "stack" to prefs.getString(KEY_STACK, "").orEmpty().take(12000),
-                "timestamp_ms" to prefs.getLong(KEY_TIMESTAMP, 0L)
+                "error" to errorClass.substringAfterLast('.').take(64),
+                "age_minutes" to ageMinutes
             )
         )
         prefs.edit().clear().apply()
