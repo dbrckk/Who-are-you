@@ -49,6 +49,9 @@ fun RetentionSection() {
     val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
     val quizCatalog = remember(context) { QuizRepository.load(context) }
+    val personalizedProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
+        GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
+    }
     val totalQuizCount = quizCatalog.size
     val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile, totalQuizCount) { AchievementEngine.build(storedProfile, totalQuizCount) }
@@ -63,6 +66,11 @@ fun RetentionSection() {
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        PersonalizedDiscoverDashboard(
+            profile = personalizedProfile,
+            quizzes = quizCatalog,
+            completed = storedProfile.completedQuizIds
+        )
         JourneyPulse(
             completed = storedProfile.completedQuizIds.size,
             total = totalQuizCount,
