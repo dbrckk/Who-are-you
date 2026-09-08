@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="result_interpretation_title">Lis ton signal</string>
+    <string name="result_interpretation_subtitle">Une lecture plus utile de ton résultat que le score seul.</string>
+    <string name="result_signal_label">INTENSITÉ DU SIGNAL</string>
+    <string name="result_signal_balanced">Signal nuancé</string>
+    <string name="result_signal_clear">Signal clair</string>
+    <string name="result_signal_strong">Signal fort</string>
+    <string name="result_pole_label">TENDANCE ACTUELLE</string>
+    <string name="result_nuance_label">Sensibilité au contexte</string>
+    <string name="result_nuance_balanced_body">Ton score reste proche du centre. Le contexte, l’humeur ou la situation peuvent compter davantage ici qu’une tendance fixe.</string>
+    <string name="result_nuance_clear_body">Une tendance se dessine nettement, tout en laissant de la place au versant opposé selon les situations.</string>
+    <string name="result_nuance_strong_body">Le résultat est éloigné du point médian : ce versant de la dimension fait actuellement partie de tes signaux les plus nets.</string>
+    <string name="result_context_label">À GARDER EN CONTEXTE</string>
+    <string name="result_context_body">Il s’agit d’un signal ludique d’introspection, pas d’un diagnostic ni d’une étiquette psychologique figée. Refaire le test peut aussi montrer comment le contexte fait évoluer tes réponses.</string>
+</resources>
