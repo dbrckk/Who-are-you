@@ -55,18 +55,23 @@ fun ResultScreen(
     ) {
         item {
             Spacer(Modifier.height(32.dp))
-            Text(stringResource(R.string.your_result), color = V2Colors.AccentViolet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.your_result), color = V2Colors.AccentViolet, style = V2Type.Eyebrow)
             Spacer(Modifier.height(18.dp))
             QuizArtwork(quiz)
             Spacer(Modifier.height(20.dp))
-            Text(resultTitle.uppercase(), color = V2Colors.TextPrimary, fontSize = 34.sp, lineHeight = 38.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+            Text(
+                resultTitle.uppercase(),
+                color = V2Colors.TextPrimary,
+                style = V2Type.Hero,
+                textAlign = TextAlign.Center
+            )
             Spacer(Modifier.height(8.dp))
-            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, textAlign = TextAlign.Center)
+            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
             Spacer(Modifier.height(26.dp))
 
             Card(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
-                shape = RoundedCornerShape(28.dp),
+                shape = RoundedCornerShape(V2Radius.Card),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -74,36 +79,24 @@ fun ResultScreen(
                         "$score%",
                         color = V2Colors.AccentViolet,
                         fontSize = 54.sp,
+                        lineHeight = 60.sp,
                         fontWeight = FontWeight.Black,
                         modifier = Modifier.testTag("result_score")
                     )
                     Spacer(Modifier.height(8.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text(
-                            quiz.metricLow,
-                            color = V2Colors.TextSecondary,
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-                        Text(
-                            quiz.metricHigh,
-                            color = V2Colors.TextSecondary,
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            textAlign = TextAlign.End,
-                            modifier = Modifier.weight(1f)
-                        )
+                        Text(quiz.metricLow, color = V2Colors.TextSecondary, style = V2Type.Supporting, modifier = Modifier.weight(1f))
+                        Text(quiz.metricHigh, color = V2Colors.TextSecondary, style = V2Type.Supporting, textAlign = TextAlign.End, modifier = Modifier.weight(1f))
                     }
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
                         progress = { score / 100f },
-                        modifier = Modifier.fillMaxWidth().height(10.dp),
+                        modifier = Modifier.fillMaxWidth().height(8.dp),
                         color = V2Colors.AccentViolet,
                         trackColor = V2Colors.Hairline
                     )
                     Spacer(Modifier.height(20.dp))
-                    Text(description, color = V2Colors.TextPrimary, fontSize = 16.sp, lineHeight = 23.sp, textAlign = TextAlign.Center)
+                    Text(description, color = V2Colors.TextPrimary, style = V2Type.Body, textAlign = TextAlign.Center)
                 }
             }
 
@@ -111,16 +104,17 @@ fun ResultScreen(
                 Spacer(Modifier.height(16.dp))
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(V2Radius.Compact),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(Modifier.padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(stringResource(R.string.retake_change_title), color = V2Colors.AccentCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.retake_change_title), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
                         Spacer(Modifier.height(7.dp))
                         Text(
                             stringResource(R.string.retake_change_values, scoreChange.previousScore, scoreChange.currentScore),
                             color = V2Colors.TextPrimary,
                             fontSize = 22.sp,
+                            lineHeight = 28.sp,
                             fontWeight = FontWeight.Black
                         )
                         Spacer(Modifier.height(6.dp))
@@ -131,8 +125,7 @@ fun ResultScreen(
                                 ScoreChangeDirection.SAME -> stringResource(R.string.retake_change_same)
                             },
                             color = V2Colors.TextSecondary,
-                            fontSize = 12.sp,
-                            lineHeight = 18.sp,
+                            style = V2Type.Supporting,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -142,11 +135,11 @@ fun ResultScreen(
             Spacer(Modifier.height(16.dp))
             Card(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(V2Radius.Compact),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(Modifier.padding(18.dp)) {
-                    Text(stringResource(R.string.profile_progress), color = V2Colors.AccentCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.profile_progress), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
                     Spacer(Modifier.height(6.dp))
                     Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
                 }
@@ -178,7 +171,7 @@ fun ResultScreen(
                 Text(stringResource(R.string.compare_with_friend), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             }
             Spacer(Modifier.height(8.dp))
-            Text(stringResource(R.string.friend_match_explainer), color = V2Colors.TextSecondary, fontSize = 12.sp, lineHeight = 18.sp, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.friend_match_explainer), color = V2Colors.TextSecondary, style = V2Type.Supporting, textAlign = TextAlign.Center)
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Button(
