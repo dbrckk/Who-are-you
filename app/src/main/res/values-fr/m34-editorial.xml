@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discover_editorial_title">Pour toi maintenant</string>
+    <string name="discover_editorial_subtitle">Une petite sélection variée pour continuer à explorer sans te perdre.</string>
+    <string name="discover_editorial_badge">SÉLECTION</string>
+    <string name="discover_editorial_next">À SUIVRE</string>
+</resources>
