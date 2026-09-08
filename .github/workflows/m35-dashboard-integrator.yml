@@ -1,0 +1,33 @@
+name: M35 Dashboard Integrator
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/m35_apply_personalized_dashboard.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Apply personalized dashboard integration
+        run: python3 tools/m35_apply_personalized_dashboard.py
+      - name: Commit integration
+        run: |
+          if git diff --quiet; then
+            echo "No dashboard integration changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/main/java/com/whoareyou/app/RetentionUi.kt
+          git commit -m "M35 integrate personalized Discover dashboard"
+          git push
