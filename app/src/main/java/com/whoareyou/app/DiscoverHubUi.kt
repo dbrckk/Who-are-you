@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 /**
  * Single Discover surface for the V2 product experience.
@@ -62,23 +61,19 @@ fun DiscoverHub(
             Text(
                 text = stringResource(R.string.app_name),
                 color = V2Colors.AccentViolet,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.Eyebrow
             )
             Spacer(Modifier.height(7.dp))
             Text(
                 text = stringResource(R.string.discover_headline),
                 color = V2Colors.TextPrimary,
-                fontSize = 38.sp,
-                lineHeight = 41.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.Hero
             )
             Spacer(Modifier.height(8.dp))
             Text(
                 text = stringResource(R.string.discover_subtitle),
                 color = V2Colors.TextSecondary,
-                fontSize = 14.sp,
-                lineHeight = 21.sp
+                style = V2Type.Body
             )
         }
 
@@ -158,15 +153,13 @@ private fun DiscoverMomentumCard(
             Text(
                 text = stringResource(R.string.discover_momentum_title),
                 color = V2Colors.TextPrimary,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.SectionTitle
             )
             Spacer(Modifier.height(5.dp))
             Text(
                 text = stringResource(R.string.discover_momentum_subtitle),
                 color = V2Colors.TextSecondary,
-                fontSize = 11.sp,
-                lineHeight = 17.sp
+                style = V2Type.Supporting
             )
             Spacer(Modifier.height(16.dp))
             Row(
@@ -207,16 +200,13 @@ private fun MomentumStat(
         Text(
             text = value,
             color = V2Colors.AccentCyan,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Black
+            style = V2Type.Metric
         )
         Spacer(Modifier.height(3.dp))
         Text(
             text = label,
             color = V2Colors.TextSecondary,
-            fontSize = 9.sp,
-            lineHeight = 12.sp,
-            fontWeight = FontWeight.Bold
+            style = V2Type.Caption
         )
     }
 }
@@ -233,14 +223,12 @@ private fun GuidedJourneySection(
         Text(
             text = stringResource(R.string.journeys_title),
             color = V2Colors.TextPrimary,
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Black
+            style = V2Type.SectionTitle
         )
         Text(
             text = stringResource(R.string.journeys_subtitle),
             color = V2Colors.TextSecondary,
-            fontSize = 12.sp,
-            lineHeight = 18.sp
+            style = V2Type.Supporting
         )
 
         journeys.forEach { journey ->
@@ -270,14 +258,12 @@ private fun JourneyCard(
         GuidedJourneyId.INNER_WORLD -> stringResource(R.string.journey_inner_world_body)
         GuidedJourneyId.VALUES_AND_DIRECTION -> stringResource(R.string.journey_values_body)
     }
-    val modifier = Modifier
-        .fillMaxWidth()
-        .let { base -> if (onClick != null) base.clickable(onClick = onClick) else base }
 
-    Card(
-        modifier = modifier,
+    V2PressableCard(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(V2Radius.Card),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+        containerColor = V2Colors.Surface
     ) {
         Column(Modifier.padding(18.dp)) {
             Row(
@@ -288,23 +274,19 @@ private fun JourneyCard(
                     text = title,
                     modifier = Modifier.weight(1f),
                     color = V2Colors.TextPrimary,
-                    fontSize = 17.sp,
-                    lineHeight = 21.sp,
-                    fontWeight = FontWeight.Black
+                    style = V2Type.BodyStrong
                 )
                 Text(
                     text = if (journey.isComplete) "✓" else "${journey.progressPercent}%",
                     color = if (journey.isComplete) V2Colors.AccentCyan else V2Colors.AccentViolet,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Black
+                    style = V2Type.Eyebrow
                 )
             }
             Spacer(Modifier.height(6.dp))
             Text(
                 text = body,
                 color = V2Colors.TextSecondary,
-                fontSize = 11.sp,
-                lineHeight = 16.sp
+                style = V2Type.Supporting
             )
             Spacer(Modifier.height(12.dp))
             LinearProgressIndicator(
@@ -321,8 +303,7 @@ private fun JourneyCard(
                     stringResource(R.string.journey_progress, journey.completedCount, journey.totalCount)
                 },
                 color = V2Colors.AccentCyan,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.Caption
             )
         }
     }
@@ -344,35 +325,32 @@ private fun PremiumDiscoverCard(
             Text(
                 stringResource(if (adsRemoved) R.string.lifetime_upgrade_active else R.string.remove_ads_forever),
                 color = V2Colors.AccentCyan,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.Eyebrow
             )
             Spacer(Modifier.height(9.dp))
             Text(
                 if (adsRemoved) stringResource(R.string.no_ads_ever)
                 else stringResource(R.string.premium_once_no_subscription, premiumPrice),
                 color = V2Colors.TextPrimary,
-                fontSize = 20.sp,
-                lineHeight = 25.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.SectionTitle
             )
             Spacer(Modifier.height(7.dp))
             Text(
                 stringResource(if (adsRemoved) R.string.premium_restore_copy else R.string.premium_copy),
                 color = V2Colors.TextSecondary,
-                fontSize = 12.sp,
-                lineHeight = 18.sp
+                style = V2Type.Supporting
             )
             if (!adsRemoved) {
                 Spacer(Modifier.height(15.dp))
                 Button(
                     onClick = onRemoveAds,
-                    modifier = Modifier.fillMaxWidth().height(50.dp),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
                     shape = RoundedCornerShape(V2Radius.Compact)
                 ) {
                     Text(
                         stringResource(R.string.remove_ads_button, premiumPrice),
+                        style = V2Type.BodyStrong,
                         fontWeight = FontWeight.Black
                     )
                 }
