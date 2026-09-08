@@ -123,13 +123,13 @@ private fun GuidedJourneySection(
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
-            text = stringResource(R.string.journey_section_title),
+            text = stringResource(R.string.journeys_title),
             color = V2Colors.TextPrimary,
             fontSize = 25.sp,
             fontWeight = FontWeight.Black
         )
         Text(
-            text = stringResource(R.string.journey_section_subtitle),
+            text = stringResource(R.string.journeys_subtitle),
             color = V2Colors.TextSecondary,
             fontSize = 12.sp,
             lineHeight = 18.sp
@@ -151,10 +151,10 @@ private fun JourneyCard(
     onClick: (() -> Unit)?
 ) {
     val title = when (journey.definition.id) {
-        GuidedJourneyId.PERSONALITY -> stringResource(R.string.journey_personality_title)
-        GuidedJourneyId.RELATIONSHIPS -> stringResource(R.string.journey_relationships_title)
-        GuidedJourneyId.INNER_WORLD -> stringResource(R.string.journey_inner_world_title)
-        GuidedJourneyId.VALUES_AND_DIRECTION -> stringResource(R.string.journey_values_title)
+        GuidedJourneyId.PERSONALITY -> stringResource(R.string.journey_personality)
+        GuidedJourneyId.RELATIONSHIPS -> stringResource(R.string.journey_relationships)
+        GuidedJourneyId.INNER_WORLD -> stringResource(R.string.journey_inner_world)
+        GuidedJourneyId.VALUES_AND_DIRECTION -> stringResource(R.string.journey_values)
     }
     val body = when (journey.definition.id) {
         GuidedJourneyId.PERSONALITY -> stringResource(R.string.journey_personality_body)
@@ -208,7 +208,7 @@ private fun JourneyCard(
             Spacer(Modifier.height(9.dp))
             Text(
                 text = if (journey.isComplete) {
-                    stringResource(R.string.journey_retake)
+                    stringResource(R.string.journey_revisit)
                 } else {
                     stringResource(R.string.journey_progress, journey.completedCount, journey.totalCount)
                 },
