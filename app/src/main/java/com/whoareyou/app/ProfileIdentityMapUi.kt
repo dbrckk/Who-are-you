@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -39,16 +38,8 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
     if (summary.dimensions.size < 3) return
 
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
-    val axes = remember(summary.dimensions) {
-        summary.dimensions
-            .sortedByDescending { abs(it.score - 50) }
-            .take(6)
-    }
-    val strongest = axes.firstOrNull()
-    val contrast = remember(axes) {
-        if (axes.isEmpty()) 0 else (axes.maxOf { it.score } - axes.minOf { it.score })
-    }
-    val balanced = remember(axes) { axes.count { abs(it.score - 50) <= 12 } }
+    val map = remember(summary.dimensions) { ProfileIdentityMapEngine.build(summary.dimensions) }
+    val axes = map.axes
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -123,17 +114,17 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
                 horizontalArrangement = Arrangement.spacedBy(9.dp)
             ) {
                 IdentityStat(
-                    value = strongest?.let { "${abs(it.score - 50) * 2}%" } ?: "0%",
+                    value = "${map.dominantSignalPercent}%",
                     label = if (french) "signal dominant" else "dominant signal",
                     modifier = Modifier.weight(1f)
                 )
                 IdentityStat(
-                    value = "$contrast",
+                    value = map.contrast.toString(),
                     label = if (french) "contraste" else "contrast",
                     modifier = Modifier.weight(1f)
                 )
                 IdentityStat(
-                    value = balanced.toString(),
+                    value = map.balancedAxes.toString(),
                     label = if (french) "axes équilibrés" else "balanced axes",
                     modifier = Modifier.weight(1f)
                 )
@@ -184,7 +175,7 @@ private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modi
 
         val profilePath = Path()
         axes.forEachIndexed { index, dimension ->
-            val normalized = (0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f)
+            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
             val p = point(index, normalized)
             if (index == 0) profilePath.moveTo(p.x, p.y) else profilePath.lineTo(p.x, p.y)
         }
@@ -194,7 +185,7 @@ private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modi
         drawPath(profilePath, color = violet.copy(alpha = 0.92f), style = Stroke(width = 3.4f))
 
         axes.forEachIndexed { index, dimension ->
-            val normalized = (0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f)
+            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
             val p = point(index, normalized)
             drawCircle(
                 color = if (index % 2 == 0) violet else cyan,
