@@ -16,11 +16,14 @@ class CoreAccessibilityContractTest(unittest.TestCase):
         self.assertIn("TextButton(", source)
 
     def test_quiz_is_scrollable_and_answers_are_buttons(self):
-        source = self.read("QuizScreenUi.kt")
-        self.assertIn("verticalScroll(scrollState)", source)
-        self.assertIn("scrollState.scrollTo(0)", source)
-        self.assertIn("clickable(role = Role.Button)", source)
-        self.assertIn("AccessibleBackAction(onClick = onBack)", source)
+        quiz = self.read("QuizScreenUi.kt")
+        pressable = self.read("V2InteractiveUi.kt")
+        self.assertIn("verticalScroll(scrollState)", quiz)
+        self.assertIn("scrollState.scrollTo(0)", quiz)
+        self.assertIn("V2PressableSurface(", quiz)
+        self.assertIn("role: Role = Role.Button", pressable)
+        self.assertIn("role = role", pressable)
+        self.assertIn("AccessibleBackAction(onClick = onBack)", quiz)
 
     def test_shell_tabs_expose_tab_semantics(self):
         source = self.read("AppShellUi.kt")
