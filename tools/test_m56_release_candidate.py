@@ -24,19 +24,28 @@ class M56ReleaseCandidateTest(unittest.TestCase):
         themed = (ROOT / "app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml").read_text(encoding="utf-8")
         self.assertIn("<monochrome", themed)
 
+    def test_candidate_build_is_release_like_and_installable(self):
+        gradle = (ROOT / "app/build.gradle.kts").read_text(encoding="utf-8")
+        self.assertIn('create("candidate")', gradle)
+        self.assertIn('initWith(getByName("release"))', gradle)
+        self.assertIn('signingConfig = signingConfigs.getByName("debug")', gradle)
+        self.assertIn("isMinifyEnabled = true", gradle)
+        self.assertIn("isShrinkResources = true", gradle)
+
     def test_circleci_builds_and_verifies_installable_apk(self):
         config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
         for expected in (
             "gradle :app:testDebugUnitTest",
             "gradle :app:assembleDebugAndroidTest",
             "gradle :app:lintDebug",
+            "gradle :app:lintCandidate",
             "gradle :app:lintRelease",
-            "gradle :app:assembleDebug",
+            "gradle :app:assembleCandidate",
             "gradle :app:bundleRelease",
             "zipalign -c -v 4",
             "apksigner verify --verbose --print-certs",
             "aapt dump badging",
-            "who-are-you-0.1.0-debug.apk",
+            "who-are-you-0.1.0-rc.apk",
             "release-candidate.json",
         ):
             self.assertIn(expected, config)
@@ -44,7 +53,8 @@ class M56ReleaseCandidateTest(unittest.TestCase):
     def test_candidate_is_explicitly_non_production(self):
         config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
         self.assertIn("Google test IDs", config)
-        self.assertIn("direct device acceptance testing; not a Play production artifact", config)
+        self.assertIn("Android debug signing key for direct device installation", config)
+        self.assertIn("production-like device acceptance testing; not a Play production artifact", config)
 
 
 if __name__ == "__main__":
