@@ -110,6 +110,10 @@ jobs:
           command: gradle :app:testDebugUnitTest --stacktrace
 
       - run:
+          name: Compile Compose UI instrumentation tests
+          command: gradle :app:assembleDebugAndroidTest --stacktrace
+
+      - run:
           name: Android lint
           command: gradle :app:lintDebug --stacktrace
 
