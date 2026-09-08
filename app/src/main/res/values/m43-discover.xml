@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discover_momentum_title">Your momentum</string>
+    <string name="discover_momentum_subtitle">Small signals that show how your profile is growing over time.</string>
+    <string name="discover_streak_label">Day streak</string>
+    <string name="discover_achievements_label">Achievements</string>
+    <string name="discover_matches_label">Comparisons</string>
+</resources>
