@@ -28,9 +28,14 @@ class PlaySubmissionGeneratorTest(unittest.TestCase):
     def test_valid_inputs_generate_all_files(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            (root / "docs").mkdir()
+            (root / "docs/privacy").mkdir(parents=True)
             (root / "docs/privacy-policy.md").write_text(
-                "# Policy\n\nBefore public release, replace this section with the developer support/contact address used in the Google Play listing.\n",
+                "# Policy\n\n**REQUIRED BEFORE PUBLIC RELEASE:** replace this line with the public developer/privacy support email or other valid support contact used for the Google Play listing.\n",
+                encoding="utf-8",
+            )
+            (root / "docs/privacy/index.html").write_text(
+                '<p class="notice"><strong>Pre-release notice:</strong> the privacy terms below reflect the current application architecture. A public developer/privacy support contact must be inserted before the first public Google Play release.</p>\n'
+                '<p><strong>REQUIRED BEFORE PUBLIC RELEASE:</strong> insert the public developer/privacy support email or support contact used for the Google Play listing.</p>\n',
                 encoding="utf-8",
             )
             input_path = root / "input.json"
@@ -42,9 +47,14 @@ class PlaySubmissionGeneratorTest(unittest.TestCase):
             self.assertTrue((out / "assetlinks.json").is_file())
             self.assertTrue((out / "production-gradle.properties").is_file())
             self.assertTrue((out / "privacy-policy-final.md").is_file())
+            self.assertTrue((out / "privacy-policy-final.html").is_file())
             self.assertTrue((out / "submission-summary.md").is_file())
             self.assertIn("com.whoareyou.app", (out / "assetlinks.json").read_text())
             self.assertIn("support@whoareyou.app", (out / "privacy-policy-final.md").read_text())
+            final_html = (out / "privacy-policy-final.html").read_text()
+            self.assertIn("mailto:support@whoareyou.app", final_html)
+            self.assertNotIn("Pre-release notice", final_html)
+            self.assertNotIn("REQUIRED BEFORE PUBLIC RELEASE", final_html)
             self.assertNotIn("WHO_ARE_YOU_TELEMETRY_ENDPOINT=", (out / "production-gradle.properties").read_text())
 
     def test_placeholder_is_rejected(self):
