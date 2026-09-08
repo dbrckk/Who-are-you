@@ -2,11 +2,13 @@
 
 ## Build and version
 
-- [ ] Confirm package name `com.whoareyou.app` is the final Play package name.
-- [ ] Increment `versionCode` for every Play upload.
-- [ ] Set the intended public `versionName`.
-- [ ] Run Android CI and confirm lint, Debug APK, Release APK and Release AAB all pass.
-- [ ] Download the CI `who-are-you-release-aab` artifact and verify the expected bundle exists.
+- [x] Package name is locked to `com.whoareyou.app` in the Android project.
+- [ ] Increment `versionCode` for every Play upload after the first accepted bundle.
+- [ ] Set the intended public `versionName` before production promotion.
+- [ ] Run Android CI and confirm repository tests, JVM tests, candidate lint, release lint, Candidate APK and Release AAB all pass.
+- [ ] Download and install the CI `who-are-you-0.1.0-rc.apk` artifact on a real Android device.
+
+The `candidate` build type is intentionally production-like: it inherits release minification/resource shrinking, keeps the production package/version, uses Google test ad IDs, leaves custom telemetry disabled by default, and uses Android's debug signing key only so the APK can be installed directly for acceptance testing. It is not a Play production artifact.
 
 ## Signing
 
@@ -14,8 +16,6 @@
 - [ ] Configure Play App Signing in Play Console.
 - [ ] Sign the upload AAB with the upload key before Play submission.
 - [ ] Record the Play app-signing SHA-256 certificate fingerprint used for Android App Links.
-
-Google Play requires new releases to use an app bundle and Play App Signing handles the distribution signing key while the developer keeps an upload key.
 
 ## Android App Links
 
@@ -31,9 +31,9 @@ Google Play requires new releases to use an app bundle and Play App Signing hand
 - [ ] Create the production AdMob app entry.
 - [ ] Create the production interstitial ad unit.
 - [ ] Supply `WHO_ARE_YOU_ADMOB_APP_ID` and `WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID` to the production build environment.
-- [ ] Confirm debug/local builds continue using Google test IDs.
+- [x] Non-production builds fall back to Google's test AdMob IDs.
 - [ ] Configure AdMob privacy/consent messaging as required for served regions.
-- [ ] Confirm ads never appear during an active quiz and frequency caps remain enabled.
+- [ ] Confirm ads never appear during an active quiz and frequency caps remain enabled during device acceptance testing.
 
 ## Billing
 
@@ -44,8 +44,8 @@ Google Play requires new releases to use an app bundle and Play App Signing hand
 
 ## Privacy and Play Console declarations
 
-- [ ] Publish the final privacy policy at a stable public HTTPS URL.
-- [ ] Replace the contact placeholder in `docs/privacy-policy.md`.
+- [x] Privacy policy source and web page foundation exist.
+- [ ] Publish the final privacy policy at a stable public HTTPS URL with the final support contact.
 - [ ] Complete Data safety based on the exact production configuration.
 - [ ] Declare advertising usage accurately.
 - [ ] Complete target audience/content declarations.
@@ -57,23 +57,37 @@ Google Play requires new releases to use an app bundle and Play App Signing hand
 - [ ] Decide whether production telemetry is enabled for v1.0.
 - [ ] If enabled, deploy an HTTPS endpoint and document its operator, retention and deletion handling.
 - [ ] Supply `WHO_ARE_YOU_TELEMETRY_ENDPOINT` only in the production build environment.
-- [ ] Confirm no credentials or secret telemetry tokens are committed to the repository.
+- [x] Candidate build leaves custom telemetry disabled unless explicitly configured.
 
 ## Store listing
 
 - [x] English listing copy foundation exists.
 - [x] French listing copy foundation exists.
-- [ ] Add final app icon.
-- [ ] Add phone screenshots in EN and FR where appropriate.
-- [ ] Add feature graphic.
+- [x] Android adaptive launcher icon, round icon and Android 13+ monochrome icon exist.
+- [ ] Produce final Play Store 512×512 icon export.
+- [ ] Produce phone screenshots in EN and FR where appropriate.
+- [ ] Produce final feature graphic.
 - [ ] Add support email and privacy-policy URL.
 - [ ] Review title/short description lengths in Play Console.
 
-## Testing and rollout
+## Device acceptance before Play configuration
+
+- [ ] Obtain a successful M56 Candidate APK build.
+- [ ] Install `who-are-you-0.1.0-rc.apk` on the target phone.
+- [ ] Test onboarding and cold/warm restart.
+- [ ] Complete representative quizzes from every theme and verify scoring/results.
+- [ ] Verify profile evolution, Discover, journeys, Daily Question and achievements.
+- [ ] Verify sharing/result image generation and challenge links.
+- [ ] Verify no ad appears during an active quiz; verify consent/privacy options behavior where applicable.
+- [ ] Test airplane/offline behavior and recovery after network restoration.
+- [ ] Test French and English device locales.
+- [ ] Test back navigation, rotation/process recreation where practical and small-screen scrolling.
+- [ ] Report any visual, functional or crash defect and fix all blocking issues before Play setup.
+
+## Play testing and rollout
 
 - [ ] Upload the signed AAB to Internal testing first.
-- [ ] Test install/update, onboarding, all 15 quizzes, sharing, challenges, Daily Question, ads consent and Billing.
-- [ ] Test FR and EN device locales.
+- [ ] Test install/update and Google Play Billing with license testers.
 - [ ] Check Play pre-launch report.
 - [ ] Fix blocking crashes, ANRs or policy warnings.
-- [ ] Promote to Closed/Open testing if required, then Production.
+- [ ] Promote to Closed/Open testing if required, then Production through the guarded promotion workflow.
