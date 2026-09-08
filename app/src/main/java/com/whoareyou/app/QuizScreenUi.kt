@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,10 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,8 +22,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -63,48 +59,51 @@ fun QuizScreen(
             Text(
                 stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
-                fontSize = 13.sp
+                style = V2Type.Supporting,
+                fontWeight = FontWeight.SemiBold
             )
         }
         Spacer(Modifier.height(8.dp))
         LinearProgressIndicator(
             progress = { progress },
-            modifier = Modifier.fillMaxWidth().height(8.dp),
+            modifier = Modifier.fillMaxWidth().height(6.dp),
             color = V2Colors.AccentViolet,
             trackColor = V2Colors.Hairline
         )
         Spacer(Modifier.height(20.dp))
         QuizArtwork(quiz, compact = true)
         Spacer(Modifier.height(24.dp))
-        Text(quiz.title.uppercase(), color = V2Colors.AccentViolet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+        Text(
+            quiz.title.uppercase(),
+            color = V2Colors.AccentViolet,
+            style = V2Type.Eyebrow
+        )
         Spacer(Modifier.height(12.dp))
-        Text(question.text, color = V2Colors.TextPrimary, fontSize = 29.sp, lineHeight = 35.sp, fontWeight = FontWeight.Black)
-        Spacer(Modifier.height(28.dp))
+        Text(
+            question.text,
+            color = V2Colors.TextPrimary,
+            style = V2Type.Question
+        )
+        Spacer(Modifier.height(26.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             question.answers.forEach { answer ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable(role = Role.Button) {
-                            val newScore = score + answer.score
-                            if (questionIndex == quiz.questions.lastIndex) {
-                                onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
-                            } else {
-                                score = newScore
-                                questionIndex++
-                            }
-                        },
-                    colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
-                    shape = RoundedCornerShape(18.dp)
+                V2PressableSurface(
+                    onClick = {
+                        val newScore = score + answer.score
+                        if (questionIndex == quiz.questions.lastIndex) {
+                            onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
+                        } else {
+                            score = newScore
+                            questionIndex++
+                        }
+                    }
                 ) {
                     Text(
                         answer.text,
                         modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp),
                         color = V2Colors.TextPrimary,
-                        fontSize = 16.sp,
-                        lineHeight = 22.sp,
-                        fontWeight = FontWeight.SemiBold
+                        style = V2Type.BodyStrong
                     )
                 }
             }
@@ -114,8 +113,9 @@ fun QuizScreen(
         Text(
             stringResource(R.string.no_right_answers),
             color = V2Colors.TextSecondary,
-            fontSize = 12.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            style = V2Type.Supporting,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(10.dp))
     }
