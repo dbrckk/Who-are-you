@@ -65,6 +65,7 @@ private fun WhoAreYouApp() {
     }
 
     var premiumOverride by remember { mutableStateOf(false) }
+    var privacyOptionsRequired by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
     val billingManager = remember(context) {
         BillingManager(
@@ -73,11 +74,13 @@ private fun WhoAreYouApp() {
             onPriceChanged = BillingPriceState::update
         )
     }
-    val adManager = remember(context) { AdManager(context) }
+    val adManager = remember(context) {
+        AdManager(context) { required -> privacyOptionsRequired = required }
+    }
 
     DisposableEffect(billingManager, adManager) {
         billingManager.start()
-        adManager.start()
+        adManager.start(activity)
         onDispose { billingManager.close() }
     }
 
@@ -125,6 +128,7 @@ private fun WhoAreYouApp() {
                     storedProfile = storedProfile,
                     completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved,
+                    privacyOptionsRequired = privacyOptionsRequired,
                     onOpenProfile = { screen = AppScreen.PROFILE },
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
@@ -136,7 +140,8 @@ private fun WhoAreYouApp() {
                         if (!adsRemoved && activity != null) {
                             billingManager.launchPurchase(activity)
                         }
-                    }
+                    },
+                    onPrivacyOptions = { adManager.showPrivacyOptions(activity) }
                 )
 
                 AppScreen.PROFILE -> ProfileScreen(
