@@ -11,16 +11,15 @@ jobs:
       - checkout
 
       - run:
-          name: Install Android SDK 37 and Gradle 9.5
+          name: Prepare Gradle 9.5
           command: |
             set -euo pipefail
-            yes | sdkmanager --licenses >/dev/null || true
-            sdkmanager "platforms;android-37" "build-tools;37.0.0"
             curl -fsSL https://services.gradle.org/distributions/gradle-9.5.0-bin.zip -o /tmp/gradle.zip
             unzip -q /tmp/gradle.zip -d /tmp
             echo 'export PATH=/tmp/gradle-9.5.0/bin:$PATH' >> "$BASH_ENV"
             source "$BASH_ENV"
             gradle --version
+            test -d "$ANDROID_HOME/platforms/android-36"
 
       - run:
           name: Repository verification tests
