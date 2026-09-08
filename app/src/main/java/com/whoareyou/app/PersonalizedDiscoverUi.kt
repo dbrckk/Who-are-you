@@ -34,14 +34,11 @@ fun PersonalizedDiscoverDashboard(
     onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
     val nextQuiz = remember(quizzes, completed, profile.dimensions) {
-        val measuredThemes = profile.dimensions.mapNotNull { dimension ->
-            quizzes.firstOrNull { it.id == dimension.quizId }?.let(QuizVisuals::themeFor)
-        }.toSet()
-        quizzes.firstOrNull { quiz -> quiz.id !in completed && QuizVisuals.themeFor(quiz) !in measuredThemes }
-            ?: quizzes.firstOrNull { it.id !in completed }
-            ?: quizzes.firstOrNull()
+        DiscoverPersonalization.nextQuiz(quizzes, completed, profile.dimensions)
     }
-    val strongest = profile.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
+    val strongest = remember(profile.dimensions) {
+        DiscoverPersonalization.strongestDimension(profile.dimensions)
+    }
     val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
