@@ -38,9 +38,11 @@ fun DiscoverHub(
     storedProfile: StoredProfile,
     completed: Set<String>,
     adsRemoved: Boolean,
+    privacyOptionsRequired: Boolean,
     onOpenProfile: () -> Unit,
     onQuizSelected: (Quiz) -> Unit,
-    onRemoveAds: () -> Unit
+    onRemoveAds: () -> Unit,
+    onPrivacyOptions: () -> Unit
 ) {
     val journeys = remember(quizzes, completed) {
         GuidedJourneyEngine.build(quizzes, completed)
@@ -133,7 +135,47 @@ fun DiscoverHub(
                 adsRemoved = adsRemoved,
                 onRemoveAds = onRemoveAds
             )
+            if (privacyOptionsRequired) {
+                Spacer(Modifier.height(14.dp))
+                PrivacyOptionsCard(onPrivacyOptions = onPrivacyOptions)
+            }
             Spacer(Modifier.height(108.dp))
+        }
+    }
+}
+
+@Composable
+private fun PrivacyOptionsCard(onPrivacyOptions: () -> Unit) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = RoundedCornerShape(V2Radius.Card),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Text(
+                text = stringResource(R.string.privacy_options_title),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = stringResource(R.string.privacy_options_body),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting
+            )
+            Spacer(Modifier.height(12.dp))
+            Button(
+                onClick = onPrivacyOptions,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Surface),
+                shape = RoundedCornerShape(V2Radius.Compact)
+            ) {
+                Text(
+                    text = stringResource(R.string.privacy_options_button),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.BodyStrong
+                )
+            }
         }
     }
 }
