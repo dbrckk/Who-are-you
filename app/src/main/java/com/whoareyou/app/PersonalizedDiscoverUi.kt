@@ -35,18 +35,21 @@ fun PersonalizedDiscoverDashboard(
     onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
-    val nextQuiz = remember(quizzes, completed, profile.dimensions) {
-        DiscoverPersonalization.nextQuiz(quizzes, completed, profile.dimensions)
+    val recommendation = remember(quizzes, completed, profile.dimensions) {
+        DiscoverPersonalization.recommendation(quizzes, completed, profile.dimensions)
     }
-    val strongest = remember(profile.dimensions) {
-        DiscoverPersonalization.strongestDimension(profile.dimensions)
-    }
+    val stage = remember(profile.completedCount, profile.signature) { DiscoverPersonalization.stage(profile) }
+    val strongest = remember(profile.dimensions) { DiscoverPersonalization.strongestDimension(profile.dimensions) }
     val strongestDimensions = remember(profile.dimensions) {
-        profile.dimensions
-            .sortedByDescending { kotlin.math.abs(it.score - 50) }
-            .take(2)
+        profile.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(2)
     }
+    val nextQuiz = recommendation?.quiz
     val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
+    val stageLabel = when (stage) {
+        DiscoverProfileStage.NEW -> R.string.personalized_stage_new
+        DiscoverProfileStage.EMERGING -> R.string.personalized_stage_emerging
+        DiscoverProfileStage.MAPPED -> R.string.personalized_stage_mapped
+    }
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         val profileModifier = Modifier
@@ -54,32 +57,20 @@ fun PersonalizedDiscoverDashboard(
             .clip(RoundedCornerShape(V2Radius.Hero))
             .background(
                 Brush.linearGradient(
-                    listOf(
-                        V2Colors.SurfaceElevated,
-                        V2Colors.AccentViolet.copy(alpha = 0.16f),
-                        V2Colors.AccentCyan.copy(alpha = 0.07f)
-                    )
+                    listOf(V2Colors.SurfaceElevated, V2Colors.AccentViolet.copy(alpha = 0.16f), V2Colors.AccentCyan.copy(alpha = 0.07f))
                 )
             )
         Box(
-            modifier = (if (onOpenProfile != null) profileModifier.clickable(onClick = onOpenProfile) else profileModifier)
-                .padding(20.dp)
+            modifier = (if (onOpenProfile != null) profileModifier.clickable(onClick = onOpenProfile) else profileModifier).padding(20.dp)
         ) {
             Column {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(stringResource(R.string.personalized_snapshot_label), color = V2Colors.AccentCyan, fontSize = 11.sp, fontWeight = FontWeight.Black)
+                        Text(stringResource(stageLabel), color = V2Colors.AccentCyan, fontSize = 11.sp, fontWeight = FontWeight.Black)
                         Spacer(Modifier.height(6.dp))
                         Text(profile.dominantArchetype, color = V2Colors.TextPrimary, fontSize = 24.sp, lineHeight = 28.sp, fontWeight = FontWeight.Black)
                     }
-                    Box(
-                        modifier = Modifier.size(62.dp).clip(CircleShape).background(V2Colors.Ink.copy(alpha = 0.72f)),
-                        contentAlignment = Alignment.Center
-                    ) {
+                    Box(modifier = Modifier.size(62.dp).clip(CircleShape).background(V2Colors.Ink.copy(alpha = 0.72f)), contentAlignment = Alignment.Center) {
                         Text("${profile.completionPercent}%", color = V2Colors.AccentViolet, fontSize = 15.sp, fontWeight = FontWeight.Black)
                     }
                 }
@@ -95,11 +86,7 @@ fun PersonalizedDiscoverDashboard(
                     val copy = SignatureProfiles.copy(signature.key, french)
                     Spacer(Modifier.height(16.dp))
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(V2Radius.Compact))
-                            .background(V2Colors.AccentViolet.copy(alpha = 0.10f))
-                            .padding(12.dp),
+                        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(V2Radius.Compact)).background(V2Colors.AccentViolet.copy(alpha = 0.10f)).padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -118,33 +105,33 @@ fun PersonalizedDiscoverDashboard(
                     Spacer(Modifier.height(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         strongestDimensions.forEach { dimension ->
-                            DimensionSignal(
-                                modifier = Modifier.weight(1f),
-                                label = dimension.metricLabel,
-                                score = dimension.score
-                            )
+                            DimensionSignal(Modifier.weight(1f), dimension.metricLabel, dimension.score)
                         }
                     }
                 }
             }
         }
 
-        nextQuiz?.let { quiz ->
+        if (nextQuiz != null && recommendation != null) {
+            val reason = when (recommendation.reason) {
+                DiscoverRecommendationReason.NEW_THEME -> R.string.personalized_next_new_theme
+                DiscoverRecommendationReason.UNFINISHED -> R.string.personalized_next_unfinished
+                DiscoverRecommendationReason.RETAKE -> R.string.personalized_next_retake
+            }
             val nextModifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(V2Radius.Card)).background(V2Colors.Surface)
             Row(
-                modifier = (if (onQuizSelected != null) nextModifier.clickable { onQuizSelected(quiz) } else nextModifier).padding(14.dp),
+                modifier = (if (onQuizSelected != null) nextModifier.clickable { onQuizSelected(nextQuiz) } else nextModifier).padding(14.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier.size(52.dp).clip(RoundedCornerShape(18.dp)).background(accent.copy(alpha = 0.16f)),
-                    contentAlignment = Alignment.Center
-                ) { Text(quiz.accent, fontSize = 23.sp) }
+                Box(modifier = Modifier.size(52.dp).clip(RoundedCornerShape(18.dp)).background(accent.copy(alpha = 0.16f)), contentAlignment = Alignment.Center) {
+                    Text(nextQuiz.accent, fontSize = 23.sp)
+                }
                 Column(modifier = Modifier.weight(1f).padding(start = 13.dp, end = 10.dp)) {
                     Text(stringResource(R.string.personalized_next_label), color = accent, fontSize = 10.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(4.dp))
-                    Text(quiz.title, color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 19.sp, fontWeight = FontWeight.Bold)
+                    Text(nextQuiz.title, color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 19.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(3.dp))
-                    Text(stringResource(R.string.personalized_next_reason), color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp)
+                    Text(stringResource(reason), color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp)
                 }
                 if (onQuizSelected != null) Text("→", color = accent, fontSize = 20.sp, fontWeight = FontWeight.Black)
             }
@@ -154,9 +141,7 @@ fun PersonalizedDiscoverDashboard(
 
 @Composable
 private fun InsightMetric(modifier: Modifier, value: String, label: String) {
-    Column(
-        modifier = modifier.clip(RoundedCornerShape(V2Radius.Compact)).background(V2Colors.Ink.copy(alpha = 0.48f)).padding(horizontal = 10.dp, vertical = 11.dp)
-    ) {
+    Column(modifier = modifier.clip(RoundedCornerShape(V2Radius.Compact)).background(V2Colors.Ink.copy(alpha = 0.48f)).padding(horizontal = 10.dp, vertical = 11.dp)) {
         Text(value, color = V2Colors.TextPrimary, fontSize = 16.sp, fontWeight = FontWeight.Black)
         Spacer(Modifier.height(2.dp))
         Text(label, color = V2Colors.TextSecondary, fontSize = 9.sp, lineHeight = 12.sp, fontWeight = FontWeight.Bold)
@@ -165,9 +150,7 @@ private fun InsightMetric(modifier: Modifier, value: String, label: String) {
 
 @Composable
 private fun DimensionSignal(modifier: Modifier, label: String, score: Int) {
-    Column(
-        modifier = modifier.clip(RoundedCornerShape(V2Radius.Compact)).background(V2Colors.Ink.copy(alpha = 0.40f)).padding(11.dp)
-    ) {
+    Column(modifier = modifier.clip(RoundedCornerShape(V2Radius.Compact)).background(V2Colors.Ink.copy(alpha = 0.40f)).padding(11.dp)) {
         Text(label, color = V2Colors.TextPrimary, fontSize = 11.sp, lineHeight = 14.sp, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(5.dp))
         Text("$score%", color = if (score >= 50) V2Colors.AccentCyan else V2Colors.AccentViolet, fontSize = 13.sp, fontWeight = FontWeight.Black)
