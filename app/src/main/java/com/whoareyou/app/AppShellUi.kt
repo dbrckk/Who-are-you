@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,34 +54,52 @@ fun PremiumAppShellBar(
             .fillMaxWidth()
             .background(
                 Brush.verticalGradient(
-                    listOf(Color.Transparent, V2Colors.Ink.copy(alpha = 0.98f))
+                    listOf(Color.Transparent, V2Colors.Ink.copy(alpha = 0.94f), V2Colors.Ink)
                 )
             )
-            .padding(horizontal = 18.dp, vertical = 10.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
             .navigationBarsPadding()
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(V2Radius.Card))
-                .background(V2Colors.SurfaceGlass)
-                .padding(6.dp),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                .clip(RoundedCornerShape(30.dp))
+                .background(
+                    Brush.linearGradient(
+                        listOf(V2Colors.SurfaceGlass, V2Colors.SurfaceElevated.copy(alpha = 0.96f))
+                    )
+                )
+                .padding(1.dp)
         ) {
-            ShellTab(
-                modifier = Modifier.weight(1f),
-                selected = selected == AppShellTab.DISCOVER,
-                symbol = "✦",
-                label = stringResource(R.string.shell_discover),
-                onClick = { onSelect(AppShellTab.DISCOVER) }
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(Color.Transparent, V2Colors.AccentViolet.copy(alpha = 0.42f), V2Colors.AccentCyan.copy(alpha = 0.28f), Color.Transparent)
+                        )
+                    )
             )
-            ShellTab(
-                modifier = Modifier.weight(1f),
-                selected = selected == AppShellTab.PROFILE,
-                symbol = "◉",
-                label = stringResource(R.string.shell_profile),
-                onClick = { onSelect(AppShellTab.PROFILE) }
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(6.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                ShellTab(
+                    modifier = Modifier.weight(1f),
+                    selected = selected == AppShellTab.DISCOVER,
+                    symbol = "✦",
+                    label = stringResource(R.string.shell_discover),
+                    onClick = { onSelect(AppShellTab.DISCOVER) }
+                )
+                ShellTab(
+                    modifier = Modifier.weight(1f),
+                    selected = selected == AppShellTab.PROFILE,
+                    symbol = "◉",
+                    label = stringResource(R.string.shell_profile),
+                    onClick = { onSelect(AppShellTab.PROFILE) }
+                )
+            }
         }
     }
 }
@@ -93,15 +112,26 @@ private fun ShellTab(
     label: String,
     onClick: () -> Unit
 ) {
-    val background = if (selected) V2Colors.SurfaceElevated else Color.Transparent
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
     val accent = if (selected) V2Colors.AccentViolet else V2Colors.TextSecondary
 
     Row(
         modifier = modifier
-            .height(54.dp)
-            .clip(RoundedCornerShape(V2Radius.Compact))
-            .background(background)
+            .height(56.dp)
+            .clip(RoundedCornerShape(22.dp))
+            .background(
+                if (selected) {
+                    Brush.linearGradient(
+                        listOf(
+                            V2Colors.AccentViolet.copy(alpha = 0.18f),
+                            V2Colors.AccentCyan.copy(alpha = 0.07f),
+                            V2Colors.SurfaceElevated
+                        )
+                    )
+                } else {
+                    Brush.linearGradient(listOf(Color.Transparent, Color.Transparent))
+                }
+            )
             .clickable(onClick = onClick)
             .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -109,14 +139,28 @@ private fun ShellTab(
     ) {
         Box(
             modifier = Modifier
-                .size(28.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .background(if (selected) accent.copy(alpha = 0.16f) else Color.Transparent),
+                .size(30.dp)
+                .clip(RoundedCornerShape(11.dp))
+                .background(
+                    if (selected) {
+                        Brush.linearGradient(
+                            listOf(V2Colors.AccentViolet.copy(alpha = 0.24f), V2Colors.AccentCyan.copy(alpha = 0.10f))
+                        )
+                    } else {
+                        Brush.linearGradient(listOf(Color.Transparent, Color.Transparent))
+                    }
+                ),
             contentAlignment = Alignment.Center
         ) {
             Text(symbol, color = accent, fontSize = 15.sp, fontWeight = FontWeight.Black)
         }
-        Spacer(Modifier.size(8.dp))
-        Text(label, color = foreground, fontSize = 12.sp, fontWeight = FontWeight.Black)
+        Spacer(Modifier.size(9.dp))
+        Text(
+            label,
+            color = foreground,
+            fontSize = 12.sp,
+            letterSpacing = 0.2.sp,
+            fontWeight = FontWeight.Black
+        )
     }
 }
