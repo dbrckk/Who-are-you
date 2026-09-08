@@ -9,7 +9,7 @@ enum class GuidedJourneyId {
 
 data class GuidedJourneyDefinition(
     val id: GuidedJourneyId,
-    val themes: Set<QuizVisualTheme>
+    val themes: List<QuizVisualTheme>
 )
 
 data class GuidedJourneyProgress(
@@ -27,19 +27,19 @@ object GuidedJourneyEngine {
     val definitions = listOf(
         GuidedJourneyDefinition(
             GuidedJourneyId.PERSONALITY,
-            setOf(QuizVisualTheme.IDENTITY, QuizVisualTheme.MIND, QuizVisualTheme.LIFESTYLE)
+            listOf(QuizVisualTheme.IDENTITY, QuizVisualTheme.MIND, QuizVisualTheme.LIFESTYLE)
         ),
         GuidedJourneyDefinition(
             GuidedJourneyId.RELATIONSHIPS,
-            setOf(QuizVisualTheme.EMOTION, QuizVisualTheme.SOCIAL)
+            listOf(QuizVisualTheme.EMOTION, QuizVisualTheme.SOCIAL)
         ),
         GuidedJourneyDefinition(
             GuidedJourneyId.INNER_WORLD,
-            setOf(QuizVisualTheme.EMOTION, QuizVisualTheme.MIND, QuizVisualTheme.ENERGY, QuizVisualTheme.CONTROL)
+            listOf(QuizVisualTheme.EMOTION, QuizVisualTheme.MIND, QuizVisualTheme.ENERGY, QuizVisualTheme.CONTROL)
         ),
         GuidedJourneyDefinition(
             GuidedJourneyId.VALUES_AND_DIRECTION,
-            setOf(QuizVisualTheme.VALUES, QuizVisualTheme.GROWTH, QuizVisualTheme.CONTROL)
+            listOf(QuizVisualTheme.VALUES, QuizVisualTheme.GROWTH, QuizVisualTheme.CONTROL)
         )
     )
 
@@ -50,7 +50,7 @@ object GuidedJourneyEngine {
     ): List<GuidedJourneyProgress> = definitions.mapNotNull { definition ->
         val selected = selectBalanced(
             quizzes = quizzes,
-            themes = definition.themes.toList(),
+            themes = definition.themes,
             limit = maxQuizzesPerJourney.coerceAtLeast(1)
         )
 
