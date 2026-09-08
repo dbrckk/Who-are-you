@@ -52,7 +52,17 @@ fun ProfileScreen(
             Spacer(Modifier.height(10.dp))
             Text(summary.dominantArchetype.uppercase(), color = V2Colors.TextPrimary, fontSize = 34.sp, lineHeight = 39.sp, fontWeight = FontWeight.Black)
             Spacer(Modifier.height(8.dp))
-            Text("${summary.completedCount}/${summary.totalCount} dimensions • ${summary.completionPercent}%", color = V2Colors.TextSecondary, fontSize = 14.sp)
+            Text(
+                stringResource(
+                    R.string.profile_header_progress,
+                    summary.completedCount,
+                    summary.totalCount,
+                    summary.completionPercent
+                ),
+                color = V2Colors.TextSecondary,
+                fontSize = 14.sp,
+                lineHeight = 20.sp
+            )
             Spacer(Modifier.height(20.dp))
             Button(
                 onClick = {
