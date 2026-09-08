@@ -55,11 +55,16 @@ class GuidedJourneysTest {
         id = id,
         title = title,
         hook = title,
-        accent = "•",
         time = "2 min",
+        accent = "•",
+        lowTitle = "Low",
+        midTitle = "Mid",
+        highTitle = "High",
+        lowDescription = "Low",
+        midDescription = "Mid",
+        highDescription = "High",
         metricLow = "Low",
         metricHigh = "High",
-        questions = emptyList(),
-        results = emptyList()
+        questions = emptyList()
     )
 }
