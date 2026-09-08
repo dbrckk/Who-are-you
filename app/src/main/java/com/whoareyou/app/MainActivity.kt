@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -81,13 +82,18 @@ private fun WhoAreYouApp() {
     }
 
     if (!storedProfile.onboardingComplete) {
+        LaunchedEffect(Unit) { AppEvents.onboardingView() }
         OnboardingScreen(
-            onStart = { scope.launch { ProfileStore.setOnboardingComplete(context) } }
+            onStart = {
+                AppEvents.onboardingComplete()
+                scope.launch { ProfileStore.setOnboardingComplete(context) }
+            }
         )
         return
     }
 
     if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
+        LaunchedEffect(quizCatalog.size) { AppEvents.catalogUnavailable() }
         CatalogUnavailableScreen()
         return
     }
@@ -97,7 +103,12 @@ private fun WhoAreYouApp() {
     var finalScore by remember { mutableIntStateOf(0) }
     var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
 
+    LaunchedEffect(screen) { AppEvents.screenView(screen) }
+
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
+        if (screen == AppScreen.QUIZ) {
+            AppEvents.testAbandon(selectedQuiz.id, "system_back")
+        }
         screen = AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER
     }
 
@@ -136,10 +147,14 @@ private fun WhoAreYouApp() {
 
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
-                    onBack = { screen = AppScreen.DISCOVER },
+                    onBack = {
+                        AppEvents.testAbandon(selectedQuiz.id, "screen_back")
+                        screen = AppScreen.DISCOVER
+                    },
                     onFinished = { score ->
                         finalScore = score
                         AppEvents.testComplete(selectedQuiz.id, score)
+                        AppEvents.resultView(selectedQuiz.id, score)
                         scope.launch {
                             ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
                         }
