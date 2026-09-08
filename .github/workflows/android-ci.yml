@@ -28,7 +28,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-37" "build-tools;36.0.0"
+        run: sdkmanager "platform-tools" "platforms;android-37" "build-tools;37.0.0"
 
       - name: Set up Gradle 9.5
         uses: gradle/actions/setup-gradle@v4
@@ -36,10 +36,42 @@ jobs:
           gradle-version: '9.5.0'
 
       - name: Validate localized quiz catalogs
-        run: python3 scripts/validate_quiz_catalog.py --parity app/src/main/assets/quizzes.json app/src/main/assets/quizzes_fr.json --min-quizzes 30
+        run: |
+          python - <<'PY'
+          import glob, json, os, re
+          files = sorted(glob.glob('app/src/main/assets/quizzes*.json'))
+          assert files, 'No quiz catalog assets found'
+          def locale_for(path):
+              name = os.path.basename(path)
+              match = re.search(r'-(?P<locale>[a-z]{2})(?=\.json$)', name)
+              return match.group('locale') if match else 'en'
+          by_locale = {}
+          for path in files:
+              by_locale.setdefault(locale_for(path), []).append(path)
+          locale_ids, locale_totals = {}, {}
+          for locale, locale_files in sorted(by_locale.items()):
+              ids, total = set(), 0
+              for path in locale_files:
+                  with open(path, encoding='utf-8') as handle:
+                      payload = json.load(handle)
+                  for quiz in payload.get('quizzes', []):
+                      quiz_id = quiz['id']
+                      assert quiz_id not in ids, f'{locale}: duplicate quiz id: {quiz_id}'
+                      ids.add(quiz_id); total += 1
+                      assert len(quiz['questions']) >= 5, f'{locale}/{quiz_id}: expected at least 5 questions'
+                      for index, question in enumerate(quiz['questions'], start=1):
+                          answers = question['answers']
+                          assert len(answers) == 4, f'{locale}/{quiz_id} Q{index}: expected 4 answers'
+                          assert sorted(answer['score'] for answer in answers) == [0,1,2,3], f'{locale}/{quiz_id} Q{index}: scores must be 0,1,2,3'
+              locale_ids[locale], locale_totals[locale] = ids, total
+          assert locale_totals.get('en', 0) >= 30
+          assert locale_totals.get('fr', 0) >= 30
+          assert locale_ids.get('fr', set()) == locale_ids.get('en', set())
+          print(f"Bilingual catalog parity confirmed: {locale_totals.get('en',0)} EN / {locale_totals.get('fr',0)} FR")
+          PY
 
       - name: Python quality tests
-        run: python3 -m unittest discover -s scripts/tests -p 'test_*.py'
+        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
