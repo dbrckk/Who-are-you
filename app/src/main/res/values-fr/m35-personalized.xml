@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personalized_snapshot_label">TA CARTE ACTUELLE</string>
+    <string name="personalized_dimensions">dimensions</string>
+    <string name="personalized_left">à explorer</string>
+    <string name="personalized_signal">signal dominant</string>
+    <string name="personalized_strongest">Signal le plus marqué actuellement : %1$s</string>
+    <string name="personalized_next_label">PROCHAINE EXPLORATION IDÉALE</string>
+    <string name="personalized_next_reason">Choisi pour révéler une partie de ton profil encore moins explorée.</string>
+</resources>
