@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="discover_momentum_title">Votre dynamique</string>
+    <string name="discover_momentum_subtitle">Des signaux simples pour voir comment votre profil évolue au fil du temps.</string>
+    <string name="discover_streak_label">Série de jours</string>
+    <string name="discover_achievements_label">Succès</string>
+    <string name="discover_matches_label">Comparaisons</string>
+</resources>
