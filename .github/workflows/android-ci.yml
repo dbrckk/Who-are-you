@@ -76,6 +76,9 @@ jobs:
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
 
+      - name: Compile Compose UI instrumentation tests
+        run: gradle :app:assembleDebugAndroidTest --stacktrace
+
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
