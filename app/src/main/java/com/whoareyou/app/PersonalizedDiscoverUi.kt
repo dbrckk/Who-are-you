@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -31,8 +30,8 @@ fun PersonalizedDiscoverDashboard(
     profile: GlobalProfileSummary,
     quizzes: List<Quiz>,
     completed: Set<String>,
-    onOpenProfile: () -> Unit,
-    onQuizSelected: (Quiz) -> Unit
+    onOpenProfile: (() -> Unit)? = null,
+    onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
     val nextQuiz = remember(quizzes, completed, profile.dimensions) {
         val measuredThemes = profile.dimensions.mapNotNull { dimension ->
@@ -46,20 +45,20 @@ fun PersonalizedDiscoverDashboard(
     val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
 
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(V2Radius.Hero))
-                .background(
-                    Brush.linearGradient(
-                        listOf(
-                            V2Colors.SurfaceElevated,
-                            V2Colors.AccentViolet.copy(alpha = 0.16f),
-                            V2Colors.AccentCyan.copy(alpha = 0.07f)
-                        )
+        val profileModifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(V2Radius.Hero))
+            .background(
+                Brush.linearGradient(
+                    listOf(
+                        V2Colors.SurfaceElevated,
+                        V2Colors.AccentViolet.copy(alpha = 0.16f),
+                        V2Colors.AccentCyan.copy(alpha = 0.07f)
                     )
                 )
-                .clickable(onClick = onOpenProfile)
+            )
+        Box(
+            modifier = (if (onOpenProfile != null) profileModifier.clickable(onClick = onOpenProfile) else profileModifier)
                 .padding(20.dp)
         ) {
             Column {
@@ -102,21 +101,9 @@ fun PersonalizedDiscoverDashboard(
 
                 Spacer(Modifier.height(18.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    InsightMetric(
-                        modifier = Modifier.weight(1f),
-                        value = profile.completedCount.toString(),
-                        label = stringResource(R.string.personalized_dimensions)
-                    )
-                    InsightMetric(
-                        modifier = Modifier.weight(1f),
-                        value = (profile.totalCount - profile.completedCount).coerceAtLeast(0).toString(),
-                        label = stringResource(R.string.personalized_left)
-                    )
-                    InsightMetric(
-                        modifier = Modifier.weight(1f),
-                        value = strongest?.score?.let { "$it%" } ?: "—",
-                        label = stringResource(R.string.personalized_signal)
-                    )
+                    InsightMetric(Modifier.weight(1f), profile.completedCount.toString(), stringResource(R.string.personalized_dimensions))
+                    InsightMetric(Modifier.weight(1f), (profile.totalCount - profile.completedCount).coerceAtLeast(0).toString(), stringResource(R.string.personalized_left))
+                    InsightMetric(Modifier.weight(1f), strongest?.score?.let { "$it%" } ?: "—", stringResource(R.string.personalized_signal))
                 }
 
                 strongest?.let {
@@ -132,12 +119,12 @@ fun PersonalizedDiscoverDashboard(
         }
 
         nextQuiz?.let { quiz ->
+            val nextModifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(V2Radius.Card))
+                .background(V2Colors.Surface)
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(V2Radius.Card))
-                    .background(V2Colors.Surface)
-                    .clickable { onQuizSelected(quiz) }
+                modifier = (if (onQuizSelected != null) nextModifier.clickable { onQuizSelected(quiz) } else nextModifier)
                     .padding(14.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -151,40 +138,20 @@ fun PersonalizedDiscoverDashboard(
                     Text(quiz.accent, fontSize = 23.sp)
                 }
                 Column(modifier = Modifier.weight(1f).padding(start = 13.dp, end = 10.dp)) {
-                    Text(
-                        stringResource(R.string.personalized_next_label),
-                        color = accent,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Black
-                    )
+                    Text(stringResource(R.string.personalized_next_label), color = accent, fontSize = 10.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(4.dp))
-                    Text(
-                        quiz.title,
-                        color = V2Colors.TextPrimary,
-                        fontSize = 15.sp,
-                        lineHeight = 19.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Text(quiz.title, color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 19.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(3.dp))
-                    Text(
-                        stringResource(R.string.personalized_next_reason),
-                        color = V2Colors.TextSecondary,
-                        fontSize = 11.sp,
-                        lineHeight = 16.sp
-                    )
+                    Text(stringResource(R.string.personalized_next_reason), color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp)
                 }
-                Text("→", color = accent, fontSize = 20.sp, fontWeight = FontWeight.Black)
+                if (onQuizSelected != null) Text("→", color = accent, fontSize = 20.sp, fontWeight = FontWeight.Black)
             }
         }
     }
 }
 
 @Composable
-private fun InsightMetric(
-    modifier: Modifier,
-    value: String,
-    label: String
-) {
+private fun InsightMetric(modifier: Modifier, value: String, label: String) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(V2Radius.Compact))
