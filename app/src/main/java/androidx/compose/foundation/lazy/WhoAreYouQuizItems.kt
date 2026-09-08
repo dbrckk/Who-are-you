@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -29,33 +31,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.whoareyou.app.DiscoverLibraryEngine
+import com.whoareyou.app.GuidedJourneyEngine
+import com.whoareyou.app.GuidedJourneyId
+import com.whoareyou.app.GuidedJourneyProgress
 import com.whoareyou.app.ProfileStore
 import com.whoareyou.app.Quiz
 import com.whoareyou.app.QuizVisualTheme
+import com.whoareyou.app.QuizVisuals
 import com.whoareyou.app.R
 import com.whoareyou.app.StoredProfile
 import com.whoareyou.app.V2Colors
 import com.whoareyou.app.V2Radius
 
-/**
- * V2 migration adapter for the legacy Discover `items(List<Quiz>)` call.
- *
- * It deliberately lives beside Compose's LazyListScope extensions so the existing
- * `androidx.compose.foundation.lazy.items` import sees this Quiz-specific overload.
- * Other list types keep using Compose's generic implementation unchanged.
- *
- * This adapter can be removed once DiscoverScreen is decomposed into its own V2 file.
- */
+/** V2 adapter for the legacy Discover `items(List<Quiz>)` call. */
 fun LazyListScope.items(
     items: List<Quiz>,
     key: ((Quiz) -> Any)? = null,
     itemContent: @Composable (Quiz) -> Unit
 ) {
     item(key = "discover-library-v2") {
-        DiscoverIntegratedLibrary(
-            quizzes = items,
-            itemContent = itemContent
-        )
+        DiscoverIntegratedLibrary(quizzes = items, itemContent = itemContent)
     }
 }
 
@@ -73,6 +68,7 @@ private fun DiscoverIntegratedLibrary(
     var unfinishedOnly by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
 
+    val journeys = remember(quizzes, completed) { GuidedJourneyEngine.build(quizzes, completed) }
     val summaries = remember(quizzes, completed) { DiscoverLibraryEngine.summaries(quizzes, completed) }
     val results = remember(quizzes, completed, query, selectedTheme, unfinishedOnly) {
         DiscoverLibraryEngine.search(
@@ -88,6 +84,35 @@ private fun DiscoverIntegratedLibrary(
     val visible = results.take(visibleLimit)
 
     Column {
+        if (journeys.isNotEmpty()) {
+            Text(
+                stringResource(R.string.journeys_title),
+                color = V2Colors.TextPrimary,
+                fontSize = 27.sp,
+                lineHeight = 32.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.height(5.dp))
+            Text(
+                stringResource(R.string.journeys_subtitle),
+                color = V2Colors.TextSecondary,
+                fontSize = 12.sp,
+                lineHeight = 18.sp
+            )
+            Spacer(Modifier.height(14.dp))
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(journeys, key = { it.definition.id.name }) { journey ->
+                    val nextQuiz = journey.nextQuizId?.let { id -> quizzes.firstOrNull { it.id == id } }
+                    GuidedJourneyCard(
+                        journey = journey,
+                        nextQuiz = nextQuiz,
+                        onClick = { nextQuiz?.let(itemContent) }
+                    )
+                }
+            }
+            Spacer(Modifier.height(26.dp))
+        }
+
         Text(
             stringResource(R.string.library_title),
             color = V2Colors.TextPrimary,
@@ -106,10 +131,7 @@ private fun DiscoverIntegratedLibrary(
 
         OutlinedTextField(
             value = query,
-            onValueChange = {
-                query = it
-                expanded = false
-            },
+            onValueChange = { query = it; expanded = false },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             placeholder = { Text(stringResource(R.string.library_search_hint)) },
@@ -131,10 +153,7 @@ private fun DiscoverIntegratedLibrary(
                 IntegratedLibraryChip(
                     label = stringResource(R.string.library_all),
                     selected = selectedTheme == null,
-                    onClick = {
-                        selectedTheme = null
-                        expanded = false
-                    }
+                    onClick = { selectedTheme = null; expanded = false }
                 )
             }
             items(summaries, key = { it.theme.name }) { summary ->
@@ -154,10 +173,7 @@ private fun DiscoverIntegratedLibrary(
         IntegratedLibraryChip(
             label = stringResource(R.string.library_unfinished_only),
             selected = unfinishedOnly,
-            onClick = {
-                unfinishedOnly = !unfinishedOnly
-                expanded = false
-            }
+            onClick = { unfinishedOnly = !unfinishedOnly; expanded = false }
         )
 
         Spacer(Modifier.height(16.dp))
@@ -203,6 +219,83 @@ private fun DiscoverIntegratedLibrary(
 }
 
 @Composable
+private fun GuidedJourneyCard(
+    journey: GuidedJourneyProgress,
+    nextQuiz: Quiz?,
+    onClick: () -> Unit
+) {
+    val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
+    Card(
+        modifier = Modifier
+            .width(270.dp)
+            .clickable(enabled = nextQuiz != null, onClick = onClick),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Text(
+                journeyTitle(journey.definition.id),
+                color = V2Colors.TextPrimary,
+                fontSize = 19.sp,
+                lineHeight = 23.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.height(7.dp))
+            Text(
+                journeyBody(journey.definition.id),
+                color = V2Colors.TextSecondary,
+                fontSize = 11.sp,
+                lineHeight = 17.sp
+            )
+            Spacer(Modifier.height(18.dp))
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    stringResource(R.string.journey_progress, journey.completedCount, journey.totalCount),
+                    color = V2Colors.TextSecondary,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text("${journey.progressPercent}%", color = accent, fontSize = 11.sp, fontWeight = FontWeight.Black)
+            }
+            Spacer(Modifier.height(6.dp))
+            LinearProgressIndicator(
+                progress = { journey.progressPercent / 100f },
+                modifier = Modifier.fillMaxWidth().height(7.dp),
+                color = accent,
+                trackColor = V2Colors.Hairline
+            )
+            Spacer(Modifier.height(14.dp))
+            Text(
+                stringResource(if (journey.isComplete) R.string.journey_revisit else R.string.journey_continue),
+                color = accent,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Black
+            )
+        }
+    }
+}
+
+@Composable
+private fun journeyTitle(id: GuidedJourneyId): String = stringResource(
+    when (id) {
+        GuidedJourneyId.PERSONALITY -> R.string.journey_personality
+        GuidedJourneyId.RELATIONSHIPS -> R.string.journey_relationships
+        GuidedJourneyId.INNER_WORLD -> R.string.journey_inner_world
+        GuidedJourneyId.VALUES_AND_DIRECTION -> R.string.journey_values
+    }
+)
+
+@Composable
+private fun journeyBody(id: GuidedJourneyId): String = stringResource(
+    when (id) {
+        GuidedJourneyId.PERSONALITY -> R.string.journey_personality_body
+        GuidedJourneyId.RELATIONSHIPS -> R.string.journey_relationships_body
+        GuidedJourneyId.INNER_WORLD -> R.string.journey_inner_world_body
+        GuidedJourneyId.VALUES_AND_DIRECTION -> R.string.journey_values_body
+    }
+)
+
+@Composable
 private fun IntegratedLibraryChip(
     label: String,
     selected: Boolean,
@@ -223,9 +316,7 @@ private fun IntegratedLibraryChip(
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold
         )
-        suffix?.let {
-            Text(it, color = V2Colors.AccentCyan, fontSize = 10.sp, fontWeight = FontWeight.Black)
-        }
+        suffix?.let { Text(it, color = V2Colors.AccentCyan, fontSize = 10.sp, fontWeight = FontWeight.Black) }
     }
 }
 
