@@ -45,13 +45,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v3-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-            - v3-gradle-
+            - v4-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+            - v4-gradle-
 
   save_gradle_cache:
     steps:
       - save_cache:
-          key: v3-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+          key: v4-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
           paths:
             - ~/.gradle/caches
             - ~/.gradle/daemon
@@ -102,7 +102,7 @@ jobs:
             PY
 
       - run:
-          name: Play submission generator tests
+          name: Repository verification tests
           command: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
       - run:
@@ -114,22 +114,39 @@ jobs:
           command: gradle :app:assembleDebugAndroidTest --stacktrace
 
       - run:
-          name: Android lint
+          name: Android debug lint
           command: gradle :app:lintDebug --stacktrace
+
+      - run:
+          name: Android release lint
+          command: gradle :app:lintRelease --stacktrace
 
       - run:
           name: Build installable debug APK
           command: gradle :app:assembleDebug --stacktrace
 
       - run:
-          name: Prepare APK artifact
+          name: Build optimized release AAB
+          command: gradle :app:bundleRelease --stacktrace
+
+      - run:
+          name: Prepare Android artifacts
           command: |
             set -euo pipefail
             mkdir -p dist
+
             APK="app/build/outputs/apk/debug/app-debug.apk"
             test -s "$APK"
             cp "$APK" dist/who-are-you-0.1.0-debug.apk
             sha256sum dist/who-are-you-0.1.0-debug.apk > dist/who-are-you-0.1.0-debug.apk.sha256
+
+            mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
+            if [ "${#bundles[@]}" -ne 1 ]; then
+              echo "Expected exactly one release AAB, found ${#bundles[@]}"
+              exit 1
+            fi
+            cp "${bundles[0]}" dist/who-are-you-0.1.0-release-unsigned.aab
+            sha256sum dist/who-are-you-0.1.0-release-unsigned.aab > dist/who-are-you-0.1.0-release-unsigned.aab.sha256
 
       - store_test_results:
           path: app/build/test-results
