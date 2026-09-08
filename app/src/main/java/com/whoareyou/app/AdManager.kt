@@ -8,10 +8,14 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 
-class AdManager(private val context: Context) {
+class AdManager(
+    private val context: Context,
+    private val onPrivacyOptionsRequirementChanged: (Boolean) -> Unit = {}
+) {
     companion object {
         private const val RESULTS_BETWEEN_ADS = 3
         private const val MIN_MILLIS_BETWEEN_ADS = 7 * 60 * 1000L
@@ -21,31 +25,45 @@ class AdManager(private val context: Context) {
     private var interstitial: InterstitialAd? = null
     private var resultTransitionsSinceAd = 0
     private var lastAdShownAtElapsedRealtime = Long.MIN_VALUE
-    private var consentRequested = false
     private var adsInitialized = false
 
     fun start() = start(context as? Activity)
 
     fun start(activity: Activity?) {
-        if (activity == null || consentRequested) return
-        consentRequested = true
+        if (activity == null) return
 
         val params = ConsentRequestParameters.Builder().build()
         consentInformation.requestConsentInfoUpdate(
             activity,
             params,
             {
+                publishPrivacyOptionsRequirement()
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) {
+                    publishPrivacyOptionsRequirement()
                     tryInitializeAds()
                 }
+                // Cached consent can already make ad requests eligible while the form check completes.
                 tryInitializeAds()
             },
             {
                 // Cached consent may still allow requests if the network update fails.
+                publishPrivacyOptionsRequirement()
                 tryInitializeAds()
             }
         )
     }
+
+    fun showPrivacyOptions(activity: Activity?) {
+        if (activity == null || !isPrivacyOptionsRequired()) return
+        UserMessagingPlatform.showPrivacyOptionsForm(activity) {
+            publishPrivacyOptionsRequirement()
+            tryInitializeAds()
+        }
+    }
+
+    fun isPrivacyOptionsRequired(): Boolean =
+        consentInformation.privacyOptionsRequirementStatus ==
+            ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
 
     fun onResultFinished(activity: Activity?, adsRemoved: Boolean, onContinue: () -> Unit) {
         if (adsRemoved || activity == null || !adsInitialized || !consentInformation.canRequestAds()) {
@@ -93,6 +111,10 @@ class AdManager(private val context: Context) {
             }
         }
         ad.show(activity)
+    }
+
+    private fun publishPrivacyOptionsRequirement() {
+        onPrivacyOptionsRequirementChanged(isPrivacyOptionsRequired())
     }
 
     private fun tryInitializeAds() {
