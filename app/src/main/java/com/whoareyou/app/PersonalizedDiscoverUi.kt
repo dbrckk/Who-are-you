@@ -82,6 +82,9 @@ fun PersonalizedDiscoverDashboard(
                     InsightMetric(Modifier.weight(1f), strongest?.score?.let { "$it%" } ?: "—", stringResource(R.string.personalized_signal))
                 }
 
+                Spacer(Modifier.height(16.dp))
+                ProfileMapPreview(dimensions = profile.dimensions)
+
                 profile.signature?.let { signature ->
                     val copy = SignatureProfiles.copy(signature.key, french)
                     Spacer(Modifier.height(16.dp))
