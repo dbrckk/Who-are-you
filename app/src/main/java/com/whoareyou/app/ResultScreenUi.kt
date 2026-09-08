@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -59,7 +60,7 @@ fun ResultScreen(
             Spacer(Modifier.height(20.dp))
             Text(resultTitle.uppercase(), color = V2Colors.TextPrimary, fontSize = 34.sp, lineHeight = 38.sp, fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
             Spacer(Modifier.height(8.dp))
-            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp)
+            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, textAlign = TextAlign.Center)
             Spacer(Modifier.height(26.dp))
 
             Card(
@@ -70,9 +71,22 @@ fun ResultScreen(
                 Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("$score%", color = V2Colors.AccentViolet, fontSize = 54.sp, fontWeight = FontWeight.Black)
                     Spacer(Modifier.height(8.dp))
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Text(quiz.metricLow, color = V2Colors.TextSecondary, fontSize = 12.sp)
-                        Text(quiz.metricHigh, color = V2Colors.TextSecondary, fontSize = 12.sp)
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(
+                            quiz.metricLow,
+                            color = V2Colors.TextSecondary,
+                            fontSize = 12.sp,
+                            lineHeight = 16.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            quiz.metricHigh,
+                            color = V2Colors.TextSecondary,
+                            fontSize = 12.sp,
+                            lineHeight = 16.sp,
+                            textAlign = TextAlign.End,
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
@@ -127,7 +141,7 @@ fun ResultScreen(
                 Column(Modifier.padding(18.dp)) {
                     Text(stringResource(R.string.profile_progress), color = V2Colors.AccentCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(6.dp))
-                    Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
 
@@ -137,11 +151,11 @@ fun ResultScreen(
                     AppEvents.resultShare(quiz.id, score)
                     ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Black)
+                Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
             }
 
             Spacer(Modifier.height(10.dp))
@@ -150,29 +164,29 @@ fun ResultScreen(
                     AppEvents.challengeCreate(quiz.id, score)
                     ChallengeShare.share(context, quiz.id, quiz.title, score)
                 },
-                modifier = Modifier.fillMaxWidth().height(54.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.compare_with_friend), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.compare_with_friend), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             }
             Spacer(Modifier.height(8.dp))
-            Text(stringResource(R.string.friend_match_explainer), color = V2Colors.TextSecondary, fontSize = 12.sp, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.friend_match_explainer), color = V2Colors.TextSecondary, fontSize = 12.sp, lineHeight = 18.sp, textAlign = TextAlign.Center)
             Spacer(Modifier.height(18.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Button(
                     onClick = onRetry,
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).heightIn(min = 48.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated)
                 ) {
-                    Text(stringResource(R.string.retry))
+                    Text(stringResource(R.string.retry), textAlign = TextAlign.Center)
                 }
                 Button(
                     onClick = onDone,
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).heightIn(min = 48.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = V2Colors.Ink)
                 ) {
-                    Text(stringResource(R.string.done_button), fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.done_button), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                 }
             }
 
