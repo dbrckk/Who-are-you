@@ -42,6 +42,8 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
         if (hasVisualMap) {
             ProfileIdentityMap(summary)
             Spacer(Modifier.height(18.dp))
+            ProfileStrengthNuanceCard(summary)
+            Spacer(Modifier.height(18.dp))
         }
 
         if (signature != null) {
