@@ -1,0 +1,90 @@
+name: M56 Main Release Candidate
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release_candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle 9.5
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+
+      - name: Prepare Android SDK 36
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Repository verification tests
+        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
+      - name: JVM tests
+        run: gradle :app:testDebugUnitTest --stacktrace
+
+      - name: Compile instrumentation tests
+        run: gradle :app:assembleDebugAndroidTest --stacktrace
+
+      - name: Candidate lint
+        run: gradle :app:lintCandidate --stacktrace
+
+      - name: Release lint
+        run: gradle :app:lintRelease --stacktrace
+
+      - name: Build optimized installable candidate APK
+        run: gradle :app:assembleCandidate --stacktrace
+
+      - name: Build unsigned release AAB
+        run: gradle :app:bundleRelease --stacktrace
+
+      - name: Verify and package artifacts
+        run: |
+          set -euo pipefail
+          APK="app/build/outputs/apk/candidate/app-candidate.apk"
+          test -s "$APK"
+          zipalign -c -v 4 "$APK"
+          apksigner verify --verbose --print-certs "$APK" | tee apk-signature.txt
+          aapt dump badging "$APK" | tee apk-badging.txt
+          grep -F "package: name='com.whoareyou.app' versionCode='1' versionName='0.1.0'" apk-badging.txt
+          grep -F "sdkVersion:'26'" apk-badging.txt
+          grep -F "targetSdkVersion:'36'" apk-badging.txt
+
+          cp "$APK" who-are-you-0.1.0-rc.apk
+          sha256sum who-are-you-0.1.0-rc.apk | tee who-are-you-0.1.0-rc.apk.sha256
+
+          mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
+          test "${#bundles[@]}" -eq 1
+          cp "${bundles[0]}" who-are-you-0.1.0-release-unsigned.aab
+          sha256sum who-are-you-0.1.0-release-unsigned.aab | tee who-are-you-0.1.0-release-unsigned.aab.sha256
+
+      - name: Upload RC artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-0.1.0-rc
+          path: |
+            who-are-you-0.1.0-rc.apk
+            who-are-you-0.1.0-rc.apk.sha256
+            who-are-you-0.1.0-release-unsigned.aab
+            who-are-you-0.1.0-release-unsigned.aab.sha256
+            apk-signature.txt
+            apk-badging.txt
+          if-no-files-found: error
+          retention-days: 30
