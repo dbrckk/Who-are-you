@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -37,11 +40,17 @@ fun QuizScreen(
     var score by remember(quiz.id) { mutableIntStateOf(0) }
     val question = quiz.questions[questionIndex]
     val progress = (questionIndex + 1f) / quiz.questions.size
+    val scrollState = rememberScrollState()
+
+    LaunchedEffect(quiz.id, questionIndex) {
+        scrollState.scrollTo(0)
+    }
 
     Column(
         Modifier
             .fillMaxSize()
             .background(V2Colors.Ink)
+            .verticalScroll(scrollState)
             .padding(V2Spacing.Screen)
     ) {
         Row(
@@ -49,20 +58,14 @@ fun QuizScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                stringResource(R.string.back),
-                color = V2Colors.TextSecondary,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.clickable(onClick = onBack)
-            )
+            AccessibleBackAction(onClick = onBack)
             Text(
                 stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
                 fontSize = 13.sp
             )
         }
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(8.dp))
         LinearProgressIndicator(
             progress = { progress },
             modifier = Modifier.fillMaxWidth().height(8.dp),
@@ -80,15 +83,17 @@ fun QuizScreen(
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             question.answers.forEach { answer ->
                 Card(
-                    modifier = Modifier.fillMaxWidth().clickable {
-                        val newScore = score + answer.score
-                        if (questionIndex == quiz.questions.lastIndex) {
-                            onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
-                        } else {
-                            score = newScore
-                            questionIndex++
-                        }
-                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            val newScore = score + answer.score
+                            if (questionIndex == quiz.questions.lastIndex) {
+                                onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
+                            } else {
+                                score = newScore
+                                questionIndex++
+                            }
+                        },
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(18.dp)
                 ) {
@@ -97,13 +102,14 @@ fun QuizScreen(
                         modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp),
                         color = V2Colors.TextPrimary,
                         fontSize = 16.sp,
+                        lineHeight = 22.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
             }
         }
 
-        Spacer(Modifier.weight(1f))
+        Spacer(Modifier.height(24.dp))
         Text(
             stringResource(R.string.no_right_answers),
             color = V2Colors.TextSecondary,
