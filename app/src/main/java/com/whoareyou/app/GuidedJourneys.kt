@@ -48,16 +48,14 @@ object GuidedJourneyEngine {
         completed: Set<String>,
         maxQuizzesPerJourney: Int = 4
     ): List<GuidedJourneyProgress> = definitions.mapNotNull { definition ->
-        val matching = quizzes
-            .filter { QuizVisuals.themeFor(it) in definition.themes }
-            .sortedWith(
-                compareBy<Quiz> { definition.themes.indexOf(QuizVisuals.themeFor(it)) }
-                    .thenBy { it.id }
-            )
-            .take(maxQuizzesPerJourney.coerceAtLeast(1))
+        val selected = selectBalanced(
+            quizzes = quizzes,
+            themes = definition.themes.toList(),
+            limit = maxQuizzesPerJourney.coerceAtLeast(1)
+        )
 
-        if (matching.isEmpty()) return@mapNotNull null
-        val ids = matching.map { it.id }
+        if (selected.isEmpty()) return@mapNotNull null
+        val ids = selected.map { it.id }
         GuidedJourneyProgress(
             definition = definition,
             quizIds = ids,
@@ -66,5 +64,31 @@ object GuidedJourneyEngine {
         )
     }
 
-    private fun <T> Set<T>.indexOf(value: T): Int = indexOfFirst { it == value }.let { if (it < 0) Int.MAX_VALUE else it }
+    private fun selectBalanced(
+        quizzes: List<Quiz>,
+        themes: List<QuizVisualTheme>,
+        limit: Int
+    ): List<Quiz> {
+        val buckets = themes.associateWith { theme ->
+            quizzes
+                .filter { QuizVisuals.themeFor(it) == theme }
+                .sortedBy { it.id }
+        }
+        val selected = mutableListOf<Quiz>()
+        var depth = 0
+
+        while (selected.size < limit) {
+            var added = false
+            for (theme in themes) {
+                val candidate = buckets[theme]?.getOrNull(depth) ?: continue
+                selected += candidate
+                added = true
+                if (selected.size == limit) break
+            }
+            if (!added) break
+            depth += 1
+        }
+
+        return selected
+    }
 }
