@@ -12,13 +12,14 @@ class DiscoverPersonalizationTest {
         val energy = quiz("energy", "Sleep and energy")
         val dimensions = listOf(dimension("social", 82))
 
-        val next = DiscoverPersonalization.nextQuiz(
+        val recommendation = DiscoverPersonalization.recommendation(
             quizzes = listOf(social, socialAgain, energy),
             completed = setOf("social"),
             dimensions = dimensions
         )
 
-        assertEquals("energy", next?.id)
+        assertEquals("energy", recommendation?.quiz?.id)
+        assertEquals(DiscoverRecommendationReason.NEW_THEME, recommendation?.reason)
     }
 
     @Test
@@ -27,45 +28,50 @@ class DiscoverPersonalizationTest {
         val socialAgain = quiz("social_2", "Friend groups")
         val dimensions = listOf(dimension("social", 80))
 
-        val next = DiscoverPersonalization.nextQuiz(
+        val recommendation = DiscoverPersonalization.recommendation(
             quizzes = listOf(social, socialAgain),
             completed = setOf("social"),
             dimensions = dimensions
         )
 
-        assertEquals("social_2", next?.id)
+        assertEquals("social_2", recommendation?.quiz?.id)
+        assertEquals(DiscoverRecommendationReason.UNFINISHED, recommendation?.reason)
     }
 
     @Test
-    fun allCompletedFallsBackToFirstQuiz() {
+    fun allCompletedBecomesRetakeRecommendation() {
         val first = quiz("first", "Identity")
         val second = quiz("second", "Values")
 
-        val next = DiscoverPersonalization.nextQuiz(
+        val recommendation = DiscoverPersonalization.recommendation(
             quizzes = listOf(first, second),
             completed = setOf("first", "second"),
             dimensions = emptyList()
         )
 
-        assertEquals("first", next?.id)
+        assertEquals("first", recommendation?.quiz?.id)
+        assertEquals(DiscoverRecommendationReason.RETAKE, recommendation?.reason)
     }
 
     @Test
     fun emptyCatalogReturnsNull() {
-        assertNull(DiscoverPersonalization.nextQuiz(emptyList(), emptySet(), emptyList()))
+        assertNull(DiscoverPersonalization.recommendation(emptyList(), emptySet(), emptyList()))
     }
 
     @Test
     fun strongestDimensionIsFarthestFromNeutral() {
         val strongest = DiscoverPersonalization.strongestDimension(
-            listOf(
-                dimension("a", 55),
-                dimension("b", 12),
-                dimension("c", 72)
-            )
+            listOf(dimension("a", 55), dimension("b", 12), dimension("c", 72))
         )
-
         assertEquals("b", strongest?.quizId)
+    }
+
+    @Test
+    fun profileStageMovesFromNewToEmerging() {
+        val newProfile = GlobalProfileSummary("Undiscovered", 0, 0, 10, emptyList())
+        val emerging = GlobalProfileSummary("Emerging", 10, 1, 10, listOf(dimension("a", 70)))
+        assertEquals(DiscoverProfileStage.NEW, DiscoverPersonalization.stage(newProfile))
+        assertEquals(DiscoverProfileStage.EMERGING, DiscoverPersonalization.stage(emerging))
     }
 
     private fun dimension(id: String, score: Int) = ProfileDimension(
@@ -91,12 +97,7 @@ class DiscoverPersonalizationTest {
         metricLow = "Low",
         metricHigh = "High",
         questions = listOf(
-            Question(
-                text = "Q",
-                answers = listOf(
-                    Answer("A", 0), Answer("B", 1), Answer("C", 2), Answer("D", 3)
-                )
-            )
+            Question("Q", listOf(Answer("A", 0), Answer("B", 1), Answer("C", 2), Answer("D", 3)))
         )
     )
 }
