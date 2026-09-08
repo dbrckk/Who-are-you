@@ -1,6 +1,10 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +19,14 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -117,10 +124,21 @@ private fun ShellTab(
 ) {
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
     val accent = if (selected) V2Colors.AccentViolet else V2Colors.TextSecondary
+    val interactionSource = remember { MutableInteractionSource() }
+    val pressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (pressed) V2Motion.PressedScale else 1f,
+        animationSpec = tween(V2Motion.FastMillis),
+        label = "shellTabScale"
+    )
 
     Row(
         modifier = modifier
             .height(56.dp)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
             .clip(RoundedCornerShape(22.dp))
             .background(
                 if (selected) {
@@ -138,6 +156,8 @@ private fun ShellTab(
             .semantics(mergeDescendants = true) { }
             .selectable(
                 selected = selected,
+                interactionSource = interactionSource,
+                indication = null,
                 role = Role.Tab,
                 onClick = onClick
             )
@@ -172,8 +192,7 @@ private fun ShellTab(
         Text(
             label,
             color = foreground,
-            fontSize = 12.sp,
-            letterSpacing = 0.2.sp,
+            style = V2Type.Caption,
             fontWeight = FontWeight.Black
         )
     }
