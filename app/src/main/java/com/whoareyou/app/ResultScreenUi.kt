@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -69,7 +70,13 @@ fun ResultScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$score%", color = V2Colors.AccentViolet, fontSize = 54.sp, fontWeight = FontWeight.Black)
+                    Text(
+                        "$score%",
+                        color = V2Colors.AccentViolet,
+                        fontSize = 54.sp,
+                        fontWeight = FontWeight.Black,
+                        modifier = Modifier.testTag("result_score")
+                    )
                     Spacer(Modifier.height(8.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(
@@ -176,14 +183,14 @@ fun ResultScreen(
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Button(
                     onClick = onRetry,
-                    modifier = Modifier.weight(1f).heightIn(min = 48.dp),
+                    modifier = Modifier.weight(1f).heightIn(min = 48.dp).testTag("result_retry"),
                     colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated)
                 ) {
                     Text(stringResource(R.string.retry), textAlign = TextAlign.Center)
                 }
                 Button(
                     onClick = onDone,
-                    modifier = Modifier.weight(1f).heightIn(min = 48.dp),
+                    modifier = Modifier.weight(1f).heightIn(min = 48.dp).testTag("result_done"),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = V2Colors.Ink)
                 ) {
                     Text(stringResource(R.string.done_button), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
