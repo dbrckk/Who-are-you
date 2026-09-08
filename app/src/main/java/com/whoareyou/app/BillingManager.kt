@@ -43,10 +43,14 @@ class BillingManager(
                 .build()
         )
         .setListener { result, purchases ->
-            if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                handlePurchases(purchases.orEmpty(), PurchaseGrantSource.LIVE_PURCHASE)
-            } else if (result.responseCode != BillingClient.BillingResponseCode.USER_CANCELED) {
-                recordBillingError("purchase_update", result)
+            when (result.responseCode) {
+                BillingClient.BillingResponseCode.OK -> {
+                    handlePurchases(purchases.orEmpty(), PurchaseGrantSource.LIVE_PURCHASE)
+                }
+                BillingClient.BillingResponseCode.USER_CANCELED -> {
+                    AppEvents.purchaseCancel(REMOVE_ADS_PRODUCT_ID)
+                }
+                else -> recordBillingError("purchase_update", result)
             }
         }
         .build()
@@ -57,6 +61,7 @@ class BillingManager(
     }
 
     fun launchPurchase(activity: Activity) {
+        AppEvents.premiumView()
         val product = removeAdsProduct ?: return
         val productBuilder = BillingFlowParams.ProductDetailsParams.newBuilder()
             .setProductDetails(product)
@@ -65,7 +70,7 @@ class BillingManager(
         val params = BillingFlowParams.newBuilder()
             .setProductDetailsParamsList(listOf(productBuilder.build()))
             .build()
-        AppEvents.premiumView()
+        AppEvents.purchaseStart(REMOVE_ADS_PRODUCT_ID)
         val result = billingClient.launchBillingFlow(activity, params)
         if (result.responseCode != BillingClient.BillingResponseCode.OK) {
             recordBillingError("launch", result)
