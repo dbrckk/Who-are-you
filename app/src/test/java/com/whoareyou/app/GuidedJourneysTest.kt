@@ -39,6 +39,44 @@ class GuidedJourneysTest {
         assertEquals(100, personality.progressPercent)
     }
 
+    @Test
+    fun `journey selection represents every available theme before repeating one`() {
+        val quizzes = listOf(
+            quiz("identity-a", "Identity portrait"),
+            quiz("identity-b", "Identity style"),
+            quiz("identity-c", "Identity self"),
+            quiz("identity-d", "Identity core"),
+            quiz("mind-a", "Logic mind"),
+            quiz("lifestyle-a", "Lifestyle routine")
+        )
+
+        val personality = GuidedJourneyEngine.build(quizzes, emptySet(), maxQuizzesPerJourney = 4)
+            .first { it.definition.id == GuidedJourneyId.PERSONALITY }
+
+        assertEquals(
+            listOf("identity-a", "mind-a", "lifestyle-a", "identity-b"),
+            personality.quizIds
+        )
+    }
+
+    @Test
+    fun `journey fills remaining slots when one theme has fewer quizzes`() {
+        val quizzes = listOf(
+            quiz("emotion-a", "Love attachment"),
+            quiz("social-a", "Social confidence"),
+            quiz("social-b", "Social group"),
+            quiz("social-c", "Social conversation")
+        )
+
+        val relationships = GuidedJourneyEngine.build(quizzes, emptySet(), maxQuizzesPerJourney = 4)
+            .first { it.definition.id == GuidedJourneyId.RELATIONSHIPS }
+
+        assertEquals(
+            listOf("emotion-a", "social-a", "social-b", "social-c"),
+            relationships.quizIds
+        )
+    }
+
     private fun sampleQuizzes(): List<Quiz> = listOf(
         quiz("identity-a", "Identity portrait"),
         quiz("mind-a", "Logic mind"),
