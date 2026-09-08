@@ -11,6 +11,9 @@
     <string name="personalized_signature_label">TA SIGNATURE</string>
     <string name="personalized_signature_confidence">correspondance %1$d%%</string>
     <string name="personalized_signals_label">DIMENSIONS LES PLUS MARQUÉES</string>
+    <string name="personalized_momentum_label">ÉVOLUTION DU PROFIL</string>
+    <string name="personalized_momentum_summary">%1$d en mouvement · %2$d stables</string>
+    <string name="personalized_momentum_change">Plus forte évolution récente : %1$s (%2$+d)</string>
     <string name="personalized_next_label">PROCHAINE EXPLORATION IDÉALE</string>
     <string name="personalized_next_new_theme">Cette exploration ouvre une facette que ta carte actuelle n’a pas encore mesurée.</string>
     <string name="personalized_next_unfinished">Continue à construire ta carte avec une dimension qui reste encore à explorer.</string>
