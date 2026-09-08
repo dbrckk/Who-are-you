@@ -19,12 +19,14 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,8 +37,8 @@ import androidx.compose.ui.unit.sp
  *
  * MainActivity still calls `items(List<Quiz>)`; this more-specific overload turns that
  * flat list into the V2 searchable/filterable library while preserving the existing
- * quiz-card callback carried by [itemContent]. Lists of other model types continue to
- * use Compose's normal generic `items` overload.
+ * quiz-card navigation callback carried by [itemContent]. Lists of other model types
+ * continue to use Compose's normal generic `items` overload.
  */
 fun LazyListScope.items(
     items: List<Quiz>,
@@ -56,12 +58,15 @@ private fun DiscoverIntegratedLibrary(
     quizzes: List<Quiz>,
     itemContent: @Composable (Quiz) -> Unit
 ) {
+    val context = LocalContext.current
+    val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
+    val completed = storedProfile.completedQuizIds
+
     var query by remember { mutableStateOf("") }
     var selectedTheme by remember { mutableStateOf<QuizVisualTheme?>(null) }
     var unfinishedOnly by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
 
-    val completed = remember(quizzes) { quizzes.filter { quiz -> quiz.id in LegacyDiscoverCompletion.completedIds }.map { it.id }.toSet() }
     val summaries = remember(quizzes, completed) { DiscoverLibraryEngine.summaries(quizzes, completed) }
     val results = remember(quizzes, completed, query, selectedTheme, unfinishedOnly) {
         DiscoverLibraryEngine.search(
@@ -95,7 +100,10 @@ private fun DiscoverIntegratedLibrary(
 
         OutlinedTextField(
             value = query,
-            onValueChange = { query = it },
+            onValueChange = {
+                query = it
+                expanded = false
+            },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             placeholder = { Text(stringResource(R.string.library_search_hint)) },
@@ -117,7 +125,10 @@ private fun DiscoverIntegratedLibrary(
                 IntegratedLibraryChip(
                     label = stringResource(R.string.library_all),
                     selected = selectedTheme == null,
-                    onClick = { selectedTheme = null }
+                    onClick = {
+                        selectedTheme = null
+                        expanded = false
+                    }
                 )
             }
             items(summaries, key = { it.theme.name }) { summary ->
@@ -125,7 +136,10 @@ private fun DiscoverIntegratedLibrary(
                     label = integratedThemeLabel(summary.theme),
                     selected = selectedTheme == summary.theme,
                     suffix = "${summary.completedCount}/${summary.totalCount}",
-                    onClick = { selectedTheme = if (selectedTheme == summary.theme) null else summary.theme }
+                    onClick = {
+                        selectedTheme = if (selectedTheme == summary.theme) null else summary.theme
+                        expanded = false
+                    }
                 )
             }
         }
@@ -134,7 +148,10 @@ private fun DiscoverIntegratedLibrary(
         IntegratedLibraryChip(
             label = stringResource(R.string.library_unfinished_only),
             selected = unfinishedOnly,
-            onClick = { unfinishedOnly = !unfinishedOnly }
+            onClick = {
+                unfinishedOnly = !unfinishedOnly
+                expanded = false
+            }
         )
 
         Spacer(Modifier.height(16.dp))
@@ -157,40 +174,31 @@ private fun DiscoverIntegratedLibrary(
             }
         }
 
-        if (!activeFilter && results.size > visibleLimit) {
+        if (!activeFilter && !expanded && results.size > visibleLimit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(V2Radius.Pill))
                     .background(V2Colors.Surface)
-                    .clickable { expanded = !expanded }
+                    .clickable { expanded = true }
                     .padding(horizontal = 16.dp, vertical = 13.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    if (expanded) stringResource(R.string.library_show_less) else stringResource(R.string.library_show_more),
+                    stringResource(R.string.library_more_results, results.size - visibleLimit),
                     color = V2Colors.TextPrimary,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    if (expanded) "↑" else "+${results.size - visibleLimit}",
+                    "↓",
                     color = V2Colors.AccentCyan,
-                    fontSize = 12.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Black
                 )
             }
         }
     }
-}
-
-/**
- * Temporary bridge populated by DiscoverScreen before its LazyColumn is built.
- * It keeps this migration isolated from the rest of MainActivity until the screen is
- * decomposed into dedicated V2 files.
- */
-object LegacyDiscoverCompletion {
-    var completedIds: Set<String> = emptySet()
 }
 
 @Composable
