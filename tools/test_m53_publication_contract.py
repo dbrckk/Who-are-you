@@ -2,6 +2,8 @@ from pathlib import Path
 import json
 import unittest
 
+from validate_public_release_inputs import validate
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -38,6 +40,16 @@ class M53PublicationContractTest(unittest.TestCase):
         self.assertEqual(payload["challenge_domain"], "dbrckk.github.io")
         self.assertEqual(payload["developer_display_name"], "REQUIRED")
         self.assertEqual(payload["support_email"], "REQUIRED")
+
+    def test_strict_public_release_gate_rejects_template_placeholders(self):
+        payload = json.loads(
+            (ROOT / "docs/public-release-inputs.template.json").read_text(encoding="utf-8")
+        )
+        errors = validate(payload, strict=True)
+        self.assertTrue(any("developer_display_name" in error for error in errors))
+        self.assertTrue(any("support_email" in error for error in errors))
+        self.assertTrue(any("target_audience" in error for error in errors))
+        self.assertTrue(any("play_app_signing_sha256" in error for error in errors))
 
     def test_app_links_docs_explain_root_domain_dependency(self):
         text = (ROOT / "docs/APP_LINKS.md").read_text(encoding="utf-8")
