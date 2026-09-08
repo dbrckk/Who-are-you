@@ -1,6 +1,7 @@
 package com.whoareyou.app
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,7 +33,11 @@ fun V2PressableSurface(
         animationSpec = tween(V2Motion.FastMillis),
         label = "pressableBackground"
     )
-    val scale = if (pressed) V2Motion.PressedScale else 1f
+    val scale by animateFloatAsState(
+        targetValue = if (pressed) V2Motion.PressedScale else 1f,
+        animationSpec = tween(V2Motion.FastMillis),
+        label = "pressableScale"
+    )
 
     Box(
         modifier = modifier
