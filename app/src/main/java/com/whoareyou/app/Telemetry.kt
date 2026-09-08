@@ -11,16 +11,45 @@ internal interface EventSink {
     fun recordError(throwable: Throwable, context: Map<String, Any?> = emptyMap())
 }
 
+internal object TelemetryPrivacy {
+    private const val MaxStringLength = 96
+    private const val MaxParams = 16
+
+    fun eventName(value: String): String = value
+        .lowercase()
+        .filter { it.isLetterOrDigit() || it == '_' }
+        .take(48)
+
+    fun params(values: Map<String, Any?>): Map<String, Any> = values
+        .asSequence()
+        .filter { (key, value) -> key.isNotBlank() && value != null }
+        .take(MaxParams)
+        .mapNotNull { (key, value) ->
+            safeValue(value)?.let { safe -> key.take(48) to safe }
+        }
+        .toMap()
+
+    private fun safeValue(value: Any): Any? = when (value) {
+        is Boolean -> value
+        is Byte, is Short, is Int, is Long, is Float, is Double -> value
+        is String -> value.take(MaxStringLength)
+        is Enum<*> -> value.name.lowercase().take(MaxStringLength)
+        else -> null
+    }
+}
+
 internal object LogEventSink : EventSink {
     private const val tag = "WhoAreYouEvents"
 
     override fun send(name: String, params: Map<String, Any?>) {
-        val payload = params.entries.joinToString(", ") { "${it.key}=${it.value}" }
-        Log.d(tag, if (payload.isBlank()) name else "$name | $payload")
+        val safeName = TelemetryPrivacy.eventName(name)
+        val safeParams = TelemetryPrivacy.params(params)
+        val payload = safeParams.entries.joinToString(", ") { "${it.key}=${it.value}" }
+        Log.d(tag, if (payload.isBlank()) safeName else "$safeName | $payload")
     }
 
     override fun recordError(throwable: Throwable, context: Map<String, Any?>) {
-        Log.e(tag, "non_fatal | ${context.entries.joinToString(", ") { "${it.key}=${it.value}" }}", throwable)
+        Log.e(tag, "non_fatal | ${TelemetryPrivacy.params(context).entries.joinToString(", ") { "${it.key}=${it.value}" }}", throwable)
     }
 }
 
@@ -31,9 +60,9 @@ internal class HttpEventSink(private val endpoint: String) : EventSink {
         enqueue(
             JSONObject().apply {
                 put("type", "event")
-                put("name", name)
+                put("name", TelemetryPrivacy.eventName(name))
                 put("timestamp_ms", System.currentTimeMillis())
-                put("params", JSONObject(params.filterValues { it != null }))
+                put("params", JSONObject(TelemetryPrivacy.params(params)))
             }
         )
     }
@@ -43,10 +72,8 @@ internal class HttpEventSink(private val endpoint: String) : EventSink {
             JSONObject().apply {
                 put("type", "non_fatal")
                 put("timestamp_ms", System.currentTimeMillis())
-                put("error", throwable::class.java.name)
-                put("message", throwable.message ?: "")
-                put("stack", throwable.stackTraceToString().take(12000))
-                put("context", JSONObject(context.filterValues { it != null }))
+                put("error", throwable::class.java.name.take(96))
+                put("context", JSONObject(TelemetryPrivacy.params(context)))
             }
         )
     }
