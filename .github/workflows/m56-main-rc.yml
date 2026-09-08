@@ -28,11 +28,15 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
+      - name: Set up Android SDK tools
+        uses: android-actions/setup-android@v3
+
       - name: Prepare Android SDK 36
         run: |
           set -euo pipefail
           yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-36" "build-tools;36.0.0"
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          sdkmanager --list_installed
 
       - name: Repository verification tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
