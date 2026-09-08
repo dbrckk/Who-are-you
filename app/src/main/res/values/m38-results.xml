@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="result_interpretation_title">Read your signal</string>
+    <string name="result_interpretation_subtitle">A more useful way to read this result than the score alone.</string>
+    <string name="result_signal_label">SIGNAL STRENGTH</string>
+    <string name="result_signal_balanced">Balanced signal</string>
+    <string name="result_signal_clear">Clear signal</string>
+    <string name="result_signal_strong">Strong signal</string>
+    <string name="result_pole_label">CURRENT LEAN</string>
+    <string name="result_nuance_label">Context sensitivity</string>
+    <string name="result_nuance_balanced_body">Your score sits close to the middle. Context, mood or situation may matter more here than a fixed tendency.</string>
+    <string name="result_nuance_clear_body">There is a visible tendency, but enough room remains for the opposite side to appear depending on context.</string>
+    <string name="result_nuance_strong_body">This result is far from the midpoint, so this side of the dimension is currently one of your clearer signals.</string>
+    <string name="result_context_label">KEEP IN CONTEXT</string>
+    <string name="result_context_body">This is a playful self-reflection signal, not a diagnosis or fixed psychological label. Retakes can also show how context changes your answers over time.</string>
+</resources>
