@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -90,9 +91,11 @@ fun DiscoverCollections(
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(populated, key = { it.first.theme.name }) { (collection, matching) ->
                 val previewQuiz = matching.firstOrNull { it.id !in completed } ?: matching.first()
+                val completedCount = matching.count { it.id in completed }
                 CollectionCard(
                     title = stringResource(collection.titleRes),
-                    count = matching.size,
+                    completedCount = completedCount,
+                    totalCount = matching.size,
                     accent = collection.accent,
                     quiz = previewQuiz,
                     onClick = onQuizSelected?.let { callback -> { callback(previewQuiz) } }
@@ -266,11 +269,13 @@ private fun EditorialCard(
 @Composable
 private fun CollectionCard(
     title: String,
-    count: Int,
+    completedCount: Int,
+    totalCount: Int,
     accent: Color,
     quiz: Quiz,
     onClick: (() -> Unit)?
 ) {
+    val progress = if (totalCount == 0) 0f else completedCount.toFloat() / totalCount
     val cardModifier = if (onClick != null) {
         Modifier.width(236.dp).clickable(onClick = onClick)
     } else {
@@ -312,13 +317,23 @@ private fun CollectionCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(title, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Black)
-                    Box(
-                        Modifier.height(9.dp).width(9.dp).clip(RoundedCornerShape(99.dp)).background(accent)
+                    Text(
+                        "$completedCount/$totalCount",
+                        color = if (completedCount == totalCount) V2Colors.AccentCyan else accent,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Black
                     )
                 }
-                Spacer(Modifier.height(5.dp))
+                Spacer(Modifier.height(8.dp))
+                LinearProgressIndicator(
+                    progress = { progress },
+                    modifier = Modifier.fillMaxWidth().height(5.dp),
+                    color = accent,
+                    trackColor = V2Colors.Hairline
+                )
+                Spacer(Modifier.height(8.dp))
                 Text(
-                    stringResource(R.string.discover_collection_count, count),
+                    stringResource(R.string.discover_collection_count, totalCount),
                     color = V2Colors.TextSecondary,
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold
