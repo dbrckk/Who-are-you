@@ -13,4 +13,9 @@
     <string name="result_nuance_strong_body">This result is far from the midpoint, so this side of the dimension is currently one of your clearer signals.</string>
     <string name="result_context_label">KEEP IN CONTEXT</string>
     <string name="result_context_body">This is a playful self-reflection signal, not a diagnosis or fixed psychological label. Retakes can also show how context changes your answers over time.</string>
+    <string name="result_next_label">NEXT EXPLORATION</string>
+    <string name="result_next_same_facet">Stay in the same theme and add another angle to this part of your map.</string>
+    <string name="result_next_complementary">Open a different facet to make your profile more complete and less one-dimensional.</string>
+    <string name="result_next_retake">This theme is already mapped. Revisit a related dimension to see whether your pattern is moving.</string>
+    <string name="result_next_action">EXPLORE THIS NEXT →</string>
 </resources>
