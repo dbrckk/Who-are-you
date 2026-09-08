@@ -7,6 +7,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodes
+import androidx.compose.ui.test.performClick
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -16,7 +17,7 @@ class AppShellUiTest {
     val composeRule = createComposeRule()
 
     @Test
-    fun shellExposesExactlyTwoTabsAndSelectedState() {
+    fun shellExposesTwoTabsAndRoutesSelection() {
         var selectedTab: AppShellTab? = null
 
         composeRule.setContent {
@@ -27,11 +28,13 @@ class AppShellUiTest {
         }
 
         val tabMatcher = SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
-        composeRule.onAllNodes(tabMatcher).assertCountEquals(2)
-        composeRule.onAllNodes(tabMatcher)[0].assertIsSelected()
+        val tabs = composeRule.onAllNodes(tabMatcher)
+        tabs.assertCountEquals(2)
+        tabs[0].assertIsSelected()
+        tabs[1].performClick()
 
         composeRule.runOnIdle {
-            assertEquals(null, selectedTab)
+            assertEquals(AppShellTab.PROFILE, selectedTab)
         }
     }
 }
