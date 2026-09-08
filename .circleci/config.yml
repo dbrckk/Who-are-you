@@ -7,6 +7,7 @@ executors:
     resource_class: small
     environment:
       GRADLE_USER_HOME: /home/circleci/.gradle
+      GRADLE_VERSION: "9.5.0"
 
 commands:
   install_android_37:
@@ -16,27 +17,54 @@ commands:
           command: |
             yes | sdkmanager --licenses >/dev/null || true
             sdkmanager "platforms;android-37" "build-tools;37.0.0"
+
+  install_gradle:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-gradle-bin-9.5.0
+      - run:
+          name: Pin Gradle 9.5.0
+          command: |
+            set -euo pipefail
+            INSTALL_DIR="$HOME/.local/gradle-$GRADLE_VERSION"
+            if [ ! -x "$INSTALL_DIR/bin/gradle" ]; then
+              mkdir -p "$HOME/.local"
+              curl -fsSL "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip" -o /tmp/gradle.zip
+              unzip -q /tmp/gradle.zip -d "$HOME/.local"
+            fi
+            echo 'export PATH="$HOME/.local/gradle-'"$GRADLE_VERSION"'/bin:$PATH"' >> "$BASH_ENV"
+            source "$BASH_ENV"
+            gradle --version
+      - save_cache:
+          key: v1-gradle-bin-9.5.0
+          paths:
+            - ~/.local/gradle-9.5.0
+
   restore_gradle_cache:
     steps:
       - restore_cache:
           keys:
-            - v2-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-            - v2-gradle-
+            - v3-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+            - v3-gradle-
+
   save_gradle_cache:
     steps:
       - save_cache:
-          key: v2-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+          key: v3-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
           paths:
             - ~/.gradle/caches
-            - ~/.gradle/wrapper
+            - ~/.gradle/daemon
 
 jobs:
-  validate:
+  android_ci:
     executor: android
     steps:
       - checkout
       - install_android_37
+      - install_gradle
       - restore_gradle_cache
+
       - run:
           name: Validate quiz catalog
           command: |
@@ -72,28 +100,23 @@ jobs:
             assert locale_ids.get('fr', set()) == locale_ids.get('en', set())
             print(f"Bilingual catalog parity confirmed: {locale_totals.get('en',0)} EN / {locale_totals.get('fr',0)} FR")
             PY
+
       - run:
           name: Play submission generator tests
           command: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
       - run:
           name: JVM unit tests
           command: gradle :app:testDebugUnitTest --stacktrace
+
       - run:
           name: Android lint
           command: gradle :app:lintDebug --stacktrace
-      - store_test_results:
-          path: app/build/test-results
-      - save_gradle_cache
 
-  debug_apk:
-    executor: android
-    steps:
-      - checkout
-      - install_android_37
-      - restore_gradle_cache
       - run:
           name: Build installable debug APK
           command: gradle :app:assembleDebug --stacktrace
+
       - run:
           name: Prepare APK artifact
           command: |
@@ -103,18 +126,20 @@ jobs:
             test -s "$APK"
             cp "$APK" dist/who-are-you-0.1.0-debug.apk
             sha256sum dist/who-are-you-0.1.0-debug.apk > dist/who-are-you-0.1.0-debug.apk.sha256
+
+      - store_test_results:
+          path: app/build/test-results
+
       - store_artifacts:
           path: dist
           destination: android
+
       - save_gradle_cache
 
 workflows:
   android:
     jobs:
-      - validate
-      - debug_apk:
-          requires:
-            - validate
+      - android_ci:
           filters:
             branches:
               only: main
