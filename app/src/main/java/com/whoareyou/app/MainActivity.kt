@@ -10,6 +10,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -122,53 +123,72 @@ private fun WhoAreYouApp() {
         screen = Screen.DISCOVER
     }
 
-    AnimatedContent(targetState = screen, label = "screen") { destination ->
-        when (destination) {
-            Screen.DISCOVER -> DiscoverScreen(
-                quizzes = quizCatalog,
-                profile = globalProfile,
-                storedProfile = storedProfile,
-                completed = storedProfile.completedQuizIds,
-                adsRemoved = adsRemoved,
-                onOpenProfile = { screen = Screen.PROFILE },
-                onQuizSelected = {
-                    previousScoreForAttempt = storedProfile.latestScores[it.id]
-                    selectedQuiz = it
-                    AppEvents.testStart(it.id)
-                    screen = Screen.QUIZ
+    Box(modifier = Modifier.fillMaxSize()) {
+        AnimatedContent(
+            targetState = screen,
+            label = "screen",
+            modifier = Modifier.fillMaxSize()
+        ) { destination ->
+            when (destination) {
+                Screen.DISCOVER -> DiscoverScreen(
+                    quizzes = quizCatalog,
+                    profile = globalProfile,
+                    storedProfile = storedProfile,
+                    completed = storedProfile.completedQuizIds,
+                    adsRemoved = adsRemoved,
+                    onOpenProfile = { screen = Screen.PROFILE },
+                    onQuizSelected = {
+                        previousScoreForAttempt = storedProfile.latestScores[it.id]
+                        selectedQuiz = it
+                        AppEvents.testStart(it.id)
+                        screen = Screen.QUIZ
+                    },
+                    onRemoveAds = { if (!adsRemoved && activity != null) billingManager.launchPurchase(activity) }
+                )
+
+                Screen.PROFILE -> GlobalProfileScreen(
+                    summary = globalProfile,
+                    catalog = quizCatalog,
+                    onBack = { screen = Screen.DISCOVER }
+                )
+
+                Screen.QUIZ -> QuizScreen(
+                    quiz = selectedQuiz,
+                    onBack = { screen = Screen.DISCOVER },
+                    onFinished = { score ->
+                        finalScore = score
+                        AppEvents.testComplete(selectedQuiz.id, score)
+                        scope.launch { ProfileStore.saveQuizResult(context, selectedQuiz.id, score) }
+                        screen = Screen.RESULT
+                    }
+                )
+
+                Screen.RESULT -> ResultScreen(
+                    quiz = selectedQuiz,
+                    score = finalScore,
+                    previousScore = previousScoreForAttempt,
+                    completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
+                    totalQuizCount = quizCatalog.size,
+                    onDone = { adManager.onResultFinished(activity, adsRemoved) { screen = Screen.DISCOVER } },
+                    onRetry = {
+                        previousScoreForAttempt = finalScore
+                        AppEvents.testStart(selectedQuiz.id)
+                        screen = Screen.QUIZ
+                    }
+                )
+            }
+        }
+
+        if (screen == Screen.DISCOVER || screen == Screen.PROFILE) {
+            PremiumAppShellBar(
+                selected = if (screen == Screen.PROFILE) AppShellTab.PROFILE else AppShellTab.DISCOVER,
+                onSelect = { tab ->
+                    screen = when (tab) {
+                        AppShellTab.DISCOVER -> Screen.DISCOVER
+                        AppShellTab.PROFILE -> Screen.PROFILE
+                    }
                 },
-                onRemoveAds = { if (!adsRemoved && activity != null) billingManager.launchPurchase(activity) }
-            )
-
-            Screen.PROFILE -> GlobalProfileScreen(
-                summary = globalProfile,
-                catalog = quizCatalog,
-                onBack = { screen = Screen.DISCOVER }
-            )
-
-            Screen.QUIZ -> QuizScreen(
-                quiz = selectedQuiz,
-                onBack = { screen = Screen.DISCOVER },
-                onFinished = { score ->
-                    finalScore = score
-                    AppEvents.testComplete(selectedQuiz.id, score)
-                    scope.launch { ProfileStore.saveQuizResult(context, selectedQuiz.id, score) }
-                    screen = Screen.RESULT
-                }
-            )
-
-            Screen.RESULT -> ResultScreen(
-                quiz = selectedQuiz,
-                score = finalScore,
-                previousScore = previousScoreForAttempt,
-                completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
-                totalQuizCount = quizCatalog.size,
-                onDone = { adManager.onResultFinished(activity, adsRemoved) { screen = Screen.DISCOVER } },
-                onRetry = {
-                    previousScoreForAttempt = finalScore
-                    AppEvents.testStart(selectedQuiz.id)
-                    screen = Screen.QUIZ
-                }
+                modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
     }
