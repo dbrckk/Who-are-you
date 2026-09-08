@@ -45,13 +45,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v5-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-            - v5-gradle-
+            - v6-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+            - v6-gradle-
 
   save_gradle_cache:
     steps:
       - save_cache:
-          key: v5-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
+          key: v6-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
           paths:
             - ~/.gradle/caches
             - ~/.gradle/daemon
@@ -118,18 +118,26 @@ jobs:
           command: gradle :app:lintDebug --stacktrace
 
       - run:
+          name: Android candidate lint
+          command: gradle :app:lintCandidate --stacktrace
+
+      - run:
           name: Android release lint
           command: gradle :app:lintRelease --stacktrace
 
       - run:
-          name: Build installable debug APK
+          name: Build debug APK
           command: gradle :app:assembleDebug --stacktrace
 
       - run:
-          name: Verify installable APK candidate
+          name: Build optimized installable candidate APK
+          command: gradle :app:assembleCandidate --stacktrace
+
+      - run:
+          name: Verify installable candidate APK
           command: |
             set -euo pipefail
-            APK="app/build/outputs/apk/debug/app-debug.apk"
+            APK="app/build/outputs/apk/candidate/app-candidate.apk"
             test -s "$APK"
             zipalign -c -v 4 "$APK"
             apksigner verify --verbose --print-certs "$APK" | tee /tmp/apk-signature.txt
@@ -148,12 +156,18 @@ jobs:
             set -euo pipefail
             mkdir -p dist
 
-            APK="app/build/outputs/apk/debug/app-debug.apk"
-            test -s "$APK"
-            cp "$APK" dist/who-are-you-0.1.0-debug.apk
+            CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
+            DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
+            test -s "$CANDIDATE_APK"
+            test -s "$DEBUG_APK"
+
+            cp "$CANDIDATE_APK" dist/who-are-you-0.1.0-rc.apk
+            sha256sum dist/who-are-you-0.1.0-rc.apk > dist/who-are-you-0.1.0-rc.apk.sha256
+            cp /tmp/apk-signature.txt dist/who-are-you-0.1.0-rc.apk.signature.txt
+            cp /tmp/apk-badging.txt dist/who-are-you-0.1.0-rc.apk.badging.txt
+
+            cp "$DEBUG_APK" dist/who-are-you-0.1.0-debug.apk
             sha256sum dist/who-are-you-0.1.0-debug.apk > dist/who-are-you-0.1.0-debug.apk.sha256
-            cp /tmp/apk-signature.txt dist/who-are-you-0.1.0-debug.apk.signature.txt
-            cp /tmp/apk-badging.txt dist/who-are-you-0.1.0-debug.apk.badging.txt
 
             mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
             if [ "${#bundles[@]}" -ne 1 ]; then
@@ -165,11 +179,11 @@ jobs:
 
             python - <<'PY'
             import hashlib, json, os
-            apk = 'dist/who-are-you-0.1.0-debug.apk'
+            apk = 'dist/who-are-you-0.1.0-rc.apk'
             with open(apk, 'rb') as handle:
                 digest = hashlib.sha256(handle.read()).hexdigest()
             report = {
-                'candidate': 'who-are-you-0.1.0-debug.apk',
+                'candidate': 'who-are-you-0.1.0-rc.apk',
                 'package': 'com.whoareyou.app',
                 'versionCode': 1,
                 'versionName': '0.1.0',
@@ -179,9 +193,11 @@ jobs:
                 'sha256': digest,
                 'signed': True,
                 'zipAligned': True,
+                'optimizedLikeRelease': True,
+                'signing': 'Android debug signing key for direct device installation',
                 'adConfiguration': 'Google test IDs',
                 'telemetry': 'disabled unless explicitly configured',
-                'purpose': 'direct device acceptance testing; not a Play production artifact'
+                'purpose': 'production-like device acceptance testing; not a Play production artifact'
             }
             with open('dist/release-candidate.json', 'w', encoding='utf-8') as handle:
                 json.dump(report, handle, indent=2)
