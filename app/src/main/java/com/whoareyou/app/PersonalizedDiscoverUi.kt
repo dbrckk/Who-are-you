@@ -40,6 +40,7 @@ fun PersonalizedDiscoverDashboard(
     }
     val stage = remember(profile.completedCount, profile.signature) { DiscoverPersonalization.stage(profile) }
     val strongest = remember(profile.dimensions) { DiscoverPersonalization.strongestDimension(profile.dimensions) }
+    val momentum = remember(profile.dimensions) { ProfileMomentumEngine.derive(profile.dimensions) }
     val strongestDimensions = remember(profile.dimensions) {
         profile.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(2)
     }
@@ -84,6 +85,11 @@ fun PersonalizedDiscoverDashboard(
 
                 Spacer(Modifier.height(16.dp))
                 ProfileMapPreview(dimensions = profile.dimensions)
+
+                if (momentum.changingCount > 0 || momentum.stableCount > 0) {
+                    Spacer(Modifier.height(14.dp))
+                    ProfileMomentumCard(momentum)
+                }
 
                 profile.signature?.let { signature ->
                     val copy = SignatureProfiles.copy(signature.key, french)
