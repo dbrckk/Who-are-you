@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +21,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -132,7 +135,12 @@ private fun ShellTab(
                     Brush.linearGradient(listOf(Color.Transparent, Color.Transparent))
                 }
             )
-            .clickable(onClick = onClick)
+            .semantics(mergeDescendants = true) { }
+            .selectable(
+                selected = selected,
+                role = Role.Tab,
+                onClick = onClick
+            )
             .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -152,7 +160,13 @@ private fun ShellTab(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Text(symbol, color = accent, fontSize = 15.sp, fontWeight = FontWeight.Black)
+            Text(
+                text = symbol,
+                color = accent,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier.clearAndSetSemantics { }
+            )
         }
         Spacer(Modifier.size(9.dp))
         Text(
