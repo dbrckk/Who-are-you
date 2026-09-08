@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +20,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,15 +45,9 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            Spacer(Modifier.height(24.dp))
-            Text(
-                stringResource(R.string.back),
-                color = V2Colors.TextSecondary,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.clickable(onClick = onBack)
-            )
-            Spacer(Modifier.height(26.dp))
+            Spacer(Modifier.height(12.dp))
+            AccessibleBackAction(onClick = onBack)
+            Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.your_profile), color = V2Colors.AccentViolet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(10.dp))
             Text(summary.dominantArchetype.uppercase(), color = V2Colors.TextPrimary, fontSize = 34.sp, lineHeight = 39.sp, fontWeight = FontWeight.Black)
