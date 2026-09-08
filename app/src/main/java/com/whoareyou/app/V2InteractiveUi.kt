@@ -8,13 +8,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -57,4 +62,42 @@ fun V2PressableSurface(
     ) {
         content()
     }
+}
+
+@Composable
+fun V2PressableCard(
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    shape: Shape = RoundedCornerShape(V2Radius.Card),
+    containerColor: Color = V2Colors.Surface,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val pressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (pressed && onClick != null) V2Motion.PressedScale else 1f,
+        animationSpec = tween(V2Motion.FastMillis),
+        label = "pressableCardScale"
+    )
+
+    Card(
+        modifier = modifier
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .then(
+                if (onClick != null) {
+                    Modifier.clickable(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        role = Role.Button,
+                        onClick = onClick
+                    )
+                } else Modifier
+            ),
+        shape = shape,
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        content = content
+    )
 }
