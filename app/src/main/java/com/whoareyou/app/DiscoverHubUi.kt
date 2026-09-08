@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
@@ -27,16 +29,19 @@ import androidx.compose.ui.unit.sp
 /**
  * Single Discover surface for the V2 product experience.
  *
- * Keeps the information architecture explicit: profile -> journeys -> curated discovery -> library.
- * The legacy long quiz list can remain available during migration without being the primary UX.
+ * Information architecture: identity -> momentum -> guided journeys -> curated discovery -> library -> premium.
+ * This keeps the richer product loop intact while removing the legacy raw catalog as the primary experience.
  */
 @Composable
 fun DiscoverHub(
     quizzes: List<Quiz>,
     profile: GlobalProfileSummary,
+    storedProfile: StoredProfile,
     completed: Set<String>,
+    adsRemoved: Boolean,
     onOpenProfile: () -> Unit,
-    onQuizSelected: (Quiz) -> Unit
+    onQuizSelected: (Quiz) -> Unit,
+    onRemoveAds: () -> Unit
 ) {
     val journeys = remember(quizzes, completed) {
         GuidedJourneyEngine.build(quizzes, completed)
@@ -84,6 +89,12 @@ fun DiscoverHub(
             )
         }
 
+        item {
+            RetentionSection()
+            Spacer(Modifier.height(14.dp))
+            SocialStatsCard(storedProfile)
+        }
+
         if (journeys.isNotEmpty()) {
             item {
                 GuidedJourneySection(
@@ -107,6 +118,13 @@ fun DiscoverHub(
                 quizzes = quizzes,
                 completed = completed,
                 onQuizSelected = onQuizSelected
+            )
+        }
+
+        item {
+            PremiumDiscoverCard(
+                adsRemoved = adsRemoved,
+                onRemoveAds = onRemoveAds
             )
             Spacer(Modifier.height(108.dp))
         }
@@ -216,6 +234,59 @@ private fun JourneyCard(
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Black
             )
+        }
+    }
+}
+
+@Composable
+private fun PremiumDiscoverCard(
+    adsRemoved: Boolean,
+    onRemoveAds: () -> Unit
+) {
+    val premiumPrice = BillingPriceState.displayPrice
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
+        shape = RoundedCornerShape(V2Radius.Card),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(Modifier.padding(22.dp)) {
+            Text(
+                stringResource(if (adsRemoved) R.string.lifetime_upgrade_active else R.string.remove_ads_forever),
+                color = V2Colors.AccentCyan,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.height(9.dp))
+            Text(
+                if (adsRemoved) stringResource(R.string.no_ads_ever)
+                else stringResource(R.string.premium_once_no_subscription, premiumPrice),
+                color = V2Colors.TextPrimary,
+                fontSize = 20.sp,
+                lineHeight = 25.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.height(7.dp))
+            Text(
+                stringResource(if (adsRemoved) R.string.premium_restore_copy else R.string.premium_copy),
+                color = V2Colors.TextSecondary,
+                fontSize = 12.sp,
+                lineHeight = 18.sp
+            )
+            if (!adsRemoved) {
+                Spacer(Modifier.height(15.dp))
+                Button(
+                    onClick = onRemoveAds,
+                    modifier = Modifier.fillMaxWidth().height(50.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
+                    shape = RoundedCornerShape(V2Radius.Compact)
+                ) {
+                    Text(
+                        stringResource(R.string.remove_ads_button, premiumPrice),
+                        fontWeight = FontWeight.Black
+                    )
+                }
+            }
         }
     }
 }
