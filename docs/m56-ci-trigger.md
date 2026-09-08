@@ -1,5 +1,5 @@
 # M56 CI trigger
 
-This file exists only to trigger the first CircleCI run after repository connection.
+This file exists only to trigger CircleCI runs while the release-candidate pipeline is being validated.
 
-It can be removed after the release-candidate pipeline is confirmed operational.
+Latest trigger: config no longer contains unescaped CircleCI `<<` syntax.
