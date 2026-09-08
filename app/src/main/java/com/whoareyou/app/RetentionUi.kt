@@ -43,27 +43,20 @@ private val RetentionMuted = Color(0xFFA4A7B5)
 private val RetentionPink = Color(0xFFF08ACB)
 private val RetentionGold = Color(0xFFF4C56A)
 
+/**
+ * Legacy all-in-one retention surface. Kept for compatibility while callers migrate to
+ * [RetentionEngagementSection], which avoids nesting Discover dashboards and collections.
+ */
 @Composable
 fun RetentionSection() {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())
     val quizCatalog = remember(context) { QuizRepository.load(context) }
     val personalizedProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
         GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
     }
     val totalQuizCount = quizCatalog.size
-    val question = remember { DailyQuestionEngine.forDate() }
     val achievements = remember(storedProfile, totalQuizCount) { AchievementEngine.build(storedProfile, totalQuizCount) }
-    val pendingAchievementId = storedProfile.pendingAchievementIds.firstOrNull()
-    val pendingAchievement = pendingAchievementId?.let { id -> achievements.firstOrNull { it.id == id } }
-
-    LaunchedEffect(question.id) { AppEvents.dailyQuestionView(question.id) }
-    LaunchedEffect(pendingAchievementId, pendingAchievement) {
-        if (pendingAchievementId != null && pendingAchievement == null) {
-            ProfileStore.consumeAchievementUnlock(context, pendingAchievementId)
-        }
-    }
 
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         PersonalizedDiscoverDashboard(
@@ -81,6 +74,39 @@ fun RetentionSection() {
             quizzes = quizCatalog,
             completed = storedProfile.completedQuizIds
         )
+        RetentionEngagementSection(
+            storedProfile = storedProfile,
+            totalQuizCount = totalQuizCount
+        )
+    }
+}
+
+/**
+ * Interactive retention loop without owning repository/profile discovery UI.
+ * Safe to embed inside DiscoverHub because it only renders achievement and daily-question content.
+ */
+@Composable
+fun RetentionEngagementSection(
+    storedProfile: StoredProfile,
+    totalQuizCount: Int
+) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val question = remember { DailyQuestionEngine.forDate() }
+    val achievements = remember(storedProfile, totalQuizCount) {
+        AchievementEngine.build(storedProfile, totalQuizCount)
+    }
+    val pendingAchievementId = storedProfile.pendingAchievementIds.firstOrNull()
+    val pendingAchievement = pendingAchievementId?.let { id -> achievements.firstOrNull { it.id == id } }
+
+    LaunchedEffect(question.id) { AppEvents.dailyQuestionView(question.id) }
+    LaunchedEffect(pendingAchievementId, pendingAchievement) {
+        if (pendingAchievementId != null && pendingAchievement == null) {
+            ProfileStore.consumeAchievementUnlock(context, pendingAchievementId)
+        }
+    }
+
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
         if (pendingAchievement != null) {
             AchievementUnlockCard(pendingAchievement) {
                 scope.launch { ProfileStore.consumeAchievementUnlock(context, pendingAchievement.id) }
