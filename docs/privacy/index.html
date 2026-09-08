@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>Who Are You? — Privacy Policy</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #0b0b12; color: #f4f4f7; line-height: 1.6; }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
+    h1, h2 { line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 6vw, 3.3rem); margin-bottom: 8px; }
+    h2 { margin-top: 34px; font-size: 1.25rem; }
+    a { color: #9adfff; }
+    .muted { color: #b6b6c4; }
+    .notice { border: 1px solid #4b3f72; background: #171322; padding: 14px 16px; border-radius: 12px; }
+    code { background: #181820; padding: 2px 5px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Who Are You? — Privacy Policy</h1>
+  <p class="muted">Last updated: September 8, 2026</p>
+  <p class="notice"><strong>Pre-release notice:</strong> the privacy terms below reflect the current application architecture. A public developer/privacy support contact must be inserted before the first public Google Play release.</p>
+
+  <p>Who Are You? is an entertainment and self-reflection application. Its quizzes are not medical or psychological diagnoses. No Who Are You? account is required.</p>
+
+  <h2>Data stored on your device</h2>
+  <p>The app stores quiz completion, latest and previous quiz scores, Daily Question state, streaks, onboarding completion, social comparison state and the lifetime remove-ads entitlement locally on the device using Android DataStore.</p>
+
+  <h2>Advertising and consent</h2>
+  <p>The free version can display Google AdMob interstitial advertising outside active quizzes. Google User Messaging Platform (UMP) is used to request and manage consent where required. Advertising requests are gated by the consent state returned by UMP, and the app exposes privacy options when UMP reports that they must be available.</p>
+  <p>Google's Android disclosure guidance for the Google Mobile Ads SDK states that the SDK can automatically collect and share data such as IP address, product interactions, diagnostic information, and device or account identifiers for purposes including advertising, analytics and fraud prevention. Android advertising ID can be used when available and not disabled by the application or user/device settings.</p>
+
+  <h2>Purchases</h2>
+  <p>The optional lifetime remove-ads purchase is processed by Google Play Billing using product ID <code>remove_ads_lifetime</code>. The app does not directly collect or store payment-card information. Purchase status can be queried from Google Play to grant or restore the entitlement. Purchase tokens are not included in the app's custom analytics events.</p>
+
+  <h2>Optional product telemetry</h2>
+  <p>Production builds can be configured to send limited product events and minimized error reports to a developer-controlled HTTPS endpoint. If no production telemetry endpoint is configured, this custom HTTP telemetry is disabled.</p>
+  <p>When enabled, custom telemetry can include bounded app/screen events, quiz activity, sharing/challenge actions, retention events, ad impressions and premium purchase-funnel events. The custom analytics contract does not include names, email addresses, free-form user text, advertising IDs, purchase tokens or deep-link query parameters. Behavioral scores are converted to coarse ranges before analytics transmission.</p>
+  <p>Remote error telemetry excludes exception messages and stack traces. Fatal crash details may be buffered briefly on-device while a next-launch remote fatal-crash event is minimized.</p>
+
+  <h2>Sharing and challenge links</h2>
+  <p>Sharing is initiated by the user through Android's system share sheet. Shared content can include generated result/profile images, result text, compatibility information or a challenge link. Challenge URLs can encode the quiz identifier and challenge score so another device can complete the comparison. The app does not automatically publish shared content to a Who Are You? account or social network.</p>
+
+  <h2>Children</h2>
+  <p>The app is not specifically designed for children. The final target-audience and age-range declaration in Google Play Console must match the production advertising and consent configuration.</p>
+
+  <h2>Data deletion</h2>
+  <p>Most Who Are You? profile data is stored locally. Local application data can be removed using Android's app-data controls or by uninstalling the app. If custom production telemetry is enabled and retained server-side, the production support contact will provide the applicable deletion/request process.</p>
+
+  <h2>Third-party services</h2>
+  <p>The app can use Google Play Billing, Google Mobile Ads / AdMob and Google User Messaging Platform (UMP). Those services are governed by Google's applicable terms and privacy documentation.</p>
+
+  <h2>Contact</h2>
+  <p><strong>REQUIRED BEFORE PUBLIC RELEASE:</strong> insert the public developer/privacy support email or support contact used for the Google Play listing.</p>
+</main>
+</body>
+</html>
