@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="journeys_title">Parcours guidés</string>
+    <string name="journeys_subtitle">Suis un chemin court plutôt que de choisir les tests un par un.</string>
+    <string name="journey_personality">Comprendre ma personnalité</string>
+    <string name="journey_personality_body">Identité, manière de penser et habitudes du quotidien.</string>
+    <string name="journey_relationships">Moi en relation</string>
+    <string name="journey_relationships_body">Attachement, émotions et manière de créer du lien.</string>
+    <string name="journey_inner_world">Explorer mon monde intérieur</string>
+    <string name="journey_inner_world_body">Émotions, schémas mentaux, énergie et contrôle.</string>
+    <string name="journey_values">Valeurs et direction</string>
+    <string name="journey_values_body">Ce qui compte, ce qui te motive et la direction que tu choisis.</string>
+    <string name="journey_progress">%1$d sur %2$d explorés</string>
+    <string name="journey_continue">CONTINUER LE PARCOURS →</string>
+    <string name="journey_revisit">REVOIR LE PARCOURS →</string>
+</resources>
