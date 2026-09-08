@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -30,7 +31,7 @@ import androidx.compose.ui.unit.sp
  * Single Discover surface for the V2 product experience.
  *
  * Information architecture: identity -> momentum -> guided journeys -> curated discovery -> library -> premium.
- * This keeps the richer product loop intact while removing the legacy raw catalog as the primary experience.
+ * Feature-specific sections stay self-contained so the hub does not recursively render other Discover surfaces.
  */
 @Composable
 fun DiscoverHub(
@@ -46,12 +47,15 @@ fun DiscoverHub(
     val journeys = remember(quizzes, completed) {
         GuidedJourneyEngine.build(quizzes, completed)
     }
+    val unlockedAchievements = remember(storedProfile, quizzes.size) {
+        AchievementEngine.build(storedProfile, quizzes.size).count { it.unlocked }
+    }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(V2Colors.Ink)
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = V2Spacing.Screen),
         verticalArrangement = Arrangement.spacedBy(28.dp)
     ) {
         item {
@@ -90,9 +94,11 @@ fun DiscoverHub(
         }
 
         item {
-            RetentionSection()
-            Spacer(Modifier.height(14.dp))
-            SocialStatsCard(storedProfile)
+            DiscoverMomentumCard(
+                streak = storedProfile.daily.currentStreak,
+                unlockedAchievements = unlockedAchievements,
+                matchCount = storedProfile.matchCount
+            )
         }
 
         if (journeys.isNotEmpty()) {
@@ -128,6 +134,84 @@ fun DiscoverHub(
             )
             Spacer(Modifier.height(108.dp))
         }
+    }
+}
+
+@Composable
+private fun DiscoverMomentumCard(
+    streak: Int,
+    unlockedAchievements: Int,
+    matchCount: Int
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Text(
+                text = stringResource(R.string.discover_momentum_title),
+                color = V2Colors.TextPrimary,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.height(5.dp))
+            Text(
+                text = stringResource(R.string.discover_momentum_subtitle),
+                color = V2Colors.TextSecondary,
+                fontSize = 11.sp,
+                lineHeight = 17.sp
+            )
+            Spacer(Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                MomentumStat(
+                    value = streak.toString(),
+                    label = stringResource(R.string.discover_streak_label),
+                    modifier = Modifier.weight(1f)
+                )
+                MomentumStat(
+                    value = unlockedAchievements.toString(),
+                    label = stringResource(R.string.discover_achievements_label),
+                    modifier = Modifier.weight(1f)
+                )
+                MomentumStat(
+                    value = matchCount.toString(),
+                    label = stringResource(R.string.discover_matches_label),
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MomentumStat(
+    value: String,
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .background(V2Colors.Ink.copy(alpha = 0.48f), RoundedCornerShape(V2Radius.Compact))
+            .padding(horizontal = 11.dp, vertical = 12.dp)
+    ) {
+        Text(
+            text = value,
+            color = V2Colors.AccentCyan,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Black
+        )
+        Spacer(Modifier.height(3.dp))
+        Text(
+            text = label,
+            color = V2Colors.TextSecondary,
+            fontSize = 9.sp,
+            lineHeight = 12.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
