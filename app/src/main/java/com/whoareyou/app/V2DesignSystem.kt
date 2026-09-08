@@ -1,7 +1,10 @@
 package com.whoareyou.app
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 object V2Colors {
     val Ink = Color(0xFF080A10)
@@ -34,4 +37,46 @@ object V2Radius {
     val Card = 26.dp
     val Compact = 20.dp
     val Pill = 50.dp
+}
+
+object V2Type {
+    val Eyebrow = TextStyle(
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp,
+        fontWeight = FontWeight.Bold
+    )
+    val Hero = TextStyle(
+        fontSize = 34.sp,
+        lineHeight = 39.sp,
+        letterSpacing = (-0.6).sp,
+        fontWeight = FontWeight.Black
+    )
+    val Question = TextStyle(
+        fontSize = 29.sp,
+        lineHeight = 35.sp,
+        letterSpacing = (-0.35).sp,
+        fontWeight = FontWeight.Black
+    )
+    val Body = TextStyle(
+        fontSize = 16.sp,
+        lineHeight = 23.sp,
+        fontWeight = FontWeight.Normal
+    )
+    val BodyStrong = TextStyle(
+        fontSize = 16.sp,
+        lineHeight = 22.sp,
+        fontWeight = FontWeight.SemiBold
+    )
+    val Supporting = TextStyle(
+        fontSize = 12.sp,
+        lineHeight = 18.sp,
+        fontWeight = FontWeight.Normal
+    )
+}
+
+object V2Motion {
+    const val FastMillis = 110
+    const val StandardMillis = 180
+    const val PressedScale = 0.985f
 }
