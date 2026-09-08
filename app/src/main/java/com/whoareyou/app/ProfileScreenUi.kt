@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -48,17 +49,12 @@ fun ProfileScreen(
             Spacer(Modifier.height(12.dp))
             AccessibleBackAction(onClick = onBack)
             Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.your_profile), color = V2Colors.AccentViolet, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.your_profile), color = V2Colors.AccentViolet, style = V2Type.Eyebrow)
             Spacer(Modifier.height(10.dp))
-            Text(summary.dominantArchetype.uppercase(), color = V2Colors.TextPrimary, fontSize = 34.sp, lineHeight = 39.sp, fontWeight = FontWeight.Black)
+            Text(summary.dominantArchetype.uppercase(), color = V2Colors.TextPrimary, style = V2Type.Hero)
             Spacer(Modifier.height(8.dp))
             Text(
-                stringResource(
-                    R.string.profile_header_progress,
-                    summary.completedCount,
-                    summary.totalCount,
-                    summary.completionPercent
-                ),
+                stringResource(R.string.profile_header_progress, summary.completedCount, summary.totalCount, summary.completionPercent),
                 color = V2Colors.TextSecondary,
                 fontSize = 14.sp,
                 lineHeight = 20.sp
@@ -69,11 +65,11 @@ fun ProfileScreen(
                     AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
                     GlobalProfileShare.share(context, summary)
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Black)
+                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
             }
             Spacer(Modifier.height(10.dp))
             Button(
@@ -84,18 +80,18 @@ fun ProfileScreen(
                     AppEvents.profileChallenge(quiz.id, dimension.score)
                     ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
                 },
-                modifier = Modifier.fillMaxWidth().height(54.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.compare_profile_friend), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.compare_profile_friend), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             }
             Spacer(Modifier.height(8.dp))
             Text(
                 if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
                 else stringResource(R.string.starts_with_dimension, strongestDimension.title),
                 color = V2Colors.TextSecondary,
-                fontSize = 12.sp,
+                style = V2Type.Supporting,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -104,18 +100,18 @@ fun ProfileScreen(
                 ProfileInsightCards(summary)
             }
             Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.all_dimensions), color = V2Colors.TextSecondary, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.all_dimensions), color = V2Colors.TextSecondary, style = V2Type.Eyebrow)
         }
 
         if (summary.dimensions.isEmpty()) {
             item {
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
-                    shape = RoundedCornerShape(22.dp),
+                    shape = RoundedCornerShape(V2Radius.Card),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(Modifier.padding(22.dp)) {
-                        Text(stringResource(R.string.profile_undiscovered), color = V2Colors.TextPrimary, fontSize = 18.sp, fontWeight = FontWeight.Black)
+                        Text(stringResource(R.string.profile_undiscovered), color = V2Colors.TextPrimary, fontSize = 18.sp, lineHeight = 24.sp, fontWeight = FontWeight.Black)
                         Spacer(Modifier.height(7.dp))
                         Text(stringResource(R.string.complete_first_test_profile), color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp)
                     }
@@ -125,17 +121,17 @@ fun ProfileScreen(
             items(summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }, key = { it.quizId }) { dimension ->
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(V2Radius.Compact),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(Modifier.padding(18.dp)) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Column(Modifier.weight(1f)) {
-                                Text(dimension.title.uppercase(), color = V2Colors.TextPrimary, fontSize = 16.sp, fontWeight = FontWeight.Black)
+                                Text(dimension.title.uppercase(), color = V2Colors.TextPrimary, fontSize = 16.sp, lineHeight = 22.sp, fontWeight = FontWeight.Black)
                                 Spacer(Modifier.height(3.dp))
-                                Text(dimension.resultTitle, color = V2Colors.AccentCyan, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Text(dimension.resultTitle, color = V2Colors.AccentCyan, style = V2Type.Supporting, fontWeight = FontWeight.Bold)
                             }
-                            Text("${dimension.score}%", color = V2Colors.AccentViolet, fontSize = 22.sp, fontWeight = FontWeight.Black)
+                            Text("${dimension.score}%", color = V2Colors.AccentViolet, fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.Black)
                         }
                         Spacer(Modifier.height(10.dp))
                         LinearProgressIndicator(
@@ -145,15 +141,16 @@ fun ProfileScreen(
                             trackColor = V2Colors.Hairline
                         )
                         Spacer(Modifier.height(7.dp))
-                        Text(dimension.metricLabel, color = V2Colors.TextSecondary, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                        Text(dimension.metricLabel, color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp, fontWeight = FontWeight.Bold)
                         dimension.scoreChange?.let { change ->
                             Spacer(Modifier.height(12.dp))
-                            Text(stringResource(R.string.profile_evolution), color = V2Colors.AccentCyan, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.profile_evolution), color = V2Colors.AccentCyan, fontSize = 10.sp, lineHeight = 14.sp, fontWeight = FontWeight.Bold)
                             Spacer(Modifier.height(4.dp))
                             Text(
                                 stringResource(R.string.profile_evolution_values, change.previousScore, change.currentScore),
                                 color = V2Colors.TextPrimary,
                                 fontSize = 12.sp,
+                                lineHeight = 18.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Spacer(Modifier.height(3.dp))
