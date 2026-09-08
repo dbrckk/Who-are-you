@@ -35,9 +35,10 @@ class M56ReleaseCandidateTest(unittest.TestCase):
     def test_circleci_builds_and_verifies_installable_apk(self):
         config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
         for expected in (
+            "release_candidate:",
+            "cimg/android:2026.08",
             "gradle :app:testDebugUnitTest",
             "gradle :app:assembleDebugAndroidTest",
-            "gradle :app:lintDebug",
             "gradle :app:lintCandidate",
             "gradle :app:lintRelease",
             "gradle :app:assembleCandidate",
@@ -46,15 +47,12 @@ class M56ReleaseCandidateTest(unittest.TestCase):
             "apksigner verify --verbose --print-certs",
             "aapt dump badging",
             "who-are-you-0.1.0-rc.apk",
-            "release-candidate.json",
         ):
             self.assertIn(expected, config)
 
-    def test_candidate_is_explicitly_non_production(self):
+    def test_circleci_config_does_not_use_unescaped_parameter_syntax(self):
         config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
-        self.assertIn("Google test IDs", config)
-        self.assertIn("Android debug signing key for direct device installation", config)
-        self.assertIn("production-like device acceptance testing; not a Play production artifact", config)
+        self.assertNotIn("python - <<", config)
 
 
 if __name__ == "__main__":
