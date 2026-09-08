@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,8 +14,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -74,17 +71,14 @@ fun DiscoverCollections(
 
         Text(
             stringResource(R.string.discover_collections_title),
-            color = Color.White,
-            fontSize = 25.sp,
-            lineHeight = 30.sp,
-            fontWeight = FontWeight.Black
+            color = V2Colors.TextPrimary,
+            style = V2Type.SectionTitle
         )
         Spacer(Modifier.height(6.dp))
         Text(
             stringResource(R.string.discover_collections_subtitle),
             color = V2Colors.TextSecondary,
-            fontSize = 13.sp,
-            lineHeight = 19.sp
+            style = V2Type.Supporting
         )
         Spacer(Modifier.height(16.dp))
 
@@ -143,25 +137,21 @@ private fun EditorialStrip(
             Column(Modifier.weight(1f)) {
                 Text(
                     stringResource(R.string.discover_editorial_title),
-                    color = Color.White,
-                    fontSize = 26.sp,
-                    lineHeight = 31.sp,
-                    fontWeight = FontWeight.Black
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.SectionTitle
                 )
                 Spacer(Modifier.height(5.dp))
                 Text(
                     stringResource(R.string.discover_editorial_subtitle),
                     color = V2Colors.TextSecondary,
-                    fontSize = 12.sp,
-                    lineHeight = 18.sp
+                    style = V2Type.Supporting
                 )
             }
             Spacer(Modifier.width(12.dp))
             Text(
                 stringResource(R.string.discover_editorial_badge),
                 color = V2Colors.AccentCyan,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Black
+                style = V2Type.Caption
             )
         }
         Spacer(Modifier.height(15.dp))
@@ -186,14 +176,12 @@ private fun EditorialCard(
     featured: Boolean,
     onClick: (() -> Unit)?
 ) {
-    val cardModifier = Modifier
-        .width(if (featured) 286.dp else 218.dp)
-        .let { base -> if (onClick != null) base.clickable(onClick = onClick) else base }
-
-    Card(
-        modifier = cardModifier,
-        shape = RoundedCornerShape(if (featured) 30.dp else 24.dp),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    val shape = RoundedCornerShape(if (featured) 30.dp else 24.dp)
+    V2PressableCard(
+        onClick = onClick,
+        modifier = Modifier.width(if (featured) 286.dp else 218.dp),
+        shape = shape,
+        containerColor = V2Colors.SurfaceElevated
     ) {
         Column {
             Box(
@@ -220,9 +208,8 @@ private fun EditorialCard(
                         .clip(RoundedCornerShape(99.dp))
                         .background(Color(0xB30B0C12))
                         .padding(horizontal = 10.dp, vertical = 6.dp),
-                    color = if (completed) V2Colors.AccentCyan else Color.White,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Black
+                    color = if (completed) V2Colors.AccentCyan else V2Colors.TextPrimary,
+                    style = V2Type.Caption
                 )
             }
 
@@ -235,7 +222,7 @@ private fun EditorialCard(
                     Text(
                         quiz.title,
                         modifier = Modifier.weight(1f),
-                        color = Color.White,
+                        color = V2Colors.TextPrimary,
                         fontSize = if (featured) 19.sp else 15.sp,
                         lineHeight = if (featured) 24.sp else 19.sp,
                         fontWeight = FontWeight.Black,
@@ -249,8 +236,7 @@ private fun EditorialCard(
                 Text(
                     quiz.hook,
                     color = V2Colors.TextSecondary,
-                    fontSize = if (featured) 12.sp else 11.sp,
-                    lineHeight = if (featured) 18.sp else 16.sp,
+                    style = V2Type.Supporting,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -258,8 +244,7 @@ private fun EditorialCard(
                 Text(
                     quiz.time,
                     color = V2Colors.AccentViolet,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Black
+                    style = V2Type.Caption
                 )
             }
         }
@@ -276,15 +261,11 @@ private fun CollectionCard(
     onClick: (() -> Unit)?
 ) {
     val progress = if (totalCount == 0) 0f else completedCount.toFloat() / totalCount
-    val cardModifier = if (onClick != null) {
-        Modifier.width(236.dp).clickable(onClick = onClick)
-    } else {
-        Modifier.width(236.dp)
-    }
-    Card(
-        modifier = cardModifier,
+    V2PressableCard(
+        onClick = onClick,
+        modifier = Modifier.width(236.dp),
         shape = RoundedCornerShape(V2Radius.Card),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+        containerColor = V2Colors.Surface
     ) {
         Column {
             Box(
@@ -316,12 +297,11 @@ private fun CollectionCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(title, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Black)
+                    Text(title, color = V2Colors.TextPrimary, style = V2Type.Metric)
                     Text(
                         "$completedCount/$totalCount",
                         color = if (completedCount == totalCount) V2Colors.AccentCyan else accent,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Black
+                        style = V2Type.Caption
                     )
                 }
                 Spacer(Modifier.height(8.dp))
@@ -335,15 +315,13 @@ private fun CollectionCard(
                 Text(
                     stringResource(R.string.discover_collection_count, totalCount),
                     color = V2Colors.TextSecondary,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold
+                    style = V2Type.Caption
                 )
                 Spacer(Modifier.height(12.dp))
                 Text(
                     quiz.title,
-                    color = Color.White,
-                    fontSize = 13.sp,
-                    lineHeight = 18.sp,
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.Supporting,
                     fontWeight = FontWeight.SemiBold
                 )
                 if (onClick != null) {
@@ -351,8 +329,7 @@ private fun CollectionCard(
                     Text(
                         stringResource(R.string.discover_collection_open),
                         color = accent,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Black
+                        style = V2Type.Caption
                     )
                 }
             }
@@ -363,13 +340,16 @@ private fun CollectionCard(
 @Composable
 fun DiscoverLibraryHeader() {
     Column {
-        Text(stringResource(R.string.discover_library_title), color = Color.White, fontSize = 23.sp, fontWeight = FontWeight.Black)
+        Text(
+            stringResource(R.string.discover_library_title),
+            color = V2Colors.TextPrimary,
+            style = V2Type.SectionTitle
+        )
         Spacer(Modifier.height(5.dp))
         Text(
             stringResource(R.string.discover_library_subtitle),
             color = V2Colors.TextSecondary,
-            fontSize = 12.sp,
-            lineHeight = 18.sp
+            style = V2Type.Supporting
         )
     }
 }
