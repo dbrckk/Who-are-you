@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_title">Explore the library</string>
+    <string name="library_subtitle">Search by topic, filter by theme and keep unfinished dimensions close at hand.</string>
+    <string name="library_search_hint">Search tests, themes or traits</string>
+    <string name="library_all">All</string>
+    <string name="library_unfinished_only">Unfinished only</string>
+    <string name="library_empty_title">Nothing matches yet</string>
+    <string name="library_empty_body">Try another search or clear one of the filters.</string>
+    <string name="library_more_results">+%1$d more tests</string>
+    <string name="library_theme_identity">Identity</string>
+    <string name="library_theme_emotion">Relationships</string>
+    <string name="library_theme_mind">Mind</string>
+    <string name="library_theme_control">Control</string>
+    <string name="library_theme_growth">Growth</string>
+    <string name="library_theme_values">Values</string>
+    <string name="library_theme_energy">Energy</string>
+    <string name="library_theme_lifestyle">Lifestyle</string>
+    <string name="library_theme_social">Social</string>
+</resources>
