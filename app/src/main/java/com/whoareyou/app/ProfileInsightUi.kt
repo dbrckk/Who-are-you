@@ -31,13 +31,19 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
     val signature = summary.signature
     val insights = ProfileInsights.derive(summary.dimensions)
     val evolution = ProfileEvolutionSummary.derive(summary.dimensions)
-    if (signature == null && insights.isEmpty() && evolution == null) return
+    val hasVisualMap = summary.dimensions.size >= 3
+    if (!hasVisualMap && signature == null && insights.isEmpty() && evolution == null) return
 
     LaunchedEffect(signature?.key) {
         if (signature != null) AppEvents.signatureUnlock(signature)
     }
 
     Column(modifier = Modifier.fillMaxWidth()) {
+        if (hasVisualMap) {
+            ProfileIdentityMap(summary)
+            Spacer(Modifier.height(18.dp))
+        }
+
         if (signature != null) {
             val copy = SignatureProfiles.copy(signature.key, french)
             Text(
