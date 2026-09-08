@@ -41,6 +41,9 @@
     <string name="premium_restore_copy">Ton achat est enregistré et restauré automatiquement.</string>
     <string name="premium_copy">Tous les tests, résultats, partages et défis restent disponibles. Seules les pubs disparaissent.</string>
     <string name="remove_ads_button">SUPPRIMER LES PUBS — %1$s</string>
+    <string name="privacy_options_title">OPTIONS DE CONFIDENTIALITÉ</string>
+    <string name="privacy_options_body">Consulte ou modifie tes choix de confidentialité liés à la publicité.</string>
+    <string name="privacy_options_button">GÉRER MES OPTIONS DE CONFIDENTIALITÉ</string>
     <string name="done">FAIT</string>
     <string name="take_again">REFAIRE  →</string>
     <string name="start">COMMENCER  →</string>
