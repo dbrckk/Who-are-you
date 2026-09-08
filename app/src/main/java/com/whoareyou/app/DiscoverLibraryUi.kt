@@ -27,12 +27,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 private const val LibraryPageSize = 8
 
@@ -66,16 +64,13 @@ fun DiscoverLibrary(
         Text(
             stringResource(R.string.library_title),
             color = V2Colors.TextPrimary,
-            fontSize = 27.sp,
-            lineHeight = 32.sp,
-            fontWeight = FontWeight.Black
+            style = V2Type.SectionTitle
         )
         Spacer(Modifier.height(5.dp))
         Text(
             stringResource(R.string.library_subtitle),
             color = V2Colors.TextSecondary,
-            fontSize = 12.sp,
-            lineHeight = 18.sp
+            style = V2Type.Supporting
         )
         Spacer(Modifier.height(14.dp))
 
@@ -84,7 +79,8 @@ fun DiscoverLibrary(
             onValueChange = { query = it },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            placeholder = { Text(stringResource(R.string.library_search_hint)) },
+            placeholder = { Text(stringResource(R.string.library_search_hint), style = V2Type.Supporting) },
+            textStyle = V2Type.BodyStrong,
             shape = RoundedCornerShape(18.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = V2Colors.TextPrimary,
@@ -131,9 +127,17 @@ fun DiscoverLibrary(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
             ) {
                 Column(Modifier.padding(20.dp)) {
-                    Text(stringResource(R.string.library_empty_title), color = V2Colors.TextPrimary, fontWeight = FontWeight.Bold)
+                    Text(
+                        stringResource(R.string.library_empty_title),
+                        color = V2Colors.TextPrimary,
+                        style = V2Type.BodyStrong
+                    )
                     Spacer(Modifier.height(5.dp))
-                    Text(stringResource(R.string.library_empty_body), color = V2Colors.TextSecondary, fontSize = 12.sp)
+                    Text(
+                        stringResource(R.string.library_empty_body),
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
                 }
             }
         } else {
@@ -155,8 +159,7 @@ fun DiscoverLibrary(
                     Text(
                         stringResource(R.string.library_show_more, minOf(LibraryPageSize, remaining), remaining),
                         color = V2Colors.AccentCyan,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Black
+                        style = V2Type.Caption
                     )
                 }
             }
@@ -182,11 +185,10 @@ private fun LibraryChip(
         Text(
             label,
             color = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Bold
+            style = V2Type.Caption
         )
         suffix?.let {
-            Text(it, color = V2Colors.AccentCyan, fontSize = 10.sp, fontWeight = FontWeight.Black)
+            Text(it, color = V2Colors.AccentCyan, style = V2Type.Caption, fontWeight = FontWeight.Black)
         }
     }
 }
@@ -198,10 +200,11 @@ private fun LibraryResultCard(
     onClick: () -> Unit
 ) {
     val accent = QuizVisuals.accentFor(quiz)
-    Card(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onClick),
+    V2PressableCard(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(V2Radius.Card),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+        containerColor = V2Colors.Surface
     ) {
         Row(modifier = Modifier.padding(14.dp), horizontalArrangement = Arrangement.spacedBy(13.dp)) {
             Column(
@@ -211,7 +214,7 @@ private fun LibraryResultCard(
                     .background(accent.copy(alpha = 0.14f))
                     .padding(vertical = 14.dp)
             ) {
-                Text(quiz.accent, modifier = Modifier.padding(horizontal = 15.dp), fontSize = 22.sp)
+                Text(quiz.accent, modifier = Modifier.padding(horizontal = 15.dp), style = V2Type.SectionTitle)
             }
             Column(modifier = Modifier.weight(1f)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -219,26 +222,28 @@ private fun LibraryResultCard(
                         quiz.title,
                         modifier = Modifier.weight(1f),
                         color = V2Colors.TextPrimary,
-                        fontSize = 15.sp,
-                        lineHeight = 19.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = V2Type.BodyStrong,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
                     Spacer(Modifier.width(8.dp))
-                    Text(if (completed) "✓" else "→", color = if (completed) V2Colors.AccentCyan else accent, fontWeight = FontWeight.Black)
+                    Text(
+                        if (completed) "✓" else "→",
+                        color = if (completed) V2Colors.AccentCyan else accent,
+                        style = V2Type.BodyStrong,
+                        fontWeight = FontWeight.Black
+                    )
                 }
                 Spacer(Modifier.height(4.dp))
                 Text(
                     quiz.hook,
                     color = V2Colors.TextSecondary,
-                    fontSize = 11.sp,
-                    lineHeight = 16.sp,
+                    style = V2Type.Supporting,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(Modifier.height(7.dp))
-                Text(quiz.time, color = accent, fontSize = 10.sp, fontWeight = FontWeight.Black)
+                Text(quiz.time, color = accent, style = V2Type.Caption)
             }
         }
     }
