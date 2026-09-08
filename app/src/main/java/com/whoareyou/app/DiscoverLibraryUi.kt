@@ -18,7 +18,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +34,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+private const val LibraryPageSize = 8
+
 @Composable
 fun DiscoverLibrary(
     quizzes: List<Quiz>,
@@ -41,6 +45,7 @@ fun DiscoverLibrary(
     var query by remember { mutableStateOf("") }
     var selectedTheme by remember { mutableStateOf<QuizVisualTheme?>(null) }
     var unfinishedOnly by remember { mutableStateOf(false) }
+    var visibleCount by remember { mutableStateOf(LibraryPageSize) }
 
     val summaries = remember(quizzes, completed) { DiscoverLibraryEngine.summaries(quizzes, completed) }
     val results = remember(quizzes, completed, query, selectedTheme, unfinishedOnly) {
@@ -51,6 +56,10 @@ fun DiscoverLibrary(
             completed = completed,
             unfinishedOnly = unfinishedOnly
         )
+    }
+
+    LaunchedEffect(query, selectedTheme, unfinishedOnly) {
+        visibleCount = LibraryPageSize
     }
 
     Column {
@@ -128,7 +137,7 @@ fun DiscoverLibrary(
                 }
             }
         } else {
-            results.take(8).forEach { quiz ->
+            results.take(visibleCount).forEach { quiz ->
                 LibraryResultCard(
                     quiz = quiz,
                     completed = quiz.id in completed,
@@ -136,13 +145,20 @@ fun DiscoverLibrary(
                 )
                 Spacer(Modifier.height(10.dp))
             }
-            if (results.size > 8) {
-                Text(
-                    stringResource(R.string.library_more_results, results.size - 8),
-                    color = V2Colors.TextSecondary,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold
-                )
+
+            val remaining = (results.size - visibleCount).coerceAtLeast(0)
+            if (remaining > 0) {
+                TextButton(
+                    onClick = { visibleCount = (visibleCount + LibraryPageSize).coerceAtMost(results.size) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        stringResource(R.string.library_show_more, minOf(LibraryPageSize, remaining), remaining),
+                        color = V2Colors.AccentCyan,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                }
             }
         }
     }
