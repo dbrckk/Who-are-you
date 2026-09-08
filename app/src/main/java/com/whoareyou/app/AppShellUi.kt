@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// The persistent shell belongs only to top-level exploration spaces; focused quiz/result flows stay chrome-free.
 enum class AppShellTab { DISCOVER, PROFILE }
 
 object AppShellNavigation {
