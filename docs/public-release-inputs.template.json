@@ -1,0 +1,13 @@
+{
+  "developer_display_name": "REQUIRED",
+  "support_email": "REQUIRED",
+  "target_audience": "REQUIRED",
+  "privacy_policy_url": "https://dbrckk.github.io/Who-are-you/privacy/",
+  "challenge_domain": "dbrckk.github.io",
+  "play_app_signing_sha256": "REQUIRED_AFTER_PLAY_APP_SIGNING",
+  "remove_ads_product_id": "remove_ads_lifetime",
+  "remove_ads_target_price_eur": 1.99,
+  "production_telemetry_enabled": false,
+  "production_telemetry_retention_days": null,
+  "production_telemetry_deletion_contact": null
+}
