@@ -13,4 +13,9 @@
     <string name="result_nuance_strong_body">Le résultat est éloigné du point médian : ce versant de la dimension fait actuellement partie de tes signaux les plus nets.</string>
     <string name="result_context_label">À GARDER EN CONTEXTE</string>
     <string name="result_context_body">Il s’agit d’un signal ludique d’introspection, pas d’un diagnostic ni d’une étiquette psychologique figée. Refaire le test peut aussi montrer comment le contexte fait évoluer tes réponses.</string>
+    <string name="result_next_label">PROCHAINE EXPLORATION</string>
+    <string name="result_next_same_facet">Reste dans le même univers et ajoute un autre angle à cette partie de ta carte.</string>
+    <string name="result_next_complementary">Ouvre une autre facette pour rendre ton profil plus complet et moins unidimensionnel.</string>
+    <string name="result_next_retake">Cet univers est déjà cartographié. Reprends une dimension liée pour voir si ton profil évolue.</string>
+    <string name="result_next_action">EXPLORER ENSUITE →</string>
 </resources>
