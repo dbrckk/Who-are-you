@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -59,10 +61,16 @@ fun DiscoverCollections(
             collection.takeIf { matching.isNotEmpty() }?.let { it to matching }
         }
     }
+    val editorial = remember(quizzes, completed) { editorialPicks(quizzes, completed) }
 
     if (populated.isEmpty()) return
 
     Column {
+        if (editorial.isNotEmpty()) {
+            EditorialStrip(editorial, completed, onQuizSelected)
+            Spacer(Modifier.height(28.dp))
+        }
+
         Text(
             stringResource(R.string.discover_collections_title),
             color = Color.White,
@@ -88,6 +96,167 @@ fun DiscoverCollections(
                     accent = collection.accent,
                     quiz = previewQuiz,
                     onClick = onQuizSelected?.let { callback -> { callback(previewQuiz) } }
+                )
+            }
+        }
+    }
+}
+
+private fun editorialPicks(quizzes: List<Quiz>, completed: Set<String>): List<Quiz> {
+    val preferred = quizzes.filterNot { it.id in completed } + quizzes.filter { it.id in completed }
+    val seenThemes = mutableSetOf<QuizVisualTheme>()
+    val picks = mutableListOf<Quiz>()
+
+    preferred.forEach { quiz ->
+        val theme = QuizVisuals.themeFor(quiz)
+        if (theme !in seenThemes) {
+            seenThemes += theme
+            picks += quiz
+        }
+        if (picks.size == 3) return picks
+    }
+
+    if (picks.size < 3) {
+        preferred.forEach { quiz ->
+            if (quiz !in picks) picks += quiz
+            if (picks.size == 3) return picks
+        }
+    }
+    return picks
+}
+
+@Composable
+private fun EditorialStrip(
+    quizzes: List<Quiz>,
+    completed: Set<String>,
+    onQuizSelected: ((Quiz) -> Unit)?
+) {
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.discover_editorial_title),
+                    color = Color.White,
+                    fontSize = 26.sp,
+                    lineHeight = 31.sp,
+                    fontWeight = FontWeight.Black
+                )
+                Spacer(Modifier.height(5.dp))
+                Text(
+                    stringResource(R.string.discover_editorial_subtitle),
+                    color = V2Colors.TextSecondary,
+                    fontSize = 12.sp,
+                    lineHeight = 18.sp
+                )
+            }
+            Spacer(Modifier.width(12.dp))
+            Text(
+                stringResource(R.string.discover_editorial_badge),
+                color = V2Colors.AccentCyan,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Black
+            )
+        }
+        Spacer(Modifier.height(15.dp))
+
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            itemsIndexed(quizzes, key = { _, quiz -> quiz.id }) { index, quiz ->
+                EditorialCard(
+                    quiz = quiz,
+                    completed = quiz.id in completed,
+                    featured = index == 0,
+                    onClick = onQuizSelected?.let { callback -> { callback(quiz) } }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun EditorialCard(
+    quiz: Quiz,
+    completed: Boolean,
+    featured: Boolean,
+    onClick: (() -> Unit)?
+) {
+    val cardModifier = Modifier
+        .width(if (featured) 286.dp else 218.dp)
+        .let { base -> if (onClick != null) base.clickable(onClick = onClick) else base }
+
+    Card(
+        modifier = cardModifier,
+        shape = RoundedCornerShape(if (featured) 30.dp else 24.dp),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    ) {
+        Column {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(if (featured) 164.dp else 126.dp)
+                    .clip(RoundedCornerShape(topStart = if (featured) 30.dp else 24.dp, topEnd = if (featured) 30.dp else 24.dp))
+            ) {
+                QuizArtwork(quiz, compact = !featured)
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(Color.Transparent, Color(0x22090A0F), Color(0xE8090A0F))
+                            )
+                        )
+                )
+                Text(
+                    if (completed) "✓" else stringResource(R.string.discover_editorial_next),
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(12.dp)
+                        .clip(RoundedCornerShape(99.dp))
+                        .background(Color(0xB30B0C12))
+                        .padding(horizontal = 10.dp, vertical = 6.dp),
+                    color = if (completed) V2Colors.AccentCyan else Color.White,
+                    fontSize = 9.sp,
+                    fontWeight = FontWeight.Black
+                )
+            }
+
+            Column(Modifier.padding(if (featured) 18.dp else 15.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        quiz.title,
+                        modifier = Modifier.weight(1f),
+                        color = Color.White,
+                        fontSize = if (featured) 19.sp else 15.sp,
+                        lineHeight = if (featured) 24.sp else 19.sp,
+                        fontWeight = FontWeight.Black,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(Modifier.width(10.dp))
+                    Text(quiz.accent, fontSize = if (featured) 22.sp else 18.sp)
+                }
+                Spacer(Modifier.height(7.dp))
+                Text(
+                    quiz.hook,
+                    color = V2Colors.TextSecondary,
+                    fontSize = if (featured) 12.sp else 11.sp,
+                    lineHeight = if (featured) 18.sp else 16.sp,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(Modifier.height(11.dp))
+                Text(
+                    quiz.time,
+                    color = V2Colors.AccentViolet,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Black
                 )
             }
         }
