@@ -19,7 +19,6 @@ object V2Colors {
     val OverlayStrong = Color(0xD9080A10)
     val OverlaySoft = Color(0x2A080A10)
 
-    // Semantic aliases keep feature UI readable while preserving one palette source.
     val SurfaceElevated = SurfaceRaised
     val AccentViolet = Violet
     val AccentCyan = Cyan
@@ -58,6 +57,12 @@ object V2Type {
         letterSpacing = (-0.35).sp,
         fontWeight = FontWeight.Black
     )
+    val SectionTitle = TextStyle(
+        fontSize = 22.sp,
+        lineHeight = 27.sp,
+        letterSpacing = (-0.2).sp,
+        fontWeight = FontWeight.Black
+    )
     val Body = TextStyle(
         fontSize = 16.sp,
         lineHeight = 23.sp,
@@ -68,10 +73,21 @@ object V2Type {
         lineHeight = 22.sp,
         fontWeight = FontWeight.SemiBold
     )
+    val Metric = TextStyle(
+        fontSize = 18.sp,
+        lineHeight = 22.sp,
+        fontWeight = FontWeight.Black
+    )
     val Supporting = TextStyle(
         fontSize = 12.sp,
         lineHeight = 18.sp,
         fontWeight = FontWeight.Normal
+    )
+    val Caption = TextStyle(
+        fontSize = 10.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.2.sp,
+        fontWeight = FontWeight.Bold
     )
 }
 
