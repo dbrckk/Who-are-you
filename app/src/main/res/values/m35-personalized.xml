@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personalized_snapshot_label">YOUR CURRENT MAP</string>
+    <string name="personalized_dimensions">dimensions</string>
+    <string name="personalized_left">left to explore</string>
+    <string name="personalized_signal">strongest signal</string>
+    <string name="personalized_strongest">Strongest signal right now: %1$s</string>
+    <string name="personalized_next_label">NEXT BEST EXPLORATION</string>
+    <string name="personalized_next_reason">Chosen to reveal a part of your profile that is still less explored.</string>
+</resources>
