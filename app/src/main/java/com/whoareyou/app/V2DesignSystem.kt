@@ -15,6 +15,11 @@ object V2Colors {
     val Hairline = Color(0x18FFFFFF)
     val OverlayStrong = Color(0xD9080A10)
     val OverlaySoft = Color(0x2A080A10)
+
+    // Semantic aliases keep feature UI readable while preserving one palette source.
+    val SurfaceElevated = SurfaceRaised
+    val AccentViolet = Violet
+    val AccentCyan = Cyan
 }
 
 object V2Spacing {
