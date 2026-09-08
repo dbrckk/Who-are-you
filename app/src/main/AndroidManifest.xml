@@ -4,7 +4,8 @@
 
     <application
         android:name=".WhoAreYouApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:usesCleartextTraffic="false"
         android:label="Who Are You?"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
