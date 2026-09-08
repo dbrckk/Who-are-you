@@ -6,21 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -32,11 +21,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -63,8 +47,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-private enum class Screen { DISCOVER, PROFILE, QUIZ, RESULT }
 
 @Composable
 private fun WhoAreYouApp() {
@@ -110,13 +92,13 @@ private fun WhoAreYouApp() {
         return
     }
 
-    var screen by remember { mutableStateOf(Screen.DISCOVER) }
+    var screen by remember { mutableStateOf(AppScreen.DISCOVER) }
     var selectedQuiz by remember(quizCatalog) { mutableStateOf(quizCatalog.first()) }
     var finalScore by remember { mutableIntStateOf(0) }
     var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
 
-    BackHandler(enabled = screen != Screen.DISCOVER) {
-        screen = Screen.DISCOVER
+    BackHandler(enabled = screen != AppScreen.DISCOVER) {
+        screen = AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -126,18 +108,18 @@ private fun WhoAreYouApp() {
             modifier = Modifier.fillMaxSize()
         ) { destination ->
             when (destination) {
-                Screen.DISCOVER -> DiscoverHub(
+                AppScreen.DISCOVER -> DiscoverHub(
                     quizzes = quizCatalog,
                     profile = globalProfile,
                     storedProfile = storedProfile,
                     completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved,
-                    onOpenProfile = { screen = Screen.PROFILE },
+                    onOpenProfile = { screen = AppScreen.PROFILE },
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
                         selectedQuiz = quiz
                         AppEvents.testStart(quiz.id)
-                        screen = Screen.QUIZ
+                        screen = AppScreen.QUIZ
                     },
                     onRemoveAds = {
                         if (!adsRemoved && activity != null) {
@@ -146,26 +128,26 @@ private fun WhoAreYouApp() {
                     }
                 )
 
-                Screen.PROFILE -> ProfileScreen(
+                AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile,
                     catalog = quizCatalog,
-                    onBack = { screen = Screen.DISCOVER }
+                    onBack = { screen = AppScreen.DISCOVER }
                 )
 
-                Screen.QUIZ -> QuizScreen(
+                AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
-                    onBack = { screen = Screen.DISCOVER },
+                    onBack = { screen = AppScreen.DISCOVER },
                     onFinished = { score ->
                         finalScore = score
                         AppEvents.testComplete(selectedQuiz.id, score)
                         scope.launch {
                             ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
                         }
-                        screen = Screen.RESULT
+                        screen = AppScreen.RESULT
                     }
                 )
 
-                Screen.RESULT -> ResultScreen(
+                AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz,
                     score = finalScore,
                     previousScore = previousScoreForAttempt,
@@ -173,109 +155,23 @@ private fun WhoAreYouApp() {
                     totalQuizCount = quizCatalog.size,
                     onDone = {
                         adManager.onResultFinished(activity, adsRemoved) {
-                            screen = Screen.DISCOVER
+                            screen = AppScreen.DISCOVER
                         }
                     },
                     onRetry = {
                         previousScoreForAttempt = finalScore
                         AppEvents.testStart(selectedQuiz.id)
-                        screen = Screen.QUIZ
+                        screen = AppScreen.QUIZ
                     }
                 )
             }
         }
 
-        if (screen == Screen.DISCOVER || screen == Screen.PROFILE) {
+        AppShellNavigation.tabFor(screen)?.let { selectedTab ->
             PremiumAppShellBar(
-                selected = if (screen == Screen.PROFILE) AppShellTab.PROFILE else AppShellTab.DISCOVER,
-                onSelect = { tab ->
-                    screen = when (tab) {
-                        AppShellTab.DISCOVER -> Screen.DISCOVER
-                        AppShellTab.PROFILE -> Screen.PROFILE
-                    }
-                },
+                selected = selectedTab,
+                onSelect = { tab -> screen = AppShellNavigation.destination(tab) },
                 modifier = Modifier.align(Alignment.BottomCenter)
-            )
-        }
-    }
-}
-
-@Composable
-private fun CatalogUnavailableScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(V2Colors.Ink)
-            .padding(horizontal = 28.dp, vertical = 36.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            stringResource(R.string.catalog_unavailable_title),
-            color = V2Colors.TextPrimary,
-            fontSize = 28.sp,
-            lineHeight = 34.sp,
-            fontWeight = FontWeight.Black,
-            textAlign = TextAlign.Center
-        )
-        Spacer(Modifier.height(12.dp))
-        Text(
-            stringResource(R.string.catalog_unavailable_body),
-            color = V2Colors.TextSecondary,
-            fontSize = 15.sp,
-            lineHeight = 22.sp,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-private fun OnboardingScreen(onStart: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(V2Colors.Ink)
-            .padding(horizontal = 28.dp, vertical = 36.dp),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column {
-            Text(
-                stringResource(R.string.onboarding_title),
-                color = V2Colors.TextPrimary,
-                fontSize = 58.sp,
-                lineHeight = 56.sp,
-                fontWeight = FontWeight.Black
-            )
-            Spacer(Modifier.height(22.dp))
-            Text(
-                stringResource(R.string.onboarding_subtitle),
-                color = V2Colors.AccentViolet,
-                fontSize = 22.sp,
-                lineHeight = 28.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(Modifier.height(12.dp))
-            Text(
-                stringResource(R.string.onboarding_body),
-                color = V2Colors.TextSecondary,
-                fontSize = 16.sp,
-                lineHeight = 24.sp
-            )
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(
-                onClick = onStart,
-                modifier = Modifier.fillMaxWidth().height(58.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
-                shape = RoundedCornerShape(18.dp)
-            ) {
-                Text(stringResource(R.string.onboarding_start), fontWeight = FontWeight.Black)
-            }
-            Spacer(Modifier.height(12.dp))
-            Text(
-                stringResource(R.string.onboarding_no_account),
-                color = V2Colors.TextSecondary,
-                fontSize = 12.sp
             )
         }
     }
