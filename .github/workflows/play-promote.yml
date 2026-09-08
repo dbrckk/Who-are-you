@@ -40,7 +40,7 @@ permissions:
 jobs:
   promote:
     runs-on: ubuntu-latest
-    environment: play-internal
+    environment: play-promotion
     steps:
       - name: Checkout
         uses: actions/checkout@v6
