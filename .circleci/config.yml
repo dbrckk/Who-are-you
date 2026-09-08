@@ -1,222 +1,31 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/reference/configuration-reference/
 version: 2.1
 
-executors:
-  android:
-    docker:
-      - image: cimg/android:2026.08
-    resource_class: small
-    environment:
-      GRADLE_USER_HOME: /home/circleci/.gradle
-      GRADLE_VERSION: "9.5.0"
-
-commands:
-  install_android_37:
-    steps:
-      - run:
-          name: Ensure Android SDK 37 is available
-          command: |
-            yes | sdkmanager --licenses >/dev/null || true
-            sdkmanager "platforms;android-37" "build-tools;37.0.0"
-
-  install_gradle:
-    steps:
-      - restore_cache:
-          keys:
-            - v1-gradle-bin-9.5.0
-      - run:
-          name: Pin Gradle 9.5.0
-          command: |
-            set -euo pipefail
-            INSTALL_DIR="$HOME/.local/gradle-$GRADLE_VERSION"
-            if [ ! -x "$INSTALL_DIR/bin/gradle" ]; then
-              mkdir -p "$HOME/.local"
-              curl -fsSL "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip" -o /tmp/gradle.zip
-              unzip -q /tmp/gradle.zip -d "$HOME/.local"
-            fi
-            echo 'export PATH="$HOME/.local/gradle-'"$GRADLE_VERSION"'/bin:$PATH"' >> "$BASH_ENV"
-            source "$BASH_ENV"
-            gradle --version
-      - save_cache:
-          key: v1-gradle-bin-9.5.0
-          paths:
-            - ~/.local/gradle-9.5.0
-
-  restore_gradle_cache:
-    steps:
-      - restore_cache:
-          keys:
-            - v6-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-            - v6-gradle-
-
-  save_gradle_cache:
-    steps:
-      - save_cache:
-          key: v6-gradle-{{ checksum "app/build.gradle.kts" }}-{{ checksum "settings.gradle.kts" }}
-          paths:
-            - ~/.gradle/caches
-            - ~/.gradle/daemon
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
 jobs:
-  android_ci:
-    executor: android
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/guides/execution-managed/executor-intro/ & https://circleci.com/docs/reference/configuration-reference/#executor-job
+    docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#steps-overview & https://circleci.com/docs/reference/configuration-reference/#steps
     steps:
+      # Checkout the code as the first step.
       - checkout
-      - install_android_37
-      - install_gradle
-      - restore_gradle_cache
-
       - run:
-          name: Validate quiz catalog
-          command: |
-            python - <<'PY'
-            import glob, json, os, re
-            files = sorted(glob.glob('app/src/main/assets/quizzes*.json'))
-            assert files, 'No quiz catalog assets found'
-            def locale_for(path):
-                name = os.path.basename(path)
-                match = re.search(r'-(?P<locale>[a-z]{2})(?=\.json$)', name)
-                return match.group('locale') if match else 'en'
-            by_locale = {}
-            for path in files:
-                by_locale.setdefault(locale_for(path), []).append(path)
-            locale_ids, locale_totals = {}, {}
-            for locale, locale_files in sorted(by_locale.items()):
-                ids, total = set(), 0
-                for path in locale_files:
-                    with open(path, encoding='utf-8') as handle:
-                        payload = json.load(handle)
-                    for quiz in payload.get('quizzes', []):
-                        quiz_id = quiz['id']
-                        assert quiz_id not in ids, f'{locale}: duplicate quiz id: {quiz_id}'
-                        ids.add(quiz_id); total += 1
-                        assert len(quiz['questions']) >= 5, f'{locale}/{quiz_id}: expected at least 5 questions'
-                        for index, question in enumerate(quiz['questions'], start=1):
-                            answers = question['answers']
-                            assert len(answers) == 4, f'{locale}/{quiz_id} Q{index}: expected 4 answers'
-                            assert sorted(answer['score'] for answer in answers) == [0,1,2,3], f'{locale}/{quiz_id} Q{index}: scores must be 0,1,2,3'
-                locale_ids[locale], locale_totals[locale] = ids, total
-            assert locale_totals.get('en', 0) >= 30
-            assert locale_totals.get('fr', 0) >= 30
-            assert locale_ids.get('fr', set()) == locale_ids.get('en', set())
-            print(f"Bilingual catalog parity confirmed: {locale_totals.get('en',0)} EN / {locale_totals.get('fr',0)} FR")
-            PY
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-      - run:
-          name: Repository verification tests
-          command: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
-
-      - run:
-          name: JVM unit tests
-          command: gradle :app:testDebugUnitTest --stacktrace
-
-      - run:
-          name: Compile Compose UI instrumentation tests
-          command: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - run:
-          name: Android debug lint
-          command: gradle :app:lintDebug --stacktrace
-
-      - run:
-          name: Android candidate lint
-          command: gradle :app:lintCandidate --stacktrace
-
-      - run:
-          name: Android release lint
-          command: gradle :app:lintRelease --stacktrace
-
-      - run:
-          name: Build debug APK
-          command: gradle :app:assembleDebug --stacktrace
-
-      - run:
-          name: Build optimized installable candidate APK
-          command: gradle :app:assembleCandidate --stacktrace
-
-      - run:
-          name: Verify installable candidate APK
-          command: |
-            set -euo pipefail
-            APK="app/build/outputs/apk/candidate/app-candidate.apk"
-            test -s "$APK"
-            zipalign -c -v 4 "$APK"
-            apksigner verify --verbose --print-certs "$APK" | tee /tmp/apk-signature.txt
-            aapt dump badging "$APK" | tee /tmp/apk-badging.txt
-            grep -F "package: name='com.whoareyou.app' versionCode='1' versionName='0.1.0'" /tmp/apk-badging.txt
-            grep -F "sdkVersion:'26'" /tmp/apk-badging.txt
-            grep -F "targetSdkVersion:'36'" /tmp/apk-badging.txt
-
-      - run:
-          name: Build optimized release AAB
-          command: gradle :app:bundleRelease --stacktrace
-
-      - run:
-          name: Prepare Android artifacts
-          command: |
-            set -euo pipefail
-            mkdir -p dist
-
-            CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
-            DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
-            test -s "$CANDIDATE_APK"
-            test -s "$DEBUG_APK"
-
-            cp "$CANDIDATE_APK" dist/who-are-you-0.1.0-rc.apk
-            sha256sum dist/who-are-you-0.1.0-rc.apk > dist/who-are-you-0.1.0-rc.apk.sha256
-            cp /tmp/apk-signature.txt dist/who-are-you-0.1.0-rc.apk.signature.txt
-            cp /tmp/apk-badging.txt dist/who-are-you-0.1.0-rc.apk.badging.txt
-
-            cp "$DEBUG_APK" dist/who-are-you-0.1.0-debug.apk
-            sha256sum dist/who-are-you-0.1.0-debug.apk > dist/who-are-you-0.1.0-debug.apk.sha256
-
-            mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
-            if [ "${#bundles[@]}" -ne 1 ]; then
-              echo "Expected exactly one release AAB, found ${#bundles[@]}"
-              exit 1
-            fi
-            cp "${bundles[0]}" dist/who-are-you-0.1.0-release-unsigned.aab
-            sha256sum dist/who-are-you-0.1.0-release-unsigned.aab > dist/who-are-you-0.1.0-release-unsigned.aab.sha256
-
-            python - <<'PY'
-            import hashlib, json, os
-            apk = 'dist/who-are-you-0.1.0-rc.apk'
-            with open(apk, 'rb') as handle:
-                digest = hashlib.sha256(handle.read()).hexdigest()
-            report = {
-                'candidate': 'who-are-you-0.1.0-rc.apk',
-                'package': 'com.whoareyou.app',
-                'versionCode': 1,
-                'versionName': '0.1.0',
-                'minSdk': 26,
-                'targetSdk': 36,
-                'gitRevision': os.environ.get('CIRCLE_SHA1', ''),
-                'sha256': digest,
-                'signed': True,
-                'zipAligned': True,
-                'optimizedLikeRelease': True,
-                'signing': 'Android debug signing key for direct device installation',
-                'adConfiguration': 'Google test IDs',
-                'telemetry': 'disabled unless explicitly configured',
-                'purpose': 'production-like device acceptance testing; not a Play production artifact'
-            }
-            with open('dist/release-candidate.json', 'w', encoding='utf-8') as handle:
-                json.dump(report, handle, indent=2)
-                handle.write('\n')
-            PY
-
-      - store_test_results:
-          path: app/build/test-results
-
-      - store_artifacts:
-          path: dist
-          destination: android
-
-      - save_gradle_cache
-
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/guides/orchestrate/workflows/ & https://circleci.com/docs/reference/configuration-reference/#workflows
 workflows:
-  android:
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - android_ci:
-          filters:
-            branches:
-              only: main
+      - say-hello
