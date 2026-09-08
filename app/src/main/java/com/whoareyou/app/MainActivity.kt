@@ -130,7 +130,7 @@ private fun WhoAreYouApp() {
             modifier = Modifier.fillMaxSize()
         ) { destination ->
             when (destination) {
-                Screen.DISCOVER -> DiscoverScreen(
+                Screen.DISCOVER -> DiscoverHub(
                     quizzes = quizCatalog,
                     profile = globalProfile,
                     storedProfile = storedProfile,
