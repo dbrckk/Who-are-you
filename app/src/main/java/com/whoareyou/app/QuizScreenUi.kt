@@ -30,11 +30,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun QuizScreen(
     quiz: Quiz,
+    attemptKey: Int,
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
 ) {
-    var questionIndex by rememberSaveable(quiz.id) { mutableIntStateOf(0) }
-    var score by rememberSaveable(quiz.id) { mutableIntStateOf(0) }
+    var questionIndex by rememberSaveable(quiz.id, attemptKey) { mutableIntStateOf(0) }
+    var score by rememberSaveable(quiz.id, attemptKey) { mutableIntStateOf(0) }
     val question = quiz.questions[questionIndex]
     val progress = (questionIndex + 1f) / quiz.questions.size
     val scrollState = rememberScrollState()
