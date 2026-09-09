@@ -135,7 +135,7 @@ fun PersonalizedDiscoverDashboard(
             }
         }
 
-        if (nextQuiz != null && recommendation != null) {
+        if (nextQuiz != null) {
             val reason = when (recommendation.reason) {
                 DiscoverRecommendationReason.NEW_THEME -> R.string.personalized_next_new_theme
                 DiscoverRecommendationReason.UNFINISHED -> R.string.personalized_next_unfinished
