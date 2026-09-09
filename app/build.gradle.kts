@@ -51,7 +51,7 @@ if (playReleaseRequested) {
 
 android {
     namespace = "com.whoareyou.app"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.whoareyou.app"
