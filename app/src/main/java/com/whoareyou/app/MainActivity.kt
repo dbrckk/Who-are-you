@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -134,7 +135,9 @@ private fun WhoAreYouApp() {
         AnimatedContent(
             targetState = screen,
             label = "screen",
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("app_screen_${screen.name.lowercase()}")
         ) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
