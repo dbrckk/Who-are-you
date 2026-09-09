@@ -13,10 +13,14 @@ class WhoAreYouApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppEvents.configure()
-        AppEvents.appOpen()
-        reportPreviousFatalCrash()
+
+        // Install the crash buffer before any optional startup integration so an
+        // initialization failure can never occur before crash capture is active.
         installFatalCrashBuffer()
+
+        runCatching { AppEvents.configure() }
+        runCatching { AppEvents.appOpen() }
+        runCatching { reportPreviousFatalCrash() }
     }
 
     private fun reportPreviousFatalCrash() {
