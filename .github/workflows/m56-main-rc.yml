@@ -37,6 +37,9 @@ jobs:
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
           test -d "$ANDROID_HOME/platforms/android-37.0"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/zipalign"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
+          test -x "$ANDROID_HOME/build-tools/37.0.0/aapt"
           sdkmanager --list_installed
 
       - name: Repository verification tests
@@ -64,10 +67,11 @@ jobs:
         run: |
           set -euo pipefail
           APK="app/build/outputs/apk/candidate/app-candidate.apk"
+          BUILD_TOOLS="$ANDROID_HOME/build-tools/37.0.0"
           test -s "$APK"
-          zipalign -c -v 4 "$APK"
-          apksigner verify --verbose --print-certs "$APK" | tee apk-signature.txt
-          aapt dump badging "$APK" | tee apk-badging.txt
+          "$BUILD_TOOLS/zipalign" -c -v 4 "$APK"
+          "$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$APK" | tee apk-signature.txt
+          "$BUILD_TOOLS/aapt" dump badging "$APK" | tee apk-badging.txt
           grep -F "package: name='com.whoareyou.app' versionCode='1' versionName='0.1.0'" apk-badging.txt
           grep -F "sdkVersion:'26'" apk-badging.txt
           grep -F "targetSdkVersion:'36'" apk-badging.txt
