@@ -110,6 +110,39 @@ class MainFlowE2eTest {
         waitForTag("app_screen_discover")
     }
 
+    @Test
+    fun resultSurvivesRecreationAndRetryStartsFreshAttempt() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        runBlocking { ProfileStore.setOnboardingComplete(context, true) }
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_discover")
+
+        val catalog = QuizRepository.load(context)
+        val stored = runBlocking { ProfileStore.observe(context).first { it.onboardingComplete } }
+        val summary = GlobalProfileEngine.build(catalog, stored.latestScores, stored.previousScores)
+        val quiz = requireNotNull(
+            DiscoverPersonalization.recommendation(catalog, stored.completedQuizIds, summary.dimensions)?.quiz
+        )
+
+        composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
+        waitForTag("app_screen_quiz")
+        repeat(quiz.questions.size) {
+            composeRule.onNodeWithTag("quiz_answer_0").assertExists().performClick()
+        }
+        waitForTag("app_screen_result")
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_result")
+        composeRule.onNodeWithTag("result_score").assertExists()
+
+        composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
+        waitForTag("app_screen_quiz")
+        waitForTag("quiz_question_1")
+
+        composeRule.onNodeWithTag("quiz_answer_0").performClick()
+        waitForTag("quiz_question_2")
+    }
+
     private fun waitForTag(tag: String) {
         composeRule.waitUntil(timeoutMillis = 10_000) {
             composeRule.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
