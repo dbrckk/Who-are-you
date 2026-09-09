@@ -34,26 +34,31 @@ jobs:
 
       - name: Enable KVM acceleration
         run: |
-          if [ -e /dev/kvm ]; then
-            sudo chmod 666 /dev/kvm
-          fi
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Run UI tests and real-device smoke test
         uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
           api-level: '37.0'
           system-image-api-level: '35'
-          target: google_apis
+          target: aosp_atd
           arch: x86_64
-          profile: pixel_6
           cores: 2
-          ram-size: 3072
+          ram-size: 2048M
+          heap-size: 256M
+          disk-size: 2048M
           disable-animations: true
-          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
+          disable-spellchecker: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
           script: |
             set -eu
-            gradle :app:connectedDebugAndroidTest --stacktrace
-            gradle :app:assembleDebug --stacktrace
+            adb wait-for-device
+            test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
+            gradle --stop || true
+            gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
+            gradle :app:assembleDebug --no-daemon --stacktrace
 
             APK="app/build/outputs/apk/debug/app-debug.apk"
             test -s "$APK"
