@@ -25,7 +25,9 @@ internal object TelemetryPrivacy {
         .filter { (key, value) -> key.isNotBlank() && value != null }
         .take(MaxParams)
         .mapNotNull { (key, value) ->
-            safeValue(value)?.let { safe -> key.take(48) to safe }
+            value?.let { nonNullValue ->
+                safeValue(nonNullValue)?.let { safe -> key.take(48) to safe }
+            }
         }
         .toMap()
 
