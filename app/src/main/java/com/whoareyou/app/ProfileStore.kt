@@ -66,9 +66,9 @@ object ProfileStore {
     suspend fun saveMatchResult(context: Context, compatibility: Int) {
         val score = compatibility.coerceIn(0, 100)
         context.profileDataStore.edit { prefs ->
-            val count = (prefs[matchCountKey] ?: 0) + 1
-            val best = prefs[bestMatchKey]
-            val lowest = prefs[lowestMatchKey]
+            val count = (prefs[matchCountKey] ?: 0).coerceAtLeast(0) + 1
+            val best = prefs[bestMatchKey]?.coerceIn(0, 100)
+            val lowest = prefs[lowestMatchKey]?.coerceIn(0, 100)
             prefs[matchCountKey] = count
             prefs[bestMatchKey] = maxOf(best ?: score, score)
             prefs[lowestMatchKey] = minOf(lowest ?: score, score)
@@ -89,20 +89,20 @@ object ProfileStore {
                 answeredDate = prefs[dailyAnsweredDateKey],
                 questionId = prefs[dailyQuestionIdKey],
                 selectedOption = prefs[dailySelectedOptionKey],
-                currentStreak = prefs[currentStreakKey] ?: 0,
-                longestStreak = prefs[longestStreakKey] ?: 0,
+                currentStreak = (prefs[currentStreakKey] ?: 0).coerceAtLeast(0),
+                longestStreak = (prefs[longestStreakKey] ?: 0).coerceAtLeast(0),
                 lastActiveDate = prefs[lastActiveDateKey]
             )
 
             if (current.answeredDate == date.toString()) {
-                result = current
+                result = ProfileIntegrity.sanitize(StoredProfile(daily = current)).daily
                 return@edit
             }
 
             val (streak, longest) = StreakEngine.next(current, date)
             result = DailyState(
                 answeredDate = date.toString(),
-                questionId = questionId,
+                questionId = questionId.trim().ifEmpty { DailyQuestionEngine.forDate(date).id },
                 selectedOption = selectedOption.coerceIn(0, 1),
                 currentStreak = streak,
                 longestStreak = longest,
@@ -156,24 +156,26 @@ object ProfileStore {
         newlyUnlocked.forEach(AppEvents::achievementUnlock)
     }
 
-    private fun decodeProfile(prefs: androidx.datastore.preferences.core.Preferences): StoredProfile = StoredProfile(
-        completedQuizIds = decodeSet(prefs[completedKey]),
-        latestScores = decodeScores(prefs[scoresKey]),
-        previousScores = decodeScores(prefs[previousScoresKey]),
-        adsRemoved = prefs[adsRemovedKey] ?: false,
-        onboardingComplete = prefs[onboardingCompleteKey] ?: false,
-        announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
-        pendingAchievementIds = decodeList(prefs[pendingAchievementsKey]),
-        matchCount = prefs[matchCountKey] ?: 0,
-        bestMatchPercent = prefs[bestMatchKey],
-        lowestMatchPercent = prefs[lowestMatchKey],
-        daily = DailyState(
-            answeredDate = prefs[dailyAnsweredDateKey],
-            questionId = prefs[dailyQuestionIdKey],
-            selectedOption = prefs[dailySelectedOptionKey],
-            currentStreak = prefs[currentStreakKey] ?: 0,
-            longestStreak = prefs[longestStreakKey] ?: 0,
-            lastActiveDate = prefs[lastActiveDateKey]
+    private fun decodeProfile(prefs: androidx.datastore.preferences.core.Preferences): StoredProfile = ProfileIntegrity.sanitize(
+        StoredProfile(
+            completedQuizIds = decodeSet(prefs[completedKey]),
+            latestScores = decodeScores(prefs[scoresKey]),
+            previousScores = decodeScores(prefs[previousScoresKey]),
+            adsRemoved = prefs[adsRemovedKey] ?: false,
+            onboardingComplete = prefs[onboardingCompleteKey] ?: false,
+            announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
+            pendingAchievementIds = decodeList(prefs[pendingAchievementsKey]),
+            matchCount = prefs[matchCountKey] ?: 0,
+            bestMatchPercent = prefs[bestMatchKey],
+            lowestMatchPercent = prefs[lowestMatchKey],
+            daily = DailyState(
+                answeredDate = prefs[dailyAnsweredDateKey],
+                questionId = prefs[dailyQuestionIdKey],
+                selectedOption = prefs[dailySelectedOptionKey],
+                currentStreak = prefs[currentStreakKey] ?: 0,
+                longestStreak = prefs[longestStreakKey] ?: 0,
+                lastActiveDate = prefs[lastActiveDateKey]
+            )
         )
     )
 
