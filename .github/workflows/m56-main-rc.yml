@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   release_candidate:
@@ -97,3 +97,25 @@ jobs:
             apk-badging.txt
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="v0.1.0-rc"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --target "$GITHUB_SHA" \
+              --title "Who Are You 0.1.0 RC" \
+              --notes "Android release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
+              --prerelease
+          fi
+          gh release upload "$TAG" \
+            who-are-you-0.1.0-rc.apk \
+            who-are-you-0.1.0-rc.apk.sha256 \
+            who-are-you-0.1.0-release-unsigned.aab \
+            who-are-you-0.1.0-release-unsigned.aab.sha256 \
+            apk-signature.txt \
+            apk-badging.txt \
+            --clobber
