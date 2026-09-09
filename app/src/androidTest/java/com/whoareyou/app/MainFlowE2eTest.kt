@@ -86,6 +86,30 @@ class MainFlowE2eTest {
         waitForTag("app_screen_profile")
     }
 
+    @Test
+    fun interruptedQuizKeepsQuestionAcrossRecreationAndBackReturnsDiscover() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        runBlocking { ProfileStore.setOnboardingComplete(context, true) }
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_discover")
+
+        composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
+        waitForTag("app_screen_quiz")
+        waitForTag("quiz_question_1")
+
+        composeRule.onNodeWithTag("quiz_answer_0").performClick()
+        waitForTag("quiz_question_2")
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_quiz")
+        waitForTag("quiz_question_2")
+
+        composeRule.activityRule.scenario.onActivity {
+            it.onBackPressedDispatcher.onBackPressed()
+        }
+        waitForTag("app_screen_discover")
+    }
+
     private fun waitForTag(tag: String) {
         composeRule.waitUntil(timeoutMillis = 10_000) {
             composeRule.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
