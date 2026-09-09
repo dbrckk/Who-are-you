@@ -1,0 +1,108 @@
+name: M59 Android Device Validation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m59-device-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  device_validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle 9.5
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '9.5.0'
+
+      - name: Enable KVM acceleration
+        run: |
+          if [ -e /dev/kvm ]; then
+            sudo chmod 666 /dev/kvm
+          fi
+
+      - name: Run UI tests and real-device smoke test
+        uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
+        with:
+          api-level: 37.0
+          system-image-api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          cores: 2
+          ram-size: 3072
+          disable-animations: true
+          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -camera-back none -camera-front none
+          script: |
+            set -euo pipefail
+            gradle :app:connectedDebugAndroidTest --stacktrace
+            gradle :app:assembleDebug --stacktrace
+
+            APK="app/build/outputs/apk/debug/app-debug.apk"
+            test -s "$APK"
+            adb install -r "$APK"
+            adb shell am force-stop com.whoareyou.app
+            adb logcat -c
+
+            START_OUTPUT="$(adb shell am start -W -n com.whoareyou.app/.MainActivity)"
+            printf '%s\n' "$START_OUTPUT" | tee device-startup.txt
+            printf '%s\n' "$START_OUTPUT" | grep -F "Status: ok"
+            sleep 3
+
+            PID="$(adb shell pidof com.whoareyou.app | tr -d '\r')"
+            test -n "$PID"
+            echo "Initial PID: $PID"
+
+            adb shell monkey -p com.whoareyou.app --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 | tee device-monkey.txt
+            sleep 2
+
+            adb logcat -d > device-logcat.txt
+            adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime.txt
+            adb shell dumpsys activity exit-info com.whoareyou.app > device-exit-info.txt || true
+
+            FINAL_PID="$(adb shell pidof com.whoareyou.app | tr -d '\r')"
+            test -n "$FINAL_PID"
+            echo "Final PID: $FINAL_PID"
+
+            if grep -F "Process: com.whoareyou.app" device-android-runtime.txt; then
+              echo "Fatal AndroidRuntime crash detected for com.whoareyou.app"
+              exit 1
+            fi
+
+            if grep -E "REASON_(CRASH|ANR)" device-exit-info.txt; then
+              echo "Crash or ANR exit reason detected for com.whoareyou.app"
+              exit 1
+            fi
+
+      - name: Upload device validation evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-device-validation-${{ github.sha }}
+          path: |
+            app/build/reports/androidTests/connected/
+            app/build/outputs/androidTest-results/connected/
+            device-startup.txt
+            device-monkey.txt
+            device-logcat.txt
+            device-android-runtime.txt
+            device-exit-info.txt
+          if-no-files-found: warn
+          retention-days: 14
