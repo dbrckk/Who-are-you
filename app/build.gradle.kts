@@ -72,6 +72,7 @@ android {
 
         buildConfigField("String", "TELEMETRY_ENDPOINT", escapedBuildConfig(telemetryEndpoint))
         buildConfigField("String", "ADMOB_INTERSTITIAL_ID", escapedBuildConfig(admobInterstitialId))
+        buildConfigField("boolean", "EXTERNAL_SERVICES_ENABLED", "true")
         manifestPlaceholders["admobAppId"] = admobAppId
     }
 
@@ -106,10 +107,12 @@ android {
             initWith(getByName("release"))
             matchingFallbacks += listOf("release")
             signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("boolean", "EXTERNAL_SERVICES_ENABLED", "false")
         }
         create("playRelease") {
             initWith(getByName("release"))
             matchingFallbacks += listOf("release")
+            buildConfigField("boolean", "EXTERNAL_SERVICES_ENABLED", "true")
             if (playReleaseRequested) {
                 signingConfig = signingConfigs.getByName("playUpload")
             }
