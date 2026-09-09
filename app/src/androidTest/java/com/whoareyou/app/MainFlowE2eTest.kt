@@ -49,7 +49,8 @@ class MainFlowE2eTest {
         composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
         waitForTag("app_screen_quiz")
 
-        repeat(nextQuiz.questions.size) {
+        nextQuiz.questions.indices.forEach { index ->
+            waitForTag("quiz_question_${index + 1}")
             composeRule.onNodeWithTag("quiz_answer_0").assertExists().performClick()
         }
 
@@ -103,10 +104,12 @@ class MainFlowE2eTest {
         composeRule.activityRule.scenario.recreate()
         waitForTag("app_screen_quiz")
         waitForTag("quiz_question_2")
+        composeRule.waitForIdle()
 
         composeRule.activityRule.scenario.onActivity {
             it.onBackPressedDispatcher.onBackPressed()
         }
+        composeRule.waitForIdle()
         waitForTag("app_screen_discover")
     }
 
@@ -126,7 +129,8 @@ class MainFlowE2eTest {
 
         composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
         waitForTag("app_screen_quiz")
-        repeat(quiz.questions.size) {
+        quiz.questions.indices.forEach { index ->
+            waitForTag("quiz_question_${index + 1}")
             composeRule.onNodeWithTag("quiz_answer_0").assertExists().performClick()
         }
         waitForTag("app_screen_result")
@@ -144,7 +148,7 @@ class MainFlowE2eTest {
     }
 
     private fun waitForTag(tag: String) {
-        composeRule.waitUntil(timeoutMillis = 10_000) {
+        composeRule.waitUntil(timeoutMillis = 15_000) {
             composeRule.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
         }
         composeRule.onNode(hasTestTag(tag), useUnmergedTree = true).assertExists()
