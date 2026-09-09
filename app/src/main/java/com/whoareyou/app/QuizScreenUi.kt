@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -86,7 +87,7 @@ fun QuizScreen(
         Spacer(Modifier.height(26.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            question.answers.forEach { answer ->
+            question.answers.forEachIndexed { answerIndex, answer ->
                 V2PressableSurface(
                     onClick = {
                         val newScore = score + answer.score
@@ -96,7 +97,8 @@ fun QuizScreen(
                             score = newScore
                             questionIndex++
                         }
-                    }
+                    },
+                    modifier = Modifier.testTag("quiz_answer_$answerIndex")
                 ) {
                     Text(
                         answer.text,
