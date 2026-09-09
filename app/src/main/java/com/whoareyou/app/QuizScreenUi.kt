@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,8 +33,8 @@ fun QuizScreen(
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
 ) {
-    var questionIndex by remember(quiz.id) { mutableIntStateOf(0) }
-    var score by remember(quiz.id) { mutableIntStateOf(0) }
+    var questionIndex by rememberSaveable(quiz.id) { mutableIntStateOf(0) }
+    var score by rememberSaveable(quiz.id) { mutableIntStateOf(0) }
     val question = quiz.questions[questionIndex]
     val progress = (questionIndex + 1f) / quiz.questions.size
     val scrollState = rememberScrollState()
@@ -60,7 +60,8 @@ fun QuizScreen(
                 stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
                 style = V2Type.Supporting,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.testTag("quiz_question_${questionIndex + 1}")
             )
         }
         Spacer(Modifier.height(8.dp))
