@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -117,10 +118,16 @@ private fun WhoAreYouApp() {
         return
     }
 
-    var screen by remember { mutableStateOf(AppScreen.DISCOVER) }
-    var selectedQuiz by remember(quizCatalog) { mutableStateOf(quizCatalog.first()) }
-    var finalScore by remember { mutableIntStateOf(0) }
-    var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
+    var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
+    val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
+    var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
+    val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
+    var finalScore by rememberSaveable { mutableIntStateOf(0) }
+    var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
+
+    fun navigate(destination: AppScreen) {
+        screenName = destination.name
+    }
 
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
 
@@ -128,7 +135,7 @@ private fun WhoAreYouApp() {
         if (screen == AppScreen.QUIZ) {
             runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
         }
-        screen = AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER
+        navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER)
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -147,12 +154,12 @@ private fun WhoAreYouApp() {
                     completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved,
                     privacyOptionsRequired = privacyOptionsRequired,
-                    onOpenProfile = { screen = AppScreen.PROFILE },
+                    onOpenProfile = { navigate(AppScreen.PROFILE) },
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
-                        selectedQuiz = quiz
+                        selectedQuizId = quiz.id
                         runCatching { AppEvents.testStart(quiz.id) }
-                        screen = AppScreen.QUIZ
+                        navigate(AppScreen.QUIZ)
                     },
                     onRemoveAds = {
                         if (!adsRemoved && activity != null) {
@@ -167,14 +174,14 @@ private fun WhoAreYouApp() {
                 AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile,
                     catalog = quizCatalog,
-                    onBack = { screen = AppScreen.DISCOVER }
+                    onBack = { navigate(AppScreen.DISCOVER) }
                 )
 
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
                     onBack = {
                         runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
-                        screen = AppScreen.DISCOVER
+                        navigate(AppScreen.DISCOVER)
                     },
                     onFinished = { score ->
                         finalScore = score
@@ -183,7 +190,7 @@ private fun WhoAreYouApp() {
                         scope.launch {
                             ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
                         }
-                        screen = AppScreen.RESULT
+                        navigate(AppScreen.RESULT)
                     }
                 )
 
@@ -196,21 +203,21 @@ private fun WhoAreYouApp() {
                     onDone = {
                         val manager = adManager
                         if (manager == null) {
-                            screen = AppScreen.DISCOVER
+                            navigate(AppScreen.DISCOVER)
                         } else {
                             runCatching {
                                 manager.onResultFinished(activity, adsRemoved) {
-                                    screen = AppScreen.DISCOVER
+                                    navigate(AppScreen.DISCOVER)
                                 }
                             }.onFailure {
-                                screen = AppScreen.DISCOVER
+                                navigate(AppScreen.DISCOVER)
                             }
                         }
                     },
                     onRetry = {
                         previousScoreForAttempt = finalScore
                         runCatching { AppEvents.testStart(selectedQuiz.id) }
-                        screen = AppScreen.QUIZ
+                        navigate(AppScreen.QUIZ)
                     }
                 )
             }
@@ -219,7 +226,7 @@ private fun WhoAreYouApp() {
         AppShellNavigation.tabFor(screen)?.let { selectedTab ->
             PremiumAppShellBar(
                 selected = selectedTab,
-                onSelect = { tab -> screen = AppShellNavigation.destination(tab) },
+                onSelect = { tab -> navigate(AppShellNavigation.destination(tab)) },
                 modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
