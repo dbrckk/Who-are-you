@@ -1,5 +1,9 @@
 package com.whoareyou.app
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -18,9 +22,16 @@ class QuizScreenUiTest {
         val quiz = testQuiz()
 
         composeRule.setContent {
+            var questionIndex by remember { mutableIntStateOf(0) }
+            var score by remember { mutableIntStateOf(0) }
             QuizScreen(
                 quiz = quiz,
-                attemptKey = 0,
+                questionIndex = questionIndex,
+                score = score,
+                onProgress = { nextQuestionIndex, nextScore ->
+                    questionIndex = nextQuestionIndex
+                    score = nextScore
+                },
                 onBack = {},
                 onFinished = { finalScore = it }
             )
