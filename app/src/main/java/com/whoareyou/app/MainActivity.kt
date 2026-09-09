@@ -122,6 +122,7 @@ private fun WhoAreYouApp() {
     val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
+    var quizAttempt by rememberSaveable { mutableIntStateOf(0) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
 
@@ -158,6 +159,7 @@ private fun WhoAreYouApp() {
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
                         selectedQuizId = quiz.id
+                        quizAttempt++
                         runCatching { AppEvents.testStart(quiz.id) }
                         navigate(AppScreen.QUIZ)
                     },
@@ -179,6 +181,7 @@ private fun WhoAreYouApp() {
 
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
+                    attemptKey = quizAttempt,
                     onBack = {
                         runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
                         navigate(AppScreen.DISCOVER)
@@ -216,6 +219,7 @@ private fun WhoAreYouApp() {
                     },
                     onRetry = {
                         previousScoreForAttempt = finalScore
+                        quizAttempt++
                         runCatching { AppEvents.testStart(selectedQuiz.id) }
                         navigate(AppScreen.QUIZ)
                     }
