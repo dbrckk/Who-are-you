@@ -52,51 +52,7 @@ jobs:
           disable-animations: true
           disable-spellchecker: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
-          script: |
-            set -eu
-            adb wait-for-device
-            test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
-            gradle --stop || true
-            gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
-            gradle :app:assembleDebug --no-daemon --stacktrace
-
-            APK="app/build/outputs/apk/debug/app-debug.apk"
-            test -s "$APK"
-            adb install -r "$APK"
-            adb shell am force-stop com.whoareyou.app
-            adb logcat -c
-
-            START_OUTPUT="$(adb shell am start -W -n com.whoareyou.app/.MainActivity)"
-            printf '%s\n' "$START_OUTPUT" > device-startup.txt
-            cat device-startup.txt
-            grep -F "Status: ok" device-startup.txt
-            sleep 3
-
-            PID="$(adb shell pidof com.whoareyou.app | tr -d '\r')"
-            test -n "$PID"
-            echo "Initial PID: $PID"
-
-            adb shell monkey -p com.whoareyou.app --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 > device-monkey.txt
-            cat device-monkey.txt
-            sleep 2
-
-            adb logcat -d > device-logcat.txt
-            adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime.txt
-            adb shell dumpsys activity exit-info com.whoareyou.app > device-exit-info.txt || true
-
-            FINAL_PID="$(adb shell pidof com.whoareyou.app | tr -d '\r')"
-            test -n "$FINAL_PID"
-            echo "Final PID: $FINAL_PID"
-
-            if grep -F "Process: com.whoareyou.app" device-android-runtime.txt; then
-              echo "Fatal AndroidRuntime crash detected for com.whoareyou.app"
-              exit 1
-            fi
-
-            if grep -E "REASON_(CRASH|ANR)" device-exit-info.txt; then
-              echo "Crash or ANR exit reason detected for com.whoareyou.app"
-              exit 1
-            fi
+          script: bash .github/scripts/android-device-validation.sh
 
       - name: Upload device validation evidence
         if: always()
