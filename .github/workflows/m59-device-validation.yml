@@ -49,9 +49,9 @@ jobs:
           cores: 2
           ram-size: 3072
           disable-animations: true
-          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -camera-back none -camera-front none
+          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
           script: |
-            set -euo pipefail
+            set -eu
             gradle :app:connectedDebugAndroidTest --stacktrace
             gradle :app:assembleDebug --stacktrace
 
@@ -62,15 +62,17 @@ jobs:
             adb logcat -c
 
             START_OUTPUT="$(adb shell am start -W -n com.whoareyou.app/.MainActivity)"
-            printf '%s\n' "$START_OUTPUT" | tee device-startup.txt
-            printf '%s\n' "$START_OUTPUT" | grep -F "Status: ok"
+            printf '%s\n' "$START_OUTPUT" > device-startup.txt
+            cat device-startup.txt
+            grep -F "Status: ok" device-startup.txt
             sleep 3
 
             PID="$(adb shell pidof com.whoareyou.app | tr -d '\r')"
             test -n "$PID"
             echo "Initial PID: $PID"
 
-            adb shell monkey -p com.whoareyou.app --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 | tee device-monkey.txt
+            adb shell monkey -p com.whoareyou.app --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 > device-monkey.txt
+            cat device-monkey.txt
             sleep 2
 
             adb logcat -d > device-logcat.txt
