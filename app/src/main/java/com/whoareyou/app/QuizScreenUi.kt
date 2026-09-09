@@ -15,10 +15,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -30,24 +26,25 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun QuizScreen(
     quiz: Quiz,
-    attemptKey: Int,
+    questionIndex: Int,
+    score: Int,
+    onProgress: (questionIndex: Int, score: Int) -> Unit,
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
 ) {
-    var questionIndex by rememberSaveable(quiz.id, attemptKey) { mutableIntStateOf(0) }
-    var score by rememberSaveable(quiz.id, attemptKey) { mutableIntStateOf(0) }
-    val question = quiz.questions[questionIndex]
-    val progress = (questionIndex + 1f) / quiz.questions.size
+    val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
+    val question = quiz.questions[safeQuestionIndex]
+    val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(quiz.id, questionIndex) {
+    LaunchedEffect(quiz.id, safeQuestionIndex) {
         scrollState.scrollTo(0)
     }
 
     Column(
         Modifier
             .fillMaxSize()
-            .testTag("quiz_question_${questionIndex + 1}")
+            .testTag("quiz_question_${safeQuestionIndex + 1}")
             .background(V2Colors.Ink)
             .verticalScroll(scrollState)
             .padding(V2Spacing.Screen)
@@ -59,7 +56,7 @@ fun QuizScreen(
         ) {
             AccessibleBackAction(onClick = onBack)
             Text(
-                stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size),
+                stringResource(R.string.question_progress, safeQuestionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
                 style = V2Type.Supporting,
                 fontWeight = FontWeight.SemiBold
@@ -93,11 +90,10 @@ fun QuizScreen(
                 V2PressableSurface(
                     onClick = {
                         val newScore = score + answer.score
-                        if (questionIndex == quiz.questions.lastIndex) {
+                        if (safeQuestionIndex == quiz.questions.lastIndex) {
                             onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
                         } else {
-                            score = newScore
-                            questionIndex++
+                            onProgress(safeQuestionIndex + 1, newScore)
                         }
                     },
                     modifier = Modifier.testTag("quiz_answer_$answerIndex")
