@@ -67,28 +67,43 @@ private fun WhoAreYouApp() {
     var premiumOverride by remember { mutableStateOf(false) }
     var privacyOptionsRequired by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
+
     val billingManager = remember(context) {
-        BillingManager(
-            context = context,
-            onPremiumChanged = { premiumOverride = it },
-            onPriceChanged = BillingPriceState::update
-        )
+        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) {
+            runCatching {
+                BillingManager(
+                    context = context,
+                    onPremiumChanged = { premiumOverride = it },
+                    onPriceChanged = BillingPriceState::update
+                )
+            }.getOrNull()
+        } else {
+            null
+        }
     }
     val adManager = remember(context) {
-        AdManager(context) { required -> privacyOptionsRequired = required }
+        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) {
+            runCatching {
+                AdManager(context) { required -> privacyOptionsRequired = required }
+            }.getOrNull()
+        } else {
+            null
+        }
     }
 
-    DisposableEffect(billingManager, adManager) {
-        billingManager.start()
-        adManager.start(activity)
-        onDispose { billingManager.close() }
+    DisposableEffect(billingManager, adManager, activity) {
+        runCatching { billingManager?.start() }
+        runCatching { adManager?.start(activity) }
+        onDispose {
+            runCatching { billingManager?.close() }
+        }
     }
 
     if (!storedProfile.onboardingComplete) {
-        LaunchedEffect(Unit) { AppEvents.onboardingView() }
+        LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
         OnboardingScreen(
             onStart = {
-                AppEvents.onboardingComplete()
+                runCatching { AppEvents.onboardingComplete() }
                 scope.launch { ProfileStore.setOnboardingComplete(context) }
             }
         )
@@ -96,7 +111,7 @@ private fun WhoAreYouApp() {
     }
 
     if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
-        LaunchedEffect(quizCatalog.size) { AppEvents.catalogUnavailable() }
+        LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }
         CatalogUnavailableScreen()
         return
     }
@@ -106,11 +121,11 @@ private fun WhoAreYouApp() {
     var finalScore by remember { mutableIntStateOf(0) }
     var previousScoreForAttempt by remember { mutableStateOf<Int?>(null) }
 
-    LaunchedEffect(screen) { AppEvents.screenView(screen) }
+    LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
 
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
         if (screen == AppScreen.QUIZ) {
-            AppEvents.testAbandon(selectedQuiz.id, "system_back")
+            runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
         }
         screen = AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER
     }
@@ -133,15 +148,17 @@ private fun WhoAreYouApp() {
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
                         selectedQuiz = quiz
-                        AppEvents.testStart(quiz.id)
+                        runCatching { AppEvents.testStart(quiz.id) }
                         screen = AppScreen.QUIZ
                     },
                     onRemoveAds = {
                         if (!adsRemoved && activity != null) {
-                            billingManager.launchPurchase(activity)
+                            runCatching { billingManager?.launchPurchase(activity) }
                         }
                     },
-                    onPrivacyOptions = { adManager.showPrivacyOptions(activity) }
+                    onPrivacyOptions = {
+                        runCatching { adManager?.showPrivacyOptions(activity) }
+                    }
                 )
 
                 AppScreen.PROFILE -> ProfileScreen(
@@ -153,13 +170,13 @@ private fun WhoAreYouApp() {
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
                     onBack = {
-                        AppEvents.testAbandon(selectedQuiz.id, "screen_back")
+                        runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
                         screen = AppScreen.DISCOVER
                     },
                     onFinished = { score ->
                         finalScore = score
-                        AppEvents.testComplete(selectedQuiz.id, score)
-                        AppEvents.resultView(selectedQuiz.id, score)
+                        runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
+                        runCatching { AppEvents.resultView(selectedQuiz.id, score) }
                         scope.launch {
                             ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
                         }
@@ -174,13 +191,22 @@ private fun WhoAreYouApp() {
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                     totalQuizCount = quizCatalog.size,
                     onDone = {
-                        adManager.onResultFinished(activity, adsRemoved) {
+                        val manager = adManager
+                        if (manager == null) {
                             screen = AppScreen.DISCOVER
+                        } else {
+                            runCatching {
+                                manager.onResultFinished(activity, adsRemoved) {
+                                    screen = AppScreen.DISCOVER
+                                }
+                            }.onFailure {
+                                screen = AppScreen.DISCOVER
+                            }
                         }
                     },
                     onRetry = {
                         previousScoreForAttempt = finalScore
-                        AppEvents.testStart(selectedQuiz.id)
+                        runCatching { AppEvents.testStart(selectedQuiz.id) }
                         screen = AppScreen.QUIZ
                     }
                 )
