@@ -46,7 +46,7 @@ class MainFlowE2eTest {
             nextQuiz.questions.size
         )
 
-        composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
+        openRecommendedQuiz()
         waitForTag("app_screen_quiz")
 
         nextQuiz.questions.indices.forEach { index ->
@@ -94,7 +94,7 @@ class MainFlowE2eTest {
         composeRule.activityRule.scenario.recreate()
         waitForTag("app_screen_discover")
 
-        composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
+        openRecommendedQuiz()
         waitForTag("app_screen_quiz")
         waitForTag("quiz_question_1")
 
@@ -127,7 +127,7 @@ class MainFlowE2eTest {
             DiscoverPersonalization.recommendation(catalog, stored.completedQuizIds, summary.dimensions)?.quiz
         )
 
-        composeRule.onNodeWithTag("discover_next_quiz").assertExists().performClick()
+        openRecommendedQuiz()
         waitForTag("app_screen_quiz")
         quiz.questions.indices.forEach { index ->
             waitForTag("quiz_question_${index + 1}")
@@ -145,6 +145,13 @@ class MainFlowE2eTest {
 
         composeRule.onNodeWithTag("quiz_answer_0").performClick()
         waitForTag("quiz_question_2")
+    }
+
+    private fun openRecommendedQuiz() {
+        composeRule.onNodeWithTag("discover_next_quiz")
+            .assertExists()
+            .performScrollTo()
+            .performClick()
     }
 
     private fun waitForTag(tag: String) {
