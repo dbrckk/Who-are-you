@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -143,7 +144,7 @@ fun PersonalizedDiscoverDashboard(
             }
             V2PressableCard(
                 onClick = onQuizSelected?.let { callback -> { callback(nextQuiz) } },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("discover_next_quiz"),
                 shape = RoundedCornerShape(V2Radius.Card),
                 containerColor = V2Colors.Surface
             ) {
