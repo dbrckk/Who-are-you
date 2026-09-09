@@ -47,6 +47,7 @@ fun QuizScreen(
     Column(
         Modifier
             .fillMaxSize()
+            .testTag("quiz_question_${questionIndex + 1}")
             .background(V2Colors.Ink)
             .verticalScroll(scrollState)
             .padding(V2Spacing.Screen)
@@ -61,8 +62,7 @@ fun QuizScreen(
                 stringResource(R.string.question_progress, questionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
                 style = V2Type.Supporting,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.testTag("quiz_question_${questionIndex + 1}")
+                fontWeight = FontWeight.SemiBold
             )
         }
         Spacer(Modifier.height(8.dp))
