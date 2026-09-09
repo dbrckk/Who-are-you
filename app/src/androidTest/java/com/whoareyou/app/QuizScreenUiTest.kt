@@ -20,6 +20,7 @@ class QuizScreenUiTest {
         composeRule.setContent {
             QuizScreen(
                 quiz = quiz,
+                attemptKey = 0,
                 onBack = {},
                 onFinished = { finalScore = it }
             )
