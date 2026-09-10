@@ -40,12 +40,17 @@ fun PersonalizedDiscoverDashboard(
     }
     val stage = remember(profile.completedCount, profile.signature) { DiscoverPersonalization.stage(profile) }
     val strongest = remember(profile.dimensions) { DiscoverPersonalization.strongestDimension(profile.dimensions) }
+    val strongestQuiz = remember(strongest, quizzes) {
+        strongest?.let { dimension -> quizzes.firstOrNull { it.id == dimension.quizId } }
+    }
+    val identityAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
+    val identityCompanion = strongestQuiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
     val momentum = remember(profile.dimensions) { ProfileMomentumEngine.derive(profile.dimensions) }
     val strongestDimensions = remember(profile.dimensions) {
         profile.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }.take(2)
     }
     val nextQuiz = recommendation?.quiz
-    val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
+    val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: identityAccent
     val stageLabel = when (stage) {
         DiscoverProfileStage.NEW -> R.string.personalized_stage_new
         DiscoverProfileStage.EMERGING -> R.string.personalized_stage_emerging
@@ -58,7 +63,12 @@ fun PersonalizedDiscoverDashboard(
             .clip(RoundedCornerShape(V2Radius.Hero))
             .background(
                 Brush.linearGradient(
-                    listOf(V2Colors.SurfaceElevated, V2Colors.AccentViolet.copy(alpha = 0.16f), V2Colors.AccentCyan.copy(alpha = 0.07f))
+                    listOf(
+                        V2Colors.SurfaceElevated,
+                        identityAccent.copy(alpha = 0.18f),
+                        identityCompanion.copy(alpha = 0.10f),
+                        V2Colors.Surface
+                    )
                 )
             )
         Box(
@@ -71,23 +81,28 @@ fun PersonalizedDiscoverDashboard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(stringResource(stageLabel), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
+                        Text(stringResource(stageLabel), color = identityCompanion, style = V2Type.Eyebrow)
                         Spacer(Modifier.height(6.dp))
                         Text(profile.dominantArchetype, color = V2Colors.TextPrimary, style = V2Type.SectionTitle)
                     }
-                    Box(
-                        modifier = Modifier.size(62.dp).clip(CircleShape).background(V2Colors.Ink.copy(alpha = 0.72f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("${profile.completionPercent}%", color = V2Colors.AccentViolet, style = V2Type.BodyStrong, fontWeight = FontWeight.Black)
-                    }
+                    IdentityAura(
+                        score = strongest?.score ?: profile.completionPercent,
+                        modifier = Modifier.size(74.dp),
+                        primary = identityAccent,
+                        secondary = identityCompanion
+                    )
+                }
+
+                strongestQuiz?.let { quiz ->
+                    Spacer(Modifier.height(14.dp))
+                    QuizArtwork(quiz = quiz, compact = true)
                 }
 
                 Spacer(Modifier.height(18.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    InsightMetric(Modifier.weight(1f), profile.completedCount.toString(), stringResource(R.string.personalized_dimensions))
-                    InsightMetric(Modifier.weight(1f), (profile.totalCount - profile.completedCount).coerceAtLeast(0).toString(), stringResource(R.string.personalized_left))
-                    InsightMetric(Modifier.weight(1f), strongest?.score?.let { "$it%" } ?: "—", stringResource(R.string.personalized_signal))
+                    InsightMetric(Modifier.weight(1f), profile.completedCount.toString(), stringResource(R.string.personalized_dimensions), identityAccent)
+                    InsightMetric(Modifier.weight(1f), (profile.totalCount - profile.completedCount).coerceAtLeast(0).toString(), stringResource(R.string.personalized_left), identityCompanion)
+                    InsightMetric(Modifier.weight(1f), strongest?.score?.let { "$it%" } ?: "—", stringResource(R.string.personalized_signal), identityAccent)
                 }
 
                 Spacer(Modifier.height(16.dp))
@@ -105,13 +120,17 @@ fun PersonalizedDiscoverDashboard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(V2Radius.Compact))
-                            .background(V2Colors.AccentViolet.copy(alpha = 0.10f))
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(identityAccent.copy(alpha = 0.14f), identityCompanion.copy(alpha = 0.07f))
+                                )
+                            )
                             .padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(stringResource(R.string.personalized_signature_label), color = V2Colors.AccentViolet, style = V2Type.Caption)
+                            Text(stringResource(R.string.personalized_signature_label), color = identityAccent, style = V2Type.Caption)
                             Spacer(Modifier.height(3.dp))
                             Text(copy.title, color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
                         }
@@ -128,8 +147,13 @@ fun PersonalizedDiscoverDashboard(
                     Text(stringResource(R.string.personalized_signals_label), color = V2Colors.TextSecondary, style = V2Type.Caption)
                     Spacer(Modifier.height(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        strongestDimensions.forEach { dimension ->
-                            DimensionSignal(Modifier.weight(1f), dimension.metricLabel, dimension.score)
+                        strongestDimensions.forEachIndexed { index, dimension ->
+                            DimensionSignal(
+                                Modifier.weight(1f),
+                                dimension.metricLabel,
+                                dimension.score,
+                                if (index == 0) identityAccent else identityCompanion
+                            )
                         }
                     }
                 }
@@ -170,32 +194,36 @@ fun PersonalizedDiscoverDashboard(
 }
 
 @Composable
-private fun InsightMetric(modifier: Modifier, value: String, label: String) {
+private fun InsightMetric(modifier: Modifier, value: String, label: String, accent: androidx.compose.ui.graphics.Color) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(V2Radius.Compact))
-            .background(V2Colors.Ink.copy(alpha = 0.48f))
+            .background(
+                Brush.verticalGradient(
+                    listOf(accent.copy(alpha = 0.10f), V2Colors.Ink.copy(alpha = 0.48f))
+                )
+            )
             .padding(horizontal = 10.dp, vertical = 11.dp)
     ) {
-        Text(value, color = V2Colors.TextPrimary, style = V2Type.Metric)
+        Text(value, color = accent, style = V2Type.Metric)
         Spacer(Modifier.height(2.dp))
         Text(label, color = V2Colors.TextSecondary, style = V2Type.Caption)
     }
 }
 
 @Composable
-private fun DimensionSignal(modifier: Modifier, label: String, score: Int) {
+private fun DimensionSignal(modifier: Modifier, label: String, score: Int, accent: androidx.compose.ui.graphics.Color) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(V2Radius.Compact))
-            .background(V2Colors.Ink.copy(alpha = 0.40f))
+            .background(accent.copy(alpha = 0.08f))
             .padding(11.dp)
     ) {
         Text(label, color = V2Colors.TextPrimary, style = V2Type.Supporting, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(5.dp))
         Text(
             "$score%",
-            color = if (score >= 50) V2Colors.AccentCyan else V2Colors.AccentViolet,
+            color = accent,
             style = V2Type.Caption,
             fontWeight = FontWeight.Black
         )
