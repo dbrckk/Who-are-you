@@ -57,11 +57,9 @@ class MainFlowE2eTest {
         waitForTag("app_screen_result")
         composeRule.onNodeWithTag("result_score").assertExists()
 
-        val persisted = runBlocking {
-            withTimeout(5_000) {
-                ProfileStore.observe(context).first { it.latestScores[nextQuiz.id] == expectedScore }
-            }
-        }
+        // Result navigation is intentionally downstream of the DataStore commit. If the
+        // result screen exists, completion must already be durable without polling/retries.
+        val persisted = runBlocking { ProfileStore.observe(context).first() }
         assertTrue(nextQuiz.id in persisted.completedQuizIds)
         assertEquals(expectedScore, persisted.latestScores[nextQuiz.id])
 
