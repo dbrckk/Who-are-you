@@ -112,7 +112,7 @@ class MainFlowE2eTest {
     }
 
     @Test
-    fun resultSurvivesRecreationAndRetryStartsFreshAttempt() {
+    fun resultCommitSurvivesImmediateRecreationAndRetryStartsFreshAttempt() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         runBlocking { ProfileStore.setOnboardingComplete(context, true) }
         composeRule.activityRule.scenario.recreate()
@@ -131,7 +131,12 @@ class MainFlowE2eTest {
             waitForTag("quiz_question_${index + 1}")
             composeRule.onNodeWithTag("quiz_answer_0").assertExists().performClick()
         }
+
+        // Recreate immediately rather than waiting for Result. This exercises the handoff
+        // where a final answer has been accepted but its durable commit may still be running.
+        composeRule.activityRule.scenario.recreate()
         waitForTag("app_screen_result")
+        composeRule.onNodeWithTag("result_score").assertExists()
 
         composeRule.activityRule.scenario.recreate()
         waitForTag("app_screen_result")
