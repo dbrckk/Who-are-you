@@ -7,29 +7,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object V2Colors {
-    // Deep blue-black foundation keeps long-form quiz reading comfortable while
-    // allowing accents to feel luminous rather than neon-on-black.
-    val Ink = Color(0xFF070914)
-    val InkSoft = Color(0xFF0B0F1D)
-    val Surface = Color(0xFF11162A)
-    val SurfaceRaised = Color(0xFF18213A)
-    val SurfaceGlass = Color(0xE0161C31)
+    // Deep plum-blue foundation: softer than pure black while retaining strong contrast.
+    val Ink = Color(0xFF090A16)
+    val InkSoft = Color(0xFF101124)
+    val Surface = Color(0xFF17182D)
+    val SurfaceRaised = Color(0xFF20223C)
+    val SurfaceGlass = Color(0xE01B1C34)
 
-    // Brand spectrum: violet -> electric blue -> aqua, with a warm counter-accent.
-    val Violet = Color(0xFF927CFF)
-    val VioletBright = Color(0xFFB6A8FF)
-    val Blue = Color(0xFF5EA1FF)
-    val Cyan = Color(0xFF5DE1E6)
-    val Coral = Color(0xFFFF8FA3)
-    val Success = Color(0xFF66E0A3)
+    // Inclusive brand spectrum: lavender and orchid lead, balanced by blue/aqua and warm peach.
+    val Violet = Color(0xFFA58BFF)
+    val VioletBright = Color(0xFFC8B9FF)
+    val Orchid = Color(0xFFE59BEF)
+    val Rose = Color(0xFFFFA7C4)
+    val Peach = Color(0xFFFFB49E)
+    val Blue = Color(0xFF72A7FF)
+    val Cyan = Color(0xFF6DDBDD)
+    val Success = Color(0xFF72DDA7)
 
-    val TextPrimary = Color(0xFFF8F9FF)
-    val TextSecondary = Color(0xFFB7BED2)
-    val TextTertiary = Color(0xFF8790AA)
+    // Compatibility alias used by existing warm-accent surfaces.
+    val Coral = Rose
+
+    val TextPrimary = Color(0xFFFAF8FF)
+    val TextSecondary = Color(0xFFC6C3D5)
+    val TextTertiary = Color(0xFF9693AB)
     val Hairline = Color(0x24FFFFFF)
     val HairlineStrong = Color(0x3DFFFFFF)
-    val OverlayStrong = Color(0xD9070914)
-    val OverlaySoft = Color(0x33070914)
+    val OverlayStrong = Color(0xD9090A16)
+    val OverlaySoft = Color(0x33090A16)
 
     val SurfaceElevated = SurfaceRaised
     val AccentViolet = Violet
