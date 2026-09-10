@@ -8,8 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -31,23 +29,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme(
-                colorScheme = androidx.compose.material3.darkColorScheme(
-                    background = V2Colors.Ink,
-                    surface = V2Colors.Surface,
-                    primary = V2Colors.AccentViolet,
-                    secondary = V2Colors.AccentCyan
-                )
-            ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = V2Colors.Ink
-                ) {
-                    WhoAreYouApp()
-                }
-            }
-        }
+        setContent { WhoAreYouTheme { WhoAreYouApp() } }
     }
 }
 
@@ -96,9 +78,7 @@ private fun WhoAreYouApp() {
     DisposableEffect(billingManager, adManager, activity) {
         runCatching { billingManager?.start() }
         runCatching { adManager?.start(activity) }
-        onDispose {
-            runCatching { billingManager?.close() }
-        }
+        onDispose { runCatching { billingManager?.close() } }
     }
 
     if (!storedProfile.onboardingComplete) {
@@ -124,9 +104,6 @@ private fun WhoAreYouApp() {
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
-    // Transient write lock: intentionally not saveable. If Android recreates the activity while
-    // the commit coroutine is cancelled, the final question becomes actionable again instead of
-    // restoring a permanently locked quiz.
     var quizFinishing by remember { mutableStateOf(false) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -144,9 +121,7 @@ private fun WhoAreYouApp() {
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
 
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
-        if (screen == AppScreen.QUIZ && quizFinishing) {
-            return@BackHandler
-        }
+        if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler
         if (screen == AppScreen.QUIZ) {
             runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
         }
@@ -214,9 +189,7 @@ private fun WhoAreYouApp() {
                             quizFinishing = true
                             finalScore = score
                             scope.launch {
-                                runCatching {
-                                    ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
-                                }
+                                runCatching { ProfileStore.saveQuizResult(context, selectedQuiz.id, score) }
                                 runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
                                 runCatching { AppEvents.resultView(selectedQuiz.id, score) }
                                 navigate(AppScreen.RESULT)
@@ -240,9 +213,7 @@ private fun WhoAreYouApp() {
                                 manager.onResultFinished(activity, adsRemoved) {
                                     navigate(AppScreen.DISCOVER)
                                 }
-                            }.onFailure {
-                                navigate(AppScreen.DISCOVER)
-                            }
+                            }.onFailure { navigate(AppScreen.DISCOVER) }
                         }
                     },
                     onRetry = {
