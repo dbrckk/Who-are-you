@@ -124,7 +124,10 @@ private fun WhoAreYouApp() {
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
-    var quizFinishing by rememberSaveable { mutableStateOf(false) }
+    // Transient write lock: intentionally not saveable. If Android recreates the activity while
+    // the commit coroutine is cancelled, the final question becomes actionable again instead of
+    // restoring a permanently locked quiz.
+    var quizFinishing by remember { mutableStateOf(false) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
 
@@ -141,6 +144,9 @@ private fun WhoAreYouApp() {
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
 
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
+        if (screen == AppScreen.QUIZ && quizFinishing) {
+            return@BackHandler
+        }
         if (screen == AppScreen.QUIZ) {
             runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
         }
