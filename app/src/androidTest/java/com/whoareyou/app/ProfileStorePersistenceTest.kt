@@ -2,7 +2,9 @@ package com.whoareyou.app
 
 import androidx.test.platform.app.InstrumentationRegistry
 import java.util.UUID
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -35,6 +37,27 @@ class ProfileStorePersistenceTest {
             assertTrue(ProfileStore.saveQuizResult(context, quizId, 41, firstAttempt))
             assertTrue(ProfileStore.saveQuizResult(context, quizId, 83, secondAttempt))
             assertFalse(ProfileStore.saveQuizResult(context, quizId, 41, firstAttempt))
+        }
+    }
+
+    @Test
+    fun quizResultNormalizesIdAndScoreBeforePersistence() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val quizId = "normalized-${UUID.randomUUID()}"
+
+        runBlocking {
+            assertTrue(
+                ProfileStore.saveQuizResult(
+                    context = context,
+                    quizId = "  $quizId  ",
+                    score = 140,
+                    attemptId = "  ${UUID.randomUUID()}  "
+                )
+            )
+
+            val profile = ProfileStore.observe(context).first()
+            assertTrue(quizId in profile.completedQuizIds)
+            assertEquals(100, profile.latestScores[quizId])
         }
     }
 }
