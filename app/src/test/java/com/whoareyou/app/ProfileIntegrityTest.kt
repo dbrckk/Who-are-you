@@ -28,6 +28,19 @@ class ProfileIntegrityTest {
     }
 
     @Test
+    fun sanitizeRepairsCompletionFromPersistedLatestScores() {
+        val sanitized = ProfileIntegrity.sanitize(
+            StoredProfile(
+                completedQuizIds = setOf("quiz-a"),
+                latestScores = mapOf(" quiz-b " to 72)
+            )
+        )
+
+        assertEquals(setOf("quiz-a", "quiz-b"), sanitized.completedQuizIds)
+        assertEquals(mapOf("quiz-b" to 72), sanitized.latestScores)
+    }
+
+    @Test
     fun sanitizeRepairsReversedMatchBounds() {
         val sanitized = ProfileIntegrity.sanitize(
             StoredProfile(
