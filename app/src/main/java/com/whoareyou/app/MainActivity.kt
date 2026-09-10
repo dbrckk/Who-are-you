@@ -189,7 +189,13 @@ private fun WhoAreYouApp() {
                             quizFinishing = true
                             finalScore = score
                             scope.launch {
-                                runCatching { ProfileStore.saveQuizResult(context, selectedQuiz.id, score) }
+                                val committed = runCatching {
+                                    ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
+                                }.isSuccess
+                                if (!committed) {
+                                    quizFinishing = false
+                                    return@launch
+                                }
                                 runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
                                 runCatching { AppEvents.resultView(selectedQuiz.id, score) }
                                 navigate(AppScreen.RESULT)
