@@ -1,5 +1,7 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,11 +22,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,6 +46,12 @@ fun ProfileScreen(
     val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
     val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
     val companionAccent = strongestQuiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.Cyan
+    val profileProgressText = stringResource(
+        R.string.profile_header_progress,
+        summary.completedCount,
+        summary.totalCount,
+        summary.completionPercent
+    )
 
     LazyColumn(
         modifier = Modifier
@@ -66,7 +77,11 @@ fun ProfileScreen(
             Text(stringResource(R.string.your_profile), color = primaryAccent, style = V2Type.Eyebrow)
             Spacer(Modifier.height(14.dp))
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics(mergeDescendants = true) {
+                        contentDescription = "${summary.dominantArchetype}. $profileProgressText"
+                    },
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 IdentityAura(
@@ -87,7 +102,7 @@ fun ProfileScreen(
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    stringResource(R.string.profile_header_progress, summary.completedCount, summary.totalCount, summary.completionPercent),
+                    profileProgressText,
                     color = V2Colors.TextSecondary,
                     fontSize = 14.sp,
                     lineHeight = 20.sp,
@@ -157,11 +172,20 @@ fun ProfileScreen(
                 val quiz = catalog.firstOrNull { it.id == dimension.quizId }
                 val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
+                val animatedProgress by animateFloatAsState(
+                    targetValue = dimension.score.coerceIn(0, 100) / 100f,
+                    animationSpec = tween(V2Motion.EmphasizedMillis),
+                    label = "profileDimensionProgress"
+                )
 
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(V2Radius.Compact),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics(mergeDescendants = true) {
+                            contentDescription = "${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%"
+                        }
                 ) {
                     Column(
                         Modifier
@@ -186,7 +210,7 @@ fun ProfileScreen(
                         }
                         Spacer(Modifier.height(10.dp))
                         LinearProgressIndicator(
-                            progress = { dimension.score / 100f },
+                            progress = { animatedProgress },
                             modifier = Modifier.fillMaxWidth().height(8.dp),
                             color = accent,
                             trackColor = companion.copy(alpha = 0.14f)
