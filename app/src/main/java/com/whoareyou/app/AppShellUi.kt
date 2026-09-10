@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,13 +29,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 // The persistent shell belongs only to top-level exploration spaces; focused quiz/result flows stay chrome-free.
 enum class AppShellTab { DISCOVER, PROFILE }
@@ -87,7 +88,12 @@ fun PremiumAppShellBar(
                     .height(1.dp)
                     .background(
                         Brush.horizontalGradient(
-                            listOf(Color.Transparent, V2Colors.AccentViolet.copy(alpha = 0.42f), V2Colors.AccentCyan.copy(alpha = 0.28f), Color.Transparent)
+                            listOf(
+                                Color.Transparent,
+                                V2Colors.AccentViolet.copy(alpha = 0.42f),
+                                V2Colors.AccentCyan.copy(alpha = 0.28f),
+                                Color.Transparent
+                            )
                         )
                     )
             )
@@ -98,14 +104,14 @@ fun PremiumAppShellBar(
                 ShellTab(
                     modifier = Modifier.weight(1f),
                     selected = selected == AppShellTab.DISCOVER,
-                    symbol = "✦",
+                    iconRes = R.drawable.ic_shell_discover,
                     label = stringResource(R.string.shell_discover),
                     onClick = { onSelect(AppShellTab.DISCOVER) }
                 )
                 ShellTab(
                     modifier = Modifier.weight(1f),
                     selected = selected == AppShellTab.PROFILE,
-                    symbol = "◉",
+                    iconRes = R.drawable.ic_shell_profile,
                     label = stringResource(R.string.shell_profile),
                     onClick = { onSelect(AppShellTab.PROFILE) }
                 )
@@ -118,7 +124,7 @@ fun PremiumAppShellBar(
 private fun ShellTab(
     modifier: Modifier,
     selected: Boolean,
-    symbol: String,
+    @DrawableRes iconRes: Int,
     label: String,
     onClick: () -> Unit
 ) {
@@ -130,6 +136,11 @@ private fun ShellTab(
         targetValue = if (pressed) V2Motion.PressedScale else 1f,
         animationSpec = tween(V2Motion.FastMillis),
         label = "shellTabScale"
+    )
+    val iconScale by animateFloatAsState(
+        targetValue = if (selected) 1.08f else 0.94f,
+        animationSpec = tween(V2Motion.StandardMillis),
+        label = "shellTabIconScale"
     )
 
     Row(
@@ -167,12 +178,16 @@ private fun ShellTab(
     ) {
         Box(
             modifier = Modifier
-                .size(30.dp)
-                .clip(RoundedCornerShape(11.dp))
+                .size(32.dp)
+                .clip(RoundedCornerShape(12.dp))
                 .background(
                     if (selected) {
                         Brush.linearGradient(
-                            listOf(V2Colors.AccentViolet.copy(alpha = 0.24f), V2Colors.AccentCyan.copy(alpha = 0.10f))
+                            listOf(
+                                V2Colors.AccentViolet.copy(alpha = 0.28f),
+                                V2Colors.Orchid.copy(alpha = 0.18f),
+                                V2Colors.AccentCyan.copy(alpha = 0.09f)
+                            )
                         )
                     } else {
                         Brush.linearGradient(listOf(Color.Transparent, Color.Transparent))
@@ -180,12 +195,16 @@ private fun ShellTab(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = symbol,
-                color = accent,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Black,
-                modifier = Modifier.clearAndSetSemantics { }
+            Icon(
+                painter = painterResource(iconRes),
+                contentDescription = null,
+                tint = accent,
+                modifier = Modifier
+                    .size(19.dp)
+                    .graphicsLayer {
+                        scaleX = iconScale
+                        scaleY = iconScale
+                    }
             )
         }
         Spacer(Modifier.size(9.dp))
