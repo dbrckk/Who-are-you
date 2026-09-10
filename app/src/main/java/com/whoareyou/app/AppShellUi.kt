@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -69,11 +71,13 @@ fun PremiumAppShellBar(
                 )
             )
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .navigationBarsPadding()
+            .navigationBarsPadding(),
+        contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .widthIn(max = 560.dp)
                 .clip(RoundedCornerShape(30.dp))
                 .background(
                     Brush.linearGradient(
@@ -98,7 +102,10 @@ fun PremiumAppShellBar(
                     )
             )
             Row(
-                modifier = Modifier.fillMaxWidth().padding(6.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .selectableGroup()
+                    .padding(6.dp),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 ShellTab(
