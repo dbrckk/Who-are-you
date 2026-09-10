@@ -74,6 +74,10 @@ fun ProfileScreen(
                     primary = primaryAccent,
                     secondary = companionAccent
                 )
+                strongestQuiz?.let { quiz ->
+                    Spacer(Modifier.height(12.dp))
+                    QuizArtwork(quiz = quiz, compact = true)
+                }
                 Spacer(Modifier.height(12.dp))
                 Text(
                     summary.dominantArchetype.uppercase(),
