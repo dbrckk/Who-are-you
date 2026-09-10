@@ -46,13 +46,21 @@ fun ResultScreen(
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
+    val accent = QuizVisuals.accentFor(quiz)
+    val secondaryAccent = QuizVisuals.secondaryAccentFor(quiz)
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    listOf(V2Colors.InkSoft, V2Colors.Ink, V2Colors.Surface.copy(alpha = 0.72f), V2Colors.Ink)
+                    listOf(
+                        accent.copy(alpha = 0.13f),
+                        V2Colors.InkSoft,
+                        V2Colors.Ink,
+                        secondaryAccent.copy(alpha = 0.08f),
+                        V2Colors.Ink
+                    )
                 )
             )
             .padding(horizontal = V2Spacing.Screen),
@@ -60,9 +68,9 @@ fun ResultScreen(
     ) {
         item {
             Spacer(Modifier.height(32.dp))
-            Text(stringResource(R.string.your_result), color = V2Colors.Orchid, style = V2Type.Eyebrow)
+            Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
             Spacer(Modifier.height(16.dp))
-            IdentityAura(score = score)
+            IdentityAura(score = score, primary = accent, secondary = secondaryAccent)
             Spacer(Modifier.height(10.dp))
             QuizArtwork(quiz)
             Spacer(Modifier.height(18.dp))
@@ -86,9 +94,9 @@ fun ResultScreen(
                         .background(
                             Brush.linearGradient(
                                 listOf(
-                                    V2Colors.Orchid.copy(alpha = 0.08f),
+                                    accent.copy(alpha = 0.12f),
                                     Color.Transparent,
-                                    V2Colors.Cyan.copy(alpha = 0.05f)
+                                    secondaryAccent.copy(alpha = 0.08f)
                                 )
                             )
                         )
@@ -97,7 +105,7 @@ fun ResultScreen(
                 ) {
                     Text(
                         "$score%",
-                        color = V2Colors.VioletBright,
+                        color = accent,
                         fontSize = 54.sp,
                         lineHeight = 60.sp,
                         fontWeight = FontWeight.Black,
@@ -112,8 +120,8 @@ fun ResultScreen(
                     LinearProgressIndicator(
                         progress = { score / 100f },
                         modifier = Modifier.fillMaxWidth().height(8.dp),
-                        color = V2Colors.Orchid,
-                        trackColor = V2Colors.Hairline
+                        color = accent,
+                        trackColor = secondaryAccent.copy(alpha = 0.16f)
                     )
                     Spacer(Modifier.height(20.dp))
                     Text(description, color = V2Colors.TextPrimary, style = V2Type.Body, textAlign = TextAlign.Center)
@@ -128,7 +136,7 @@ fun ResultScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(Modifier.padding(18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(stringResource(R.string.retake_change_title), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
+                        Text(stringResource(R.string.retake_change_title), color = secondaryAccent, style = V2Type.Eyebrow)
                         Spacer(Modifier.height(7.dp))
                         Text(
                             stringResource(R.string.retake_change_values, scoreChange.previousScore, scoreChange.currentScore),
@@ -159,7 +167,7 @@ fun ResultScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(Modifier.padding(18.dp)) {
-                    Text(stringResource(R.string.profile_progress), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
+                    Text(stringResource(R.string.profile_progress), color = secondaryAccent, style = V2Type.Eyebrow)
                     Spacer(Modifier.height(6.dp))
                     Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
                 }
@@ -172,7 +180,7 @@ fun ResultScreen(
                     ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
+                colors = ButtonDefaults.buttonColors(containerColor = accent, contentColor = V2Colors.Ink),
                 shape = RoundedCornerShape(18.dp)
             ) {
                 Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
