@@ -3,7 +3,7 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 APP_GRADLE = ROOT / "app" / "build.gradle.kts"
-CIRCLE_CI = ROOT / ".circleci" / "config.yml"
+MAIN_RC = ROOT / ".github" / "workflows" / "m56-main-rc.yml"
 ANDROID_TEST = ROOT / "app" / "src" / "androidTest" / "java" / "com" / "whoareyou" / "app"
 
 
@@ -14,8 +14,8 @@ class M47UiTestWiringTest(unittest.TestCase):
         self.assertIn('androidTestImplementation("androidx.compose.ui:ui-test-junit4")', source)
         self.assertIn('debugImplementation("androidx.compose.ui:ui-test-manifest")', source)
 
-    def test_circleci_compiles_instrumentation_test_apk(self):
-        source = CIRCLE_CI.read_text(encoding="utf-8")
+    def test_github_actions_compiles_instrumentation_test_apk(self):
+        source = MAIN_RC.read_text(encoding="utf-8")
         self.assertIn("gradle :app:assembleDebugAndroidTest --stacktrace", source)
 
     def test_critical_compose_ui_tests_exist(self):
