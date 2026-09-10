@@ -18,6 +18,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -48,6 +51,11 @@ fun ResultScreen(
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
+    val animatedScore by animateFloatAsState(
+        targetValue = score.coerceIn(0, 100) / 100f,
+        animationSpec = tween(V2Motion.EmphasizedMillis),
+        label = "resultScoreProgress"
+    )
 
     LazyColumn(
         modifier = Modifier
@@ -118,7 +126,7 @@ fun ResultScreen(
                     }
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
-                        progress = { score / 100f },
+                        progress = { animatedScore },
                         modifier = Modifier.fillMaxWidth().height(8.dp),
                         color = accent,
                         trackColor = secondaryAccent.copy(alpha = 0.16f)
