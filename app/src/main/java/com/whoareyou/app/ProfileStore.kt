@@ -33,10 +33,13 @@ data class StoredProfile(
 )
 
 object ProfileStore {
+    private const val MAX_COMMITTED_QUIZ_ATTEMPTS = 64
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val previousScoresKey = stringPreferencesKey("previous_scores")
+    // Legacy per-quiz marker retained for migration from versions before M81.
     private val lastQuizAttemptIdsKey = stringPreferencesKey("last_quiz_attempt_ids")
+    private val committedQuizAttemptIdsKey = stringPreferencesKey("committed_quiz_attempt_ids")
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
@@ -60,8 +63,11 @@ object ProfileStore {
         var changed = false
         context.profileDataStore.edit { prefs ->
             val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
-            val previousAttempts = decodeStringMap(prefs[lastQuizAttemptIdsKey])
-            if (normalizedAttemptId != null && previousAttempts[normalizedQuizId] == normalizedAttemptId) {
+            val legacyAttempts = decodeStringMap(prefs[lastQuizAttemptIdsKey])
+            val committedAttempts = decodeList(prefs[committedQuizAttemptIdsKey]).toMutableList().apply {
+                legacyAttempts.values.filterNot(::contains).forEach(::add)
+            }
+            if (normalizedAttemptId != null && normalizedAttemptId in committedAttempts) {
                 return@edit
             }
 
@@ -76,7 +82,12 @@ object ProfileStore {
             prefs[scoresKey] = encodeScores(history.latestScores)
             prefs[previousScoresKey] = encodeScores(history.previousScores)
             if (normalizedAttemptId != null) {
-                prefs[lastQuizAttemptIdsKey] = encodeStringMap(previousAttempts + (normalizedQuizId to normalizedAttemptId))
+                committedAttempts.remove(normalizedAttemptId)
+                committedAttempts.add(normalizedAttemptId)
+                prefs[committedQuizAttemptIdsKey] = committedAttempts
+                    .takeLast(MAX_COMMITTED_QUIZ_ATTEMPTS)
+                    .joinToString(",")
+                prefs[lastQuizAttemptIdsKey] = encodeStringMap(legacyAttempts + (normalizedQuizId to normalizedAttemptId))
             }
             changed = true
         }
