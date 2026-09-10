@@ -36,6 +36,7 @@ object ProfileStore {
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val previousScoresKey = stringPreferencesKey("previous_scores")
+    private val lastQuizAttemptIdsKey = stringPreferencesKey("last_quiz_attempt_ids")
     private val adsRemovedKey = booleanPreferencesKey("ads_removed")
     private val onboardingCompleteKey = booleanPreferencesKey("onboarding_complete")
     private val announcedAchievementsKey = stringPreferencesKey("announced_achievement_ids")
@@ -52,8 +53,15 @@ object ProfileStore {
 
     fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map(::decodeProfile)
 
-    suspend fun saveQuizResult(context: Context, quizId: String, score: Int) {
+    suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null) {
+        var changed = false
         context.profileDataStore.edit { prefs ->
+            val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
+            val previousAttempts = decodeStringMap(prefs[lastQuizAttemptIdsKey])
+            if (normalizedAttemptId != null && previousAttempts[quizId] == normalizedAttemptId) {
+                return@edit
+            }
+
             val completed = decodeSet(prefs[completedKey]).toMutableSet().apply { add(quizId) }
             val history = ScoreHistoryEngine.update(
                 latestScores = decodeScores(prefs[scoresKey]),
@@ -64,8 +72,12 @@ object ProfileStore {
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = encodeScores(history.latestScores)
             prefs[previousScoresKey] = encodeScores(history.previousScores)
+            if (normalizedAttemptId != null) {
+                prefs[lastQuizAttemptIdsKey] = encodeStringMap(previousAttempts + (quizId to normalizedAttemptId))
+            }
+            changed = true
         }
-        announceNewAchievements(context)
+        if (changed) announceNewAchievements(context)
     }
 
     suspend fun saveMatchResult(context: Context, compatibility: Int) {
@@ -202,6 +214,20 @@ object ProfileStore {
         ?.mapNotNull { item ->
             val parts = item.split(':', limit = 2)
             if (parts.size != 2) null else parts[1].toIntOrNull()?.let { parts[0] to it.coerceIn(0, 100) }
+        }
+        ?.toMap()
+        ?: emptyMap()
+
+    private fun encodeStringMap(values: Map<String, String>): String = values.entries
+        .filter { it.key.isNotBlank() && it.value.isNotBlank() }
+        .sortedBy { it.key }
+        .joinToString(";") { "${it.key}:${it.value}" }
+
+    private fun decodeStringMap(raw: String?): Map<String, String> = raw
+        ?.split(';')
+        ?.mapNotNull { item ->
+            val parts = item.split(':', limit = 2)
+            if (parts.size != 2 || parts[0].isBlank() || parts[1].isBlank()) null else parts[0] to parts[1]
         }
         ?.toMap()
         ?: emptyMap()
