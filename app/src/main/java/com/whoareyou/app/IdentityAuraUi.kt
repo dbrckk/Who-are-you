@@ -22,11 +22,13 @@ import kotlin.math.sin
 @Composable
 fun IdentityAura(
     score: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    primary: Color = V2Colors.Orchid,
+    secondary: Color = V2Colors.Cyan
 ) {
     val normalized = score.coerceIn(0, 100) / 100f
-    val warm = lerp(V2Colors.Orchid, V2Colors.Peach, normalized)
-    val cool = lerp(V2Colors.VioletBright, V2Colors.Cyan, normalized)
+    val warm = lerp(primary, secondary, normalized * 0.42f)
+    val cool = lerp(secondary, primary, (1f - normalized) * 0.28f)
 
     Box(
         modifier = modifier
@@ -35,8 +37,9 @@ fun IdentityAura(
             .background(
                 Brush.radialGradient(
                     colors = listOf(
-                        warm.copy(alpha = 0.22f),
-                        V2Colors.Plum.copy(alpha = 0.14f),
+                        warm.copy(alpha = 0.24f),
+                        secondary.copy(alpha = 0.10f),
+                        V2Colors.Plum.copy(alpha = 0.10f),
                         Color.Transparent
                     )
                 )
@@ -50,8 +53,8 @@ fun IdentityAura(
             drawCircle(
                 brush = Brush.radialGradient(
                     colors = listOf(
-                        cool.copy(alpha = 0.88f),
-                        warm.copy(alpha = 0.48f),
+                        cool.copy(alpha = 0.90f),
+                        warm.copy(alpha = 0.52f),
                         Color.Transparent
                     ),
                     center = center,
@@ -91,7 +94,7 @@ fun IdentityAura(
             }
 
             drawCircle(
-                color = V2Colors.TextPrimary.copy(alpha = 0.20f),
+                color = primary.copy(alpha = 0.24f),
                 radius = baseRadius * 1.28f,
                 center = center,
                 style = Stroke(width = 2.5f)
