@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -49,16 +50,22 @@ fun ResultScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(V2Colors.Ink)
+            .background(
+                Brush.verticalGradient(
+                    listOf(V2Colors.InkSoft, V2Colors.Ink, V2Colors.Surface.copy(alpha = 0.72f), V2Colors.Ink)
+                )
+            )
             .padding(horizontal = V2Spacing.Screen),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
             Spacer(Modifier.height(32.dp))
-            Text(stringResource(R.string.your_result), color = V2Colors.AccentViolet, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(18.dp))
+            Text(stringResource(R.string.your_result), color = V2Colors.Orchid, style = V2Type.Eyebrow)
+            Spacer(Modifier.height(16.dp))
+            IdentityAura(score = score)
+            Spacer(Modifier.height(10.dp))
             QuizArtwork(quiz)
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(18.dp))
             Text(
                 resultTitle.uppercase(),
                 color = V2Colors.TextPrimary,
@@ -74,10 +81,23 @@ fun ResultScreen(
                 shape = RoundedCornerShape(V2Radius.Card),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(Modifier.padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    Modifier
+                        .background(
+                            Brush.linearGradient(
+                                listOf(
+                                    V2Colors.Orchid.copy(alpha = 0.08f),
+                                    Color.Transparent,
+                                    V2Colors.Cyan.copy(alpha = 0.05f)
+                                )
+                            )
+                        )
+                        .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
                         "$score%",
-                        color = V2Colors.AccentViolet,
+                        color = V2Colors.VioletBright,
                         fontSize = 54.sp,
                         lineHeight = 60.sp,
                         fontWeight = FontWeight.Black,
@@ -92,7 +112,7 @@ fun ResultScreen(
                     LinearProgressIndicator(
                         progress = { score / 100f },
                         modifier = Modifier.fillMaxWidth().height(8.dp),
-                        color = V2Colors.AccentViolet,
+                        color = V2Colors.Orchid,
                         trackColor = V2Colors.Hairline
                     )
                     Spacer(Modifier.height(20.dp))
