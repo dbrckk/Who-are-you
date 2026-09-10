@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,14 @@ class M56ReleaseCandidateTest(unittest.TestCase):
 
     def test_github_actions_builds_and_verifies_installable_apk(self):
         config = (ROOT / ".github/workflows/m56-main-rc.yml").read_text(encoding="utf-8")
+        gradle = (ROOT / "app/build.gradle.kts").read_text(encoding="utf-8")
+        version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle)
+        version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle)
+        self.assertIsNotNone(version_name)
+        self.assertIsNotNone(version_code)
+        version_name = version_name.group(1)
+        version_code = version_code.group(1)
+
         for expected in (
             "release_candidate:",
             "gradle :app:testDebugUnitTest",
@@ -45,7 +54,9 @@ class M56ReleaseCandidateTest(unittest.TestCase):
             "zipalign\" -c -v 4",
             "apksigner\" verify --verbose --print-certs",
             "aapt\" dump badging",
-            "who-are-you-0.1.0-rc.apk",
+            f'VERSION_NAME="{version_name}"',
+            f'VERSION_CODE="{version_code}"',
+            f"who-are-you-{version_name}-rc",
         ):
             self.assertIn(expected, config)
 
