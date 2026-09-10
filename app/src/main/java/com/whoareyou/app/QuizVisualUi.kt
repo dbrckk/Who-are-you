@@ -1,5 +1,10 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -7,34 +12,27 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-enum class QuizVisualTheme {
-    SOCIAL,
-    EMOTION,
-    MIND,
-    CONTROL,
-    GROWTH,
-    VALUES,
-    ENERGY,
-    LIFESTYLE,
-    IDENTITY
-}
+enum class QuizVisualTheme { SOCIAL, EMOTION, MIND, CONTROL, GROWTH, VALUES, ENERGY, LIFESTYLE, IDENTITY }
 
 object QuizVisuals {
     fun themeFor(quiz: Quiz): QuizVisualTheme {
@@ -92,21 +90,27 @@ object QuizVisuals {
 }
 
 @Composable
-fun QuizArtwork(
-    quiz: Quiz,
-    modifier: Modifier = Modifier,
-    compact: Boolean = false
-) {
+fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = false) {
     val shape = RoundedCornerShape(if (compact) V2Radius.Compact else V2Radius.Card)
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
+    val ambient = rememberInfiniteTransition(label = "quizArtworkAmbient")
+    val glowScale by ambient.animateFloat(
+        initialValue = 0.90f,
+        targetValue = 1.12f,
+        animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis), repeatMode = RepeatMode.Reverse),
+        label = "quizArtworkGlowScale"
+    )
+    val glowAlpha by ambient.animateFloat(
+        initialValue = 0.32f,
+        targetValue = 0.62f,
+        animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis + 700), repeatMode = RepeatMode.Reverse),
+        label = "quizArtworkGlowAlpha"
+    )
 
     Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(if (compact) 118.dp else 172.dp)
-            .clip(shape)
-            .border(1.dp, accent.copy(alpha = 0.24f), shape)
+        modifier = modifier.fillMaxWidth().height(if (compact) 118.dp else 172.dp).clip(shape)
+            .border(1.dp, accent.copy(alpha = 0.30f), shape)
     ) {
         Image(
             painter = painterResource(QuizVisuals.drawableFor(quiz)),
@@ -114,82 +118,42 @@ fun QuizArtwork(
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-
+        Box(Modifier.fillMaxSize().background(Brush.linearGradient(listOf(accent.copy(alpha = 0.12f), Color.Transparent, companion.copy(alpha = 0.15f)))))
         Box(
-            Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.linearGradient(
-                        listOf(
-                            accent.copy(alpha = 0.10f),
-                            Color.Transparent,
-                            companion.copy(alpha = 0.13f)
-                        )
-                    )
-                )
-        )
-
-        Box(
-            Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color.Transparent,
-                            V2Colors.OverlaySoft,
-                            V2Colors.OverlayStrong
-                        )
-                    )
-                )
-        )
-
-        Box(
-            modifier = Modifier
-                .padding(14.dp)
-                .size(if (compact) 38.dp else 46.dp)
-                .align(Alignment.TopEnd)
+            Modifier.align(Alignment.TopStart).offset(x = (-24).dp, y = (-30).dp)
+                .size(if (compact) 100.dp else 138.dp)
+                .graphicsLayer { scaleX = glowScale; scaleY = glowScale; alpha = glowAlpha }
                 .clip(CircleShape)
-                .background(
-                    Brush.radialGradient(
-                        listOf(
-                            accent.copy(alpha = 0.24f),
-                            V2Colors.SurfaceGlass
-                        )
-                    )
-                )
-                .border(1.dp, accent.copy(alpha = 0.48f), CircleShape),
+                .background(Brush.radialGradient(listOf(accent.copy(alpha = 0.34f), Color.Transparent)))
+        )
+        Box(
+            Modifier.align(Alignment.BottomEnd).offset(x = 28.dp, y = 34.dp)
+                .size(if (compact) 90.dp else 124.dp)
+                .graphicsLayer { scaleX = 1.05f / glowScale; scaleY = 1.05f / glowScale; alpha = glowAlpha * 0.78f }
+                .clip(CircleShape)
+                .background(Brush.radialGradient(listOf(companion.copy(alpha = 0.30f), Color.Transparent)))
+        )
+        Box(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color.Transparent, V2Colors.OverlaySoft, V2Colors.OverlayStrong))))
+
+        Box(
+            modifier = Modifier.padding(14.dp).size(if (compact) 38.dp else 46.dp).align(Alignment.TopEnd)
+                .graphicsLayer { scaleX = 0.98f + (glowScale - 0.90f) * 0.12f; scaleY = scaleX }
+                .clip(CircleShape)
+                .background(Brush.radialGradient(listOf(accent.copy(alpha = 0.28f), V2Colors.SurfaceGlass)))
+                .border(1.dp, accent.copy(alpha = 0.52f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = quiz.accent,
-                color = V2Colors.TextPrimary,
-                fontSize = if (compact) 18.sp else 22.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Text(quiz.accent, color = V2Colors.TextPrimary, fontSize = if (compact) 18.sp else 22.sp, fontWeight = FontWeight.Bold)
         }
 
         Box(
-            modifier = Modifier
-                .padding(start = 14.dp, bottom = 13.dp)
-                .align(Alignment.BottomStart)
+            modifier = Modifier.padding(start = 14.dp, bottom = 13.dp).align(Alignment.BottomStart)
                 .clip(RoundedCornerShape(V2Radius.Pill))
-                .background(
-                    Brush.horizontalGradient(
-                        listOf(
-                            accent.copy(alpha = 0.22f),
-                            companion.copy(alpha = 0.13f)
-                        )
-                    )
-                )
-                .border(1.dp, accent.copy(alpha = 0.30f), RoundedCornerShape(V2Radius.Pill))
+                .background(Brush.horizontalGradient(listOf(accent.copy(alpha = 0.25f), companion.copy(alpha = 0.16f))))
+                .border(1.dp, accent.copy(alpha = 0.34f), RoundedCornerShape(V2Radius.Pill))
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         ) {
-            Text(
-                text = quiz.time,
-                color = V2Colors.TextPrimary.copy(alpha = 0.90f),
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Text(quiz.time, color = V2Colors.TextPrimary.copy(alpha = 0.92f), fontSize = 10.sp, fontWeight = FontWeight.Bold)
         }
     }
 }
