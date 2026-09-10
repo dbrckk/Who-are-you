@@ -17,15 +17,17 @@ fun QuizResultCommitEffect(
     LaunchedEffect(screen, quiz.id, attemptId, pendingScore) {
         val score = pendingScore
         if (screen != AppScreen.QUIZ || score == null) return@LaunchedEffect
-        val committed = runCatching {
+        val commitResult = runCatching {
             ProfileStore.saveQuizResult(context, quiz.id, score, attemptId)
-        }.isSuccess
-        if (!committed) {
+        }
+        if (commitResult.isFailure) {
             onCommitFailed()
             return@LaunchedEffect
         }
-        runCatching { AppEvents.testComplete(quiz.id, score) }
-        runCatching { AppEvents.resultView(quiz.id, score) }
+        if (commitResult.getOrDefault(false)) {
+            runCatching { AppEvents.testComplete(quiz.id, score) }
+            runCatching { AppEvents.resultView(quiz.id, score) }
+        }
         onCommitted()
     }
 }
