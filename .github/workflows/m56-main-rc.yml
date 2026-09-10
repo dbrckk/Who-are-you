@@ -69,33 +69,35 @@ jobs:
       - name: Verify and package artifacts
         run: |
           set -euo pipefail
+          VERSION_NAME="0.2.0"
+          VERSION_CODE="2"
           APK="app/build/outputs/apk/candidate/app-candidate.apk"
           BUILD_TOOLS="$ANDROID_HOME/build-tools/37.0.0"
           test -s "$APK"
           "$BUILD_TOOLS/zipalign" -c -v 4 "$APK"
           "$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$APK" | tee apk-signature.txt
           "$BUILD_TOOLS/aapt" dump badging "$APK" | tee apk-badging.txt
-          grep -F "package: name='com.whoareyou.app' versionCode='1' versionName='0.1.0'" apk-badging.txt
+          grep -F "package: name='com.whoareyou.app' versionCode='${VERSION_CODE}' versionName='${VERSION_NAME}'" apk-badging.txt
           grep -F "sdkVersion:'26'" apk-badging.txt
           grep -F "targetSdkVersion:'36'" apk-badging.txt
 
-          cp "$APK" who-are-you-0.1.0-rc.apk
-          sha256sum who-are-you-0.1.0-rc.apk | tee who-are-you-0.1.0-rc.apk.sha256
+          cp "$APK" "who-are-you-${VERSION_NAME}-rc.apk"
+          sha256sum "who-are-you-${VERSION_NAME}-rc.apk" | tee "who-are-you-${VERSION_NAME}-rc.apk.sha256"
 
           mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
           test "${#bundles[@]}" -eq 1
-          cp "${bundles[0]}" who-are-you-0.1.0-release-unsigned.aab
-          sha256sum who-are-you-0.1.0-release-unsigned.aab | tee who-are-you-0.1.0-release-unsigned.aab.sha256
+          cp "${bundles[0]}" "who-are-you-${VERSION_NAME}-release-unsigned.aab"
+          sha256sum "who-are-you-${VERSION_NAME}-release-unsigned.aab" | tee "who-are-you-${VERSION_NAME}-release-unsigned.aab.sha256"
 
       - name: Upload RC artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-0.1.0-rc
+          name: who-are-you-0.2.0-rc
           path: |
-            who-are-you-0.1.0-rc.apk
-            who-are-you-0.1.0-rc.apk.sha256
-            who-are-you-0.1.0-release-unsigned.aab
-            who-are-you-0.1.0-release-unsigned.aab.sha256
+            who-are-you-0.2.0-rc.apk
+            who-are-you-0.2.0-rc.apk.sha256
+            who-are-you-0.2.0-release-unsigned.aab
+            who-are-you-0.2.0-release-unsigned.aab.sha256
             apk-signature.txt
             apk-badging.txt
           if-no-files-found: error
@@ -106,19 +108,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          TAG="v0.1.0-rc"
+          TAG="v0.2.0-rc"
           if ! gh release view "$TAG" >/dev/null 2>&1; then
             gh release create "$TAG" \
               --target "$GITHUB_SHA" \
-              --title "Who Are You 0.1.0 RC" \
-              --notes "Android release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
+              --title "Who Are You 0.2.0 RC" \
+              --notes "Android 0.2.0 release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
               --prerelease
           fi
           gh release upload "$TAG" \
-            who-are-you-0.1.0-rc.apk \
-            who-are-you-0.1.0-rc.apk.sha256 \
-            who-are-you-0.1.0-release-unsigned.aab \
-            who-are-you-0.1.0-release-unsigned.aab.sha256 \
+            who-are-you-0.2.0-rc.apk \
+            who-are-you-0.2.0-rc.apk.sha256 \
+            who-are-you-0.2.0-release-unsigned.aab \
+            who-are-you-0.2.0-release-unsigned.aab.sha256 \
             apk-signature.txt \
             apk-badging.txt \
             --clobber
