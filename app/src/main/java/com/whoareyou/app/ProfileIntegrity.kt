@@ -18,6 +18,7 @@ object ProfileIntegrity {
         val lowest = if (matchCount == 0) null else listOfNotNull(rawBest, rawLowest).minOrNull()
         val latestScores = cleanScores(profile.latestScores)
         val previousScores = cleanScores(profile.previousScores)
+            .filterKeys { it in latestScores }
         val completedQuizIds = cleanIds(profile.completedQuizIds).apply {
             addAll(latestScores.keys)
         }
