@@ -20,7 +20,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,11 +39,23 @@ fun ProfileScreen(
     val context = LocalContext.current
     val strongestDimension = summary.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
     val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
+    val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
+    val companionAccent = strongestQuiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.Cyan
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(V2Colors.Ink)
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        primaryAccent.copy(alpha = 0.11f),
+                        V2Colors.InkSoft,
+                        V2Colors.Ink,
+                        companionAccent.copy(alpha = 0.05f),
+                        V2Colors.Ink
+                    )
+                )
+            )
             .padding(horizontal = V2Spacing.Screen),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -49,16 +63,33 @@ fun ProfileScreen(
             Spacer(Modifier.height(12.dp))
             AccessibleBackAction(onClick = onBack)
             Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.your_profile), color = V2Colors.AccentViolet, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(10.dp))
-            Text(summary.dominantArchetype.uppercase(), color = V2Colors.TextPrimary, style = V2Type.Hero)
-            Spacer(Modifier.height(8.dp))
-            Text(
-                stringResource(R.string.profile_header_progress, summary.completedCount, summary.totalCount, summary.completionPercent),
-                color = V2Colors.TextSecondary,
-                fontSize = 14.sp,
-                lineHeight = 20.sp
-            )
+            Text(stringResource(R.string.your_profile), color = primaryAccent, style = V2Type.Eyebrow)
+            Spacer(Modifier.height(14.dp))
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IdentityAura(
+                    score = strongestDimension?.score ?: summary.completionPercent,
+                    primary = primaryAccent,
+                    secondary = companionAccent
+                )
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    summary.dominantArchetype.uppercase(),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.Hero,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    stringResource(R.string.profile_header_progress, summary.completedCount, summary.totalCount, summary.completionPercent),
+                    color = V2Colors.TextSecondary,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
             Spacer(Modifier.height(20.dp))
             Button(
                 onClick = {
@@ -66,7 +97,7 @@ fun ProfileScreen(
                     GlobalProfileShare.share(context, summary)
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
+                colors = ButtonDefaults.buttonColors(containerColor = primaryAccent, contentColor = V2Colors.Ink),
                 shape = RoundedCornerShape(18.dp)
             ) {
                 Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
@@ -100,7 +131,7 @@ fun ProfileScreen(
                 ProfileInsightCards(summary)
             }
             Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.all_dimensions), color = V2Colors.TextSecondary, style = V2Type.Eyebrow)
+            Text(stringResource(R.string.all_dimensions), color = companionAccent, style = V2Type.Eyebrow)
         }
 
         if (summary.dimensions.isEmpty()) {
@@ -119,32 +150,48 @@ fun ProfileScreen(
             }
         } else {
             items(summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }, key = { it.quizId }) { dimension ->
+                val quiz = catalog.firstOrNull { it.id == dimension.quizId }
+                val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
+                val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
+
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(V2Radius.Compact),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Column(Modifier.padding(18.dp)) {
+                    Column(
+                        Modifier
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(
+                                        accent.copy(alpha = 0.08f),
+                                        V2Colors.Surface,
+                                        companion.copy(alpha = 0.05f)
+                                    )
+                                )
+                            )
+                            .padding(18.dp)
+                    ) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Column(Modifier.weight(1f)) {
                                 Text(dimension.title.uppercase(), color = V2Colors.TextPrimary, fontSize = 16.sp, lineHeight = 22.sp, fontWeight = FontWeight.Black)
                                 Spacer(Modifier.height(3.dp))
-                                Text(dimension.resultTitle, color = V2Colors.AccentCyan, style = V2Type.Supporting, fontWeight = FontWeight.Bold)
+                                Text(dimension.resultTitle, color = companion, style = V2Type.Supporting, fontWeight = FontWeight.Bold)
                             }
-                            Text("${dimension.score}%", color = V2Colors.AccentViolet, fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.Black)
+                            Text("${dimension.score}%", color = accent, fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.Black)
                         }
                         Spacer(Modifier.height(10.dp))
                         LinearProgressIndicator(
                             progress = { dimension.score / 100f },
                             modifier = Modifier.fillMaxWidth().height(8.dp),
-                            color = V2Colors.AccentViolet,
-                            trackColor = V2Colors.Hairline
+                            color = accent,
+                            trackColor = companion.copy(alpha = 0.14f)
                         )
                         Spacer(Modifier.height(7.dp))
                         Text(dimension.metricLabel, color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp, fontWeight = FontWeight.Bold)
                         dimension.scoreChange?.let { change ->
                             Spacer(Modifier.height(12.dp))
-                            Text(stringResource(R.string.profile_evolution), color = V2Colors.AccentCyan, fontSize = 10.sp, lineHeight = 14.sp, fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.profile_evolution), color = companion, fontSize = 10.sp, lineHeight = 14.sp, fontWeight = FontWeight.Bold)
                             Spacer(Modifier.height(4.dp))
                             Text(
                                 stringResource(R.string.profile_evolution_values, change.previousScore, change.currentScore),
