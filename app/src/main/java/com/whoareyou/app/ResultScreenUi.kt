@@ -47,7 +47,7 @@ fun ResultScreen(
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
     val accent = QuizVisuals.accentFor(quiz)
-    val secondaryAccent = QuizVisuals.secondaryAccentFor(quiz)
+    val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
 
     LazyColumn(
         modifier = Modifier
