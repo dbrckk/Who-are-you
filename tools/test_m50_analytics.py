@@ -40,15 +40,18 @@ class M50AnalyticsTest(unittest.TestCase):
         self.assertIn("TelemetryPrivacy.params", http_section)
 
     def test_main_app_wires_activation_and_abandonment(self):
-        source = (APP / "MainActivity.kt").read_text(encoding="utf-8")
+        main_source = (APP / "MainActivity.kt").read_text(encoding="utf-8")
+        result_commit_source = (APP / "QuizResultCommitEffect.kt").read_text(encoding="utf-8")
         for call in (
             "AppEvents.onboardingView()",
             "AppEvents.onboardingComplete()",
             "AppEvents.screenView(screen)",
             "AppEvents.testAbandon(selectedQuiz.id",
-            "AppEvents.resultView(selectedQuiz.id, score)",
         ):
-            self.assertIn(call, source)
+            self.assertIn(call, main_source)
+        self.assertIn("QuizResultCommitEffect(", main_source)
+        self.assertIn("AppEvents.resultView(quiz.id, score)", result_commit_source)
+        self.assertIn("AppEvents.testComplete(quiz.id, score)", result_commit_source)
 
     def test_billing_wires_conversion_steps(self):
         source = (APP / "BillingManager.kt").read_text(encoding="utf-8")
