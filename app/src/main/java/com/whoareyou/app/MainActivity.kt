@@ -6,12 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.togetherWith
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -140,19 +134,7 @@ private fun WhoAreYouApp() {
     Box(modifier = Modifier.fillMaxSize()) {
         AnimatedContent(
             targetState = screen,
-            transitionSpec = {
-                (fadeIn(tween(V2Motion.StandardMillis)) +
-                    slideInHorizontally(
-                        animationSpec = tween(V2Motion.EmphasizedMillis),
-                        initialOffsetX = { width -> width / 10 }
-                    )).togetherWith(
-                    fadeOut(tween(V2Motion.FastMillis)) +
-                        slideOutHorizontally(
-                            animationSpec = tween(V2Motion.StandardMillis),
-                            targetOffsetX = { width -> -width / 14 }
-                        )
-                )
-            },
+            transitionSpec = { premiumScreenTransition() },
             label = "screen",
             modifier = Modifier
                 .fillMaxSize()
