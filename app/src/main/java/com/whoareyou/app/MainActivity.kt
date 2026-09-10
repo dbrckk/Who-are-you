@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import java.util.UUID
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -96,17 +97,35 @@ private fun WhoAreYouApp() {
     val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
+    var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
-    var quizFinishing by remember { mutableStateOf(false) }
+    var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
+    val quizFinishing = pendingFinalScore != null
 
     fun navigate(destination: AppScreen) { screenName = destination.name }
     fun resetQuizAttempt() {
+        quizAttemptId = UUID.randomUUID().toString()
         quizQuestionIndex = 0
         quizRawScore = 0
-        quizFinishing = false
+        pendingFinalScore = null
+    }
+
+    LaunchedEffect(screen, selectedQuizId, quizAttemptId, pendingFinalScore) {
+        val score = pendingFinalScore
+        if (screen != AppScreen.QUIZ || score == null) return@LaunchedEffect
+        val committed = runCatching {
+            ProfileStore.saveQuizResult(context, selectedQuiz.id, score, quizAttemptId)
+        }.isSuccess
+        if (!committed) {
+            pendingFinalScore = null
+            return@LaunchedEffect
+        }
+        runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
+        runCatching { AppEvents.resultView(selectedQuiz.id, score) }
+        navigate(AppScreen.RESULT)
     }
 
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
@@ -175,20 +194,8 @@ private fun WhoAreYouApp() {
                     },
                     onFinished = { score ->
                         if (!quizFinishing) {
-                            quizFinishing = true
                             finalScore = score
-                            scope.launch {
-                                val committed = runCatching {
-                                    ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
-                                }.isSuccess
-                                if (!committed) {
-                                    quizFinishing = false
-                                    return@launch
-                                }
-                                runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
-                                runCatching { AppEvents.resultView(selectedQuiz.id, score) }
-                                navigate(AppScreen.RESULT)
-                            }
+                            pendingFinalScore = score
                         }
                     }
                 )
@@ -200,6 +207,7 @@ private fun WhoAreYouApp() {
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                     totalQuizCount = quizCatalog.size,
                     onDone = {
+                        pendingFinalScore = null
                         val manager = adManager
                         if (manager == null) {
                             navigate(AppScreen.DISCOVER)
