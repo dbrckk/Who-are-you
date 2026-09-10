@@ -124,6 +124,7 @@ private fun WhoAreYouApp() {
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
+    var quizFinishing by rememberSaveable { mutableStateOf(false) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
 
@@ -134,6 +135,7 @@ private fun WhoAreYouApp() {
     fun resetQuizAttempt() {
         quizQuestionIndex = 0
         quizRawScore = 0
+        quizFinishing = false
     }
 
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
@@ -190,21 +192,30 @@ private fun WhoAreYouApp() {
                     questionIndex = quizQuestionIndex,
                     score = quizRawScore,
                     onProgress = { questionIndex, score ->
-                        quizQuestionIndex = questionIndex
-                        quizRawScore = score
+                        if (!quizFinishing) {
+                            quizQuestionIndex = questionIndex
+                            quizRawScore = score
+                        }
                     },
                     onBack = {
-                        runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
-                        navigate(AppScreen.DISCOVER)
+                        if (!quizFinishing) {
+                            runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
+                            navigate(AppScreen.DISCOVER)
+                        }
                     },
                     onFinished = { score ->
-                        finalScore = score
-                        runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
-                        runCatching { AppEvents.resultView(selectedQuiz.id, score) }
-                        scope.launch {
-                            ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
+                        if (!quizFinishing) {
+                            quizFinishing = true
+                            finalScore = score
+                            scope.launch {
+                                runCatching {
+                                    ProfileStore.saveQuizResult(context, selectedQuiz.id, score)
+                                }
+                                runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
+                                runCatching { AppEvents.resultView(selectedQuiz.id, score) }
+                                navigate(AppScreen.RESULT)
+                            }
                         }
-                        navigate(AppScreen.RESULT)
                     }
                 )
 
