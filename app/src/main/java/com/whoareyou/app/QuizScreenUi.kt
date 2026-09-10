@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,6 +37,8 @@ fun QuizScreen(
     val question = quiz.questions[safeQuestionIndex]
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val scrollState = rememberScrollState()
+    val accent = QuizVisuals.accentFor(quiz)
+    val companion = QuizVisuals.companionAccentFor(quiz)
 
     LaunchedEffect(quiz.id, safeQuestionIndex) {
         scrollState.scrollTo(0)
@@ -45,7 +48,17 @@ fun QuizScreen(
         Modifier
             .fillMaxSize()
             .testTag("quiz_question_${safeQuestionIndex + 1}")
-            .background(V2Colors.Ink)
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        accent.copy(alpha = 0.08f),
+                        V2Colors.InkSoft,
+                        V2Colors.Ink,
+                        companion.copy(alpha = 0.05f),
+                        V2Colors.Ink
+                    )
+                )
+            )
             .verticalScroll(scrollState)
             .padding(V2Spacing.Screen)
     ) {
@@ -66,15 +79,15 @@ fun QuizScreen(
         LinearProgressIndicator(
             progress = { progress },
             modifier = Modifier.fillMaxWidth().height(6.dp),
-            color = V2Colors.AccentViolet,
-            trackColor = V2Colors.Hairline
+            color = accent,
+            trackColor = companion.copy(alpha = 0.14f)
         )
         Spacer(Modifier.height(20.dp))
         QuizArtwork(quiz, compact = true)
         Spacer(Modifier.height(24.dp))
         Text(
             quiz.title.uppercase(),
-            color = V2Colors.AccentViolet,
+            color = accent,
             style = V2Type.Eyebrow
         )
         Spacer(Modifier.height(12.dp))
