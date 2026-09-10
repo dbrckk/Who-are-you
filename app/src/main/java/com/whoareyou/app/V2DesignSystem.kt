@@ -10,6 +10,7 @@ object V2Colors {
     // Deep plum-blue foundation: softer than pure black while retaining strong contrast.
     val Ink = Color(0xFF090A16)
     val InkSoft = Color(0xFF101124)
+    val Plum = Color(0xFF251C3A)
     val Surface = Color(0xFF17182D)
     val SurfaceRaised = Color(0xFF20223C)
     val SurfaceGlass = Color(0xE01B1C34)
