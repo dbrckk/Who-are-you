@@ -20,12 +20,12 @@ fun WhoAreYouTheme(content: @Composable () -> Unit) {
         primary = V2Colors.AccentViolet,
         onPrimary = Color.White,
         secondary = V2Colors.AccentCyan,
-        tertiary = V2Colors.Coral,
+        tertiary = V2Colors.Orchid,
         onBackground = V2Colors.TextPrimary,
         onSurface = V2Colors.TextPrimary,
         onSurfaceVariant = V2Colors.TextSecondary,
         outline = V2Colors.HairlineStrong,
-        error = V2Colors.Coral
+        error = V2Colors.Rose
     )
 
     MaterialTheme(colorScheme = scheme) {
@@ -35,9 +35,10 @@ fun WhoAreYouTheme(content: @Composable () -> Unit) {
                 .background(
                     Brush.verticalGradient(
                         listOf(
+                            Color(0xFF17142A),
                             V2Colors.InkSoft,
                             V2Colors.Ink,
-                            Color(0xFF080B17)
+                            Color(0xFF0B1020)
                         )
                     )
                 )
