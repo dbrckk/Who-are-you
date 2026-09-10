@@ -26,8 +26,8 @@ class M51ReleaseReadinessTest(unittest.TestCase):
         self.assertIn('android:exported="false"', manifest)
         self.assertIn('android:autoVerify="true"', manifest)
 
-    def test_circleci_proves_release_variant(self):
-        config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
+    def test_github_actions_proves_release_variant(self):
+        config = (ROOT / ".github/workflows/m56-main-rc.yml").read_text(encoding="utf-8")
         self.assertIn("gradle :app:lintRelease --stacktrace", config)
         self.assertIn("gradle :app:bundleRelease --stacktrace", config)
         self.assertIn("release-unsigned.aab", config)
