@@ -37,6 +37,26 @@ class ProfileStorePersistenceTest {
             assertTrue(ProfileStore.saveQuizResult(context, quizId, 41, firstAttempt))
             assertTrue(ProfileStore.saveQuizResult(context, quizId, 83, secondAttempt))
             assertFalse(ProfileStore.saveQuizResult(context, quizId, 41, firstAttempt))
+
+            val profile = ProfileStore.observe(context).first()
+            assertEquals(83, profile.latestScores[quizId])
+            assertEquals(41, profile.previousScores[quizId])
+        }
+    }
+
+    @Test
+    fun immediateAttemptReplayCannotOverwritePersistedScore() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val quizId = "duplicate-${UUID.randomUUID()}"
+        val attemptId = UUID.randomUUID().toString()
+
+        runBlocking {
+            assertTrue(ProfileStore.saveQuizResult(context, quizId, 52, attemptId))
+            assertFalse(ProfileStore.saveQuizResult(context, quizId, 99, attemptId))
+
+            val profile = ProfileStore.observe(context).first()
+            assertEquals(52, profile.latestScores[quizId])
+            assertFalse(quizId in profile.previousScores)
         }
     }
 
