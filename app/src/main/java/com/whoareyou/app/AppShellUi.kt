@@ -106,6 +106,8 @@ fun PremiumAppShellBar(
                     selected = selected == AppShellTab.DISCOVER,
                     iconRes = R.drawable.ic_shell_discover,
                     label = stringResource(R.string.shell_discover),
+                    primaryAccent = V2Colors.Cyan,
+                    secondaryAccent = V2Colors.VioletBright,
                     onClick = { onSelect(AppShellTab.DISCOVER) }
                 )
                 ShellTab(
@@ -113,6 +115,8 @@ fun PremiumAppShellBar(
                     selected = selected == AppShellTab.PROFILE,
                     iconRes = R.drawable.ic_shell_profile,
                     label = stringResource(R.string.shell_profile),
+                    primaryAccent = V2Colors.Orchid,
+                    secondaryAccent = V2Colors.Rose,
                     onClick = { onSelect(AppShellTab.PROFILE) }
                 )
             }
@@ -126,10 +130,12 @@ private fun ShellTab(
     selected: Boolean,
     @DrawableRes iconRes: Int,
     label: String,
+    primaryAccent: Color,
+    secondaryAccent: Color,
     onClick: () -> Unit
 ) {
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
-    val accent = if (selected) V2Colors.AccentViolet else V2Colors.TextSecondary
+    val accent = if (selected) primaryAccent else V2Colors.TextSecondary
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
@@ -155,8 +161,8 @@ private fun ShellTab(
                 if (selected) {
                     Brush.linearGradient(
                         listOf(
-                            V2Colors.AccentViolet.copy(alpha = 0.18f),
-                            V2Colors.AccentCyan.copy(alpha = 0.07f),
+                            primaryAccent.copy(alpha = 0.20f),
+                            secondaryAccent.copy(alpha = 0.09f),
                             V2Colors.SurfaceElevated
                         )
                     )
@@ -184,9 +190,9 @@ private fun ShellTab(
                     if (selected) {
                         Brush.linearGradient(
                             listOf(
-                                V2Colors.AccentViolet.copy(alpha = 0.28f),
-                                V2Colors.Orchid.copy(alpha = 0.18f),
-                                V2Colors.AccentCyan.copy(alpha = 0.09f)
+                                primaryAccent.copy(alpha = 0.30f),
+                                secondaryAccent.copy(alpha = 0.18f),
+                                primaryAccent.copy(alpha = 0.08f)
                             )
                         )
                     } else {
