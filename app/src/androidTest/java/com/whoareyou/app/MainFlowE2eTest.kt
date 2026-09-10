@@ -112,7 +112,7 @@ class MainFlowE2eTest {
     }
 
     @Test
-    fun resultCommitSurvivesImmediateRecreationAndRetryStartsFreshAttempt() {
+    fun resultCommitSurvivesImmediateRecreationAndRetryPreservesScoreHistory() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         runBlocking { ProfileStore.setOnboardingComplete(context, true) }
         composeRule.activityRule.scenario.recreate()
@@ -123,6 +123,15 @@ class MainFlowE2eTest {
         val summary = GlobalProfileEngine.build(catalog, stored.latestScores, stored.previousScores)
         val quiz = requireNotNull(
             DiscoverPersonalization.recommendation(catalog, stored.completedQuizIds, summary.dimensions)?.quiz
+        )
+        val firstScore = Scoring.quizPercent(
+            quiz.questions.sumOf { it.answers.first().score },
+            quiz.questions.size
+        )
+        val retryAnswerIndices = quiz.questions.map { question -> if (question.answers.size > 1) 1 else 0 }
+        val retryScore = Scoring.quizPercent(
+            quiz.questions.mapIndexed { index, question -> question.answers[retryAnswerIndices[index]].score }.sum(),
+            quiz.questions.size
         )
 
         openRecommendedQuiz()
@@ -142,12 +151,22 @@ class MainFlowE2eTest {
         waitForTag("app_screen_result")
         composeRule.onNodeWithTag("result_score").assertExists()
 
+        val afterFirstAttempt = runBlocking { ProfileStore.observe(context).first() }
+        assertEquals(firstScore, afterFirstAttempt.latestScores[quiz.id])
+
         composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
         waitForTag("app_screen_quiz")
         waitForTag("quiz_question_1")
 
-        composeRule.onNodeWithTag("quiz_answer_0").performClick()
-        waitForTag("quiz_question_2")
+        quiz.questions.indices.forEach { index ->
+            waitForTag("quiz_question_${index + 1}")
+            composeRule.onNodeWithTag("quiz_answer_${retryAnswerIndices[index]}").assertExists().performClick()
+        }
+
+        waitForTag("app_screen_result")
+        val afterRetry = runBlocking { ProfileStore.observe(context).first() }
+        assertEquals(retryScore, afterRetry.latestScores[quiz.id])
+        assertEquals(firstScore, afterRetry.previousScores[quiz.id])
     }
 
     private fun openRecommendedQuiz() {
