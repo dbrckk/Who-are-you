@@ -54,26 +54,29 @@ object ProfileStore {
     fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map(::decodeProfile)
 
     suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null): Boolean {
+        val normalizedQuizId = quizId.trim()
+        if (normalizedQuizId.isEmpty()) return false
+
         var changed = false
         context.profileDataStore.edit { prefs ->
             val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
             val previousAttempts = decodeStringMap(prefs[lastQuizAttemptIdsKey])
-            if (normalizedAttemptId != null && previousAttempts[quizId] == normalizedAttemptId) {
+            if (normalizedAttemptId != null && previousAttempts[normalizedQuizId] == normalizedAttemptId) {
                 return@edit
             }
 
-            val completed = decodeSet(prefs[completedKey]).toMutableSet().apply { add(quizId) }
+            val completed = decodeSet(prefs[completedKey]).toMutableSet().apply { add(normalizedQuizId) }
             val history = ScoreHistoryEngine.update(
                 latestScores = decodeScores(prefs[scoresKey]),
                 previousScores = decodeScores(prefs[previousScoresKey]),
-                quizId = quizId,
+                quizId = normalizedQuizId,
                 score = score
             )
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = encodeScores(history.latestScores)
             prefs[previousScoresKey] = encodeScores(history.previousScores)
             if (normalizedAttemptId != null) {
-                prefs[lastQuizAttemptIdsKey] = encodeStringMap(previousAttempts + (quizId to normalizedAttemptId))
+                prefs[lastQuizAttemptIdsKey] = encodeStringMap(previousAttempts + (normalizedQuizId to normalizedAttemptId))
             }
             changed = true
         }
