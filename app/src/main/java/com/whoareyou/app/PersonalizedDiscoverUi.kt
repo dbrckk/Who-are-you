@@ -148,25 +148,20 @@ fun PersonalizedDiscoverDashboard(
                 shape = RoundedCornerShape(V2Radius.Card),
                 containerColor = V2Colors.Surface
             ) {
-                Row(
-                    modifier = Modifier.padding(14.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier.size(52.dp).clip(RoundedCornerShape(18.dp)).background(accent.copy(alpha = 0.16f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(nextQuiz.accent, style = V2Type.SectionTitle)
-                    }
-                    Column(modifier = Modifier.weight(1f).padding(start = 13.dp, end = 10.dp)) {
-                        Text(stringResource(R.string.personalized_next_label), color = accent, style = V2Type.Caption)
-                        Spacer(Modifier.height(4.dp))
-                        Text(nextQuiz.title, color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
-                        Spacer(Modifier.height(3.dp))
-                        Text(stringResource(reason), color = V2Colors.TextSecondary, style = V2Type.Supporting)
-                    }
-                    if (onQuizSelected != null) {
-                        Text("→", color = accent, style = V2Type.SectionTitle)
+                Column(modifier = Modifier.padding(14.dp)) {
+                    QuizArtwork(quiz = nextQuiz, compact = true)
+                    Spacer(Modifier.height(14.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Column(modifier = Modifier.weight(1f).padding(end = 10.dp)) {
+                            Text(stringResource(R.string.personalized_next_label), color = accent, style = V2Type.Caption)
+                            Spacer(Modifier.height(4.dp))
+                            Text(nextQuiz.title, color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                            Spacer(Modifier.height(3.dp))
+                            Text(stringResource(reason), color = V2Colors.TextSecondary, style = V2Type.Supporting)
+                        }
+                        if (onQuizSelected != null) {
+                            Text("→", color = accent, style = V2Type.SectionTitle)
+                        }
                     }
                 }
             }
