@@ -33,19 +33,19 @@ The app has moved well beyond the original prototype. The current product includ
 - AdMob interstitial support with no ad interruption during quizzes
 - Google Play Billing one-time ad-removal purchase
 - Play release preparation/publishing tooling
-- CircleCI Android validation and artifact generation
-- GitHub Actions manual fallback workflows
+- GitHub Actions validation, device testing and release-candidate workflows
 
 ## Quality gates
 
-CircleCI validates `main` with:
+GitHub Actions validates `main` with:
 
-1. bilingual quiz-catalog integrity and EN/FR parity
-2. Python release-tool tests
-3. JVM unit tests
-4. Android lint
-5. debug APK compilation
-6. installable APK artifact generation + SHA-256 checksum
+1. repository and bilingual quiz-catalog integrity checks
+2. JVM unit tests
+3. instrumentation-test compilation
+4. Android candidate and release lint
+5. optimized installable candidate APK and unsigned release AAB builds
+6. emulator/device UI and runtime smoke validation with crash/ANR detection
+7. release-candidate artifact packaging and prerelease publication
 
 ## Tech
 
