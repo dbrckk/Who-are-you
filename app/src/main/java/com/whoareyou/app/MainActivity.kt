@@ -40,34 +40,24 @@ private fun WhoAreYouApp() {
     val activity = context as? Activity
     val scope = rememberCoroutineScope()
     val quizCatalog = remember(context) { QuizRepository.load(context) }
-    val storedProfileFlow = remember(context) {
-        ProfileStore.observe(context).map<StoredProfile, StoredProfile?> { it }
-    }
+    val storedProfileFlow = remember(context) { ProfileStore.observe(context).map<StoredProfile, StoredProfile?> { it } }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
     val storedProfile = storedProfileState ?: return
     val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
         GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
     }
-
     var premiumOverride by remember { mutableStateOf(false) }
     var privacyOptionsRequired by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
-
     val billingManager = remember(context) {
-        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) {
-            runCatching {
-                BillingManager(
-                    context = context,
-                    onPremiumChanged = { premiumOverride = it },
-                    onPriceChanged = BillingPriceState::update
-                )
-            }.getOrNull()
-        } else null
+        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching {
+            BillingManager(context, { premiumOverride = it }, BillingPriceState::update)
+        }.getOrNull() else null
     }
     val adManager = remember(context) {
-        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) {
-            runCatching { AdManager(context) { required -> privacyOptionsRequired = required } }.getOrNull()
-        } else null
+        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching {
+            AdManager(context) { required -> privacyOptionsRequired = required }
+        }.getOrNull() else null
     }
 
     DisposableEffect(billingManager, adManager, activity) {
@@ -75,18 +65,14 @@ private fun WhoAreYouApp() {
         runCatching { adManager?.start(activity) }
         onDispose { runCatching { billingManager?.close() } }
     }
-
     if (!storedProfile.onboardingComplete) {
         LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
-        OnboardingScreen(
-            onStart = {
-                runCatching { AppEvents.onboardingComplete() }
-                scope.launch { ProfileStore.setOnboardingComplete(context) }
-            }
-        )
+        OnboardingScreen {
+            runCatching { AppEvents.onboardingComplete() }
+            scope.launch { ProfileStore.setOnboardingComplete(context) }
+        }
         return
     }
-
     if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
         LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }
         CatalogUnavailableScreen()
@@ -114,31 +100,23 @@ private fun WhoAreYouApp() {
     }
 
     QuizResultCommitEffect(
-        screen = screen,
-        quiz = selectedQuiz,
-        attemptId = quizAttemptId,
-        pendingScore = pendingFinalScore,
+        screen, selectedQuiz, quizAttemptId, pendingFinalScore,
         onCommitFailed = { pendingFinalScore = null },
         onCommitted = { navigate(AppScreen.RESULT) }
     )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
-
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
         if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler
-        if (screen == AppScreen.QUIZ) {
-            runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
-        }
+        if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
         navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(Modifier.fillMaxSize()) {
         AnimatedContent(
             targetState = screen,
             transitionSpec = { premiumScreenTransition() },
             label = "screen",
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag("app_screen_${screen.name.lowercase()}")
+            modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}")
         ) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
@@ -157,19 +135,11 @@ private fun WhoAreYouApp() {
                         navigate(AppScreen.QUIZ)
                     },
                     onRemoveAds = {
-                        if (!adsRemoved && activity != null) {
-                            runCatching { billingManager?.launchPurchase(activity) }
-                        }
+                        if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) }
                     },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
-
-                AppScreen.PROFILE -> ProfileScreen(
-                    summary = globalProfile,
-                    catalog = quizCatalog,
-                    onBack = { navigate(AppScreen.DISCOVER) }
-                )
-
+                AppScreen.PROFILE -> ProfileScreen(globalProfile, quizCatalog) { navigate(AppScreen.DISCOVER) }
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
                     questionIndex = quizQuestionIndex,
@@ -193,7 +163,6 @@ private fun WhoAreYouApp() {
                         }
                     }
                 )
-
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz,
                     score = finalScore,
@@ -203,15 +172,9 @@ private fun WhoAreYouApp() {
                     onDone = {
                         pendingFinalScore = null
                         val manager = adManager
-                        if (manager == null) {
-                            navigate(AppScreen.DISCOVER)
-                        } else {
-                            runCatching {
-                                manager.onResultFinished(activity, adsRemoved) {
-                                    navigate(AppScreen.DISCOVER)
-                                }
-                            }.onFailure { navigate(AppScreen.DISCOVER) }
-                        }
+                        if (manager == null) navigate(AppScreen.DISCOVER) else runCatching {
+                            manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) }
+                        }.onFailure { navigate(AppScreen.DISCOVER) }
                     },
                     onRetry = {
                         previousScoreForAttempt = finalScore
@@ -222,12 +185,11 @@ private fun WhoAreYouApp() {
                 )
             }
         }
-
         AppShellNavigation.tabFor(screen)?.let { selectedTab ->
             PremiumAppShellBar(
-                selected = selectedTab,
-                onSelect = { tab -> navigate(AppShellNavigation.destination(tab)) },
-                modifier = Modifier.align(Alignment.BottomCenter)
+                selectedTab,
+                { tab -> navigate(AppShellNavigation.destination(tab)) },
+                Modifier.align(Alignment.BottomCenter)
             )
         }
     }
