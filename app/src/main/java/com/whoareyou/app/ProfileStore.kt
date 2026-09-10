@@ -63,31 +63,33 @@ object ProfileStore {
         var changed = false
         context.profileDataStore.edit { prefs ->
             val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
-            val legacyAttempts = decodeStringMap(prefs[lastQuizAttemptIdsKey])
-            val committedAttempts = decodeList(prefs[committedQuizAttemptIdsKey]).toMutableList().apply {
+            val legacyAttempts = ProfilePersistenceCodec.decodeStringMap(prefs[lastQuizAttemptIdsKey])
+            val committedAttempts = ProfilePersistenceCodec.decodeList(prefs[committedQuizAttemptIdsKey]).toMutableList().apply {
                 legacyAttempts.values.filterNot(::contains).forEach(::add)
             }
             if (normalizedAttemptId != null && normalizedAttemptId in committedAttempts) {
                 return@edit
             }
 
-            val completed = decodeSet(prefs[completedKey]).toMutableSet().apply { add(normalizedQuizId) }
+            val completed = ProfilePersistenceCodec.decodeSet(prefs[completedKey]).toMutableSet().apply { add(normalizedQuizId) }
             val history = ScoreHistoryEngine.update(
-                latestScores = decodeScores(prefs[scoresKey]),
-                previousScores = decodeScores(prefs[previousScoresKey]),
+                latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey]),
+                previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
                 quizId = normalizedQuizId,
                 score = score
             )
             prefs[completedKey] = completed.sorted().joinToString(",")
-            prefs[scoresKey] = encodeScores(history.latestScores)
-            prefs[previousScoresKey] = encodeScores(history.previousScores)
+            prefs[scoresKey] = ProfilePersistenceCodec.encodeScores(history.latestScores)
+            prefs[previousScoresKey] = ProfilePersistenceCodec.encodeScores(history.previousScores)
             if (normalizedAttemptId != null) {
                 committedAttempts.remove(normalizedAttemptId)
                 committedAttempts.add(normalizedAttemptId)
                 prefs[committedQuizAttemptIdsKey] = committedAttempts
                     .takeLast(MAX_COMMITTED_QUIZ_ATTEMPTS)
                     .joinToString(",")
-                prefs[lastQuizAttemptIdsKey] = encodeStringMap(legacyAttempts + (normalizedQuizId to normalizedAttemptId))
+                prefs[lastQuizAttemptIdsKey] = ProfilePersistenceCodec.encodeStringMap(
+                    legacyAttempts + (normalizedQuizId to normalizedAttemptId)
+                )
             }
             changed = true
         }
@@ -163,7 +165,7 @@ object ProfileStore {
 
     suspend fun consumeAchievementUnlock(context: Context, achievementId: String) {
         context.profileDataStore.edit { prefs ->
-            val pending = decodeList(prefs[pendingAchievementsKey])
+            val pending = ProfilePersistenceCodec.decodeList(prefs[pendingAchievementsKey])
             prefs[pendingAchievementsKey] = AchievementUnlockQueue.consume(pending, achievementId).joinToString(",")
         }
     }
@@ -190,13 +192,13 @@ object ProfileStore {
 
     private fun decodeProfile(prefs: androidx.datastore.preferences.core.Preferences): StoredProfile = ProfileIntegrity.sanitize(
         StoredProfile(
-            completedQuizIds = decodeSet(prefs[completedKey]),
-            latestScores = decodeScores(prefs[scoresKey]),
-            previousScores = decodeScores(prefs[previousScoresKey]),
+            completedQuizIds = ProfilePersistenceCodec.decodeSet(prefs[completedKey]),
+            latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey]),
+            previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
             adsRemoved = prefs[adsRemovedKey] ?: false,
             onboardingComplete = prefs[onboardingCompleteKey] ?: false,
-            announcedAchievementIds = decodeSet(prefs[announcedAchievementsKey]),
-            pendingAchievementIds = decodeList(prefs[pendingAchievementsKey]),
+            announcedAchievementIds = ProfilePersistenceCodec.decodeSet(prefs[announcedAchievementsKey]),
+            pendingAchievementIds = ProfilePersistenceCodec.decodeList(prefs[pendingAchievementsKey]),
             matchCount = prefs[matchCountKey] ?: 0,
             bestMatchPercent = prefs[bestMatchKey],
             lowestMatchPercent = prefs[lowestMatchKey],
@@ -210,53 +212,4 @@ object ProfileStore {
             )
         )
     )
-
-    private fun decodeSet(raw: String?): Set<String> = decodeList(raw).toSet()
-
-    private fun decodeList(raw: String?): List<String> = raw
-        ?.split(',')
-        ?.map { it.trim() }
-        ?.filter { it.isNotEmpty() }
-        ?.distinct()
-        ?: emptyList()
-
-    private fun encodeScores(scores: Map<String, Int>): String = scores.entries
-        .mapNotNull { (rawId, score) -> rawId.trim().takeIf(String::isNotEmpty)?.let { it to score.coerceIn(0, 100) } }
-        .distinctBy { it.first }
-        .sortedBy { it.first }
-        .joinToString(";") { (id, score) -> "$id:$score" }
-
-    private fun decodeScores(raw: String?): Map<String, Int> = raw
-        ?.split(';')
-        ?.mapNotNull { item ->
-            val parts = item.split(':', limit = 2)
-            if (parts.size != 2) return@mapNotNull null
-            val id = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
-            val score = parts[1].trim().toIntOrNull()?.coerceIn(0, 100) ?: return@mapNotNull null
-            id to score
-        }
-        ?.toMap()
-        ?: emptyMap()
-
-    private fun encodeStringMap(values: Map<String, String>): String = values.entries
-        .mapNotNull { (rawKey, rawValue) ->
-            val key = rawKey.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
-            val value = rawValue.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
-            key to value
-        }
-        .distinctBy { it.first }
-        .sortedBy { it.first }
-        .joinToString(";") { (key, value) -> "$key:$value" }
-
-    private fun decodeStringMap(raw: String?): Map<String, String> = raw
-        ?.split(';')
-        ?.mapNotNull { item ->
-            val parts = item.split(':', limit = 2)
-            if (parts.size != 2) return@mapNotNull null
-            val key = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
-            val value = parts[1].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
-            key to value
-        }
-        ?.toMap()
-        ?: emptyMap()
 }
