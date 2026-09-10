@@ -221,28 +221,41 @@ object ProfileStore {
         ?: emptyList()
 
     private fun encodeScores(scores: Map<String, Int>): String = scores.entries
-        .sortedBy { it.key }
-        .joinToString(";") { "${it.key}:${it.value.coerceIn(0, 100)}" }
+        .mapNotNull { (rawId, score) -> rawId.trim().takeIf(String::isNotEmpty)?.let { it to score.coerceIn(0, 100) } }
+        .distinctBy { it.first }
+        .sortedBy { it.first }
+        .joinToString(";") { (id, score) -> "$id:$score" }
 
     private fun decodeScores(raw: String?): Map<String, Int> = raw
         ?.split(';')
         ?.mapNotNull { item ->
             val parts = item.split(':', limit = 2)
-            if (parts.size != 2) null else parts[1].toIntOrNull()?.let { parts[0] to it.coerceIn(0, 100) }
+            if (parts.size != 2) return@mapNotNull null
+            val id = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val score = parts[1].trim().toIntOrNull()?.coerceIn(0, 100) ?: return@mapNotNull null
+            id to score
         }
         ?.toMap()
         ?: emptyMap()
 
     private fun encodeStringMap(values: Map<String, String>): String = values.entries
-        .filter { it.key.isNotBlank() && it.value.isNotBlank() }
-        .sortedBy { it.key }
-        .joinToString(";") { "${it.key}:${it.value}" }
+        .mapNotNull { (rawKey, rawValue) ->
+            val key = rawKey.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val value = rawValue.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            key to value
+        }
+        .distinctBy { it.first }
+        .sortedBy { it.first }
+        .joinToString(";") { (key, value) -> "$key:$value" }
 
     private fun decodeStringMap(raw: String?): Map<String, String> = raw
         ?.split(';')
         ?.mapNotNull { item ->
             val parts = item.split(':', limit = 2)
-            if (parts.size != 2 || parts[0].isBlank() || parts[1].isBlank()) null else parts[0] to parts[1]
+            if (parts.size != 2) return@mapNotNull null
+            val key = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val value = parts[1].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            key to value
         }
         ?.toMap()
         ?: emptyMap()
