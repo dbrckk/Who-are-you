@@ -61,18 +61,12 @@ private fun WhoAreYouApp() {
                     onPriceChanged = BillingPriceState::update
                 )
             }.getOrNull()
-        } else {
-            null
-        }
+        } else null
     }
     val adManager = remember(context) {
         if (BuildConfig.EXTERNAL_SERVICES_ENABLED) {
-            runCatching {
-                AdManager(context) { required -> privacyOptionsRequired = required }
-            }.getOrNull()
-        } else {
-            null
-        }
+            runCatching { AdManager(context) { required -> privacyOptionsRequired = required } }.getOrNull()
+        } else null
     }
 
     DisposableEffect(billingManager, adManager, activity) {
@@ -108,10 +102,7 @@ private fun WhoAreYouApp() {
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
 
-    fun navigate(destination: AppScreen) {
-        screenName = destination.name
-    }
-
+    fun navigate(destination: AppScreen) { screenName = destination.name }
     fun resetQuizAttempt() {
         quizQuestionIndex = 0
         quizRawScore = 0
@@ -157,9 +148,7 @@ private fun WhoAreYouApp() {
                             runCatching { billingManager?.launchPurchase(activity) }
                         }
                     },
-                    onPrivacyOptions = {
-                        runCatching { adManager?.showPrivacyOptions(activity) }
-                    }
+                    onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
 
                 AppScreen.PROFILE -> ProfileScreen(
