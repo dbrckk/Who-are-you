@@ -83,6 +83,9 @@ class MainFlowE2eTest {
         val tabMatcher = SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
         composeRule.onAllNodes(tabMatcher)[1].performClick()
         waitForTag("app_screen_profile")
+
+        pressSystemBack()
+        waitForTag("app_screen_discover")
     }
 
     @Test
@@ -104,10 +107,7 @@ class MainFlowE2eTest {
         waitForTag("quiz_question_2")
         composeRule.waitForIdle()
 
-        composeRule.activityRule.scenario.onActivity {
-            it.onBackPressedDispatcher.onBackPressed()
-        }
-        composeRule.waitForIdle()
+        pressSystemBack()
         waitForTag("app_screen_discover")
     }
 
@@ -167,6 +167,9 @@ class MainFlowE2eTest {
         val afterRetry = runBlocking { ProfileStore.observe(context).first() }
         assertEquals(retryScore, afterRetry.latestScores[quiz.id])
         assertEquals(firstScore, afterRetry.previousScores[quiz.id])
+
+        pressSystemBack()
+        waitForTag("app_screen_discover")
     }
 
     private fun openRecommendedQuiz() {
@@ -174,6 +177,13 @@ class MainFlowE2eTest {
             .assertExists()
             .performScrollTo()
             .performClick()
+    }
+
+    private fun pressSystemBack() {
+        composeRule.activityRule.scenario.onActivity {
+            it.onBackPressedDispatcher.onBackPressed()
+        }
+        composeRule.waitForIdle()
     }
 
     private fun waitForTag(tag: String) {
