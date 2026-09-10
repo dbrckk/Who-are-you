@@ -53,7 +53,7 @@ object ProfileStore {
 
     fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map(::decodeProfile)
 
-    suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null) {
+    suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null): Boolean {
         var changed = false
         context.profileDataStore.edit { prefs ->
             val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
@@ -78,6 +78,7 @@ object ProfileStore {
             changed = true
         }
         if (changed) announceNewAchievements(context)
+        return changed
     }
 
     suspend fun saveMatchResult(context: Context, compatibility: Int) {
