@@ -113,21 +113,14 @@ private fun WhoAreYouApp() {
         pendingFinalScore = null
     }
 
-    LaunchedEffect(screen, selectedQuizId, quizAttemptId, pendingFinalScore) {
-        val score = pendingFinalScore
-        if (screen != AppScreen.QUIZ || score == null) return@LaunchedEffect
-        val committed = runCatching {
-            ProfileStore.saveQuizResult(context, selectedQuiz.id, score, quizAttemptId)
-        }.isSuccess
-        if (!committed) {
-            pendingFinalScore = null
-            return@LaunchedEffect
-        }
-        runCatching { AppEvents.testComplete(selectedQuiz.id, score) }
-        runCatching { AppEvents.resultView(selectedQuiz.id, score) }
-        navigate(AppScreen.RESULT)
-    }
-
+    QuizResultCommitEffect(
+        screen = screen,
+        quiz = selectedQuiz,
+        attemptId = quizAttemptId,
+        pendingScore = pendingFinalScore,
+        onCommitFailed = { pendingFinalScore = null },
+        onCommitted = { navigate(AppScreen.RESULT) }
+    )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
 
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
