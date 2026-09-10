@@ -41,6 +41,18 @@ class ProfileIntegrityTest {
     }
 
     @Test
+    fun sanitizeDropsPreviousScoresWithoutCurrentScore() {
+        val sanitized = ProfileIntegrity.sanitize(
+            StoredProfile(
+                latestScores = mapOf("quiz-a" to 70),
+                previousScores = mapOf("quiz-a" to 60, "quiz-orphan" to 45)
+            )
+        )
+
+        assertEquals(mapOf("quiz-a" to 60), sanitized.previousScores)
+    }
+
+    @Test
     fun sanitizeRepairsReversedMatchBounds() {
         val sanitized = ProfileIntegrity.sanitize(
             StoredProfile(
