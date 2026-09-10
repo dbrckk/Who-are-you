@@ -1,5 +1,8 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -298,7 +301,7 @@ fun DailyQuestionCard(
 private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onClick: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = if (selected) RetentionViolet else RetentionPanelSoft),
+        colors = CardDefaults.cardColors(containerColor = container),
         shape = RoundedCornerShape(16.dp)
     ) {
         Text(
@@ -321,7 +324,7 @@ fun AchievementStrip(achievements: List<Achievement>) {
     Card(
         colors = CardDefaults.cardColors(containerColor = RetentionPanel),
         shape = RoundedCornerShape(24.dp),
-        modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded }
+        modifier = Modifier.fillMaxWidth().animateContentSize().clickable { expanded = !expanded }
     ) {
         Column(Modifier.padding(20.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
