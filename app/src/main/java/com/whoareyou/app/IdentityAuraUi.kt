@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
 import kotlin.math.cos
 import kotlin.math.sin
@@ -24,8 +25,8 @@ fun IdentityAura(
     modifier: Modifier = Modifier
 ) {
     val normalized = score.coerceIn(0, 100) / 100f
-    val warm = Color.lerp(V2Colors.Orchid, V2Colors.Peach, normalized)
-    val cool = Color.lerp(V2Colors.VioletBright, V2Colors.Cyan, normalized)
+    val warm = lerp(V2Colors.Orchid, V2Colors.Peach, normalized)
+    val cool = lerp(V2Colors.VioletBright, V2Colors.Cyan, normalized)
 
     Box(
         modifier = modifier
@@ -33,7 +34,7 @@ fun IdentityAura(
             .clip(CircleShape)
             .background(
                 Brush.radialGradient(
-                    listOf(
+                    colors = listOf(
                         warm.copy(alpha = 0.22f),
                         V2Colors.Plum.copy(alpha = 0.14f),
                         Color.Transparent
@@ -48,7 +49,11 @@ fun IdentityAura(
 
             drawCircle(
                 brush = Brush.radialGradient(
-                    colors = listOf(cool.copy(alpha = 0.88f), warm.copy(alpha = 0.48f), Color.Transparent),
+                    colors = listOf(
+                        cool.copy(alpha = 0.88f),
+                        warm.copy(alpha = 0.48f),
+                        Color.Transparent
+                    ),
                     center = center,
                     radius = baseRadius * 1.65f
                 ),
@@ -75,7 +80,11 @@ fun IdentityAura(
                     y = center.y + sin(angle).toFloat() * orbit
                 )
                 drawCircle(
-                    color = if (index % 2 == 0) warm.copy(alpha = 0.88f) else cool.copy(alpha = 0.82f),
+                    color = if (index % 2 == 0) {
+                        warm.copy(alpha = 0.88f)
+                    } else {
+                        cool.copy(alpha = 0.82f)
+                    },
                     radius = if (index % 3 == 0) 5.5f else 3.4f,
                     center = point
                 )
