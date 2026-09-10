@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
@@ -111,12 +114,46 @@ fun QuizScreen(
                     },
                     modifier = Modifier.testTag("quiz_answer_$answerIndex")
                 ) {
-                    Text(
-                        answer.text,
-                        modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp),
-                        color = V2Colors.TextPrimary,
-                        style = V2Type.BodyStrong
-                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(
+                                        accent.copy(alpha = 0.08f),
+                                        V2Colors.Surface,
+                                        companion.copy(alpha = 0.05f)
+                                    )
+                                )
+                            )
+                            .padding(horizontal = 16.dp, vertical = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(
+                                    color = if (answerIndex % 2 == 0) accent.copy(alpha = 0.18f) else companion.copy(alpha = 0.18f),
+                                    shape = CircleShape
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = ('A'.code + answerIndex).toChar().toString(),
+                                color = if (answerIndex % 2 == 0) accent else companion,
+                                style = V2Type.Caption,
+                                fontWeight = FontWeight.Black
+                            )
+                        }
+                        Text(
+                            answer.text,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 14.dp),
+                            color = V2Colors.TextPrimary,
+                            style = V2Type.BodyStrong
+                        )
+                    }
                 }
             }
         }
