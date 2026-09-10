@@ -32,27 +32,25 @@ class M56ReleaseCandidateTest(unittest.TestCase):
         self.assertIn("isMinifyEnabled = true", gradle)
         self.assertIn("isShrinkResources = true", gradle)
 
-    def test_circleci_builds_and_verifies_installable_apk(self):
-        config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
+    def test_github_actions_builds_and_verifies_installable_apk(self):
+        config = (ROOT / ".github/workflows/m56-main-rc.yml").read_text(encoding="utf-8")
         for expected in (
             "release_candidate:",
-            "cimg/android:2026.08",
             "gradle :app:testDebugUnitTest",
             "gradle :app:assembleDebugAndroidTest",
             "gradle :app:lintCandidate",
             "gradle :app:lintRelease",
             "gradle :app:assembleCandidate",
             "gradle :app:bundleRelease",
-            "zipalign -c -v 4",
-            "apksigner verify --verbose --print-certs",
-            "aapt dump badging",
+            "zipalign\" -c -v 4",
+            "apksigner\" verify --verbose --print-certs",
+            "aapt\" dump badging",
             "who-are-you-0.1.0-rc.apk",
         ):
             self.assertIn(expected, config)
 
-    def test_circleci_config_does_not_use_unescaped_parameter_syntax(self):
-        config = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
-        self.assertNotIn("python - <<", config)
+    def test_circleci_config_is_removed(self):
+        self.assertFalse((ROOT / ".circleci/config.yml").exists())
 
 
 if __name__ == "__main__":
