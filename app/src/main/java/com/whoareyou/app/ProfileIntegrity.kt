@@ -16,11 +16,16 @@ object ProfileIntegrity {
         val rawLowest = profile.lowestMatchPercent?.coerceIn(0, 100)
         val best = if (matchCount == 0) null else listOfNotNull(rawBest, rawLowest).maxOrNull()
         val lowest = if (matchCount == 0) null else listOfNotNull(rawBest, rawLowest).minOrNull()
+        val latestScores = cleanScores(profile.latestScores)
+        val previousScores = cleanScores(profile.previousScores)
+        val completedQuizIds = cleanIds(profile.completedQuizIds).apply {
+            addAll(latestScores.keys)
+        }
 
         return profile.copy(
-            completedQuizIds = cleanIds(profile.completedQuizIds),
-            latestScores = cleanScores(profile.latestScores),
-            previousScores = cleanScores(profile.previousScores),
+            completedQuizIds = completedQuizIds,
+            latestScores = latestScores,
+            previousScores = previousScores,
             announcedAchievementIds = cleanIds(profile.announcedAchievementIds),
             pendingAchievementIds = cleanIds(profile.pendingAchievementIds).toList(),
             matchCount = matchCount,
