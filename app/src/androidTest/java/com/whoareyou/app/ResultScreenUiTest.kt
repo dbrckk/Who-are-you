@@ -25,6 +25,9 @@ class ResultScreenUiTest {
                 previousScore = null,
                 completedCount = 4,
                 totalQuizCount = 30,
+                catalog = listOf(testQuiz()),
+                completed = setOf("result-ui-test"),
+                onQuizSelected = { },
                 onDone = { doneCount++ },
                 onRetry = { retryCount++ }
             )
