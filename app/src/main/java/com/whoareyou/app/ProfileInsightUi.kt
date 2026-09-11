@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +27,6 @@ private data class InsightCopy(val title: String, val body: String)
 
 @Composable
 fun ProfileInsightCards(summary: GlobalProfileSummary) {
-    val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val signature = summary.signature
     val insights = ProfileInsights.derive(summary.dimensions)
     val evolution = ProfileEvolutionSummary.derive(summary.dimensions)
@@ -47,9 +46,9 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
         }
 
         if (signature != null) {
-            val copy = SignatureProfiles.copy(signature.key, french)
+            val copy = SignatureProfiles.copy(signature.key, false)
             Text(
-                text = if (french) "TA SIGNATURE" else "YOUR SIGNATURE",
+                text = stringResource(R.string.profile_insight_signature),
                 color = InsightCyan,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
@@ -66,7 +65,7 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
                     Text(copy.description, color = Color.White, fontSize = 14.sp, lineHeight = 21.sp)
                     Spacer(Modifier.height(9.dp))
                     Text(
-                        text = if (french) "Confiance de correspondance : ${signature.confidence}%" else "Match confidence: ${signature.confidence}%",
+                        text = stringResource(R.string.profile_insight_match_confidence, signature.confidence),
                         color = InsightMuted,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold
@@ -82,14 +81,14 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
 
         if (insights.isNotEmpty()) {
             Text(
-                text = if (french) "CE QUE TON PROFIL RÉVÈLE" else "WHAT YOUR PROFILE REVEALS",
+                text = stringResource(R.string.profile_insight_reveals),
                 color = InsightCyan,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(Modifier.height(10.dp))
             insights.forEach { key ->
-                val copy = localizedCopy(key, french)
+                val copy = localizedCopy(key)
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = InsightPanel),
@@ -106,47 +105,25 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
         }
 
         Text(
-            text = if (french) "Interprétation ludique basée uniquement sur tes réponses." else "A playful interpretation based only on your answers.",
+            text = stringResource(R.string.profile_insight_disclaimer),
             color = InsightMuted,
             fontSize = 10.sp
         )
     }
 }
 
-private fun localizedCopy(key: ProfileInsightKey, french: Boolean): InsightCopy = when (key) {
-    ProfileInsightKey.STRONG_SIGNATURE -> if (french) {
-        InsightCopy(
-            "SIGNATURE MARQUÉE",
-            "Plusieurs de tes dimensions sont nettement éloignées du centre. Ton profil fait ressortir des préférences assez affirmées plutôt qu’un ensemble neutre."
-        )
-    } else {
-        InsightCopy(
-            "STRONG SIGNATURE",
-            "Several of your dimensions sit far from the middle. Your profile shows a set of fairly pronounced preferences rather than a neutral pattern."
-        )
-    }
-
-    ProfileInsightKey.BALANCED_CORE -> if (french) {
-        InsightCopy(
-            "NOYAU ÉQUILIBRÉ",
-            "Plusieurs dimensions restent proches du centre. Selon le contexte, tu sembles pouvoir naviguer entre les deux côtés plutôt que suivre une préférence unique."
-        )
-    } else {
-        InsightCopy(
-            "BALANCED CORE",
-            "Several dimensions stay close to the middle. Depending on context, you may move between both sides instead of following one fixed preference."
-        )
-    }
-
-    ProfileInsightKey.BOLD_CONTRAST -> if (french) {
-        InsightCopy(
-            "CONTRASTES FORTS",
-            "Ton profil contient à la fois des scores très hauts et très bas. Certaines facettes de ta façon d’agir peuvent donc sembler très différentes selon la situation."
-        )
-    } else {
-        InsightCopy(
-            "BOLD CONTRAST",
-            "Your profile contains both very high and very low scores. Different parts of how you act may therefore look quite different depending on the situation."
-        )
-    }
+@Composable
+private fun localizedCopy(key: ProfileInsightKey): InsightCopy = when (key) {
+    ProfileInsightKey.STRONG_SIGNATURE -> InsightCopy(
+        stringResource(R.string.profile_insight_strong_title),
+        stringResource(R.string.profile_insight_strong_body)
+    )
+    ProfileInsightKey.BALANCED_CORE -> InsightCopy(
+        stringResource(R.string.profile_insight_balanced_title),
+        stringResource(R.string.profile_insight_balanced_body)
+    )
+    ProfileInsightKey.BOLD_CONTRAST -> InsightCopy(
+        stringResource(R.string.profile_insight_contrast_title),
+        stringResource(R.string.profile_insight_contrast_body)
+    )
 }
