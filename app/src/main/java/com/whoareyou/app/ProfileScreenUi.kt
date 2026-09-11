@@ -145,17 +145,7 @@ fun ProfileScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
-            if (summary.dimensions.size >= 3) {
-                Spacer(Modifier.height(18.dp))
-                ProfileIdentityMap(summary)
-                Spacer(Modifier.height(18.dp))
-                ProfileStrengthNuanceCard(summary)
-            }
-            if (summary.dimensions.any { it.scoreChange != null }) {
-                Spacer(Modifier.height(18.dp))
-                ProfileEvolutionCard(summary)
-            }
-            if (summary.dimensions.size >= 5) {
+            if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
                 Spacer(Modifier.height(18.dp))
                 ProfileInsightCards(summary)
             }
