@@ -4,8 +4,6 @@ Last updated: 2026-09-08
 
 Who Are You? is an entertainment and self-reflection app. Its quizzes are not medical or psychological diagnoses.
 
-> Release status: the policy content is production-oriented, but the public support contact must be filled in before public Google Play release.
-
 ## Data stored on the device
 
 The app stores quiz completion, latest and previous quiz scores, Daily Question state, streaks, onboarding completion, social comparison state and the lifetime remove-ads entitlement locally on the device using Android DataStore.
@@ -70,4 +68,4 @@ These services are governed by the applicable Google terms and privacy documenta
 
 ## Contact
 
-**REQUIRED BEFORE PUBLIC RELEASE:** replace this line with the public developer/privacy support email or other valid support contact used for the Google Play listing.
+For privacy or support requests, contact: **dbrak7108@gmail.com**.
