@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,7 +33,6 @@ fun PersonalizedDiscoverDashboard(
     onOpenProfile: (() -> Unit)? = null,
     onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
-    val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val recommendation = remember(quizzes, completed, profile.dimensions) {
         DiscoverPersonalization.recommendation(quizzes, completed, profile.dimensions)
     }
@@ -114,7 +112,7 @@ fun PersonalizedDiscoverDashboard(
                 }
 
                 profile.signature?.let { signature ->
-                    val copy = SignatureProfiles.copy(signature.key, french)
+                    val copy = localizedSignatureProfileCopy(signature.key)
                     Spacer(Modifier.height(16.dp))
                     Row(
                         modifier = Modifier
