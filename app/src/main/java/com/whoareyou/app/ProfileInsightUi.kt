@@ -46,7 +46,7 @@ fun ProfileInsightCards(summary: GlobalProfileSummary) {
         }
 
         if (signature != null) {
-            val copy = SignatureProfiles.copy(signature.key, false)
+            val copy = localizedSignatureProfileCopy(signature.key)
             Text(
                 text = stringResource(R.string.profile_insight_signature),
                 color = InsightCyan,
