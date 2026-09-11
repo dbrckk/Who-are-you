@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,12 +26,11 @@ import kotlin.math.abs
 @Composable
 fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
     if (summary.dimensions.size < 3) return
-    val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val snapshot = remember(summary.dimensions) { ProfileStrengthNuanceEngine.build(summary.dimensions) }
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
-            if (french) "FORCES & NUANCES" else "STRENGTHS & NUANCES",
+            stringResource(R.string.profile_strengths_eyebrow),
             color = V2Colors.AccentCyan,
             fontSize = 11.sp,
             fontWeight = FontWeight.Black
@@ -47,9 +46,9 @@ fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
                 snapshot.strongest.forEachIndexed { index, dimension ->
                     SignalRow(
                         eyebrow = if (index == 0) {
-                            if (french) "SIGNAL LE PLUS MARQUÉ" else "STRONGEST SIGNAL"
+                            stringResource(R.string.profile_strengths_strongest)
                         } else {
-                            if (french) "SECOND SIGNAL" else "SECOND SIGNAL"
+                            stringResource(R.string.profile_strengths_second)
                         },
                         dimension = dimension,
                         accent = if (index == 0) V2Colors.AccentViolet else V2Colors.AccentCyan
@@ -64,7 +63,7 @@ fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
                             .padding(14.dp)
                     ) {
                         Text(
-                            if (french) "ZONE LA PLUS NUANCÉE" else "MOST NUANCED AREA",
+                            stringResource(R.string.profile_strengths_nuanced),
                             color = V2Colors.TextSecondary,
                             fontSize = 9.sp,
                             fontWeight = FontWeight.Black
@@ -73,11 +72,11 @@ fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
                         Text(nuanced.title, color = V2Colors.TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.height(3.dp))
                         Text(
-                            if (french) {
-                                "${nuanced.metricLabel} · ${nuanced.score}% · proche du centre, donc plus dépendant du contexte."
-                            } else {
-                                "${nuanced.metricLabel} · ${nuanced.score}% · closer to the center, so this area may depend more on context."
-                            },
+                            stringResource(
+                                R.string.profile_strengths_nuanced_body,
+                                nuanced.metricLabel,
+                                nuanced.score
+                            ),
                             color = V2Colors.TextSecondary,
                             fontSize = 11.sp,
                             lineHeight = 16.sp
@@ -90,7 +89,7 @@ fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
                     if (spread >= 35) {
                         Column {
                             Text(
-                                if (french) "CONTRASTE DU PROFIL" else "PROFILE CONTRAST",
+                                stringResource(R.string.profile_strengths_contrast),
                                 color = V2Colors.TextSecondary,
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Black
