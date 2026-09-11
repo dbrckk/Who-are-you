@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="identity_map_eyebrow">CARTE D’IDENTITÉ</string>
+    <string name="identity_map_title">La forme de ton profil</string>
+    <string name="identity_map_body">Les six dimensions les plus marquées dessinent une empreinte qui évolue avec tes réponses.</string>
+    <string name="identity_map_dominant_signal">signal dominant</string>
+    <string name="identity_map_contrast">contraste</string>
+    <string name="identity_map_balanced_axes">axes équilibrés</string>
+    <string name="identity_map_accessibility">Carte d’identité. Signal dominant %1$d pour cent. Contraste %2$d. %3$d axes équilibrés.</string>
+
+    <string name="profile_strengths_eyebrow">FORCES &amp; NUANCES</string>
+    <string name="profile_strengths_strongest">SIGNAL LE PLUS MARQUÉ</string>
+    <string name="profile_strengths_second">SECOND SIGNAL</string>
+    <string name="profile_strengths_nuanced">ZONE LA PLUS NUANCÉE</string>
+    <string name="profile_strengths_nuanced_body">%1$s · %2$d%% · proche du centre, donc plus dépendant du contexte.</string>
+    <string name="profile_strengths_contrast">CONTRASTE DU PROFIL</string>
+    <string name="profile_strengths_contrast_body">%1$d points séparent ces deux dimensions : ton profil n’est donc pas uniforme.</string>
+
+    <string name="evolution_before">AVANT</string>
+    <string name="evolution_now">MAINTENANT</string>
+    <string name="evolution_other_movements">AUTRES MOUVEMENTS</string>
+</resources>
