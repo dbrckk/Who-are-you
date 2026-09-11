@@ -1,6 +1,6 @@
 package com.whoareyou.app
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,19 +37,33 @@ fun ResultNextExplorationCard(
     } ?: return
     val nextQuiz = catalog.firstOrNull { it.id == recommendation.quizId } ?: return
     val accent = QuizVisuals.accentFor(nextQuiz)
+    val companion = QuizVisuals.companionAccentFor(nextQuiz)
 
-    Card(
-        modifier = Modifier.fillMaxWidth().clickable { onQuizSelected(nextQuiz) },
+    V2PressableCard(
+        onClick = { onQuizSelected(nextQuiz) },
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(V2Radius.Card),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+        containerColor = V2Colors.SurfaceElevated
     ) {
-        Column(Modifier.padding(16.dp)) {
+        Column(
+            Modifier
+                .background(
+                    Brush.linearGradient(
+                        listOf(
+                            accent.copy(alpha = 0.12f),
+                            V2Colors.SurfaceElevated,
+                            companion.copy(alpha = 0.08f)
+                        )
+                    )
+                )
+                .padding(16.dp)
+        ) {
             QuizArtwork(nextQuiz, compact = true)
             Spacer(Modifier.height(14.dp))
             Text(
                 stringResource(R.string.result_next_label),
-                color = V2Colors.AccentCyan,
-                fontSize = 10.sp,
+                color = companion,
+                style = V2Type.Caption,
                 fontWeight = FontWeight.Black
             )
             Spacer(Modifier.height(5.dp))
@@ -76,14 +89,13 @@ fun ResultNextExplorationCard(
                     }
                 ),
                 color = V2Colors.TextSecondary,
-                fontSize = 12.sp,
-                lineHeight = 18.sp
+                style = V2Type.Supporting
             )
             Spacer(Modifier.height(11.dp))
             Text(
                 stringResource(R.string.result_next_action),
                 color = accent,
-                fontSize = 11.sp,
+                style = V2Type.Caption,
                 fontWeight = FontWeight.Black
             )
         }
