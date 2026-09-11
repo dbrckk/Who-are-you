@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="identity_map_eyebrow">IDENTITY MAP</string>
+    <string name="identity_map_title">The shape of your profile</string>
+    <string name="identity_map_body">Your six strongest dimensions form a fingerprint that evolves with your answers.</string>
+    <string name="identity_map_dominant_signal">dominant signal</string>
+    <string name="identity_map_contrast">contrast</string>
+    <string name="identity_map_balanced_axes">balanced axes</string>
+    <string name="identity_map_accessibility">Identity map. Dominant signal %1$d percent. Contrast %2$d. %3$d balanced axes.</string>
+
+    <string name="profile_strengths_eyebrow">STRENGTHS &amp; NUANCES</string>
+    <string name="profile_strengths_strongest">STRONGEST SIGNAL</string>
+    <string name="profile_strengths_second">SECOND SIGNAL</string>
+    <string name="profile_strengths_nuanced">MOST NUANCED AREA</string>
+    <string name="profile_strengths_nuanced_body">%1$s · %2$d%% · closer to the center, so this area may depend more on context.</string>
+    <string name="profile_strengths_contrast">PROFILE CONTRAST</string>
+    <string name="profile_strengths_contrast_body">%1$d points separate these dimensions, so your profile is not one-dimensional.</string>
+
+    <string name="evolution_before">BEFORE</string>
+    <string name="evolution_now">NOW</string>
+    <string name="evolution_other_movements">OTHER MOVEMENTS</string>
+</resources>
