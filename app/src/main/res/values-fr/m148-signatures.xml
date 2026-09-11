@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="signature_independent_explorer_title">EXPLORATEUR INDÉPENDANT</string>
+    <string name="signature_independent_explorer_body">Ta curiosité, ton goût de la nouveauté et ton besoin d’autonomie se renforcent mutuellement. Tu tends à avancer en expérimentant et en choisissant toi-même ta direction.</string>
+    <string name="signature_structured_builder_title">BÂTISSEUR STRUCTURÉ</string>
+    <string name="signature_structured_builder_body">Planification et discipline forment le cœur de ton profil. Tu as tendance à transformer les intentions en étapes concrètes et à préférer une progression organisée.</string>
+    <string name="signature_open_connector_title">CONNECTEUR OUVERT</string>
+    <string name="signature_open_connector_body">Ouverture émotionnelle, confiance et communication convergent chez toi. Tu tends à créer du lien en exprimant clairement ce que tu ressens et en laissant de la place aux autres.</string>
+    <string name="signature_adaptive_diplomat_title">DIPLOMATE ADAPTABLE</string>
+    <string name="signature_adaptive_diplomat_body">Adaptabilité et patience se combinent avec une affirmation mesurée. Tu tends à ajuster ton approche sans abandonner complètement ta position.</string>
+    <string name="signature_driven_challenger_title">CHALLENGER DÉTERMINÉ</string>
+    <string name="signature_driven_challenger_body">Affirmation, compétitivité et intensité sous pression se combinent fortement. Tu tends à te mobiliser face au défi et à chercher activement à faire avancer la situation.</string>
+    <string name="signature_calm_strategist_title">STRATÈGE CALME</string>
+    <string name="signature_calm_strategist_body">Patience, discipline et faible réactivité au stress forment un profil posé. Tu tends à garder ton cap, réfléchir avant d’agir et progresser sans précipitation.</string>
+</resources>
