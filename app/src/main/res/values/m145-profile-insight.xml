@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_insight_signature">YOUR SIGNATURE</string>
+    <string name="profile_insight_match_confidence">Match confidence: %1$d%%</string>
+    <string name="profile_insight_reveals">WHAT YOUR PROFILE REVEALS</string>
+    <string name="profile_insight_disclaimer">A playful interpretation based only on your answers.</string>
+    <string name="profile_insight_strong_title">STRONG SIGNATURE</string>
+    <string name="profile_insight_strong_body">Several of your dimensions sit far from the middle. Your profile shows a set of fairly pronounced preferences rather than a neutral pattern.</string>
+    <string name="profile_insight_balanced_title">BALANCED CORE</string>
+    <string name="profile_insight_balanced_body">Several dimensions stay close to the middle. Depending on context, you may move between both sides instead of following one fixed preference.</string>
+    <string name="profile_insight_contrast_title">BOLD CONTRAST</string>
+    <string name="profile_insight_contrast_body">Your profile contains both very high and very low scores. Different parts of how you act may therefore look quite different depending on the situation.</string>
+</resources>
