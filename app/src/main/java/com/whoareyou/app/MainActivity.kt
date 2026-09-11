@@ -169,6 +169,15 @@ private fun WhoAreYouApp() {
                     previousScore = previousScoreForAttempt,
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                     totalQuizCount = quizCatalog.size,
+                    catalog = quizCatalog,
+                    completed = storedProfile.completedQuizIds + selectedQuiz.id,
+                    onQuizSelected = { quiz ->
+                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
+                        selectedQuizId = quiz.id
+                        resetQuizAttempt()
+                        runCatching { AppEvents.testStart(quiz.id) }
+                        navigate(AppScreen.QUIZ)
+                    },
                     onDone = {
                         pendingFinalScore = null
                         val manager = adManager
