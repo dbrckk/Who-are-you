@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="signature_independent_explorer_title">INDEPENDENT EXPLORER</string>
+    <string name="signature_independent_explorer_body">Your curiosity, appetite for novelty and independence reinforce each other. You tend to move forward by experimenting and choosing your own direction.</string>
+    <string name="signature_structured_builder_title">STRUCTURED BUILDER</string>
+    <string name="signature_structured_builder_body">Planning and discipline sit at the center of your pattern. You tend to turn intentions into concrete steps and prefer organized progress.</string>
+    <string name="signature_open_connector_title">OPEN CONNECTOR</string>
+    <string name="signature_open_connector_body">Emotional openness, trust and communication converge in your profile. You tend to build connection by expressing yourself clearly and making room for others.</string>
+    <string name="signature_adaptive_diplomat_title">ADAPTIVE DIPLOMAT</string>
+    <string name="signature_adaptive_diplomat_body">Adaptability and patience combine with measured assertiveness. You tend to adjust your approach without completely giving up your position.</string>
+    <string name="signature_driven_challenger_title">DRIVEN CHALLENGER</string>
+    <string name="signature_driven_challenger_body">Assertiveness, competitiveness and intensity under pressure combine strongly. You tend to mobilize around challenges and actively push situations forward.</string>
+    <string name="signature_calm_strategist_title">CALM STRATEGIST</string>
+    <string name="signature_calm_strategist_body">Patience, discipline and lower stress reactivity form a composed pattern. You tend to stay on course, think before acting and make progress without rushing.</string>
+</resources>
