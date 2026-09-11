@@ -42,6 +42,11 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val map = remember(summary.dimensions) { ProfileIdentityMapEngine.build(summary.dimensions) }
     val axes = map.axes
+    val mapDescription = if (french) {
+        "Carte d’identité. Signal dominant ${map.dominantSignalPercent} pour cent. Contraste ${map.contrast}. ${map.balancedAxes} axes équilibrés."
+    } else {
+        "Identity map. Dominant signal ${map.dominantSignalPercent} percent. Contrast ${map.contrast}. ${map.balancedAxes} balanced axes."
+    }
 
     Card(
         modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) { contentDescription = mapDescription },
