@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -80,6 +81,7 @@ private fun ChallengeQuizScreen(
             .fillMaxSize()
             .background(V2Colors.Ink)
             .verticalScroll(scrollState)
+            .navigationBarsPadding()
             .padding(V2Spacing.Screen)
     ) {
         Text(stringResource(R.string.challenge_header), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
@@ -153,6 +155,7 @@ private fun CompatibilityScreen(
             .fillMaxSize()
             .background(V2Colors.Ink)
             .verticalScroll(rememberScrollState())
+            .navigationBarsPadding()
             .padding(V2Spacing.Screen),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -245,6 +248,7 @@ fun InvalidChallengeScreen(onClose: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(V2Colors.Ink)
+            .navigationBarsPadding()
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
