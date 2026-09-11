@@ -38,13 +38,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
-private val RetentionPanel = Color(0xFF14151D)
-private val RetentionPanelSoft = Color(0xFF1B1D27)
-private val RetentionViolet = Color(0xFF9C7BFF)
-private val RetentionCyan = Color(0xFF6EE7F9)
-private val RetentionMuted = Color(0xFFA4A7B5)
-private val RetentionPink = Color(0xFFF08ACB)
-private val RetentionGold = Color(0xFFF4C56A)
+private val RetentionPanel = V2Colors.Surface
+private val RetentionPanelSoft = V2Colors.SurfaceElevated
+private val RetentionViolet = V2Colors.Violet
+private val RetentionCyan = V2Colors.Cyan
+private val RetentionMuted = V2Colors.TextSecondary
+private val RetentionPink = V2Colors.Rose
+private val RetentionGold = V2Colors.Peach
 
 /**
  * Legacy all-in-one retention surface. Kept for compatibility while callers migrate to
@@ -299,6 +299,11 @@ fun DailyQuestionCard(
 
 @Composable
 private fun DailyChoice(label: String, selected: Boolean, enabled: Boolean, onClick: () -> Unit) {
+    val container by animateColorAsState(
+        targetValue = if (selected) RetentionViolet else RetentionPanelSoft,
+        animationSpec = tween(V2Motion.StandardMillis),
+        label = "dailyChoiceColor"
+    )
     Card(
         modifier = Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = container),
