@@ -148,6 +148,12 @@ fun ProfileScreen(
             if (summary.dimensions.size >= 3) {
                 Spacer(Modifier.height(18.dp))
                 ProfileIdentityMap(summary)
+                Spacer(Modifier.height(18.dp))
+                ProfileStrengthNuanceCard(summary)
+            }
+            if (summary.dimensions.any { it.scoreChange != null }) {
+                Spacer(Modifier.height(18.dp))
+                ProfileEvolutionCard(summary)
             }
             if (summary.dimensions.size >= 5) {
                 Spacer(Modifier.height(18.dp))
