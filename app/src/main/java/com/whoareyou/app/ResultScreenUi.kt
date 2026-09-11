@@ -42,6 +42,9 @@ fun ResultScreen(
     previousScore: Int?,
     completedCount: Int,
     totalQuizCount: Int,
+    catalog: List<Quiz>,
+    completed: Set<String>,
+    onQuizSelected: (Quiz) -> Unit,
     onDone: () -> Unit,
     onRetry: () -> Unit
 ) {
@@ -136,6 +139,9 @@ fun ResultScreen(
                 }
             }
 
+            Spacer(Modifier.height(18.dp))
+            ResultInterpretationPanel(quiz = quiz, score = score)
+
             if (scoreChange != null) {
                 Spacer(Modifier.height(16.dp))
                 Card(
@@ -180,6 +186,14 @@ fun ResultScreen(
                     Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
                 }
             }
+
+            Spacer(Modifier.height(18.dp))
+            ResultNextExplorationCard(
+                currentQuiz = quiz,
+                catalog = catalog,
+                completed = completed,
+                onQuizSelected = onQuizSelected
+            )
 
             Spacer(Modifier.height(22.dp))
             Button(
