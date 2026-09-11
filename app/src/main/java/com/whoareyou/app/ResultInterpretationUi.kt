@@ -17,6 +17,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -126,7 +127,7 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
                 LinearProgressIndicator(
                     progress = { animatedNuance },
                     modifier = Modifier.fillMaxWidth().height(7.dp),
-                    color = V2Colors.AccentViolet,
+                    color = accent,
                     trackColor = Color.White.copy(alpha = 0.06f)
                 )
                 Spacer(Modifier.height(8.dp))
@@ -154,7 +155,7 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
         ) {
             Text(
                 stringResource(R.string.result_context_label),
-                color = V2Colors.AccentCyan,
+                color = companion,
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Black
             )
