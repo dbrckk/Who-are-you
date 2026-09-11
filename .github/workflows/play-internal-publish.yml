@@ -59,7 +59,7 @@ jobs:
           UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
         run: |
           set -euo pipefail
@@ -69,7 +69,6 @@ jobs:
             UPLOAD_KEYSTORE_B64
             UPLOAD_KEYSTORE_PASSWORD
             UPLOAD_KEY_ALIAS
-            UPLOAD_KEY_PASSWORD
             PLAY_SERVICE_ACCOUNT_JSON_B64
           )
           for name in "${required[@]}"; do
@@ -103,7 +102,7 @@ jobs:
           ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
         run: |
           set -euo pipefail
           gradle :app:bundlePlayRelease \
