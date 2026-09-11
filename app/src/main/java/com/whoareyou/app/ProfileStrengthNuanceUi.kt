@@ -96,14 +96,14 @@ fun ProfileStrengthNuanceCard(summary: GlobalProfileSummary) {
                             )
                             Spacer(Modifier.height(5.dp))
                             Text(
-                                if (french) "${low.title} ↔ ${high.title}" else "${low.title} ↔ ${high.title}",
+                                "${low.title} ↔ ${high.title}",
                                 color = V2Colors.TextPrimary,
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Bold
                             )
                             Spacer(Modifier.height(3.dp))
                             Text(
-                                if (french) "$spread points séparent ces deux dimensions : ton profil n'est donc pas uniforme." else "$spread points separate these dimensions, so your profile is not one-dimensional.",
+                                stringResource(R.string.profile_strengths_contrast_body, spread),
                                 color = V2Colors.TextSecondary,
                                 fontSize = 11.sp,
                                 lineHeight = 16.sp
