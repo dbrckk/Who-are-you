@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_insight_signature">TA SIGNATURE</string>
+    <string name="profile_insight_match_confidence">Confiance de correspondance : %1$d%%</string>
+    <string name="profile_insight_reveals">CE QUE TON PROFIL RÉVÈLE</string>
+    <string name="profile_insight_disclaimer">Interprétation ludique basée uniquement sur tes réponses.</string>
+    <string name="profile_insight_strong_title">SIGNATURE MARQUÉE</string>
+    <string name="profile_insight_strong_body">Plusieurs de tes dimensions sont nettement éloignées du centre. Ton profil fait ressortir des préférences assez affirmées plutôt qu’un ensemble neutre.</string>
+    <string name="profile_insight_balanced_title">NOYAU ÉQUILIBRÉ</string>
+    <string name="profile_insight_balanced_body">Plusieurs dimensions restent proches du centre. Selon le contexte, tu sembles pouvoir naviguer entre les deux côtés plutôt que suivre une préférence unique.</string>
+    <string name="profile_insight_contrast_title">CONTRASTES FORTS</string>
+    <string name="profile_insight_contrast_body">Ton profil contient à la fois des scores très hauts et très bas. Certaines facettes de ta façon d’agir peuvent donc sembler très différentes selon la situation.</string>
+</resources>
