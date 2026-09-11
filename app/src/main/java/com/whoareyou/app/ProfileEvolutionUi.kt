@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,7 +34,6 @@ fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
     val snapshot = ProfileEvolutionSummary.derive(summary.dimensions) ?: return
     val dimension = snapshot.mostChanged
     val change = dimension.scoreChange ?: return
-    val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val tracked = summary.dimensions
         .filter { it.scoreChange != null }
         .sortedByDescending { it.scoreChange?.absoluteDelta ?: 0 }
@@ -86,13 +84,13 @@ fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
                 Spacer(Modifier.height(12.dp))
 
                 EvolutionCompareBar(
-                    label = if (french) "AVANT" else "BEFORE",
+                    label = stringResource(R.string.evolution_before),
                     value = change.previousScore,
                     color = EvolutionMuted
                 )
                 Spacer(Modifier.height(9.dp))
                 EvolutionCompareBar(
-                    label = if (french) "MAINTENANT" else "NOW",
+                    label = stringResource(R.string.evolution_now),
                     value = change.currentScore,
                     color = EvolutionCyan
                 )
@@ -123,7 +121,7 @@ fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
                 if (tracked.size > 1) {
                     Spacer(Modifier.height(18.dp))
                     Text(
-                        if (french) "AUTRES MOUVEMENTS" else "OTHER MOVEMENTS",
+                        stringResource(R.string.evolution_other_movements),
                         color = EvolutionMuted,
                         fontSize = 9.sp,
                         fontWeight = FontWeight.Black
