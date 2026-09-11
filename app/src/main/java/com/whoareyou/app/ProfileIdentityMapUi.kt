@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -39,14 +38,14 @@ import kotlin.math.sin
 fun ProfileIdentityMap(summary: GlobalProfileSummary) {
     if (summary.dimensions.size < 3) return
 
-    val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val map = remember(summary.dimensions) { ProfileIdentityMapEngine.build(summary.dimensions) }
     val axes = map.axes
-    val mapDescription = if (french) {
-        "Carte d’identité. Signal dominant ${map.dominantSignalPercent} pour cent. Contraste ${map.contrast}. ${map.balancedAxes} axes équilibrés."
-    } else {
-        "Identity map. Dominant signal ${map.dominantSignalPercent} percent. Contrast ${map.contrast}. ${map.balancedAxes} balanced axes."
-    }
+    val mapDescription = stringResource(
+        R.string.identity_map_accessibility,
+        map.dominantSignalPercent,
+        map.contrast,
+        map.balancedAxes
+    )
 
     Card(
         modifier = Modifier.fillMaxWidth().semantics(mergeDescendants = true) { contentDescription = mapDescription },
@@ -67,14 +66,14 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
                 .padding(20.dp)
         ) {
             Text(
-                if (french) "CARTE D’IDENTITÉ" else "IDENTITY MAP",
+                stringResource(R.string.identity_map_eyebrow),
                 color = V2Colors.AccentCyan,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Black
             )
             Spacer(Modifier.height(5.dp))
             Text(
-                if (french) "La forme de ton profil" else "The shape of your profile",
+                stringResource(R.string.identity_map_title),
                 color = V2Colors.TextPrimary,
                 fontSize = 23.sp,
                 lineHeight = 28.sp,
@@ -82,8 +81,7 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                if (french) "Les six dimensions les plus marquées dessinent une empreinte qui évolue avec tes réponses."
-                else "Your six strongest dimensions form a fingerprint that evolves with your answers.",
+                stringResource(R.string.identity_map_body),
                 color = V2Colors.TextSecondary,
                 fontSize = 12.sp,
                 lineHeight = 18.sp
@@ -122,17 +120,17 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
             ) {
                 IdentityStat(
                     value = "${map.dominantSignalPercent}%",
-                    label = if (french) "signal dominant" else "dominant signal",
+                    label = stringResource(R.string.identity_map_dominant_signal),
                     modifier = Modifier.weight(1f)
                 )
                 IdentityStat(
                     value = map.contrast.toString(),
-                    label = if (french) "contraste" else "contrast",
+                    label = stringResource(R.string.identity_map_contrast),
                     modifier = Modifier.weight(1f)
                 )
                 IdentityStat(
                     value = map.balancedAxes.toString(),
-                    label = if (french) "axes équilibrés" else "balanced axes",
+                    label = stringResource(R.string.identity_map_balanced_axes),
                     modifier = Modifier.weight(1f)
                 )
             }
