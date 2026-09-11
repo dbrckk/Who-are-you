@@ -1,5 +1,7 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +16,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -22,10 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val EvolutionPanel = Color(0xFF1B1D27)
-private val EvolutionViolet = Color(0xFF9C7BFF)
-private val EvolutionCyan = Color(0xFF6EE7F9)
-private val EvolutionMuted = Color(0xFFA4A7B5)
+private val EvolutionPanel = V2Colors.SurfaceElevated
+private val EvolutionViolet = V2Colors.Violet
+private val EvolutionCyan = V2Colors.Cyan
+private val EvolutionMuted = V2Colors.TextSecondary
 
 @Composable
 fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
@@ -68,7 +71,7 @@ fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
                     progress = { snapshot.coveragePercent / 100f },
                     modifier = Modifier.fillMaxWidth().height(7.dp),
                     color = EvolutionViolet,
-                    trackColor = Color(0xFF14151D)
+                    trackColor = V2Colors.Ink
                 )
 
                 Spacer(Modifier.height(18.dp))
@@ -158,15 +161,20 @@ fun ProfileEvolutionCard(summary: GlobalProfileSummary) {
 
 @Composable
 private fun EvolutionCompareBar(label: String, value: Int, color: Color) {
+    val animatedProgress by animateFloatAsState(
+        targetValue = value.coerceIn(0, 100) / 100f,
+        animationSpec = tween(V2Motion.EmphasizedMillis),
+        label = "evolutionCompareProgress"
+    )
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
         Text(label, color = EvolutionMuted, fontSize = 9.sp, fontWeight = FontWeight.Black)
         Text("$value%", color = color, fontSize = 11.sp, fontWeight = FontWeight.Black)
     }
     Spacer(Modifier.height(5.dp))
     LinearProgressIndicator(
-        progress = { value.coerceIn(0, 100) / 100f },
+        progress = { animatedProgress },
         modifier = Modifier.fillMaxWidth().height(7.dp),
         color = color,
-        trackColor = Color.White.copy(alpha = 0.06f)
+        trackColor = V2Colors.Hairline
     )
 }
