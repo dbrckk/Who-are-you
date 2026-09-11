@@ -1,5 +1,7 @@
 package com.whoareyou.app
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,6 +29,12 @@ import androidx.compose.ui.unit.sp
 fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
     val summary = remember(score) { ResultInterpretationEngine.derive(score) }
     val accent = QuizVisuals.accentFor(quiz)
+    val companion = QuizVisuals.companionAccentFor(quiz)
+    val animatedNuance by animateFloatAsState(
+        targetValue = summary.nuancePercent / 100f,
+        animationSpec = tween(V2Motion.EmphasizedMillis),
+        label = "resultNuanceProgress"
+    )
     val pole = if (summary.direction == ResultDirection.LOW) quiz.metricLow else quiz.metricHigh
     val strengthLabel = stringResource(
         when (summary.strength) {
@@ -65,7 +73,7 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
                     Column(Modifier.weight(1f)) {
                         Text(
                             stringResource(R.string.result_signal_label),
-                            color = V2Colors.AccentCyan,
+                            color = companion,
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Black
                         )
@@ -109,14 +117,14 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
                     )
                     Text(
                         "${summary.nuancePercent}%",
-                        color = V2Colors.AccentViolet,
+                        color = accent,
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Black
                     )
                 }
                 Spacer(Modifier.height(6.dp))
                 LinearProgressIndicator(
-                    progress = { summary.nuancePercent / 100f },
+                    progress = { animatedNuance },
                     modifier = Modifier.fillMaxWidth().height(7.dp),
                     color = V2Colors.AccentViolet,
                     trackColor = Color.White.copy(alpha = 0.06f)
