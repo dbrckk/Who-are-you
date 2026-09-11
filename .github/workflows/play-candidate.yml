@@ -109,14 +109,14 @@ jobs:
           PLAY_AAB="${bundles[0]}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
-          cp "$PLAY_AAB" who-are-you-play-0.2.0-2.aab
+          cp "$PLAY_AAB" who-are-you-play-0.2.1-3.aab
 
       - name: Upload signed Play candidate
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-play-candidate-0.2.0-2
+          name: who-are-you-play-candidate-0.2.1-3
           path: |
-            who-are-you-play-0.2.0-2.aab
+            who-are-you-play-0.2.1-3.aab
             play-candidate.sha256
           if-no-files-found: error
           retention-days: 30
