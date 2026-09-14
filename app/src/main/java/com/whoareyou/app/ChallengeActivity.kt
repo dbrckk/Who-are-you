@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 
 class ChallengeActivity : ComponentActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(localizedAppContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val incomingUri = intent?.data
