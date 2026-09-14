@@ -34,6 +34,28 @@ capture_visual_evidence() {
   python3 .github/scripts/validate-ui-hierarchy.py     "device-ui-$label.xml"     --package "$PACKAGE"     --size "$display_size"     --density "$density_dpi"     | tee "device-ui-report-$label.txt"
 }
 
+validate_evidence_matrix() {
+  local labels=(
+    "debug"
+    "candidate"
+    "upgrade-candidate"
+    "upgrade-relaunch"
+    "candidate-font-130"
+    "candidate-compact"
+    "candidate-large"
+    "candidate-reduced-motion"
+    "candidate-landscape"
+  )
+
+  : > device-validation-summary.txt
+  for label in "${labels[@]}"; do
+    for artifact in       "device-screen-$label.png"       "device-ui-$label.xml"       "device-ui-report-$label.txt"; do
+      test -s "$artifact"
+      printf 'ok %s\n' "$artifact" >> device-validation-summary.txt
+    done
+  done
+}
+
 capture_reduced_motion_variant() {
   local label="$1"
 
@@ -212,4 +234,5 @@ adb shell wm size > device-display-metrics.txt
 adb shell wm density >> device-display-metrics.txt
 adb shell settings get system font_scale >> device-display-metrics.txt
 
-echo "Android debug + minified candidate + in-place upgrade + accessibility validation passed."
+validate_evidence_matrix
+echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
