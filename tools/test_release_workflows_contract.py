@@ -37,9 +37,8 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
     def test_android_37_sdk_package_name_is_valid(self):
         workflows = (self.ci, self.candidate, self.internal)
         for workflow in workflows:
-            self.assertIn('"platforms;android-37"', workflow)
-            self.assertNotIn('"platforms;android-37.0"', workflow)
-            self.assertIn('"build-tools;36.0.0"', workflow)
+            self.assertIn('"platforms;android-37.0"', workflow)
+            self.assertIn('"build-tools;37.0.0"', workflow)
 
     def test_candidate_and_internal_run_core_quality_gates(self):
         for workflow in (self.candidate, self.internal):
