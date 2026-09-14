@@ -4,31 +4,33 @@
 Who Are You?
 
 ## Short description
-Discover your personality, build your profile and compare with friends.
+Explore your personality patterns and build a visual self-reflection profile.
 
 ## Full description
-Who Are You? turns quick personality questions into a profile you can actually use and share.
+Who Are You? turns quick personality questions into a visual profile designed for self-reflection.
 
-Take 30 fast, visual tests about your social energy, decision style, curiosity, risk tolerance, relationships, productivity and more. Every result adds another dimension to your evolving profile.
+Explore dimensions such as social energy, decision style, curiosity, risk tolerance, relationships, productivity and more. Each completed test adds another signal to your evolving profile, helping you see patterns without locking you into a fixed type.
 
-Compare results with friends through challenge links, discover how closely you match, share visual match cards, answer a new Daily Question and unlock achievements as your profile grows.
+Your profile is stored locally on your device and no Who Are You? account is required.
 
-No account is required to start.
+When you want to go further, you can explore another dimension, revisit previous results, answer the Daily Question, track streaks and achievements, or optionally compare a result with a friend through a challenge link.
 
 ### What you can do
-- Take 30 fast personality tests.
+- Take fast, visual personality tests.
 - Build an evolving multi-dimensional profile.
-- Share visual result cards.
-- Challenge friends to the same test.
-- Compare compatibility scores and share visual match cards.
-- Pass the challenge on directly from a completed match.
+- See clear result explanations and changes over time.
+- Explore recommended dimensions at your own pace.
 - Answer the Daily Question.
-- Build streaks and unlock achievements.
+- Track streaks and unlock achievements.
+- Optionally share results or compare a test with a friend.
+- Reset your local profile data from inside the app.
 - Remove ads forever with one optional lifetime purchase — no subscription.
+
+No account is required to start.
 
 Who Are You? is designed for entertainment and self-reflection. It is not a psychological or medical diagnostic tool.
 
 ## Store notes
 - Primary category: Entertainment / Lifestyle.
-- Core promise: "Discover your profile in 60 seconds. Compare it with friends."
-- Recommended screenshots: onboarding, Discover/profile progress, quiz, result card, visual friend match, Daily Question.
+- Core promise: "Explore your patterns. Build a clearer picture of yourself over time."
+- Recommended screenshots: onboarding, Discover/profile progress, quiz, result interpretation, profile evolution, optional friend comparison.
