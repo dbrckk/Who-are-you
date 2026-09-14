@@ -66,11 +66,13 @@ internal class HttpEventSink(private val endpoint: String) : EventSink {
     private val executor = ThreadPoolExecutor(
         1,
         1,
-        0L,
-        TimeUnit.MILLISECONDS,
+        30L,
+        TimeUnit.SECONDS,
         ArrayBlockingQueue(64),
         ThreadPoolExecutor.DiscardOldestPolicy()
-    )
+    ).apply {
+        allowCoreThreadTimeOut(true)
+    }
 
     override fun send(name: String, params: Map<String, Any?>) {
         enqueue(
