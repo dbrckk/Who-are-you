@@ -29,6 +29,11 @@ data class GlobalProfileSummary(
         strongTraitCount = 0,
         uncertainTraitCount = 0,
         traits = emptyList()
+    ),
+    val traitEvolution: TraitEvolutionSummary = TraitEvolutionSummary(
+        traits = emptyList(),
+        meaningfulChanges = emptyList(),
+        newEvidence = emptyList()
     )
 )
 
@@ -36,7 +41,8 @@ object GlobalProfileEngine {
     fun build(
         catalog: List<Quiz>,
         latestScores: Map<String, Int>,
-        previousScores: Map<String, Int> = emptyMap()
+        previousScores: Map<String, Int> = emptyMap(),
+        scoreHistory: Map<String, List<Int>> = emptyMap()
     ): GlobalProfileSummary {
         val dimensions = catalog.mapNotNull { quiz ->
             latestScores[quiz.id]?.let { rawScore ->
@@ -66,7 +72,12 @@ object GlobalProfileEngine {
             dimensions = dimensions,
             signature = SignatureProfiles.primary(stableScores),
             traitGraph = traitGraph,
-            coverage = ProfileCoverageEngine.build(catalog, traitGraph)
+            coverage = ProfileCoverageEngine.build(catalog, traitGraph),
+            traitEvolution = TraitEvolutionEngine.build(
+                catalog = catalog,
+                latestScores = latestScores,
+                scoreHistory = scoreHistory
+            )
         )
     }
 }
