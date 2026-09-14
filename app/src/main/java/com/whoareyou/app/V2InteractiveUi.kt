@@ -10,6 +10,7 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -48,6 +49,7 @@ fun V2PressableSurface(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .heightIn(min = 48.dp)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
@@ -84,6 +86,7 @@ fun V2PressableCard(
 
     Card(
         modifier = modifier
+            .heightIn(min = 48.dp)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
