@@ -53,6 +53,7 @@ fun QuizScreen(
     onFinished: (Int) -> Unit
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
+    val question = quiz.questions[safeQuestionIndex]
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
     val animatedProgress by animateFloatAsState(
@@ -168,7 +169,7 @@ fun QuizScreen(
         Spacer(Modifier.height(26.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            quiz.questions[safeQuestionIndex].answers.forEachIndexed { answerIndex, answer ->
+            question.answers.forEachIndexed { answerIndex, answer ->
                 V2PressableSurface(
                     onClick = {
                         if (isFinishing) return@V2PressableSurface
