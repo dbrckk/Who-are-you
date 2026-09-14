@@ -159,6 +159,7 @@ private fun WhoAreYouApp() {
                     quiz = selectedQuiz,
                     questionIndex = quizQuestionIndex,
                     score = quizRawScore,
+                    isFinishing = quizFinishing,
                     onProgress = { questionIndex, score ->
                         if (!quizFinishing) {
                             quizQuestionIndex = questionIndex
