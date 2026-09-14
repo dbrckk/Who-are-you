@@ -178,6 +178,7 @@ jobs:
           path: |
             play-internal-upload.sha256
             play-internal-native-libraries.txt
+            app/build/outputs/mapping/playRelease/mapping.txt
             play-internal-publish-result.json
           if-no-files-found: error
           retention-days: 30
