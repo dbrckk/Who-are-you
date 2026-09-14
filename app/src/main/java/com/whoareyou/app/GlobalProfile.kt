@@ -18,7 +18,8 @@ data class GlobalProfileSummary(
     val completedCount: Int,
     val totalCount: Int,
     val dimensions: List<ProfileDimension>,
-    val signature: SignatureProfileMatch? = null
+    val signature: SignatureProfileMatch? = null,
+    val traitGraph: TraitGraph = TraitGraph(emptyList(), 0)
 )
 
 object GlobalProfileEngine {
@@ -51,7 +52,8 @@ object GlobalProfileEngine {
             completedCount = dimensions.size,
             totalCount = catalog.size,
             dimensions = dimensions,
-            signature = SignatureProfiles.primary(stableScores)
+            signature = SignatureProfiles.primary(stableScores),
+            traitGraph = TraitGraphEngine.build(dimensions)
         )
     }
 }
