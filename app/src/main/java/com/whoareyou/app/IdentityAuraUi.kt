@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,23 +28,28 @@ fun IdentityAura(
     secondary: Color = V2Colors.Cyan
 ) {
     val normalized = score.coerceIn(0, 100) / 100f
-    val warm = lerp(primary, secondary, normalized * 0.42f)
-    val cool = lerp(secondary, primary, (1f - normalized) * 0.28f)
+    val warm = remember(primary, secondary, normalized) {
+        lerp(primary, secondary, normalized * 0.42f)
+    }
+    val cool = remember(primary, secondary, normalized) {
+        lerp(secondary, primary, (1f - normalized) * 0.28f)
+    }
+    val outerBrush = remember(warm, secondary) {
+        Brush.radialGradient(
+            colors = listOf(
+                warm.copy(alpha = 0.24f),
+                secondary.copy(alpha = 0.10f),
+                V2Colors.Plum.copy(alpha = 0.10f),
+                Color.Transparent
+            )
+        )
+    }
 
     Box(
         modifier = modifier
             .size(156.dp)
             .clip(CircleShape)
-            .background(
-                Brush.radialGradient(
-                    colors = listOf(
-                        warm.copy(alpha = 0.24f),
-                        secondary.copy(alpha = 0.10f),
-                        V2Colors.Plum.copy(alpha = 0.10f),
-                        Color.Transparent
-                    )
-                )
-            ),
+            .background(outerBrush),
         contentAlignment = Alignment.Center
     ) {
         Canvas(Modifier.size(136.dp)) {
