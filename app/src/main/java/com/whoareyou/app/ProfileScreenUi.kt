@@ -193,7 +193,10 @@ fun ProfileScreen(
                 summary.traitEvolution.newEvidence.isNotEmpty()
             ) {
                 Spacer(Modifier.height(18.dp))
-                TraitEvolutionCard(summary.traitEvolution)
+                TraitEvolutionCard(
+                    evolution = summary.traitEvolution,
+                    catalog = catalog
+                )
             }
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(18.dp))
