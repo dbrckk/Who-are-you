@@ -70,5 +70,6 @@ jobs:
             device-screen-*.png
             device-ui-*.xml
             device-display-metrics.txt
+            device-display-*.txt
           if-no-files-found: warn
           retention-days: 14
