@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="result_score_accessibility">Score: %1$d percent on the scale from %2$s to %3$s.</string>
     <string name="result_interpretation_title">Read your signal</string>
     <string name="result_interpretation_subtitle">A more useful way to read this result than the score alone.</string>
     <string name="result_signal_label">SIGNAL STRENGTH</string>
