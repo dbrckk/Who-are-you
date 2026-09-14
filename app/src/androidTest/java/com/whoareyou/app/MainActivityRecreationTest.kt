@@ -3,9 +3,10 @@ package com.whoareyou.app
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
@@ -29,7 +30,9 @@ class MainActivityRecreationTest {
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
-            composeRule.onNodeWithTag("discover_next_quiz").performScrollTo().assertIsDisplayed().performClick()
+            composeRule.onNodeWithTag("discover_list")
+                .performScrollToNode(hasTestTag("discover_next_quiz"))
+            composeRule.onNodeWithTag("discover_next_quiz").assertIsDisplayed().performClick()
             composeRule.onNodeWithTag("quiz_question_1").assertIsDisplayed()
             composeRule.onNodeWithTag("quiz_answer_0").performClick()
             composeRule.onNodeWithTag("quiz_question_2").assertIsDisplayed()
