@@ -1,6 +1,12 @@
 package com.whoareyou.app
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
@@ -116,11 +122,35 @@ fun QuizScreen(
             style = V2Type.Eyebrow
         )
         Spacer(Modifier.height(12.dp))
-        Text(
-            question.text,
-            color = V2Colors.TextPrimary,
-            style = V2Type.Question
-        )
+        AnimatedContent(
+            targetState = safeQuestionIndex,
+            transitionSpec = {
+                if (reduceMotion) {
+                    fadeIn(tween(0)).togetherWith(fadeOut(tween(0)))
+                } else {
+                    (
+                        fadeIn(tween(V2Motion.StandardMillis)) +
+                            slideInHorizontally(
+                                animationSpec = tween(V2Motion.StandardMillis),
+                                initialOffsetX = { width -> width / 12 }
+                            )
+                        ).togetherWith(
+                            fadeOut(tween(V2Motion.FastMillis)) +
+                                slideOutHorizontally(
+                                    animationSpec = tween(V2Motion.FastMillis),
+                                    targetOffsetX = { width -> -width / 16 }
+                                )
+                        )
+                }
+            },
+            label = "quizQuestion"
+        ) { animatedIndex ->
+            Text(
+                quiz.questions[animatedIndex.coerceIn(0, quiz.questions.lastIndex)].text,
+                color = V2Colors.TextPrimary,
+                style = V2Type.Question
+            )
+        }
         if (isFinishing) {
             Spacer(Modifier.height(14.dp))
             V2StatusNotice(
