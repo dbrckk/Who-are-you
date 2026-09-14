@@ -134,6 +134,45 @@ private fun TraitTimelineDialog(
                     style = MaterialTheme.typography.bodyMedium
                 )
 
+                timeline.periodComparison?.let { comparison ->
+                    val scoreDelta = if (comparison.scoreDelta > 0) "+${comparison.scoreDelta}" else "${comparison.scoreDelta}"
+                    val confidenceDelta = if (comparison.confidenceDelta > 0) "+${comparison.confidenceDelta}" else "${comparison.confidenceDelta}"
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = if (french) "Score ancien → récent" else "Score earlier → recent",
+                            color = V2Colors.TextSecondary,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                        Text(
+                            text = "${comparison.earlierScoreAverage}% → ${comparison.recentScoreAverage}% ($scoreDelta)",
+                            color = V2Colors.TextPrimary,
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = if (french) "Confiance ancienne → récente" else "Confidence earlier → recent",
+                            color = V2Colors.TextSecondary,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                        Text(
+                            text = "${comparison.earlierConfidenceAverage}% → ${comparison.recentConfidenceAverage}% ($confidenceDelta)",
+                            color = V2Colors.TextPrimary,
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
                 timeline.points.asReversed().forEach { point ->
                     val date = if (point.epochDay > 0) {
                         LocalDate.ofEpochDay(point.epochDay).format(formatter)
