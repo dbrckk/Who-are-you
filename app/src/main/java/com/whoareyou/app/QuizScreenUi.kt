@@ -121,6 +121,7 @@ fun QuizScreen(
                             onProgress(safeQuestionIndex + 1, newScore)
                         }
                     },
+                    enabled = !isFinishing,
                     modifier = Modifier.testTag("quiz_answer_$answerIndex")
                 ) {
                     Row(
