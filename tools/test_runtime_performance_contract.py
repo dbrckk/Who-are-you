@@ -37,7 +37,7 @@ class RuntimePerformanceContractTest(unittest.TestCase):
     def test_reduced_motion_removes_ambient_frame_loops(self):
         for source in (self.quiz_visual, self.onboarding, self.discover):
             self.assertIn('if (reduceMotion)', source)
-        self.assertIn('glowScale = 1f', self.quiz_visual)
+        self.assertIn('glowScale?.value ?: 1f', self.quiz_visual)
 
     def test_app_reports_first_useful_draw(self):
         self.assertIn('reportFullyDrawn()', self.main)
