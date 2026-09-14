@@ -30,18 +30,20 @@ object QuizRepository {
     @Volatile private var cached: List<Quiz>? = null
 
     fun load(context: Context): List<Quiz> {
-        val deviceLanguage = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
+        val appContext = context.applicationContext
+        val deviceLanguage = appContext.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
         val language = supportedCatalogLanguage(deviceLanguage)
-        val assets = defaultAssets.map { defaultName ->
-            val localizedName = defaultName.removeSuffix(".json") + "-$language.json"
-            if (language == "fr" && assetExists(context, localizedName)) localizedName else defaultName
-        }
-        val current = cached
-        if (current != null && cachedLanguage == language) return current
+        cached?.takeIf { cachedLanguage == language }?.let { return it }
 
         return synchronized(this) {
-            cached?.takeIf { cachedLanguage == language } ?: assets.flatMap { assetName ->
-                parse(context.assets.open(assetName).bufferedReader().use { it.readText() })
+            cached?.takeIf { cachedLanguage == language } ?: run {
+                val assets = defaultAssets.map { defaultName ->
+                    val localizedName = defaultName.removeSuffix(".json") + "-$language.json"
+                    if (language == "fr" && assetExists(appContext, localizedName)) localizedName else defaultName
+                }
+                assets.flatMap { assetName ->
+                    parse(appContext.assets.open(assetName).bufferedReader().use { it.readText() })
+                }
             }.also { catalog ->
                 require(catalog.isNotEmpty()) { "Quiz catalog cannot be empty" }
                 require(catalog.map { it.id }.distinct().size == catalog.size) { "Quiz IDs must be unique" }
