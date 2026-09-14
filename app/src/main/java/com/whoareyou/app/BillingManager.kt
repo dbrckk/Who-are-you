@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class BillingManager(
-    private val context: Context,
+    context: Context,
     private val onPremiumChanged: (Boolean) -> Unit,
     private val onPriceChanged: (String?) -> Unit = {}
 ) {
@@ -28,9 +28,12 @@ class BillingManager(
         const val REMOVE_ADS_PRODUCT_ID = "remove_ads_lifetime"
     }
 
+    private val appContext = context.applicationContext
+    private val supervisorJob = SupervisorJob()
+
     private var removeAdsProduct: ProductDetails? = null
     private var removeAdsOfferToken: String? = null
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private val scope = CoroutineScope(supervisorJob + Dispatchers.Main.immediate)
     private var reconnectJob: Job? = null
     private var reconnectAttempt = 0
     private var productQueryRetryJob: Job? = null
@@ -38,7 +41,7 @@ class BillingManager(
     private var closed = false
     private val loggedLivePurchaseTokens = mutableSetOf<String>()
 
-    private val billingClient: BillingClient = BillingClient.newBuilder(context)
+    private val billingClient: BillingClient = BillingClient.newBuilder(appContext)
         .enablePendingPurchases(
             PendingPurchasesParams.newBuilder()
                 .enableOneTimeProducts()
@@ -85,6 +88,7 @@ class BillingManager(
         reconnectJob = null
         productQueryRetryJob?.cancel()
         productQueryRetryJob = null
+        supervisorJob.cancel()
         billingClient.endConnection()
     }
 
@@ -215,7 +219,7 @@ class BillingManager(
             AppEvents.purchaseSuccess(REMOVE_ADS_PRODUCT_ID)
         }
         CoroutineScope(Dispatchers.IO).launch {
-            ProfileStore.setAdsRemoved(context, true)
+            ProfileStore.setAdsRemoved(appContext, true)
         }
     }
 
