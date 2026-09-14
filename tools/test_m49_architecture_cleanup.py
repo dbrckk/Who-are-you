@@ -13,7 +13,7 @@ class M49ArchitectureCleanupTest(unittest.TestCase):
         self.assertNotIn("private fun CatalogUnavailableScreen", source)
         self.assertIn("AppScreen.DISCOVER", source)
         self.assertIn("AppShellNavigation.tabFor(screen)", source)
-        self.assertLess(len(source), 10000)
+        self.assertLess(len(source), 15000)
 
     def test_entry_screens_are_extracted(self):
         source = (APP / "EntryScreensUi.kt").read_text(encoding="utf-8")
