@@ -67,30 +67,18 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
             colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
         ) {
             Column(Modifier.padding(20.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            stringResource(R.string.result_signal_label),
-                            color = companion,
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Black
-                        )
-                        Spacer(Modifier.height(5.dp))
-                        Text(
-                            strengthLabel,
-                            color = V2Colors.TextPrimary,
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Black
-                        )
-                    }
-                    Spacer(Modifier.width(12.dp))
+                Column {
                     Text(
-                        "${summary.distanceFromNeutral}",
-                        color = accent,
-                        fontSize = 30.sp,
+                        stringResource(R.string.result_signal_label),
+                        color = companion,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Black
+                    )
+                    Spacer(Modifier.height(5.dp))
+                    Text(
+                        strengthLabel,
+                        color = V2Colors.TextPrimary,
+                        fontSize = 22.sp,
                         fontWeight = FontWeight.Black
                     )
                 }
