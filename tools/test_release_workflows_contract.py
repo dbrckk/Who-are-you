@@ -32,7 +32,10 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
             self.assertIn(":app:testDebugUnitTest", workflow)
             self.assertIn(":app:assembleDebugAndroidTest", workflow)
             self.assertIn(":app:lintDebug", workflow)
+            self.assertIn(":app:lintPlayRelease", workflow)
             self.assertIn(":baseline-profile:assembleBenchmark", workflow)
+            self.assertIn("test -s app/build/outputs/mapping/playRelease/mapping.txt", workflow)
+            self.assertIn("timeout-minutes: 40", workflow)
 
 class ComposeImportContractTest(unittest.TestCase):
     def test_padding_extension_has_import_when_used(self):
