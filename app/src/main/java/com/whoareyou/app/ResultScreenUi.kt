@@ -49,6 +49,7 @@ fun ResultScreen(
     totalQuizCount: Int,
     catalog: List<Quiz>,
     completed: Set<String>,
+    coverage: ProfileCoverage,
     onQuizSelected: (Quiz) -> Unit,
     onDone: () -> Unit,
     onRetry: () -> Unit
@@ -210,6 +211,7 @@ fun ResultScreen(
                 currentQuiz = quiz,
                 catalog = catalog,
                 completed = completed,
+                coverage = coverage,
                 onQuizSelected = onQuizSelected
             )
 
