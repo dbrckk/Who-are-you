@@ -84,9 +84,14 @@ object ProfileStore {
             val latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey])
 
             if (normalizedAttemptId != null && normalizedAttemptId in committedAttempts) {
+                val persistedScore = latestScores[normalizedQuizId]
+                if (persistedScore == null) {
+                    result = QuizResultCommit(changed = false, persistedScore = -1)
+                    return@edit
+                }
                 result = QuizResultCommit(
                     changed = false,
-                    persistedScore = latestScores[normalizedQuizId] ?: normalizedScore
+                    persistedScore = persistedScore
                 )
                 return@edit
             }
@@ -117,6 +122,7 @@ object ProfileStore {
             )
         }
 
+        if (!result.changed && result.persistedScore < 0) return null
         if (result.changed) announceNewAchievements(context)
         return result
     }
