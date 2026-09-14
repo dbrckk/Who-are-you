@@ -52,7 +52,7 @@ The app is not specifically designed for children. The final target-audience and
 
 ## Data deletion
 
-Most Who Are You? profile data is stored locally. Users can remove local application data using Android's app-data controls or by uninstalling the app.
+Most Who Are You? profile data is stored locally. The Profile screen includes a confirmed **Reset profile data** action that removes quiz progress, scores, streaks, comparisons and onboarding state from the device. Users can also remove local application data using Android's app-data controls or by uninstalling the app.
 
 If custom production telemetry is enabled and server-side records are retained, the published support contact must provide the applicable deletion/request process.
 
