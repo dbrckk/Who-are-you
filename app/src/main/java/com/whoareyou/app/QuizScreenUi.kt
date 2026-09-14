@@ -42,6 +42,7 @@ fun QuizScreen(
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
     val question = quiz.questions[safeQuestionIndex]
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
+    val canNavigateBack = !isFinishing
     val scrollState = rememberScrollState()
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
@@ -74,7 +75,7 @@ fun QuizScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AccessibleBackAction(onClick = onBack)
+            AccessibleBackAction(onClick = { if (canNavigateBack) onBack() })
             Text(
                 stringResource(R.string.question_progress, safeQuestionIndex + 1, quiz.questions.size),
                 color = V2Colors.TextSecondary,
