@@ -13,8 +13,8 @@ class PlayCandidateWorkflowTest(unittest.TestCase):
 
     def test_manual_only_and_read_only(self):
         self.assertIn('workflow_dispatch:', self.workflow)
-        self.assertNotIn('\n  push:', self.workflow)
-        self.assertNotIn('\n  pull_request:', self.workflow)
+        self.assertNotIn('\\n  push:', self.workflow)
+        self.assertNotIn('\\n  pull_request:', self.workflow)
         self.assertIn('contents: read', self.workflow)
         self.assertIn('environment: play-internal', self.workflow)
 
@@ -31,11 +31,25 @@ class PlayCandidateWorkflowTest(unittest.TestCase):
         self.assertIn(':app:bundlePlayRelease', self.workflow)
         self.assertIn('jarsigner -verify -verbose -certs', self.workflow)
         self.assertIn('sha256sum', self.workflow)
+        self.assertIn('VERSION_NAME=', self.workflow)
+        self.assertIn('VERSION_CODE=', self.workflow)
+        self.assertIn('app/build.gradle.kts', self.workflow)
+        self.assertIn('who-are-you-play-${VERSION_NAME}-${VERSION_CODE}.aab', self.workflow)
+        self.assertIn('who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}', self.workflow)
+        self.assertIn('steps.bundle.outputs.output_aab', self.workflow)
+        self.assertIn('steps.bundle.outputs.artifact_name', self.workflow)
+
         gradle = (ROOT / 'app/build.gradle.kts').read_text(encoding='utf-8')
-        version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle).group(1)
-        version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle).group(1)
-        self.assertIn(f'who-are-you-play-candidate-{version_name}-{version_code}', self.workflow)
-        self.assertIn(f'who-are-you-play-{version_name}-{version_code}.aab', self.workflow)
+        version_name = re.search(r'versionName\\s*=\\s*"([^"]+)"', gradle).group(1)
+        version_code = re.search(r'versionCode\\s*=\\s*(\\d+)', gradle).group(1)
+        self.assertEqual(
+            f'who-are-you-play-candidate-{version_name}-{version_code}',
+            self.contract['artifactName'],
+        )
+        self.assertIn(
+            f'who-are-you-play-{version_name}-{version_code}.aab',
+            self.contract['artifactFiles'],
+        )
 
     def test_workflow_does_not_upload_to_play(self):
         self.assertFalse(self.contract['playUploadAutomated'])
