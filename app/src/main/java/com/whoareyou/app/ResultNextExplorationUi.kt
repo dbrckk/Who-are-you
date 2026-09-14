@@ -27,17 +27,28 @@ fun ResultNextExplorationCard(
     onQuizSelected: (Quiz) -> Unit
 ) {
     val themeMap = remember(catalog) { catalog.associate { it.id to QuizVisuals.themeFor(it) } }
-    val recommendation = remember(currentQuiz.id, catalog, completed) {
+    val catalogById = remember(catalog) { catalog.associateBy { it.id } }
+    val orderedQuizIds = remember(catalog) { catalog.map { it.id } }
+    val recommendation = remember(currentQuiz.id, orderedQuizIds, themeMap, completed) {
         ResultNextExplorationEngine.recommend(
             currentQuizId = currentQuiz.id,
-            orderedQuizIds = catalog.map { it.id },
+            orderedQuizIds = orderedQuizIds,
             themeByQuizId = themeMap,
             completed = completed
         )
     } ?: return
-    val nextQuiz = catalog.firstOrNull { it.id == recommendation.quizId } ?: return
+    val nextQuiz = catalogById[recommendation.quizId] ?: return
     val accent = QuizVisuals.accentFor(nextQuiz)
     val companion = QuizVisuals.companionAccentFor(nextQuiz)
+    val cardBrush = remember(accent, companion) {
+        Brush.linearGradient(
+            listOf(
+                accent.copy(alpha = 0.12f),
+                V2Colors.SurfaceElevated,
+                companion.copy(alpha = 0.08f)
+            )
+        )
+    }
 
     V2PressableCard(
         onClick = { onQuizSelected(nextQuiz) },
@@ -47,15 +58,7 @@ fun ResultNextExplorationCard(
     ) {
         Column(
             Modifier
-                .background(
-                    Brush.linearGradient(
-                        listOf(
-                            accent.copy(alpha = 0.12f),
-                            V2Colors.SurfaceElevated,
-                            companion.copy(alpha = 0.08f)
-                        )
-                    )
-                )
+                .background(cardBrush)
                 .padding(16.dp)
         ) {
             QuizArtwork(nextQuiz, compact = true)
