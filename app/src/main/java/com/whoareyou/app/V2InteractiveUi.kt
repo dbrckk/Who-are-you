@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
@@ -40,6 +41,7 @@ fun V2PressableSurface(
     content: @Composable () -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    val view = LocalView.current
     var focused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
@@ -75,7 +77,10 @@ fun V2PressableSurface(
                 indication = null,
                 role = role,
                 enabled = enabled,
-                onClick = onClick
+                onClick = {
+                    view.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+                    onClick()
+                }
             )
     ) {
         content()
@@ -91,6 +96,7 @@ fun V2PressableCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    val view = LocalView.current
     var focused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
@@ -119,7 +125,10 @@ fun V2PressableCard(
                         interactionSource = interactionSource,
                         indication = null,
                         role = Role.Button,
-                        onClick = onClick
+                        onClick = {
+                            view.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+                            onClick()
+                        }
                     )
                 } else Modifier
             ),
