@@ -15,8 +15,8 @@ class QuizResultPersistenceFeedbackTest(unittest.TestCase):
         for source in (self.en, self.fr):
             self.assertIn('name="quiz_result_saving"', source)
             self.assertIn('name="quiz_result_save_failed"', source)
-        self.assertIn('testTag("quiz_result_saving")', self.quiz)
-        self.assertIn('testTag("quiz_result_save_failed")', self.quiz)
+        self.assertIn('tag = "quiz_result_saving"', self.quiz)
+        self.assertIn('tag = "quiz_result_save_failed"', self.quiz)
 
     def test_commit_failure_preserves_retry_path(self):
         self.assertIn("var commitFailed by rememberSaveable", self.main)
