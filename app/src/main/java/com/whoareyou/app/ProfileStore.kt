@@ -32,6 +32,7 @@ data class StoredProfile(
     val latestScores: Map<String, Int> = emptyMap(),
     val previousScores: Map<String, Int> = emptyMap(),
     val scoreHistory: Map<String, List<Int>> = emptyMap(),
+    val timedScoreHistory: Map<String, List<TimedScore>> = emptyMap(),
     val adsRemoved: Boolean = false,
     val onboardingComplete: Boolean = false,
     val announcedAchievementIds: Set<String> = emptySet(),
@@ -49,6 +50,7 @@ object ProfileStore {
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val previousScoresKey = stringPreferencesKey("previous_scores")
     private val scoreHistoryKey = stringPreferencesKey("score_history_v2")
+    private val timedScoreHistoryKey = stringPreferencesKey("timed_score_history_v1")
     // Legacy per-quiz marker retained for migration from versions before M81.
     private val lastQuizAttemptIdsKey = stringPreferencesKey("last_quiz_attempt_ids")
     private val committedQuizAttemptIdsKey = stringPreferencesKey("committed_quiz_attempt_ids")
@@ -114,6 +116,7 @@ object ProfileStore {
                 latestScores = latestScores,
                 previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
             scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
+            timedScoreHistory = ProfilePersistenceCodec.decodeTimedScoreHistory(prefs[timedScoreHistoryKey]),
                 scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
                 quizId = normalizedQuizId,
                 score = normalizedScore
@@ -122,6 +125,23 @@ object ProfileStore {
             prefs[scoresKey] = ProfilePersistenceCodec.encodeScores(history.latestScores)
             prefs[previousScoresKey] = ProfilePersistenceCodec.encodeScores(history.previousScores)
             prefs[scoreHistoryKey] = ProfilePersistenceCodec.encodeScoreHistory(history.scoreHistory)
+
+            val timedHistory = ProfilePersistenceCodec.decodeTimedScoreHistory(
+                prefs[timedScoreHistoryKey]
+            ).toMutableMap()
+            val existingTimed = timedHistory[normalizedQuizId].orEmpty()
+            val migratedTimed = if (existingTimed.isEmpty()) {
+                history.scoreHistory[normalizedQuizId]
+                    .orEmpty()
+                    .dropLast(1)
+                    .map { TimedScore(it, 0) }
+            } else {
+                existingTimed
+            }
+            timedHistory[normalizedQuizId] = (
+                migratedTimed + TimedScore(normalizedScore, LocalDate.now().toEpochDay())
+            ).takeLast(ScoreHistoryEngine.MAX_SCORES_PER_QUIZ)
+            prefs[timedScoreHistoryKey] = ProfilePersistenceCodec.encodeTimedScoreHistory(timedHistory)
             if (normalizedAttemptId != null) {
                 committedAttempts.remove(normalizedAttemptId)
                 committedAttempts.add(normalizedAttemptId)
