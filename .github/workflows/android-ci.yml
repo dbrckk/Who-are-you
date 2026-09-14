@@ -84,7 +84,7 @@ jobs:
         run: gradle :app:assembleDebugAndroidTest --stacktrace
 
       - name: Compile benchmark variants
-        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace
+        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmarkRelease --stacktrace
 
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
