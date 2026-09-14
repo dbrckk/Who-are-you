@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -70,7 +71,7 @@ fun PersonalizedDiscoverDashboard(
                 )
             )
         Box(
-            modifier = (if (onOpenProfile != null) profileModifier.clickable(onClick = onOpenProfile) else profileModifier).padding(20.dp)
+            modifier = (if (onOpenProfile != null) profileModifier.clickable(role = Role.Button, onClick = onOpenProfile) else profileModifier).padding(20.dp)
         ) {
             Column {
                 Row(
