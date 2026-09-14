@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -183,6 +184,7 @@ private fun LibraryChip(
             .background(if (selected) V2Colors.AccentViolet.copy(alpha = 0.18f) else V2Colors.Surface)
             .clickable(role = Role.Button, onClick = onClick)
             .semantics { this.selected = selected }
+            .heightIn(min = 48.dp)
             .padding(horizontal = 13.dp, vertical = 9.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
@@ -226,9 +228,7 @@ private fun LibraryResultCard(
                         quiz.title,
                         modifier = Modifier.weight(1f),
                         color = V2Colors.TextPrimary,
-                        style = V2Type.BodyStrong,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                        style = V2Type.BodyStrong
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
@@ -242,9 +242,7 @@ private fun LibraryResultCard(
                 Text(
                     quiz.hook,
                     color = V2Colors.TextSecondary,
-                    style = V2Type.Supporting,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    style = V2Type.Supporting
                 )
                 Spacer(Modifier.height(7.dp))
                 Text(quiz.time, color = accent, style = V2Type.Caption)
