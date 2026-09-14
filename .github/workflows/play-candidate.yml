@@ -26,10 +26,28 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
+
       - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
+
+      - name: Python quality tests
+        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
+      - name: JVM unit tests
+        run: gradle :app:testDebugUnitTest --stacktrace
+
+      - name: Compile instrumentation tests
+        run: gradle :app:assembleDebugAndroidTest --stacktrace
+
+      - name: Android lint
+        run: gradle :app:lintDebug --stacktrace
 
       - name: Validate required secrets
         env:
@@ -121,6 +139,26 @@ jobs:
           ARTIFACT_NAME="who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
+          {
+            echo "Native libraries packaged in the Play candidate:"
+            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so          echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Upload signed Play candidate
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.bundle.outputs.artifact_name }}
+          path: |
+            ${{ steps.bundle.outputs.output_aab }}
+            play-candidate.sha256
+            play-native-libraries.txt
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove materialized keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
+ || echo "(none)"
+          } | tee play-native-libraries.txt
           cp "$PLAY_AAB" "$OUTPUT_AAB"
           echo "output_aab=$OUTPUT_AAB" >> "$GITHUB_OUTPUT"
           echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
