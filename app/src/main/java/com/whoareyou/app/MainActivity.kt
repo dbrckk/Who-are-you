@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -101,9 +102,12 @@ private fun WhoAreYouApp() {
         }.getOrNull() else null
     }
 
-    DisposableEffect(billingManager, adManager, activity) {
+    LaunchedEffect(billingManager, adManager, activity) {
+        withFrameNanos { }
         runCatching { billingManager?.start() }
         runCatching { adManager?.start(activity) }
+    }
+    DisposableEffect(billingManager) {
         onDispose { runCatching { billingManager?.close() } }
     }
 
