@@ -2,7 +2,7 @@ package com.whoareyou.app
 
 object AppEvents {
     @Volatile
-    private var sink: EventSink = LogEventSink
+    private var sink: EventSink = if (BuildConfig.DEBUG) LogEventSink else NoOpEventSink
 
     @Volatile
     private var recommendationSession = RecommendationAttributionSession()
@@ -11,7 +11,7 @@ object AppEvents {
         sink = BuildConfig.TELEMETRY_ENDPOINT
             .takeIf { it.startsWith("https://") }
             ?.let(::HttpEventSink)
-            ?: LogEventSink
+            ?: if (BuildConfig.DEBUG) LogEventSink else NoOpEventSink
     }
 
     fun log(name: String, params: Map<String, Any?> = emptyMap()) {
