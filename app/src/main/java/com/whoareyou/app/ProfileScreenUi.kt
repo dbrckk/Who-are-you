@@ -193,6 +193,13 @@ fun ProfileScreen(
                     catalog = catalog
                 )
             }
+            if (summary.traitTimelines.any { it.points.size >= 2 }) {
+                Spacer(Modifier.height(18.dp))
+                TraitTimelineCard(
+                    timelines = summary.traitTimelines,
+                    catalog = catalog
+                )
+            }
             if (
                 summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
                 summary.traitEvolution.newEvidence.isNotEmpty()
