@@ -89,22 +89,16 @@ fun CatalogUnavailableScreen() {
 @Composable
 fun OnboardingScreen(onStart: () -> Unit) {
     val reduceMotion = reducedMotionEnabled()
-    val glowScale: Float
-    if (reduceMotion) {
-        glowScale = 1f
-    } else {
-        val ambient = rememberInfiniteTransition(label = "onboardingAmbient")
-        val animatedScale by ambient.animateFloat(
-            initialValue = 0.94f,
-            targetValue = 1.10f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(V2Motion.AmbientMillis),
-                repeatMode = RepeatMode.Reverse
-            ),
-            label = "onboardingGlowScale"
-        )
-        glowScale = animatedScale
-    }
+    val ambient = if (reduceMotion) null else rememberInfiniteTransition(label = "onboardingAmbient")
+    val glowScale = ambient?.animateFloat(
+        initialValue = 0.94f,
+        targetValue = 1.10f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(V2Motion.AmbientMillis),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "onboardingGlowScale"
+    )
 
     BoxWithConstraints(
         modifier = Modifier
@@ -127,8 +121,9 @@ fun OnboardingScreen(onStart: () -> Unit) {
                 .offset(x = 70.dp, y = (-60).dp)
                 .size(240.dp)
                 .graphicsLayer {
-                    scaleX = glowScale
-                    scaleY = glowScale
+                    val scale = glowScale?.value ?: 1f
+                    scaleX = scale
+                    scaleY = scale
                 }
                 .clip(CircleShape)
                 .background(
@@ -143,8 +138,9 @@ fun OnboardingScreen(onStart: () -> Unit) {
                 .offset(x = (-70).dp, y = 75.dp)
                 .size(230.dp)
                 .graphicsLayer {
-                    scaleX = 1.04f / glowScale
-                    scaleY = 1.04f / glowScale
+                    val scale = glowScale?.value ?: 1f
+                    scaleX = 1.04f / scale
+                    scaleY = 1.04f / scale
                 }
                 .clip(CircleShape)
                 .background(
