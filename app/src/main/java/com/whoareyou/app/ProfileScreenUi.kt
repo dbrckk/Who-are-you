@@ -117,16 +117,25 @@ fun ProfileScreen(
                 )
             }
             Spacer(Modifier.height(20.dp))
+            Text(
+                stringResource(R.string.profile_optional_social_actions),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(10.dp))
             Button(
                 onClick = {
                     AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
                     GlobalProfileShare.share(context, summary)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = primaryAccent, contentColor = V2Colors.Ink),
+                enabled = summary.dimensions.isNotEmpty(),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             }
             Spacer(Modifier.height(10.dp))
             Button(
@@ -137,7 +146,7 @@ fun ProfileScreen(
                     AppEvents.profileChallenge(quiz.id, dimension.score)
                     ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
