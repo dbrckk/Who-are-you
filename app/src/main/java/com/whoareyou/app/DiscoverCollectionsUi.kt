@@ -225,9 +225,7 @@ private fun EditorialCard(
                         color = V2Colors.TextPrimary,
                         fontSize = if (featured) 19.sp else 15.sp,
                         lineHeight = if (featured) 24.sp else 19.sp,
-                        fontWeight = FontWeight.Black,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                        fontWeight = FontWeight.Black
                     )
                     Spacer(Modifier.width(10.dp))
                     Text(quiz.accent, fontSize = if (featured) 22.sp else 18.sp)
@@ -236,9 +234,7 @@ private fun EditorialCard(
                 Text(
                     quiz.hook,
                     color = V2Colors.TextSecondary,
-                    style = V2Type.Supporting,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    style = V2Type.Supporting
                 )
                 Spacer(Modifier.height(11.dp))
                 Text(
