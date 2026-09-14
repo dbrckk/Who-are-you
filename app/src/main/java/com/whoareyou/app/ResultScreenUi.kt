@@ -31,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -55,6 +57,12 @@ fun ResultScreen(
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
+    val scoreAccessibility = stringResource(
+        R.string.result_score_accessibility,
+        score.coerceIn(0, 100),
+        quiz.metricLow,
+        quiz.metricHigh
+    )
     val animatedScore by animateFloatAsState(
         targetValue = score.coerceIn(0, 100) / 100f,
         animationSpec = tween(V2Motion.EmphasizedMillis),
@@ -122,7 +130,9 @@ fun ResultScreen(
                         fontSize = 54.sp,
                         lineHeight = 60.sp,
                         fontWeight = FontWeight.Black,
-                        modifier = Modifier.testTag("result_score")
+                        modifier = Modifier
+                            .testTag("result_score")
+                            .semantics { contentDescription = scoreAccessibility }
                     )
                     Spacer(Modifier.height(8.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
