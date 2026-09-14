@@ -254,6 +254,7 @@ private fun WhoAreYouApp() {
                     totalQuizCount = quizCatalog.size,
                     catalog = quizCatalog,
                     completed = storedProfile.completedQuizIds + selectedQuiz.id,
+                    coverage = globalProfile.coverage,
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
                         selectedQuizId = quiz.id
