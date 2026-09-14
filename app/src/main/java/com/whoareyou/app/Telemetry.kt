@@ -3,7 +3,9 @@ package com.whoareyou.app
 import android.util.Log
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.concurrent.Executors
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 
 internal interface EventSink {
@@ -40,6 +42,11 @@ internal object TelemetryPrivacy {
     }
 }
 
+internal object NoOpEventSink : EventSink {
+    override fun send(name: String, params: Map<String, Any?>) = Unit
+    override fun recordError(throwable: Throwable, context: Map<String, Any?>) = Unit
+}
+
 internal object LogEventSink : EventSink {
     private const val tag = "WhoAreYouEvents"
 
@@ -56,7 +63,14 @@ internal object LogEventSink : EventSink {
 }
 
 internal class HttpEventSink(private val endpoint: String) : EventSink {
-    private val executor = Executors.newSingleThreadExecutor()
+    private val executor = ThreadPoolExecutor(
+        1,
+        1,
+        0L,
+        TimeUnit.MILLISECONDS,
+        ArrayBlockingQueue(64),
+        ThreadPoolExecutor.DiscardOldestPolicy()
+    )
 
     override fun send(name: String, params: Map<String, Any?>) {
         enqueue(
@@ -85,8 +99,8 @@ internal class HttpEventSink(private val endpoint: String) : EventSink {
             runCatching {
                 val connection = (URL(endpoint).openConnection() as HttpURLConnection).apply {
                     requestMethod = "POST"
-                    connectTimeout = 4000
-                    readTimeout = 4000
+                    connectTimeout = 2500
+                    readTimeout = 2500
                     doOutput = true
                     setRequestProperty("Content-Type", "application/json; charset=utf-8")
                 }
