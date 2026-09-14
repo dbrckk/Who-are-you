@@ -12,6 +12,6 @@ object BillingPriceState {
         formattedPrice = price
     }
 
-    val displayPrice: String
-        get() = formattedPrice ?: "€1.99"
+    val isAvailable: Boolean
+        get() = !formattedPrice.isNullOrBlank()
 }
