@@ -76,13 +76,15 @@ private fun WhoAreYouApp() {
         quizCatalog,
         storedProfile.latestScores,
         storedProfile.previousScores,
-        storedProfile.scoreHistory
+        storedProfile.scoreHistory,
+        storedProfile.timedScoreHistory
     ) {
         GlobalProfileEngine.build(
             catalog = quizCatalog,
             latestScores = storedProfile.latestScores,
             previousScores = storedProfile.previousScores,
-            scoreHistory = storedProfile.scoreHistory
+            scoreHistory = storedProfile.scoreHistory,
+            timedScoreHistory = storedProfile.timedScoreHistory
         )
     }
     if (!storedProfile.onboardingComplete) {
