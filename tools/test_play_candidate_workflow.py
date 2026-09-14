@@ -22,6 +22,20 @@ class PlayCandidateWorkflowTest(unittest.TestCase):
         for secret in self.contract['requiredSecrets']:
             self.assertIn(f'secrets.{secret}', self.workflow)
 
+    def test_optional_secrets_are_referenced(self):
+        for secret in self.contract['optionalSecrets']:
+            self.assertIn(f'secrets.{secret}', self.workflow)
+
+    def test_upload_key_password_falls_back_to_keystore_password(self):
+        self.assertEqual(
+            'WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD',
+            self.contract['uploadKeyPasswordFallback'],
+        )
+        self.assertIn(
+            'UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"',
+            self.workflow,
+        )
+
     def test_keystore_is_temporary_and_cleaned(self):
         self.assertIn('$RUNNER_TEMP/who-are-you-upload.jks', self.workflow)
         self.assertIn('if: always()', self.workflow)
