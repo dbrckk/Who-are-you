@@ -38,7 +38,7 @@ jobs:
           UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
           TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
           TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
@@ -60,6 +60,9 @@ jobs:
             echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
             exit 1
           fi
+          if [ -z "${UPLOAD_KEY_PASSWORD:-}" ]; then
+            echo "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD is not set; using keystore password for the key"
+          fi
 
       - name: Materialize upload keystore
         env:
@@ -76,11 +79,12 @@ jobs:
           ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
           TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
           TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
           set -euo pipefail
+          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
           args=(
             :app:bundlePlayRelease
             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
