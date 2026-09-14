@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="result_score_accessibility">Score : %1$d pour cent sur l’axe allant de %2$s à %3$s.</string>
     <string name="result_interpretation_title">Lis ton signal</string>
     <string name="result_interpretation_subtitle">Une lecture plus utile de ton résultat que le score seul.</string>
     <string name="result_signal_label">INTENSITÉ DU SIGNAL</string>
