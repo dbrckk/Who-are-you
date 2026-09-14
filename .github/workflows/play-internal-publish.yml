@@ -35,6 +35,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     environment: play-internal
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -55,6 +56,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
+
+      - name: Validate localized quiz catalogs
+        run: PYTHONPATH=tools python -m unittest tools.test_trait_taxonomy_v2
 
       - name: Python quality tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
@@ -81,7 +85,6 @@ jobs:
           UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
         run: |
           set -euo pipefail
@@ -128,14 +131,7 @@ jobs:
         run: |
           set -euo pipefail
           UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:bundlePlayRelease \
-            "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID" \
-            "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID" \
-            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks" \
-            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD" \
-            "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS" \
-            "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD" \
-            --stacktrace
+          gradle :app:bundlePlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
 
       - name: Locate and verify signed bundle
         id: bundle
@@ -147,9 +143,10 @@ jobs:
             echo "Unable to resolve versionName/versionCode from app/build.gradle.kts"
             exit 1
           fi
-          mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -type f -name '*.aab' -print)
+          mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -maxdepth 1 -type f -name '*.aab' -print)
           if [ "${#bundles[@]}" -ne 1 ]; then
             echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
+            printf '%s\n' "${bundles[@]:-}"
             exit 1
           fi
           PLAY_AAB="${bundles[0]}"
@@ -157,39 +154,7 @@ jobs:
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
           {
             echo "Native libraries packaged in the Play bundle:"
-            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so          echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
-
-      - name: Upload and commit Google Play edit
-        env:
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          PLAY_AAB: ${{ steps.bundle.outputs.path }}
-        run: |
-          set -euo pipefail
-          python tools/play_publisher.py \
-            --bundle "$PLAY_AAB" \
-            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
-            --status "$RELEASE_STATUS" \
-            --commit | tee play-internal-publish-result.json
-
-      - name: Upload publishing receipt
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            play-internal-upload.sha256
-            play-internal-native-libraries.txt
-            play-internal-bundle-budget.json
-            app/build/outputs/mapping/playRelease/mapping.txt
-            play-internal-publish-result.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove temporary credentials
-        if: always()
-        run: |
-          rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
-          rm -f "$RUNNER_TEMP/google-play-service-account.json"
- || echo "(none)"
+            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || echo "(none)"
           } | tee play-internal-native-libraries.txt
           python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-internal-bundle-budget.json
           echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
@@ -201,11 +166,7 @@ jobs:
           PLAY_AAB: ${{ steps.bundle.outputs.path }}
         run: |
           set -euo pipefail
-          python tools/play_publisher.py \
-            --bundle "$PLAY_AAB" \
-            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
-            --status "$RELEASE_STATUS" \
-            --commit | tee play-internal-publish-result.json
+          python tools/play_publisher.py             --bundle "$PLAY_AAB"             --credentials "$RUNNER_TEMP/google-play-service-account.json"             --status "$RELEASE_STATUS"             --commit | tee play-internal-publish-result.json
 
       - name: Upload publishing receipt
         uses: actions/upload-artifact@v7
@@ -214,6 +175,7 @@ jobs:
           path: |
             play-internal-upload.sha256
             play-internal-native-libraries.txt
+            play-internal-bundle-budget.json
             app/build/outputs/mapping/playRelease/mapping.txt
             play-internal-publish-result.json
           if-no-files-found: error
