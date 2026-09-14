@@ -76,6 +76,53 @@ class RenderingBenchmark {
         }
     }
 
+    @Test
+    fun resultScrollFrames() = benchmarkRule.measureRepeated(
+        packageName = PACKAGE_NAME,
+        metrics = listOf(FrameTimingMetric()),
+        compilationMode = CompilationMode.Partial(
+            baselineProfileMode = BaselineProfileMode.Require
+        ),
+        iterations = 7,
+        setupBlock = {
+            device.executeShellCommand("am force-stop $PACKAGE_NAME")
+            startActivityAndWait()
+            device.findObject(By.res("onboarding_start"))?.click()
+            check(device.wait(Until.hasObject(By.res("discover_next_quiz")), 5_000)) {
+                "Next quiz card was not ready"
+            }
+            device.findObject(By.res("discover_next_quiz")).click()
+            check(device.wait(Until.hasObject(By.res("quiz_answer_0")), 5_000)) {
+                "Quiz answers were not ready"
+            }
+            repeat(MAX_ANSWER_TAPS) {
+                if (device.hasObject(By.res("result_score"))) return@repeat
+                device.findObject(By.res("quiz_answer_0"))?.click()
+                device.waitForIdle()
+            }
+            check(device.wait(Until.hasObject(By.res("result_score")), 5_000)) {
+                "Result screen did not become ready"
+            }
+        }
+    ) {
+        device.swipe(
+            device.displayWidth / 2,
+            device.displayHeight * 4 / 5,
+            device.displayWidth / 2,
+            device.displayHeight / 5,
+            24
+        )
+        device.waitForIdle()
+        device.swipe(
+            device.displayWidth / 2,
+            device.displayHeight / 5,
+            device.displayWidth / 2,
+            device.displayHeight * 4 / 5,
+            24
+        )
+        device.waitForIdle()
+    }
+
     private companion object {
         const val PACKAGE_NAME = "com.whoareyou.app"
         const val MAX_ANSWER_TAPS = 24
