@@ -1,4 +1,5 @@
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -30,8 +31,11 @@ class PlayCandidateWorkflowTest(unittest.TestCase):
         self.assertIn(':app:bundlePlayRelease', self.workflow)
         self.assertIn('jarsigner -verify -verbose -certs', self.workflow)
         self.assertIn('sha256sum', self.workflow)
-        self.assertIn('who-are-you-play-candidate-0.1.0-1', self.workflow)
-        self.assertIn('who-are-you-play-0.1.0-1.aab', self.workflow)
+        gradle = (ROOT / 'app/build.gradle.kts').read_text(encoding='utf-8')
+        version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle).group(1)
+        version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle).group(1)
+        self.assertIn(f'who-are-you-play-candidate-{version_name}-{version_code}', self.workflow)
+        self.assertIn(f'who-are-you-play-{version_name}-{version_code}.aab', self.workflow)
 
     def test_workflow_does_not_upload_to_play(self):
         self.assertFalse(self.contract['playUploadAutomated'])
