@@ -8,8 +8,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.core.content.FileProvider
-import java.io.File
-import java.io.FileOutputStream
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -32,6 +30,7 @@ object ResultShare {
 
     fun share(
         context: Context,
+        quizId: String,
         quizTitle: String,
         resultTitle: String,
         score: Int,
@@ -66,15 +65,12 @@ object ResultShare {
                         file
                     )
 
-                    val quizId = QuizRepository.load(context).firstOrNull { it.title == quizTitle }?.id
-                    val challengeUri = quizId?.let { ChallengeShare.buildUri(it, score).toString() }
+                    val challengeUri = ChallengeShare.buildUri(quizId, score).toString()
 
                     val shareText = buildString {
                         append(context.getString(R.string.result_share_text, resultTitle, score, quizTitle))
-                        if (challengeUri != null) {
-                            append("\n\n")
-                            append(context.getString(R.string.result_share_challenge, challengeUri))
-                        }
+                        append("\n\n")
+                        append(context.getString(R.string.result_share_challenge, challengeUri))
                     }
 
                     val intent = Intent(Intent.ACTION_SEND).apply {
