@@ -29,17 +29,18 @@ fun V2PressableSurface(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     role: Role = Role.Button,
+    enabled: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val background by animateColorAsState(
-        targetValue = if (pressed) V2Colors.SurfaceElevated else V2Colors.Surface,
+        targetValue = if (pressed && enabled) V2Colors.SurfaceElevated else V2Colors.Surface,
         animationSpec = tween(V2Motion.FastMillis),
         label = "pressableBackground"
     )
     val scale by animateFloatAsState(
-        targetValue = if (pressed) V2Motion.PressedScale else 1f,
+        targetValue = if (pressed && enabled) V2Motion.PressedScale else 1f,
         animationSpec = tween(V2Motion.FastMillis),
         label = "pressableScale"
     )
@@ -57,6 +58,7 @@ fun V2PressableSurface(
                 interactionSource = interactionSource,
                 indication = null,
                 role = role,
+                enabled = enabled,
                 onClick = onClick
             )
     ) {
