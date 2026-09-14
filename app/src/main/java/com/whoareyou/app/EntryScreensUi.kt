@@ -67,7 +67,7 @@ fun CatalogUnavailableScreen() {
                 .padding(horizontal = 24.dp, vertical = 30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IdentityAura(score = 50, primary = V2Colors.Violet, secondary = V2Colors.Cyan)
+            BrandMascot(mood = BrandMascotMood.CURIOUS, animated = false)
             Spacer(Modifier.height(18.dp))
             Text(
                 stringResource(R.string.catalog_unavailable_title),
@@ -176,7 +176,7 @@ fun OnboardingScreen(onStart: () -> Unit) {
                     .padding(horizontal = 24.dp, vertical = 26.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                IdentityAura(score = 62, primary = V2Colors.Orchid, secondary = V2Colors.Cyan)
+                BrandMascot(mood = BrandMascotMood.WELCOME)
                 Spacer(Modifier.height(18.dp))
                 Text(
                     stringResource(R.string.onboarding_title),
