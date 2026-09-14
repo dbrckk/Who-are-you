@@ -15,6 +15,7 @@ class ProfileResultAllocationContractTest(unittest.TestCase):
         self.assertIn('val sortedDimensions = remember(summary.dimensions)', self.profile)
         self.assertIn('items(sortedDimensions', self.profile)
         self.assertNotIn('items(summary.dimensions.sortedByDescending', self.profile)
+        self.assertIn('val dimensionBrush = remember(accent, companion)', self.profile)
 
     def test_profile_and_result_background_gradients_are_remembered(self):
         self.assertIn('val profileBackground = remember(primaryAccent, companionAccent)', self.profile)
