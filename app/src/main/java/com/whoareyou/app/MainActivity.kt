@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -47,7 +48,16 @@ private fun WhoAreYouApp() {
     val quizCatalog = remember(context) { QuizRepository.load(context) }
     val storedProfileFlow = remember(context) { ProfileStore.observe(context).map<StoredProfile, StoredProfile?> { it } }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
-    val storedProfile = storedProfileState ?: return
+    val storedProfile = storedProfileState
+    if (storedProfile == null) {
+        Box(
+            modifier = Modifier.fillMaxSize().testTag("startup_loading"),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+        return
+    }
     val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
         GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
     }
