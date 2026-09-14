@@ -16,7 +16,7 @@ class ProfileStartupResilienceTest(unittest.TestCase):
 
     def test_profile_observation_recovers_with_empty_preferences(self):
         self.assertIn("import kotlinx.coroutines.flow.catch", self.source)
-        self.assertIn(".catch { emit(emptyPreferences()) }", self.source)
+        self.assertIn(".catch { error ->", self.source)\n        self.assertIn("if (error is IOException)", self.source)\n        self.assertIn("emit(emptyPreferences())", self.source)\n        self.assertIn("throw error", self.source)
         self.assertIn(".map(::decodeProfile)", self.source)
 
 
