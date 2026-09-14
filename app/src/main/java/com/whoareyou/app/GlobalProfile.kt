@@ -6,6 +6,7 @@ data class ProfileDimension(
     val score: Int,
     val resultTitle: String,
     val metricLabel: String,
+    val traitWeights: List<QuizTraitWeight> = emptyList(),
     val change: ScoreChange? = null
 ) {
     val scoreChange: ScoreChange?
@@ -37,6 +38,7 @@ object GlobalProfileEngine {
                     score = score,
                     resultTitle = quiz.resultTitleFor(score),
                     metricLabel = if (score >= 50) quiz.metricHigh else quiz.metricLow,
+                    traitWeights = quiz.traits,
                     change = ScoreChangeEngine.compare(previousScores[quiz.id], score)
                 )
             }
