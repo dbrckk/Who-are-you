@@ -10,6 +10,19 @@
 
 The `candidate` build type is intentionally production-like: it inherits release minification/resource shrinking, keeps the production package/version, uses Google test ad IDs, leaves custom telemetry disabled by default, and uses Android's debug signing key only so the APK can be installed directly for acceptance testing. It is not a Play production artifact.
 
+## Performance and Vitals gate
+
+- [ ] Review `play-bundle-budget.json` or `play-internal-bundle-budget.json`; investigate meaningful size growth.
+- [ ] Confirm the AAB remains below the internal 50 MiB hard ceiling.
+- [ ] Run cold/warm Macrobenchmark on a physical device after major startup/dependency changes.
+- [ ] Regenerate/review the Baseline Profile when startup-critical code paths change materially.
+- [ ] Review Android Vitals crash and ANR rates before Production.
+- [ ] Review new crash/ANR clusters and device-model outliers.
+- [ ] Review the Play pre-launch report before Production.
+- [ ] Confirm the R8 `mapping.txt` for the candidate is retained.
+- [ ] For Production, set both `confirm_vitals_review=true` and `confirm_prelaunch_report=true` only after the reviews are complete.
+- [ ] Follow `docs/android-vitals-policy.md` and `docs/performance-validation.md`.
+
 ## 2026 Play technical compliance
 
 - [x] `targetSdk = 36`, meeting the Google Play mobile requirement effective 31 August 2026.
