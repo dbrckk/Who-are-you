@@ -21,12 +21,15 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.snap
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import kotlin.math.roundToInt
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -93,6 +96,18 @@ fun ResultScreen(
         animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
         label = "resultScoreProgress"
     )
+    val scoreCounter = remember(score) { Animatable(if (reduceMotion) score.toFloat() else 0f) }
+    LaunchedEffect(score, reduceMotion) {
+        if (reduceMotion) {
+            scoreCounter.snapTo(score.coerceIn(0, 100).toFloat())
+        } else {
+            scoreCounter.animateTo(
+                targetValue = score.coerceIn(0, 100).toFloat(),
+                animationSpec = tween(V2Motion.EmphasizedMillis)
+            )
+        }
+    }
+    val displayedScore = scoreCounter.value.roundToInt().coerceIn(0, 100)
 
     LazyColumn(
         modifier = Modifier
@@ -138,7 +153,7 @@ fun ResultScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        "$score%",
+                        "$displayedScore%",
                         color = accent,
                         fontSize = 54.sp,
                         lineHeight = 60.sp,
