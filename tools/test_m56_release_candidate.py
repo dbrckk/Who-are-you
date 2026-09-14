@@ -74,8 +74,11 @@ class M56ReleaseCandidateTest(unittest.TestCase):
         ):
             self.assertIn(expected, config)
 
-    def test_circleci_config_is_removed(self):
-        self.assertFalse((ROOT / ".circleci/config.yml").exists())
+    def test_circleci_is_lightweight_contract_gate(self):
+        circleci = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
+        self.assertIn("cimg/python:3.13.7", circleci)
+        self.assertIn("python -m unittest discover", circleci)
+        self.assertNotIn("gradle :app:", circleci)
 
 
 if __name__ == "__main__":
