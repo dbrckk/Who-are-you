@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -141,24 +143,25 @@ private fun ShellTab(
     secondaryAccent: Color,
     onClick: () -> Unit
 ) {
+    val reduceMotion = reducedMotionEnabled()
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
     val accent = if (selected) primaryAccent else V2Colors.TextSecondary
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
         targetValue = if (pressed) V2Motion.PressedScale else 1f,
-        animationSpec = tween(V2Motion.FastMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.FastMillis),
         label = "shellTabScale"
     )
     val iconScale by animateFloatAsState(
         targetValue = if (selected) 1.08f else 0.94f,
-        animationSpec = tween(V2Motion.StandardMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.StandardMillis),
         label = "shellTabIconScale"
     )
 
     Row(
         modifier = modifier
-            .height(56.dp)
+            .heightIn(min = 56.dp)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
