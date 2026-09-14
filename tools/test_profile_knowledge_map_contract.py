@@ -19,7 +19,9 @@ class ProfileKnowledgeMapContractTest(unittest.TestCase):
         self.assertIn("unknown: List<TraitCoverage>", self.model)
 
     def test_profile_renders_knowledge_map(self):
-        self.assertIn("ProfileKnowledgeMapCard(", self.profile)\n        self.assertIn("coverage = summary.coverage", self.profile)\n        self.assertIn("onTraitClick = { selectedTraitId = it }", self.profile)
+        self.assertIn("ProfileKnowledgeMapCard(", self.profile)
+        self.assertIn("coverage = summary.coverage", self.profile)
+        self.assertIn("onTraitClick = { selectedTraitId = it }", self.profile)
         self.assertIn("TraitLocalization.label", self.ui)
 
 if __name__ == "__main__":
