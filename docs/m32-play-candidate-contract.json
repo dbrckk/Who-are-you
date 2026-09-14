@@ -6,9 +6,9 @@
     "contents": "read"
   },
   "buildTask": ":app:bundlePlayRelease",
-  "artifactName": "who-are-you-play-candidate-0.1.0-1",
+  "artifactName": "who-are-you-play-candidate-0.2.2-4",
   "artifactFiles": [
-    "who-are-you-play-0.1.0-1.aab",
+    "who-are-you-play-0.2.2-4.aab",
     "play-candidate.sha256"
   ],
   "requiredSecrets": [
@@ -16,8 +16,7 @@
     "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
     "WHO_ARE_YOU_UPLOAD_KEYSTORE_B64",
     "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD",
-    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS",
-    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
+    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS"
   ],
   "optionalSecrets": [
     "WHO_ARE_YOU_TELEMETRY_ENDPOINT"
