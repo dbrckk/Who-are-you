@@ -3,6 +3,7 @@ package com.whoareyou.app
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 
@@ -50,6 +52,31 @@ fun BrandMascot(
             repeatMode = RepeatMode.Reverse
         ),
         label = "brandMascotBreath"
+    )
+    val blink = transition?.animateFloat(
+        initialValue = 1f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = keyframes {
+                durationMillis = 4200
+                1f at 0
+                1f at 3300
+                0.12f at 3380
+                1f at 3480
+                1f at 4200
+            },
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "brandMascotBlink"
+    )
+    val sparkleRotation = transition?.animateFloat(
+        initialValue = -4f,
+        targetValue = 4f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(V2Motion.AmbientMillis + 900),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "brandMascotSparkleDrift"
     )
     val floatOffset = transition?.animateFloat(
         initialValue = -2f,
@@ -118,8 +145,24 @@ fun BrandMascot(
                 else -> r * 0.068f
             }
             val eyeColor = V2Colors.Ink.copy(alpha = 0.88f)
-            drawCircle(eyeColor, eyeRadius, androidx.compose.ui.geometry.Offset(center.x - eyeSpacing, eyeY))
-            drawCircle(eyeColor, eyeRadius, androidx.compose.ui.geometry.Offset(center.x + eyeSpacing, eyeY))
+            val eyeOpen = blink?.value ?: 1f
+            val eyeSize = androidx.compose.ui.geometry.Size(eyeRadius * 2f, eyeRadius * 2f * eyeOpen)
+            drawOval(
+                color = eyeColor,
+                topLeft = androidx.compose.ui.geometry.Offset(
+                    center.x - eyeSpacing - eyeRadius,
+                    eyeY - eyeRadius * eyeOpen
+                ),
+                size = eyeSize
+            )
+            drawOval(
+                color = eyeColor,
+                topLeft = androidx.compose.ui.geometry.Offset(
+                    center.x + eyeSpacing - eyeRadius,
+                    eyeY - eyeRadius * eyeOpen
+                ),
+                size = eyeSize
+            )
 
             when (mood) {
                 BrandMascotMood.WELCOME -> {
@@ -174,20 +217,22 @@ fun BrandMascot(
             )
 
             if (mood == BrandMascotMood.CELEBRATE) {
-                listOf(
-                    Triple(-0.82f, -0.78f, primary),
-                    Triple(0.86f, -0.66f, secondary),
-                    Triple(-0.96f, 0.16f, V2Colors.Peach),
-                    Triple(0.94f, 0.22f, V2Colors.Rose)
-                ).forEach { (dx, dy, color) ->
-                    drawCircle(
-                        color = color.copy(alpha = 0.82f),
-                        radius = 4.2f,
-                        center = androidx.compose.ui.geometry.Offset(
-                            center.x + r * dx,
-                            center.y + r * dy
+                rotate(sparkleRotation?.value ?: 0f, pivot = center) {
+                    listOf(
+                        Triple(-0.82f, -0.78f, primary),
+                        Triple(0.86f, -0.66f, secondary),
+                        Triple(-0.96f, 0.16f, V2Colors.Peach),
+                        Triple(0.94f, 0.22f, V2Colors.Rose)
+                    ).forEach { (dx, dy, color) ->
+                        drawCircle(
+                            color = color.copy(alpha = 0.84f),
+                            radius = 4.2f,
+                            center = androidx.compose.ui.geometry.Offset(
+                                center.x + r * dx,
+                                center.y + r * dy
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
