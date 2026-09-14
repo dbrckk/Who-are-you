@@ -3,95 +3,77 @@ package com.whoareyou.app
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-/**
- * A transparent cross-quiz trait graph. Traits are derived only from completed
- * quiz dimensions and keep their evidence provenance; they are not diagnoses.
- */
 data class TraitEvidence(
     val quizId: String,
     val quizTitle: String,
-    val score: Int,
-    val contribution: Int
+    val sourceScore: Int,
+    val weight: Double,
+    val contribution: Int,
+    val signalStrength: Double
 )
 
 data class ProfileTrait(
     val id: String,
-    val label: String,
     val score: Int,
-    val evidence: List<TraitEvidence>
+    val confidence: Int,
+    val evidence: List<TraitEvidence>,
+    val contradictoryEvidenceCount: Int
 ) {
     val evidenceCount: Int get() = evidence.size
 }
 
 data class TraitGraph(
     val traits: List<ProfileTrait>,
-    val evidenceCount: Int
-)
-
-private data class TraitRule(
-    val id: String,
-    val label: String,
-    val tokens: Set<String>,
-    val invert: Boolean = false
+    val evidenceCount: Int,
+    val taxonomyVersion: Int = 2
 )
 
 object TraitGraphEngine {
-    private val rules = listOf(
-        TraitRule("social_energy", "Social energy", setOf("social", "extrav", "introver", "sociab")),
-        TraitRule("structure", "Structure", setOf("structure", "plan", "discipline", "organization", "organisation")),
-        TraitRule("openness", "Openness", setOf("open", "curios", "creative", "novel", "imagin")),
-        TraitRule("emotional_intensity", "Emotional intensity", setOf("emotion", "sensitive", "stress", "anx", "calm"), invert = false),
-        TraitRule("assertiveness", "Assertiveness", setOf("assert", "leader", "confidence", "confiance", "decision")),
-        TraitRule("empathy", "Empathy", setOf("empathy", "empath", "compassion", "warm", "chaleur")),
-        TraitRule("independence", "Independence", setOf("independ", "autonom", "self-reli", "solitude")),
-        TraitRule("adaptability", "Adaptability", setOf("adapt", "flexib", "spontan", "change", "changement"))
-    )
-
     fun build(dimensions: List<ProfileDimension>): TraitGraph {
         if (dimensions.isEmpty()) return TraitGraph(emptyList(), 0)
 
-        val evidenceByTrait = linkedMapOf<String, MutableList<TraitEvidence>>()
-        val labels = rules.associate { it.id to it.label }
-
+        val grouped = linkedMapOf<String, MutableList<TraitEvidence>>()
         dimensions.forEach { dimension ->
-            val searchable = listOf(
-                dimension.quizId,
-                dimension.title,
-                dimension.metricLabel,
-                dimension.resultTitle
-            ).joinToString(" ").lowercase()
-
-            rules.forEach { rule ->
-                if (rule.tokens.none(searchable::contains)) return@forEach
-                val normalized = if (rule.invert) 100 - dimension.score else dimension.score
-                val contribution = normalized.coerceIn(0, 100)
-                evidenceByTrait.getOrPut(rule.id) { mutableListOf() }.add(
+            dimension.traitWeights.forEach { mapping ->
+                val centered = dimension.score - 50
+                val contribution = (
+                    50.0 + centered * mapping.weight
+                ).roundToInt().coerceIn(0, 100)
+                val strength = (abs(centered) / 50.0 * abs(mapping.weight)).coerceIn(0.0, 1.0)
+                grouped.getOrPut(mapping.id) { mutableListOf() }.add(
                     TraitEvidence(
                         quizId = dimension.quizId,
                         quizTitle = dimension.title,
-                        score = dimension.score,
-                        contribution = contribution
+                        sourceScore = dimension.score,
+                        weight = mapping.weight,
+                        contribution = contribution,
+                        signalStrength = strength
                     )
                 )
             }
         }
 
-        val traits = evidenceByTrait.mapNotNull { (traitId, evidence) ->
+        val traits = grouped.mapNotNull { (traitId, evidence) ->
             if (evidence.isEmpty()) return@mapNotNull null
-            val weighted = evidence.map { item ->
-                val confidenceWeight = 0.5 + abs(item.score - 50) / 100.0
-                item.contribution * confidenceWeight to confidenceWeight
-            }
-            val score = (
-                weighted.sumOf { it.first } / weighted.sumOf { it.second }
+            val totalWeight = evidence.sumOf { (0.25 + it.signalStrength) * abs(it.weight) }
+            if (totalWeight <= 0.0) return@mapNotNull null
+            val weightedScore = evidence.sumOf {
+                it.contribution * (0.25 + it.signalStrength) * abs(it.weight)
+            } / totalWeight
+            val score = weightedScore.roundToInt().coerceIn(0, 100)
+            val confidence = (
+                evidence.sumOf { it.signalStrength } / evidence.size * 100.0
             ).roundToInt().coerceIn(0, 100)
+            val dominantSide = score >= 50
+            val contradictions = evidence.count { (it.contribution >= 50) != dominantSide }
             ProfileTrait(
                 id = traitId,
-                label = labels.getValue(traitId),
                 score = score,
-                evidence = evidence.sortedByDescending { abs(it.score - 50) }
+                confidence = confidence,
+                evidence = evidence.sortedByDescending { it.signalStrength },
+                contradictoryEvidenceCount = contradictions
             )
-        }.sortedByDescending { abs(it.score - 50) }
+        }.sortedByDescending { abs(it.score - 50) * (0.5 + it.confidence / 100.0) }
 
         return TraitGraph(
             traits = traits,
