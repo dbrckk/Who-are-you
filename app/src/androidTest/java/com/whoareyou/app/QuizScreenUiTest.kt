@@ -6,6 +6,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import org.junit.Assert.assertEquals
@@ -48,6 +49,52 @@ class QuizScreenUiTest {
         composeRule.runOnIdle {
             assertEquals(100, finalScore)
         }
+    }
+
+    @Test
+    fun finishingStateBlocksAnswersAndShowsSavingFeedback() {
+        var finalScore: Int? = null
+        val quiz = testQuiz()
+
+        composeRule.setContent {
+            QuizScreen(
+                quiz = quiz,
+                questionIndex = quiz.questions.lastIndex,
+                score = 3,
+                isFinishing = true,
+                commitFailed = false,
+                onProgress = { _, _ -> error("progress must stay locked") },
+                onBack = {},
+                onFinished = { finalScore = it }
+            )
+        }
+
+        composeRule.onNodeWithTag("quiz_result_saving").assertIsDisplayed()
+        composeRule.onNodeWithText("Second high answer").performClick()
+        composeRule.runOnIdle { assertEquals(null, finalScore) }
+    }
+
+    @Test
+    fun commitFailureFeedbackIsVisibleAndRetryable() {
+        var finalScore: Int? = null
+        val quiz = testQuiz()
+
+        composeRule.setContent {
+            QuizScreen(
+                quiz = quiz,
+                questionIndex = quiz.questions.lastIndex,
+                score = 3,
+                isFinishing = false,
+                commitFailed = true,
+                onProgress = { _, _ -> },
+                onBack = {},
+                onFinished = { finalScore = it }
+            )
+        }
+
+        composeRule.onNodeWithTag("quiz_result_save_failed").assertIsDisplayed()
+        composeRule.onNodeWithText("Second high answer").performClick()
+        composeRule.runOnIdle { assertEquals(100, finalScore) }
     }
 
     private fun testQuiz() = Quiz(
