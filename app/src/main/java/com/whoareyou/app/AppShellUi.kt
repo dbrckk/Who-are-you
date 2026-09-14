@@ -88,8 +88,13 @@ fun PremiumAppShellBar(
                 .clip(RoundedCornerShape(30.dp))
                 .background(
                     Brush.linearGradient(
-                        listOf(V2Colors.SurfaceGlass, V2Colors.SurfaceElevated.copy(alpha = 0.96f))
+                        listOf(V2Colors.SurfaceGlass, V2Colors.SurfaceElevated.copy(alpha = 0.98f))
                     )
+                )
+                .border(
+                    width = 1.dp,
+                    color = V2Colors.Hairline,
+                    shape = RoundedCornerShape(30.dp)
                 )
                 .padding(1.dp)
         ) {
