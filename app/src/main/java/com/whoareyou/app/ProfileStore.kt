@@ -115,8 +115,6 @@ object ProfileStore {
             val history = ScoreHistoryEngine.update(
                 latestScores = latestScores,
                 previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
-            scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
-            timedScoreHistory = ProfilePersistenceCodec.decodeTimedScoreHistory(prefs[timedScoreHistoryKey]),
                 scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
                 quizId = normalizedQuizId,
                 score = normalizedScore
@@ -270,6 +268,8 @@ object ProfileStore {
             completedQuizIds = ProfilePersistenceCodec.decodeSet(prefs[completedKey]),
             latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey]),
             previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
+            scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
+            timedScoreHistory = ProfilePersistenceCodec.decodeTimedScoreHistory(prefs[timedScoreHistoryKey]),
             adsRemoved = prefs[adsRemovedKey] ?: false,
             onboardingComplete = prefs[onboardingCompleteKey] ?: false,
             announcedAchievementIds = ProfilePersistenceCodec.decodeSet(prefs[announcedAchievementsKey]),
