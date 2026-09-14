@@ -26,6 +26,19 @@ capture_visual_evidence() {
   test -s "device-ui-$label.xml"
 }
 
+capture_accessibility_variant() {
+  local label="$1"
+  local font_scale="$2"
+
+  adb shell settings put system font_scale "$font_scale"
+  adb shell am force-stop "$PACKAGE"
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 3
+  capture_visual_evidence "$label"
+}
+
 validate_running_app() {
   local label="$1"
 
@@ -115,4 +128,12 @@ if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
   exit 1
 fi
 
-echo "Android debug + minified candidate + in-place upgrade validation passed."
+capture_accessibility_variant "candidate-font-130" "1.30"
+adb shell settings put system font_scale 1.0
+adb shell am force-stop "$PACKAGE"
+
+adb shell wm size > device-display-metrics.txt
+adb shell wm density >> device-display-metrics.txt
+adb shell settings get system font_scale >> device-display-metrics.txt
+
+echo "Android debug + minified candidate + in-place upgrade + accessibility validation passed."
