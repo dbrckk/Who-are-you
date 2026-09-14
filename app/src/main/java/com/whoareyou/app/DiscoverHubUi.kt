@@ -509,7 +509,7 @@ private fun PremiumDiscoverCard(
     adsRemoved: Boolean,
     onRemoveAds: () -> Unit
 ) {
-    val premiumPrice = BillingPriceState.displayPrice
+    val premiumPrice = BillingPriceState.formattedPrice
 
     Card(
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
@@ -537,7 +537,8 @@ private fun PremiumDiscoverCard(
             Spacer(Modifier.height(9.dp))
             Text(
                 if (adsRemoved) stringResource(R.string.no_ads_ever)
-                else stringResource(R.string.premium_once_no_subscription, premiumPrice),
+                else if (premiumPrice != null) stringResource(R.string.premium_once_no_subscription, premiumPrice)
+                else stringResource(R.string.premium_price_loading),
                 color = V2Colors.TextPrimary,
                 style = V2Type.SectionTitle
             )
@@ -551,12 +552,14 @@ private fun PremiumDiscoverCard(
                 Spacer(Modifier.height(15.dp))
                 Button(
                     onClick = onRemoveAds,
+                    enabled = premiumPrice != null,
                     modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = V2Colors.AccentViolet),
                     shape = RoundedCornerShape(V2Radius.Compact)
                 ) {
                     Text(
-                        stringResource(R.string.remove_ads_button, premiumPrice),
+                        if (premiumPrice != null) stringResource(R.string.remove_ads_button, premiumPrice)
+                        else stringResource(R.string.remove_ads_price_loading_button),
                         style = V2Type.BodyStrong,
                         fontWeight = FontWeight.Black
                     )
