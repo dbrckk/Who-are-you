@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -75,6 +76,7 @@ fun DiscoverHub(
                     listOf(Color.Transparent, V2Colors.Ink.copy(alpha = 0.50f), V2Colors.Ink)
                 )
             )
+            .statusBarsPadding()
             .padding(horizontal = V2Spacing.Screen),
         verticalArrangement = Arrangement.spacedBy(28.dp)
     ) {
