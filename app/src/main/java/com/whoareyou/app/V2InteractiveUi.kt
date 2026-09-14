@@ -64,7 +64,11 @@ fun V2PressableSurface(
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
-                alpha = if (pressed && enabled) 0.96f else 1f
+                alpha = when {
+                    !enabled -> 0.58f
+                    pressed -> 0.96f
+                    else -> 1f
+                }
                 translationY = if (pressed && enabled) 1.5f else 0f
             }
             .onFocusChanged { focused = it.isFocused }
