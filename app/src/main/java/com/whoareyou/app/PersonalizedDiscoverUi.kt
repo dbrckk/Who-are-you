@@ -75,13 +75,10 @@ fun PersonalizedDiscoverDashboard(
                     )
                 )
             )
-        V2PressableCard(
-            onClick = onOpenProfile,
-            modifier = profileModifier,
-            shape = RoundedCornerShape(V2Radius.Hero),
-            containerColor = androidx.compose.ui.graphics.Color.Transparent
+        Box(
+            modifier = (if (onOpenProfile != null) profileModifier.clickable(role = Role.Button, onClick = onOpenProfile) else profileModifier).padding(20.dp)
         ) {
-            Column(Modifier.padding(20.dp)) {
+            Column {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
