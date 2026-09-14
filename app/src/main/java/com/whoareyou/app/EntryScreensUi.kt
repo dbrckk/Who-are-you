@@ -85,10 +85,11 @@ fun CatalogUnavailableScreen() {
 
 @Composable
 fun OnboardingScreen(onStart: () -> Unit) {
+    val reduceMotion = reducedMotionEnabled()
     val ambient = rememberInfiniteTransition(label = "onboardingAmbient")
     val glowScale by ambient.animateFloat(
-        initialValue = 0.94f,
-        targetValue = 1.10f,
+        initialValue = if (reduceMotion) 1f else 0.94f,
+        targetValue = if (reduceMotion) 1f else 1.10f,
         animationSpec = infiniteRepeatable(
             animation = tween(V2Motion.AmbientMillis),
             repeatMode = RepeatMode.Reverse
