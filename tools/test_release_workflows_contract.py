@@ -9,6 +9,7 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         self.ci = (ROOT / ".github/workflows/android-ci.yml").read_text(encoding="utf-8")
         self.internal = (ROOT / ".github/workflows/play-internal-publish.yml").read_text(encoding="utf-8")
         self.candidate = (ROOT / ".github/workflows/play-candidate.yml").read_text(encoding="utf-8")
+        self.circleci = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
 
     def test_ci_runs_automatically(self):
         self.assertIn("pull_request:", self.ci)
@@ -26,6 +27,13 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         self.assertIn("play-internal-bundle-budget.json", self.internal)
         self.assertIn("app/build/outputs/mapping/playRelease/mapping.txt", self.internal)
         self.assertIn("grep -E '(^|/)lib/[^/]+/[^/]+\\.so$'", self.internal)
+
+    def test_circleci_runs_real_android_quality_gates(self):
+        self.assertIn("cimg/android:2026.08.1", self.circleci)
+        self.assertIn("PYTHONPATH=tools python -m unittest discover", self.circleci)
+        self.assertIn("gradle :app:testDebugUnitTest", self.circleci)
+        self.assertIn("gradle :app:lintDebug", self.circleci)
+        self.assertIn("gradle :app:assembleDebugAndroidTest", self.circleci)
 
     def test_candidate_and_internal_run_core_quality_gates(self):
         for workflow in (self.candidate, self.internal):
