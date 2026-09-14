@@ -226,11 +226,10 @@ private fun WhoAreYouApp() {
                     summary = globalProfile,
                     catalog = quizCatalog,
                     onQuizSelected = { quiz ->
-                        selectedQuiz = quiz
-                        quizQuestionIndex = 0
-                        quizRawScore = 0
-                        quizFinishing = false
-                        commitFailed = false
+                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
+                        selectedQuizId = quiz.id
+                        resetQuizAttempt()
+                        runCatching { AppEvents.testStart(quiz.id) }
                         navigate(AppScreen.QUIZ)
                     },
                     onBack = { navigate(AppScreen.DISCOVER) },
