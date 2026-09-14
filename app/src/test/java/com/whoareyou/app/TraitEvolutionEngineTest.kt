@@ -22,6 +22,27 @@ class TraitEvolutionEngineTest {
     }
 
     @Test
+    fun `new evidence identifies the contributing quiz`() {
+        val catalog = listOf(
+            quiz("a", QuizTraitWeight("curiosity", 1.0)),
+            quiz("b", QuizTraitWeight("curiosity", 0.5))
+        )
+
+        val result = TraitEvolutionEngine.build(
+            catalog = catalog,
+            latestScores = mapOf("a" to 70, "b" to 80),
+            scoreHistory = mapOf(
+                "a" to listOf(70),
+                "b" to listOf(80)
+            )
+        )
+
+        val trait = result.traits.single()
+        assertEquals(TraitEvolutionKind.NEW_EVIDENCE, trait.kind)
+        assertTrue("a" in trait.newEvidenceQuizIds || "b" in trait.newEvidenceQuizIds)
+    }
+
+    @Test
     fun `meaningful retake movement is separated from new information`() {
         val catalog = listOf(quiz("a", QuizTraitWeight("curiosity", 1.0)))
 
