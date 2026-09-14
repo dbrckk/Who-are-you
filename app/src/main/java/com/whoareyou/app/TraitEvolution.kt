@@ -19,7 +19,8 @@ data class TraitEvolution(
     val currentConfidence: Int,
     val previousEvidenceCount: Int,
     val currentEvidenceCount: Int,
-    val kind: TraitEvolutionKind
+    val kind: TraitEvolutionKind,
+    val newEvidenceQuizIds: List<String> = emptyList()
 )
 
 data class TraitEvolutionSummary(
@@ -56,6 +57,12 @@ object TraitEvolutionEngine {
         val traits = currentGraph.traits.map { current ->
             val previous = priorById[current.id]
             val delta = previous?.let { current.score - it.score }
+            val previousEvidenceIds = previous?.evidence?.mapTo(mutableSetOf()) { it.quizId }.orEmpty()
+            val newEvidenceQuizIds = current.evidence
+                .map { it.quizId }
+                .filterNot { it in previousEvidenceIds }
+                .distinct()
+
             val kind = when {
                 current.confidence < LOW_CONFIDENCE -> TraitEvolutionKind.LOW_CONFIDENCE
                 current.contradictoryEvidenceCount > 0 -> TraitEvolutionKind.CONTRADICTORY
@@ -75,7 +82,8 @@ object TraitEvolutionEngine {
                 currentConfidence = current.confidence,
                 previousEvidenceCount = previous?.evidenceCount ?: 0,
                 currentEvidenceCount = current.evidenceCount,
-                kind = kind
+                kind = kind,
+                newEvidenceQuizIds = newEvidenceQuizIds
             )
         }
 
