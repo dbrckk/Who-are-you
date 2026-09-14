@@ -35,6 +35,7 @@ enum class BrandMascotMood {
 fun BrandMascot(
     mood: BrandMascotMood = BrandMascotMood.WELCOME,
     modifier: Modifier = Modifier,
+    size: androidx.compose.ui.unit.Dp = 164.dp,
     animated: Boolean = true,
     primary: Color = V2Colors.Orchid,
     secondary: Color = V2Colors.Cyan
@@ -62,7 +63,7 @@ fun BrandMascot(
 
     Box(
         modifier = modifier
-            .size(164.dp)
+            .size(size)
             .graphicsLayer {
                 val scale = breathe?.value ?: 1f
                 scaleX = scale
@@ -71,7 +72,7 @@ fun BrandMascot(
             },
         contentAlignment = Alignment.Center
     ) {
-        Canvas(Modifier.size(164.dp)) {
+        Canvas(Modifier.size(size)) {
             val center = this.center
             val r = size.minDimension * 0.31f
 
