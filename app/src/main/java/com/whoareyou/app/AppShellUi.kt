@@ -178,6 +178,8 @@ private fun ShellTab(
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
+                alpha = if (pressed) 0.97f else 1f
+                translationY = if (pressed) 1.25f else 0f
             }
             .clip(RoundedCornerShape(22.dp))
             .background(
