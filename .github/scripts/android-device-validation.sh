@@ -26,6 +26,29 @@ capture_visual_evidence() {
   test -s "device-ui-$label.xml"
 }
 
+capture_display_variant() {
+  local label="$1"
+  local size="$2"
+  local density="$3"
+
+  adb shell wm size "$size"
+  adb shell wm density "$density"
+  adb shell settings put system font_scale 1.0
+  adb shell am force-stop "$PACKAGE"
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 3
+  capture_visual_evidence "$label"
+  {
+    echo "label=$label"
+    adb shell wm size
+    adb shell wm density
+    printf 'font_scale='
+    adb shell settings get system font_scale
+  } > "device-display-$label.txt"
+}
+
 capture_accessibility_variant() {
   local label="$1"
   local font_scale="$2"
@@ -129,6 +152,12 @@ if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
 fi
 
 capture_accessibility_variant "candidate-font-130" "1.30"
+adb shell settings put system font_scale 1.0
+
+capture_display_variant "candidate-compact" "720x1600" "320"
+capture_display_variant "candidate-large" "1600x2560" "320"
+adb shell wm size reset
+adb shell wm density reset
 adb shell settings put system font_scale 1.0
 adb shell am force-stop "$PACKAGE"
 
