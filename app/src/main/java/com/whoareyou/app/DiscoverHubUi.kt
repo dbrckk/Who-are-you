@@ -266,7 +266,7 @@ private fun PrivacyAndSupportCard() {
             )
             Spacer(Modifier.height(12.dp))
             Button(
-                onClick = { uriHandler.openUri("https://dbrckk.github.io/Who-are-you/privacy/") },
+                onClick = { runCatching { uriHandler.openUri("https://dbrckk.github.io/Who-are-you/privacy/") } },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Surface),
                 shape = RoundedCornerShape(V2Radius.Compact)
@@ -279,7 +279,7 @@ private fun PrivacyAndSupportCard() {
             }
             Spacer(Modifier.height(8.dp))
             TextButton(
-                onClick = { uriHandler.openUri("mailto:dbrak7108@gmail.com") },
+                onClick = { runCatching { uriHandler.openUri("mailto:dbrak7108@gmail.com") } },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
