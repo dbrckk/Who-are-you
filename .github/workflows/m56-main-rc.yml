@@ -93,23 +93,23 @@ jobs:
           grep -F "sdkVersion:'26'" apk-badging.txt
           grep -F "targetSdkVersion:'36'" apk-badging.txt
 
-          cp "$APK" "who-are-you-${VERSION_NAME}-rc.apk"
-          sha256sum "who-are-you-${VERSION_NAME}-rc.apk" | tee "who-are-you-${VERSION_NAME}-rc.apk.sha256"
+          cp "$APK" "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk"
+          sha256sum "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk" | tee "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk.sha256"
 
           mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
           test "${#bundles[@]}" -eq 1
-          cp "${bundles[0]}" "who-are-you-${VERSION_NAME}-release-unsigned.aab"
-          sha256sum "who-are-you-${VERSION_NAME}-release-unsigned.aab" | tee "who-are-you-${VERSION_NAME}-release-unsigned.aab.sha256"
+          cp "${bundles[0]}" "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab"
+          sha256sum "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab" | tee "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab.sha256"
 
       - name: Upload RC artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-${{ steps.version.outputs.name }}-rc
+          name: who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc
           path: |
-            who-are-you-${{ steps.version.outputs.name }}-rc.apk
-            who-are-you-${{ steps.version.outputs.name }}-rc.apk.sha256
-            who-are-you-${{ steps.version.outputs.name }}-release-unsigned.aab
-            who-are-you-${{ steps.version.outputs.name }}-release-unsigned.aab.sha256
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc.apk
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc.apk.sha256
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-release-unsigned.aab
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-release-unsigned.aab.sha256
             apk-signature.txt
             apk-badging.txt
           if-no-files-found: error
@@ -119,21 +119,22 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: |
           set -euo pipefail
-          TAG="v${VERSION_NAME}-rc"
+          TAG="v${VERSION_NAME}-${VERSION_CODE}-rc"
           if ! gh release view "$TAG" >/dev/null 2>&1; then
             gh release create "$TAG" \
               --target "$GITHUB_SHA" \
-              --title "Who Are You ${VERSION_NAME} RC" \
-              --notes "Android ${VERSION_NAME} release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
+              --title "Who Are You ${VERSION_NAME} (${VERSION_CODE}) RC" \
+              --notes "Android ${VERSION_NAME} (${VERSION_CODE}) release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
               --prerelease
           fi
           gh release upload "$TAG" \
-            who-are-you-${VERSION_NAME}-rc.apk \
-            who-are-you-${VERSION_NAME}-rc.apk.sha256 \
-            who-are-you-${VERSION_NAME}-release-unsigned.aab \
-            who-are-you-${VERSION_NAME}-release-unsigned.aab.sha256 \
+            who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk \
+            who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk.sha256 \
+            who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab \
+            who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab.sha256 \
             apk-signature.txt \
             apk-badging.txt \
             --clobber
