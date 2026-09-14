@@ -59,6 +59,26 @@ fun ResultScreen(
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
+    val resultBackground = remember(accent, secondaryAccent) {
+        Brush.verticalGradient(
+            listOf(
+                accent.copy(alpha = 0.13f),
+                V2Colors.InkSoft,
+                V2Colors.Ink,
+                secondaryAccent.copy(alpha = 0.08f),
+                V2Colors.Ink
+            )
+        )
+    }
+    val scoreCardBrush = remember(accent, secondaryAccent) {
+        Brush.linearGradient(
+            listOf(
+                accent.copy(alpha = 0.12f),
+                Color.Transparent,
+                secondaryAccent.copy(alpha = 0.08f)
+            )
+        )
+    }
     val scoreAccessibility = stringResource(
         R.string.result_score_accessibility,
         score.coerceIn(0, 100),
@@ -76,17 +96,7 @@ fun ResultScreen(
         modifier = Modifier
             .fillMaxHeight()
             .readableContentWidth()
-            .background(
-                Brush.verticalGradient(
-                    listOf(
-                        accent.copy(alpha = 0.13f),
-                        V2Colors.InkSoft,
-                        V2Colors.Ink,
-                        secondaryAccent.copy(alpha = 0.08f),
-                        V2Colors.Ink
-                    )
-                )
-            )
+            .background(resultBackground)
             .navigationBarsPadding()
             .padding(horizontal = V2Spacing.Screen),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -116,15 +126,7 @@ fun ResultScreen(
             ) {
                 Column(
                     Modifier
-                        .background(
-                            Brush.linearGradient(
-                                listOf(
-                                    accent.copy(alpha = 0.12f),
-                                    Color.Transparent,
-                                    secondaryAccent.copy(alpha = 0.08f)
-                                )
-                            )
-                        )
+                        .background(scoreCardBrush)
                         .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
