@@ -190,7 +190,7 @@ private fun EditorialCard(
                     .height(if (featured) 164.dp else 126.dp)
                     .clip(RoundedCornerShape(topStart = if (featured) 30.dp else 24.dp, topEnd = if (featured) 30.dp else 24.dp))
             ) {
-                QuizArtwork(quiz, compact = !featured)
+                QuizArtwork(quiz, compact = !featured, animated = false)
                 Box(
                     modifier = Modifier
                         .matchParentSize()
