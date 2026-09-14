@@ -3,6 +3,7 @@ package com.whoareyou.app
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.flow.first
 
 @Composable
 fun QuizResultCommitEffect(
@@ -11,7 +12,7 @@ fun QuizResultCommitEffect(
     attemptId: String,
     pendingScore: Int?,
     onCommitFailed: () -> Unit,
-    onCommitted: () -> Unit
+    onCommitted: (Int) -> Unit
 ) {
     val context = LocalContext.current
     LaunchedEffect(screen, quiz.id, attemptId, pendingScore) {
@@ -24,10 +25,14 @@ fun QuizResultCommitEffect(
             onCommitFailed()
             return@LaunchedEffect
         }
-        if (commitResult.getOrDefault(false)) {
+        val changed = commitResult.getOrDefault(false)
+        if (changed) {
             runCatching { AppEvents.testComplete(quiz.id, score) }
             runCatching { AppEvents.resultView(quiz.id, score) }
         }
-        onCommitted()
+        val persistedScore = runCatching {
+            ProfileStore.observe(context).first().latestScores[quiz.id]
+        }.getOrNull() ?: score
+        onCommitted(persistedScore)
     }
 }
