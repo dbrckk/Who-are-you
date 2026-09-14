@@ -123,14 +123,26 @@ fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = fa
         Box(
             Modifier.align(Alignment.TopStart).offset(x = (-24).dp, y = (-30).dp)
                 .size(if (compact) 100.dp else 138.dp)
-                .graphicsLayer { scaleX = glowScale; scaleY = glowScale; alpha = glowAlpha }
+                .graphicsLayer {
+                    val scale = glowScale?.value ?: 1f
+                    val alphaValue = glowAlpha?.value ?: 1f
+                    scaleX = scale
+                    scaleY = scale
+                    alpha = alphaValue
+                }
                 .clip(CircleShape)
                 .background(Brush.radialGradient(listOf(accent.copy(alpha = 0.34f), Color.Transparent)))
         )
         Box(
             Modifier.align(Alignment.BottomEnd).offset(x = 28.dp, y = 34.dp)
                 .size(if (compact) 90.dp else 124.dp)
-                .graphicsLayer { scaleX = 1.05f / glowScale; scaleY = 1.05f / glowScale; alpha = glowAlpha * 0.78f }
+                .graphicsLayer {
+                    val scale = glowScale?.value ?: 1f
+                    val alphaValue = glowAlpha?.value ?: 1f
+                    scaleX = 1.05f / scale
+                    scaleY = 1.05f / scale
+                    alpha = alphaValue * 0.78f
+                }
                 .clip(CircleShape)
                 .background(Brush.radialGradient(listOf(companion.copy(alpha = 0.30f), Color.Transparent)))
         )
@@ -138,7 +150,11 @@ fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = fa
 
         Box(
             modifier = Modifier.padding(14.dp).size(if (compact) 38.dp else 46.dp).align(Alignment.TopEnd)
-                .graphicsLayer { scaleX = 0.98f + (glowScale - 0.90f) * 0.12f; scaleY = scaleX }
+                .graphicsLayer {
+                    val scale = glowScale?.value ?: 1f
+                    scaleX = 0.98f + (scale - 0.90f) * 0.12f
+                    scaleY = scaleX
+                }
                 .clip(CircleShape)
                 .background(Brush.radialGradient(listOf(accent.copy(alpha = 0.28f), V2Colors.SurfaceGlass)))
                 .border(1.dp, accent.copy(alpha = 0.52f), CircleShape),
