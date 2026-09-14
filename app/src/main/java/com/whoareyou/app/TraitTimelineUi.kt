@@ -159,7 +159,10 @@ private fun TraitTimelineDialog(
                                 style = MaterialTheme.typography.bodySmall
                             )
                             Text(
-                                text = "${point.score}% · confiance ${point.confidence}%",
+                                text = if (french)
+                                    "${point.score}% · confiance ${point.confidence}%"
+                                else
+                                    "${point.score}% · confidence ${point.confidence}%",
                                 color = V2Colors.TextPrimary,
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Bold
