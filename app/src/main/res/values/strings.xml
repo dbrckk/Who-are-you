@@ -27,6 +27,7 @@
     <string name="open_full_profile">OPEN FULL PROFILE  →</string>
     <string name="profile_snapshot">PROFILE SNAPSHOT</string>
     <string name="back">← BACK</string>
+    <string name="profile_optional_social_actions">Optional — your profile stays useful without sharing it.</string>
     <string name="share_my_profile">SHARE MY PROFILE  ↗</string>
     <string name="compare_profile_friend">COMPARE PROFILE WITH A FRIEND  →</string>
     <string name="complete_test_unlock_compare">Complete one test to unlock profile comparison.</string>
