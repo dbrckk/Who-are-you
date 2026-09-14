@@ -15,6 +15,7 @@
     <string name="personalized_momentum_summary">%1$d en mouvement · %2$d stables</string>
     <string name="personalized_momentum_change">Plus forte évolution récente : %1$s (%2$+d)</string>
     <string name="personalized_next_label">PROCHAINE EXPLORATION IDÉALE</string>
+    <string name="personalized_next_profile_gap">Ce test devrait réduire l’incertitude sur une partie de ton profil encore peu documentée.</string>
     <string name="personalized_next_new_theme">Cette exploration ouvre une facette que ta carte actuelle n’a pas encore mesurée.</string>
     <string name="personalized_next_unfinished">Continue à construire ta carte avec une dimension qui reste encore à explorer.</string>
     <string name="personalized_next_retake">Ta carte est complète. Reprends une dimension pour voir si ton profil évolue.</string>
