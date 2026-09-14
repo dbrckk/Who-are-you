@@ -83,6 +83,12 @@ capture_reduced_motion_variant() {
   grep -F "Status: ok" "device-startup-$label.txt"
   sleep 2
   capture_visual_evidence "$label"
+  {
+    echo "label=$label"
+    echo "window_animation_scale=$(adb shell settings get global window_animation_scale | tr -d '\r')"
+    echo "transition_animation_scale=$(adb shell settings get global transition_animation_scale | tr -d '\r')"
+    echo "animator_duration_scale=$(adb shell settings get global animator_duration_scale | tr -d '\r')"
+  } > "device-motion-$label.txt"
 }
 
 capture_landscape_variant() {
@@ -96,6 +102,12 @@ capture_landscape_variant() {
   grep -F "Status: ok" "device-startup-$label.txt"
   sleep 3
   capture_visual_evidence "$label"
+  {
+    echo "label=$label"
+    echo "accelerometer_rotation=$(adb shell settings get system accelerometer_rotation | tr -d '\r')"
+    echo "user_rotation=$(adb shell settings get system user_rotation | tr -d '\r')"
+    adb shell dumpsys input | grep -m1 'SurfaceOrientation' || true
+  } > "device-orientation-$label.txt"
 }
 
 capture_display_variant() {
