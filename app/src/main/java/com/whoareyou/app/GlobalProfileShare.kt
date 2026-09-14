@@ -33,30 +33,32 @@ object GlobalProfileShare {
         summary.signature?.let(AppEvents::signatureShare)
         shareScope.launch {
             runCatching {
-            val chooser = withContext(Dispatchers.IO) {
                 val copy = cardCopy(context)
-                val bitmap = render(summary, copy)
-                try {
-                    val file = ShareFileStore.writePng(
-                        context,
-                        "who_are_you_profile.png",
-                        bitmap
-                    )
-                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-                    val shareArchetype = summary.signature
-                        ?.let { SignatureProfiles.copy(it.key, copy.french).title }
-                        ?: summary.dominantArchetype
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "image/png"
-                        putExtra(Intent.EXTRA_STREAM, uri)
-                        putExtra(Intent.EXTRA_TEXT, copy.shareText(shareArchetype))
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                val bitmap = withContext(Dispatchers.Default) {
+                    render(summary, copy)
+                }
+                val chooser = try {
+                    withContext(Dispatchers.IO) {
+                        val file = ShareFileStore.writePng(
+                            context,
+                            "who_are_you_profile.png",
+                            bitmap
+                        )
+                        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                        val shareArchetype = summary.signature
+                            ?.let { SignatureProfiles.copy(it.key, copy.french).title }
+                            ?: summary.dominantArchetype
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "image/png"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_TEXT, copy.shareText(shareArchetype))
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        Intent.createChooser(intent, copy.chooser)
                     }
-                    Intent.createChooser(intent, copy.chooser)
                 } finally {
                     bitmap.recycle()
                 }
-            }
                 ShareSafety.launch(context, chooser)
             }.onFailure { error ->
                 ShareSafety.notifyFailure(context, error)
