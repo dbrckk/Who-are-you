@@ -143,7 +143,10 @@ private fun WhoAreYouApp() {
             pendingFinalScore = null
             commitFailed = true
         },
-        onCommitted = { navigate(AppScreen.RESULT) }
+        onCommitted = { persistedScore ->
+            finalScore = persistedScore
+            navigate(AppScreen.RESULT)
+        }
     )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
@@ -202,7 +205,6 @@ private fun WhoAreYouApp() {
                     onFinished = { score ->
                         if (!quizFinishing) {
                             commitFailed = false
-                            finalScore = score
                             pendingFinalScore = score
                         }
                     }
