@@ -50,8 +50,8 @@ class M50AnalyticsTest(unittest.TestCase):
         ):
             self.assertIn(call, main_source)
         self.assertIn("QuizResultCommitEffect(", main_source)
-        self.assertIn("AppEvents.resultView(quiz.id, score)", result_commit_source)
-        self.assertIn("AppEvents.testComplete(quiz.id, score)", result_commit_source)
+        self.assertIn("AppEvents.resultView(quiz.id, committed.persistedScore)", result_commit_source)
+        self.assertIn("AppEvents.testComplete(quiz.id, committed.persistedScore)", result_commit_source)
 
     def test_billing_wires_conversion_steps(self):
         source = (APP / "BillingManager.kt").read_text(encoding="utf-8")
