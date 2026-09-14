@@ -17,9 +17,11 @@ import kotlin.math.abs
 @Composable
 fun TraitEvolutionCard(
     evolution: TraitEvolutionSummary,
+    catalog: List<Quiz>,
     modifier: Modifier = Modifier
 ) {
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
+    val catalogById = remember(catalog) { catalog.associateBy { it.id } }
     val visible = remember(evolution) {
         (evolution.meaningfulChanges.take(3) + evolution.newEvidence.take(3))
             .distinctBy { it.traitId }
@@ -45,20 +47,42 @@ fun TraitEvolutionCard(
             )
 
             visible.forEach { item ->
-                TraitEvolutionRow(item = item, french = french)
+                TraitEvolutionRow(
+                    item = item,
+                    french = french,
+                    catalogById = catalogById
+                )
             }
         }
     }
 }
 
 @Composable
-private fun TraitEvolutionRow(item: TraitEvolution, french: Boolean) {
+private fun TraitEvolutionRow(
+    item: TraitEvolution,
+    french: Boolean,
+    catalogById: Map<String, Quiz>
+) {
     val label = TraitLocalization.label(item.traitId, french)
     val detail = when (item.kind) {
-        TraitEvolutionKind.NEW_EVIDENCE -> if (french)
-            "Nouvelle information · confiance ${item.currentConfidence}%"
-        else
-            "New evidence · confidence ${item.currentConfidence}%"
+        TraitEvolutionKind.NEW_EVIDENCE -> {
+            val source = item.newEvidenceQuizIds
+                .mapNotNull { catalogById[it]?.title }
+                .distinct()
+                .take(2)
+                .joinToString(", ")
+            if (french) {
+                if (source.isNotBlank())
+                    "Nouvelle information via $source · confiance ${item.currentConfidence}%"
+                else
+                    "Nouvelle information · confiance ${item.currentConfidence}%"
+            } else {
+                if (source.isNotBlank())
+                    "New evidence via $source · confidence ${item.currentConfidence}%"
+                else
+                    "New evidence · confidence ${item.currentConfidence}%"
+            }
+        }
 
         TraitEvolutionKind.MOVED -> {
             val delta = item.delta ?: 0
