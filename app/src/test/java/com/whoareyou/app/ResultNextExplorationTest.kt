@@ -39,7 +39,7 @@ class ResultNextExplorationTest {
     }
 
     @Test
-    fun `uses same facet retake when catalog is complete`() {
+    fun `returns null instead of pushing retake when catalog is complete`() {
         val result = ResultNextExplorationEngine.recommend(
             currentQuizId = "a",
             orderedQuizIds = listOf("a", "b", "c", "d"),
@@ -47,8 +47,7 @@ class ResultNextExplorationTest {
             completed = setOf("a", "b", "c", "d")
         )
 
-        assertEquals("b", result?.quizId)
-        assertEquals(ResultNextReason.RETAKE_FACET, result?.reason)
+        assertNull(result)
     }
 
     @Test
