@@ -35,7 +35,8 @@ data class GlobalProfileSummary(
         meaningfulChanges = emptyList(),
         newEvidence = emptyList()
     ),
-    val longitudinalTrends: List<LongitudinalTrend> = emptyList()
+    val longitudinalTrends: List<LongitudinalTrend> = emptyList(),
+    val traitTimelines: List<TraitTimeline> = emptyList()
 )
 
 object GlobalProfileEngine {
@@ -83,7 +84,11 @@ object GlobalProfileEngine {
             longitudinalTrends = timedScoreHistory
                 .map { (quizId, points) -> LongitudinalTrendEngine.build(quizId, points) }
                 .filter { it.kind != LongitudinalTrendKind.INSUFFICIENT }
-                .sortedByDescending { kotlin.math.abs(it.netChange) + it.volatility }
+                .sortedByDescending { kotlin.math.abs(it.netChange) + it.volatility },
+            traitTimelines = TraitTimelineEngine.build(
+                catalog = catalog,
+                timedScoreHistory = timedScoreHistory
+            )
         )
     }
 }
