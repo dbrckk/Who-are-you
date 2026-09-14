@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -126,4 +127,22 @@ fun V2PressableCard(
         colors = CardDefaults.cardColors(containerColor = containerColor),
         content = content
     )
+}
+
+
+@Composable
+fun V2Card(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    ) {
+        androidx.compose.foundation.layout.Column(
+            modifier = Modifier.padding(V2Spacing.Card),
+            content = content
+        )
+    }
 }
