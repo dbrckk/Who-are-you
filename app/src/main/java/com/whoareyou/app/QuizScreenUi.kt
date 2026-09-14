@@ -111,6 +111,21 @@ fun QuizScreen(
             color = V2Colors.TextPrimary,
             style = V2Type.Question
         )
+        if (isFinishing) {
+            Spacer(Modifier.height(14.dp))
+            V2StatusNotice(
+                text = stringResource(R.string.quiz_result_saving),
+                accent = accent,
+                tag = "quiz_result_saving"
+            )
+        } else if (commitFailed) {
+            Spacer(Modifier.height(14.dp))
+            V2StatusNotice(
+                text = stringResource(R.string.quiz_result_save_failed),
+                accent = V2Colors.Peach,
+                tag = "quiz_result_save_failed"
+            )
+        }
         Spacer(Modifier.height(26.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -173,25 +188,6 @@ fun QuizScreen(
         }
 
         Spacer(Modifier.height(24.dp))
-        if (isFinishing) {
-            Text(
-                stringResource(R.string.quiz_result_saving),
-                color = accent,
-                style = V2Type.Supporting,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().testTag("quiz_result_saving")
-            )
-            Spacer(Modifier.height(10.dp))
-        } else if (commitFailed) {
-            Text(
-                stringResource(R.string.quiz_result_save_failed),
-                color = V2Colors.TextSecondary,
-                style = V2Type.Supporting,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().testTag("quiz_result_save_failed")
-            )
-            Spacer(Modifier.height(10.dp))
-        }
         Text(
             stringResource(R.string.no_right_answers),
             color = V2Colors.TextSecondary,
@@ -200,5 +196,38 @@ fun QuizScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(10.dp))
+    }
+}
+
+
+@Composable
+private fun V2StatusNotice(
+    text: String,
+    accent: androidx.compose.ui.graphics.Color,
+    tag: String
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                Brush.horizontalGradient(
+                    listOf(
+                        accent.copy(alpha = 0.16f),
+                        V2Colors.SurfaceElevated,
+                        accent.copy(alpha = 0.07f)
+                    )
+                ),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Compact)
+            )
+            .testTag(tag)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+    ) {
+        Text(
+            text = text,
+            color = V2Colors.TextPrimary,
+            style = V2Type.Supporting,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
