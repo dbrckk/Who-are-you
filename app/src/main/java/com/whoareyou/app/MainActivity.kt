@@ -183,7 +183,17 @@ private fun WhoAreYouApp() {
                     },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
-                AppScreen.PROFILE -> ProfileScreen(globalProfile, quizCatalog) { navigate(AppScreen.DISCOVER) }
+                AppScreen.PROFILE -> ProfileScreen(
+                    summary = globalProfile,
+                    catalog = quizCatalog,
+                    onBack = { navigate(AppScreen.DISCOVER) },
+                    onResetLocalData = {
+                        scope.launch {
+                            ProfileStore.clearLocalProfile(context)
+                            navigate(AppScreen.DISCOVER)
+                        }
+                    }
+                )
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
                     questionIndex = quizQuestionIndex,
