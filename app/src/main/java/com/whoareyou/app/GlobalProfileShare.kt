@@ -37,9 +37,11 @@ object GlobalProfileShare {
                 val copy = cardCopy(context)
                 val bitmap = render(summary, copy)
                 try {
-                    val dir = File(context.cacheDir, "shared_results").apply { mkdirs() }
-                    val file = File(dir, "who_are_you_profile.png")
-                    FileOutputStream(file).use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+                    val file = ShareFileStore.writePng(
+                        context,
+                        "who_are_you_profile.png",
+                        bitmap
+                    )
                     val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
                     val shareArchetype = summary.signature
                         ?.let { SignatureProfiles.copy(it.key, copy.french).title }
