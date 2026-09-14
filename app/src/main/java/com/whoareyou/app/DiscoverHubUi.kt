@@ -202,7 +202,15 @@ private fun DiscoverHeroHeader() {
                     )
                 )
         )
-        Column(Modifier.padding(horizontal = 22.dp, vertical = 24.dp)) {
+        BrandMascot(
+            mood = BrandMascotMood.CURIOUS,
+            size = 86.dp,
+            animated = false,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 12.dp, end = 12.dp)
+        )
+        Column(Modifier.padding(start = 22.dp, end = 112.dp, top = 24.dp, bottom = 24.dp)) {
             Text(
                 text = stringResource(R.string.app_name),
                 color = V2Colors.VioletBright,
