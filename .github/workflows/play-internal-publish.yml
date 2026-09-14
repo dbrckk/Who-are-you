@@ -121,6 +121,18 @@ jobs:
           print("Service-account JSON structure validated")
           PY
 
+      - name: Lint real Play release variant
+        env:
+          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
+          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
+          gradle :app:lintPlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
+
       - name: Build signed production Play bundle
         env:
           ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
@@ -157,6 +169,7 @@ jobs:
             unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || echo "(none)"
           } | tee play-internal-native-libraries.txt
           python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-internal-bundle-budget.json
+          test -s app/build/outputs/mapping/playRelease/mapping.txt
           echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
           echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
 
