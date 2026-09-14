@@ -1,6 +1,6 @@
 # Who Are You? — Play Console copy/paste sheet
 
-Use this sheet for the first Internal testing release `0.1.0 (1)`.
+Use this sheet for the current public candidate. The authoritative version name/code comes from `app/build.gradle.kts`; do not duplicate a version number here.
 
 ## App identity
 
@@ -14,21 +14,21 @@ Use this sheet for the first Internal testing release `0.1.0 (1)`.
 
 **Short description**
 
-Discover your personality, build your profile and compare with friends.
+Explore your personality patterns and build a visual self-reflection profile.
 
-**Internal-test release notes**
+**Release notes**
 
-Initial internal test of Who Are You?. Includes 30 personality tests, evolving profile and signature, result/profile sharing, friend challenges and compatibility, Daily Question, achievements, recommendations, ads and an optional lifetime remove-ads purchase. This app is for entertainment and self-reflection, not diagnosis.
+Improved public-launch experience with clearer onboarding, resilient quiz/result persistence, better accessibility, localized privacy/support access, safer Google Play purchase states, local profile reset controls and healthier result/recommendation flows. Who Are You? is for entertainment and self-reflection, not diagnosis.
 
 ## Français (fr-FR)
 
 **Description courte**
 
-Découvre ta personnalité, construis ton profil et compare-toi avec tes amis.
+Explore tes tendances et construis un profil visuel dédié à l’introspection.
 
-**Notes de version — test interne**
+**Notes de version**
 
-Premier test interne de Who Are You?. Inclut 30 tests de personnalité, profil évolutif et signature, partage des résultats/profils, défis et compatibilité entre amis, Question du jour, succès, recommandations, publicités et achat facultatif pour supprimer les publicités à vie. L’application est destinée au divertissement et à la réflexion personnelle, pas au diagnostic.
+Expérience de lancement améliorée avec onboarding plus clair, sauvegarde des quiz/résultats plus robuste, meilleure accessibilité, accès localisé à la confidentialité et au support, états d’achat Google Play plus sûrs, réinitialisation du profil local et recommandations plus respectueuses. Who Are You? est destiné au divertissement et à la réflexion personnelle, pas au diagnostic.
 
 ## Full descriptions
 
