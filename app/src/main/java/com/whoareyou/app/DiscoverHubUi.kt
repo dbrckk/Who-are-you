@@ -510,6 +510,7 @@ private fun PremiumDiscoverCard(
     onRemoveAds: () -> Unit
 ) {
     val premiumPrice = BillingPriceState.formattedPrice
+    val premiumPriceState = BillingPriceState.loadState
 
     Card(
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
@@ -538,6 +539,7 @@ private fun PremiumDiscoverCard(
             Text(
                 if (adsRemoved) stringResource(R.string.no_ads_ever)
                 else if (premiumPrice != null) stringResource(R.string.premium_once_no_subscription, premiumPrice)
+                else if (premiumPriceState == BillingPriceLoadState.UNAVAILABLE) stringResource(R.string.premium_price_unavailable)
                 else stringResource(R.string.premium_price_loading),
                 color = V2Colors.TextPrimary,
                 style = V2Type.SectionTitle
@@ -559,6 +561,7 @@ private fun PremiumDiscoverCard(
                 ) {
                     Text(
                         if (premiumPrice != null) stringResource(R.string.remove_ads_button, premiumPrice)
+                        else if (premiumPriceState == BillingPriceLoadState.UNAVAILABLE) stringResource(R.string.remove_ads_price_unavailable_button)
                         else stringResource(R.string.remove_ads_price_loading_button),
                         style = V2Type.BodyStrong,
                         fontWeight = FontWeight.Black
