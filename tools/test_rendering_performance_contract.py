@@ -18,10 +18,13 @@ class RenderingPerformanceContractTest(unittest.TestCase):
         self.assertIn('By.res("discover_list")', self.rendering)
         self.assertIn('By.res("result_score")', self.rendering)
 
-    def test_ambient_animation_state_is_read_in_graphics_layer(self):
-        for source in (self.discover, self.quiz_visual, self.onboarding):
+    def test_discover_idle_has_no_perpetual_ambient_animation(self):
+        self.assertNotIn('rememberInfiniteTransition', self.discover)
+        self.assertNotIn('infiniteRepeatable', self.discover)
+
+    def test_remaining_ambient_animation_state_is_read_in_graphics_layer(self):
+        for source in (self.quiz_visual, self.onboarding):
             self.assertIn('?.value ?: 1f', source)
-        self.assertNotIn('val glowScale: Float', self.discover)
         self.assertNotIn('val glowScale: Float', self.quiz_visual)
 
     def test_result_share_no_longer_reparses_quiz_catalog(self):
