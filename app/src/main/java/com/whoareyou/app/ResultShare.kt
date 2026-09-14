@@ -54,11 +54,11 @@ object ResultShare {
                 )
 
                 try {
-                    val directory = File(context.cacheDir, "shared_results").apply { mkdirs() }
-                    val file = File(directory, "who_are_you_${System.currentTimeMillis()}.png")
-                    FileOutputStream(file).use { output ->
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
-                    }
+                    val file = ShareFileStore.writePng(
+                        context,
+                        "who_are_you_${System.currentTimeMillis()}.png",
+                        bitmap
+                    )
 
                     val uri = FileProvider.getUriForFile(
                         context,
