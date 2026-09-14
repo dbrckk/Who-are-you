@@ -98,6 +98,28 @@ class ProfileStorePersistenceTest {
     }
 
     @Test
+    fun repeatedQuizPersistsBoundedAndDatedHistory() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val quizId = "history-${UUID.randomUUID()}"
+
+        runBlocking {
+            assertTrue(ProfileStore.saveQuizResult(context, quizId, 30, UUID.randomUUID().toString()))
+            assertTrue(ProfileStore.saveQuizResult(context, quizId, 60, UUID.randomUUID().toString()))
+            assertTrue(ProfileStore.saveQuizResult(context, quizId, 75, UUID.randomUUID().toString()))
+
+            val profile = ProfileStore.observe(context).first()
+            assertEquals(75, profile.latestScores[quizId])
+            assertEquals(60, profile.previousScores[quizId])
+            assertEquals(listOf(30, 60, 75), profile.scoreHistory[quizId])
+
+            val timed = profile.timedScoreHistory[quizId].orEmpty()
+            assertEquals(3, timed.size)
+            assertEquals(listOf(30, 60, 75), timed.map { it.score })
+            assertTrue(timed.all { it.epochDay > 0 })
+        }
+    }
+
+    @Test
     fun quizResultNormalizesIdAndScoreBeforePersistence() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val quizId = "normalized-${UUID.randomUUID()}"
