@@ -170,6 +170,10 @@ fun ProfileScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+            if (summary.coverage.totalTraitCount > 0) {
+                Spacer(Modifier.height(18.dp))
+                ProfileCoverageCard(summary.coverage)
+            }
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(18.dp))
                 TraitGraphCard(summary.traitGraph)
