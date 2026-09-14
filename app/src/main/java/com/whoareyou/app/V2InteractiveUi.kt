@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -138,6 +139,10 @@ fun V2PressableCard(
             ),
         shape = shape,
         colors = CardDefaults.cardColors(containerColor = containerColor),
+        border = BorderStroke(
+            width = if (focused) 1.5.dp else 1.dp,
+            color = if (focused) V2Colors.AccentCyan.copy(alpha = 0.90f) else V2Colors.Hairline
+        ),
         content = content
     )
 }
@@ -151,7 +156,8 @@ fun V2Card(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(V2Radius.Card),
-        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        border = BorderStroke(1.dp, V2Colors.Hairline)
     ) {
         androidx.compose.foundation.layout.Column(
             modifier = Modifier.padding(V2Spacing.Card),
