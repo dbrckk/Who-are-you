@@ -63,6 +63,7 @@
     <string name="profile_progress">PROFILE PROGRESS</string>
     <string name="share_my_result">SHARE MY RESULT  ↗</string>
     <string name="compare_with_friend">COMPARE WITH A FRIEND  →</string>
+    <string name="result_optional_actions">Optional — share or compare only if you want to.</string>
     <string name="friend_match_explainer">Your friend takes the same test and gets an instant match score</string>
     <string name="retry">RETRY</string>
     <string name="done_button">DONE</string>
