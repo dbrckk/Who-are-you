@@ -28,7 +28,7 @@ class RestoredQuizRecoveryTest(unittest.TestCase):
             "finalScore = 0",
             "previousScoreForAttempt = null",
             "screenName = AppScreen.DISCOVER.name",
-            'testTag("quiz_session_recovering")',
+            'BrandLoadingScreen(tag = "quiz_session_recovering")',
         ):
             self.assertIn(expected, self.source)
 
