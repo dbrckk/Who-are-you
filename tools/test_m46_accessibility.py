@@ -23,7 +23,7 @@ class CoreAccessibilityContractTest(unittest.TestCase):
         self.assertIn("V2PressableSurface(", quiz)
         self.assertIn("role: Role = Role.Button", pressable)
         self.assertIn("role = role", pressable)
-        self.assertIn("AccessibleBackAction(onClick = onBack)", quiz)
+        self.assertIn("AccessibleBackAction(onClick = { if (canNavigateBack) onBack() })", quiz)
 
     def test_shell_tabs_expose_tab_semantics(self):
         source = self.read("AppShellUi.kt")
@@ -33,7 +33,7 @@ class CoreAccessibilityContractTest(unittest.TestCase):
 
     def test_result_secondary_actions_keep_touch_targets(self):
         source = self.read("ResultScreenUi.kt")
-        self.assertGreaterEqual(source.count("heightIn(min = 48.dp)"), 2)
+        self.assertGreaterEqual(source.count("heightIn(min = 52.dp)"), 2)
 
     def test_profile_progress_is_resource_backed(self):
         source = self.read("ProfileScreenUi.kt")
