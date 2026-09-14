@@ -186,7 +186,7 @@ private fun WhoAreYouApp() {
     ) {
         AnimatedContent(
             targetState = screen,
-            transitionSpec = { premiumScreenTransition(reduceMotion) },
+            transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) },
             label = "screen",
             modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}")
         ) { destination ->
