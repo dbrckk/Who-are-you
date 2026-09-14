@@ -17,13 +17,20 @@ data class JournalEntry(
     val kind: JournalChangeKind
 )
 
+data class PeriodComparison(
+    val earlierAverage: Int,
+    val recentAverage: Int,
+    val delta: Int
+)
+
 data class DimensionJournal(
     val quizId: String,
     val entries: List<JournalEntry>,
     val firstScore: Int,
     val latestScore: Int,
     val totalChange: Int,
-    val trendKind: LongitudinalTrendKind
+    val trendKind: LongitudinalTrendKind,
+    val periodComparison: PeriodComparison?
 )
 
 object DimensionJournalEngine {
@@ -60,13 +67,30 @@ object DimensionJournalEngine {
             )
         }
 
+        val periodComparison = buildPeriodComparison(normalized)
         return DimensionJournal(
             quizId = quizId,
             entries = entries,
             firstScore = normalized.first().score,
             latestScore = normalized.last().score,
             totalChange = normalized.last().score - normalized.first().score,
-            trendKind = trend.kind
+            trendKind = trend.kind,
+            periodComparison = periodComparison
+        )
+    }
+
+    private fun buildPeriodComparison(points: List<TimedScore>): PeriodComparison? {
+        if (points.size < 2) return null
+        val split = points.size / 2
+        val earlier = points.take(split.coerceAtLeast(1))
+        val recent = points.drop(split.coerceAtLeast(1))
+        if (recent.isEmpty()) return null
+        val earlierAverage = earlier.map { it.score }.average().toInt()
+        val recentAverage = recent.map { it.score }.average().toInt()
+        return PeriodComparison(
+            earlierAverage = earlierAverage,
+            recentAverage = recentAverage,
+            delta = recentAverage - earlierAverage
         )
     }
 }
