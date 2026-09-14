@@ -9,8 +9,8 @@ class AccessibilitySystemContractTest(unittest.TestCase):
         self.design = (ROOT / 'app/src/main/java/com/whoareyou/app/V2DesignSystem.kt').read_text(encoding='utf-8')
         self.library = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt').read_text(encoding='utf-8')
 
-    def test_shared_click_targets_are_at_least_48dp(self):
-        self.assertGreaterEqual(self.interactive.count('.heightIn(min = 48.dp)'), 2)
+    def test_shared_click_targets_are_at_least_52dp(self):
+        self.assertGreaterEqual(self.interactive.count('.heightIn(min = 52.dp)'), 2)
 
     def test_supporting_text_baseline_is_not_tiny(self):
         self.assertIn('fontSize = 14.sp', self.design)
