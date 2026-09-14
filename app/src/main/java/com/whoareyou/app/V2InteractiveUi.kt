@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,16 +34,17 @@ fun V2PressableSurface(
     enabled: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val reduceMotion = reducedMotionEnabled()
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val background by animateColorAsState(
         targetValue = if (pressed && enabled) V2Colors.SurfaceElevated else V2Colors.Surface,
-        animationSpec = tween(V2Motion.FastMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.FastMillis),
         label = "pressableBackground"
     )
     val scale by animateFloatAsState(
         targetValue = if (pressed && enabled) V2Motion.PressedScale else 1f,
-        animationSpec = tween(V2Motion.FastMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.FastMillis),
         label = "pressableScale"
     )
 
@@ -76,11 +78,12 @@ fun V2PressableCard(
     containerColor: Color = V2Colors.Surface,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val reduceMotion = reducedMotionEnabled()
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
         targetValue = if (pressed && onClick != null) V2Motion.PressedScale else 1f,
-        animationSpec = tween(V2Motion.FastMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.FastMillis),
         label = "pressableCardScale"
     )
 
