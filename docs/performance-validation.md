@@ -50,6 +50,28 @@ Measure at least:
 
 Do not use emulator timing as a production performance target. Emulator CPU/storage resources are shared with the host and are not representative.
 
+## Measure rendering jank
+
+The performance module also contains `RenderingBenchmark`.
+
+Run it on the same physical Android 12+ device used for regression tracking:
+
+```bash
+gradle :baseline-profile:connectedBenchmarkAndroidTest
+```
+
+Relevant journeys:
+- `discoverScrollFrames` — scroll down/up through the main Discover surface;
+- `quizToResultFrames` — answer a quiz through the Result transition.
+
+Inspect `FrameTimingMetric`:
+- `frameDurationCpuMs` P50/P90/P95/P99;
+- `frameOverrunMs` P50/P90/P95/P99.
+
+A positive `frameOverrunMs` means a frame missed its deadline. Treat repeatable P95/P99 regressions as performance bugs, especially when the same device/configuration previously stayed below deadline. Android's Macrobenchmark documentation recommends focusing on the worst-performing P95/P99 frames for Compose rendering analysis.
+
+Do not compare absolute frame timing values across different phones, refresh rates, thermal states or emulator hosts.
+
 ## Regression policy
 
 Before a production promotion:
