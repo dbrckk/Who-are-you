@@ -59,6 +59,7 @@ fun CatalogUnavailableScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .widthIn(max = 560.dp)
+                .verticalScroll(rememberScrollState())
                 .clip(RoundedCornerShape(V2Radius.Hero))
                 .background(V2Colors.SurfaceGlass)
                 .padding(horizontal = 24.dp, vertical = 30.dp),
