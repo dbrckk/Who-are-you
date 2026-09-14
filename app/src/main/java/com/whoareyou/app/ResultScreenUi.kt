@@ -21,6 +21,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.snap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -63,9 +64,10 @@ fun ResultScreen(
         quiz.metricLow,
         quiz.metricHigh
     )
+    val reduceMotion = reducedMotionEnabled()
     val animatedScore by animateFloatAsState(
         targetValue = score.coerceIn(0, 100) / 100f,
-        animationSpec = tween(V2Motion.EmphasizedMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
         label = "resultScoreProgress"
     )
 
