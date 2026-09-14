@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -26,10 +27,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -144,6 +148,7 @@ private fun ShellTab(
     onClick: () -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    var focused by remember { mutableStateOf(false) }
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
     val accent = if (selected) primaryAccent else V2Colors.TextSecondary
     val interactionSource = remember { MutableInteractionSource() }
@@ -162,6 +167,12 @@ private fun ShellTab(
     Row(
         modifier = modifier
             .heightIn(min = 56.dp)
+            .onFocusChanged { focused = it.isFocused }
+            .border(
+                width = if (focused) 2.dp else 0.dp,
+                color = if (focused) V2Colors.AccentCyan else Color.Transparent,
+                shape = RoundedCornerShape(22.dp)
+            )
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
