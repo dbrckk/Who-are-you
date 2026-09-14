@@ -24,6 +24,7 @@ capture_visual_evidence() {
   adb shell uiautomator dump "/sdcard/device-ui-$label.xml" >/dev/null
   adb pull "/sdcard/device-ui-$label.xml" "device-ui-$label.xml" >/dev/null
   test -s "device-ui-$label.xml"
+  python3 .github/scripts/validate-ui-hierarchy.py "device-ui-$label.xml" | tee "device-ui-report-$label.txt"
 }
 
 capture_display_variant() {
