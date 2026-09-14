@@ -66,6 +66,7 @@ private fun WhoAreYouApp() {
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
     val billingManager = remember(context) {
         if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching {
+            BillingPriceState.markLoading()
             BillingManager(context, { premiumOverride = it }, BillingPriceState::update)
         }.getOrNull() else null
     }
