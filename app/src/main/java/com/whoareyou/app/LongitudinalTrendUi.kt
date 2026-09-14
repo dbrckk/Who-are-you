@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,7 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
@@ -31,6 +35,7 @@ fun LongitudinalTrendsCard(
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
     val catalogById = remember(catalog) { catalog.associateBy { it.id } }
     val visible = remember(trends) { trends.take(4) }
+    var selectedTrend by remember { mutableStateOf<LongitudinalTrend?>(null) }
 
     V2Card(modifier = modifier) {
         Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -51,8 +56,24 @@ fun LongitudinalTrendsCard(
 
             visible.forEach { trend ->
                 val title = catalogById[trend.quizId]?.title ?: trend.quizId
-                TrendRow(title = title, trend = trend, french = french)
+                TrendRow(
+                    title = title,
+                    trend = trend,
+                    french = french,
+                    onClick = { selectedTrend = trend }
+                )
             }
+        }
+    }
+
+    selectedTrend?.let { trend ->
+        val title = catalogById[trend.quizId]?.title ?: trend.quizId
+        DimensionJournalEngine.build(trend.quizId, trend.points)?.let { journal ->
+            DimensionJournalDialog(
+                title = title,
+                journal = journal,
+                onDismiss = { selectedTrend = null }
+            )
         }
     }
 }
@@ -61,11 +82,17 @@ fun LongitudinalTrendsCard(
 private fun TrendRow(
     title: String,
     trend: LongitudinalTrend,
-    french: Boolean
+    french: Boolean,
+    onClick: () -> Unit
 ) {
     val summary = trendSummary(trend, french)
 
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
