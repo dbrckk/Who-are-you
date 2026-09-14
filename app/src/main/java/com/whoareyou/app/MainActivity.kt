@@ -213,6 +213,14 @@ private fun WhoAreYouApp() {
                 AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile,
                     catalog = quizCatalog,
+                    onQuizSelected = { quiz ->
+                        selectedQuiz = quiz
+                        quizQuestionIndex = 0
+                        quizRawScore = 0
+                        quizFinishing = false
+                        commitFailed = false
+                        navigate(AppScreen.QUIZ)
+                    },
                     onBack = { navigate(AppScreen.DISCOVER) },
                     onResetLocalData = {
                         scope.launch {
