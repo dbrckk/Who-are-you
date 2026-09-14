@@ -35,6 +35,7 @@ object CompatibilityShare {
         AppEvents.compatibilityShare(quizId, safeCompatibility)
 
         shareScope.launch {
+            runCatching {
             val chooser = withContext(Dispatchers.IO) {
                 val matchLabel = matchLabel(context, safeCompatibility)
                 val bitmap = render(
@@ -70,7 +71,10 @@ object CompatibilityShare {
                     bitmap.recycle()
                 }
             }
-            context.startActivity(chooser)
+                ShareSafety.launch(context, chooser)
+            }.onFailure { error ->
+                ShareSafety.notifyFailure(context, error)
+            }
         }
     }
 
