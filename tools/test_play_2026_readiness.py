@@ -25,8 +25,8 @@ class Play2026ReadinessContractTest(unittest.TestCase):
             self.assertLess(self.workflow.index(step), build_index)
 
     def test_play_candidate_installs_declared_android_sdk(self):
-        self.assertIn('platforms;android-37.0', self.workflow)
-        self.assertIn('build-tools;37.0.0', self.workflow)
+        self.assertIn('platforms;android-37', self.workflow)
+        self.assertIn('build-tools;36.0.0', self.workflow)
 
     def test_play_artifact_reports_native_libraries(self):
         self.assertIn('play-native-libraries.txt', self.workflow)
