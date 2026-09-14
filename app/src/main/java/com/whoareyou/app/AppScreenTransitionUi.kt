@@ -8,8 +8,11 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.tween
 
-fun premiumScreenTransition(): ContentTransform =
-    (fadeIn(tween(V2Motion.StandardMillis)) +
+fun premiumScreenTransition(reduceMotion: Boolean = false): ContentTransform {
+    if (reduceMotion) {
+        return fadeIn(tween(0)).togetherWith(fadeOut(tween(0)))
+    }
+    return (fadeIn(tween(V2Motion.StandardMillis)) +
         slideInHorizontally(
             animationSpec = tween(V2Motion.EmphasizedMillis),
             initialOffsetX = { width -> width / 10 }
@@ -20,3 +23,4 @@ fun premiumScreenTransition(): ContentTransform =
                 targetOffsetX = { width -> -width / 14 }
             )
     )
+}
