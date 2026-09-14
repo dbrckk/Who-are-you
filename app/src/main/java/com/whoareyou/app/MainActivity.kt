@@ -109,11 +109,11 @@ private fun WhoAreYouApp() {
         runCatching { billingManager?.start() }
         runCatching { adManager?.start(activity) }
     }
-    DisposableEffect(billingManager, adManager) {
-        onDispose {
-            runCatching { billingManager?.close() }
-            runCatching { adManager?.close() }
-        }
+    DisposableEffect(billingManager) {
+        onDispose { runCatching { billingManager?.close() } }
+    }
+    DisposableEffect(adManager) {
+        onDispose { runCatching { adManager?.close() } }
     }
 
     var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
