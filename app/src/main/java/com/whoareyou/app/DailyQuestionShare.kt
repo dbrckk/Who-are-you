@@ -16,7 +16,8 @@ object DailyQuestionShare {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, text)
         }
-        context.startActivity(
+        ShareSafety.launch(
+            context,
             Intent.createChooser(intent, context.getString(R.string.daily_share_chooser))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
