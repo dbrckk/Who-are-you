@@ -7,6 +7,7 @@ enum class DiscoverProfileStage {
 }
 
 enum class DiscoverRecommendationReason {
+    PROFILE_GAP,
     NEW_THEME,
     UNFINISHED,
     RETAKE
@@ -21,9 +22,22 @@ object DiscoverPersonalization {
     fun recommendation(
         quizzes: List<Quiz>,
         completed: Set<String>,
-        dimensions: List<ProfileDimension>
+        dimensions: List<ProfileDimension>,
+        coverage: ProfileCoverage? = null
     ): DiscoverRecommendation? {
         if (quizzes.isEmpty()) return null
+
+        coverage?.let { profileCoverage ->
+            CoverageRecommendationEngine.recommend(
+                catalog = quizzes,
+                completedQuizIds = completed,
+                coverage = profileCoverage
+            )?.let { recommendation ->
+                quizzes.firstOrNull { it.id == recommendation.quizId }?.let {
+                    return DiscoverRecommendation(it, DiscoverRecommendationReason.PROFILE_GAP)
+                }
+            }
+        }
 
         val measuredThemes = dimensions.mapNotNull { dimension ->
             quizzes.firstOrNull { it.id == dimension.quizId }?.let(QuizVisuals::themeFor)
