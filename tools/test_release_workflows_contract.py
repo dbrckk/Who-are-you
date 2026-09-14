@@ -28,16 +28,14 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
         self.assertIn("app/build/outputs/mapping/playRelease/mapping.txt", self.internal)
         self.assertIn("grep -E '(^|/)lib/[^/]+/[^/]+\\.so$'", self.internal)
 
-    def test_circleci_runs_real_android_quality_gates(self):
-        self.assertIn("cimg/android:2026.08.1", self.circleci)
-        self.assertIn("PYTHONPATH=tools python3 -m unittest discover", self.circleci)
-        self.assertIn("gradle-9.5.0-bin.zip", self.circleci)
-        self.assertIn("gradle :app:testDebugUnitTest", self.circleci)
-        self.assertIn("gradle :app:lintDebug", self.circleci)
-        self.assertIn("gradle :app:assembleDebugAndroidTest", self.circleci)
+    def test_circleci_is_fast_deterministic_contract_gate(self):
+        self.assertIn("cimg/python:3.13.7", self.circleci)
+        self.assertIn("PYTHONPATH=tools python -m unittest discover", self.circleci)
+        self.assertNotIn("sdkmanager", self.circleci)
+        self.assertNotIn("gradle :app:", self.circleci)
 
     def test_android_37_sdk_package_name_is_valid(self):
-        workflows = (self.ci, self.candidate, self.internal, self.circleci)
+        workflows = (self.ci, self.candidate, self.internal)
         for workflow in workflows:
             self.assertIn('"platforms;android-37"', workflow)
             self.assertNotIn('"platforms;android-37.0"', workflow)
