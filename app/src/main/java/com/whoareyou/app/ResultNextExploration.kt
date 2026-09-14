@@ -28,10 +28,6 @@ object ResultNextExplorationEngine {
             id != currentQuizId && id !in completed && themeByQuizId[id] != null
         }?.let { return ResultNextExploration(it, ResultNextReason.COMPLEMENTARY_FACET) }
 
-        orderedQuizIds.firstOrNull { id ->
-            id != currentQuizId && themeByQuizId[id] == currentTheme
-        }?.let { return ResultNextExploration(it, ResultNextReason.RETAKE_FACET) }
-
         return null
     }
 }
