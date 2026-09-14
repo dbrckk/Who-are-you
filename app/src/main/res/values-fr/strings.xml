@@ -63,6 +63,7 @@
     <string name="profile_progress">PROGRESSION DU PROFIL</string>
     <string name="share_my_result">PARTAGER MON RÉSULTAT  ↗</string>
     <string name="compare_with_friend">COMPARER AVEC UN AMI  →</string>
+    <string name="result_optional_actions">Facultatif — partage ou compare seulement si tu en as envie.</string>
     <string name="friend_match_explainer">Ton ami fait le même test et obtient immédiatement un score de compatibilité</string>
     <string name="retry">REFAIRE</string>
     <string name="done_button">TERMINER</string>
