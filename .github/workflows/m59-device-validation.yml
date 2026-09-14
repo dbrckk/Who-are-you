@@ -68,6 +68,7 @@ jobs:
             device-android-runtime-*.txt
             device-exit-info-*.txt
             device-screen-*.png
+            device-screen-report-*.txt
             device-ui-*.xml
             device-ui-report-*.txt
             device-display-metrics.txt
