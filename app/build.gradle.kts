@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("androidx.baselineprofile")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -105,6 +106,12 @@ android {
             buildConfigField("boolean", "EXTERNAL_SERVICES_ENABLED", "false")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        create("benchmark") {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("boolean", "EXTERNAL_SERVICES_ENABLED", "false")
+        }
         create("candidate") {
             initWith(getByName("release"))
             matchingFallbacks += listOf("release")
@@ -140,6 +147,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     implementation("androidx.datastore:datastore-preferences:1.2.1")
+    implementation("androidx.profileinstaller:profileinstaller:1.4.1")
     implementation("com.android.billingclient:billing-ktx:9.1.0")
     implementation("com.google.android.gms:play-services-ads:25.4.0")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
@@ -151,4 +159,6 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.7.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    baselineProfile(project(":baseline-profile"))
 }
