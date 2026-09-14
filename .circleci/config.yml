@@ -14,9 +14,6 @@ jobs:
           name: Python release and product contracts
           command: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
-      - store_test_results:
-          path: test-results
-
 workflows:
   quality:
     jobs:
