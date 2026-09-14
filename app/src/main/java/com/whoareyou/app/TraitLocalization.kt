@@ -1,0 +1,71 @@
+package com.whoareyou.app
+
+internal object TraitLocalization {
+    fun label(id: String, french: Boolean): String {
+        val en = when (id) {
+            "social_energy" -> "Social energy"
+            "emotional_orientation" -> "Emotional orientation"
+            "analytical_style" -> "Analytical style"
+            "rumination" -> "Rumination"
+            "structure" -> "Structure"
+            "adaptability" -> "Adaptability"
+            "risk_tolerance" -> "Risk tolerance"
+            "opportunity_orientation" -> "Opportunity orientation"
+            "assertiveness" -> "Assertiveness"
+            "deliberation" -> "Deliberation"
+            "emotional_expression" -> "Emotional expression"
+            "emotional_openness" -> "Emotional openness"
+            "social_breadth" -> "Social breadth"
+            "circadian_lateness" -> "Night orientation"
+            "conflict_directness" -> "Conflict directness"
+            "curiosity" -> "Curiosity"
+            "openness" -> "Openness"
+            "novelty_seeking" -> "Novelty seeking"
+            "learning_depth" -> "Learning depth"
+            "planning" -> "Planning"
+            "boundaries" -> "Boundaries"
+            "competitiveness" -> "Competitiveness"
+            "patience" -> "Patience"
+            "independence" -> "Independence"
+            "communication_directness" -> "Communication directness"
+            "trust_openness" -> "Trust openness"
+            "self_discipline" -> "Self-discipline"
+            "optimism" -> "Optimism"
+            "stress_mobilization" -> "Stress mobilization"
+            else -> id.replace('_', ' ').replaceFirstChar { it.uppercase() }
+        }
+        if (!french) return en
+        return when (id) {
+            "social_energy" -> "Énergie sociale"
+            "emotional_orientation" -> "Orientation émotionnelle"
+            "analytical_style" -> "Style analytique"
+            "rumination" -> "Rumination"
+            "structure" -> "Structure"
+            "adaptability" -> "Adaptabilité"
+            "risk_tolerance" -> "Tolérance au risque"
+            "opportunity_orientation" -> "Orientation opportunités"
+            "assertiveness" -> "Affirmation de soi"
+            "deliberation" -> "Délibération"
+            "emotional_expression" -> "Expression émotionnelle"
+            "emotional_openness" -> "Ouverture émotionnelle"
+            "social_breadth" -> "Étendue sociale"
+            "circadian_lateness" -> "Orientation nocturne"
+            "conflict_directness" -> "Directivité en conflit"
+            "curiosity" -> "Curiosité"
+            "openness" -> "Ouverture"
+            "novelty_seeking" -> "Recherche de nouveauté"
+            "learning_depth" -> "Profondeur d’apprentissage"
+            "planning" -> "Planification"
+            "boundaries" -> "Limites personnelles"
+            "competitiveness" -> "Compétitivité"
+            "patience" -> "Patience"
+            "independence" -> "Indépendance"
+            "communication_directness" -> "Communication directe"
+            "trust_openness" -> "Ouverture à la confiance"
+            "self_discipline" -> "Autodiscipline"
+            "optimism" -> "Optimisme"
+            "stress_mobilization" -> "Mobilisation sous stress"
+            else -> en
+        }
+    }
+}
