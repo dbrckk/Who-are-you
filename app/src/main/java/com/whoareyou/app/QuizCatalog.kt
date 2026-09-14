@@ -30,10 +30,11 @@ object QuizRepository {
     @Volatile private var cached: List<Quiz>? = null
 
     fun load(context: Context): List<Quiz> {
-        val language = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
+        val deviceLanguage = context.resources.configuration.locales[0]?.language ?: Locale.getDefault().language
+        val language = supportedCatalogLanguage(deviceLanguage)
         val assets = defaultAssets.map { defaultName ->
             val localizedName = defaultName.removeSuffix(".json") + "-$language.json"
-            if (language != "en" && assetExists(context, localizedName)) localizedName else defaultName
+            if (language == "fr" && assetExists(context, localizedName)) localizedName else defaultName
         }
         val current = cached
         if (current != null && cachedLanguage == language) return current
@@ -93,3 +94,7 @@ object QuizRepository {
     private fun <T> JSONArray.mapObjects(transform: (JSONObject) -> T): List<T> =
         List(length()) { index -> transform(getJSONObject(index)) }
 }
+
+
+internal fun supportedCatalogLanguage(deviceLanguage: String?): String =
+    if (deviceLanguage.equals("fr", ignoreCase = true)) "fr" else "en"
