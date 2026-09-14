@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun AccessibleBackAction(
@@ -18,7 +17,7 @@ fun AccessibleBackAction(
 ) {
     TextButton(
         onClick = onClick,
-        modifier = modifier.heightIn(min = 48.dp)
+        modifier = modifier.heightIn(min = 52.dp)
     ) {
         Text(
             text = stringResource(R.string.back),
