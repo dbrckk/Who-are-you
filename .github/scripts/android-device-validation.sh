@@ -16,6 +16,15 @@ gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
 test -s "$DEBUG_APK"
 test -s "$CANDIDATE_APK"
 
+capture_visual_evidence() {
+  local label="$1"
+
+  capture_visual_evidence "$label"
+  adb shell uiautomator dump "/sdcard/device-ui-$label.xml" >/dev/null
+  adb pull "/sdcard/device-ui-$label.xml" "device-ui-$label.xml" >/dev/null
+  test -s "device-ui-$label.xml"
+}
+
 validate_running_app() {
   local label="$1"
 
@@ -92,8 +101,7 @@ RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
 printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
 grep -F "Status: ok" device-startup-upgrade-relaunch.txt
 sleep 3
-adb exec-out screencap -p > device-screen-upgrade-relaunch.png
-test -s device-screen-upgrade-relaunch.png
+capture_visual_evidence "upgrade-relaunch"
 RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
 test -n "$RELAUNCH_PID"
 adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
