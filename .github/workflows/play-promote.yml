@@ -28,6 +28,16 @@ on:
         required: true
         type: boolean
         default: false
+      confirm_vitals_review:
+        description: "Confirm Android Vitals crash/ANR review before Production"
+        required: true
+        type: boolean
+        default: false
+      confirm_prelaunch_report:
+        description: "Confirm Play pre-launch report review before Production"
+        required: true
+        type: boolean
+        default: false
       commit_edit:
         description: "Commit the validated Play edit"
         required: true
@@ -63,8 +73,24 @@ jobs:
           RELEASE_STATUS: ${{ inputs.release_status }}
           USER_FRACTION: ${{ inputs.user_fraction }}
           CONFIRM_PRODUCTION: ${{ inputs.confirm_production }}
+          CONFIRM_VITALS_REVIEW: ${{ inputs.confirm_vitals_review }}
+          CONFIRM_PRELAUNCH_REPORT: ${{ inputs.confirm_prelaunch_report }}
         run: |
           set -euo pipefail
+          if [ "$TARGET_TRACK" = "production" ]; then
+            if [ "$CONFIRM_PRODUCTION" != "true" ]; then
+              echo "Production promotion requires confirm_production=true"
+              exit 1
+            fi
+            if [ "$CONFIRM_VITALS_REVIEW" != "true" ]; then
+              echo "Production promotion requires Android Vitals review confirmation"
+              exit 1
+            fi
+            if [ "$CONFIRM_PRELAUNCH_REPORT" != "true" ]; then
+              echo "Production promotion requires Play pre-launch report confirmation"
+              exit 1
+            fi
+          fi
           args=(--validate-only --track "$TARGET_TRACK" --status "$RELEASE_STATUS")
           if [ -n "$USER_FRACTION" ]; then args+=(--user-fraction "$USER_FRACTION"); fi
           if [ "$CONFIRM_PRODUCTION" = "true" ]; then args+=(--confirm-production); fi
