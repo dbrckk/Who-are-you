@@ -14,7 +14,8 @@
     "WHO_ARE_YOU_UPLOAD_KEY_ALIAS"
   ],
   "optionalSecrets": [
-    "WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+    "WHO_ARE_YOU_TELEMETRY_ENDPOINT",
+    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
   ],
   "keystoreLocation": "RUNNER_TEMP",
   "signatureVerification": "jarsigner -verify -verbose -certs",
@@ -24,5 +25,6 @@
   "artifactFileTemplates": [
     "who-are-you-play-{versionName}-{versionCode}.aab",
     "play-candidate.sha256"
-  ]
+  ],
+  "uploadKeyPasswordFallback": "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD"
 }
