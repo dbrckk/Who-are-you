@@ -170,6 +170,10 @@ fun ProfileScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+            if (summary.traitGraph.traits.isNotEmpty()) {
+                Spacer(Modifier.height(18.dp))
+                TraitGraphCard(summary.traitGraph)
+            }
             if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
                 Spacer(Modifier.height(18.dp))
                 ProfileInsightCards(summary)
