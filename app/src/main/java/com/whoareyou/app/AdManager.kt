@@ -118,6 +118,7 @@ class AdManager(
                     IllegalStateException("Ad show failed [${adError.code}]: ${adError.message}"),
                     mapOf("placement" to "result_interstitial", "stage" to "show", "domain" to adError.domain)
                 )
+                load()
                 onContinue()
             }
 
