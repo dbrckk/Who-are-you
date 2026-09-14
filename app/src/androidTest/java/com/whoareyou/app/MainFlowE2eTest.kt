@@ -9,6 +9,7 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -173,9 +174,10 @@ class MainFlowE2eTest {
     }
 
     private fun openRecommendedQuiz() {
+        composeRule.onNodeWithTag("discover_list")
+            .performScrollToNode(hasTestTag("discover_next_quiz"))
         composeRule.onNodeWithTag("discover_next_quiz")
             .assertExists()
-            .performScrollTo()
             .performClick()
     }
 
