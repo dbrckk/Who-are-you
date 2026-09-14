@@ -7,6 +7,7 @@ import java.util.Locale
 
 data class Answer(val text: String, val score: Int)
 data class Question(val text: String, val answers: List<Answer>)
+data class QuizTraitWeight(val id: String, val weight: Double)
 data class Quiz(
     val id: String,
     val title: String,
@@ -21,11 +22,18 @@ data class Quiz(
     val highDescription: String,
     val metricLow: String,
     val metricHigh: String,
-    val questions: List<Question>
+    val questions: List<Question>,
+    val traits: List<QuizTraitWeight> = emptyList()
 )
 
 object QuizRepository {
-    private val defaultAssets = listOf("quizzes.json", "quizzes-extra.json")
+    private val defaultAssets = listOf(
+        "quizzes.json",
+        "quizzes-extra.json",
+        "quizzes-growth.json",
+        "quizzes-growth2.json",
+        "quizzes-growth3.json"
+    )
     @Volatile private var cachedLanguage: String? = null
     @Volatile private var cached: List<Quiz>? = null
 
@@ -75,6 +83,13 @@ object QuizRepository {
         require(questions.isNotEmpty()) { "Quiz ${json.getString("id")} has no questions" }
 
         val results = json.getJSONObject("results")
+        val traits = json.optJSONArray("traits")?.mapObjects { traitJson ->
+            QuizTraitWeight(
+                id = traitJson.getString("id"),
+                weight = traitJson.getDouble("weight").coerceIn(-1.0, 1.0)
+            )
+        }.orEmpty()
+
         return Quiz(
             id = json.getString("id"),
             title = json.getString("title"),
@@ -89,7 +104,8 @@ object QuizRepository {
             highDescription = results.getJSONObject("high").getString("description"),
             metricLow = json.getString("metricLow"),
             metricHigh = json.getString("metricHigh"),
-            questions = questions
+            questions = questions,
+            traits = traits
         )
     }
 
