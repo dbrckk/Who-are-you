@@ -151,6 +151,7 @@ jobs:
             ${{ steps.bundle.outputs.output_aab }}
             play-candidate.sha256
             play-native-libraries.txt
+            app/build/outputs/mapping/playRelease/mapping.txt
           if-no-files-found: error
           retention-days: 30
 
