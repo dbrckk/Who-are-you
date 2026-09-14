@@ -65,9 +65,12 @@ class M56ReleaseCandidateTest(unittest.TestCase):
             "zipalign\" -c -v 4",
             "apksigner\" verify --verbose --print-certs",
             "aapt\" dump badging",
-            f'VERSION_NAME="{version_name}"',
-            f'VERSION_CODE="{version_code}"',
-            f"who-are-you-{version_name}-rc",
+            'VERSION_NAME="$(sed -n',
+            'VERSION_CODE="$(sed -n',
+            'steps.version.outputs.name',
+            'steps.version.outputs.code',
+            'who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk',
+            'TAG="v${VERSION_NAME}-${VERSION_CODE}-rc"',
         ):
             self.assertIn(expected, config)
 
