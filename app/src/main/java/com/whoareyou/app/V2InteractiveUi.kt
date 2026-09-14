@@ -63,6 +63,8 @@ fun V2PressableSurface(
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
+                alpha = if (pressed && enabled) 0.96f else 1f
+                translationY = if (pressed && enabled) 1.5f else 0f
             }
             .onFocusChanged { focused = it.isFocused }
             .border(
@@ -118,6 +120,8 @@ fun V2PressableCard(
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
+                alpha = if (pressed && onClick != null) 0.97f else 1f
+                translationY = if (pressed && onClick != null) 1.5f else 0f
             }
             .then(
                 if (onClick != null) {
