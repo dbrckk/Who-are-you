@@ -23,7 +23,9 @@ class TraitEvolutionIntegrationContractTest(unittest.TestCase):
         self.assertIn('storedProfile.scoreHistory', self.main)
 
     def test_ui_separates_new_evidence_from_real_movement(self):
-        self.assertIn('TraitEvolutionCard(', self.profile)\n        self.assertIn('evolution = summary.traitEvolution', self.profile)\n        self.assertIn('catalog = catalog', self.profile)
+        self.assertIn('TraitEvolutionCard(', self.profile)
+        self.assertIn('evolution = summary.traitEvolution', self.profile)
+        self.assertIn('catalog = catalog', self.profile)
         self.assertIn('NEW_EVIDENCE', self.evolution)
         self.assertIn('MOVED', self.evolution)
         self.assertIn('LOW_CONFIDENCE', self.evolution)
