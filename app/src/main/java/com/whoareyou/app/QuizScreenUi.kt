@@ -1,6 +1,9 @@
 package com.whoareyou.app
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,6 +25,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -45,6 +49,12 @@ fun QuizScreen(
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
     val question = quiz.questions[safeQuestionIndex]
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
+    val reduceMotion = reducedMotionEnabled()
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.StandardMillis),
+        label = "quizProgress"
+    )
     val canNavigateBack = !isFinishing
     val scrollState = rememberScrollState()
     val accent = QuizVisuals.accentFor(quiz)
@@ -92,7 +102,7 @@ fun QuizScreen(
         }
         Spacer(Modifier.height(8.dp))
         LinearProgressIndicator(
-            progress = { progress },
+            progress = { animatedProgress },
             modifier = Modifier.fillMaxWidth().height(6.dp),
             color = accent,
             trackColor = companion.copy(alpha = 0.14f)
