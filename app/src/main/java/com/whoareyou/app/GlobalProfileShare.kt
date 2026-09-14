@@ -32,6 +32,7 @@ object GlobalProfileShare {
     fun share(context: Context, summary: GlobalProfileSummary) {
         summary.signature?.let(AppEvents::signatureShare)
         shareScope.launch {
+            runCatching {
             val chooser = withContext(Dispatchers.IO) {
                 val copy = cardCopy(context)
                 val bitmap = render(summary, copy)
@@ -54,7 +55,10 @@ object GlobalProfileShare {
                     bitmap.recycle()
                 }
             }
-            context.startActivity(chooser)
+                ShareSafety.launch(context, chooser)
+            }.onFailure { error ->
+                ShareSafety.notifyFailure(context, error)
+            }
         }
     }
 
