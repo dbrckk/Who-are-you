@@ -71,12 +71,14 @@ class ComposeImportContractTest(unittest.TestCase):
             "padding",
         )
 
-    def test_weight_extension_has_import_when_used(self):
-        self._assert_extension_import(
-            ".weight(",
-            "import androidx.compose.foundation.layout.weight",
-            "weight",
-        )
+    def test_weight_uses_scope_extension_without_invalid_import(self):
+        root = ROOT / "app/src/main/java/com/whoareyou/app"
+        offenders = []
+        for path in root.glob("*.kt"):
+            source = path.read_text(encoding="utf-8")
+            if "import androidx.compose.foundation.layout.weight" in source:
+                offenders.append(path.name)
+        self.assertEqual([], offenders, f"Invalid Compose weight imports: {offenders}")
 
     def test_height_extension_has_import_when_used(self):
         self._assert_extension_import(
