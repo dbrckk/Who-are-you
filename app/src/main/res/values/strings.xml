@@ -62,7 +62,7 @@
     <string name="friend_match_explainer">Your friend takes the same test and gets an instant match score</string>
     <string name="retry">RETRY</string>
     <string name="done_button">DONE</string>
-    <string name="reset_local_data_button">RESET LOCAL DATA</string>
+    <string name="reset_local_data_button">RESET PROFILE DATA</string>
     <string name="reset_local_data_hint">Deletes your quiz progress, scores, streaks and local comparison history from this device. Your Google Play purchase is not cancelled.</string>
     <string name="reset_local_data_title">Reset local data?</string>
     <string name="reset_local_data_body">This removes your local profile and progress from this device and returns the app to onboarding. This action cannot be undone.</string>
