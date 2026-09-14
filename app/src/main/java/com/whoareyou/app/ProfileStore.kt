@@ -9,10 +9,13 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import java.io.IOException
 import java.time.LocalDate
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 private val Context.profileDataStore by preferencesDataStore(
     name = "who_are_you_profile",
@@ -62,7 +65,13 @@ object ProfileStore {
     private val lastActiveDateKey = stringPreferencesKey("last_active_date")
 
     fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data
-        .catch { emit(emptyPreferences()) }
+        .catch { error ->
+            if (error is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw error
+            }
+        }
         .map(::decodeProfile)
 
     suspend fun commitQuizResult(
@@ -211,7 +220,9 @@ object ProfileStore {
 
     private suspend fun announceNewAchievements(context: Context) {
         val newlyUnlocked = mutableListOf<String>()
-        val totalQuizCount = QuizRepository.load(context).size
+        val totalQuizCount = withContext(Dispatchers.IO) {
+            QuizRepository.load(context.applicationContext).size
+        }
         context.profileDataStore.edit { prefs ->
             val profile = decodeProfile(prefs)
             val announced = profile.announcedAchievementIds
