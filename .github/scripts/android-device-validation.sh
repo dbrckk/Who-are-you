@@ -34,6 +34,33 @@ capture_visual_evidence() {
   python3 .github/scripts/validate-ui-hierarchy.py     "device-ui-$label.xml"     --package "$PACKAGE"     --size "$display_size"     --density "$density_dpi"     | tee "device-ui-report-$label.txt"
 }
 
+capture_reduced_motion_variant() {
+  local label="$1"
+
+  adb shell settings put global window_animation_scale 0
+  adb shell settings put global transition_animation_scale 0
+  adb shell settings put global animator_duration_scale 0
+  adb shell am force-stop "$PACKAGE"
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 2
+  capture_visual_evidence "$label"
+}
+
+capture_landscape_variant() {
+  local label="$1"
+
+  adb shell settings put system accelerometer_rotation 0
+  adb shell settings put system user_rotation 1
+  adb shell am force-stop "$PACKAGE"
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 3
+  capture_visual_evidence "$label"
+}
+
 capture_display_variant() {
   local label="$1"
   local size="$2"
@@ -164,6 +191,18 @@ adb shell settings put system font_scale 1.0
 
 capture_display_variant "candidate-compact" "720x1600" "320"
 capture_display_variant "candidate-large" "1600x2560" "320"
+adb shell wm size reset
+adb shell wm density reset
+
+capture_reduced_motion_variant "candidate-reduced-motion"
+adb shell settings put global window_animation_scale 1
+adb shell settings put global transition_animation_scale 1
+adb shell settings put global animator_duration_scale 1
+
+capture_landscape_variant "candidate-landscape"
+adb shell settings put system user_rotation 0
+adb shell settings put system accelerometer_rotation 1
+
 adb shell wm size reset
 adb shell wm density reset
 adb shell settings put system font_scale 1.0
