@@ -33,6 +33,8 @@ class BillingManager(
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private var reconnectJob: Job? = null
     private var reconnectAttempt = 0
+    private var productQueryRetryJob: Job? = null
+    private var productQueryRetryAttempt = 0
     private var closed = false
     private val loggedLivePurchaseTokens = mutableSetOf<String>()
 
@@ -81,6 +83,8 @@ class BillingManager(
         closed = true
         reconnectJob?.cancel()
         reconnectJob = null
+        productQueryRetryJob?.cancel()
+        productQueryRetryJob = null
         billingClient.endConnection()
     }
 
@@ -150,6 +154,9 @@ class BillingManager(
 
         billingClient.queryProductDetailsAsync(params) { result, response ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                productQueryRetryAttempt = 0
+                productQueryRetryJob?.cancel()
+                productQueryRetryJob = null
                 removeAdsProduct = response.productDetailsList.firstOrNull()
                 val selectedOffer = removeAdsProduct
                     ?.oneTimePurchaseOfferDetailsList
@@ -158,9 +165,27 @@ class BillingManager(
                 val localizedPrice = selectedOffer?.formattedPrice
                     ?: removeAdsProduct?.oneTimePurchaseOfferDetails?.formattedPrice
                 onPriceChanged(localizedPrice)
+                if (localizedPrice == null) {
+                    scheduleProductQueryRetry()
+                }
             } else {
+                removeAdsProduct = null
+                removeAdsOfferToken = null
+                onPriceChanged(null)
                 recordBillingError("product_query", result)
+                scheduleProductQueryRetry()
             }
+        }
+    }
+
+    private fun scheduleProductQueryRetry() {
+        if (closed || productQueryRetryJob?.isActive == true || productQueryRetryAttempt >= 3) return
+        val delayMillis = BillingReconnectPolicy.delayMillis(productQueryRetryAttempt)
+        productQueryRetryAttempt = BillingReconnectPolicy.nextAttempt(productQueryRetryAttempt)
+        productQueryRetryJob = scope.launch {
+            delay(delayMillis)
+            productQueryRetryJob = null
+            if (!closed && billingClient.isReady) queryProduct()
         }
     }
 
