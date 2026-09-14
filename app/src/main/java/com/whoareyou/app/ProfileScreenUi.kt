@@ -60,6 +60,17 @@ fun ProfileScreen(
     val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
     val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
     val companionAccent = strongestQuiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.Cyan
+    val profileBackground = remember(primaryAccent, companionAccent) {
+        Brush.verticalGradient(
+            listOf(
+                primaryAccent.copy(alpha = 0.11f),
+                V2Colors.InkSoft,
+                V2Colors.Ink,
+                companionAccent.copy(alpha = 0.05f),
+                V2Colors.Ink
+            )
+        )
+    }
     val profileProgressText = stringResource(
         R.string.profile_header_progress,
         summary.completedCount,
@@ -71,17 +82,7 @@ fun ProfileScreen(
         modifier = Modifier
             .fillMaxHeight()
             .readableContentWidth()
-            .background(
-                Brush.verticalGradient(
-                    listOf(
-                        primaryAccent.copy(alpha = 0.11f),
-                        V2Colors.InkSoft,
-                        V2Colors.Ink,
-                        companionAccent.copy(alpha = 0.05f),
-                        V2Colors.Ink
-                    )
-                )
-            )
+            .background(profileBackground)
             .padding(horizontal = V2Spacing.Screen),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
