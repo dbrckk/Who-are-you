@@ -61,6 +61,25 @@ class ProfileStorePersistenceTest {
     }
 
     @Test
+    fun replayedAttemptDoesNotDuplicateScoreHistories() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val quizId = "replay-history-${UUID.randomUUID()}"
+        val attemptId = UUID.randomUUID().toString()
+
+        runBlocking {
+            val first = ProfileStore.commitQuizResult(context, quizId, 67, attemptId)
+            val replay = ProfileStore.commitQuizResult(context, quizId, 99, attemptId)
+
+            assertEquals(true, first?.changed)
+            assertEquals(false, replay?.changed)
+
+            val profile = ProfileStore.observe(context).first()
+            assertEquals(listOf(67), profile.scoreHistory[quizId])
+            assertEquals(listOf(67), profile.timedScoreHistory[quizId].orEmpty().map { it.score })
+        }
+    }
+
+    @Test
     fun atomicCommitReturnsPersistedScoreAndRejectsReplay() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val quizId = "atomic-${UUID.randomUUID()}"
