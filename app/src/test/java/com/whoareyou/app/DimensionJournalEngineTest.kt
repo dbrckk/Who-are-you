@@ -22,6 +22,9 @@ class DimensionJournalEngineTest {
         assertEquals(19, journal.totalChange)
         assertEquals(10, journal.entries.first().epochDay)
         assertEquals(30, journal.entries.last().epochDay)
+        assertEquals(55, journal.periodComparison?.earlierAverage)
+        assertEquals(67, journal.periodComparison?.recentAverage)
+        assertEquals(12, journal.periodComparison?.delta)
     }
 
     @Test
