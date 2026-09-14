@@ -17,6 +17,8 @@
     .card strong { color: #6EE7F9; }
     .actions { display: grid; gap: 12px; margin-top: 24px; }
     a { display: block; text-align: center; text-decoration: none; border-radius: 18px; padding: 17px 18px; font-weight: 900; }
+    a:focus-visible { outline: 3px solid #6EE7F9; outline-offset: 4px; }
+    [hidden] { display: none !important; }
     .primary { background: #9C7BFF; color: #090A0F; }
     .secondary { background: #1B1D27; color: #fff; }
     .fine { margin-top: 22px; color: #747887; font-size: 12px; line-height: 1.5; text-align: center; }
@@ -67,6 +69,17 @@
     document.getElementById('challengeText').innerHTML = french
       ? 'Défi prêt. <strong>Ouvre l’app</strong> pour faire le test et découvrir votre compatibilité.'
       : 'Challenge ready. <strong>Open the app</strong> to take the test and reveal your match.';
+  } else {
+    openApp.hidden = true;
+    document.getElementById('headline').textContent = french
+      ? 'Ce lien de défi n’est plus valide.'
+      : 'This challenge link is no longer valid.';
+    document.getElementById('subtitle').textContent = french
+      ? 'Tu peux toujours découvrir Who Are You? depuis Google Play.'
+      : 'You can still discover Who Are You? from Google Play.';
+    document.getElementById('challengeText').textContent = french
+      ? 'Les informations nécessaires au défi sont manquantes ou invalides.'
+      : 'The information required for this challenge is missing or invalid.';
   }
 
   const highlightInstallFallback = () => {
