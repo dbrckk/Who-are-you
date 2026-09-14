@@ -141,25 +141,9 @@ jobs:
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
           {
             echo "Native libraries packaged in the Play candidate:"
-            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so          echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
-
-      - name: Upload signed Play candidate
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            ${{ steps.bundle.outputs.output_aab }}
-            play-candidate.sha256
-            play-native-libraries.txt
-            app/build/outputs/mapping/playRelease/mapping.txt
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove materialized keystore
-        if: always()
-        run: rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
- || echo "(none)"
+            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || echo "(none)"
           } | tee play-native-libraries.txt
+          python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-bundle-budget.json
           cp "$PLAY_AAB" "$OUTPUT_AAB"
           echo "output_aab=$OUTPUT_AAB" >> "$GITHUB_OUTPUT"
           echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
@@ -171,6 +155,9 @@ jobs:
           path: |
             ${{ steps.bundle.outputs.output_aab }}
             play-candidate.sha256
+            play-native-libraries.txt
+            play-bundle-budget.json
+            app/build/outputs/mapping/playRelease/mapping.txt
           if-no-files-found: error
           retention-days: 30
 
