@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,8 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import java.util.UUID
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     override fun attachBaseContext(newBase: Context) {
@@ -45,11 +47,16 @@ private fun WhoAreYouApp() {
     val context = LocalContext.current
     val activity = context as? Activity
     val scope = rememberCoroutineScope()
-    val quizCatalog = remember(context) { QuizRepository.load(context) }
-    val storedProfileFlow = remember(context) { ProfileStore.observe(context).map<StoredProfile, StoredProfile?> { it } }
+    val quizCatalogState by produceState<List<Quiz>?>(initialValue = null, context) {
+        value = withContext(Dispatchers.IO) {
+            runCatching { QuizRepository.load(context.applicationContext) }.getOrDefault(emptyList())
+        }
+    }
+    val storedProfileFlow = remember(context) { ProfileStore.observe(context) }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
     val storedProfile = storedProfileState
-    if (storedProfile == null) {
+    val quizCatalog = quizCatalogState
+    if (storedProfile == null || quizCatalog == null) {
         Box(
             modifier = Modifier.fillMaxSize().testTag("startup_loading"),
             contentAlignment = Alignment.Center
@@ -61,6 +68,20 @@ private fun WhoAreYouApp() {
     val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
         GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
     }
+    if (!storedProfile.onboardingComplete) {
+        LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
+        OnboardingScreen {
+            runCatching { AppEvents.onboardingComplete() }
+            scope.launch { ProfileStore.setOnboardingComplete(context) }
+        }
+        return
+    }
+    if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
+        LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }
+        CatalogUnavailableScreen()
+        return
+    }
+
     var premiumOverride by remember { mutableStateOf(false) }
     var privacyOptionsRequired by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
@@ -80,19 +101,6 @@ private fun WhoAreYouApp() {
         runCatching { billingManager?.start() }
         runCatching { adManager?.start(activity) }
         onDispose { runCatching { billingManager?.close() } }
-    }
-    if (!storedProfile.onboardingComplete) {
-        LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
-        OnboardingScreen {
-            runCatching { AppEvents.onboardingComplete() }
-            scope.launch { ProfileStore.setOnboardingComplete(context) }
-        }
-        return
-    }
-    if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
-        LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }
-        CatalogUnavailableScreen()
-        return
     }
 
     var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
