@@ -65,6 +65,10 @@ private fun WhoAreYouApp() {
         }
         return
     }
+    LaunchedEffect(activity, storedProfile.onboardingComplete, quizCatalog.size) {
+        runCatching { activity?.reportFullyDrawn() }
+    }
+
     val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores) {
         GlobalProfileEngine.build(quizCatalog, storedProfile.latestScores, storedProfile.previousScores)
     }
