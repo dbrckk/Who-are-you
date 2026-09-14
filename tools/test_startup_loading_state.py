@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class StartupLoadingStateTest(unittest.TestCase):
     def test_profile_loading_has_visible_testable_ui(self):
         source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
-        self.assertIn('if (storedProfile == null)', source)
+        self.assertIn('if (storedProfile == null || quizCatalog == null)', source)
         self.assertIn('testTag("startup_loading")', source)
         self.assertIn('CircularProgressIndicator()', source)
 
