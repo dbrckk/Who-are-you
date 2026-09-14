@@ -36,7 +36,8 @@ data class GlobalProfileSummary(
         newEvidence = emptyList()
     ),
     val longitudinalTrends: List<LongitudinalTrend> = emptyList(),
-    val traitTimelines: List<TraitTimeline> = emptyList()
+    val traitTimelines: List<TraitTimeline> = emptyList(),
+    val narrative: ProfileNarrativeSummary = ProfileNarrativeSummary(emptyList())
 )
 
 object GlobalProfileEngine {
@@ -67,6 +68,10 @@ object GlobalProfileEngine {
         val stableScores = dimensions.associate { it.quizId to it.score }
 
         val traitGraph = TraitGraphEngine.build(dimensions)
+        val traitTimelines = TraitTimelineEngine.build(
+            catalog = catalog,
+            timedScoreHistory = timedScoreHistory
+        )
         return GlobalProfileSummary(
             dominantArchetype = dominant?.resultTitle ?: "Profile undiscovered",
             completionPercent = completion,
@@ -85,9 +90,10 @@ object GlobalProfileEngine {
                 .map { (quizId, points) -> LongitudinalTrendEngine.build(quizId, points) }
                 .filter { it.kind != LongitudinalTrendKind.INSUFFICIENT }
                 .sortedByDescending { kotlin.math.abs(it.netChange) + it.volatility },
-            traitTimelines = TraitTimelineEngine.build(
-                catalog = catalog,
-                timedScoreHistory = timedScoreHistory
+            traitTimelines = traitTimelines,
+            narrative = ProfileNarrativeEngine.build(
+                graph = traitGraph,
+                timelines = traitTimelines
             )
         )
     }
