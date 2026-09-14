@@ -6,11 +6,6 @@
     "contents": "read"
   },
   "buildTask": ":app:bundlePlayRelease",
-  "artifactName": "who-are-you-play-candidate-0.2.2-4",
-  "artifactFiles": [
-    "who-are-you-play-0.2.2-4.aab",
-    "play-candidate.sha256"
-  ],
   "requiredSecrets": [
     "WHO_ARE_YOU_ADMOB_APP_ID",
     "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
@@ -24,5 +19,10 @@
   "keystoreLocation": "RUNNER_TEMP",
   "signatureVerification": "jarsigner -verify -verbose -certs",
   "checksum": "sha256",
-  "playUploadAutomated": false
+  "playUploadAutomated": false,
+  "artifactNameTemplate": "who-are-you-play-candidate-{versionName}-{versionCode}",
+  "artifactFileTemplates": [
+    "who-are-you-play-{versionName}-{versionCode}.aab",
+    "play-candidate.sha256"
+  ]
 }
