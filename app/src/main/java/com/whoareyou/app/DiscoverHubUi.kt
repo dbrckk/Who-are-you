@@ -156,10 +156,11 @@ fun DiscoverHub(
 
 @Composable
 private fun DiscoverHeroHeader() {
+    val reduceMotion = reducedMotionEnabled()
     val ambient = rememberInfiniteTransition(label = "discoverHeroAmbient")
     val glowScale by ambient.animateFloat(
-        initialValue = 0.92f,
-        targetValue = 1.10f,
+        initialValue = if (reduceMotion) 1f else 0.92f,
+        targetValue = if (reduceMotion) 1f else 1.10f,
         animationSpec = infiniteRepeatable(
             animation = tween(V2Motion.AmbientMillis),
             repeatMode = RepeatMode.Reverse
@@ -167,8 +168,8 @@ private fun DiscoverHeroHeader() {
         label = "discoverGlowScale"
     )
     val glowAlpha by ambient.animateFloat(
-        initialValue = 0.32f,
-        targetValue = 0.62f,
+        initialValue = if (reduceMotion) 0.46f else 0.32f,
+        targetValue = if (reduceMotion) 0.46f else 0.62f,
         animationSpec = infiniteRepeatable(
             animation = tween(V2Motion.AmbientMillis + 800),
             repeatMode = RepeatMode.Reverse
