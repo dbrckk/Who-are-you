@@ -53,7 +53,6 @@ fun QuizScreen(
     onFinished: (Int) -> Unit
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
-    val question = quiz.questions[safeQuestionIndex]
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
     val animatedProgress by animateFloatAsState(
@@ -205,7 +204,11 @@ fun QuizScreen(
                             }
                         },
                         enabled = !isFinishing && animatedIndex == safeQuestionIndex,
-                        modifier = Modifier.testTag("quiz_answer_$answerIndex")
+                        modifier = if (animatedIndex == safeQuestionIndex) {
+                            Modifier.testTag("quiz_answer_$answerIndex")
+                        } else {
+                            Modifier
+                        }
                     ) {
                         Row(
                             modifier = Modifier
