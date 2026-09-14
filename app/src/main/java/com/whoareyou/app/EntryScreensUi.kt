@@ -26,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -227,6 +228,56 @@ fun OnboardingScreen(onStart: () -> Unit) {
                     textAlign = TextAlign.Center
                 )
             }
+        }
+    }
+}
+
+
+@Composable
+fun BrandLoadingScreen(
+    modifier: Modifier = Modifier,
+    tag: String = "startup_loading"
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .testTag(tag)
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        V2Colors.Plum.copy(alpha = 0.58f),
+                        V2Colors.InkSoft,
+                        V2Colors.Ink
+                    )
+                )
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .widthIn(max = 320.dp)
+                .padding(horizontal = 36.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            BrandMascot(
+                mood = BrandMascotMood.CURIOUS,
+                size = 104.dp,
+                animated = true
+            )
+            Spacer(Modifier.height(18.dp))
+            Text(
+                text = stringResource(R.string.app_name),
+                color = V2Colors.TextPrimary,
+                style = V2Type.SectionTitle,
+                textAlign = TextAlign.Center
+            )
+            Spacer(Modifier.height(18.dp))
+            LinearProgressIndicator(
+                modifier = Modifier.fillMaxWidth().height(4.dp),
+                color = V2Colors.AccentCyan,
+                trackColor = V2Colors.Hairline
+            )
         }
     }
 }
