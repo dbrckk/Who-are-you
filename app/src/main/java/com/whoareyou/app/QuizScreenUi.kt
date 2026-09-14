@@ -33,6 +33,7 @@ fun QuizScreen(
     quiz: Quiz,
     questionIndex: Int,
     score: Int,
+    isFinishing: Boolean,
     onProgress: (questionIndex: Int, score: Int) -> Unit,
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
@@ -107,6 +108,7 @@ fun QuizScreen(
             question.answers.forEachIndexed { answerIndex, answer ->
                 V2PressableSurface(
                     onClick = {
+                        if (isFinishing) return@V2PressableSurface
                         val newScore = score + answer.score
                         if (safeQuestionIndex == quiz.questions.lastIndex) {
                             onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
