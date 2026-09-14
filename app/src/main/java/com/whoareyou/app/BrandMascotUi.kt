@@ -78,6 +78,23 @@ fun BrandMascot(
         ),
         label = "brandMascotSparkleDrift"
     )
+    val tilt = transition?.animateFloat(
+        initialValue = when (mood) {
+            BrandMascotMood.CURIOUS -> -1.2f
+            BrandMascotMood.CELEBRATE -> -1.8f
+            BrandMascotMood.WELCOME -> -0.7f
+        },
+        targetValue = when (mood) {
+            BrandMascotMood.CURIOUS -> 1.2f
+            BrandMascotMood.CELEBRATE -> 1.8f
+            BrandMascotMood.WELCOME -> 0.7f
+        },
+        animationSpec = infiniteRepeatable(
+            animation = tween(V2Motion.AmbientMillis + 1200),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "brandMascotTilt"
+    )
     val floatOffset = transition?.animateFloat(
         initialValue = -2f,
         targetValue = 3f,
@@ -96,6 +113,7 @@ fun BrandMascot(
                 scaleX = scale
                 scaleY = scale
                 translationY = floatOffset?.value ?: 0f
+                rotationZ = tilt?.value ?: 0f
             },
         contentAlignment = Alignment.Center
     ) {
