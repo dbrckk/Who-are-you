@@ -41,3 +41,24 @@ The Play candidate and Play Internal workflows must pass:
 ## Data and privacy
 
 The app currently sets `android:allowBackup="false"` and `android:usesCleartextTraffic="false"`. Profile history remains local unless an explicitly configured external telemetry path records an allowed event. Do not enable backup without first defining data extraction/backup rules for profile and crash-buffer data.
+
+
+## Android 15/16 edge-to-edge
+
+The app targets API 36. Android enforces edge-to-edge for apps targeting API 35 or newer, so top-level Compose surfaces must apply system-bar insets.
+
+Current release contract requires `statusBarsPadding()` on Discover, Profile, Quiz, Result, and Challenge surfaces, while the persistent shell already applies `navigationBarsPadding()`.
+
+Before production rollout, visually smoke-test at least:
+
+- gesture navigation;
+- three-button navigation;
+- display cutout / hole-punch device;
+- large font and display scaling;
+- Android 15 and Android 16.
+
+## CI status providers
+
+Both GitHub Actions and CircleCI are configured. CircleCI uses `cimg/android:2026.08.1`, installs pinned Gradle 9.5.0, and installs SDK Platform `android-37` plus Build Tools `37.0.0`.
+
+If branch protection requires CircleCI, do not remove `.circleci/config.yml` without also removing that required status from repository settings.
