@@ -66,13 +66,13 @@ object V2Type {
     val Hero = TextStyle(
         fontSize = 36.sp,
         lineHeight = 41.sp,
-        letterSpacing = (-0.7).sp,
+        letterSpacing = (-0.55).sp,
         fontWeight = FontWeight.Black
     )
     val Question = TextStyle(
         fontSize = 29.sp,
         lineHeight = 35.sp,
-        letterSpacing = (-0.35).sp,
+        letterSpacing = (-0.25).sp,
         fontWeight = FontWeight.Black
     )
     val SectionTitle = TextStyle(
@@ -98,7 +98,7 @@ object V2Type {
     )
     val Supporting = TextStyle(
         fontSize = 14.sp,
-        lineHeight = 20.sp,
+        lineHeight = 21.sp,
         fontWeight = FontWeight.Normal
     )
     val Caption = TextStyle(
