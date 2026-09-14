@@ -20,7 +20,16 @@ data class GlobalProfileSummary(
     val totalCount: Int,
     val dimensions: List<ProfileDimension>,
     val signature: SignatureProfileMatch? = null,
-    val traitGraph: TraitGraph = TraitGraph(emptyList(), 0)
+    val traitGraph: TraitGraph = TraitGraph(emptyList(), 0),
+    val coverage: ProfileCoverage = ProfileCoverage(
+        knownTraitCount = 0,
+        totalTraitCount = 0,
+        coveragePercent = 0,
+        averageConfidence = 0,
+        strongTraitCount = 0,
+        uncertainTraitCount = 0,
+        traits = emptyList()
+    )
 )
 
 object GlobalProfileEngine {
@@ -48,6 +57,7 @@ object GlobalProfileEngine {
         val completion = if (catalog.isEmpty()) 0 else ((dimensions.size * 100f) / catalog.size).toInt().coerceIn(0, 100)
         val stableScores = dimensions.associate { it.quizId to it.score }
 
+        val traitGraph = TraitGraphEngine.build(dimensions)
         return GlobalProfileSummary(
             dominantArchetype = dominant?.resultTitle ?: "Profile undiscovered",
             completionPercent = completion,
@@ -55,7 +65,8 @@ object GlobalProfileEngine {
             totalCount = catalog.size,
             dimensions = dimensions,
             signature = SignatureProfiles.primary(stableScores),
-            traitGraph = TraitGraphEngine.build(dimensions)
+            traitGraph = traitGraph,
+            coverage = ProfileCoverageEngine.build(catalog, traitGraph)
         )
     }
 }
