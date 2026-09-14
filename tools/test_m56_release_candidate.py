@@ -15,6 +15,8 @@ class M56ReleaseCandidateTest(unittest.TestCase):
         required = (
             "app/src/main/res/drawable/ic_launcher_foreground.xml",
             "app/src/main/res/drawable/ic_launcher_monochrome.xml",
+            "app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+            "app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
             "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
             "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
             "app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml",
@@ -22,6 +24,15 @@ class M56ReleaseCandidateTest(unittest.TestCase):
         )
         for path in required:
             self.assertTrue((ROOT / path).is_file(), path)
+        for path in (
+            "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+            "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+            "app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml",
+            "app/src/main/res/mipmap-anydpi-v33/ic_launcher_round.xml",
+        ):
+            icon = (ROOT / path).read_text(encoding="utf-8")
+            self.assertIn("@drawable/ic_launcher_foreground", icon)
+            self.assertNotIn("@drawable/ic_launcher_art", icon)
         themed = (ROOT / "app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml").read_text(encoding="utf-8")
         self.assertIn("<monochrome", themed)
 
