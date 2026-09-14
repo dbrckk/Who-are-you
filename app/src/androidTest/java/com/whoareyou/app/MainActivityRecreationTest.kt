@@ -8,6 +8,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -20,8 +21,10 @@ class MainActivityRecreationTest {
     @Test
     fun quizProgressSurvivesActivityRecreation() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        runBlocking {
-            ProfileStore.setOnboardingComplete(context, true)
+        val previousOnboardingComplete = runBlocking {
+            ProfileStore.observe(context).first().onboardingComplete.also {
+                ProfileStore.setOnboardingComplete(context, true)
+            }
         }
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
@@ -37,6 +40,9 @@ class MainActivityRecreationTest {
             composeRule.onNodeWithTag("quiz_question_2").assertIsDisplayed()
         } finally {
             scenario.close()
+            runBlocking {
+                ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
+            }
         }
     }
 }
