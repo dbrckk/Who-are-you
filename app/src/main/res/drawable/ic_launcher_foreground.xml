@@ -7,7 +7,7 @@
     android:viewportHeight="108">
 
     <!-- Premium identity wisp, kept inside adaptive-icon safe bounds. -->
-    <path android:pathData="M54,22 A32,32 0,1 1,53.99 22">
+    <path android:pathData="M54,24 A30,30 0,1 1,53.99 24">
         <aapt:attr name="android:fillColor">
             <gradient
                 android:startX="28"
@@ -26,15 +26,15 @@
         android:fillColor="@android:color/transparent"
         android:strokeColor="#42FFFFFF"
         android:strokeWidth="2"
-        android:pathData="M54,30 A24,24 0,1 1,53.99 30" />
+        android:pathData="M54,31 A23,23 0,1 1,53.99 31" />
 
     <!-- Eyes -->
     <path
         android:fillColor="#DD090A16"
-        android:pathData="M42,47 A3,3 0,1 1,41.99 47" />
+        android:pathData="M43,47 A3,3 0,1 1,42.99 47" />
     <path
         android:fillColor="#DD090A16"
-        android:pathData="M66,47 A3,3 0,1 1,65.99 47" />
+        android:pathData="M65,47 A3,3 0,1 1,64.99 47" />
 
     <!-- Soft smile -->
     <path
@@ -42,7 +42,7 @@
         android:strokeColor="#C9090A16"
         android:strokeLineCap="round"
         android:strokeWidth="3"
-        android:pathData="M45,59 C49,65 59,65 63,59" />
+        android:pathData="M46,59 C50,64 58,64 62,59" />
 
     <!-- Signature question-mark tail -->
     <path
@@ -50,8 +50,8 @@
         android:strokeColor="#DD6DDBDD"
         android:strokeLineCap="round"
         android:strokeWidth="5"
-        android:pathData="M68,70 C79,75 77,85 69,87" />
+        android:pathData="M67,69 C76,74 75,82 69,85" />
     <path
         android:fillColor="#F56DDBDD"
-        android:pathData="M68,94 A3.5,3.5 0,1 1,67.99 94" />
+        android:pathData="M68,91 A3.2,3.2 0,1 1,67.99 91" />
 </vector>
