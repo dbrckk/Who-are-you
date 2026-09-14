@@ -112,7 +112,11 @@ class BillingManager(
     }
 
     private fun scheduleReconnect() {
-        if (closed || reconnectJob?.isActive == true) return
+        if (
+            closed ||
+            reconnectJob?.isActive == true ||
+            reconnectAttempt >= BillingReconnectPolicy.maxAttempts
+        ) return
         val delayMillis = BillingReconnectPolicy.delayMillis(reconnectAttempt)
         reconnectAttempt = BillingReconnectPolicy.nextAttempt(reconnectAttempt)
         reconnectJob = scope.launch {
