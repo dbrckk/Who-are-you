@@ -204,7 +204,17 @@ class BillingManager(
 
         billingClient.queryPurchasesAsync(params) { result, purchases ->
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                val hasActivePremium = purchases.any { purchase ->
+                    REMOVE_ADS_PRODUCT_ID in purchase.products &&
+                        purchase.purchaseState == Purchase.PurchaseState.PURCHASED
+                }
                 handlePurchases(purchases, PurchaseGrantSource.RESTORE)
+                if (!hasActivePremium) {
+                    onPremiumChanged(false)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        ProfileStore.setAdsRemoved(appContext, false)
+                    }
+                }
             } else {
                 recordBillingError("restore", result)
             }
