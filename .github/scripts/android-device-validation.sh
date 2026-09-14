@@ -24,6 +24,9 @@ validate_running_app() {
   grep -F "Status: ok" "device-startup-$label.txt"
   sleep 3
 
+  adb exec-out screencap -p > "device-screen-$label.png"
+  test -s "device-screen-$label.png"
+
   PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
   test -n "$PID"
   printf '%s PID: %s\n' "$label" "$PID"
@@ -89,6 +92,8 @@ RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
 printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
 grep -F "Status: ok" device-startup-upgrade-relaunch.txt
 sleep 3
+adb exec-out screencap -p > device-screen-upgrade-relaunch.png
+test -s device-screen-upgrade-relaunch.png
 RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
 test -n "$RELAUNCH_PID"
 adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
