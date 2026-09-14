@@ -6,9 +6,19 @@
 - [ ] Increment `versionCode` for every Play upload after the first accepted bundle.
 - [ ] Set the intended public `versionName` before production promotion.
 - [ ] Run Android CI and confirm repository tests, JVM tests, candidate lint, release lint, Candidate APK and Release AAB all pass.
-- [ ] Download and install the CI `who-are-you-0.1.0-rc.apk` artifact on a real Android device.
+- [ ] Download and install the current versioned RC artifact (`who-are-you-<versionName>-<versionCode>-rc.apk`) on a real Android device.
 
 The `candidate` build type is intentionally production-like: it inherits release minification/resource shrinking, keeps the production package/version, uses Google test ad IDs, leaves custom telemetry disabled by default, and uses Android's debug signing key only so the APK can be installed directly for acceptance testing. It is not a Play production artifact.
+
+## 2026 Play technical compliance
+
+- [x] `targetSdk = 36`, meeting the Google Play mobile requirement effective 31 August 2026.
+- [x] `compileSdk` is not lower than `targetSdk`.
+- [x] The Play Candidate workflow installs the declared Android SDK/build tools explicitly.
+- [x] The Play Candidate workflow reruns Python quality tests, JVM tests, instrumentation-test compilation and Android lint before signing.
+- [x] Every signed Play candidate includes `play-native-libraries.txt` so native-code presence is visible before upload.
+- [ ] Review `play-native-libraries.txt` for every public candidate. If native libraries are listed, verify 16 KB page-size compatibility in Play Console/pre-launch testing before promotion.
+- [ ] Review Play Console technical-quality warnings and pre-launch report before every production promotion.
 
 ## Signing
 
@@ -73,7 +83,7 @@ The `candidate` build type is intentionally production-like: it inherits release
 ## Device acceptance before Play configuration
 
 - [ ] Obtain a successful M56 Candidate APK build.
-- [ ] Install `who-are-you-0.1.0-rc.apk` on the target phone.
+- [ ] Install the current versioned RC APK on the target phone.
 - [ ] Test onboarding and cold/warm restart.
 - [ ] Complete representative quizzes from every theme and verify scoring/results.
 - [ ] Verify profile evolution, Discover, journeys, Daily Question and achievements.
