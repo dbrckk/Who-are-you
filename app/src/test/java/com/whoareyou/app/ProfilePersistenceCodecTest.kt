@@ -24,6 +24,21 @@ class ProfilePersistenceCodecTest {
     }
 
     @Test
+    fun scoreHistoryCodecRoundTripsAndClampsValues() {
+        val encoded = ProfilePersistenceCodec.encodeScoreHistory(
+            mapOf(
+                " quiz-a " to listOf(-5, 40, 120),
+                "quiz-b" to listOf(10, 20)
+            )
+        )
+        assertEquals("quiz-a:0|40|100;quiz-b:10|20", encoded)
+        assertEquals(
+            mapOf("quiz-a" to listOf(0, 40, 100), "quiz-b" to listOf(10, 20)),
+            ProfilePersistenceCodec.decodeScoreHistory(encoded)
+        )
+    }
+
+    @Test
     fun stringMapCodecNormalizesLegacyAttemptIdentifiers() {
         val decoded = ProfilePersistenceCodec.decodeStringMap(
             " quiz-a : attempt-a ;bad;quiz-b:  attempt-b  ; :missing"
