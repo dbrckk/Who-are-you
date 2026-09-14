@@ -38,7 +38,8 @@ data class StoredProfile(
 )
 
 object ProfileStore {
-    private const val MAX_COMMITTED_QUIZ_ATTEMPTS = 64
+    // Bounded replay window: large enough to survive long-lived/restored sessions without unbounded DataStore growth.
+    private const val MAX_COMMITTED_QUIZ_ATTEMPTS = 256
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val previousScoresKey = stringPreferencesKey("previous_scores")
