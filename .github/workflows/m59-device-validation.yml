@@ -73,6 +73,8 @@ jobs:
             device-ui-report-*.txt
             device-display-metrics.txt
             device-display-*.txt
+            device-motion-*.txt
+            device-orientation-*.txt
             device-validation-summary.txt
             device-visual-qa-summary.md
           if-no-files-found: warn
