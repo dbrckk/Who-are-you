@@ -19,7 +19,8 @@ test -s "$CANDIDATE_APK"
 capture_visual_evidence() {
   local label="$1"
 
-  capture_visual_evidence "$label"
+  adb exec-out screencap -p > "device-screen-$label.png"
+  test -s "device-screen-$label.png"
   adb shell uiautomator dump "/sdcard/device-ui-$label.xml" >/dev/null
   adb pull "/sdcard/device-ui-$label.xml" "device-ui-$label.xml" >/dev/null
   test -s "device-ui-$label.xml"
@@ -33,8 +34,7 @@ validate_running_app() {
   grep -F "Status: ok" "device-startup-$label.txt"
   sleep 3
 
-  adb exec-out screencap -p > "device-screen-$label.png"
-  test -s "device-screen-$label.png"
+  capture_visual_evidence "$label"
 
   PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
   test -n "$PID"
