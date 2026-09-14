@@ -40,6 +40,18 @@ class ScoreHistoryEngineTest {
     }
 
     @Test
+    fun legacyPreviousAndLatestSeedHistoryOnFirstRetake() {
+        val result = ScoreHistoryEngine.update(
+            latestScores = mapOf("planning_style" to 72),
+            previousScores = mapOf("planning_style" to 61),
+            quizId = "planning_style",
+            score = 80
+        )
+
+        assertEquals(listOf(61, 72, 80), result.scoreHistory["planning_style"])
+    }
+
+    @Test
     fun repeatedScoresAreKeptInBoundedSeries() {
         var history = emptyMap<String, List<Int>>()
         var latest = emptyMap<String, Int>()
