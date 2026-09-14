@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "WhoAreYou"
-include(":app")
+include(":app", ":baseline-profile")
