@@ -68,5 +68,6 @@ jobs:
             device-android-runtime-*.txt
             device-exit-info-*.txt
             device-screen-*.png
+            device-ui-*.xml
           if-no-files-found: warn
           retention-days: 14
