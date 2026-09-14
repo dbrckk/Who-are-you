@@ -105,6 +105,42 @@ private fun JournalOverview(
                 fontWeight = FontWeight.Bold
             )
         }
+        journal.periodComparison?.let { comparison ->
+            val periodDelta = comparison.delta
+            val periodSigned = if (periodDelta > 0) "+$periodDelta" else "$periodDelta"
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = if (french) "Ancienne période" else "Earlier period",
+                    color = V2Colors.TextSecondary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    text = "${comparison.earlierAverage}%",
+                    color = V2Colors.TextPrimary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = if (french) "Période récente" else "Recent period",
+                    color = V2Colors.TextSecondary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    text = "${comparison.recentAverage}%  ($periodSigned)",
+                    color = V2Colors.TextPrimary,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
         Text(
             text = journalTrendExplanation(journal.trendKind, french),
             color = V2Colors.TextMuted,
