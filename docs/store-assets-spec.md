@@ -26,6 +26,17 @@ For the first three screenshots, avoid ads, purchase prompts and friend-comparis
 
 Capture a clean EN set and a clean FR set where localized store assets are used. Avoid personal notifications, status-bar private information, debug overlays, test ad banners, or developer tooling in captures.
 
+## Visual treatment
+
+Use one consistent presentation system across the listing:
+- preserve the real app UI at native aspect ratio; never stretch, redraw or fake controls;
+- keep the plum-black brand foundation with violet/cyan accents already used in-product;
+- keep captions short enough to read at thumbnail size, with one message per frame;
+- use generous negative space around the phone frame and avoid decorative elements competing with the UI;
+- keep the mascot as a supporting brand cue, not as a replacement for product screenshots;
+- verify every frame at small Play Store thumbnail size before export;
+- keep EN and FR layouts visually identical wherever translation length allows.
+
 ## Screenshot captions
 
 Suggested EN captions:
@@ -43,6 +54,18 @@ Suggested FR captions:
 - Comprends ce que ton résultat signifie
 - Observe l’évolution de ton profil
 - Compare ou reviens seulement si tu en as envie
+
+## Capture coverage
+
+The final validation set should include at least:
+- a compact phone width;
+- a representative modern phone;
+- a large phone or tablet-width layout;
+- default font scale and an enlarged-font accessibility pass;
+- Android 13+ themed launcher icon verification;
+- reduced-motion verification for animated entry, mascot and navigation states.
+
+Only the representative phone set belongs in the public listing; the other captures are release evidence.
 
 ## Release-candidate capture checklist
 
