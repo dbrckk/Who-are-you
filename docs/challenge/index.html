@@ -73,20 +73,13 @@
     if (document.visibilityState === 'visible') installApp.focus();
   };
 
-  const attemptOpen = () => {
-    if (!validQuiz || !validScore) return;
-    window.location.href = appUri;
-    setTimeout(highlightInstallFallback, 1400);
-  };
-
   openApp.addEventListener('click', () => {
     setTimeout(highlightInstallFallback, 1400);
   });
 
-  // Best-effort handoff for installed users. Browsers that block automatic
-  // custom-scheme navigation simply leave the landing page visible, where
-  // the explicit Open / Install actions remain available.
-  setTimeout(attemptOpen, 350);
+  // Keep fallback deterministic: verified Android App Links open the app
+  // before this page is shown. Otherwise the user explicitly chooses whether
+  // to open the installed app or go to Google Play.
 </script>
 </body>
 </html>
