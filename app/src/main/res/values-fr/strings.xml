@@ -48,6 +48,8 @@
     <string name="take_again">REFAIRE  →</string>
     <string name="start">COMMENCER  →</string>
     <string name="question_progress">%1$d / %2$d</string>
+    <string name="quiz_result_saving">Enregistrement de ton résultat…</string>
+    <string name="quiz_result_save_failed">Ton résultat n’a pas pu être enregistré. Vérifie ta connexion ou le stockage, puis touche de nouveau une réponse pour réessayer.</string>
     <string name="no_right_answers">Il n’y a pas de bonne réponse. Choisis ce qui te ressemble le plus.</string>
     <string name="your_result">TON RÉSULTAT</string>
     <string name="profile_progress">PROGRESSION DU PROFIL</string>
