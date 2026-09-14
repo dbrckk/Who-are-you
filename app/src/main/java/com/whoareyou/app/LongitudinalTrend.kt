@@ -86,7 +86,14 @@ object LongitudinalTrendEngine {
         val baseline = values.dropLast(1)
         val baselineMean = baseline.average()
         val baselineSd = standardDeviation(baseline)
+        val baselineSlope = linearSlope(baseline)
         val last = values.last()
+
+        // A final point is only an outlier when it breaks a relatively stable baseline.
+        // If the baseline is already moving strongly, a distant final value may simply
+        // continue the existing trend rather than represent isolated evidence.
+        if (abs(baselineSlope) >= 3.0) return false
+
         return abs(last - baselineMean) >= maxOf(18.0, baselineSd * 2.5)
     }
 }
