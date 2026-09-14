@@ -136,10 +136,13 @@ fun DiscoverHub(
         }
 
         item {
-            PremiumDiscoverCard(
-                adsRemoved = adsRemoved,
-                onRemoveAds = onRemoveAds
-            )
+            if (!adsRemoved) {
+                PremiumDiscoverCard(
+                    adsRemoved = false,
+                    onRemoveAds = onRemoveAds
+                )
+                Spacer(Modifier.height(14.dp))
+            }
             if (privacyOptionsRequired) {
                 Spacer(Modifier.height(14.dp))
                 PrivacyOptionsCard(onPrivacyOptions = onPrivacyOptions)
