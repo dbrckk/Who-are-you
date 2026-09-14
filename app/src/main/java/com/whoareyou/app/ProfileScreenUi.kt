@@ -173,6 +173,8 @@ fun ProfileScreen(
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(18.dp))
                 ProfileCoverageCard(summary.coverage)
+                Spacer(Modifier.height(18.dp))
+                ProfileKnowledgeMapCard(summary.coverage)
             }
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(18.dp))
