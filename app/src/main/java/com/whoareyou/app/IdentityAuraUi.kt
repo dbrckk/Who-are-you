@@ -56,7 +56,7 @@ fun IdentityAura(
             Modifier
                 .size(136.dp)
                 .drawWithCache {
-                    val centerPoint = center
+                    val centerPoint = Offset(size.width / 2f, size.height / 2f)
                     val baseRadius = size.minDimension * 0.26f
                     val innerBrush = Brush.radialGradient(
                         colors = listOf(
