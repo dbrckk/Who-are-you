@@ -275,4 +275,6 @@ adb shell wm density >> device-display-metrics.txt
 adb shell settings get system font_scale >> device-display-metrics.txt
 
 validate_evidence_matrix
+python3 .github/scripts/summarize-visual-qa.py   --root .   --output device-visual-qa-summary.md
+
 echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
