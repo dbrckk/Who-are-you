@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import java.time.LocalDate
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 
 private val Context.profileDataStore by preferencesDataStore(
@@ -22,8 +23,7 @@ data class StoredProfile(
     val latestScores: Map<String, Int> = emptyMap(),
     val previousScores: Map<String, Int> = emptyMap(),
     val adsRemoved: Boolean = false,
-    // Optimistic only for Compose's pre-DataStore initial frame. Fresh installs receive false from DataStore immediately after load.
-    val onboardingComplete: Boolean = true,
+    val onboardingComplete: Boolean = false,
     val announcedAchievementIds: Set<String> = emptySet(),
     val pendingAchievementIds: List<String> = emptyList(),
     val matchCount: Int = 0,
@@ -54,7 +54,9 @@ object ProfileStore {
     private val longestStreakKey = intPreferencesKey("longest_streak")
     private val lastActiveDateKey = stringPreferencesKey("last_active_date")
 
-    fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data.map(::decodeProfile)
+    fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data
+        .catch { emit(emptyPreferences()) }
+        .map(::decodeProfile)
 
     suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null): Boolean {
         val normalizedQuizId = quizId.trim()
