@@ -102,6 +102,7 @@ private fun WhoAreYouApp() {
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
+    var commitFailed by rememberSaveable { mutableStateOf(false) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
     val quizFinishing = pendingFinalScore != null
@@ -113,6 +114,7 @@ private fun WhoAreYouApp() {
             quizQuestionIndex = 0
             quizRawScore = 0
             pendingFinalScore = null
+            commitFailed = false
             finalScore = 0
             previousScoreForAttempt = null
             screenName = AppScreen.DISCOVER.name
@@ -132,11 +134,15 @@ private fun WhoAreYouApp() {
         quizQuestionIndex = 0
         quizRawScore = 0
         pendingFinalScore = null
+        commitFailed = false
     }
 
     QuizResultCommitEffect(
         screen, selectedQuiz, quizAttemptId, pendingFinalScore,
-        onCommitFailed = { pendingFinalScore = null },
+        onCommitFailed = {
+            pendingFinalScore = null
+            commitFailed = true
+        },
         onCommitted = { navigate(AppScreen.RESULT) }
     )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
@@ -180,6 +186,7 @@ private fun WhoAreYouApp() {
                     questionIndex = quizQuestionIndex,
                     score = quizRawScore,
                     isFinishing = quizFinishing,
+                    commitFailed = commitFailed,
                     onProgress = { questionIndex, score ->
                         if (!quizFinishing) {
                             quizQuestionIndex = questionIndex
@@ -194,6 +201,7 @@ private fun WhoAreYouApp() {
                     },
                     onFinished = { score ->
                         if (!quizFinishing) {
+                            commitFailed = false
                             finalScore = score
                             pendingFinalScore = score
                         }
