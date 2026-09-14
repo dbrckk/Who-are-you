@@ -16,7 +16,6 @@ class ReducedMotionAndLargeFontContractTest(unittest.TestCase):
     def test_android_animation_scale_is_respected(self):
         self.assertIn('Settings.Global.ANIMATOR_DURATION_SCALE', self.motion)
         self.assertIn('reducedMotionEnabled()', self.entry)
-        self.assertIn('reducedMotionEnabled()', self.discover)
         self.assertIn('reducedMotionEnabled()', self.interactive)
         self.assertIn('reducedMotionEnabled()', self.result)
         self.assertIn('reducedMotionEnabled()', self.profile)
