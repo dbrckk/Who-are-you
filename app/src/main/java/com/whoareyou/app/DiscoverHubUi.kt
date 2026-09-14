@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 /**
  * Single Discover surface for the V2 product experience.
  *
- * Information architecture: identity -> momentum -> retention -> guided journeys -> curated discovery -> library -> premium.
+ * Information architecture: identity -> guided exploration -> curated discovery -> library -> optional engagement -> premium.
  * Feature-specific sections stay self-contained so the hub does not recursively render other Discover surfaces.
  */
 @Composable
@@ -94,21 +94,6 @@ fun DiscoverHub(
             )
         }
 
-        item {
-            DiscoverMomentumCard(
-                streak = storedProfile.daily.currentStreak,
-                unlockedAchievements = unlockedAchievements,
-                matchCount = storedProfile.matchCount
-            )
-        }
-
-        item {
-            RetentionEngagementSection(
-                storedProfile = storedProfile,
-                totalQuizCount = quizzes.size
-            )
-        }
-
         if (journeys.isNotEmpty()) {
             item {
                 GuidedJourneySection(
@@ -132,6 +117,21 @@ fun DiscoverHub(
                 quizzes = quizzes,
                 completed = completed,
                 onQuizSelected = onQuizSelected
+            )
+        }
+
+        item {
+            DiscoverMomentumCard(
+                streak = storedProfile.daily.currentStreak,
+                unlockedAchievements = unlockedAchievements,
+                matchCount = storedProfile.matchCount
+            )
+        }
+
+        item {
+            RetentionEngagementSection(
+                storedProfile = storedProfile,
+                totalQuizCount = quizzes.size
             )
         }
 
