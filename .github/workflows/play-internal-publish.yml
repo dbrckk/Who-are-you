@@ -26,6 +26,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Validate locked Play API payload
         run: python tools/play_publisher.py --validate-only
 
@@ -139,6 +140,10 @@ jobs:
           set -euo pipefail
           VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n 1)"
           VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n 1)"
+          if [ -z "$VERSION_NAME" ] || [ -z "$VERSION_CODE" ]; then
+            echo "Unable to resolve versionName/versionCode from app/build.gradle.kts"
+            exit 1
+          fi
           mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -type f -name '*.aab' -print)
           if [ "${#bundles[@]}" -ne 1 ]; then
             echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
@@ -149,36 +154,7 @@ jobs:
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
           {
             echo "Native libraries packaged in the Play bundle:"
-            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so
-      - name: Upload and commit Google Play edit
-        env:
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          PLAY_AAB: ${{ steps.bundle.outputs.path }}
-        run: |
-          set -euo pipefail
-          python tools/play_publisher.py \
-            --bundle "$PLAY_AAB" \
-            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
-            --status "$RELEASE_STATUS" \
-            --commit | tee play-internal-publish-result.json
-
-      - name: Upload publishing receipt
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            play-internal-upload.sha256
-            play-internal-native-libraries.txt
-            play-internal-publish-result.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove temporary credentials
-        if: always()
-        run: |
-          rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
-          rm -f "$RUNNER_TEMP/google-play-service-account.json"
- || echo "(none)"
+            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || echo "(none)"
           } | tee play-internal-native-libraries.txt
           echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
           echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
@@ -198,9 +174,10 @@ jobs:
       - name: Upload publishing receipt
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-play-internal-publish-0.2.2-4
+          name: ${{ steps.bundle.outputs.artifact_name }}
           path: |
             play-internal-upload.sha256
+            play-internal-native-libraries.txt
             play-internal-publish-result.json
           if-no-files-found: error
           retention-days: 30
