@@ -1,7 +1,7 @@
 package com.whoareyou.app
 
 import java.time.LocalDate
-import java.util.Locale
+import android.content.res.Resources
 
 data class DailyQuestion(
     val id: String,
@@ -45,7 +45,10 @@ object DailyQuestionEngine {
         DailyQuestion("money_or_time", "Tu préfères avoir deux fois plus d’argent ou deux fois plus de temps libre ?", "Plus d’argent", "Plus de temps libre")
     )
 
-    private fun questions(): List<DailyQuestion> = if (Locale.getDefault().language == "fr") french else english
+    private fun questions(): List<DailyQuestion> {
+        val phoneLanguage = Resources.getSystem().configuration.locales[0]?.language
+        return if (supportedAppLanguage(phoneLanguage) == "fr") french else english
+    }
 
     fun forDate(date: LocalDate = LocalDate.now()): DailyQuestion {
         val questions = questions()
