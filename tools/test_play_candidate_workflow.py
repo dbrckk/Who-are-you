@@ -42,14 +42,29 @@ class PlayCandidateWorkflowTest(unittest.TestCase):
         gradle = (ROOT / 'app/build.gradle.kts').read_text(encoding='utf-8')
         version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle).group(1)
         version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle).group(1)
+        artifact_name = self.contract['artifactNameTemplate'].format(
+            versionName=version_name,
+            versionCode=version_code,
+        )
+        artifact_files = [
+            template.format(versionName=version_name, versionCode=version_code)
+            for template in self.contract['artifactFileTemplates']
+        ]
         self.assertEqual(
             f'who-are-you-play-candidate-{version_name}-{version_code}',
-            self.contract['artifactName'],
+            artifact_name,
         )
         self.assertIn(
             f'who-are-you-play-{version_name}-{version_code}.aab',
-            self.contract['artifactFiles'],
+            artifact_files,
         )
+        self.assertIn('play-candidate.sha256', artifact_files)
+
+    def test_contract_does_not_pin_a_specific_app_version(self):
+        serialized = json.dumps(self.contract)
+        self.assertNotIn('0.2.2-4', serialized)
+        self.assertIn('{versionName}', self.contract['artifactNameTemplate'])
+        self.assertIn('{versionCode}', self.contract['artifactNameTemplate'])
 
     def test_workflow_does_not_upload_to_play(self):
         self.assertFalse(self.contract['playUploadAutomated'])
