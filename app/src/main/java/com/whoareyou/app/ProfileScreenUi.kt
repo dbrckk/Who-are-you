@@ -197,6 +197,15 @@ fun ProfileScreen(
                 val quiz = catalogById[dimension.quizId]
                 val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
+                val dimensionBrush = remember(accent, companion) {
+                    Brush.linearGradient(
+                        listOf(
+                            accent.copy(alpha = 0.08f),
+                            V2Colors.Surface,
+                            companion.copy(alpha = 0.05f)
+                        )
+                    )
+                }
                 val animatedProgress by animateFloatAsState(
                     targetValue = dimension.score.coerceIn(0, 100) / 100f,
                     animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
@@ -214,15 +223,7 @@ fun ProfileScreen(
                 ) {
                     Column(
                         Modifier
-                            .background(
-                                Brush.linearGradient(
-                                    listOf(
-                                        accent.copy(alpha = 0.08f),
-                                        V2Colors.Surface,
-                                        companion.copy(alpha = 0.05f)
-                                    )
-                                )
-                            )
+                            .background(dimensionBrush)
                             .padding(18.dp)
                     ) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
