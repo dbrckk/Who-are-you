@@ -199,15 +199,43 @@ fun ResultScreen(
 
             Spacer(Modifier.height(22.dp))
             Button(
+                onClick = onDone,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("result_done"),
+                colors = ButtonDefaults.buttonColors(containerColor = accent, contentColor = V2Colors.Ink),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text(stringResource(R.string.done_button), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+            }
+
+            Spacer(Modifier.height(10.dp))
+            Button(
+                onClick = onRetry,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).testTag("result_retry"),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text(stringResource(R.string.retry), textAlign = TextAlign.Center)
+            }
+
+            Spacer(Modifier.height(22.dp))
+            Text(
+                stringResource(R.string.result_optional_actions),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(10.dp))
+            Button(
                 onClick = {
                     AppEvents.resultShare(quiz.id, score)
                     ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = accent, contentColor = V2Colors.Ink),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Black, textAlign = TextAlign.Center)
+                Text(stringResource(R.string.share_my_result), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             }
 
             Spacer(Modifier.height(10.dp))
@@ -216,7 +244,7 @@ fun ResultScreen(
                     AppEvents.challengeCreate(quiz.id, score)
                     ChallengeShare.share(context, quiz.id, quiz.title, score)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
@@ -224,23 +252,6 @@ fun ResultScreen(
             }
             Spacer(Modifier.height(8.dp))
             Text(stringResource(R.string.friend_match_explainer), color = V2Colors.TextSecondary, style = V2Type.Supporting, textAlign = TextAlign.Center)
-            Spacer(Modifier.height(18.dp))
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                Button(
-                    onClick = onRetry,
-                    modifier = Modifier.weight(1f).heightIn(min = 48.dp).testTag("result_retry"),
-                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated)
-                ) {
-                    Text(stringResource(R.string.retry), textAlign = TextAlign.Center)
-                }
-                Button(
-                    onClick = onDone,
-                    modifier = Modifier.weight(1f).heightIn(min = 48.dp).testTag("result_done"),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = V2Colors.Ink)
-                ) {
-                    Text(stringResource(R.string.done_button), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-                }
-            }
 
             Spacer(Modifier.height(30.dp))
             Text(stringResource(R.string.disclaimer), color = V2Colors.TextSecondary, fontSize = 11.sp, lineHeight = 16.sp, textAlign = TextAlign.Center)
