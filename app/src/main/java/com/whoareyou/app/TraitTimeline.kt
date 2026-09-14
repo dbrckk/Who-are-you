@@ -11,10 +11,20 @@ data class TimedTraitSnapshot(
     val retakeQuizIds: List<String>
 )
 
+data class TraitTimelinePeriodComparison(
+    val earlierScoreAverage: Int,
+    val recentScoreAverage: Int,
+    val scoreDelta: Int,
+    val earlierConfidenceAverage: Int,
+    val recentConfidenceAverage: Int,
+    val confidenceDelta: Int
+)
+
 data class TraitTimeline(
     val traitId: String,
     val points: List<TimedTraitSnapshot>,
-    val trend: LongitudinalTrend
+    val trend: LongitudinalTrend,
+    val periodComparison: TraitTimelinePeriodComparison?
 )
 
 object TraitTimelineEngine {
@@ -49,7 +59,7 @@ object TraitTimelineEngine {
         val seenQuizIds = baselineScores.keys.toMutableSet()
         val timelines = linkedMapOf<String, MutableList<TimedTraitSnapshot>>()
 
-        datedEvents.toSortedMap().forEach { (epochDay, changes) ->
+        datedEvents.toSortedMap().forEach dayLoop@ { (epochDay, changes) ->
             val wasKnown = changes.keys.associateWith { it in seenQuizIds }
             changes.forEach { (quizId, score) ->
                 currentScores[quizId] = score
@@ -61,13 +71,13 @@ object TraitTimelineEngine {
             )
             val changedQuizIds = changes.keys.toSet()
 
-            graph.traits.forEach { trait ->
+            graph.traits.forEach traitLoop@ { trait ->
                 val affectedQuizIds = trait.evidence
                     .map { it.quizId }
                     .filter { it in changedQuizIds }
                     .distinct()
 
-                if (affectedQuizIds.isEmpty()) return@forEach
+                if (affectedQuizIds.isEmpty()) return@traitLoop
 
                 val newEvidence = affectedQuizIds.filter { wasKnown[it] == false }
                 val retakes = affectedQuizIds.filter { wasKnown[it] == true }
@@ -94,12 +104,37 @@ object TraitTimelineEngine {
                 trend = LongitudinalTrendEngine.build(
                     quizId = "trait:$traitId",
                     points = points.map { TimedScore(it.score, it.epochDay) }
-                )
+                ),
+                periodComparison = buildPeriodComparison(points)
             )
         }.sortedWith(
             compareByDescending<TraitTimeline> { it.points.size }
                 .thenByDescending { kotlin.math.abs(it.trend.netChange) }
                 .thenBy { it.traitId }
+        )
+    }
+
+    private fun buildPeriodComparison(
+        points: List<TimedTraitSnapshot>
+    ): TraitTimelinePeriodComparison? {
+        if (points.size < 2) return null
+        val split = (points.size / 2).coerceAtLeast(1)
+        val earlier = points.take(split)
+        val recent = points.drop(split)
+        if (recent.isEmpty()) return null
+
+        val earlierScore = earlier.map { it.score }.average().toInt()
+        val recentScore = recent.map { it.score }.average().toInt()
+        val earlierConfidence = earlier.map { it.confidence }.average().toInt()
+        val recentConfidence = recent.map { it.confidence }.average().toInt()
+
+        return TraitTimelinePeriodComparison(
+            earlierScoreAverage = earlierScore,
+            recentScoreAverage = recentScore,
+            scoreDelta = recentScore - earlierScore,
+            earlierConfidenceAverage = earlierConfidence,
+            recentConfidenceAverage = recentConfidence,
+            confidenceDelta = recentConfidence - earlierConfidence
         )
     }
 
