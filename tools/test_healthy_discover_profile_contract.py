@@ -21,6 +21,10 @@ class HealthyDiscoverProfileContractTest(unittest.TestCase):
         nearby = self.profile[share:share + 900]
         self.assertIn('containerColor = V2Colors.SurfaceElevated', nearby)
 
+    def test_premium_promotion_disappears_after_purchase(self):
+        self.assertIn("if (!adsRemoved)", self.discover)
+        self.assertIn("PremiumDiscoverCard(", self.discover)
+
     def test_optional_profile_copy_is_localized(self):
         self.assertIn('your profile stays useful without sharing it', self.en)
         self.assertIn('ton profil reste utile sans avoir besoin de le partager', self.fr)
