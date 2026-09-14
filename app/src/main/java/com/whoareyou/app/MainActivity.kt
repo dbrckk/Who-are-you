@@ -97,7 +97,7 @@ private fun WhoAreYouApp() {
     var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
     val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
-    val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId } ?: quizCatalog.first()
+    val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
@@ -105,6 +105,26 @@ private fun WhoAreYouApp() {
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
     val quizFinishing = pendingFinalScore != null
+
+    if (selectedQuiz == null) {
+        LaunchedEffect(selectedQuizId, quizCatalog) {
+            selectedQuizId = quizCatalog.first().id
+            quizAttemptId = UUID.randomUUID().toString()
+            quizQuestionIndex = 0
+            quizRawScore = 0
+            pendingFinalScore = null
+            finalScore = 0
+            previousScoreForAttempt = null
+            screenName = AppScreen.DISCOVER.name
+        }
+        Box(
+            modifier = Modifier.fillMaxSize().testTag("quiz_session_recovering"),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+        return
+    }
 
     fun navigate(destination: AppScreen) { screenName = destination.name }
     fun resetQuizAttempt() {
