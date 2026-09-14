@@ -168,60 +168,85 @@ fun QuizScreen(
         }
         Spacer(Modifier.height(26.dp))
 
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            question.answers.forEachIndexed { answerIndex, answer ->
-                V2PressableSurface(
-                    onClick = {
-                        if (isFinishing) return@V2PressableSurface
-                        val newScore = score + answer.score
-                        if (safeQuestionIndex == quiz.questions.lastIndex) {
-                            onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
-                        } else {
-                            onProgress(safeQuestionIndex + 1, newScore)
-                        }
-                    },
-                    enabled = !isFinishing,
-                    modifier = Modifier.testTag("quiz_answer_$answerIndex")
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                Brush.horizontalGradient(
-                                    listOf(
-                                        accent.copy(alpha = 0.08f),
-                                        V2Colors.Surface,
-                                        companion.copy(alpha = 0.05f)
+        AnimatedContent(
+            targetState = safeQuestionIndex,
+            transitionSpec = {
+                if (reduceMotion) {
+                    fadeIn(tween(0)).togetherWith(fadeOut(tween(0)))
+                } else {
+                    (
+                        fadeIn(tween(V2Motion.StandardMillis)) +
+                            slideInHorizontally(
+                                animationSpec = tween(V2Motion.StandardMillis),
+                                initialOffsetX = { width -> width / 16 }
+                            )
+                        ).togetherWith(
+                            fadeOut(tween(V2Motion.FastMillis)) +
+                                slideOutHorizontally(
+                                    animationSpec = tween(V2Motion.FastMillis),
+                                    targetOffsetX = { width -> -width / 20 }
+                                )
+                        )
+                }
+            },
+            label = "quizAnswers"
+        ) { animatedIndex ->
+            val animatedQuestion = quiz.questions[animatedIndex.coerceIn(0, quiz.questions.lastIndex)]
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                animatedQuestion.answers.forEachIndexed { answerIndex, answer ->
+                    V2PressableSurface(
+                        onClick = {
+                            if (isFinishing || animatedIndex != safeQuestionIndex) return@V2PressableSurface
+                            val newScore = score + answer.score
+                            if (safeQuestionIndex == quiz.questions.lastIndex) {
+                                onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
+                            } else {
+                                onProgress(safeQuestionIndex + 1, newScore)
+                            }
+                        },
+                        enabled = !isFinishing && animatedIndex == safeQuestionIndex,
+                        modifier = Modifier.testTag("quiz_answer_$answerIndex")
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    Brush.horizontalGradient(
+                                        listOf(
+                                            accent.copy(alpha = 0.08f),
+                                            V2Colors.Surface,
+                                            companion.copy(alpha = 0.05f)
+                                        )
                                     )
                                 )
-                            )
-                            .padding(horizontal = 16.dp, vertical = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(32.dp)
-                                .background(
-                                    color = if (answerIndex % 2 == 0) accent.copy(alpha = 0.18f) else companion.copy(alpha = 0.18f),
-                                    shape = CircleShape
-                                ),
-                            contentAlignment = Alignment.Center
+                                .padding(horizontal = 16.dp, vertical = 16.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(32.dp)
+                                    .background(
+                                        color = if (answerIndex % 2 == 0) accent.copy(alpha = 0.18f) else companion.copy(alpha = 0.18f),
+                                        shape = CircleShape
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = ('A'.code + answerIndex).toChar().toString(),
+                                    color = if (answerIndex % 2 == 0) accent else companion,
+                                    style = V2Type.Caption,
+                                    fontWeight = FontWeight.Black
+                                )
+                            }
                             Text(
-                                text = ('A'.code + answerIndex).toChar().toString(),
-                                color = if (answerIndex % 2 == 0) accent else companion,
-                                style = V2Type.Caption,
-                                fontWeight = FontWeight.Black
+                                answer.text,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 14.dp),
+                                color = V2Colors.TextPrimary,
+                                style = V2Type.BodyStrong
                             )
                         }
-                        Text(
-                            answer.text,
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(start = 14.dp),
-                            color = V2Colors.TextPrimary,
-                            style = V2Type.BodyStrong
-                        )
                     }
                 }
             }
