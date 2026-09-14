@@ -31,6 +31,11 @@ class PerformanceReleaseGateContractTest(unittest.TestCase):
         self.assertIn('StartupMode.WARM', self.benchmark)
         self.assertIn('BaselineProfileMode.Require', self.benchmark)
 
+    def test_play_preflight_compiles_benchmark_variants(self):
+        expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace"
+        self.assertIn(expected, self.candidate)
+        self.assertIn(expected, self.internal)
+
     def test_play_artifacts_include_bundle_budget(self):
         self.assertIn('play-bundle-budget.json', self.candidate)
         self.assertIn('play-internal-bundle-budget.json', self.internal)
