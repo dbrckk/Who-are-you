@@ -24,6 +24,8 @@ class PerformanceReleaseGateContractTest(unittest.TestCase):
 
     def test_benchmark_covers_startup_and_requires_baseline_profile(self):
         self.assertIn('BaselineProfileRule()', self.generator)
+        self.assertIn('By.res("onboarding_start")', self.generator)
+        self.assertIn('By.res("app_screen_discover")', self.generator)
         self.assertIn('StartupTimingMetric()', self.benchmark)
         self.assertIn('StartupMode.COLD', self.benchmark)
         self.assertIn('StartupMode.WARM', self.benchmark)
