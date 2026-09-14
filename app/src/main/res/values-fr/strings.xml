@@ -62,6 +62,7 @@
     <string name="no_right_answers">Il n’y a pas de bonne réponse. Choisis ce qui te ressemble le plus.</string>
     <string name="your_result">TON RÉSULTAT</string>
     <string name="profile_progress">PROGRESSION DU PROFIL</string>
+    <string name="share_failed">Le partage n’est pas disponible pour le moment.</string>
     <string name="share_my_result">PARTAGER MON RÉSULTAT  ↗</string>
     <string name="compare_with_friend">COMPARER AVEC UN AMI  →</string>
     <string name="result_optional_actions">Facultatif — partage ou compare seulement si tu en as envie.</string>
