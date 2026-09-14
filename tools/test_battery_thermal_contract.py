@@ -15,7 +15,11 @@ class BatteryThermalContractTest(unittest.TestCase):
         self.assertIn('animationsDisabledBySystem(context) || powerSaveModeEnabled(context)', self.motion)
 
     def test_compact_quiz_artwork_is_static(self):
-        self.assertIn('reducedMotionEnabled() || compact', self.visual)
+        self.assertIn('reducedMotionEnabled() || compact || !animated', self.visual)
+
+    def test_discover_idle_has_no_infinite_animation(self):
+        discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')
+        self.assertNotIn('rememberInfiniteTransition', discover)
 
     def test_ads_are_not_preloaded_at_consent_startup(self):
         start_block = self.ads.split('fun start(activity: Activity?)', 1)[1].split('fun showPrivacyOptions', 1)[0]
