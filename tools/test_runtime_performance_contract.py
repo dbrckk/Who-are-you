@@ -24,6 +24,7 @@ class RuntimePerformanceContractTest(unittest.TestCase):
         catalog_index = self.main.index('if (!AppNavigation.hasUsableCatalog')
         self.assertGreater(manager_index, onboarding_index)
         self.assertGreater(manager_index, catalog_index)
+        self.assertIn("withFrameNanos { }", self.main)
 
     def test_billing_reconnects_are_bounded(self):
         self.assertIn('const val maxAttempts = 5', self.billing_policy)
