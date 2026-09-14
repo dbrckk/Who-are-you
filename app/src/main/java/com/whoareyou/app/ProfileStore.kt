@@ -31,6 +31,7 @@ data class StoredProfile(
     val completedQuizIds: Set<String> = emptySet(),
     val latestScores: Map<String, Int> = emptyMap(),
     val previousScores: Map<String, Int> = emptyMap(),
+    val scoreHistory: Map<String, List<Int>> = emptyMap(),
     val adsRemoved: Boolean = false,
     val onboardingComplete: Boolean = false,
     val announcedAchievementIds: Set<String> = emptySet(),
@@ -47,6 +48,7 @@ object ProfileStore {
     private val completedKey = stringPreferencesKey("completed_quiz_ids")
     private val scoresKey = stringPreferencesKey("latest_scores")
     private val previousScoresKey = stringPreferencesKey("previous_scores")
+    private val scoreHistoryKey = stringPreferencesKey("score_history_v2")
     // Legacy per-quiz marker retained for migration from versions before M81.
     private val lastQuizAttemptIdsKey = stringPreferencesKey("last_quiz_attempt_ids")
     private val committedQuizAttemptIdsKey = stringPreferencesKey("committed_quiz_attempt_ids")
@@ -111,12 +113,15 @@ object ProfileStore {
             val history = ScoreHistoryEngine.update(
                 latestScores = latestScores,
                 previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
+            scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
+                scoreHistory = ProfilePersistenceCodec.decodeScoreHistory(prefs[scoreHistoryKey]),
                 quizId = normalizedQuizId,
                 score = normalizedScore
             )
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = ProfilePersistenceCodec.encodeScores(history.latestScores)
             prefs[previousScoresKey] = ProfilePersistenceCodec.encodeScores(history.previousScores)
+            prefs[scoreHistoryKey] = ProfilePersistenceCodec.encodeScoreHistory(history.scoreHistory)
             if (normalizedAttemptId != null) {
                 committedAttempts.remove(normalizedAttemptId)
                 committedAttempts.add(normalizedAttemptId)
