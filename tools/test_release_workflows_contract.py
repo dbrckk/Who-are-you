@@ -38,18 +38,39 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
             self.assertIn("timeout-minutes: 40", workflow)
 
 class ComposeImportContractTest(unittest.TestCase):
-    def test_padding_extension_has_import_when_used(self):
+    def _assert_extension_import(self, token, import_line, label):
         root = ROOT / "app/src/main/java/com/whoareyou/app"
         offenders = []
         for path in root.glob("*.kt"):
             source = path.read_text(encoding="utf-8")
-            if ".padding(" not in source:
+            if token not in source:
                 continue
             if "androidx.compose.foundation.layout.*" in source:
                 continue
-            if "import androidx.compose.foundation.layout.padding" not in source:
+            if import_line not in source:
                 offenders.append(path.name)
-        self.assertEqual([], offenders, f"Missing Compose padding import: {offenders}")
+        self.assertEqual([], offenders, f"Missing Compose {label} import: {offenders}")
+
+    def test_padding_extension_has_import_when_used(self):
+        self._assert_extension_import(
+            ".padding(",
+            "import androidx.compose.foundation.layout.padding",
+            "padding",
+        )
+
+    def test_weight_extension_has_import_when_used(self):
+        self._assert_extension_import(
+            ".weight(",
+            "import androidx.compose.foundation.layout.weight",
+            "weight",
+        )
+
+    def test_height_extension_has_import_when_used(self):
+        self._assert_extension_import(
+            ".height(",
+            "import androidx.compose.foundation.layout.height",
+            "height",
+        )
 
 if __name__ == "__main__":
     unittest.main()
