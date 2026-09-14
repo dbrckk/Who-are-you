@@ -68,6 +68,7 @@ object QuizRepository {
 
     private fun parse(raw: String): List<Quiz> {
         val root = JSONObject(raw)
+        require(root.getInt("version") == 2) { "Unsupported quiz catalog schema version" }
         val items = root.getJSONArray("quizzes")
         return List(items.length()) { index -> parseQuiz(items.getJSONObject(index)) }
     }
@@ -84,11 +85,15 @@ object QuizRepository {
 
         val results = json.getJSONObject("results")
         val traits = json.optJSONArray("traits")?.mapObjects { traitJson ->
-            QuizTraitWeight(
-                id = traitJson.getString("id"),
-                weight = traitJson.getDouble("weight").coerceIn(-1.0, 1.0)
-            )
+            val id = traitJson.getString("id")
+            val weight = traitJson.getDouble("weight")
+            require(id.isNotBlank()) { "Trait id cannot be blank" }
+            require(weight in -1.0..1.0 && weight != 0.0) {
+                "Trait weight for $id must be within [-1, 1] and non-zero"
+            }
+            QuizTraitWeight(id = id, weight = weight)
         }.orEmpty()
+        require(traits.isNotEmpty()) { "Quiz ${json.getString("id")} must define at least one trait" }
 
         return Quiz(
             id = json.getString("id"),
