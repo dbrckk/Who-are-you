@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +18,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ProfileKnowledgeMapCard(
     coverage: ProfileCoverage,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onTraitClick: (String) -> Unit = {}
 ) {
     if (coverage.totalTraitCount == 0) return
     val french = LocalConfiguration.current.locales[0]?.language == "fr"
@@ -47,17 +49,20 @@ fun ProfileKnowledgeMapCard(
             KnowledgeSection(
                 title = if (french) "BIEN DOCUMENTÉ" else "WELL SUPPORTED",
                 traits = map.strong.take(5),
-                french = french
+                french = french,
+                onTraitClick = onTraitClick
             )
             KnowledgeSection(
                 title = if (french) "À APPROFONDIR" else "DEVELOPING",
                 traits = map.developing.take(5),
-                french = french
+                french = french,
+                onTraitClick = onTraitClick
             )
             KnowledgeSection(
                 title = if (french) "INCONNU" else "UNEXPLORED",
                 traits = map.unknown.take(5),
-                french = french
+                french = french,
+                onTraitClick = onTraitClick
             )
         }
     }
@@ -95,7 +100,8 @@ private fun DomainCoverageRow(item: TraitDomainCoverage, french: Boolean) {
 private fun KnowledgeSection(
     title: String,
     traits: List<TraitCoverage>,
-    french: Boolean
+    french: Boolean,
+    onTraitClick: (String) -> Unit
 ) {
     if (traits.isEmpty()) return
     Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
@@ -107,7 +113,10 @@ private fun KnowledgeSection(
         )
         traits.forEach { trait ->
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onTraitClick(trait.traitId) }
+                    .padding(vertical = 6.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
