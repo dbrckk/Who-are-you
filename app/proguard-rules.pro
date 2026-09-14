@@ -1,7 +1,5 @@
 # Project-specific R8 / ProGuard rules.
-
-# WorkManager creates its Room database implementation by generated-name lookup.
-# Keep the abstract database and generated implementation stable in minified candidate/release builds.
--keep class androidx.work.impl.WorkDatabase { *; }
--keep class androidx.work.impl.WorkDatabase_Impl { *; }
--keep class androidx.room.RoomDatabase { *; }
+#
+# Keep this file intentionally minimal. AndroidX, Billing, Ads and UMP ship
+# consumer rules with their own artifacts. Broad application-level keep rules
+# would prevent R8 from removing unused code and increase the Play bundle.
