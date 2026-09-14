@@ -16,13 +16,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,9 +44,11 @@ import androidx.compose.ui.unit.sp
 fun ProfileScreen(
     summary: GlobalProfileSummary,
     catalog: List<Quiz>,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onResetLocalData: () -> Unit
 ) {
     val context = LocalContext.current
+    var showResetDialog by remember { mutableStateOf(false) }
     val strongestDimension = summary.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
     val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
     val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
@@ -246,7 +253,29 @@ fun ProfileScreen(
         }
 
         item {
+            Spacer(Modifier.height(18.dp))
+            Button(
+                onClick = { showResetDialog = true },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Text(
+                    stringResource(R.string.reset_local_data_button),
+                    color = V2Colors.TextPrimary,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
             Spacer(Modifier.height(12.dp))
+            Text(
+                stringResource(R.string.reset_local_data_hint),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(18.dp))
             Text(
                 stringResource(R.string.disclaimer),
                 color = V2Colors.TextSecondary,
@@ -257,5 +286,28 @@ fun ProfileScreen(
             )
             Spacer(Modifier.height(108.dp))
         }
+    }
+
+    if (showResetDialog) {
+        AlertDialog(
+            onDismissRequest = { showResetDialog = false },
+            title = { Text(stringResource(R.string.reset_local_data_title)) },
+            text = { Text(stringResource(R.string.reset_local_data_body)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showResetDialog = false
+                        onResetLocalData()
+                    }
+                ) {
+                    Text(stringResource(R.string.reset_local_data_confirm))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showResetDialog = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
     }
 }
