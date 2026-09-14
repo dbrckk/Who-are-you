@@ -61,6 +61,23 @@ class ProfileStorePersistenceTest {
     }
 
     @Test
+    fun atomicCommitReturnsPersistedScoreAndRejectsReplay() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val quizId = "atomic-${UUID.randomUUID()}"
+        val attemptId = UUID.randomUUID().toString()
+
+        runBlocking {
+            val first = ProfileStore.commitQuizResult(context, quizId, 140, attemptId)
+            assertEquals(true, first?.changed)
+            assertEquals(100, first?.persistedScore)
+
+            val replay = ProfileStore.commitQuizResult(context, quizId, 5, attemptId)
+            assertEquals(false, replay?.changed)
+            assertEquals(100, replay?.persistedScore)
+        }
+    }
+
+    @Test
     fun quizResultNormalizesIdAndScoreBeforePersistence() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val quizId = "normalized-${UUID.randomUUID()}"
