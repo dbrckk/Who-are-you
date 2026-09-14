@@ -24,13 +24,24 @@ fun ResultNextExplorationCard(
     currentQuiz: Quiz,
     catalog: List<Quiz>,
     completed: Set<String>,
+    coverage: ProfileCoverage,
     onQuizSelected: (Quiz) -> Unit
 ) {
     val themeMap = remember(catalog) { catalog.associate { it.id to QuizVisuals.themeFor(it) } }
     val catalogById = remember(catalog) { catalog.associateBy { it.id } }
     val orderedQuizIds = remember(catalog) { catalog.map { it.id } }
-    val recommendation = remember(currentQuiz.id, orderedQuizIds, themeMap, completed) {
-        ResultNextExplorationEngine.recommend(
+    val recommendation = remember(
+        currentQuiz.id,
+        orderedQuizIds,
+        themeMap,
+        completed,
+        coverage
+    ) {
+        ResultNextExplorationEngine.recommendForCoverage(
+            catalog = catalog,
+            completed = completed,
+            coverage = coverage
+        ) ?: ResultNextExplorationEngine.recommend(
             currentQuizId = currentQuiz.id,
             orderedQuizIds = orderedQuizIds,
             themeByQuizId = themeMap,
@@ -86,6 +97,7 @@ fun ResultNextExplorationCard(
             Text(
                 stringResource(
                     when (recommendation.reason) {
+                        ResultNextReason.PROFILE_GAP -> R.string.result_next_profile_gap
                         ResultNextReason.SAME_FACET -> R.string.result_next_same_facet
                         ResultNextReason.COMPLEMENTARY_FACET -> R.string.result_next_complementary
                         ResultNextReason.RETAKE_FACET -> R.string.result_next_retake
