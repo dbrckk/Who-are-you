@@ -36,43 +36,44 @@ object CompatibilityShare {
 
         shareScope.launch {
             runCatching {
-            val chooser = withContext(Dispatchers.IO) {
                 val matchLabel = matchLabel(context, safeCompatibility)
-                val bitmap = render(
-                    context = context,
-                    quizTitle = quizTitle,
-                    inviterScore = safeInviterScore,
-                    myScore = safeMyScore,
-                    compatibility = safeCompatibility,
-                    matchLabel = matchLabel
-                )
-
-                try {
-                    val file = ShareFileStore.writePng(
-                        context,
-                        "who_are_you_match_${System.currentTimeMillis()}.png",
-                        bitmap
+                val bitmap = withContext(Dispatchers.Default) {
+                    render(
+                        context = context,
+                        quizTitle = quizTitle,
+                        inviterScore = safeInviterScore,
+                        myScore = safeMyScore,
+                        compatibility = safeCompatibility,
+                        matchLabel = matchLabel
                     )
+                }
+                val chooser = try {
+                    withContext(Dispatchers.IO) {
+                        val file = ShareFileStore.writePng(
+                            context,
+                            "who_are_you_match_${System.currentTimeMillis()}.png",
+                            bitmap
+                        )
 
-                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-                    val challengeUri = ChallengeShare.buildUri(quizId, safeMyScore).toString()
-                    val text = buildString {
-                        append(context.getString(R.string.compatibility_share_text, safeCompatibility, quizTitle))
-                        append("\n\n")
-                        append(context.getString(R.string.compatibility_share_challenge, challengeUri))
+                        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                        val challengeUri = ChallengeShare.buildUri(quizId, safeMyScore).toString()
+                        val text = buildString {
+                            append(context.getString(R.string.compatibility_share_text, safeCompatibility, quizTitle))
+                            append("\n\n")
+                            append(context.getString(R.string.compatibility_share_challenge, challengeUri))
+                        }
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "image/png"
+                            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.compatibility_share_subject))
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_TEXT, text)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        Intent.createChooser(intent, context.getString(R.string.compatibility_share_chooser))
                     }
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "image/png"
-                        putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.compatibility_share_subject))
-                        putExtra(Intent.EXTRA_STREAM, uri)
-                        putExtra(Intent.EXTRA_TEXT, text)
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
-                    Intent.createChooser(intent, context.getString(R.string.compatibility_share_chooser))
                 } finally {
                     bitmap.recycle()
                 }
-            }
                 ShareSafety.launch(context, chooser)
             }.onFailure { error ->
                 ShareSafety.notifyFailure(context, error)
