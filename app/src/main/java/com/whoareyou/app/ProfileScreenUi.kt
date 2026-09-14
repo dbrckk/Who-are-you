@@ -276,12 +276,14 @@ fun ProfileScreen(
                     label = "profileDimensionProgress"
                 )
 
-                V2PressableCard(
-                    onClick = journalTrend?.let { trend -> { selectedJournalTrend = trend } },
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(V2Radius.Compact),
-                    containerColor = V2Colors.Surface,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable(enabled = journalTrend != null) {
+                            selectedJournalTrend = journalTrend
+                        }
                         .semantics(mergeDescendants = true) {
                             contentDescription = buildString {
                                 append("${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%")
