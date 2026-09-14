@@ -38,6 +38,8 @@
     <string name="remove_ads_forever">REMOVE ADS FOREVER</string>
     <string name="no_ads_ever">No ads. Ever.</string>
     <string name="premium_once_no_subscription">%1$s once. No subscription.</string>
+    <string name="premium_price_unavailable">Google Play purchase is temporarily unavailable.</string>
+    <string name="remove_ads_price_unavailable_button">PURCHASE UNAVAILABLE</string>
     <string name="premium_price_loading">Checking the Google Play price…</string>
     <string name="remove_ads_price_loading_button">CHECKING PRICE…</string>
     <string name="premium_restore_copy">Your purchase is stored and restored automatically.</string>
