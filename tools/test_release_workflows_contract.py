@@ -30,7 +30,8 @@ class ReleaseWorkflowContractTest(unittest.TestCase):
 
     def test_circleci_runs_real_android_quality_gates(self):
         self.assertIn("cimg/android:2026.08.1", self.circleci)
-        self.assertIn("PYTHONPATH=tools python -m unittest discover", self.circleci)
+        self.assertIn("PYTHONPATH=tools python3 -m unittest discover", self.circleci)
+        self.assertIn("gradle-9.5.0-bin.zip", self.circleci)
         self.assertIn("gradle :app:testDebugUnitTest", self.circleci)
         self.assertIn("gradle :app:lintDebug", self.circleci)
         self.assertIn("gradle :app:assembleDebugAndroidTest", self.circleci)
