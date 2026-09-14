@@ -32,14 +32,14 @@ class TraitEvolutionEngineTest {
             catalog = catalog,
             latestScores = mapOf("a" to 70, "b" to 80),
             scoreHistory = mapOf(
-                "a" to listOf(70),
+                "a" to listOf(65, 70),
                 "b" to listOf(80)
             )
         )
 
         val trait = result.traits.single()
         assertEquals(TraitEvolutionKind.NEW_EVIDENCE, trait.kind)
-        assertTrue("a" in trait.newEvidenceQuizIds || "b" in trait.newEvidenceQuizIds)
+        assertEquals(listOf("b"), trait.newEvidenceQuizIds)
     }
 
     @Test
