@@ -177,6 +177,14 @@ fun ProfileScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
+            summary.nextQuizRecommendation?.let { recommendation ->
+                Spacer(Modifier.height(18.dp))
+                NextQuizRecommendationCard(
+                    recommendation = recommendation,
+                    catalog = catalog,
+                    onStartQuiz = onQuizSelected
+                )
+            }
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(18.dp))
                 ProfileCoverageCard(summary.coverage)
