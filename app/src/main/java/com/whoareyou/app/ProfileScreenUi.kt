@@ -52,8 +52,12 @@ fun ProfileScreen(
     val context = LocalContext.current
     val reduceMotion = reducedMotionEnabled()
     var showResetDialog by remember { mutableStateOf(false) }
-    val strongestDimension = summary.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
-    val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
+    val catalogById = remember(catalog) { catalog.associateBy { it.id } }
+    val sortedDimensions = remember(summary.dimensions) {
+        summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }
+    }
+    val strongestDimension = sortedDimensions.firstOrNull()
+    val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
     val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
     val companionAccent = strongestQuiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.Cyan
     val profileProgressText = stringResource(
@@ -188,8 +192,8 @@ fun ProfileScreen(
                 }
             }
         } else {
-            items(summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }, key = { it.quizId }) { dimension ->
-                val quiz = catalog.firstOrNull { it.id == dimension.quizId }
+            items(sortedDimensions, key = { it.quizId }, contentType = { "profile_dimension" }) { dimension ->
+                val quiz = catalogById[dimension.quizId]
                 val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
                 val animatedProgress by animateFloatAsState(
