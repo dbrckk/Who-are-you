@@ -14,9 +14,9 @@ class PersistedResultScoreContractTest(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
     def test_result_callback_uses_persisted_profile_score(self):
-        self.assertIn("import kotlinx.coroutines.flow.first", self.effect)
-        self.assertIn("ProfileStore.observe(context).first().latestScores[quiz.id]", self.effect)
-        self.assertIn("onCommitted(persistedScore)", self.effect)
+        self.assertIn("ProfileStore.commitQuizResult(context, quiz.id, score, attemptId)", self.effect)
+        self.assertIn("onCommitted(committed.persistedScore)", self.effect)
+        self.assertNotIn("ProfileStore.observe(context).first()", self.effect)
 
     def test_main_activity_sets_final_score_only_after_commit_callback(self):
         self.assertIn("onCommitted = { persistedScore ->", self.main)
