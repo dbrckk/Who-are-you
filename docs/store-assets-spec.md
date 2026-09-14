@@ -13,34 +13,36 @@ Do not fabricate screenshots from mock UI. Capture them from the actual release 
 
 ## Recommended screenshot story
 
-Keep the sequence focused on the product's actual value:
+The first screenshots should communicate the core value before optional social or retention features:
 
-1. **Discover / profile progress** — show the quiz catalog and evolving profile entry point.
-2. **Quiz** — show a representative question with the four-answer interaction.
-3. **Result** — show a completed result and share affordance.
-4. **Full profile / signature** — show the multi-dimensional profile and signature profile.
-5. **Friend challenge / compatibility** — show the social comparison flow or match card.
-6. **Daily Question / achievements** — show retention features without overcrowding the listing.
+1. **Onboarding / trust** — show the self-reflection positioning, no-account promise and local-profile message.
+2. **Discover / evolving profile** — show the personalized dashboard and next recommended dimension.
+3. **Quiz** — show one representative question with the four-answer interaction.
+4. **Result interpretation** — show the result, scale and explanatory interpretation rather than leading with sharing.
+5. **Full profile / evolution** — show multiple dimensions, profile evolution and signature when available.
+6. **Optional comparison or Daily Question** — use social comparison or retention only after the core self-reflection story is established.
+
+For the first three screenshots, avoid ads, purchase prompts and friend-comparison CTAs dominating the frame.
 
 Capture a clean EN set and a clean FR set where localized store assets are used. Avoid personal notifications, status-bar private information, debug overlays, test ad banners, or developer tooling in captures.
 
 ## Screenshot captions
 
 Suggested EN captions:
-- Discover your evolving profile
-- Quick questions, clear results
-- See how each dimension changes
-- Unlock your signature profile
-- Compare with friends
-- Come back for the Daily Question
+- Explore your patterns at your own pace
+- Build a clearer profile over time
+- Quick questions, no right answers
+- Understand what your result means
+- See how your profile evolves
+- Compare or come back only when you want to
 
 Suggested FR captions:
-- Découvre ton profil évolutif
-- Des questions rapides, des résultats clairs
-- Suis l’évolution de chaque dimension
-- Débloque ton profil signature
-- Compare-toi avec tes amis
-- Reviens pour la Question du jour
+- Explore tes tendances à ton rythme
+- Construis progressivement un profil plus clair
+- Des questions rapides, sans bonne réponse
+- Comprends ce que ton résultat signifie
+- Observe l’évolution de ton profil
+- Compare ou reviens seulement si tu en as envie
 
 ## Release-candidate capture checklist
 
@@ -49,5 +51,7 @@ Before capturing:
 - locale is correct;
 - no crash/error/debug state is visible;
 - sample profile contains enough completed quizzes to make the UI meaningful;
-- any ad visible is a valid production/tester-safe state and does not dominate the screenshot;
-- medical/diagnostic claims are absent.
+- no test AdMob IDs or test-ad presentation appears in public-facing store assets;
+- privacy/support entry points exist and are functional;
+- medical/diagnostic claims are absent;
+- screenshots match the exact public build behavior and current store description.
