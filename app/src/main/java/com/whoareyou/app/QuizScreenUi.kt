@@ -34,6 +34,7 @@ fun QuizScreen(
     questionIndex: Int,
     score: Int,
     isFinishing: Boolean,
+    commitFailed: Boolean,
     onProgress: (questionIndex: Int, score: Int) -> Unit,
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
@@ -163,6 +164,25 @@ fun QuizScreen(
         }
 
         Spacer(Modifier.height(24.dp))
+        if (isFinishing) {
+            Text(
+                stringResource(R.string.quiz_result_saving),
+                color = accent,
+                style = V2Type.Supporting,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().testTag("quiz_result_saving")
+            )
+            Spacer(Modifier.height(10.dp))
+        } else if (commitFailed) {
+            Text(
+                stringResource(R.string.quiz_result_save_failed),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().testTag("quiz_result_save_failed")
+            )
+            Spacer(Modifier.height(10.dp))
+        }
         Text(
             stringResource(R.string.no_right_answers),
             color = V2Colors.TextSecondary,
