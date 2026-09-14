@@ -92,18 +92,19 @@ object QuizVisuals {
 @Composable
 fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = false) {
     val shape = RoundedCornerShape(if (compact) V2Radius.Compact else V2Radius.Card)
+    val reduceMotion = reducedMotionEnabled()
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
     val ambient = rememberInfiniteTransition(label = "quizArtworkAmbient")
     val glowScale by ambient.animateFloat(
-        initialValue = 0.90f,
-        targetValue = 1.12f,
+        initialValue = if (reduceMotion) 1f else 0.90f,
+        targetValue = if (reduceMotion) 1f else 1.12f,
         animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis), repeatMode = RepeatMode.Reverse),
         label = "quizArtworkGlowScale"
     )
     val glowAlpha by ambient.animateFloat(
-        initialValue = 0.32f,
-        targetValue = 0.62f,
+        initialValue = if (reduceMotion) 0.46f else 0.32f,
+        targetValue = if (reduceMotion) 0.46f else 0.62f,
         animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis + 700), repeatMode = RepeatMode.Reverse),
         label = "quizArtworkGlowAlpha"
     )
