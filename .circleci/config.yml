@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  android-quality:
+    docker:
+      - image: cimg/android:2026.08.1
+    resource_class: large
+    environment:
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4g"
+    steps:
+      - checkout
+
+      - run:
+          name: Install required Android SDK packages
+          command: |
+            yes | sdkmanager --licenses >/dev/null || true
+            sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
+
+      - run:
+          name: Python quality contracts
+          command: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
+      - run:
+          name: JVM unit tests
+          command: gradle :app:testDebugUnitTest --stacktrace
+
+      - run:
+          name: Android lint
+          command: gradle :app:lintDebug --stacktrace
+
+      - run:
+          name: Compile instrumentation tests
+          command: gradle :app:assembleDebugAndroidTest --stacktrace
+
+      - store_test_results:
+          path: app/build/test-results
+
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+
+workflows:
+  quality:
+    jobs:
+      - android-quality
