@@ -40,6 +40,7 @@ object ResultShare {
         description: String
     ) {
         shareScope.launch {
+            runCatching {
             val chooser = withContext(Dispatchers.IO) {
                 val copy = cardCopy(context)
                 val bitmap = render(
@@ -89,7 +90,10 @@ object ResultShare {
                 }
             }
 
-            context.startActivity(chooser)
+                ShareSafety.launch(context, chooser)
+            }.onFailure { error ->
+                ShareSafety.notifyFailure(context, error)
+            }
         }
     }
 
