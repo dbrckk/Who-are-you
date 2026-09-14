@@ -23,9 +23,16 @@ object ScoreHistoryEngine {
             .toMutableMap()
 
         val normalizedScore = score.coerceIn(0, 100)
-        latest[quizId]?.let { previous[quizId] = it.coerceIn(0, 100) }
+        val existingLatest = latest[quizId]?.coerceIn(0, 100)
+        val migratedSeries = history[quizId].orEmpty().ifEmpty {
+            listOfNotNull(
+                previous[quizId]?.coerceIn(0, 100),
+                existingLatest
+            )
+        }
+        existingLatest?.let { previous[quizId] = it }
         latest[quizId] = normalizedScore
-        history[quizId] = (history[quizId].orEmpty() + normalizedScore).takeLast(MAX_SCORES_PER_QUIZ)
+        history[quizId] = (migratedSeries + normalizedScore).takeLast(MAX_SCORES_PER_QUIZ)
 
         return ScoreHistoryUpdate(
             latestScores = latest.toMap(),
