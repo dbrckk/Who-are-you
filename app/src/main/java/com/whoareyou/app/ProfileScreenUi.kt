@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ fun ProfileScreen(
     onResetLocalData: () -> Unit
 ) {
     val context = LocalContext.current
+    val reduceMotion = reducedMotionEnabled()
     var showResetDialog by remember { mutableStateOf(false) }
     val strongestDimension = summary.dimensions.maxByOrNull { kotlin.math.abs(it.score - 50) }
     val strongestQuiz = strongestDimension?.let { dimension -> catalog.firstOrNull { it.id == dimension.quizId } }
@@ -190,7 +192,7 @@ fun ProfileScreen(
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
                 val animatedProgress by animateFloatAsState(
                     targetValue = dimension.score.coerceIn(0, 100) / 100f,
-                    animationSpec = tween(V2Motion.EmphasizedMillis),
+                    animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
                     label = "profileDimensionProgress"
                 )
 
