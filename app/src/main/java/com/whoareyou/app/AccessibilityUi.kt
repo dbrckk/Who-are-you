@@ -23,7 +23,7 @@ fun AccessibleBackAction(
         Text(
             text = stringResource(R.string.back),
             color = V2Colors.TextSecondary,
-            fontSize = 13.sp,
+            style = V2Type.Supporting,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 2.dp)
         )
