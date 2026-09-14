@@ -37,6 +37,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -148,6 +149,7 @@ private fun ShellTab(
     onClick: () -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    val view = LocalView.current
     var focused by remember { mutableStateOf(false) }
     val foreground = if (selected) V2Colors.TextPrimary else V2Colors.TextSecondary
     val accent = if (selected) primaryAccent else V2Colors.TextSecondary
@@ -197,7 +199,12 @@ private fun ShellTab(
                 interactionSource = interactionSource,
                 indication = null,
                 role = Role.Tab,
-                onClick = onClick
+                onClick = {
+                    if (!selected) {
+                        view.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+                        onClick()
+                    }
+                }
             )
             .padding(horizontal = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
