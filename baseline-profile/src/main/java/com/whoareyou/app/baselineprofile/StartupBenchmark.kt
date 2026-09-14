@@ -1,5 +1,6 @@
 package com.whoareyou.app.baselineprofile
 
+import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
@@ -26,7 +27,7 @@ class StartupBenchmark {
         packageName = PACKAGE_NAME,
         metrics = listOf(StartupTimingMetric()),
         compilationMode = CompilationMode.Partial(
-            baselineProfileMode = CompilationMode.Partial.BaselineProfileMode.Require
+            baselineProfileMode = BaselineProfileMode.Require
         ),
         startupMode = mode,
         iterations = 10,
