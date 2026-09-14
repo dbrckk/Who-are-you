@@ -30,9 +30,9 @@ object V2Colors {
 
     val TextPrimary = Color(0xFFFAF8FF)
     val TextSecondary = Color(0xFFC6C3D5)
-    val TextTertiary = Color(0xFF9693AB)
+    val TextTertiary = Color(0xFFA7A4B7)
     val TextMuted = TextTertiary
-    val Hairline = Color(0x24FFFFFF)
+    val Hairline = Color(0x2EFFFFFF)
     val HairlineStrong = Color(0x3DFFFFFF)
     val OverlayStrong = Color(0xD9090A16)
     val OverlaySoft = Color(0x33090A16)
