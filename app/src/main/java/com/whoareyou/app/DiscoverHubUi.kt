@@ -83,12 +83,12 @@ fun DiscoverHub(
             .padding(horizontal = V2Spacing.Screen),
         verticalArrangement = Arrangement.spacedBy(28.dp)
     ) {
-        item {
+        item(key = "hero", contentType = "hero") {
             Spacer(Modifier.height(18.dp))
             DiscoverHeroHeader()
         }
 
-        item {
+        item(key = "personalized", contentType = "dashboard") {
             PersonalizedDiscoverDashboard(
                 profile = profile,
                 quizzes = quizzes,
@@ -99,7 +99,7 @@ fun DiscoverHub(
         }
 
         if (journeys.isNotEmpty()) {
-            item {
+            item(key = "journeys", contentType = "journeys") {
                 GuidedJourneySection(
                     journeys = journeys,
                     quizzes = quizzes,
@@ -108,7 +108,7 @@ fun DiscoverHub(
             }
         }
 
-        item {
+        item(key = "collections", contentType = "collections") {
             DiscoverCollections(
                 quizzes = quizzes,
                 completed = completed,
@@ -116,7 +116,7 @@ fun DiscoverHub(
             )
         }
 
-        item {
+        item(key = "library", contentType = "library") {
             DiscoverLibrary(
                 quizzes = quizzes,
                 completed = completed,
@@ -124,7 +124,7 @@ fun DiscoverHub(
             )
         }
 
-        item {
+        item(key = "momentum", contentType = "summary") {
             DiscoverMomentumCard(
                 streak = storedProfile.daily.currentStreak,
                 unlockedAchievements = unlockedAchievements,
@@ -132,14 +132,14 @@ fun DiscoverHub(
             )
         }
 
-        item {
+        item(key = "retention", contentType = "retention") {
             RetentionEngagementSection(
                 storedProfile = storedProfile,
                 totalQuizCount = quizzes.size
             )
         }
 
-        item {
+        item(key = "footer", contentType = "footer") {
             if (!adsRemoved) {
                 PremiumDiscoverCard(
                     adsRemoved = false,
