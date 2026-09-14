@@ -146,7 +146,7 @@ object CoverageRecommendationEngine {
             }
             .maxWithOrNull(
                 compareBy<CoverageRecommendation> { it.informationGainScore }
-                    .thenByDescending { it.targetedTraitIds.size }
+                    .thenBy { it.targetedTraitIds.size }
             )
     }
 
