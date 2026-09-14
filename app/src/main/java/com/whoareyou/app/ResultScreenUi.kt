@@ -243,7 +243,7 @@ fun ResultScreen(
             Button(
                 onClick = {
                     AppEvents.resultShare(quiz.id, score)
-                    ResultShare.share(context, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
+                    ResultShare.share(context, quiz.id, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
                 },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
