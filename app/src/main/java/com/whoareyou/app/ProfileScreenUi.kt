@@ -46,12 +46,14 @@ import androidx.compose.ui.unit.sp
 fun ProfileScreen(
     summary: GlobalProfileSummary,
     catalog: List<Quiz>,
+    onQuizSelected: (Quiz) -> Unit,
     onBack: () -> Unit,
     onResetLocalData: () -> Unit
 ) {
     val context = LocalContext.current
     val reduceMotion = reducedMotionEnabled()
     var showResetDialog by remember { mutableStateOf(false) }
+    var selectedTraitId by remember { mutableStateOf<String?>(null) }
     val catalogById = remember(catalog) { catalog.associateBy { it.id } }
     val sortedDimensions = remember(summary.dimensions) {
         summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }
@@ -174,7 +176,10 @@ fun ProfileScreen(
                 Spacer(Modifier.height(18.dp))
                 ProfileCoverageCard(summary.coverage)
                 Spacer(Modifier.height(18.dp))
-                ProfileKnowledgeMapCard(summary.coverage)
+                ProfileKnowledgeMapCard(
+                    coverage = summary.coverage,
+                    onTraitClick = { selectedTraitId = it }
+                )
             }
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(18.dp))
@@ -314,6 +319,26 @@ fun ProfileScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(Modifier.height(108.dp))
+        }
+    }
+
+    selectedTraitId?.let { traitId ->
+        TraitExplorationEngine.build(
+            traitId = traitId,
+            coverage = summary.coverage,
+            graph = summary.traitGraph,
+            catalog = catalog,
+            completedQuizIds = summary.dimensions.mapTo(mutableSetOf()) { it.quizId }
+        )?.let { exploration ->
+            TraitExplorationDialog(
+                exploration = exploration,
+                catalogById = catalogById,
+                onDismiss = { selectedTraitId = null },
+                onStartQuiz = { quiz ->
+                    selectedTraitId = null
+                    onQuizSelected(quiz)
+                }
+            )
         }
     }
 
