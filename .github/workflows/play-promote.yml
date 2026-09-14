@@ -93,7 +93,7 @@ jobs:
         if: ${{ inputs.commit_edit == true }}
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-play-promotion-0.1.0-1
+          name: who-are-you-play-promotion-${{ inputs.target_track }}-run-${{ github.run_number }}
           path: play-promotion-result.json
           if-no-files-found: error
           retention-days: 30
