@@ -69,6 +69,7 @@ jobs:
             device-exit-info-*.txt
             device-screen-*.png
             device-ui-*.xml
+            device-ui-report-*.txt
             device-display-metrics.txt
             device-display-*.txt
           if-no-files-found: warn
