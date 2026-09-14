@@ -40,51 +40,50 @@ object ResultShare {
     ) {
         shareScope.launch {
             runCatching {
-            val chooser = withContext(Dispatchers.IO) {
                 val copy = cardCopy(context)
-                val bitmap = render(
-                    quizTitle = quizTitle,
-                    resultTitle = resultTitle,
-                    score = score,
-                    metricLow = metricLow,
-                    metricHigh = metricHigh,
-                    description = description,
-                    copy = copy
-                )
-
-                try {
-                    val file = ShareFileStore.writePng(
-                        context,
-                        "who_are_you_${System.currentTimeMillis()}.png",
-                        bitmap
+                val bitmap = withContext(Dispatchers.Default) {
+                    render(
+                        quizTitle = quizTitle,
+                        resultTitle = resultTitle,
+                        score = score,
+                        metricLow = metricLow,
+                        metricHigh = metricHigh,
+                        description = description,
+                        copy = copy
                     )
+                }
+                val chooser = try {
+                    withContext(Dispatchers.IO) {
+                        val file = ShareFileStore.writePng(
+                            context,
+                            "who_are_you_${System.currentTimeMillis()}.png",
+                            bitmap
+                        )
 
-                    val uri = FileProvider.getUriForFile(
-                        context,
-                        "${context.packageName}.fileprovider",
-                        file
-                    )
+                        val uri = FileProvider.getUriForFile(
+                            context,
+                            "${context.packageName}.fileprovider",
+                            file
+                        )
 
-                    val challengeUri = ChallengeShare.buildUri(quizId, score).toString()
+                        val challengeUri = ChallengeShare.buildUri(quizId, score).toString()
+                        val shareText = buildString {
+                            append(context.getString(R.string.result_share_text, resultTitle, score, quizTitle))
+                            append("\n\n")
+                            append(context.getString(R.string.result_share_challenge, challengeUri))
+                        }
 
-                    val shareText = buildString {
-                        append(context.getString(R.string.result_share_text, resultTitle, score, quizTitle))
-                        append("\n\n")
-                        append(context.getString(R.string.result_share_challenge, challengeUri))
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "image/png"
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_TEXT, shareText)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        Intent.createChooser(intent, context.getString(R.string.result_share_chooser))
                     }
-
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "image/png"
-                        putExtra(Intent.EXTRA_STREAM, uri)
-                        putExtra(Intent.EXTRA_TEXT, shareText)
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
-
-                    Intent.createChooser(intent, context.getString(R.string.result_share_chooser))
                 } finally {
                     bitmap.recycle()
                 }
-            }
 
                 ShareSafety.launch(context, chooser)
             }.onFailure { error ->
