@@ -1,5 +1,7 @@
 package com.whoareyou.app
 
+data class TimedScore(val score: Int, val epochDay: Long)
+
 object ProfilePersistenceCodec {
     fun decodeSet(raw: String?): Set<String> = decodeList(raw).toSet()
 
@@ -37,6 +39,42 @@ object ProfilePersistenceCodec {
         .distinctBy { it.first }
         .sortedBy { it.first }
         .joinToString(";") { (key, value) -> "$key:$value" }
+
+    fun encodeTimedScoreHistory(values: Map<String, List<TimedScore>>): String = values.entries
+        .mapNotNull { (rawId, rawScores) ->
+            val id = rawId.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val scores = rawScores.map {
+                TimedScore(
+                    score = it.score.coerceIn(0, 100),
+                    epochDay = it.epochDay.coerceAtLeast(0)
+                )
+            }
+            if (scores.isEmpty()) return@mapNotNull null
+            id to scores
+        }
+        .sortedBy { it.first }
+        .joinToString(";") { (id, scores) ->
+            "$id:" + scores.joinToString("|") { "${it.score}@${it.epochDay}" }
+        }
+
+    fun decodeTimedScoreHistory(raw: String?): Map<String, List<TimedScore>> = raw
+        ?.split(';')
+        ?.mapNotNull { item ->
+            val parts = item.split(':', limit = 2)
+            if (parts.size != 2) return@mapNotNull null
+            val id = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val scores = parts[1].split('|').mapNotNull { token ->
+                val scoreParts = token.split('@', limit = 2)
+                if (scoreParts.size != 2) return@mapNotNull null
+                val score = scoreParts[0].toIntOrNull()?.coerceIn(0, 100) ?: return@mapNotNull null
+                val day = scoreParts[1].toLongOrNull()?.coerceAtLeast(0) ?: return@mapNotNull null
+                TimedScore(score, day)
+            }
+            if (scores.isEmpty()) return@mapNotNull null
+            id to scores
+        }
+        ?.toMap()
+        ?: emptyMap()
 
     fun encodeScoreHistory(values: Map<String, List<Int>>): String = values.entries
         .mapNotNull { (rawId, rawScores) ->
