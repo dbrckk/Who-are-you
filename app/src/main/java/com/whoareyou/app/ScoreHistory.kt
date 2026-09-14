@@ -12,9 +12,9 @@ object ScoreHistoryEngine {
     fun update(
         latestScores: Map<String, Int>,
         previousScores: Map<String, Int>,
-        scoreHistory: Map<String, List<Int>> = emptyMap(),
         quizId: String,
-        score: Int
+        score: Int,
+        scoreHistory: Map<String, List<Int>> = emptyMap()
     ): ScoreHistoryUpdate {
         val latest = latestScores.toMutableMap()
         val previous = previousScores.toMutableMap()
