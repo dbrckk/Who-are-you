@@ -9,7 +9,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -60,12 +59,7 @@ private fun WhoAreYouApp() {
     val storedProfile = storedProfileState
     val quizCatalog = quizCatalogState
     if (storedProfile == null || quizCatalog == null) {
-        Box(
-            modifier = Modifier.fillMaxSize().testTag("startup_loading"),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        BrandLoadingScreen(tag = "startup_loading")
         return
     }
     LaunchedEffect(activity, storedProfile.onboardingComplete, quizCatalog.size) {
@@ -153,12 +147,7 @@ private fun WhoAreYouApp() {
             previousScoreForAttempt = null
             screenName = AppScreen.DISCOVER.name
         }
-        Box(
-            modifier = Modifier.fillMaxSize().testTag("quiz_session_recovering"),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        BrandLoadingScreen(tag = "quiz_session_recovering")
         return
     }
 
