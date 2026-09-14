@@ -62,6 +62,12 @@
     <string name="friend_match_explainer">Ton ami fait le même test et obtient immédiatement un score de compatibilité</string>
     <string name="retry">REFAIRE</string>
     <string name="done_button">TERMINER</string>
+    <string name="reset_local_data_button">RÉINITIALISER LES DONNÉES LOCALES</string>
+    <string name="reset_local_data_hint">Supprime ta progression, tes scores, tes séries et l’historique local des comparaisons sur cet appareil. Ton achat Google Play n’est pas annulé.</string>
+    <string name="reset_local_data_title">Réinitialiser les données locales ?</string>
+    <string name="reset_local_data_body">Cela supprime ton profil et ta progression de cet appareil et relance l’onboarding. Cette action est irréversible.</string>
+    <string name="reset_local_data_confirm">RÉINITIALISER</string>
+    <string name="cancel">ANNULER</string>
     <string name="disclaimer">Pour le divertissement et la réflexion personnelle uniquement — ce n’est pas un diagnostic psychologique.</string>
     <string name="daily_question">QUESTION DU JOUR</string>
     <string name="streak_count">SÉRIE %1$d</string>
