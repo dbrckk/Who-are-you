@@ -47,6 +47,36 @@ class TraitTimelineEngineTest {
     }
 
     @Test
+    fun `period comparison tracks score and confidence movement`() {
+        val catalog = listOf(
+            quiz("a", QuizTraitWeight("assertiveness", 1.0)),
+            quiz("b", QuizTraitWeight("assertiveness", 0.5))
+        )
+        val history = mapOf(
+            "a" to listOf(
+                TimedScore(55, 0),
+                TimedScore(60, 10),
+                TimedScore(75, 30)
+            ),
+            "b" to listOf(
+                TimedScore(80, 20),
+                TimedScore(82, 40)
+            )
+        )
+
+        val timeline = TraitTimelineEngine.build(catalog, history)
+            .single { it.traitId == "assertiveness" }
+        val comparison = timeline.periodComparison!!
+
+        assertTrue(comparison.recentScoreAverage >= comparison.earlierScoreAverage)
+        assertTrue(comparison.recentConfidenceAverage >= 0)
+        assertEquals(
+            comparison.recentScoreAverage - comparison.earlierScoreAverage,
+            comparison.scoreDelta
+        )
+    }
+
+    @Test
     fun `unknown-date migration points seed baseline without creating dated point`() {
         val catalog = listOf(quiz("a", QuizTraitWeight("optimism", 1.0)))
         val history = mapOf(
