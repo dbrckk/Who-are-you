@@ -17,7 +17,7 @@ fun AccessibleBackAction(
 ) {
     TextButton(
         onClick = onClick,
-        modifier = modifier.heightIn(min = 52.dp)
+        modifier = modifier.heightIn(min = 48.dp)
     ) {
         Text(
             text = stringResource(R.string.back),
