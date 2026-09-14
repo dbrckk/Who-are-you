@@ -90,9 +90,9 @@ object QuizVisuals {
 }
 
 @Composable
-fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = false) {
+fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = false, animated: Boolean = true) {
     val shape = RoundedCornerShape(if (compact) V2Radius.Compact else V2Radius.Card)
-    val reduceMotion = reducedMotionEnabled() || compact
+    val reduceMotion = reducedMotionEnabled() || compact || !animated
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
     val ambient = if (reduceMotion) null else rememberInfiniteTransition(label = "quizArtworkAmbient")
