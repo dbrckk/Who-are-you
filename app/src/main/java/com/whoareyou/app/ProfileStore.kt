@@ -3,6 +3,7 @@ package com.whoareyou.app
 import android.content.Context
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.clear
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -191,6 +192,10 @@ object ProfileStore {
 
     suspend fun setAdsRemoved(context: Context, removed: Boolean) {
         context.profileDataStore.edit { it[adsRemovedKey] = removed }
+    }
+
+    suspend fun clearLocalProfile(context: Context) {
+        context.profileDataStore.edit { it.clear() }
     }
 
     suspend fun setOnboardingComplete(context: Context, complete: Boolean = true) {
