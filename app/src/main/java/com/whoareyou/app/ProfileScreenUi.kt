@@ -181,6 +181,13 @@ fun ProfileScreen(
                     onTraitClick = { selectedTraitId = it }
                 )
             }
+            if (
+                summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
+                summary.traitEvolution.newEvidence.isNotEmpty()
+            ) {
+                Spacer(Modifier.height(18.dp))
+                TraitEvolutionCard(summary.traitEvolution)
+            }
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(18.dp))
                 TraitGraphCard(summary.traitGraph)
