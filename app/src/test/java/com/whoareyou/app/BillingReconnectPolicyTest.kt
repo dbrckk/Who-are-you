@@ -15,11 +15,12 @@ class BillingReconnectPolicyTest {
     }
 
     @Test
-    fun `next reconnect attempt saturates at maximum backoff`() {
+    fun `next reconnect attempt saturates at bounded maximum`() {
+        assertEquals(5, BillingReconnectPolicy.maxAttempts)
         assertEquals(1, BillingReconnectPolicy.nextAttempt(0))
         assertEquals(2, BillingReconnectPolicy.nextAttempt(1))
-        assertEquals(4, BillingReconnectPolicy.nextAttempt(4))
-        assertEquals(4, BillingReconnectPolicy.nextAttempt(99))
+        assertEquals(5, BillingReconnectPolicy.nextAttempt(4))
+        assertEquals(5, BillingReconnectPolicy.nextAttempt(99))
     }
 
     @Test
