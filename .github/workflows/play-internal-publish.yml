@@ -163,39 +163,7 @@ jobs:
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
           {
             echo "Native libraries packaged in the Play bundle:"
-            native_libs="$(unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so
-          python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-internal-bundle-budget.json
-          test -s app/build/outputs/mapping/playRelease/mapping.txt
-          echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
-
-      - name: Upload and commit Google Play edit
-        env:
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          PLAY_AAB: ${{ steps.bundle.outputs.path }}
-        run: |
-          set -euo pipefail
-          python tools/play_publisher.py             --bundle "$PLAY_AAB"             --credentials "$RUNNER_TEMP/google-play-service-account.json"             --status "$RELEASE_STATUS"             --commit | tee play-internal-publish-result.json
-
-      - name: Upload publishing receipt
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            play-internal-upload.sha256
-            play-internal-native-libraries.txt
-            play-internal-bundle-budget.json
-            app/build/outputs/mapping/playRelease/mapping.txt
-            play-internal-publish-result.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove temporary credentials
-        if: always()
-        run: |
-          rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
-          rm -f "$RUNNER_TEMP/google-play-service-account.json"
- || true)"
+            native_libs="$(unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || true)"
             if [ -n "$native_libs" ]; then
               printf '%s\n' "$native_libs"
             else
