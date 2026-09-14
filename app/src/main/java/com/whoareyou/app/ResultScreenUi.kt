@@ -108,7 +108,11 @@ fun ResultScreen(
             Spacer(Modifier.height(32.dp))
             Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
             Spacer(Modifier.height(16.dp))
-            BrandMascot(\n                mood = BrandMascotMood.CELEBRATE,\n                primary = accent,\n                secondary = secondaryAccent\n            )
+            BrandMascot(
+                mood = BrandMascotMood.CELEBRATE,
+                primary = accent,
+                secondary = secondaryAccent
+            )
             Spacer(Modifier.height(10.dp))
             QuizArtwork(quiz)
             Spacer(Modifier.height(18.dp))
