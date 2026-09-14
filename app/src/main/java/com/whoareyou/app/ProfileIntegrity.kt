@@ -19,6 +19,8 @@ object ProfileIntegrity {
         val latestScores = cleanScores(profile.latestScores)
         val previousScores = cleanScores(profile.previousScores)
             .filterKeys { it in latestScores }
+        val scoreHistory = cleanScoreHistory(profile.scoreHistory)
+            .filterKeys { it in latestScores }
         val completedQuizIds = cleanIds(profile.completedQuizIds).apply {
             addAll(latestScores.keys)
         }
@@ -27,6 +29,7 @@ object ProfileIntegrity {
             completedQuizIds = completedQuizIds,
             latestScores = latestScores,
             previousScores = previousScores,
+            scoreHistory = scoreHistory,
             announcedAchievementIds = cleanIds(profile.announcedAchievementIds),
             pendingAchievementIds = cleanIds(profile.pendingAchievementIds).toList(),
             matchCount = matchCount,
@@ -65,6 +68,14 @@ object ProfileIntegrity {
         .filter(String::isNotEmpty)
         .distinct()
         .toCollection(linkedSetOf())
+
+    private fun cleanScoreHistory(history: Map<String, List<Int>>): Map<String, List<Int>> = history.entries
+        .mapNotNull { (rawId, rawScores) ->
+            val id = rawId.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val scores = rawScores.map { it.coerceIn(0, 100) }.takeLast(ScoreHistoryEngine.MAX_SCORES_PER_QUIZ)
+            if (scores.isEmpty()) null else id to scores
+        }
+        .toMap()
 
     private fun cleanScores(scores: Map<String, Int>): Map<String, Int> = scores.entries
         .mapNotNull { (rawId, rawScore) ->
