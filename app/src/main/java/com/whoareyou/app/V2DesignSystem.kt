@@ -96,13 +96,13 @@ object V2Type {
         fontWeight = FontWeight.Black
     )
     val Supporting = TextStyle(
-        fontSize = 13.sp,
-        lineHeight = 19.sp,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
         fontWeight = FontWeight.Normal
     )
     val Caption = TextStyle(
-        fontSize = 11.sp,
-        lineHeight = 15.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.2.sp,
         fontWeight = FontWeight.Bold
     )
