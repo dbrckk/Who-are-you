@@ -62,7 +62,7 @@
     <string name="friend_match_explainer">Ton ami fait le même test et obtient immédiatement un score de compatibilité</string>
     <string name="retry">REFAIRE</string>
     <string name="done_button">TERMINER</string>
-    <string name="reset_local_data_button">RÉINITIALISER LES DONNÉES LOCALES</string>
+    <string name="reset_local_data_button">RÉINITIALISER LES DONNÉES DU PROFIL</string>
     <string name="reset_local_data_hint">Supprime ta progression, tes scores, tes séries et l’historique local des comparaisons sur cet appareil. Ton achat Google Play n’est pas annulé.</string>
     <string name="reset_local_data_title">Réinitialiser les données locales ?</string>
     <string name="reset_local_data_body">Cela supprime ton profil et ta progression de cet appareil et relance l’onboarding. Cette action est irréversible.</string>
