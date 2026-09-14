@@ -12,7 +12,7 @@ class SupportedAppLanguageTest {
 
     @Test
     fun everyOtherSystemLocaleUsesEnglish() {
-        listOf("en", "de", "es", "it", "pt", "ja", "zh", "ar", null).forEach { language ->
+        listOf("en", "de", "es", "it", "pt", "ja", "zh", "ar", "nl", "pl", "tr", null).forEach { language ->
             assertEquals("en", supportedAppLanguage(language))
         }
     }
