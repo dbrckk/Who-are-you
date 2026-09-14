@@ -57,7 +57,7 @@ fun V2PressableSurface(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
+            .heightIn(min = 52.dp)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
@@ -66,9 +66,9 @@ fun V2PressableSurface(
             .border(
                 width = if (focused) 2.dp else 0.dp,
                 color = if (focused) V2Colors.AccentCyan else Color.Transparent,
-                shape = RoundedCornerShape(18.dp)
+                shape = RoundedCornerShape(V2Radius.Compact)
             )
-            .clip(RoundedCornerShape(18.dp))
+            .clip(RoundedCornerShape(V2Radius.Compact))
             .background(background)
             .clickable(
                 interactionSource = interactionSource,
@@ -102,7 +102,7 @@ fun V2PressableCard(
 
     Card(
         modifier = modifier
-            .heightIn(min = 48.dp)
+            .heightIn(min = 52.dp)
             .onFocusChanged { focused = it.isFocused }
             .border(
                 width = if (focused) 2.dp else 0.dp,
