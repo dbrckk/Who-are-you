@@ -62,6 +62,7 @@
     <string name="no_right_answers">No right answers. Pick what feels most like you.</string>
     <string name="your_result">YOUR RESULT</string>
     <string name="profile_progress">PROFILE PROGRESS</string>
+    <string name="share_failed">Sharing isn’t available right now.</string>
     <string name="share_my_result">SHARE MY RESULT  ↗</string>
     <string name="compare_with_friend">COMPARE WITH A FRIEND  →</string>
     <string name="result_optional_actions">Optional — share or compare only if you want to.</string>
