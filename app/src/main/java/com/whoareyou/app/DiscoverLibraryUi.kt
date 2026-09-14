@@ -29,6 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -180,6 +182,7 @@ private fun LibraryChip(
             .clip(RoundedCornerShape(V2Radius.Pill))
             .background(if (selected) V2Colors.AccentViolet.copy(alpha = 0.18f) else V2Colors.Surface)
             .clickable(role = Role.Button, onClick = onClick)
+            .semantics { this.selected = selected }
             .padding(horizontal = 13.dp, vertical = 9.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
