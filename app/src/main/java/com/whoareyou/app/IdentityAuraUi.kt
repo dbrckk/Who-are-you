@@ -1,6 +1,5 @@
 package com.whoareyou.app
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -10,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -52,59 +52,65 @@ fun IdentityAura(
             .background(outerBrush),
         contentAlignment = Alignment.Center
     ) {
-        Canvas(Modifier.size(136.dp)) {
-            val center = this.center
-            val baseRadius = size.minDimension * 0.26f
+        Box(
+            Modifier
+                .size(136.dp)
+                .drawWithCache {
+                    val centerPoint = center
+                    val baseRadius = size.minDimension * 0.26f
+                    val innerBrush = Brush.radialGradient(
+                        colors = listOf(
+                            cool.copy(alpha = 0.90f),
+                            warm.copy(alpha = 0.52f),
+                            Color.Transparent
+                        ),
+                        center = centerPoint,
+                        radius = baseRadius * 1.65f
+                    )
+                    val orbitPoints = List(10) { index ->
+                        val angle = index * (Math.PI * 2.0 / 10.0) + normalized * 0.7
+                        val orbit = baseRadius * (1.55f + (index % 3) * 0.18f)
+                        Offset(
+                            x = centerPoint.x + cos(angle).toFloat() * orbit,
+                            y = centerPoint.y + sin(angle).toFloat() * orbit
+                        )
+                    }
 
-            drawCircle(
-                brush = Brush.radialGradient(
-                    colors = listOf(
-                        cool.copy(alpha = 0.90f),
-                        warm.copy(alpha = 0.52f),
-                        Color.Transparent
-                    ),
-                    center = center,
-                    radius = baseRadius * 1.65f
-                ),
-                radius = baseRadius * 1.65f,
-                center = center
-            )
-
-            drawCircle(
-                color = V2Colors.TextPrimary.copy(alpha = 0.82f),
-                radius = baseRadius * 0.62f,
-                center = center
-            )
-            drawCircle(
-                color = V2Colors.Ink.copy(alpha = 0.78f),
-                radius = baseRadius * 0.45f,
-                center = center
-            )
-
-            repeat(10) { index ->
-                val angle = index * (Math.PI * 2.0 / 10.0) + normalized * 0.7
-                val orbit = baseRadius * (1.55f + (index % 3) * 0.18f)
-                val point = Offset(
-                    x = center.x + cos(angle).toFloat() * orbit,
-                    y = center.y + sin(angle).toFloat() * orbit
-                )
-                drawCircle(
-                    color = if (index % 2 == 0) {
-                        warm.copy(alpha = 0.88f)
-                    } else {
-                        cool.copy(alpha = 0.82f)
-                    },
-                    radius = if (index % 3 == 0) 5.5f else 3.4f,
-                    center = point
-                )
-            }
-
-            drawCircle(
-                color = primary.copy(alpha = 0.24f),
-                radius = baseRadius * 1.28f,
-                center = center,
-                style = Stroke(width = 2.5f)
-            )
-        }
+                    onDrawBehind {
+                        drawCircle(
+                            brush = innerBrush,
+                            radius = baseRadius * 1.65f,
+                            center = centerPoint
+                        )
+                        drawCircle(
+                            color = V2Colors.TextPrimary.copy(alpha = 0.82f),
+                            radius = baseRadius * 0.62f,
+                            center = centerPoint
+                        )
+                        drawCircle(
+                            color = V2Colors.Ink.copy(alpha = 0.78f),
+                            radius = baseRadius * 0.45f,
+                            center = centerPoint
+                        )
+                        orbitPoints.forEachIndexed { index, point ->
+                            drawCircle(
+                                color = if (index % 2 == 0) {
+                                    warm.copy(alpha = 0.88f)
+                                } else {
+                                    cool.copy(alpha = 0.82f)
+                                },
+                                radius = if (index % 3 == 0) 5.5f else 3.4f,
+                                center = point
+                            )
+                        }
+                        drawCircle(
+                            color = primary.copy(alpha = 0.24f),
+                            radius = baseRadius * 1.28f,
+                            center = centerPoint,
+                            style = Stroke(width = 2.5f)
+                        )
+                    }
+                }
+        )
     }
 }
