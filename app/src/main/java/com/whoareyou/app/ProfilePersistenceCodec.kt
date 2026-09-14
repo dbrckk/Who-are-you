@@ -38,6 +38,33 @@ object ProfilePersistenceCodec {
         .sortedBy { it.first }
         .joinToString(";") { (key, value) -> "$key:$value" }
 
+    fun encodeScoreHistory(values: Map<String, List<Int>>): String = values.entries
+        .mapNotNull { (rawId, rawScores) ->
+            val id = rawId.trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val scores = rawScores.map { it.coerceIn(0, 100) }
+            if (scores.isEmpty()) return@mapNotNull null
+            id to scores
+        }
+        .sortedBy { it.first }
+        .joinToString(";") { (id, scores) ->
+            "$id:" + scores.joinToString("|")
+        }
+
+    fun decodeScoreHistory(raw: String?): Map<String, List<Int>> = raw
+        ?.split(';')
+        ?.mapNotNull { item ->
+            val parts = item.split(':', limit = 2)
+            if (parts.size != 2) return@mapNotNull null
+            val id = parts[0].trim().takeIf(String::isNotEmpty) ?: return@mapNotNull null
+            val scores = parts[1]
+                .split('|')
+                .mapNotNull { it.trim().toIntOrNull()?.coerceIn(0, 100) }
+            if (scores.isEmpty()) return@mapNotNull null
+            id to scores
+        }
+        ?.toMap()
+        ?: emptyMap()
+
     fun decodeStringMap(raw: String?): Map<String, String> = raw
         ?.split(';')
         ?.mapNotNull { item ->
