@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -142,6 +143,8 @@ fun DiscoverHub(
                 Spacer(Modifier.height(14.dp))
                 PrivacyOptionsCard(onPrivacyOptions = onPrivacyOptions)
             }
+            Spacer(Modifier.height(14.dp))
+            PrivacyAndSupportCard()
             Spacer(Modifier.height(108.dp))
         }
     }
@@ -236,6 +239,54 @@ private fun DiscoverHeroHeader() {
                 color = V2Colors.TextSecondary,
                 style = V2Type.Body
             )
+        }
+    }
+}
+
+@Composable
+private fun PrivacyAndSupportCard() {
+    val uriHandler = LocalUriHandler.current
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = RoundedCornerShape(V2Radius.Card),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Text(
+                text = stringResource(R.string.privacy_support_title),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = stringResource(R.string.privacy_support_body),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting
+            )
+            Spacer(Modifier.height(12.dp))
+            Button(
+                onClick = { uriHandler.openUri("https://dbrckk.github.io/Who-are-you/privacy/") },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Surface),
+                shape = RoundedCornerShape(V2Radius.Compact)
+            ) {
+                Text(
+                    text = stringResource(R.string.privacy_policy_button),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.BodyStrong
+                )
+            }
+            Spacer(Modifier.height(8.dp))
+            TextButton(
+                onClick = { uriHandler.openUri("mailto:dbrak7108@gmail.com") },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(R.string.contact_support_button),
+                    color = V2Colors.AccentCyan,
+                    style = V2Type.BodyStrong
+                )
+            }
         }
     }
 }
