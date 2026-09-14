@@ -35,8 +35,10 @@ class RuntimePerformanceContractTest(unittest.TestCase):
         self.assertIn('throw error', self.profile)
 
     def test_reduced_motion_removes_ambient_frame_loops(self):
-        for source in (self.quiz_visual, self.onboarding, self.discover):
+        for source in (self.quiz_visual, self.onboarding):
             self.assertIn('if (reduceMotion)', source)
+        self.assertNotIn('rememberInfiniteTransition', self.discover)
+        self.assertNotIn('infiniteRepeatable', self.discover)
         self.assertIn('glowScale?.value ?: 1f', self.quiz_visual)
 
     def test_app_reports_first_useful_draw(self):
