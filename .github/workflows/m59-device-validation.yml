@@ -67,5 +67,6 @@ jobs:
             device-logcat.txt
             device-android-runtime.txt
             device-exit-info.txt
+            device-screen-*.png
           if-no-files-found: warn
           retention-days: 14
