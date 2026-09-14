@@ -41,15 +41,10 @@ class AdManager(
                 publishPrivacyOptionsRequirement()
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) {
                     publishPrivacyOptionsRequirement()
-                    tryInitializeAds()
                 }
-                // Cached consent can already make ad requests eligible while the form check completes.
-                tryInitializeAds()
             },
             {
-                // Cached consent may still allow requests if the network update fails.
                 publishPrivacyOptionsRequirement()
-                tryInitializeAds()
             }
         )
     }
@@ -58,7 +53,6 @@ class AdManager(
         if (activity == null || !isPrivacyOptionsRequired()) return
         UserMessagingPlatform.showPrivacyOptionsForm(activity) {
             publishPrivacyOptionsRequirement()
-            tryInitializeAds()
         }
     }
 
@@ -67,13 +61,29 @@ class AdManager(
             ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
 
     fun onResultFinished(activity: Activity?, adsRemoved: Boolean, onContinue: () -> Unit) {
-        if (adsRemoved || activity == null || !adsInitialized || !consentInformation.canRequestAds()) {
+        if (adsRemoved || activity == null || !consentInformation.canRequestAds()) {
             onContinue()
             return
         }
 
         resultTransitionsSinceAd++
+
+        if (
+            resultTransitionsSinceAd == RESULTS_BETWEEN_ADS - 1 &&
+            timeCapSatisfied()
+        ) {
+            initializeAndLoadIfNeeded()
+            onContinue()
+            return
+        }
+
         if (resultTransitionsSinceAd < RESULTS_BETWEEN_ADS || !timeCapSatisfied()) {
+            onContinue()
+            return
+        }
+
+        if (!adsInitialized) {
+            initializeAndLoadIfNeeded()
             onContinue()
             return
         }
@@ -94,7 +104,6 @@ class AdManager(
             }
 
             override fun onAdDismissedFullScreenContent() {
-                load()
                 onContinue()
             }
 
@@ -103,7 +112,6 @@ class AdManager(
                     IllegalStateException("Ad show failed [${adError.code}]: ${adError.message}"),
                     mapOf("placement" to "result_interstitial", "stage" to "show", "domain" to adError.domain)
                 )
-                load()
                 onContinue()
             }
 
@@ -118,8 +126,12 @@ class AdManager(
         onPrivacyOptionsRequirementChanged(isPrivacyOptionsRequired())
     }
 
-    private fun tryInitializeAds() {
-        if (adsInitialized || !consentInformation.canRequestAds()) return
+    private fun initializeAndLoadIfNeeded() {
+        if (!consentInformation.canRequestAds()) return
+        if (adsInitialized) {
+            load()
+            return
+        }
         adsInitialized = true
         MobileAds.initialize(appContext) { load() }
     }
