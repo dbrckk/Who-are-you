@@ -28,6 +28,8 @@ class QuizScreenUiTest {
                 quiz = quiz,
                 questionIndex = questionIndex,
                 score = score,
+                isFinishing = false,
+                commitFailed = false,
                 onProgress = { nextQuestionIndex, nextScore ->
                     questionIndex = nextQuestionIndex
                     score = nextScore
