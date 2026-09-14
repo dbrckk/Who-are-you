@@ -27,6 +27,15 @@ class ResultScreenUiTest {
                 totalQuizCount = 30,
                 catalog = listOf(testQuiz()),
                 completed = setOf("result-ui-test"),
+                coverage = ProfileCoverage(
+                    knownTraitCount = 0,
+                    totalTraitCount = 0,
+                    coveragePercent = 0,
+                    averageConfidence = 0,
+                    strongTraitCount = 0,
+                    uncertainTraitCount = 0,
+                    traits = emptyList()
+                ),
                 onQuizSelected = { },
                 onDone = { doneCount++ },
                 onRetry = { retryCount++ }
