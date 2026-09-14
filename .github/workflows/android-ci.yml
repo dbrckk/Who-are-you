@@ -79,6 +79,9 @@ jobs:
       - name: Compile Compose UI instrumentation tests
         run: gradle :app:assembleDebugAndroidTest --stacktrace
 
+      - name: Compile benchmark variants
+        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace
+
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
