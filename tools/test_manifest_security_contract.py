@@ -28,6 +28,20 @@ class ManifestSecurityContractTest(unittest.TestCase):
         self.assertIn("onPremiumChanged(false)", self.billing)
         self.assertIn("ProfileStore.setAdsRemoved(appContext, false)", self.billing)
 
+    def test_top_level_compose_surfaces_handle_status_bar_insets(self):
+        paths = [
+            "DiscoverHubUi.kt",
+            "ProfileScreenUi.kt",
+            "QuizScreenUi.kt",
+            "ResultScreenUi.kt",
+            "ChallengeUi.kt",
+        ]
+        for name in paths:
+            source = (
+                ROOT / "app/src/main/java/com/whoareyou/app" / name
+            ).read_text(encoding="utf-8")
+            self.assertIn("statusBarsPadding()", source, name)
+
     def test_ad_show_failure_preloads_replacement(self):
         marker = "override fun onAdFailedToShowFullScreenContent"
         block = self.ads[self.ads.index(marker):]
