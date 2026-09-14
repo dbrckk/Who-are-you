@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -54,7 +55,11 @@ fun ProfileScreen(
     val reduceMotion = reducedMotionEnabled()
     var showResetDialog by remember { mutableStateOf(false) }
     var selectedTraitId by remember { mutableStateOf<String?>(null) }
+    var selectedJournalTrend by remember { mutableStateOf<LongitudinalTrend?>(null) }
     val catalogById = remember(catalog) { catalog.associateBy { it.id } }
+    val longitudinalByQuizId = remember(summary.longitudinalTrends) {
+        summary.longitudinalTrends.associateBy { it.quizId }
+    }
     val sortedDimensions = remember(summary.dimensions) {
         summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }
     }
@@ -227,6 +232,7 @@ fun ProfileScreen(
         } else {
             items(sortedDimensions, key = { it.quizId }, contentType = { "profile_dimension" }) { dimension ->
                 val quiz = catalogById[dimension.quizId]
+                val journalTrend = longitudinalByQuizId[dimension.quizId]
                 val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
                 val dimensionBrush = remember(accent, companion) {
@@ -249,6 +255,9 @@ fun ProfileScreen(
                     shape = RoundedCornerShape(V2Radius.Compact),
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable(enabled = journalTrend != null) {
+                            selectedJournalTrend = journalTrend
+                        }
                         .semantics(mergeDescendants = true) {
                             contentDescription = "${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%"
                         }
@@ -336,6 +345,17 @@ fun ProfileScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(Modifier.height(108.dp))
+        }
+    }
+
+    selectedJournalTrend?.let { trend ->
+        val title = catalogById[trend.quizId]?.title ?: trend.quizId
+        DimensionJournalEngine.build(trend.quizId, trend.points)?.let { journal ->
+            DimensionJournalDialog(
+                title = title,
+                journal = journal,
+                onDismiss = { selectedJournalTrend = null }
+            )
         }
     }
 
