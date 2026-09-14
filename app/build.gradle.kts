@@ -16,6 +16,7 @@ val uploadKeystorePath = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEYSTORE_P
 val uploadKeystorePassword = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD").orNull
 val uploadKeyAlias = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEY_ALIAS").orNull
 val uploadKeyPassword = providers.gradleProperty("WHO_ARE_YOU_UPLOAD_KEY_PASSWORD").orNull
+val effectiveUploadKeyPassword = uploadKeyPassword?.takeIf { it.isNotBlank() } ?: uploadKeystorePassword
 
 if (playReleaseRequested) {
     require(
@@ -44,8 +45,8 @@ if (playReleaseRequested) {
     require(!uploadKeyAlias.isNullOrBlank()) {
         "playRelease requires WHO_ARE_YOU_UPLOAD_KEY_ALIAS"
     }
-    require(!uploadKeyPassword.isNullOrBlank()) {
-        "playRelease requires WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
+    require(!effectiveUploadKeyPassword.isNullOrBlank()) {
+        "playRelease requires a key password or a keystore password usable as fallback"
     }
 }
 
@@ -92,7 +93,7 @@ android {
                 storeFile = file(uploadKeystorePath!!)
                 storePassword = uploadKeystorePassword
                 keyAlias = uploadKeyAlias
-                keyPassword = uploadKeyPassword
+                keyPassword = effectiveUploadKeyPassword
             }
         }
     }
