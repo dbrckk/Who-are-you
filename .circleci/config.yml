@@ -18,7 +18,7 @@ jobs:
           name: QA script syntax contracts
           command: |
             bash -n .github/scripts/android-device-validation.sh
-            python -m py_compile .github/scripts/validate-ui-hierarchy.py
+            python -m py_compile .github/scripts/validate-ui-hierarchy.py .github/scripts/validate-screenshot.py
 
 workflows:
   quality:
