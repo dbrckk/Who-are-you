@@ -38,6 +38,8 @@
     <string name="remove_ads_forever">SUPPRIMER LES PUBS À VIE</string>
     <string name="no_ads_ever">Plus aucune pub.</string>
     <string name="premium_once_no_subscription">%1$s une seule fois. Sans abonnement.</string>
+    <string name="premium_price_loading">Vérification du prix Google Play…</string>
+    <string name="remove_ads_price_loading_button">VÉRIFICATION DU PRIX…</string>
     <string name="premium_restore_copy">Ton achat est enregistré et restauré automatiquement.</string>
     <string name="premium_copy">Tous les tests, résultats, partages et défis restent disponibles. Seules les pubs disparaissent.</string>
     <string name="remove_ads_button">SUPPRIMER LES PUBS — %1$s</string>
