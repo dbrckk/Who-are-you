@@ -1,11 +1,15 @@
 package com.whoareyou.app
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 
 object ShareSafety {
     fun launch(context: Context, intent: Intent): Boolean = runCatching {
+        if (context !is Activity) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         context.startActivity(intent)
         true
     }.getOrElse { error ->
