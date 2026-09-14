@@ -13,7 +13,7 @@ import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 
 class AdManager(
-    private val context: Context,
+    context: Context,
     private val onPrivacyOptionsRequirementChanged: (Boolean) -> Unit = {}
 ) {
     companion object {
@@ -21,13 +21,14 @@ class AdManager(
         private const val MIN_MILLIS_BETWEEN_ADS = 7 * 60 * 1000L
     }
 
-    private val consentInformation = UserMessagingPlatform.getConsentInformation(context)
+    private val appContext = context.applicationContext
+    private val consentInformation = UserMessagingPlatform.getConsentInformation(appContext)
     private var interstitial: InterstitialAd? = null
     private var resultTransitionsSinceAd = 0
     private var lastAdShownAtElapsedRealtime = Long.MIN_VALUE
     private var adsInitialized = false
 
-    fun start() = start(context as? Activity)
+    fun start() = Unit
 
     fun start(activity: Activity?) {
         if (activity == null) return
@@ -120,7 +121,7 @@ class AdManager(
     private fun tryInitializeAds() {
         if (adsInitialized || !consentInformation.canRequestAds()) return
         adsInitialized = true
-        MobileAds.initialize(context) { load() }
+        MobileAds.initialize(appContext) { load() }
     }
 
     private fun timeCapSatisfied(): Boolean {
@@ -131,7 +132,7 @@ class AdManager(
     private fun load() {
         if (!adsInitialized || !consentInformation.canRequestAds() || interstitial != null) return
         InterstitialAd.load(
-            context,
+            appContext,
             BuildConfig.ADMOB_INTERSTITIAL_ID,
             AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
