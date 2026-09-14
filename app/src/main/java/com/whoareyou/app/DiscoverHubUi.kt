@@ -1,10 +1,5 @@
 package com.whoareyou.app
 
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -160,27 +155,6 @@ fun DiscoverHub(
 
 @Composable
 private fun DiscoverHeroHeader() {
-    val reduceMotion = reducedMotionEnabled()
-    val ambient = if (reduceMotion) null else rememberInfiniteTransition(label = "discoverHeroAmbient")
-    val glowScale = ambient?.animateFloat(
-        initialValue = 0.92f,
-        targetValue = 1.10f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(V2Motion.AmbientMillis),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "discoverGlowScale"
-    )
-    val glowAlpha = ambient?.animateFloat(
-        initialValue = 0.32f,
-        targetValue = 0.62f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(V2Motion.AmbientMillis + 800),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "discoverGlowAlpha"
-    )
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -201,13 +175,7 @@ private fun DiscoverHeroHeader() {
                 .align(Alignment.TopEnd)
                 .offset(x = 34.dp, y = (-26).dp)
                 .size(150.dp)
-                .graphicsLayer {
-                    val scale = glowScale?.value ?: 1f
-                    val alphaValue = glowAlpha?.value ?: 0.46f
-                    scaleX = scale
-                    scaleY = scale
-                    alpha = alphaValue
-                }
+                .graphicsLayer { alpha = 0.46f }
                 .clip(CircleShape)
                 .background(
                     Brush.radialGradient(
@@ -221,11 +189,9 @@ private fun DiscoverHeroHeader() {
                 .offset(x = (-30).dp, y = 28.dp)
                 .size(130.dp)
                 .graphicsLayer {
-                    val scale = glowScale?.value ?: 1f
-                    val alphaValue = glowAlpha?.value ?: 0.46f
-                    scaleX = 1.06f / scale
-                    scaleY = 1.06f / scale
-                    alpha = alphaValue * 0.72f
+                    scaleX = 1.06f
+                    scaleY = 1.06f
+                    alpha = 0.33f
                 }
                 .clip(CircleShape)
                 .background(
