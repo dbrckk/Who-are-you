@@ -100,6 +100,12 @@ jobs:
         id: bundle
         run: |
           set -euo pipefail
+          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n 1)"
+          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n 1)"
+          if [ -z "$VERSION_NAME" ] || [ -z "$VERSION_CODE" ]; then
+            echo "Unable to resolve versionName/versionCode from app/build.gradle.kts"
+            exit 1
+          fi
           mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -maxdepth 1 -type f -name '*.aab' -print)
           if [ "${#bundles[@]}" -ne 1 ]; then
             echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
@@ -107,16 +113,20 @@ jobs:
             exit 1
           fi
           PLAY_AAB="${bundles[0]}"
+          OUTPUT_AAB="who-are-you-play-${VERSION_NAME}-${VERSION_CODE}.aab"
+          ARTIFACT_NAME="who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
-          cp "$PLAY_AAB" who-are-you-play-0.2.2-4.aab
+          cp "$PLAY_AAB" "$OUTPUT_AAB"
+          echo "output_aab=$OUTPUT_AAB" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
 
       - name: Upload signed Play candidate
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-play-candidate-0.2.2-4
+          name: ${{ steps.bundle.outputs.artifact_name }}
           path: |
-            who-are-you-play-0.2.2-4.aab
+            ${{ steps.bundle.outputs.output_aab }}
             play-candidate.sha256
           if-no-files-found: error
           retention-days: 30
