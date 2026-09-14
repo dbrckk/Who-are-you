@@ -1,6 +1,8 @@
 package com.whoareyou.app
 
 object BillingReconnectPolicy {
+    const val maxAttempts = 5
+
     private val delaysMillis = longArrayOf(
         1_000L,
         2_000L,
@@ -13,5 +15,5 @@ object BillingReconnectPolicy {
         delaysMillis[attempt.coerceIn(0, delaysMillis.lastIndex)]
 
     fun nextAttempt(attempt: Int): Int =
-        (attempt + 1).coerceAtMost(delaysMillis.lastIndex)
+        (attempt + 1).coerceAtMost(maxAttempts)
 }
