@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -17,9 +18,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
@@ -35,6 +39,7 @@ fun V2PressableSurface(
     content: @Composable () -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    var focused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val background by animateColorAsState(
@@ -56,6 +61,12 @@ fun V2PressableSurface(
                 scaleX = scale
                 scaleY = scale
             }
+            .onFocusChanged { focused = it.isFocused }
+            .border(
+                width = if (focused) 2.dp else 0.dp,
+                color = if (focused) V2Colors.AccentCyan else Color.Transparent,
+                shape = RoundedCornerShape(18.dp)
+            )
             .clip(RoundedCornerShape(18.dp))
             .background(background)
             .clickable(
@@ -79,6 +90,7 @@ fun V2PressableCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
+    var focused by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
@@ -90,6 +102,12 @@ fun V2PressableCard(
     Card(
         modifier = modifier
             .heightIn(min = 48.dp)
+            .onFocusChanged { focused = it.isFocused }
+            .border(
+                width = if (focused) 2.dp else 0.dp,
+                color = if (focused) V2Colors.AccentCyan else Color.Transparent,
+                shape = shape
+            )
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
