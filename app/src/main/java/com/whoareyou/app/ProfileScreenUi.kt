@@ -193,6 +193,10 @@ fun ProfileScreen(
                     catalog = catalog
                 )
             }
+            if (summary.narrative.insights.isNotEmpty()) {
+                Spacer(Modifier.height(18.dp))
+                ProfileNarrativeCard(summary.narrative)
+            }
             if (summary.traitTimelines.any { it.points.size >= 2 }) {
                 Spacer(Modifier.height(18.dp))
                 TraitTimelineCard(
