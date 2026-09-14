@@ -45,6 +45,7 @@ validate_evidence_matrix() {
     "candidate-large"
     "candidate-reduced-motion"
     "candidate-landscape"
+    "candidate-compact-font-130"
   )
 
   : > device-validation-summary.txt
@@ -91,6 +92,30 @@ capture_display_variant() {
   adb shell wm size "$size"
   adb shell wm density "$density"
   adb shell settings put system font_scale 1.0
+  adb shell am force-stop "$PACKAGE"
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 3
+  capture_visual_evidence "$label"
+  {
+    echo "label=$label"
+    adb shell wm size
+    adb shell wm density
+    printf 'font_scale='
+    adb shell settings get system font_scale
+  } > "device-display-$label.txt"
+}
+
+capture_compact_accessibility_variant() {
+  local label="$1"
+  local size="$2"
+  local density="$3"
+  local font_scale="$4"
+
+  adb shell wm size "$size"
+  adb shell wm density "$density"
+  adb shell settings put system font_scale "$font_scale"
   adb shell am force-stop "$PACKAGE"
   START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
   printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
@@ -212,6 +237,7 @@ capture_accessibility_variant "candidate-font-130" "1.30"
 adb shell settings put system font_scale 1.0
 
 capture_display_variant "candidate-compact" "720x1600" "320"
+capture_compact_accessibility_variant "candidate-compact-font-130" "720x1600" "320" "1.30"
 capture_display_variant "candidate-large" "1600x2560" "320"
 adb shell wm size reset
 adb shell wm density reset
