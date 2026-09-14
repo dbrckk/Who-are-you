@@ -89,6 +89,19 @@ jobs:
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
+      - name: Upload CI diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-ci-diagnostics-${{ github.sha }}
+          path: |
+            app/build/reports/tests/
+            app/build/reports/lint-results-debug.html
+            app/build/reports/lint-results-debug.xml
+            app/build/reports/androidTests/
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Build debug APK
         run: gradle :app:assembleDebug --stacktrace
 
