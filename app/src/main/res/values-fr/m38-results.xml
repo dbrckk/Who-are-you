@@ -15,6 +15,7 @@
     <string name="result_context_label">À GARDER EN CONTEXTE</string>
     <string name="result_context_body">Il s’agit d’un signal ludique d’introspection, pas d’un diagnostic ni d’une étiquette psychologique figée. Refaire le test peut aussi montrer comment le contexte fait évoluer tes réponses.</string>
     <string name="result_next_label">PROCHAINE EXPLORATION</string>
+    <string name="result_next_profile_gap">Ce test cible une partie de ton profil encore peu documentée ou incertaine.</string>
     <string name="result_next_same_facet">Reste dans le même univers et ajoute un autre angle à cette partie de ta carte.</string>
     <string name="result_next_complementary">Ouvre une autre facette pour rendre ton profil plus complet et moins unidimensionnel.</string>
     <string name="result_next_retake">Cet univers est déjà cartographié. Reprends une dimension liée pour voir si ton profil évolue.</string>
