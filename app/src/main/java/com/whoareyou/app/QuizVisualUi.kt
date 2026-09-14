@@ -95,28 +95,19 @@ fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = fa
     val reduceMotion = reducedMotionEnabled()
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
-    val glowScale: Float
-    val glowAlpha: Float
-    if (reduceMotion) {
-        glowScale = 1f
-        glowAlpha = 0.46f
-    } else {
-        val ambient = rememberInfiniteTransition(label = "quizArtworkAmbient")
-        val animatedScale by ambient.animateFloat(
-            initialValue = 0.90f,
-            targetValue = 1.12f,
-            animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis), repeatMode = RepeatMode.Reverse),
-            label = "quizArtworkGlowScale"
-        )
-        val animatedAlpha by ambient.animateFloat(
-            initialValue = 0.32f,
-            targetValue = 0.62f,
-            animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis + 700), repeatMode = RepeatMode.Reverse),
-            label = "quizArtworkGlowAlpha"
-        )
-        glowScale = animatedScale
-        glowAlpha = animatedAlpha
-    }
+    val ambient = if (reduceMotion) null else rememberInfiniteTransition(label = "quizArtworkAmbient")
+    val glowScale = ambient?.animateFloat(
+        initialValue = 0.90f,
+        targetValue = 1.12f,
+        animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis), repeatMode = RepeatMode.Reverse),
+        label = "quizArtworkGlowScale"
+    )
+    val glowAlpha = ambient?.animateFloat(
+        initialValue = 0.32f,
+        targetValue = 0.62f,
+        animationSpec = infiniteRepeatable(tween(V2Motion.AmbientMillis + 700), repeatMode = RepeatMode.Reverse),
+        label = "quizArtworkGlowAlpha"
+    )
 
     Box(
         modifier = modifier.fillMaxWidth().height(if (compact) 118.dp else 172.dp).clip(shape)
