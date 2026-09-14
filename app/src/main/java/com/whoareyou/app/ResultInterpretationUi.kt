@@ -2,6 +2,7 @@ package com.whoareyou.app
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,9 +32,10 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
     val summary = remember(score) { ResultInterpretationEngine.derive(score) }
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
+    val reduceMotion = reducedMotionEnabled()
     val animatedNuance by animateFloatAsState(
         targetValue = summary.nuancePercent / 100f,
-        animationSpec = tween(V2Motion.EmphasizedMillis),
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
         label = "resultNuanceProgress"
     )
     val pole = if (summary.direction == ResultDirection.LOW) quiz.metricLow else quiz.metricHigh
