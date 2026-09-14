@@ -18,6 +18,11 @@ private val Context.profileDataStore by preferencesDataStore(
     corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() }
 )
 
+data class QuizResultCommit(
+    val changed: Boolean,
+    val persistedScore: Int
+)
+
 data class StoredProfile(
     val completedQuizIds: Set<String> = emptySet(),
     val latestScores: Map<String, Int> = emptyMap(),
@@ -58,27 +63,40 @@ object ProfileStore {
         .catch { emit(emptyPreferences()) }
         .map(::decodeProfile)
 
-    suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null): Boolean {
+    suspend fun commitQuizResult(
+        context: Context,
+        quizId: String,
+        score: Int,
+        attemptId: String? = null
+    ): QuizResultCommit? {
         val normalizedQuizId = quizId.trim()
-        if (normalizedQuizId.isEmpty()) return false
+        if (normalizedQuizId.isEmpty()) return null
 
-        var changed = false
+        val normalizedScore = score.coerceIn(0, 100)
+        var result = QuizResultCommit(changed = false, persistedScore = normalizedScore)
+
         context.profileDataStore.edit { prefs ->
             val normalizedAttemptId = attemptId?.trim()?.takeIf { it.isNotEmpty() }
             val legacyAttempts = ProfilePersistenceCodec.decodeStringMap(prefs[lastQuizAttemptIdsKey])
             val committedAttempts = ProfilePersistenceCodec.decodeList(prefs[committedQuizAttemptIdsKey]).toMutableList().apply {
                 legacyAttempts.values.filterNot(::contains).forEach(::add)
             }
+            val latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey])
+
             if (normalizedAttemptId != null && normalizedAttemptId in committedAttempts) {
+                result = QuizResultCommit(
+                    changed = false,
+                    persistedScore = latestScores[normalizedQuizId] ?: normalizedScore
+                )
                 return@edit
             }
 
             val completed = ProfilePersistenceCodec.decodeSet(prefs[completedKey]).toMutableSet().apply { add(normalizedQuizId) }
             val history = ScoreHistoryEngine.update(
-                latestScores = ProfilePersistenceCodec.decodeScores(prefs[scoresKey]),
+                latestScores = latestScores,
                 previousScores = ProfilePersistenceCodec.decodeScores(prefs[previousScoresKey]),
                 quizId = normalizedQuizId,
-                score = score
+                score = normalizedScore
             )
             prefs[completedKey] = completed.sorted().joinToString(",")
             prefs[scoresKey] = ProfilePersistenceCodec.encodeScores(history.latestScores)
@@ -93,11 +111,18 @@ object ProfileStore {
                     legacyAttempts + (normalizedQuizId to normalizedAttemptId)
                 )
             }
-            changed = true
+            result = QuizResultCommit(
+                changed = true,
+                persistedScore = history.latestScores[normalizedQuizId] ?: normalizedScore
+            )
         }
-        if (changed) announceNewAchievements(context)
-        return changed
+
+        if (result.changed) announceNewAchievements(context)
+        return result
     }
+
+    suspend fun saveQuizResult(context: Context, quizId: String, score: Int, attemptId: String? = null): Boolean =
+        commitQuizResult(context, quizId, score, attemptId)?.changed ?: false
 
     suspend fun saveMatchResult(context: Context, compatibility: Int) {
         val score = compatibility.coerceIn(0, 100)
