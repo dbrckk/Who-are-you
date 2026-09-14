@@ -181,6 +181,13 @@ fun ProfileScreen(
                     onTraitClick = { selectedTraitId = it }
                 )
             }
+            if (summary.longitudinalTrends.isNotEmpty()) {
+                Spacer(Modifier.height(18.dp))
+                LongitudinalTrendsCard(
+                    trends = summary.longitudinalTrends,
+                    catalog = catalog
+                )
+            }
             if (
                 summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
                 summary.traitEvolution.newEvidence.isNotEmpty()
