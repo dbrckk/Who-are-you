@@ -31,7 +31,17 @@ capture_visual_evidence() {
   display_size="${size_line##*: }"
   density_dpi="${density_line##*: }"
 
-  python3 .github/scripts/validate-ui-hierarchy.py     "device-ui-$label.xml"     --package "$PACKAGE"     --size "$display_size"     --density "$density_dpi"     | tee "device-ui-report-$label.txt"
+  python3 .github/scripts/validate-screenshot.py \
+    "device-screen-$label.png" \
+    --size "$display_size" \
+    | tee "device-screen-report-$label.txt"
+
+  python3 .github/scripts/validate-ui-hierarchy.py \
+    "device-ui-$label.xml" \
+    --package "$PACKAGE" \
+    --size "$display_size" \
+    --density "$density_dpi" \
+    | tee "device-ui-report-$label.txt"
 }
 
 validate_evidence_matrix() {
@@ -50,7 +60,11 @@ validate_evidence_matrix() {
 
   : > device-validation-summary.txt
   for label in "${labels[@]}"; do
-    for artifact in       "device-screen-$label.png"       "device-ui-$label.xml"       "device-ui-report-$label.txt"; do
+    for artifact in \
+      "device-screen-$label.png" \
+      "device-screen-report-$label.txt" \
+      "device-ui-$label.xml" \
+      "device-ui-report-$label.txt"; do
       test -s "$artifact"
       printf 'ok %s\n' "$artifact" >> device-validation-summary.txt
     done
