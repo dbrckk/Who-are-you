@@ -2,6 +2,8 @@ package com.whoareyou.app
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -256,6 +258,17 @@ fun BrandLoadingScreen(
     modifier: Modifier = Modifier,
     tag: String = "startup_loading"
 ) {
+    val reduceMotion = reducedMotionEnabled()
+    val loadingAmbient = if (reduceMotion) null else rememberInfiniteTransition(label = "brandLoadingAmbient")
+    val loadingGlow = loadingAmbient?.animateFloat(
+        initialValue = 0.86f,
+        targetValue = 1.08f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(V2Motion.AmbientMillis),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "brandLoadingGlow"
+    )
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -271,6 +284,25 @@ fun BrandLoadingScreen(
             ),
         contentAlignment = Alignment.Center
     ) {
+        Box(
+            modifier = Modifier
+                .size(190.dp)
+                .graphicsLayer {
+                    val scale = loadingGlow?.value ?: 1f
+                    scaleX = scale
+                    scaleY = scale
+                }
+                .clip(CircleShape)
+                .background(
+                    Brush.radialGradient(
+                        listOf(
+                            V2Colors.Violet.copy(alpha = 0.16f),
+                            V2Colors.Cyan.copy(alpha = 0.07f),
+                            Color.Transparent
+                        )
+                    )
+                )
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
