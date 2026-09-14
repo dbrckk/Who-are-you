@@ -8,11 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class M53PublicationContractTest(unittest.TestCase):
-    def test_privacy_page_exists_and_is_explicitly_pre_release(self):
+    def test_privacy_page_is_publication_ready(self):
         html = (ROOT / "docs/privacy/index.html").read_text(encoding="utf-8")
         self.assertIn("Privacy Policy", html)
-        self.assertIn("Pre-release notice", html)
-        self.assertIn("REQUIRED BEFORE PUBLIC RELEASE", html)
+        self.assertNotIn("Pre-release notice", html)
+        self.assertNotIn("REQUIRED BEFORE PUBLIC RELEASE", html)
+        self.assertIn("dbrak7108@gmail.com", html)
         self.assertIn("Google Mobile Ads", html)
         self.assertIn("remove_ads_lifetime", html)
 
