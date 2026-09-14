@@ -78,6 +78,26 @@ class ProfileStorePersistenceTest {
     }
 
     @Test
+    fun mismatchedReplayCannotFabricatePersistedScore() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val firstQuiz = "replay-source-${UUID.randomUUID()}"
+        val secondQuiz = "replay-target-${UUID.randomUUID()}"
+        val attemptId = UUID.randomUUID().toString()
+
+        runBlocking {
+            val first = ProfileStore.commitQuizResult(context, firstQuiz, 64, attemptId)
+            assertEquals(true, first?.changed)
+            assertEquals(64, first?.persistedScore)
+
+            val mismatched = ProfileStore.commitQuizResult(context, secondQuiz, 91, attemptId)
+            assertEquals(null, mismatched)
+
+            val profile = ProfileStore.observe(context).first()
+            assertFalse(secondQuiz in profile.latestScores)
+        }
+    }
+
+    @Test
     fun quizResultNormalizesIdAndScoreBeforePersistence() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val quizId = "normalized-${UUID.randomUUID()}"
