@@ -164,10 +164,11 @@ private fun WhoAreYouApp() {
         navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER)
     }
 
+    val reduceMotion = reducedMotionEnabled()
     Box(Modifier.fillMaxSize()) {
         AnimatedContent(
             targetState = screen,
-            transitionSpec = { premiumScreenTransition() },
+            transitionSpec = { premiumScreenTransition(reduceMotion) },
             label = "screen",
             modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}")
         ) { destination ->
