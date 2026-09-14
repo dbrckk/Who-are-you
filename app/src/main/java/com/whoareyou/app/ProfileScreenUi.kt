@@ -233,6 +233,11 @@ fun ProfileScreen(
             items(sortedDimensions, key = { it.quizId }, contentType = { "profile_dimension" }) { dimension ->
                 val quiz = catalogById[dimension.quizId]
                 val journalTrend = longitudinalByQuizId[dimension.quizId]
+                val historyHint = if (journalTrend != null) {
+                    stringResource(R.string.profile_history_available)
+                } else {
+                    ""
+                }
                 val accent = quiz?.let(QuizVisuals::accentFor) ?: V2Colors.AccentViolet
                 val companion = quiz?.let(QuizVisuals::companionAccentFor) ?: V2Colors.AccentCyan
                 val dimensionBrush = remember(accent, companion) {
@@ -259,7 +264,13 @@ fun ProfileScreen(
                             selectedJournalTrend = journalTrend
                         }
                         .semantics(mergeDescendants = true) {
-                            contentDescription = "${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%"
+                            contentDescription = buildString {
+                                append("${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%")
+                                if (historyHint.isNotBlank()) {
+                                    append(". ")
+                                    append(historyHint)
+                                }
+                            }
                         }
                 ) {
                     Column(
