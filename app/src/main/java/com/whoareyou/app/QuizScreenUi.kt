@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,6 +47,8 @@ fun QuizScreen(
     val scrollState = rememberScrollState()
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
+
+    BackHandler(enabled = isFinishing) { }
 
     LaunchedEffect(quiz.id, safeQuestionIndex) {
         scrollState.scrollTo(0)
