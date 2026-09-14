@@ -34,8 +34,13 @@ fun PersonalizedDiscoverDashboard(
     onOpenProfile: (() -> Unit)? = null,
     onQuizSelected: ((Quiz) -> Unit)? = null
 ) {
-    val recommendation = remember(quizzes, completed, profile.dimensions) {
-        DiscoverPersonalization.recommendation(quizzes, completed, profile.dimensions)
+    val recommendation = remember(quizzes, completed, profile.dimensions, profile.coverage) {
+        DiscoverPersonalization.recommendation(
+            quizzes = quizzes,
+            completed = completed,
+            dimensions = profile.dimensions,
+            coverage = profile.coverage
+        )
     }
     val stage = remember(profile.completedCount, profile.signature) { DiscoverPersonalization.stage(profile) }
     val strongest = remember(profile.dimensions) { DiscoverPersonalization.strongestDimension(profile.dimensions) }
@@ -161,6 +166,7 @@ fun PersonalizedDiscoverDashboard(
 
         if (nextQuiz != null) {
             val reason = when (recommendation.reason) {
+                DiscoverRecommendationReason.PROFILE_GAP -> R.string.personalized_next_profile_gap
                 DiscoverRecommendationReason.NEW_THEME -> R.string.personalized_next_new_theme
                 DiscoverRecommendationReason.UNFINISHED -> R.string.personalized_next_unfinished
                 DiscoverRecommendationReason.RETAKE -> R.string.personalized_next_retake
