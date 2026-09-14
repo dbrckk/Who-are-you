@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.border
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -64,7 +66,19 @@ fun CatalogUnavailableScreen() {
                 .widthIn(max = 560.dp)
                 .verticalScroll(rememberScrollState())
                 .clip(RoundedCornerShape(V2Radius.Hero))
-                .background(V2Colors.SurfaceGlass)
+                .border(
+                    BorderStroke(1.dp, V2Colors.HairlineStrong),
+                    RoundedCornerShape(V2Radius.Hero)
+                )
+                .background(
+                    Brush.linearGradient(
+                        listOf(
+                            V2Colors.SurfaceGlass,
+                            V2Colors.Violet.copy(alpha = 0.08f),
+                            V2Colors.Cyan.copy(alpha = 0.04f)
+                        )
+                    )
+                )
                 .padding(horizontal = 24.dp, vertical = 30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -165,6 +179,10 @@ fun OnboardingScreen(onStart: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(V2Radius.Hero))
+                    .border(
+                        BorderStroke(1.dp, V2Colors.Hairline),
+                        RoundedCornerShape(V2Radius.Hero)
+                    )
                     .background(
                         Brush.linearGradient(
                             listOf(
