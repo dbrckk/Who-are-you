@@ -74,7 +74,7 @@ fun BrandMascot(
     ) {
         Canvas(Modifier.size(size)) {
             val center = this.center
-            val r = size.minDimension * 0.31f
+            val r = this.size.minDimension * 0.31f
 
             drawCircle(
                 brush = Brush.radialGradient(
@@ -84,9 +84,9 @@ fun BrandMascot(
                         Color.Transparent
                     ),
                     center = center,
-                    radius = size.minDimension * 0.49f
+                    radius = this.size.minDimension * 0.49f
                 ),
-                radius = size.minDimension * 0.49f,
+                radius = this.size.minDimension * 0.49f,
                 center = center
             )
 
