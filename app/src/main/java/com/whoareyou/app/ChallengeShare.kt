@@ -32,7 +32,10 @@ object ChallengeShare {
             putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.challenge_share_subject))
             putExtra(Intent.EXTRA_TEXT, text)
         }
-        context.startActivity(Intent.createChooser(intent, context.getString(R.string.challenge_share_chooser)))
+        ShareSafety.launch(
+            context,
+            Intent.createChooser(intent, context.getString(R.string.challenge_share_chooser))
+        )
     }
 
     fun parse(uri: Uri?): IncomingChallenge? {
