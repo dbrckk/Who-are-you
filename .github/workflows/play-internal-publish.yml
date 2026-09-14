@@ -44,10 +44,28 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
+
       - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
+
+      - name: Python quality tests
+        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
+
+      - name: JVM unit tests
+        run: gradle :app:testDebugUnitTest --stacktrace
+
+      - name: Compile instrumentation tests
+        run: gradle :app:assembleDebugAndroidTest --stacktrace
+
+      - name: Android lint
+        run: gradle :app:lintDebug --stacktrace
 
       - name: Set up Python publishing dependencies
         run: python -m pip install --disable-pip-version-check google-auth requests
@@ -59,7 +77,7 @@ jobs:
           UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
         run: |
           set -euo pipefail
@@ -102,9 +120,10 @@ jobs:
           ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
         run: |
           set -euo pipefail
+          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
           gradle :app:bundlePlayRelease \
             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID" \
             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID" \
@@ -118,6 +137,8 @@ jobs:
         id: bundle
         run: |
           set -euo pipefail
+          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n 1)"
+          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n 1)"
           mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -type f -name '*.aab' -print)
           if [ "${#bundles[@]}" -ne 1 ]; then
             echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
@@ -126,7 +147,41 @@ jobs:
           PLAY_AAB="${bundles[0]}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
+          {
+            echo "Native libraries packaged in the Play bundle:"
+            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so
+      - name: Upload and commit Google Play edit
+        env:
+          RELEASE_STATUS: ${{ inputs.release_status }}
+          PLAY_AAB: ${{ steps.bundle.outputs.path }}
+        run: |
+          set -euo pipefail
+          python tools/play_publisher.py \
+            --bundle "$PLAY_AAB" \
+            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
+            --status "$RELEASE_STATUS" \
+            --commit | tee play-internal-publish-result.json
+
+      - name: Upload publishing receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.bundle.outputs.artifact_name }}
+          path: |
+            play-internal-upload.sha256
+            play-internal-native-libraries.txt
+            play-internal-publish-result.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove temporary credentials
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
+          rm -f "$RUNNER_TEMP/google-play-service-account.json"
+ || echo "(none)"
+          } | tee play-internal-native-libraries.txt
           echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
 
       - name: Upload and commit Google Play edit
         env:
