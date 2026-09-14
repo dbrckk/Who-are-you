@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: m56-main-rc-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release_candidate:
     runs-on: ubuntu-latest
