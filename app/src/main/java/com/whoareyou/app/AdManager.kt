@@ -30,6 +30,12 @@ class AdManager(
 
     fun start() = Unit
 
+    fun close() {
+        interstitial = null
+        resultTransitionsSinceAd = 0
+        onPrivacyOptionsRequirementChanged(false)
+    }
+
     fun start(activity: Activity?) {
         if (activity == null) return
 
