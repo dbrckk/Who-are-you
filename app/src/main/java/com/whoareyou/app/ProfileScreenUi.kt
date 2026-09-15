@@ -35,7 +35,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -53,6 +55,11 @@ fun ProfileScreen(
     onResetLocalData: () -> Unit
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val sectionGap = if (constrainedLayout) 14.dp else 18.dp
+    val dimensionPadding = if (constrainedLayout) 15.dp else 18.dp
     val reduceMotion = reducedMotionEnabled()
     var showResetDialog by remember { mutableStateOf(false) }
     var selectedTraitId by remember { mutableStateOf<String?>(null) }
@@ -134,7 +141,7 @@ fun ProfileScreen(
                     textAlign = TextAlign.Center
                 )
             }
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
             Text(
                 stringResource(R.string.profile_optional_social_actions),
                 color = V2Colors.TextSecondary,
@@ -180,7 +187,7 @@ fun ProfileScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             summary.nextQuizRecommendation?.let { recommendation ->
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 NextQuizRecommendationCard(
                     recommendation = recommendation,
                     catalog = catalog,
@@ -188,27 +195,27 @@ fun ProfileScreen(
                 )
             }
             if (summary.coverage.totalTraitCount > 0) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 ProfileKnowledgeMapCard(
                     coverage = summary.coverage,
                     onTraitClick = { selectedTraitId = it }
                 )
             }
             if (summary.longitudinalTrends.isNotEmpty()) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 LongitudinalTrendsCard(
                     trends = summary.longitudinalTrends,
                     catalog = catalog
                 )
             }
             if (summary.narrative.insights.isNotEmpty()) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 ProfileNarrativeCard(summary.narrative)
             }
             if (summary.traitTimelines.any { it.points.size >= 2 }) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 TraitTimelineCard(
                     timelines = summary.traitTimelines,
                     catalog = catalog
@@ -218,18 +225,18 @@ fun ProfileScreen(
                 summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
                 summary.traitEvolution.newEvidence.isNotEmpty()
             ) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 TraitEvolutionCard(
                     evolution = summary.traitEvolution,
                     catalog = catalog
                 )
             }
             if (summary.traitGraph.traits.isNotEmpty()) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 TraitGraphCard(summary.traitGraph)
             }
             if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
-                Spacer(Modifier.height(18.dp))
+                Spacer(Modifier.height(sectionGap))
                 ProfileInsightCards(summary)
             }
             Spacer(Modifier.height(14.dp))
@@ -297,7 +304,7 @@ fun ProfileScreen(
                     Column(
                         Modifier
                             .background(dimensionBrush)
-                            .padding(18.dp)
+                            .padding(dimensionPadding)
                     ) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Column(Modifier.weight(1f)) {
@@ -345,7 +352,7 @@ fun ProfileScreen(
         }
 
         item {
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(sectionGap))
             Button(
                 onClick = { showResetDialog = true },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
@@ -367,7 +374,7 @@ fun ProfileScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(sectionGap))
             Text(
                 stringResource(R.string.disclaimer),
                 color = V2Colors.TextSecondary,
