@@ -88,6 +88,7 @@ fun ResultNextExplorationCard(
                     onQuizSelected(nextQuiz)
                 }.onFailure {
                     startedRecommendationKey = null
+                    AppEvents.recommendationCancel(nextQuiz.id)
                     AppEvents.recordError(
                         it,
                         mapOf(
