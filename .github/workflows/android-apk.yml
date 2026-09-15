@@ -43,8 +43,23 @@ jobs:
       - name: Android lint
         run: gradle :app:lintDebug --stacktrace
 
+      - name: Compile Compose UI instrumentation tests
+        run: gradle :app:assembleDebugAndroidTest --stacktrace
+
       - name: Build installable debug APK
         run: gradle :app:assembleDebug --stacktrace
+
+      - name: Upload validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-apk-validation-${{ github.sha }}
+          path: |
+            app/build/reports/tests/
+            app/build/reports/lint-results-debug.html
+            app/build/reports/lint-results-debug.xml
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Prepare APK
         run: |
