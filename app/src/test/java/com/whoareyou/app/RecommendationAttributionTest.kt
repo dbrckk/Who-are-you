@@ -37,6 +37,32 @@ class RecommendationAttributionTest {
     }
 
     @Test
+    fun `duplicate pending recommendation start is idempotent`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val duplicate = RecommendationAttribution.recommendationStarted(
+            started,
+            "values",
+            signatureGuided = true
+        )
+
+        assertEquals(started, duplicate)
+    }
+
+    @Test
+    fun `different recommendation replaces pending handoff`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val replacement = RecommendationAttribution.recommendationStarted(
+            started,
+            "social",
+            signatureGuided = false
+        )
+
+        assertEquals("social", replacement.attempt?.quizId)
+        assertEquals(RecommendationMode.GENERIC, replacement.attempt?.mode)
+        assertTrue(replacement.awaitingTestStart)
+    }
+
+    @Test
     fun `cancel pending clears matching handoff`() {
         val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
         val cancelled = RecommendationAttribution.cancelPending(started, "values")
