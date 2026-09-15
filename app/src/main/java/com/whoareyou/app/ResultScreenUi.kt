@@ -34,7 +34,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -59,6 +61,13 @@ fun ResultScreen(
     onRetry: () -> Unit
 ) {
     val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val sectionGap = if (constrainedLayout) 14.dp else 18.dp
+    val cardPadding = if (constrainedLayout) 18.dp else 24.dp
+    val heroScoreSize = if (constrainedLayout) 48.sp else 54.sp
+    val heroScoreLineHeight = if (constrainedLayout) 54.sp else 60.sp
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
@@ -120,9 +129,9 @@ fun ResultScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 22.dp else 32.dp))
             Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 16.dp))
             BrandMascot(
                 mood = BrandMascotMood.CELEBRATE,
                 primary = accent,
@@ -130,7 +139,7 @@ fun ResultScreen(
             )
             Spacer(Modifier.height(10.dp))
             QuizArtwork(quiz)
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(sectionGap))
             Text(
                 resultTitle.uppercase(),
                 color = V2Colors.TextPrimary,
@@ -139,7 +148,7 @@ fun ResultScreen(
             )
             Spacer(Modifier.height(8.dp))
             Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
-            Spacer(Modifier.height(26.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 18.dp else 26.dp))
 
             Card(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
@@ -149,14 +158,14 @@ fun ResultScreen(
                 Column(
                     Modifier
                         .background(scoreCardBrush)
-                        .padding(24.dp),
+                        .padding(cardPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         "$displayedScore%",
                         color = accent,
-                        fontSize = 54.sp,
-                        lineHeight = 60.sp,
+                        fontSize = heroScoreSize,
+                        lineHeight = heroScoreLineHeight,
                         fontWeight = FontWeight.Black,
                         modifier = Modifier
                             .testTag("result_score")
@@ -179,7 +188,7 @@ fun ResultScreen(
                 }
             }
 
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
 
             if (scoreChange != null) {
