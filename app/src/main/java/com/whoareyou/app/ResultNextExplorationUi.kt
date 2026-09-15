@@ -83,8 +83,19 @@ fun ResultNextExplorationCard(
         onClick = {
             if (startedRecommendationKey != recommendationKey) {
                 startedRecommendationKey = recommendationKey
-                runCatching { AppEvents.recommendationStart(nextQuiz.id, signatureGuided) }
-                onQuizSelected(nextQuiz)
+                runCatching {
+                    AppEvents.recommendationStart(nextQuiz.id, signatureGuided)
+                    onQuizSelected(nextQuiz)
+                }.onFailure {
+                    startedRecommendationKey = null
+                    AppEvents.recordError(
+                        it,
+                        mapOf(
+                            "surface" to "result_next_exploration",
+                            "quiz_id" to nextQuiz.id
+                        )
+                    )
+                }
             }
         },
         modifier = Modifier
