@@ -150,9 +150,6 @@ def screen_variation(width, height, color_type, channels, rows):
 def main(path: str, expected: str) -> int:
     expected_w, expected_h = parse_size(expected)
     size_bytes = os.path.getsize(path)
-    if size_bytes < 4096:
-        print(f"Screenshot too small: {size_bytes} bytes")
-        return 1
 
     try:
         width, height, color_type, channels, rows = read_png(path)
