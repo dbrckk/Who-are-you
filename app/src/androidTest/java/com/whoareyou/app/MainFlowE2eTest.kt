@@ -40,7 +40,12 @@ class MainFlowE2eTest {
         val storedBeforeQuiz = runBlocking { ProfileStore.observe(context).first { it.onboardingComplete } }
         val summary = GlobalProfileEngine.build(catalog, storedBeforeQuiz.latestScores, storedBeforeQuiz.previousScores)
         val nextQuiz = requireNotNull(
-            DiscoverPersonalization.recommendation(catalog, storedBeforeQuiz.completedQuizIds, summary.dimensions)?.quiz
+            DiscoverPersonalization.recommendation(
+                quizzes = catalog,
+                completed = storedBeforeQuiz.completedQuizIds,
+                dimensions = summary.dimensions,
+                coverage = summary.coverage
+            )?.quiz
         )
         val expectedScore = Scoring.quizPercent(
             nextQuiz.questions.sumOf { question -> question.answers.first().score },
@@ -123,7 +128,12 @@ class MainFlowE2eTest {
         val stored = runBlocking { ProfileStore.observe(context).first { it.onboardingComplete } }
         val summary = GlobalProfileEngine.build(catalog, stored.latestScores, stored.previousScores)
         val quiz = requireNotNull(
-            DiscoverPersonalization.recommendation(catalog, stored.completedQuizIds, summary.dimensions)?.quiz
+            DiscoverPersonalization.recommendation(
+                quizzes = catalog,
+                completed = stored.completedQuizIds,
+                dimensions = summary.dimensions,
+                coverage = summary.coverage
+            )?.quiz
         )
         val firstScore = Scoring.quizPercent(
             quiz.questions.sumOf { it.answers.first().score },
