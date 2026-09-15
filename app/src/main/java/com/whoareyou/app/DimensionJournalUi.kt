@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
@@ -174,7 +175,7 @@ private fun JournalEntryRow(
 
     Column(
         verticalArrangement = Arrangement.spacedBy(3.dp),
-        modifier = Modifier.semantics(mergeDescendants = true) {
+        modifier = Modifier.clearAndSetSemantics {
             contentDescription = "$date. ${entry.score}%. $deltaText. ${journalEntryExplanation(entry.kind, french)}"
         }
     ) {
