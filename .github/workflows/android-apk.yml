@@ -93,6 +93,15 @@ jobs:
             echo "apk_sha256=$(cut -d' ' -f1 who-are-you-0.1.0-debug.apk.sha256)"
           } | tee who-are-you-0.1.0-debug.provenance.txt
 
+      - name: Verify APK release-candidate bundle
+        run: |
+          set -euo pipefail
+          sha256sum --check who-are-you-0.1.0-debug.apk.sha256
+          test "$(grep '^commit=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$GITHUB_SHA"
+          test "$(grep '^apk_sha256=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$(sha256sum who-are-you-0.1.0-debug.apk | cut -d' ' -f1)"
+          test -s who-are-you-0.1.0-debug.apk
+          test -s who-are-you-0.1.0-debug.provenance.txt
+
       - name: Upload installable APK
         uses: actions/upload-artifact@v7
         with:
