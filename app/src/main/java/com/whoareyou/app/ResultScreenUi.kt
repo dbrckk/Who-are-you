@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
@@ -286,13 +287,20 @@ fun ResultScreen(
                 Text(stringResource(R.string.retry), fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
             }
 
-            Spacer(Modifier.height(22.dp))
+            Spacer(Modifier.height(24.dp))
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                color = V2Colors.TextSecondary.copy(alpha = 0.16f)
+            )
+            Spacer(Modifier.height(18.dp))
             Text(
                 stringResource(R.string.result_optional_actions),
                 color = V2Colors.TextSecondary,
                 style = V2Type.Caption,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("result_optional_actions")
             )
             Spacer(Modifier.height(10.dp))
             Button(
