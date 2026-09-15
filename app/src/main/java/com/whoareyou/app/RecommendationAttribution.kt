@@ -65,6 +65,12 @@ object RecommendationAttribution {
     fun testCompleted(
         session: RecommendationAttributionSession,
         quizId: String
-    ): Pair<RecommendationAttempt?, RecommendationAttributionSession> =
-        completion(session.attempt, quizId) to RecommendationAttributionSession.Empty
+    ): Pair<RecommendationAttempt?, RecommendationAttributionSession> {
+        val completedAttempt = if (session.awaitingTestStart) {
+            null
+        } else {
+            completion(session.attempt, quizId)
+        }
+        return completedAttempt to RecommendationAttributionSession.Empty
+    }
 }
