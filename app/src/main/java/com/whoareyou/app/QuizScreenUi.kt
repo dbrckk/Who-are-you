@@ -203,7 +203,8 @@ fun QuizScreen(
                 animatedQuestion.answers.forEachIndexed { answerIndex, answer ->
                     V2PressableSurface(
                         onClick = {
-                            if (isFinishing || animatedIndex != safeQuestionIndex) return@V2PressableSurface
+                            if (isFinishing) return@V2PressableSurface
+                            if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
                             val newScore = score + answer.score
                             if (safeQuestionIndex == quiz.questions.lastIndex) {
                                 onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
