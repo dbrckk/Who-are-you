@@ -55,16 +55,16 @@ class ScreenshotValidatorTests(unittest.TestCase):
     def test_accepts_non_uniform_screenshot(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 256, 384, uniform=False)
-            result = self.run_validator(path, "256x384")
+            write_rgba_png(path, 512, 768, uniform=False)
+            result = self.run_validator(path, "512x768")
             self.assertEqual(result.returncode, 0, result.stdout)
             self.assertIn("Screenshot integrity OK", result.stdout)
 
     def test_accepts_rotated_dimensions(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 384, 256, uniform=False)
-            result = self.run_validator(path, "256x384")
+            write_rgba_png(path, 768, 512, uniform=False)
+            result = self.run_validator(path, "512x768")
             self.assertEqual(result.returncode, 0, result.stdout)
 
     def test_rejects_uniform_screenshot(self):
@@ -77,7 +77,7 @@ class ScreenshotValidatorTests(unittest.TestCase):
     def test_rejects_wrong_dimensions(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 256, 384, uniform=False)
+            write_rgba_png(path, 512, 768, uniform=False)
             result = self.run_validator(path, "720x1600")
             self.assertNotEqual(result.returncode, 0, result.stdout)
 
