@@ -22,25 +22,39 @@ fun premiumScreenTransition(
     val forward = navigationDepth(target) >= navigationDepth(initial)
     val enterDirection = if (forward) 1 else -1
     val exitDirection = -enterDirection
+    val isTopLevelSwitch =
+        (initial == AppScreen.DISCOVER && target == AppScreen.PROFILE) ||
+            (initial == AppScreen.PROFILE && target == AppScreen.DISCOVER)
 
-    val enterScale = if (forward) 0.985f else 1.008f
-    val exitScale = if (forward) 0.992f else 1.012f
+    val enterScale = when {
+        isTopLevelSwitch -> 0.996f
+        forward -> 0.985f
+        else -> 1.008f
+    }
+    val exitScale = when {
+        isTopLevelSwitch -> 0.998f
+        forward -> 0.992f
+        else -> 1.012f
+    }
+    val enterDivisor = if (isTopLevelSwitch) 24 else 14
+    val exitDivisor = if (isTopLevelSwitch) 28 else 18
+    val enterMillis = if (isTopLevelSwitch) V2Motion.StandardMillis else V2Motion.EmphasizedMillis
 
     return (
         fadeIn(tween(V2Motion.StandardMillis)) +
             slideInHorizontally(
-                animationSpec = tween(V2Motion.EmphasizedMillis),
-                initialOffsetX = { width -> enterDirection * (width / 14) }
+                animationSpec = tween(enterMillis),
+                initialOffsetX = { width -> enterDirection * (width / enterDivisor) }
             ) +
             scaleIn(
                 initialScale = enterScale,
-                animationSpec = tween(V2Motion.EmphasizedMillis)
+                animationSpec = tween(enterMillis)
             )
         ).togetherWith(
             fadeOut(tween(V2Motion.FastMillis)) +
                 slideOutHorizontally(
                     animationSpec = tween(V2Motion.StandardMillis),
-                    targetOffsetX = { width -> exitDirection * (width / 18) }
+                    targetOffsetX = { width -> exitDirection * (width / exitDivisor) }
                 ) +
                 scaleOut(
                     targetScale = exitScale,
