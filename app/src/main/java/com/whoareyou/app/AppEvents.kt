@@ -56,7 +56,11 @@ object AppEvents {
     )
 
     fun recommendationStart(quizId: String, signatureGuided: Boolean) {
-        recommendationSession = RecommendationAttribution.recommendationStarted(quizId, signatureGuided)
+        recommendationSession = RecommendationAttribution.recommendationStarted(
+            recommendationSession,
+            quizId,
+            signatureGuided
+        )
         log(
             "recommendation_start",
             RecommendationTelemetry.params(quizId, signatureGuided)
