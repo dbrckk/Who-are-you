@@ -70,14 +70,14 @@ class ScreenshotValidatorTests(unittest.TestCase):
     def test_rejects_uniform_screenshot(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 256, 256, uniform=True)
-            result = self.run_validator(path, "256x256")
+            write_rgba_png(path, 512, 512, uniform=True)
+            result = self.run_validator(path, "512x512")
             self.assertNotEqual(result.returncode, 0, result.stdout)
 
     def test_rejects_wrong_dimensions(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 128, 192, uniform=False)
+            write_rgba_png(path, 256, 384, uniform=False)
             result = self.run_validator(path, "720x1600")
             self.assertNotEqual(result.returncode, 0, result.stdout)
 
