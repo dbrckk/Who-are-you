@@ -37,6 +37,8 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -69,6 +71,13 @@ fun PremiumAppShellBar(
     onSelect: (AppShellTab) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val outerHorizontalPadding = if (constrainedLayout) 12.dp else 16.dp
+    val outerVerticalPadding = if (constrainedLayout) 6.dp else 8.dp
+    val tabGap = if (constrainedLayout) 4.dp else 6.dp
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -77,7 +86,7 @@ fun PremiumAppShellBar(
                     listOf(Color.Transparent, V2Colors.Ink.copy(alpha = 0.94f), V2Colors.Ink)
                 )
             )
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = outerHorizontalPadding, vertical = outerVerticalPadding)
             .navigationBarsPadding(),
         contentAlignment = Alignment.Center
     ) {
@@ -117,8 +126,8 @@ fun PremiumAppShellBar(
                 modifier = Modifier
                     .fillMaxWidth()
                     .selectableGroup()
-                    .padding(6.dp),
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    .padding(if (constrainedLayout) 4.dp else 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(tabGap)
             ) {
                 ShellTab(
                     modifier = Modifier.weight(1f),
@@ -127,6 +136,7 @@ fun PremiumAppShellBar(
                     label = stringResource(R.string.shell_discover),
                     primaryAccent = V2Colors.Cyan,
                     secondaryAccent = V2Colors.VioletBright,
+                    compact = constrainedLayout,
                     onClick = { onSelect(AppShellTab.DISCOVER) }
                 )
                 ShellTab(
@@ -136,6 +146,7 @@ fun PremiumAppShellBar(
                     label = stringResource(R.string.shell_profile),
                     primaryAccent = V2Colors.Orchid,
                     secondaryAccent = V2Colors.Rose,
+                    compact = constrainedLayout,
                     onClick = { onSelect(AppShellTab.PROFILE) }
                 )
             }
@@ -151,6 +162,7 @@ private fun ShellTab(
     label: String,
     primaryAccent: Color,
     secondaryAccent: Color,
+    compact: Boolean,
     onClick: () -> Unit
 ) {
     val reduceMotion = reducedMotionEnabled()
@@ -213,7 +225,7 @@ private fun ShellTab(
                     }
                 }
             )
-            .padding(horizontal = 14.dp),
+            .padding(horizontal = if (compact) 10.dp else 14.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -248,7 +260,7 @@ private fun ShellTab(
                     }
             )
         }
-        Spacer(Modifier.size(9.dp))
+        Spacer(Modifier.size(if (compact) 6.dp else 9.dp))
         Text(
             label,
             color = foreground,
