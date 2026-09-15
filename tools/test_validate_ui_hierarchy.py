@@ -63,7 +63,7 @@ class UiHierarchyValidatorTests(unittest.TestCase):
             write_xml(path, "[20,20][100,100]")
             result = self.run_validator(path)
             self.assertNotEqual(result.returncode, 0, result.stdout)
-            self.assertIn("below 48dp", result.stdout)
+            self.assertIn("below 48dp", result.stdout.lower())
 
     def test_rejects_outside_viewport(self):
         with tempfile.TemporaryDirectory() as tmp:
