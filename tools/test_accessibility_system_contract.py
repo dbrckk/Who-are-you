@@ -23,5 +23,13 @@ class AccessibilitySystemContractTest(unittest.TestCase):
         block = self.library.split('private fun LibraryResultCard', 1)[1]
         self.assertNotIn('maxLines = 2', block)
 
+    def test_library_title_is_exposed_as_heading(self):
+        self.assertIn('import androidx.compose.ui.semantics.heading', self.library)
+        title_block = self.library.split(
+            'stringResource(R.string.library_title)',
+            1,
+        )[1].split('Spacer(Modifier.height(5.dp))', 1)[0]
+        self.assertIn('Modifier.semantics { heading() }', title_block)
+
 if __name__ == '__main__':
     unittest.main()
