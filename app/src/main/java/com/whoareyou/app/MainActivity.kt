@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import java.util.UUID
@@ -188,7 +189,10 @@ private fun WhoAreYouApp() {
             targetState = screen,
             transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) },
             label = "screen",
-            modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}")
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("app_screen_${screen.name.lowercase()}")
+                .semantics { paneTitle = screen.name.lowercase().replaceFirstChar { it.uppercase() } }
         ) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
