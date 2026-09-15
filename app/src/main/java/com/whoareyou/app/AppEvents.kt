@@ -9,6 +9,8 @@ object AppEvents {
 
     private val recommendationViewLock = Any()
     private var lastRecommendationViewKey: String? = null
+    private var lastRecommendationViewAtMillis: Long = 0L
+    private const val RecommendationViewDedupWindowMillis = 2_000L
 
     fun configure() {
         sink = BuildConfig.TELEMETRY_ENDPOINT
@@ -55,11 +57,15 @@ object AppEvents {
 
     fun recommendationView(quizId: String, signatureGuided: Boolean) {
         val key = quizId + ":" + RecommendationTelemetry.mode(signatureGuided).wireValue
+        val now = android.os.SystemClock.elapsedRealtime()
         val shouldLog = synchronized(recommendationViewLock) {
-            if (lastRecommendationViewKey == key) {
+            val duplicate = lastRecommendationViewKey == key &&
+                now - lastRecommendationViewAtMillis < RecommendationViewDedupWindowMillis
+            if (duplicate) {
                 false
             } else {
                 lastRecommendationViewKey = key
+                lastRecommendationViewAtMillis = now
                 true
             }
         }
