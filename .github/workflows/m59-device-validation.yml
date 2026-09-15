@@ -43,7 +43,7 @@ jobs:
         with:
           api-level: '37.0'
           system-image-api-level: '35'
-          target: aosp_atd
+          target: google_apis
           arch: x86_64
           cores: 2
           ram-size: 2048M
