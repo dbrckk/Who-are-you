@@ -35,6 +35,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,6 +67,12 @@ fun QuizScreen(
     val scrollState = rememberScrollState()
     val accent = QuizVisuals.accentFor(quiz)
     val companion = QuizVisuals.companionAccentFor(quiz)
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val artworkGap = if (constrainedLayout) 16.dp else 24.dp
+    val answerGap = if (constrainedLayout) 10.dp else 12.dp
+    val answerVerticalPadding = if (constrainedLayout) 14.dp else 16.dp
 
     BackHandler(enabled = isFinishing) { }
 
@@ -115,7 +123,7 @@ fun QuizScreen(
         )
         Spacer(Modifier.height(20.dp))
         QuizArtwork(quiz, compact = true)
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(artworkGap))
         Text(
             quiz.title.uppercase(),
             color = accent,
@@ -166,9 +174,9 @@ fun QuizScreen(
                 tag = "quiz_result_save_failed"
             )
         }
-        Spacer(Modifier.height(26.dp))
+        Spacer(Modifier.height(if (constrainedLayout) 20.dp else 26.dp))
 
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(answerGap)) {
             question.answers.forEachIndexed { answerIndex, answer ->
                 V2PressableSurface(
                     onClick = {
@@ -195,7 +203,7 @@ fun QuizScreen(
                                     )
                                 )
                             )
-                            .padding(horizontal = 16.dp, vertical = 16.dp),
+                            .padding(horizontal = 16.dp, vertical = answerVerticalPadding),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
