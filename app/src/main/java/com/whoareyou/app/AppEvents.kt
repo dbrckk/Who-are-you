@@ -63,6 +63,12 @@ object AppEvents {
         )
     }
 
+    fun recommendationCancel(quizId: String) {
+        if (recommendationSession.attempt?.quizId == quizId && recommendationSession.awaitingTestStart) {
+            recommendationSession = RecommendationAttributionSession()
+        }
+    }
+
     fun recommendationComplete(attempt: RecommendationAttempt) = log(
         "recommendation_complete",
         mapOf(
