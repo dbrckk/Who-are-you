@@ -78,6 +78,20 @@ jobs:
           test -s "$APK"
           cp "$APK" who-are-you-0.1.0-debug.apk
           sha256sum who-are-you-0.1.0-debug.apk | tee who-are-you-0.1.0-debug.apk.sha256
+          {
+            echo "project=Who Are You?"
+            echo "version=0.1.0-debug"
+            echo "commit=${GITHUB_SHA}"
+            echo "ref=${GITHUB_REF}"
+            echo "run_id=${GITHUB_RUN_ID}"
+            echo "run_attempt=${GITHUB_RUN_ATTEMPT}"
+            echo "runner_os=${RUNNER_OS}"
+            echo "java=17-temurin"
+            echo "gradle=9.5.0"
+            echo "compile_sdk=37"
+            echo "build_tools=37.0.0"
+            echo "apk_sha256=$(cut -d' ' -f1 who-are-you-0.1.0-debug.apk.sha256)"
+          } | tee who-are-you-0.1.0-debug.provenance.txt
 
       - name: Upload installable APK
         uses: actions/upload-artifact@v7
@@ -86,5 +100,6 @@ jobs:
           path: |
             who-are-you-0.1.0-debug.apk
             who-are-you-0.1.0-debug.apk.sha256
+            who-are-you-0.1.0-debug.provenance.txt
           if-no-files-found: error
           retention-days: 14
