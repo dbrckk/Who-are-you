@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -55,6 +57,11 @@ fun PersonalizedDiscoverDashboard(
     }
     val nextQuiz = recommendation?.quiz
     val accent = nextQuiz?.let(QuizVisuals::accentFor) ?: identityAccent
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val profilePadding = if (constrainedLayout) 16.dp else 20.dp
+    val identityAuraSize = if (constrainedLayout) 64.dp else 74.dp
     val stageLabel = when (stage) {
         DiscoverProfileStage.NEW -> R.string.personalized_stage_new
         DiscoverProfileStage.EMERGING -> R.string.personalized_stage_emerging
@@ -76,7 +83,7 @@ fun PersonalizedDiscoverDashboard(
                 )
             )
         Box(
-            modifier = (if (onOpenProfile != null) profileModifier.clickable(role = Role.Button, onClick = onOpenProfile) else profileModifier).padding(20.dp)
+            modifier = (if (onOpenProfile != null) profileModifier.clickable(role = Role.Button, onClick = onOpenProfile) else profileModifier).padding(profilePadding)
         ) {
             Column {
                 Row(
@@ -91,7 +98,7 @@ fun PersonalizedDiscoverDashboard(
                     }
                     IdentityAura(
                         score = strongest?.score ?: profile.completionPercent,
-                        modifier = Modifier.size(74.dp),
+                        modifier = Modifier.size(identityAuraSize),
                         primary = identityAccent,
                         secondary = identityCompanion
                     )
@@ -102,8 +109,8 @@ fun PersonalizedDiscoverDashboard(
                     QuizArtwork(quiz = quiz, compact = true)
                 }
 
-                Spacer(Modifier.height(18.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                Spacer(Modifier.height(if (constrainedLayout) 14.dp else 18.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(if (constrainedLayout) 8.dp else 10.dp)) {
                     InsightMetric(Modifier.weight(1f), profile.completedCount.toString(), stringResource(R.string.personalized_dimensions), identityAccent)
                     InsightMetric(Modifier.weight(1f), (profile.totalCount - profile.completedCount).coerceAtLeast(0).toString(), stringResource(R.string.personalized_left), identityCompanion)
                     InsightMetric(Modifier.weight(1f), strongest?.score?.let { "$it%" } ?: "—", stringResource(R.string.personalized_signal), identityAccent)
