@@ -90,6 +90,15 @@ class RecommendationAttributionTest {
     }
 
     @Test
+    fun `completion before matching test start is not attributed`() {
+        val pending = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val (completion, cleared) = RecommendationAttribution.testCompleted(pending, "values")
+
+        assertNull(completion)
+        assertEquals(RecommendationAttributionSession.Empty, cleared)
+    }
+
+    @Test
     fun `matching completion emits attempt and consumes session`() {
         val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
         val active = RecommendationAttribution.testStarted(started, "values")
