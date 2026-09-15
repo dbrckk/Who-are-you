@@ -73,6 +73,16 @@ class UiHierarchyValidatorTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0, result.stdout)
             self.assertIn("outside viewport", result.stdout.lower())
 
+    def test_fixture_is_well_formed_and_nested(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "ui.xml"
+            write_xml(path, "[20,20][140,140]")
+            import xml.etree.ElementTree as ET
+            root = ET.parse(path).getroot()
+            nodes = list(root.iter("node"))
+            self.assertEqual(len(nodes), 2)
+            self.assertEqual(nodes[1].attrib["resource-id"], "com.whoareyou.app:id/action")
+
     def test_ignores_other_packages(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "ui.xml"
