@@ -25,6 +25,17 @@ object RecommendationAttribution {
         awaitingTestStart = true
     )
 
+    fun cancelPending(
+        session: RecommendationAttributionSession,
+        quizId: String
+    ): RecommendationAttributionSession = if (
+        session.awaitingTestStart && session.attempt?.quizId == quizId
+    ) {
+        RecommendationAttributionSession()
+    } else {
+        session
+    }
+
     fun testStarted(
         session: RecommendationAttributionSession,
         quizId: String
