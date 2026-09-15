@@ -1,7 +1,14 @@
-name: Android APK (manual fallback)
+name: Android APK
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -38,9 +45,9 @@ jobs:
       - name: Upload installable APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-android-apk-0.1.0
+          name: who-are-you-android-apk-${{ github.sha }}
           path: |
             who-are-you-0.1.0-debug.apk
             who-are-you-0.1.0-debug.apk.sha256
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 14
