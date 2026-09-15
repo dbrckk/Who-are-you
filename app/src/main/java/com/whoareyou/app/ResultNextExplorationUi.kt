@@ -13,6 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
@@ -57,8 +60,13 @@ fun ResultNextExplorationCard(
     val companion = QuizVisuals.companionAccentFor(nextQuiz)
     val nextActionLabel = stringResource(R.string.result_next_action)
     val signatureGuided = recommendation.reason == ResultNextReason.PROFILE_GAP
-    LaunchedEffect(nextQuiz.id, signatureGuided) {
-        runCatching { AppEvents.recommendationView(nextQuiz.id, signatureGuided) }
+    var viewedRecommendationKey by rememberSaveable { androidx.compose.runtime.mutableStateOf<String?>(null) }
+    val recommendationKey = "${currentQuiz.id}:${nextQuiz.id}:$signatureGuided"
+    LaunchedEffect(recommendationKey) {
+        if (viewedRecommendationKey != recommendationKey) {
+            runCatching { AppEvents.recommendationView(nextQuiz.id, signatureGuided) }
+            viewedRecommendationKey = recommendationKey
+        }
     }
     val cardBrush = remember(accent, companion) {
         Brush.linearGradient(
