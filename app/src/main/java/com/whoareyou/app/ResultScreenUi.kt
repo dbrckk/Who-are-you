@@ -87,9 +87,9 @@ fun ResultScreen(
     val scoreCardBrush = remember(accent, secondaryAccent) {
         Brush.linearGradient(
             listOf(
-                accent.copy(alpha = 0.12f),
+                accent.copy(alpha = 0.16f),
                 Color.Transparent,
-                secondaryAccent.copy(alpha = 0.08f)
+                secondaryAccent.copy(alpha = 0.10f)
             )
         )
     }
@@ -151,9 +151,12 @@ fun ResultScreen(
             Spacer(Modifier.height(if (constrainedLayout) 18.dp else 26.dp))
 
             Card(
-                colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
+                colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 shape = RoundedCornerShape(V2Radius.Card),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("result_score_card")
             ) {
                 Column(
                     Modifier
@@ -179,11 +182,11 @@ fun ResultScreen(
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
                         progress = { animatedScore },
-                        modifier = Modifier.fillMaxWidth().height(8.dp),
+                        modifier = Modifier.fillMaxWidth().height(10.dp),
                         color = accent,
-                        trackColor = secondaryAccent.copy(alpha = 0.16f)
+                        trackColor = secondaryAccent.copy(alpha = 0.18f)
                     )
-                    Spacer(Modifier.height(20.dp))
+                    Spacer(Modifier.height(if (constrainedLayout) 16.dp else 20.dp))
                     Text(description, color = V2Colors.TextPrimary, style = V2Type.Body, textAlign = TextAlign.Center)
                 }
             }
