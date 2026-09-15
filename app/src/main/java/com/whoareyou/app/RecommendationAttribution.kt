@@ -8,7 +8,17 @@ data class RecommendationAttempt(
 data class RecommendationAttributionSession(
     val attempt: RecommendationAttempt? = null,
     val awaitingTestStart: Boolean = false
-)
+) {
+    init {
+        require(!awaitingTestStart || attempt != null) {
+            "A pending recommendation handoff requires an attribution attempt"
+        }
+    }
+
+    companion object {
+        val Empty = RecommendationAttributionSession()
+    }
+}
 
 object RecommendationAttribution {
     fun start(quizId: String, signatureGuided: Boolean): RecommendationAttempt =
@@ -31,7 +41,7 @@ object RecommendationAttribution {
     ): RecommendationAttributionSession = if (
         session.awaitingTestStart && session.attempt?.quizId == quizId
     ) {
-        RecommendationAttributionSession()
+        RecommendationAttributionSession.Empty
     } else {
         session
     }
@@ -44,7 +54,7 @@ object RecommendationAttribution {
     ) {
         session.copy(awaitingTestStart = false)
     } else {
-        RecommendationAttributionSession()
+        RecommendationAttributionSession.Empty
     }
 
     fun completion(
@@ -56,5 +66,5 @@ object RecommendationAttribution {
         session: RecommendationAttributionSession,
         quizId: String
     ): Pair<RecommendationAttempt?, RecommendationAttributionSession> =
-        completion(session.attempt, quizId) to RecommendationAttributionSession()
+        completion(session.attempt, quizId) to RecommendationAttributionSession.Empty
 }
