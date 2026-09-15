@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
@@ -64,6 +65,14 @@ fun ResultNextExplorationCard(
     val companion = QuizVisuals.companionAccentFor(nextQuiz)
     val nextActionLabel = stringResource(R.string.result_next_action)
     val signatureGuided = recommendation.reason == ResultNextReason.PROFILE_GAP
+    val recommendationReason = stringResource(
+        when (recommendation.reason) {
+            ResultNextReason.PROFILE_GAP -> R.string.result_next_profile_gap
+            ResultNextReason.SAME_FACET -> R.string.result_next_same_facet
+            ResultNextReason.COMPLEMENTARY_FACET -> R.string.result_next_complementary
+            ResultNextReason.RETAKE_FACET -> R.string.result_next_retake
+        }
+    )
     var viewedRecommendationKey by rememberSaveable { androidx.compose.runtime.mutableStateOf<String?>(null) }
     var startedRecommendationKey by remember { androidx.compose.runtime.mutableStateOf<String?>(null) }
     val recommendationKey = "${currentQuiz.id}:${nextQuiz.id}:$signatureGuided"
@@ -110,6 +119,7 @@ fun ResultNextExplorationCard(
             .semantics {
                 contentDescription = "$nextActionLabel: ${nextQuiz.title}"
                 role = Role.Button
+                stateDescription = recommendationReason
             },
         shape = RoundedCornerShape(V2Radius.Card),
         containerColor = V2Colors.SurfaceElevated
@@ -143,14 +153,7 @@ fun ResultNextExplorationCard(
             }
             Spacer(Modifier.height(6.dp))
             Text(
-                stringResource(
-                    when (recommendation.reason) {
-                        ResultNextReason.PROFILE_GAP -> R.string.result_next_profile_gap
-                        ResultNextReason.SAME_FACET -> R.string.result_next_same_facet
-                        ResultNextReason.COMPLEMENTARY_FACET -> R.string.result_next_complementary
-                        ResultNextReason.RETAKE_FACET -> R.string.result_next_retake
-                    }
-                ),
+                recommendationReason,
                 color = V2Colors.TextSecondary,
                 style = V2Type.Supporting
             )
