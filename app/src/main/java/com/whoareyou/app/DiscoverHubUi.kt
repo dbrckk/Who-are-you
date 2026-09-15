@@ -34,6 +34,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -59,6 +61,10 @@ fun DiscoverHub(
     onRemoveAds: () -> Unit,
     onPrivacyOptions: () -> Unit
 ) {
+    val configuration = LocalConfiguration.current
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = configuration.screenWidthDp <= 360 || fontScale >= 1.3f
+    val hubGap = if (constrainedLayout) 20.dp else 28.dp
     val journeys = remember(quizzes, completed) {
         GuidedJourneyEngine.build(quizzes, completed)
     }
@@ -78,11 +84,11 @@ fun DiscoverHub(
             )
             .statusBarsPadding()
             .padding(horizontal = V2Spacing.Screen),
-        verticalArrangement = Arrangement.spacedBy(28.dp)
+        verticalArrangement = Arrangement.spacedBy(hubGap)
     ) {
         item(key = "hero", contentType = "hero") {
-            Spacer(Modifier.height(18.dp))
-            DiscoverHeroHeader()
+            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 18.dp))
+            DiscoverHeroHeader(constrained = constrainedLayout)
         }
 
         item(key = "personalized", contentType = "dashboard") {
@@ -156,7 +162,7 @@ fun DiscoverHub(
 }
 
 @Composable
-private fun DiscoverHeroHeader() {
+private fun DiscoverHeroHeader(constrained: Boolean) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -204,13 +210,13 @@ private fun DiscoverHeroHeader() {
         )
         BrandMascot(
             mood = BrandMascotMood.CURIOUS,
-            size = 86.dp,
+            size = if (constrained) 72.dp else 86.dp,
             animated = false,
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 12.dp, end = 12.dp)
+                .padding(top = if (constrained) 10.dp else 12.dp, end = if (constrained) 10.dp else 12.dp)
         )
-        Column(Modifier.padding(start = 22.dp, end = 112.dp, top = 24.dp, bottom = 24.dp)) {
+        Column(Modifier.padding(start = if (constrained) 18.dp else 22.dp, end = if (constrained) 88.dp else 112.dp, top = if (constrained) 20.dp else 24.dp, bottom = if (constrained) 20.dp else 24.dp)) {
             Text(
                 text = stringResource(R.string.app_name),
                 color = V2Colors.VioletBright,
