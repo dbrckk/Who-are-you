@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -113,13 +116,24 @@ fun ResultNextExplorationCard(
                 color = V2Colors.TextSecondary,
                 style = V2Type.Supporting
             )
-            Spacer(Modifier.height(11.dp))
-            Text(
-                stringResource(R.string.result_next_action),
-                color = accent,
-                style = V2Type.Caption,
-                fontWeight = FontWeight.Black
-            )
+            Spacer(Modifier.height(14.dp))
+            Button(
+                onClick = { onQuizSelected(nextQuiz) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 48.dp)
+                    .testTag("result_next_exploration_action"),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = accent,
+                    contentColor = V2Colors.Ink
+                ),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Text(
+                    nextActionLabel,
+                    fontWeight = FontWeight.Black
+                )
+            }
         }
     }
 }
