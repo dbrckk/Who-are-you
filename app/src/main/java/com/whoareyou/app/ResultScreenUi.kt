@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
@@ -276,13 +277,13 @@ fun ResultScreen(
             }
 
             Spacer(Modifier.height(10.dp))
-            Button(
+            OutlinedButton(
                 onClick = onRetry,
                 modifier = Modifier.fillMaxWidth().heightIn(min = 50.dp).testTag("result_retry"),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = V2Colors.TextPrimary),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Text(stringResource(R.string.retry), textAlign = TextAlign.Center)
+                Text(stringResource(R.string.retry), fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
             }
 
             Spacer(Modifier.height(22.dp))
