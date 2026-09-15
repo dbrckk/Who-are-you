@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -55,6 +56,10 @@ fun ResultNextExplorationCard(
     val accent = QuizVisuals.accentFor(nextQuiz)
     val companion = QuizVisuals.companionAccentFor(nextQuiz)
     val nextActionLabel = stringResource(R.string.result_next_action)
+    val signatureGuided = recommendation.reason == ResultNextReason.PROFILE_GAP
+    LaunchedEffect(nextQuiz.id, signatureGuided) {
+        runCatching { AppEvents.recommendationView(nextQuiz.id, signatureGuided) }
+    }
     val cardBrush = remember(accent, companion) {
         Brush.linearGradient(
             listOf(
@@ -66,7 +71,10 @@ fun ResultNextExplorationCard(
     }
 
     V2PressableCard(
-        onClick = { onQuizSelected(nextQuiz) },
+        onClick = {
+            runCatching { AppEvents.recommendationStart(nextQuiz.id, signatureGuided) }
+            onQuizSelected(nextQuiz)
+        },
         modifier = Modifier
             .fillMaxWidth()
             .testTag("result_next_exploration")
