@@ -30,7 +30,6 @@ class StringResourceParityTest(unittest.TestCase):
         self.assertTrue(required <= default)
         self.assertTrue(required <= french)
 
-
     def test_kotlin_string_references_exist(self):
         available = resource_names(VALUES)
         missing_by_file = {}
