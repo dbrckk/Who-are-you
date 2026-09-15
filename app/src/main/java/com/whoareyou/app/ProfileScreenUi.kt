@@ -39,7 +39,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -288,10 +290,12 @@ fun ProfileScreen(
                     shape = RoundedCornerShape(V2Radius.Compact),
                     modifier = Modifier
                         .fillMaxWidth()
+                        .heightIn(min = 48.dp)
                         .clickable(enabled = journalTrend != null) {
                             selectedJournalTrend = journalTrend
                         }
                         .semantics(mergeDescendants = true) {
+                            if (journalTrend != null) role = Role.Button
                             contentDescription = buildString {
                                 append("${dimension.title}. ${dimension.resultTitle}. ${dimension.score}%")
                                 if (historyHint.isNotBlank()) {
