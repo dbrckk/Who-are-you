@@ -23,7 +23,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
@@ -117,9 +116,8 @@ fun ResultNextExplorationCard(
             .heightIn(min = 48.dp)
             .testTag("result_next_exploration")
             .semantics {
-                contentDescription = "$nextActionLabel: ${nextQuiz.title}"
                 role = Role.Button
-                stateDescription = recommendationReason
+                contentDescription = "$nextActionLabel: ${nextQuiz.title}. $recommendationReason"
             },
         shape = RoundedCornerShape(V2Radius.Card),
         containerColor = V2Colors.SurfaceElevated
