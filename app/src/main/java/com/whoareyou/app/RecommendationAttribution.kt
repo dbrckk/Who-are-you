@@ -40,7 +40,10 @@ object RecommendationAttribution {
         quizId: String,
         signatureGuided: Boolean
     ): RecommendationAttributionSession =
-        if (session.awaitingTestStart &&
+        if (!session.awaitingTestStart && session.attempt != null) {
+            session
+        } else if (
+            session.awaitingTestStart &&
             session.attempt?.quizId == quizId &&
             session.attempt.mode == RecommendationTelemetry.mode(signatureGuided)
         ) {
