@@ -63,6 +63,21 @@ class RecommendationAttributionTest {
     }
 
     @Test
+    fun `new recommendation start cannot overwrite active attribution`() {
+        val pending = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(pending, "values")
+        val staleStart = RecommendationAttribution.recommendationStarted(
+            active,
+            "social",
+            signatureGuided = false
+        )
+
+        assertEquals(active, staleStart)
+        assertEquals("values", staleStart.attempt?.quizId)
+        assertFalse(staleStart.awaitingTestStart)
+    }
+
+    @Test
     fun `cancel pending clears matching handoff`() {
         val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
         val cancelled = RecommendationAttribution.cancelPending(started, "values")
