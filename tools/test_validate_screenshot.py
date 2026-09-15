@@ -70,8 +70,13 @@ class ScreenshotValidatorTests(unittest.TestCase):
     def test_rejects_uniform_screenshot(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "screen.png"
-            write_rgba_png(path, 512, 512, uniform=True)
-            result = self.run_validator(path, "512x512")
+            write_rgba_png(path, 1024, 1024, uniform=True)
+            # Uniform PNG data compresses extremely well, so append inert bytes
+            # to ensure this test reaches the pixel-uniformity validator rather
+            # than failing first on the production 4096-byte integrity floor.
+            with path.open("ab") as fh:
+                fh.write(b"QA_PADDING" * 512)
+            result = self.run_validator(path, "1024x1024")
             self.assertNotEqual(result.returncode, 0, result.stdout)
 
     def test_rejects_wrong_dimensions(self):
