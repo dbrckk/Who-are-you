@@ -35,7 +35,7 @@ class StringResourceParityTest(unittest.TestCase):
         missing_by_file = {}
         for path in (ROOT / "app/src/main/java").rglob("*.kt"):
             source = path.read_text(encoding="utf-8")
-            referenced = set(re.findall(r"R\.string\.([A-Za-z0-9_]+)", source))
+            referenced = set(re.findall(r"R[.]string[.]([A-Za-z0-9_]+)", source))
             missing = sorted(referenced - available)
             if missing:
                 missing_by_file[str(path.relative_to(ROOT))] = missing
