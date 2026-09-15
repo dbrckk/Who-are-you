@@ -10,6 +10,8 @@ object AppEvents {
     private val recommendationViewDeduplicator = EventWindowDeduplicator(windowMillis = 2_000L)
     private val actionDeduplicator = EventWindowDeduplicator(windowMillis = 750L)
 
+    private fun nowMillis(): Long = android.os.SystemClock.elapsedRealtime()
+
     fun configure() {
         sink = BuildConfig.TELEMETRY_ENDPOINT
             .takeIf { it.startsWith("https://") }
@@ -57,7 +59,7 @@ object AppEvents {
         val key = quizId + ":" + RecommendationTelemetry.mode(signatureGuided).wireValue
         val shouldLog = recommendationViewDeduplicator.shouldEmit(
             key = key,
-            nowMillis = android.os.SystemClock.elapsedRealtime()
+            nowMillis = nowMillis()
         )
         if (shouldLog) {
             log(
@@ -172,7 +174,7 @@ object AppEvents {
 
     private fun emitActionOnce(name: String, key: String, params: Map<String, Any?>) {
         val eventKey = name + ":" + key
-        if (actionDeduplicator.shouldEmit(eventKey, android.os.SystemClock.elapsedRealtime())) {
+        if (actionDeduplicator.shouldEmit(eventKey, nowMillis())) {
             log(name, params)
         }
     }
