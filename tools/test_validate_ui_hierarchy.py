@@ -15,11 +15,12 @@ def write_xml(path: Path, bounds: str, clickable: bool = True) -> None:
   <node index="0" text="" resource-id="com.whoareyou.app:id/root"
         class="android.view.View" package="com.whoareyou.app"
         content-desc="" clickable="false" enabled="true"
-        bounds="[0,0][720,1600]" />
+        bounds="[0,0][720,1600]">
     <node index="0" text="Action" resource-id="com.whoareyou.app:id/action"
           class="android.widget.Button" package="com.whoareyou.app"
           content-desc="Action" clickable="{str(clickable).lower()}" enabled="true"
           bounds="{bounds}" />
+  </node>
 </hierarchy>
 ''',
         encoding="utf-8",
