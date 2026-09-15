@@ -33,6 +33,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -69,6 +70,7 @@ fun DiscoverLibrary(
     Column {
         Text(
             stringResource(R.string.library_title),
+            modifier = Modifier.semantics { heading() },
             color = V2Colors.TextPrimary,
             style = V2Type.SectionTitle
         )
