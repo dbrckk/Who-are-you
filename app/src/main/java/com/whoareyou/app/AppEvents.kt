@@ -56,15 +56,19 @@ object AppEvents {
     )
 
     fun recommendationStart(quizId: String, signatureGuided: Boolean) {
-        recommendationSession = RecommendationAttribution.recommendationStarted(
-            recommendationSession,
+        val previousSession = recommendationSession
+        val nextSession = RecommendationAttribution.recommendationStarted(
+            previousSession,
             quizId,
             signatureGuided
         )
-        log(
-            "recommendation_start",
-            RecommendationTelemetry.params(quizId, signatureGuided)
-        )
+        recommendationSession = nextSession
+        if (nextSession != previousSession) {
+            log(
+                "recommendation_start",
+                RecommendationTelemetry.params(quizId, signatureGuided)
+            )
+        }
     }
 
     fun recommendationCancel(quizId: String) {
