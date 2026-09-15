@@ -8,6 +8,7 @@ object AppEvents {
     private var recommendationSession = RecommendationAttributionSession()
 
     private val recommendationViewDeduplicator = EventWindowDeduplicator(windowMillis = 2_000L)
+    private val actionDeduplicator = EventWindowDeduplicator(windowMillis = 750L)
 
     fun configure() {
         sink = BuildConfig.TELEMETRY_ENDPOINT
@@ -94,21 +95,21 @@ object AppEvents {
         )
     )
 
-    fun resultShare(quizId: String, score: Int? = null) = log(
-        "result_share",
-        buildMap {
+    fun resultShare(quizId: String, score: Int? = null) {
+        val params = buildMap<String, Any?> {
             put("quiz_id", quizId)
             score?.let { put("score_bucket", scoreBucket(it)) }
         }
-    )
+        emitActionOnce("result_share", quizId, params)
+    }
 
-    fun challengeCreate(quizId: String, score: Int? = null) = log(
-        "challenge_create",
-        buildMap {
+    fun challengeCreate(quizId: String, score: Int? = null) {
+        val params = buildMap<String, Any?> {
             put("quiz_id", quizId)
             score?.let { put("score_bucket", scoreBucket(it)) }
         }
-    )
+        emitActionOnce("challenge_create", quizId, params)
+    }
 
     fun challengeOpen(quizId: String, source: String) = log(
         "challenge_open",
@@ -168,6 +169,13 @@ object AppEvents {
     fun purchaseSuccess(productId: String) = log("purchase_success", mapOf("product_id" to productId))
 
     fun adImpression(placement: String) = log("ad_impression", mapOf("placement" to placement))
+
+    private fun emitActionOnce(name: String, key: String, params: Map<String, Any?>) {
+        val eventKey = name + ":" + key
+        if (actionDeduplicator.shouldEmit(eventKey, android.os.SystemClock.elapsedRealtime())) {
+            log(name, params)
+        }
+    }
 
     private fun scoreBucket(value: Int): String = when (value.coerceIn(0, 100)) {
         in 0..19 -> "00_19"
