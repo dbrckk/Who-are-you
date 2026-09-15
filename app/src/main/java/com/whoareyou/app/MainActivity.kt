@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.paneTitle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import java.util.UUID
@@ -180,6 +181,12 @@ private fun WhoAreYouApp() {
     }
 
     val reduceMotion = reducedMotionEnabled()
+    val screenPaneTitle = when (screen) {
+        AppScreen.DISCOVER -> stringResource(R.string.nav_discover)
+        AppScreen.PROFILE -> stringResource(R.string.nav_profile)
+        AppScreen.QUIZ -> selectedQuiz.title
+        AppScreen.RESULT -> selectedQuiz.title
+    }
     Box(
         Modifier
             .fillMaxSize()
@@ -192,7 +199,7 @@ private fun WhoAreYouApp() {
             modifier = Modifier
                 .fillMaxSize()
                 .testTag("app_screen_${screen.name.lowercase()}")
-                .semantics { paneTitle = screen.name.lowercase().replaceFirstChar { it.uppercase() } }
+                .semantics { paneTitle = screenPaneTitle }
         ) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
