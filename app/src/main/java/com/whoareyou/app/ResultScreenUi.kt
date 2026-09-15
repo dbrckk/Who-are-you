@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -144,7 +145,10 @@ fun ResultScreen(
                 resultTitle.uppercase(),
                 color = V2Colors.TextPrimary,
                 style = V2Type.Hero,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .testTag("result_title")
+                    .semantics { contentDescription = resultTitle }
             )
             Spacer(Modifier.height(8.dp))
             Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
@@ -182,7 +186,10 @@ fun ResultScreen(
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
                         progress = { animatedScore },
-                        modifier = Modifier.fillMaxWidth().height(10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(10.dp)
+                            .clearAndSetSemantics { },
                         color = accent,
                         trackColor = secondaryAccent.copy(alpha = 0.18f)
                     )
