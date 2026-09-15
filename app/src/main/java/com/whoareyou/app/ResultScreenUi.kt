@@ -43,6 +43,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -180,7 +181,10 @@ fun ResultScreen(
                         fontWeight = FontWeight.Black,
                         modifier = Modifier
                             .testTag("result_score")
-                            .semantics { contentDescription = scoreAccessibility }
+                            .semantics {
+                                contentDescription = scoreAccessibility
+                                stateDescription = "$displayedScore%"
+                            }
                     )
                     Spacer(Modifier.height(8.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -198,7 +202,13 @@ fun ResultScreen(
                         trackColor = secondaryAccent.copy(alpha = 0.18f)
                     )
                     Spacer(Modifier.height(if (constrainedLayout) 16.dp else 20.dp))
-                    Text(description, color = V2Colors.TextPrimary, style = V2Type.Body, textAlign = TextAlign.Center)
+                    Text(
+                        description,
+                        color = V2Colors.TextPrimary,
+                        style = V2Type.Body,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.testTag("result_description")
+                    )
                 }
             }
 
