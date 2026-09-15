@@ -7,6 +7,9 @@ object AppEvents {
     @Volatile
     private var recommendationSession = RecommendationAttributionSession()
 
+    private val recommendationViewLock = Any()
+    private var lastRecommendationViewKey: String? = null
+
     fun configure() {
         sink = BuildConfig.TELEMETRY_ENDPOINT
             .takeIf { it.startsWith("https://") }
@@ -50,10 +53,23 @@ object AppEvents {
         mapOf("quiz_id" to quizId, "score_bucket" to scoreBucket(score))
     )
 
-    fun recommendationView(quizId: String, signatureGuided: Boolean) = log(
-        "recommendation_view",
-        RecommendationTelemetry.params(quizId, signatureGuided)
-    )
+    fun recommendationView(quizId: String, signatureGuided: Boolean) {
+        val key = quizId + ":" + RecommendationTelemetry.mode(signatureGuided).wireValue
+        val shouldLog = synchronized(recommendationViewLock) {
+            if (lastRecommendationViewKey == key) {
+                false
+            } else {
+                lastRecommendationViewKey = key
+                true
+            }
+        }
+        if (shouldLog) {
+            log(
+                "recommendation_view",
+                RecommendationTelemetry.params(quizId, signatureGuided)
+            )
+        }
+    }
 
     fun recommendationStart(quizId: String, signatureGuided: Boolean) {
         val previousSession = recommendationSession
