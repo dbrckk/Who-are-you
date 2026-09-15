@@ -268,6 +268,8 @@ fun BrandLoadingScreen(
     modifier: Modifier = Modifier,
     tag: String = "startup_loading"
 ) {
+    val fontScale = LocalDensity.current.fontScale
+    val constrainedLayout = fontScale >= 1.3f
     val reduceMotion = reducedMotionEnabled()
     val loadingAmbient = if (reduceMotion) null else rememberInfiniteTransition(label = "brandLoadingAmbient")
     val loadingGlow = loadingAmbient?.animateFloat(
@@ -296,7 +298,7 @@ fun BrandLoadingScreen(
     ) {
         Box(
             modifier = Modifier
-                .size(190.dp)
+                .size(if (constrainedLayout) 168.dp else 190.dp)
                 .graphicsLayer {
                     val scale = loadingGlow?.value ?: 1f
                     scaleX = scale
@@ -317,22 +319,22 @@ fun BrandLoadingScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .widthIn(max = 320.dp)
-                .padding(horizontal = 36.dp),
+                .padding(horizontal = if (constrainedLayout) 28.dp else 36.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             BrandMascot(
                 mood = BrandMascotMood.CURIOUS,
-                size = 104.dp,
+                size = if (constrainedLayout) 88.dp else 104.dp,
                 animated = true
             )
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 18.dp))
             Text(
                 text = stringResource(R.string.app_name),
                 color = V2Colors.TextPrimary,
                 style = V2Type.SectionTitle,
                 textAlign = TextAlign.Center
             )
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 18.dp))
             LinearProgressIndicator(
                 modifier = Modifier.fillMaxWidth().height(4.dp),
                 color = V2Colors.AccentCyan,
