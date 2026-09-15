@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
@@ -161,7 +162,9 @@ fun ResultNextExplorationCard(
                 color = accent,
                 style = V2Type.Caption,
                 fontWeight = FontWeight.Black,
-                modifier = Modifier.testTag("result_next_exploration_action")
+                modifier = Modifier
+                    .testTag("result_next_exploration_action")
+                    .clearAndSetSemantics { }
             )
         }
     }
