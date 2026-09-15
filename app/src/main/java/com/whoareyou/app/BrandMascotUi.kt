@@ -58,12 +58,27 @@ fun BrandMascot(
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
             animation = keyframes {
-                durationMillis = 4200
+                durationMillis = when (mood) {
+                    BrandMascotMood.CURIOUS -> 3600
+                    BrandMascotMood.CELEBRATE -> 4700
+                    BrandMascotMood.WELCOME -> 4200
+                }
                 1f at 0
-                1f at 3300
-                0.12f at 3380
-                1f at 3480
-                1f at 4200
+                1f at when (mood) {
+                    BrandMascotMood.CURIOUS -> 2750
+                    BrandMascotMood.CELEBRATE -> 3800
+                    BrandMascotMood.WELCOME -> 3300
+                }
+                0.12f at when (mood) {
+                    BrandMascotMood.CURIOUS -> 2830
+                    BrandMascotMood.CELEBRATE -> 3880
+                    BrandMascotMood.WELCOME -> 3380
+                }
+                1f at when (mood) {
+                    BrandMascotMood.CURIOUS -> 2930
+                    BrandMascotMood.CELEBRATE -> 3980
+                    BrandMascotMood.WELCOME -> 3480
+                }
             },
             repeatMode = RepeatMode.Restart
         ),
@@ -96,8 +111,16 @@ fun BrandMascot(
         label = "brandMascotTilt"
     )
     val floatOffset = transition?.animateFloat(
-        initialValue = -2f,
-        targetValue = 3f,
+        initialValue = when (mood) {
+            BrandMascotMood.CURIOUS -> -1.5f
+            BrandMascotMood.CELEBRATE -> -2.5f
+            BrandMascotMood.WELCOME -> -2f
+        },
+        targetValue = when (mood) {
+            BrandMascotMood.CURIOUS -> 2f
+            BrandMascotMood.CELEBRATE -> 3.5f
+            BrandMascotMood.WELCOME -> 3f
+        },
         animationSpec = infiniteRepeatable(
             animation = tween(V2Motion.AmbientMillis + 700),
             repeatMode = RepeatMode.Reverse
