@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -148,7 +149,10 @@ fun ResultScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .testTag("result_title")
-                    .semantics { contentDescription = resultTitle }
+                    .semantics {
+                        heading()
+                        contentDescription = resultTitle
+                    }
             )
             Spacer(Modifier.height(8.dp))
             Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
@@ -289,7 +293,10 @@ fun ResultScreen(
                     AppEvents.resultShare(quiz.id, score)
                     ResultShare.share(context, quiz.id, quiz.title, resultTitle, score, quiz.metricLow, quiz.metricHigh, description)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 52.dp)
+                    .testTag("result_share"),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
@@ -302,7 +309,10 @@ fun ResultScreen(
                     AppEvents.challengeCreate(quiz.id, score)
                     ChallengeShare.share(context, quiz.id, quiz.title, score)
                 },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 52.dp)
+                    .testTag("result_compare"),
                 colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
                 shape = RoundedCornerShape(18.dp)
             ) {
