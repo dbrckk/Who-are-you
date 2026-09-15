@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -425,20 +426,29 @@ fun ProfileScreen(
     if (showResetDialog) {
         AlertDialog(
             onDismissRequest = { showResetDialog = false },
-            title = { Text(stringResource(R.string.reset_local_data_title)) },
+            title = {
+                Text(
+                    stringResource(R.string.reset_local_data_title),
+                    modifier = Modifier.semantics { heading() }
+                )
+            },
             text = { Text(stringResource(R.string.reset_local_data_body)) },
             confirmButton = {
                 TextButton(
                     onClick = {
                         showResetDialog = false
                         onResetLocalData()
-                    }
+                    },
+                    modifier = Modifier.heightIn(min = 48.dp)
                 ) {
                     Text(stringResource(R.string.reset_local_data_confirm))
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showResetDialog = false }) {
+                TextButton(
+                    onClick = { showResetDialog = false },
+                    modifier = Modifier.heightIn(min = 48.dp)
+                ) {
                     Text(stringResource(R.string.cancel))
                 }
             }
