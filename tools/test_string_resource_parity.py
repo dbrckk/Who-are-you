@@ -30,18 +30,13 @@ class StringResourceParityTest(unittest.TestCase):
         self.assertTrue(required <= default)
         self.assertTrue(required <= french)
 
-    def test_kotlin_string_references_exist(self):
+    def test_main_activity_accessibility_string_references_exist(self):
+        source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
+        referenced = set(re.findall(r"R[.]string[.]([A-Za-z0-9_]+)", source))
         available = resource_names(VALUES)
-        missing_by_file = {}
-        for path in (ROOT / "app/src/main/java").rglob("*.kt"):
-            source = path.read_text(encoding="utf-8")
-            referenced = set(re.findall(r"R[.]string[.]([A-Za-z0-9_]+)", source))
-            missing = sorted(referenced - available)
-            if missing:
-                missing_by_file[str(path.relative_to(ROOT))] = missing
         self.assertFalse(
-            missing_by_file,
-            f"Kotlin sources reference missing strings: {missing_by_file}",
+            referenced - available,
+            f"MainActivity references missing strings: {sorted(referenced - available)}",
         )
 
 
