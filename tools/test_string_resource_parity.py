@@ -31,5 +31,15 @@ class StringResourceParityTest(unittest.TestCase):
         self.assertTrue(required <= french)
 
 
+    def test_main_activity_string_references_exist(self):
+        source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
+        referenced = set(re.findall(r"R\\.string\\.([A-Za-z0-9_]+)", source))
+        available = resource_names(VALUES)
+        self.assertFalse(
+            referenced - available,
+            f"MainActivity references missing strings: {sorted(referenced - available)}",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
