@@ -23,6 +23,32 @@ class RecommendationAttributionTest {
     }
 
     @Test
+    fun `cancel pending clears matching handoff`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val cancelled = RecommendationAttribution.cancelPending(started, "values")
+
+        assertNull(cancelled.attempt)
+        assertFalse(cancelled.awaitingTestStart)
+    }
+
+    @Test
+    fun `cancel pending ignores different quiz`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val unchanged = RecommendationAttribution.cancelPending(started, "social")
+
+        assertEquals(started, unchanged)
+    }
+
+    @Test
+    fun `cancel pending does not erase active attribution after test start`() {
+        val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
+        val active = RecommendationAttribution.testStarted(started, "values")
+        val unchanged = RecommendationAttribution.cancelPending(active, "values")
+
+        assertEquals(active, unchanged)
+    }
+
+    @Test
     fun `recommended launch survives its immediate matching test start`() {
         val started = RecommendationAttribution.recommendationStarted("values", signatureGuided = true)
         val active = RecommendationAttribution.testStarted(started, "values")
