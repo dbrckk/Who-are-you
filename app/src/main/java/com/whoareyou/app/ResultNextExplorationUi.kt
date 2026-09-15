@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -51,6 +54,7 @@ fun ResultNextExplorationCard(
     val nextQuiz = catalogById[recommendation.quizId] ?: return
     val accent = QuizVisuals.accentFor(nextQuiz)
     val companion = QuizVisuals.companionAccentFor(nextQuiz)
+    val nextActionLabel = stringResource(R.string.result_next_action)
     val cardBrush = remember(accent, companion) {
         Brush.linearGradient(
             listOf(
@@ -63,7 +67,10 @@ fun ResultNextExplorationCard(
 
     V2PressableCard(
         onClick = { onQuizSelected(nextQuiz) },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("result_next_exploration")
+            .semantics { contentDescription = "$nextActionLabel: ${nextQuiz.title}" },
         shape = RoundedCornerShape(V2Radius.Card),
         containerColor = V2Colors.SurfaceElevated
     ) {
