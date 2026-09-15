@@ -71,7 +71,7 @@ class UiHierarchyValidatorTests(unittest.TestCase):
             write_xml(path, "[650,1500][760,1620]", clickable=False)
             result = self.run_validator(path)
             self.assertNotEqual(result.returncode, 0, result.stdout)
-            self.assertIn("outside viewport", result.stdout)
+            self.assertIn("outside viewport", result.stdout.lower())
 
     def test_ignores_other_packages(self):
         with tempfile.TemporaryDirectory() as tmp:
