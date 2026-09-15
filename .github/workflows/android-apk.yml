@@ -15,7 +15,10 @@ permissions:
 
 jobs:
   apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=true
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -33,9 +36,16 @@ jobs:
           java-version: '17'
 
       - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
+          cache-read-only: false
+
+      - name: Verify toolchain
+        run: |
+          java -version
+          gradle --version
+          sdkmanager --list_installed
 
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
