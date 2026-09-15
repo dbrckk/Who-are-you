@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -105,6 +106,7 @@ fun CatalogUnavailableScreen() {
 
 @Composable
 fun OnboardingScreen(onStart: () -> Unit) {
+    val fontScale = LocalDensity.current.fontScale
     val reduceMotion = reducedMotionEnabled()
     val ambient = if (reduceMotion) null else rememberInfiniteTransition(label = "onboardingAmbient")
     val glowScale = ambient?.animateFloat(
@@ -132,6 +134,14 @@ fun OnboardingScreen(onStart: () -> Unit) {
                 )
             )
     ) {
+        val constrainedLayout = maxWidth <= 360.dp || fontScale >= 1.3f
+        val screenHorizontalPadding = if (constrainedLayout) 20.dp else if (maxWidth >= 600.dp) 42.dp else 28.dp
+        val screenVerticalPadding = if (constrainedLayout) 24.dp else 36.dp
+        val contentGap = if (constrainedLayout) 18.dp else 24.dp
+        val heroPaddingHorizontal = if (constrainedLayout) 20.dp else 24.dp
+        val heroPaddingVertical = if (constrainedLayout) 22.dp else 26.dp
+        val mascotSize = if (constrainedLayout) 96.dp else 112.dp
+
         Box(
             modifier = Modifier
                 .align(Alignment.TopEnd)
@@ -174,8 +184,8 @@ fun OnboardingScreen(onStart: () -> Unit) {
                 .widthIn(max = 620.dp)
                 .verticalScroll(rememberScrollState())
                 .navigationBarsPadding()
-                .padding(horizontal = if (maxWidth >= 600.dp) 42.dp else 28.dp, vertical = 36.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .padding(horizontal = screenHorizontalPadding, vertical = screenVerticalPadding),
+            verticalArrangement = Arrangement.spacedBy(contentGap)
         ) {
             Column(
                 modifier = Modifier
@@ -194,11 +204,11 @@ fun OnboardingScreen(onStart: () -> Unit) {
                             )
                         )
                     )
-                    .padding(horizontal = 24.dp, vertical = 26.dp),
+                    .padding(horizontal = heroPaddingHorizontal, vertical = heroPaddingVertical),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                BrandMascot(mood = BrandMascotMood.WELCOME)
-                Spacer(Modifier.height(18.dp))
+                BrandMascot(mood = BrandMascotMood.WELCOME, size = mascotSize)
+                Spacer(Modifier.height(if (constrainedLayout) 14.dp else 18.dp))
                 Text(
                     stringResource(R.string.onboarding_title),
                     color = V2Colors.TextPrimary,
