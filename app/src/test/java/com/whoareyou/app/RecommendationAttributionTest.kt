@@ -4,9 +4,23 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class RecommendationAttributionTest {
+    @Test
+    fun `session rejects pending handoff without attempt`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            RecommendationAttributionSession(attempt = null, awaitingTestStart = true)
+        }
+    }
+
+    @Test
+    fun `empty session singleton is valid`() {
+        assertNull(RecommendationAttributionSession.Empty.attempt)
+        assertFalse(RecommendationAttributionSession.Empty.awaitingTestStart)
+    }
+
     @Test
     fun `start preserves quiz and guided mode`() {
         val attempt = RecommendationAttribution.start("values", signatureGuided = true)
