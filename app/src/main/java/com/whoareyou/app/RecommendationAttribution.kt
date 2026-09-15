@@ -35,6 +35,20 @@ object RecommendationAttribution {
         awaitingTestStart = true
     )
 
+    fun recommendationStarted(
+        session: RecommendationAttributionSession,
+        quizId: String,
+        signatureGuided: Boolean
+    ): RecommendationAttributionSession =
+        if (session.awaitingTestStart &&
+            session.attempt?.quizId == quizId &&
+            session.attempt.mode == RecommendationTelemetry.mode(signatureGuided)
+        ) {
+            session
+        } else {
+            recommendationStarted(quizId, signatureGuided)
+        }
+
     fun cancelPending(
         session: RecommendationAttributionSession,
         quizId: String
