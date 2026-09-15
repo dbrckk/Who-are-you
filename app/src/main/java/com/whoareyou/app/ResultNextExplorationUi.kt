@@ -61,7 +61,7 @@ fun ResultNextExplorationCard(
     val nextActionLabel = stringResource(R.string.result_next_action)
     val signatureGuided = recommendation.reason == ResultNextReason.PROFILE_GAP
     var viewedRecommendationKey by rememberSaveable { androidx.compose.runtime.mutableStateOf<String?>(null) }
-    var startedRecommendationKey by rememberSaveable { androidx.compose.runtime.mutableStateOf<String?>(null) }
+    var startedRecommendationKey by remember { androidx.compose.runtime.mutableStateOf<String?>(null) }
     val recommendationKey = "${currentQuiz.id}:${nextQuiz.id}:$signatureGuided"
     LaunchedEffect(recommendationKey) {
         if (viewedRecommendationKey != recommendationKey) {
