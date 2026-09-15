@@ -13,6 +13,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
@@ -48,7 +50,11 @@ fun TraitExplorationDialog(
                     )
                     exploration.evidence.take(4).forEach { evidence ->
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clearAndSetSemantics {
+                                    contentDescription = "${evidence.quizTitle}. ${evidence.contribution}%"
+                                },
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
