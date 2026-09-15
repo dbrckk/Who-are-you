@@ -182,8 +182,8 @@ private fun WhoAreYouApp() {
 
     val reduceMotion = reducedMotionEnabled()
     val screenPaneTitle = when (screen) {
-        AppScreen.DISCOVER -> stringResource(R.string.nav_discover)
-        AppScreen.PROFILE -> stringResource(R.string.nav_profile)
+        AppScreen.DISCOVER -> stringResource(R.string.discover_headline)
+        AppScreen.PROFILE -> stringResource(R.string.your_profile)
         AppScreen.QUIZ -> selectedQuiz.title
         AppScreen.RESULT -> selectedQuiz.title
     }
