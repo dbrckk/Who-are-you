@@ -76,6 +76,8 @@ jobs:
             device-display-*.txt
             device-motion-*.txt
             device-orientation-*.txt
+            device-host-resources.txt
+            device-host-kernel.txt
             device-validation-summary.txt
             device-visual-qa-summary.md
           if-no-files-found: warn
