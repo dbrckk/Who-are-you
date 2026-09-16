@@ -5,11 +5,83 @@ PACKAGE="com.whoareyou.app"
 ACTIVITY="$PACKAGE/.MainActivity"
 DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
 CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
+HOST_RESOURCE_LOG="device-host-resources.txt"
+HOST_KERNEL_LOG="device-host-kernel.txt"
+HOST_MONITOR_PID=""
+
+capture_host_resource_snapshot() {
+  {
+    printf '\n=== %s ===\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+    echo "--- free -m ---"
+    free -m || true
+    echo "--- selected /proc/meminfo ---"
+    grep -E '^(MemTotal|MemFree|MemAvailable|Buffers|Cached|SwapTotal|SwapFree):' /proc/meminfo || true
+    echo "--- /proc/pressure/memory ---"
+    if [[ -r /proc/pressure/memory ]]; then
+      cat /proc/pressure/memory
+    else
+      echo "unavailable"
+    fi
+    echo "--- cgroup memory ---"
+    for path in \
+      /sys/fs/cgroup/memory.current \
+      /sys/fs/cgroup/memory.max \
+      /sys/fs/cgroup/memory.events; do
+      echo "$path"
+      if [[ -r "$path" ]]; then
+        cat "$path"
+      else
+        echo "unavailable"
+      fi
+    done
+    echo "--- top RSS processes ---"
+    ps -eo pid,ppid,rss,vsz,%mem,%cpu,comm,args --sort=-rss | head -n 25 || true
+    echo "--- emulator/qemu processes ---"
+    pgrep -af 'emulator|qemu' || true
+  } >> "$HOST_RESOURCE_LOG" 2>&1
+}
+
+capture_host_kernel_evidence() {
+  {
+    echo "=== dmesg tail ==="
+    dmesg --ctime 2>&1 | tail -n 200 || true
+    echo
+    echo "=== kernel journal tail ==="
+    journalctl -k --no-pager -n 200 2>&1 || true
+  } > "$HOST_KERNEL_LOG"
+}
+
+start_host_resource_monitor() {
+  : > "$HOST_RESOURCE_LOG"
+  capture_host_resource_snapshot
+  (
+    while true; do
+      sleep 5
+      capture_host_resource_snapshot
+    done
+  ) &
+  HOST_MONITOR_PID=$!
+}
+
+capture_exit_diagnostics() {
+  local status=$?
+  trap - EXIT
+  set +e
+  if [[ -n "${HOST_MONITOR_PID:-}" ]]; then
+    kill "$HOST_MONITOR_PID" 2>/dev/null
+    wait "$HOST_MONITOR_PID" 2>/dev/null
+  fi
+  capture_host_resource_snapshot
+  capture_host_kernel_evidence
+  exit "$status"
+}
 
 adb wait-for-device
 test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
 
 gradle --stop || true
+start_host_resource_monitor
+trap capture_exit_diagnostics EXIT
 gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
 gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
 
