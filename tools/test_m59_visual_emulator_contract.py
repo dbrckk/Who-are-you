@@ -15,6 +15,15 @@ class M59VisualEmulatorContractTest(unittest.TestCase):
         self.assertNotIn("target: google_atd", workflow)
         self.assertIn("target: google_apis", workflow)
 
+    def test_visual_validation_uses_supported_software_renderer(self):
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+
+        # Emulator 36.4.9 deprecated swiftshader_indirect. M59 runs headless on
+        # current stable Emulator builds, so keep the visual gate on a supported
+        # software renderer rather than the legacy indirect backend.
+        self.assertNotIn("-gpu swiftshader_indirect", workflow)
+        self.assertIn("-gpu software", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
