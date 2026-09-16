@@ -24,6 +24,13 @@ class M59VisualEmulatorContractTest(unittest.TestCase):
         self.assertNotIn("-gpu swiftshader_indirect", workflow)
         self.assertIn("-gpu software", workflow)
 
+    def test_visual_validation_pins_known_stable_emulator_build(self):
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+
+        # Emulator 37.1.11 repeatedly disappeared from ADB during the first
+        # connected UI test. Pin the final stable 36.x patch used by this gate.
+        self.assertIn("emulator-build: '15004761'", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
