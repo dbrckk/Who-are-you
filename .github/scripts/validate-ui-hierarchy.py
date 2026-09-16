@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import argparse
 import re
-import sys
+import struct
 import xml.etree.ElementTree as ET
 
 BOUNDS_RE = re.compile(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]")
 SIZE_RE = re.compile(r"(\d+)x(\d+)")
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+
 
 def parse_bounds(raw: str):
     match = BOUNDS_RE.fullmatch(raw or "")
@@ -13,11 +15,21 @@ def parse_bounds(raw: str):
         return None
     return tuple(map(int, match.groups()))
 
+
 def parse_size(raw: str):
     match = SIZE_RE.fullmatch(raw or "")
     if not match:
         raise ValueError(f"invalid display size: {raw!r}")
     return tuple(map(int, match.groups()))
+
+
+def png_size(path: str):
+    with open(path, "rb") as handle:
+        header = handle.read(24)
+    if len(header) < 24 or header[:8] != PNG_SIGNATURE or header[12:16] != b"IHDR":
+        raise ValueError(f"invalid PNG screenshot: {path!r}")
+    return struct.unpack(">II", header[16:24])
+
 
 def label_for(node):
     return (
@@ -28,8 +40,15 @@ def label_for(node):
         or "<anonymous>"
     )
 
-def main(path: str, package: str, display_size: str, density_dpi: int) -> int:
-    screen_w, screen_h = parse_size(display_size)
+
+def main(path: str, package: str, display_size: str | None, density_dpi: int, screenshot: str | None = None) -> int:
+    if screenshot:
+        screen_w, screen_h = png_size(screenshot)
+    elif display_size:
+        screen_w, screen_h = parse_size(display_size)
+    else:
+        raise ValueError("either screenshot or display size is required")
+
     density = density_dpi / 160.0
     min_touch_px = 48.0 * density
 
@@ -119,11 +138,15 @@ def main(path: str, package: str, display_size: str, density_dpi: int) -> int:
         return 1
     return 0
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("xml")
     parser.add_argument("--package", required=True)
-    parser.add_argument("--size", required=True)
+    parser.add_argument("--size")
+    parser.add_argument("--screenshot")
     parser.add_argument("--density", type=int, required=True)
     args = parser.parse_args()
-    raise SystemExit(main(args.xml, args.package, args.size, args.density))
+    if not args.screenshot and not args.size:
+        parser.error("one of --screenshot or --size is required")
+    raise SystemExit(main(args.xml, args.package, args.size, args.density, args.screenshot))
