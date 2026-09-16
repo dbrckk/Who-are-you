@@ -251,6 +251,13 @@ capture_accessibility_variant() {
   capture_visual_evidence "$label"
 }
 
+run_monkey_stress() {
+  local label="$1"
+
+  adb shell monkey -p "$PACKAGE" --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 | tee "device-monkey-$label.txt"
+  sleep 2
+}
+
 validate_running_app() {
   local label="$1"
 
@@ -265,8 +272,9 @@ validate_running_app() {
   test -n "$PID"
   printf '%s PID: %s\n' "$label" "$PID"
 
-  adb shell monkey -p "$PACKAGE" --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 | tee "device-monkey-$label.txt"
-  sleep 2
+  if [[ "$VALIDATION_MODE" != "visual" ]]; then
+    run_monkey_stress "$label"
+  fi
 
   adb logcat -d > "device-logcat-$label.txt"
   adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
