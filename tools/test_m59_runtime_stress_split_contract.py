@@ -36,6 +36,18 @@ class M59RuntimeStressSplitContractTest(unittest.TestCase):
         self.assertIn('stress_apk "$DEBUG_APK" debug-stress', script)
         self.assertIn('stress_apk "$CANDIDATE_APK" candidate-stress', script)
 
+    def test_runtime_stress_captures_startup_evidence_before_pid_assertion(self):
+        script = STRESS_SCRIPT.read_text(encoding="utf-8")
+
+        self.assertIn("capture_runtime_evidence()", script)
+        self.assertIn('pid="$(adb shell pidof "$PACKAGE" | tr -d \'\\r\' || true)"', script)
+        self.assertIn('final_pid="$(adb shell pidof "$PACKAGE" | tr -d \'\\r\' || true)"', script)
+
+        start = script.index('start_output="$(adb shell am start -W -n "$ACTIVITY")"')
+        first_capture = script.index('capture_runtime_evidence "$label"', start)
+        pid_lookup = script.index('pid="$(adb shell pidof', start)
+        self.assertLess(first_capture, pid_lookup)
+
 
 if __name__ == "__main__":
     unittest.main()
