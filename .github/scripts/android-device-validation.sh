@@ -8,6 +8,7 @@ CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
 HOST_RESOURCE_LOG="device-host-resources.txt"
 HOST_KERNEL_LOG="device-host-kernel.txt"
 HOST_MONITOR_PID=""
+VALIDATION_MODE="${VALIDATION_MODE:-full}"
 
 capture_host_resource_snapshot() {
   {
@@ -80,9 +81,17 @@ adb wait-for-device
 test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
 
 gradle --stop || true
-start_host_resource_monitor
-trap capture_exit_diagnostics EXIT
-gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
+if [[ "$VALIDATION_MODE" != "visual" ]]; then
+  start_host_resource_monitor
+  trap capture_exit_diagnostics EXIT
+  gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
+fi
+
+if [[ "$VALIDATION_MODE" == "instrumentation" ]]; then
+  echo "Connected instrumentation validation passed."
+  exit 0
+fi
+
 gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
 
 test -s "$DEBUG_APK"
@@ -359,6 +368,8 @@ adb shell wm density >> device-display-metrics.txt
 adb shell settings get system font_scale >> device-display-metrics.txt
 
 validate_evidence_matrix
-python3 .github/scripts/summarize-visual-qa.py   --root .   --output device-visual-qa-summary.md
+python3 .github/scripts/summarize-visual-qa.py \
+  --root . \
+  --output device-visual-qa-summary.md
 
 echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
