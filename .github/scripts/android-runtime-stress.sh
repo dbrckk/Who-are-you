@@ -11,6 +11,14 @@ gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
 test -s "$DEBUG_APK"
 test -s "$CANDIDATE_APK"
 
+capture_runtime_evidence() {
+  local label="$1"
+
+  adb logcat -d > "device-logcat-$label.txt"
+  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
+  adb shell dumpsys activity exit-info "$PACKAGE" > "device-exit-info-$label.txt" || true
+}
+
 stress_apk() {
   local apk="$1"
   local label="$2"
@@ -25,8 +33,13 @@ stress_apk() {
   printf '%s\n' "$start_output" | tee "device-startup-$label.txt"
   grep -F "Status: ok" "device-startup-$label.txt"
 
-  pid="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-  test -n "$pid"
+  sleep 2
+  capture_runtime_evidence "$label"
+  pid="$(adb shell pidof "$PACKAGE" | tr -d '\r' || true)"
+  if [[ -z "$pid" ]]; then
+    echo "App process exited during startup for $PACKAGE ($label)"
+    return 1
+  fi
   printf '%s PID: %s\n' "$label" "$pid"
 
   adb shell monkey \
@@ -39,11 +52,9 @@ stress_apk() {
     | tee "device-monkey-$label.txt"
   sleep 2
 
-  adb logcat -d > "device-logcat-$label.txt"
-  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
-  adb shell dumpsys activity exit-info "$PACKAGE" > "device-exit-info-$label.txt" || true
+  capture_runtime_evidence "$label"
 
-  final_pid="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
+  final_pid="$(adb shell pidof "$PACKAGE" | tr -d '\r' || true)"
   test -n "$final_pid"
   printf '%s final PID: %s\n' "$label" "$final_pid"
 
