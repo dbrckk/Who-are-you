@@ -120,7 +120,7 @@ capture_visual_evidence() {
   python3 .github/scripts/validate-ui-hierarchy.py \
     "device-ui-$label.xml" \
     --package "$PACKAGE" \
-    --size "$display_size" \
+    --screenshot "device-screen-$label.png" \
     --density "$density_dpi" \
     | tee "device-ui-report-$label.txt"
 }
