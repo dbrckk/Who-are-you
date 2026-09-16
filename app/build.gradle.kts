@@ -152,6 +152,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:25.4.0")
     implementation("com.google.android.ump:user-messaging-platform:4.0.0")
 
+    constraints {
+        implementation("androidx.work:work-runtime:2.11.2") {
+            because("Google Mobile Ads brings WorkManager transitively; WorkManager 2.10+ ships R8 full-mode-safe rules for reflective WorkDatabase creation")
+        }
+    }
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
