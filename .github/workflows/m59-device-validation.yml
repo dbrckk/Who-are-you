@@ -51,7 +51,7 @@ jobs:
           disk-size: 2048M
           disable-animations: true
           disable-spellchecker: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
+          emulator-options: -no-window -gpu software -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
           script: bash .github/scripts/android-device-validation.sh
 
       - name: Upload device validation evidence
