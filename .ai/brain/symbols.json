@@ -4995,6 +4995,13 @@
       "file": "tools/play_preflight.py",
       "language": "python",
       "kind": "function",
+      "name": "add",
+      "line": 15
+    },
+    {
+      "file": "tools/play_preflight.py",
+      "language": "python",
+      "kind": "function",
       "name": "run",
       "line": 41
     },
@@ -5004,13 +5011,6 @@
       "kind": "function",
       "name": "main",
       "line": 70
-    },
-    {
-      "file": "tools/play_preflight.py",
-      "language": "python",
-      "kind": "function",
-      "name": "add",
-      "line": 15
     },
     {
       "file": "tools/play_promoter.py",
@@ -5032,6 +5032,13 @@
       "kind": "class",
       "name": "ReleaseConfig",
       "line": 32
+    },
+    {
+      "file": "tools/play_publisher.py",
+      "language": "python",
+      "kind": "function",
+      "name": "validate",
+      "line": 38
     },
     {
       "file": "tools/play_publisher.py",
@@ -5081,13 +5088,6 @@
       "kind": "function",
       "name": "main",
       "line": 182
-    },
-    {
-      "file": "tools/play_publisher.py",
-      "language": "python",
-      "kind": "function",
-      "name": "validate",
-      "line": 38
     },
     {
       "file": "tools/prepare_play_submission.py",
@@ -7549,13 +7549,6 @@
     {
       "file": "tools/test_release_workflows_contract.py",
       "language": "python",
-      "kind": "class",
-      "name": "ComposeImportContractTest",
-      "line": 53
-    },
-    {
-      "file": "tools/test_release_workflows_contract.py",
-      "language": "python",
       "kind": "function",
       "name": "setUp",
       "line": 8
@@ -7601,6 +7594,13 @@
       "kind": "function",
       "name": "test_candidate_and_internal_run_core_quality_gates",
       "line": 43
+    },
+    {
+      "file": "tools/test_release_workflows_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ComposeImportContractTest",
+      "line": 53
     },
     {
       "file": "tools/test_release_workflows_contract.py",

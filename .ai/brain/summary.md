@@ -1,8 +1,12 @@
 # Repo Brain
 
+- Index mode: full
 - Files indexed: 244
+- Files reparsed this run: 244
 - Symbols: 1200
 - Internal import edges: 8
+- Impacted files: 0
+- Selected tests: 0
 
 ## Languages
 - kotlin: 151 files
@@ -31,11 +35,10 @@
 - app/src/main/java/com/whoareyou/app/RetentionUi.kt: 9 symbols
 
 ## Agent routing
-- Search lookup.json first for direct symbol-to-file routing.
-- Use symbols.json only when broader symbol metadata is needed.
-- Use code-graph.json to inspect likely internal import relationships.
-- Use imports.json when a changed file crosses module boundaries.
-- Treat graph edges as static hints; verify source before editing.
+- Read impact.json first after project/change context.
+- Use selected-tests.json before broad validation.
+- Search lookup.json for symbol routing; ast-grep enrichment may provide exact ranges.
+- Verify source before editing.
 
 ## ast-grep enrichment
 - ast-grep outline: available

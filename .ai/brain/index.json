@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
   "files_indexed": 244,
   "symbol_count": 1200,
@@ -8,6 +8,8 @@
     "python": 93,
     "kotlin": 151
   },
+  "index_mode": "full",
+  "reparsed_files": 244,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",

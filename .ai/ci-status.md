@@ -2,13 +2,13 @@
 
 Summary: 0 success / 0 failure / 4 active
 
-- M59 Android Device Validation: in_progress / pending (69489525)
-- M56 Main Release Candidate: in_progress / pending (69489525)
-- Android CI: in_progress / pending (69489525)
-- Android APK: in_progress / pending (69489525)
-- M56 Main Release Candidate: completed / cancelled (e09d7eee)
-- M59 Android Device Validation: completed / cancelled (e09d7eee)
-- Android APK: completed / cancelled (e09d7eee)
-- Android CI: completed / cancelled (e09d7eee)
+- Android CI: pending / pending (9903bf76)
+- M56 Main Release Candidate: queued / pending (9903bf76)
+- Android APK: in_progress / pending (9903bf76)
+- M59 Android Device Validation: queued / pending (9903bf76)
+- M59 Android Device Validation: completed / cancelled (a36a339d)
+- Android APK: completed / cancelled (a36a339d)
+- Android CI: completed / cancelled (a36a339d)
+- M56 Main Release Candidate: completed / cancelled (a36a339d)
 
 > Generated summary only; inspect GitHub Actions for full logs when needed.
