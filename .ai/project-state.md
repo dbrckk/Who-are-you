@@ -22,19 +22,19 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-18T19:08:02Z
+Generated: 2026-09-18T19:17:55Z
 
 ### Git
 - Branch: `main`
-- Head: `f66bffa25df4`
-- Commit date: 2026-09-18T21:07:25+02:00
-- Commit: chore(ai): adopt bounded v6 context routing
+- Head: `491dc1d94a29`
+- Commit date: 2026-09-18T21:16:50+02:00
+- Commit: chore(ai): align config with v6 bounded context
 - Tracked files: 445
 
 ### Recently changed files
-- `AGENTS.md`
 - `.repo-standards.yml`
 - `.github/workflows/ai-repo-map.yml`
+- `AGENTS.md`
 
 ### Project signals
 - `build.gradle.kts`
