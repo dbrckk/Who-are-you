@@ -5,6 +5,11 @@
       "source": "tools/test_prepare_play_submission.py",
       "target": "tools/prepare_play_submission.py",
       "type": "imports"
+    },
+    {
+      "source": "tools/test_prepare_play_submission.py",
+      "target": "tools/prepare_play_submission.py",
+      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

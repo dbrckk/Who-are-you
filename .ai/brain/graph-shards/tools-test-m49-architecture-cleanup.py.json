@@ -1,0 +1,41 @@
+{
+  "area": "tools-test-m49-architecture-cleanup.py",
+  "edges": [
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m49_architecture_cleanup.py",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

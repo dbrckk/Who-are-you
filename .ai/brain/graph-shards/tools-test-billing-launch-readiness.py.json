@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-billing-launch-readiness.py",
+  "edges": [
+    {
+      "source": "tools/test_billing_launch_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_billing_launch_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_billing_launch_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

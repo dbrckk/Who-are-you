@@ -1,0 +1,26 @@
+{
+  "area": "tools-test-share-storage-safety.py",
+  "edges": [
+    {
+      "source": "tools/test_share_storage_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_share_storage_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_share_storage_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_share_storage_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/ShareFileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

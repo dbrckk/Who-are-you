@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-trait-timeline-integration.py",
+  "edges": [
+    {
+      "source": "tools/test_trait_timeline_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

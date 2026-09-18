@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-performance-release-gate-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_performance_release_gate_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_performance_release_gate_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

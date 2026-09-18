@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-shell-accessibility-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_shell_accessibility_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

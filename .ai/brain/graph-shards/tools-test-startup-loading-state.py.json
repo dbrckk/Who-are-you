@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-startup-loading-state.py",
+  "edges": [
+    {
+      "source": "tools/test_startup_loading_state.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_startup_loading_state.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

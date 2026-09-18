@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-m52-play-policy.py",
+  "edges": [
+    {
+      "source": "tools/test_m52_play_policy.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m52_play_policy.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m52_play_policy.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

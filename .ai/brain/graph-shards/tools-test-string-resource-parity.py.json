@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-string-resource-parity.py",
+  "edges": [
+    {
+      "source": "tools/test_string_resource_parity.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-healthy-discover-profile-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_healthy_discover_profile_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_healthy_discover_profile_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

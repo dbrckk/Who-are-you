@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-challenge-landing-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_challenge_landing_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

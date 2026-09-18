@@ -1,0 +1,31 @@
+{
+  "area": "tools-test-m50-analytics.py",
+  "edges": [
+    {
+      "source": "tools/test_m50_analytics.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m50_analytics.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m50_analytics.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m50_analytics.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m50_analytics.py",
+      "target": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

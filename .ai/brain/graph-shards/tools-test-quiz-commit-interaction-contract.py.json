@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-quiz-commit-interaction-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_quiz_commit_interaction_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-m48-visual-system.py",
+  "edges": [
+    {
+      "source": "tools/test_m48_visual_system.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m48_visual_system.py",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

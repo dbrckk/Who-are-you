@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-main-activity-recreation-sync-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_main_activity_recreation_sync_contract.py",
+      "target": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

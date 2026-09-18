@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-profile-narrative-integration.py",
+  "edges": [
+    {
+      "source": "tools/test_profile_narrative_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

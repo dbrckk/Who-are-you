@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-trait-graph-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_trait_graph_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

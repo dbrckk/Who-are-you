@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-progression-journal-integration.py",
+  "edges": [
+    {
+      "source": "tools/test_progression_journal_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_progression_journal_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-quiz-commit-interaction-lock.py",
+  "edges": [
+    {
+      "source": "tools/test_quiz_commit_interaction_lock.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

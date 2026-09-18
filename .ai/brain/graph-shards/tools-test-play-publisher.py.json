@@ -5,6 +5,11 @@
       "source": "tools/test_play_publisher.py",
       "target": "tools/play_publisher.py",
       "type": "imports"
+    },
+    {
+      "source": "tools/test_play_publisher.py",
+      "target": "tools/play_publisher.py",
+      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

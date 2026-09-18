@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-main-activity-architecture.py",
+  "edges": [
+    {
+      "source": "tools/test_main_activity_architecture.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

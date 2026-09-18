@@ -3,6 +3,16 @@
   "edges": [
     {
       "source": "tools/play_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_preflight.py",
       "target": "tools/validate_public_release_inputs.py",
       "type": "imports"
     },

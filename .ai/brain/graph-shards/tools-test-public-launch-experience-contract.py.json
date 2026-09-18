@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-public-launch-experience-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_public_launch_experience_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

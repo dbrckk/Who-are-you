@@ -1,0 +1,26 @@
+{
+  "area": "tools-test-actionable-knowledge-map-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_actionable_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_actionable_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_actionable_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_actionable_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

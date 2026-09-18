@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-trait-evolution-integration.py",
+  "edges": [
+    {
+      "source": "tools/test_trait_evolution_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_trait_evolution_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_trait_evolution_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

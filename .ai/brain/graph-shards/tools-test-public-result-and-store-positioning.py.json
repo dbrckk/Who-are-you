@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-public-result-and-store-positioning.py",
+  "edges": [
+    {
+      "source": "tools/test_public_result_and_store_positioning.py",
+      "target": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

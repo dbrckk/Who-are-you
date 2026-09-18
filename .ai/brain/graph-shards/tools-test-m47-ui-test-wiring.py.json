@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-m47-ui-test-wiring.py",
+  "edges": [
+    {
+      "source": "tools/test_m47_ui_test_wiring.py",
+      "target": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m47_ui_test_wiring.py",
+      "target": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m47_ui_test_wiring.py",
+      "target": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

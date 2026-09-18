@@ -1,0 +1,41 @@
+{
+  "area": "baseline-profile",
+  "edges": [
+    {
+      "source": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_performance_release_gate_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_performance_release_gate_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_rendering_performance_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

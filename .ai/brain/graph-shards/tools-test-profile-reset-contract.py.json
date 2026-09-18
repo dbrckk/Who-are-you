@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-profile-reset-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_profile_reset_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_reset_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

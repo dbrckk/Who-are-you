@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-manifest-security-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_manifest_security_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_manifest_security_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_manifest_security_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

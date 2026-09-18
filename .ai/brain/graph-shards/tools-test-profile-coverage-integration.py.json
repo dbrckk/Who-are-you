@@ -1,0 +1,26 @@
+{
+  "area": "tools-test-profile-coverage-integration.py",
+  "edges": [
+    {
+      "source": "tools/test_profile_coverage_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_coverage_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_coverage_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_coverage_integration.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

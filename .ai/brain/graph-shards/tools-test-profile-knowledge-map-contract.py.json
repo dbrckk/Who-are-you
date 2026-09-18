@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-profile-knowledge-map-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_profile_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

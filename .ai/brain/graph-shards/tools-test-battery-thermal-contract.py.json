@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-battery-thermal-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_battery_thermal_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

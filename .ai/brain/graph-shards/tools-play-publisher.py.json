@@ -7,6 +7,11 @@
       "type": "imports"
     },
     {
+      "source": "tools/play_promoter.py",
+      "target": "tools/play_publisher.py",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_play_promoter.py",
       "target": "tools/play_publisher.py",
       "type": "imports"
@@ -15,6 +20,11 @@
       "source": "tools/test_play_publisher.py",
       "target": "tools/play_publisher.py",
       "type": "imports"
+    },
+    {
+      "source": "tools/test_play_publisher.py",
+      "target": "tools/play_publisher.py",
+      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

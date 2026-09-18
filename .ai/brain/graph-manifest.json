@@ -4,8 +4,13 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 2,
+      "edge_count": 505,
       "path": ".ai/brain/graph-shards/app-src.json"
+    },
+    {
+      "area": "baseline-profile",
+      "edge_count": 7,
+      "path": ".ai/brain/graph-shards/baseline-profile.json"
     },
     {
       "area": "tools-check-play-bundle-budget.py",
@@ -14,23 +19,88 @@
     },
     {
       "area": "tools-play-preflight.py",
-      "edge_count": 2,
+      "edge_count": 4,
       "path": ".ai/brain/graph-shards/tools-play-preflight.py.json"
     },
     {
       "area": "tools-play-promoter.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-play-promoter.py.json"
     },
     {
       "area": "tools-play-publisher.py",
-      "edge_count": 3,
+      "edge_count": 5,
       "path": ".ai/brain/graph-shards/tools-play-publisher.py.json"
     },
     {
       "area": "tools-prepare-play-submission.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-prepare-play-submission.py.json"
+    },
+    {
+      "area": "tools-test-actionable-knowledge-map-contract.py",
+      "edge_count": 4,
+      "path": ".ai/brain/graph-shards/tools-test-actionable-knowledge-map-contract.py.json"
+    },
+    {
+      "area": "tools-test-battery-thermal-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-battery-thermal-contract.py.json"
+    },
+    {
+      "area": "tools-test-billing-launch-readiness.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-billing-launch-readiness.py.json"
+    },
+    {
+      "area": "tools-test-challenge-landing-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-challenge-landing-contract.py.json"
+    },
+    {
+      "area": "tools-test-healthy-discover-profile-contract.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-healthy-discover-profile-contract.py.json"
+    },
+    {
+      "area": "tools-test-large-screen-keyboard-accessibility.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-large-screen-keyboard-accessibility.py.json"
+    },
+    {
+      "area": "tools-test-longitudinal-trend-integration.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-longitudinal-trend-integration.py.json"
+    },
+    {
+      "area": "tools-test-m46-accessibility.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-m46-accessibility.py.json"
+    },
+    {
+      "area": "tools-test-m47-ui-test-wiring.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-m47-ui-test-wiring.py.json"
+    },
+    {
+      "area": "tools-test-m48-visual-system.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-m48-visual-system.py.json"
+    },
+    {
+      "area": "tools-test-m49-architecture-cleanup.py",
+      "edge_count": 7,
+      "path": ".ai/brain/graph-shards/tools-test-m49-architecture-cleanup.py.json"
+    },
+    {
+      "area": "tools-test-m50-analytics.py",
+      "edge_count": 5,
+      "path": ".ai/brain/graph-shards/tools-test-m50-analytics.py.json"
+    },
+    {
+      "area": "tools-test-m52-play-policy.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-m52-play-policy.py.json"
     },
     {
       "area": "tools-test-m53-publication-contract.py",
@@ -41,6 +111,41 @@
       "area": "tools-test-m54-play-preflight.py",
       "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-m54-play-preflight.py.json"
+    },
+    {
+      "area": "tools-test-main-activity-architecture.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-main-activity-architecture.py.json"
+    },
+    {
+      "area": "tools-test-main-activity-recreation-sync-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-main-activity-recreation-sync-contract.py.json"
+    },
+    {
+      "area": "tools-test-main-flow-recommendation-parity-contract.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-main-flow-recommendation-parity-contract.py.json"
+    },
+    {
+      "area": "tools-test-manifest-security-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-manifest-security-contract.py.json"
+    },
+    {
+      "area": "tools-test-offline-resilience-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-offline-resilience-contract.py.json"
+    },
+    {
+      "area": "tools-test-performance-release-gate-contract.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-performance-release-gate-contract.py.json"
+    },
+    {
+      "area": "tools-test-persisted-result-score-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-persisted-result-score-contract.py.json"
     },
     {
       "area": "tools-test-play-bundle-budget.py",
@@ -54,13 +159,148 @@
     },
     {
       "area": "tools-test-play-publisher.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-play-publisher.py.json"
     },
     {
       "area": "tools-test-prepare-play-submission.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-prepare-play-submission.py.json"
+    },
+    {
+      "area": "tools-test-profile-coverage-integration.py",
+      "edge_count": 4,
+      "path": ".ai/brain/graph-shards/tools-test-profile-coverage-integration.py.json"
+    },
+    {
+      "area": "tools-test-profile-knowledge-map-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-profile-knowledge-map-contract.py.json"
+    },
+    {
+      "area": "tools-test-profile-narrative-integration.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-profile-narrative-integration.py.json"
+    },
+    {
+      "area": "tools-test-profile-reset-contract.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-profile-reset-contract.py.json"
+    },
+    {
+      "area": "tools-test-profile-startup-resilience.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-profile-startup-resilience.py.json"
+    },
+    {
+      "area": "tools-test-progression-journal-integration.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-progression-journal-integration.py.json"
+    },
+    {
+      "area": "tools-test-public-launch-experience-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-public-launch-experience-contract.py.json"
+    },
+    {
+      "area": "tools-test-public-result-and-store-positioning.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-public-result-and-store-positioning.py.json"
+    },
+    {
+      "area": "tools-test-quiz-commit-interaction-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-quiz-commit-interaction-contract.py.json"
+    },
+    {
+      "area": "tools-test-quiz-commit-interaction-lock.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-quiz-commit-interaction-lock.py.json"
+    },
+    {
+      "area": "tools-test-quiz-process-recreation-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-quiz-process-recreation-contract.py.json"
+    },
+    {
+      "area": "tools-test-quiz-replay-window-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-quiz-replay-window-contract.py.json"
+    },
+    {
+      "area": "tools-test-quiz-result-persistence-feedback.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-quiz-result-persistence-feedback.py.json"
+    },
+    {
+      "area": "tools-test-release-critical-profile-contract.py",
+      "edge_count": 6,
+      "path": ".ai/brain/graph-shards/tools-test-release-critical-profile-contract.py.json"
+    },
+    {
+      "area": "tools-test-rendering-performance-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-rendering-performance-contract.py.json"
+    },
+    {
+      "area": "tools-test-restored-quiz-recovery.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-restored-quiz-recovery.py.json"
+    },
+    {
+      "area": "tools-test-runtime-efficiency-contract.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-runtime-efficiency-contract.py.json"
+    },
+    {
+      "area": "tools-test-runtime-memory-lifecycle.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-runtime-memory-lifecycle.py.json"
+    },
+    {
+      "area": "tools-test-runtime-performance-contract.py",
+      "edge_count": 6,
+      "path": ".ai/brain/graph-shards/tools-test-runtime-performance-contract.py.json"
+    },
+    {
+      "area": "tools-test-share-rendering-performance.py",
+      "edge_count": 5,
+      "path": ".ai/brain/graph-shards/tools-test-share-rendering-performance.py.json"
+    },
+    {
+      "area": "tools-test-share-storage-safety.py",
+      "edge_count": 4,
+      "path": ".ai/brain/graph-shards/tools-test-share-storage-safety.py.json"
+    },
+    {
+      "area": "tools-test-shell-accessibility-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-shell-accessibility-contract.py.json"
+    },
+    {
+      "area": "tools-test-startup-loading-state.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-startup-loading-state.py.json"
+    },
+    {
+      "area": "tools-test-string-resource-parity.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-string-resource-parity.py.json"
+    },
+    {
+      "area": "tools-test-trait-evolution-integration.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-trait-evolution-integration.py.json"
+    },
+    {
+      "area": "tools-test-trait-graph-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-trait-graph-contract.py.json"
+    },
+    {
+      "area": "tools-test-trait-timeline-integration.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-trait-timeline-integration.py.json"
     },
     {
       "area": "tools-validate-public-release-inputs.py",

@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-rendering-performance-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_rendering_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_rendering_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_rendering_performance_contract.py",
+      "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-quiz-replay-window-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_quiz_replay_window_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-offline-resilience-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_offline_resilience_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_offline_resilience_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ShareSafety.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_offline_resilience_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

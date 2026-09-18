@@ -1,0 +1,36 @@
+{
+  "area": "tools-test-runtime-performance-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BillingReconnectPolicy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_runtime_performance_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

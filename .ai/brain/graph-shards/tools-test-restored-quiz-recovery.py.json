@@ -1,0 +1,16 @@
+{
+  "area": "tools-test-restored-quiz-recovery.py",
+  "edges": [
+    {
+      "source": "tools/test_restored_quiz_recovery.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_restored_quiz_recovery.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

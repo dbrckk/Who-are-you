@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-m46-accessibility.py",
+  "edges": [
+    {
+      "source": "tools/test_m46_accessibility.py",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

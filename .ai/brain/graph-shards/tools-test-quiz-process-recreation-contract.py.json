@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-quiz-process-recreation-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_quiz_process_recreation_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}
