@@ -29,7 +29,7 @@ The content is organized as follows:
 ## Notes
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
-- Only files matching these patterns are included: **/*.{py,js,mjs,cjs,ts,tsx,jsx,java,kt,kts,gd,groovy,gradle,toml,json,yaml,yml,sql,sh}, README.md, AGENTS.md, PROJECT_*.md
+- Only files matching these patterns are included: **/*.{py,js,mjs,cjs,ts,tsx,jsx,java,kt,kts,gd,groovy,gradle,toml,json,yaml,yml,sql,sh}
 - Files matching these patterns are excluded: .ai/**, **/node_modules/**, **/.gradle/**, **/build/**, **/dist/**, **/.venv/**, **/__pycache__/**, **/.pytest_cache/**, **/.git/**, **/coverage/**, **/*.lock, **/*.min.js, **/*.map, assets/**, art/**, art_sources/**, marketing/**, colab/**, kaggle/**, discovery-cache.json, health-snapshot.json, history.json
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
@@ -38,2216 +38,187 @@ The content is organized as follows:
 
 # Directory Structure
 ```
-.circleci/
-  config.yml
-.github/
-  scripts/
-    android-device-validation.sh
-    android-runtime-stress.sh
-    summarize-visual-qa.py
-    validate-screenshot.py
-    validate-ui-hierarchy.py
-  workflows/
-    ai-repo-map.yml
-    android-apk.yml
-    android-ci.yml
-    apk-test.yml
-    m56-main-rc.yml
-    m59-device-validation.yml
-    pages.yml
-    play-candidate.yml
-    play-internal-publish.yml
-    play-promote.yml
-.serena/
-  project.yml
-app/
-  src/
-    androidTest/
-      java/
-        com/
-          whoareyou/
-            app/
-              AppShellUiTest.kt
-              MainActivityRecreationTest.kt
-              MainFlowE2eTest.kt
-              ProfileStorePersistenceTest.kt
-              QuizScreenUiTest.kt
-              ResultScreenUiTest.kt
-    main/
-      assets/
-        quizzes-extra-fr.json
-        quizzes-extra.json
-        quizzes-fr.json
-        quizzes-growth-fr.json
-        quizzes-growth.json
-        quizzes-growth2-fr.json
-        quizzes-growth2.json
-        quizzes-growth3-fr.json
-        quizzes-growth3.json
-        quizzes.json
-      java/
-        androidx/
-          compose/
-            foundation/
-              lazy/
-                WhoAreYouQuizItems.kt
-        com/
-          whoareyou/
-            app/
-              AccessibilityUi.kt
-              Achievements.kt
-              AchievementUnlockQueue.kt
-              AdaptiveLayoutUi.kt
-              AdManager.kt
-              AppEvents.kt
-              AppLanguage.kt
-              AppNavigation.kt
-              AppScreenTransitionUi.kt
-              AppShellUi.kt
-              AppThemeUi.kt
-              BillingManager.kt
-              BillingPriceState.kt
-              BillingReconnectPolicy.kt
-              BrandMascotUi.kt
-              ChallengeActivity.kt
-              ChallengeShare.kt
-              ChallengeUi.kt
-              CompatibilityShare.kt
-              DailyQuestion.kt
-              DailyQuestionShare.kt
-              DimensionJournal.kt
-              DimensionJournalUi.kt
-              DiscoverCollectionsUi.kt
-              DiscoverHubUi.kt
-              DiscoverLibraryEngine.kt
-              DiscoverLibraryUi.kt
-              DiscoverPersonalization.kt
-              EntryScreensUi.kt
-              EventWindowDeduplicator.kt
-              GlobalProfile.kt
-              GlobalProfileShare.kt
-              GuidedJourneys.kt
-              IdentityAuraUi.kt
-              LongitudinalTrend.kt
-              LongitudinalTrendUi.kt
-              MainActivity.kt
-              NextQuizRecommendation.kt
-              NextQuizRecommendationUi.kt
-              PersonalizedDiscoverUi.kt
-              ProfileCoverage.kt
-              ProfileCoverageUi.kt
-              ProfileEvolutionShare.kt
-              ProfileEvolutionSummary.kt
-              ProfileEvolutionUi.kt
-              ProfileIdentityMap.kt
-              ProfileIdentityMapUi.kt
-              ProfileInsights.kt
-              ProfileInsightUi.kt
-              ProfileIntegrity.kt
-              ProfileKnowledgeMap.kt
-              ProfileKnowledgeMapUi.kt
-              ProfileMapPreviewUi.kt
-              ProfileMomentum.kt
-              ProfileMomentumUi.kt
-              ProfileNarrative.kt
-              ProfileNarrativeUi.kt
-              ProfilePersistenceCodec.kt
-              ProfileScreenUi.kt
-              ProfileStore.kt
-              ProfileStrengthNuance.kt
-              ProfileStrengthNuanceUi.kt
-              PurchaseGrantPolicy.kt
-              QuizCatalog.kt
-              QuizResultCommitEffect.kt
-              QuizScreenUi.kt
-              QuizVisualUi.kt
-              RecommendationAttribution.kt
-              RecommendationTelemetry.kt
-              ResultInterpretation.kt
-              ResultInterpretationUi.kt
-              ResultNextExploration.kt
-              ResultNextExplorationUi.kt
-              ResultScreenUi.kt
-              ResultShare.kt
-              RetakeRecommendation.kt
-              RetentionUi.kt
-              ScoreChange.kt
-              ScoreHistory.kt
-              Scoring.kt
-              ShareFileStore.kt
-              ShareSafety.kt
-              SignatureProfile.kt
-              SignatureProfileUiCopy.kt
-              Telemetry.kt
-              TraitEvolution.kt
-              TraitEvolutionUi.kt
-              TraitExploration.kt
-              TraitExplorationUi.kt
-              TraitGraph.kt
-              TraitGraphUi.kt
-              TraitLocalization.kt
-              TraitTimeline.kt
-              TraitTimelineUi.kt
-              V2DesignSystem.kt
-              V2InteractiveUi.kt
-              V2MotionPreferences.kt
-              WhoAreYouApplication.kt
-    test/
-      java/
-        com/
-          whoareyou/
-            app/
-              AchievementUnlockQueueTest.kt
-              AppNavigationTest.kt
-              AppShellNavigationTest.kt
-              BillingReconnectPolicyTest.kt
-              DimensionJournalEngineTest.kt
-              DiscoverLibraryEngineTest.kt
-              DiscoverPersonalizationTest.kt
-              EventWindowDeduplicatorTest.kt
-              GlobalProfileEngineTest.kt
-              GuidedJourneysTest.kt
-              LongitudinalTrendEngineTest.kt
-              ProfileCoverageEngineTest.kt
-              ProfileEvolutionShareTest.kt
-              ProfileEvolutionSummaryTest.kt
-              ProfileIdentityMapTest.kt
-              ProfileInsightsTest.kt
-              ProfileIntegrityTest.kt
-              ProfileKnowledgeMapEngineTest.kt
-              ProfileMomentumEngineTest.kt
-              ProfileNarrativeEngineTest.kt
-              ProfilePersistenceCodecTest.kt
-              ProfileStrengthNuanceTest.kt
-              PurchaseGrantPolicyTest.kt
-              RecommendationAttributionTest.kt
-              RecommendationTelemetryTest.kt
-              ResultInterpretationTest.kt
-              ResultNextExplorationTest.kt
-              RetakeRecommendationEngineTest.kt
-              ScoreChangeEngineTest.kt
-              ScoreHistoryEngineTest.kt
-              ScoringTest.kt
-              SignatureProfilesTest.kt
-              SignatureProfileTest.kt
-              SupportedAppLanguageTest.kt
-              SupportedCatalogLanguageTest.kt
-              TraitEvolutionEngineTest.kt
-              TraitExplorationEngineTest.kt
-              TraitGraphEngineTest.kt
-              TraitTimelineEngineTest.kt
-  build.gradle.kts
-baseline-profile/
-  src/
-    main/
-      java/
-        com/
-          whoareyou/
-            app/
-              baselineprofile/
-                BaselineProfileGenerator.kt
-                RenderingBenchmark.kt
-                StartupBenchmark.kt
-  build.gradle.kts
-docs/
-  assetlinks.template.json
-  internal-test-release.json
-  m28-external-inputs.template.json
-  m28-readiness.json
-  m30-play-build-contract.json
-  m31-readiness.json
-  m32-play-candidate-contract.json
-  m32-readiness.json
-  m33-readiness.json
-  play-internal-test-metadata.json
-  play-signing-contract.json
-  public-release-inputs.template.json
-tools/
-  check_play_bundle_budget.py
-  play_preflight.py
-  play_promoter.py
-  play_publisher.py
-  prepare_play_submission.py
-  test_accessibility_launch_contract.py
-  test_accessibility_system_contract.py
-  test_actionable_knowledge_map_contract.py
-  test_android_ci_sdk_setup_contract.py
-  test_baseline_profile_manifest_contract.py
-  test_battery_thermal_contract.py
-  test_billing_launch_readiness.py
-  test_challenge_landing_contract.py
-  test_gradle_release_reproducibility.py
-  test_healthy_discover_profile_contract.py
-  test_large_screen_keyboard_accessibility.py
-  test_local_profile_privacy_contract.py
-  test_localization_parity.py
-  test_longitudinal_trend_integration.py
-  test_m33_readiness.py
-  test_m46_accessibility.py
-  test_m47_ui_test_wiring.py
-  test_m48_visual_system.py
-  test_m49_architecture_cleanup.py
-  test_m50_analytics.py
-  test_m51_release_readiness.py
-  test_m52_play_policy.py
-  test_m53_publication_contract.py
-  test_m54_play_preflight.py
-  test_m55_release_automation.py
-  test_m56_release_candidate.py
-  test_m59_host_diagnostics_contract.py
-  test_m59_no_kvm_contract.py
-  test_m59_runtime_stress_split_contract.py
-  test_m59_split_validation_contract.py
-  test_m59_visual_emulator_contract.py
-  test_m769_landscape_viewport.py
-  test_main_activity_architecture.py
-  test_main_activity_recreation_sync_contract.py
-  test_main_flow_recommendation_parity_contract.py
-  test_manifest_security_contract.py
-  test_offline_resilience_contract.py
-  test_performance_release_gate_contract.py
-  test_persisted_result_score_contract.py
-  test_play_2026_readiness.py
-  test_play_bundle_budget.py
-  test_play_candidate_workflow.py
-  test_play_promoter.py
-  test_play_publish_pipeline_contract.py
-  test_play_publish_workflow.py
-  test_play_publisher.py
-  test_play_release_safety_contract.py
-  test_prepare_play_submission.py
-  test_profile_coverage_integration.py
-  test_profile_knowledge_map_contract.py
-  test_profile_narrative_integration.py
-  test_profile_reset_contract.py
-  test_profile_result_allocation_contract.py
-  test_profile_startup_resilience.py
-  test_progression_journal_integration.py
-  test_public_launch_experience_contract.py
-  test_public_result_and_store_positioning.py
-  test_quiz_commit_interaction_contract.py
-  test_quiz_commit_interaction_lock.py
-  test_quiz_process_recreation_contract.py
-  test_quiz_replay_window_contract.py
-  test_quiz_result_persistence_feedback.py
-  test_reduced_motion_large_font_contract.py
-  test_release_critical_profile_contract.py
-  test_release_workflows_contract.py
-  test_rendering_performance_contract.py
-  test_restored_quiz_recovery.py
-  test_result_visual_hierarchy_contract.py
-  test_runtime_efficiency_contract.py
-  test_runtime_memory_lifecycle.py
-  test_runtime_performance_contract.py
-  test_share_rendering_performance.py
-  test_share_storage_safety.py
-  test_shell_accessibility_contract.py
-  test_startup_loading_state.py
-  test_string_resource_parity.py
-  test_summarize_visual_qa.py
-  test_trait_evolution_integration.py
-  test_trait_graph_contract.py
-  test_trait_taxonomy_v2.py
-  test_trait_timeline_integration.py
-  test_validate_screenshot.py
-  test_validate_ui_hierarchy.py
-  test_workmanager_r8_contract.py
-  validate_public_release_inputs.py
-.repo-standards.yml
-AGENTS.md
+src/
+  androidTest/
+    java/
+      com/
+        whoareyou/
+          app/
+            AppShellUiTest.kt
+            MainActivityRecreationTest.kt
+            MainFlowE2eTest.kt
+            ProfileStorePersistenceTest.kt
+            QuizScreenUiTest.kt
+            ResultScreenUiTest.kt
+  main/
+    assets/
+      quizzes-extra-fr.json
+      quizzes-extra.json
+      quizzes-fr.json
+      quizzes-growth-fr.json
+      quizzes-growth.json
+      quizzes-growth2-fr.json
+      quizzes-growth2.json
+      quizzes-growth3-fr.json
+      quizzes-growth3.json
+      quizzes.json
+    java/
+      androidx/
+        compose/
+          foundation/
+            lazy/
+              WhoAreYouQuizItems.kt
+      com/
+        whoareyou/
+          app/
+            AccessibilityUi.kt
+            Achievements.kt
+            AchievementUnlockQueue.kt
+            AdaptiveLayoutUi.kt
+            AdManager.kt
+            AppEvents.kt
+            AppLanguage.kt
+            AppNavigation.kt
+            AppScreenTransitionUi.kt
+            AppShellUi.kt
+            AppThemeUi.kt
+            BillingManager.kt
+            BillingPriceState.kt
+            BillingReconnectPolicy.kt
+            BrandMascotUi.kt
+            ChallengeActivity.kt
+            ChallengeShare.kt
+            ChallengeUi.kt
+            CompatibilityShare.kt
+            DailyQuestion.kt
+            DailyQuestionShare.kt
+            DimensionJournal.kt
+            DimensionJournalUi.kt
+            DiscoverCollectionsUi.kt
+            DiscoverHubUi.kt
+            DiscoverLibraryEngine.kt
+            DiscoverLibraryUi.kt
+            DiscoverPersonalization.kt
+            EntryScreensUi.kt
+            EventWindowDeduplicator.kt
+            GlobalProfile.kt
+            GlobalProfileShare.kt
+            GuidedJourneys.kt
+            IdentityAuraUi.kt
+            LongitudinalTrend.kt
+            LongitudinalTrendUi.kt
+            MainActivity.kt
+            NextQuizRecommendation.kt
+            NextQuizRecommendationUi.kt
+            PersonalizedDiscoverUi.kt
+            ProfileCoverage.kt
+            ProfileCoverageUi.kt
+            ProfileEvolutionShare.kt
+            ProfileEvolutionSummary.kt
+            ProfileEvolutionUi.kt
+            ProfileIdentityMap.kt
+            ProfileIdentityMapUi.kt
+            ProfileInsights.kt
+            ProfileInsightUi.kt
+            ProfileIntegrity.kt
+            ProfileKnowledgeMap.kt
+            ProfileKnowledgeMapUi.kt
+            ProfileMapPreviewUi.kt
+            ProfileMomentum.kt
+            ProfileMomentumUi.kt
+            ProfileNarrative.kt
+            ProfileNarrativeUi.kt
+            ProfilePersistenceCodec.kt
+            ProfileScreenUi.kt
+            ProfileStore.kt
+            ProfileStrengthNuance.kt
+            ProfileStrengthNuanceUi.kt
+            PurchaseGrantPolicy.kt
+            QuizCatalog.kt
+            QuizResultCommitEffect.kt
+            QuizScreenUi.kt
+            QuizVisualUi.kt
+            RecommendationAttribution.kt
+            RecommendationTelemetry.kt
+            ResultInterpretation.kt
+            ResultInterpretationUi.kt
+            ResultNextExploration.kt
+            ResultNextExplorationUi.kt
+            ResultScreenUi.kt
+            ResultShare.kt
+            RetakeRecommendation.kt
+            RetentionUi.kt
+            ScoreChange.kt
+            ScoreHistory.kt
+            Scoring.kt
+            ShareFileStore.kt
+            ShareSafety.kt
+            SignatureProfile.kt
+            SignatureProfileUiCopy.kt
+            Telemetry.kt
+            TraitEvolution.kt
+            TraitEvolutionUi.kt
+            TraitExploration.kt
+            TraitExplorationUi.kt
+            TraitGraph.kt
+            TraitGraphUi.kt
+            TraitLocalization.kt
+            TraitTimeline.kt
+            TraitTimelineUi.kt
+            V2DesignSystem.kt
+            V2InteractiveUi.kt
+            V2MotionPreferences.kt
+            WhoAreYouApplication.kt
+  test/
+    java/
+      com/
+        whoareyou/
+          app/
+            AchievementUnlockQueueTest.kt
+            AppNavigationTest.kt
+            AppShellNavigationTest.kt
+            BillingReconnectPolicyTest.kt
+            DimensionJournalEngineTest.kt
+            DiscoverLibraryEngineTest.kt
+            DiscoverPersonalizationTest.kt
+            EventWindowDeduplicatorTest.kt
+            GlobalProfileEngineTest.kt
+            GuidedJourneysTest.kt
+            LongitudinalTrendEngineTest.kt
+            ProfileCoverageEngineTest.kt
+            ProfileEvolutionShareTest.kt
+            ProfileEvolutionSummaryTest.kt
+            ProfileIdentityMapTest.kt
+            ProfileInsightsTest.kt
+            ProfileIntegrityTest.kt
+            ProfileKnowledgeMapEngineTest.kt
+            ProfileMomentumEngineTest.kt
+            ProfileNarrativeEngineTest.kt
+            ProfilePersistenceCodecTest.kt
+            ProfileStrengthNuanceTest.kt
+            PurchaseGrantPolicyTest.kt
+            RecommendationAttributionTest.kt
+            RecommendationTelemetryTest.kt
+            ResultInterpretationTest.kt
+            ResultNextExplorationTest.kt
+            RetakeRecommendationEngineTest.kt
+            ScoreChangeEngineTest.kt
+            ScoreHistoryEngineTest.kt
+            ScoringTest.kt
+            SignatureProfilesTest.kt
+            SignatureProfileTest.kt
+            SupportedAppLanguageTest.kt
+            SupportedCatalogLanguageTest.kt
+            TraitEvolutionEngineTest.kt
+            TraitExplorationEngineTest.kt
+            TraitGraphEngineTest.kt
+            TraitTimelineEngineTest.kt
 build.gradle.kts
-README.md
-settings.gradle.kts
 ```
 
 # Files
 
-## File: .circleci/config.yml
-```yaml
-version: 2.1
-
-# CircleCI is intentionally the fast deterministic contract gate.
-# Full Android compilation, lint, instrumentation compilation, benchmarks and
-# signed Play builds are owned by GitHub Actions / Play workflows.
-jobs:
-  android-quality:
-    docker:
-      - image: cimg/python:3.13.7
-    steps:
-      - checkout
-
-      - run:
-          name: Python release and product contracts
-          command: PYTHONPATH=tools python -m unittest discover -v -s tools -p 'test_*.py'
-
-      - run:
-          name: QA script syntax contracts
-          command: |
-            bash -n .github/scripts/android-device-validation.sh
-            python -m py_compile .github/scripts/validate-ui-hierarchy.py .github/scripts/validate-screenshot.py .github/scripts/summarize-visual-qa.py
-
-workflows:
-  quality:
-    jobs:
-      - android-quality
-```
-
-## File: .github/scripts/android-device-validation.sh
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-PACKAGE="com.whoareyou.app"
-ACTIVITY="$PACKAGE/.MainActivity"
-DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
-CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
-HOST_RESOURCE_LOG="device-host-resources.txt"
-HOST_KERNEL_LOG="device-host-kernel.txt"
-HOST_MONITOR_PID=""
-VALIDATION_MODE="${VALIDATION_MODE:-full}"
-
-capture_host_resource_snapshot() {
-  {
-    printf '\n=== %s ===\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-    echo "--- free -m ---"
-    free -m || true
-    echo "--- selected /proc/meminfo ---"
-    grep -E '^(MemTotal|MemFree|MemAvailable|Buffers|Cached|SwapTotal|SwapFree):' /proc/meminfo || true
-    echo "--- /proc/pressure/memory ---"
-    if [[ -r /proc/pressure/memory ]]; then
-      cat /proc/pressure/memory
-    else
-      echo "unavailable"
-    fi
-    echo "--- cgroup memory ---"
-    for path in \
-      /sys/fs/cgroup/memory.current \
-      /sys/fs/cgroup/memory.max \
-      /sys/fs/cgroup/memory.events; do
-      echo "$path"
-      if [[ -r "$path" ]]; then
-        cat "$path"
-      else
-        echo "unavailable"
-      fi
-    done
-    echo "--- top RSS processes ---"
-    ps -eo pid,ppid,rss,vsz,%mem,%cpu,comm,args --sort=-rss | head -n 25 || true
-    echo "--- emulator/qemu processes ---"
-    pgrep -af 'emulator|qemu' || true
-  } >> "$HOST_RESOURCE_LOG" 2>&1
-}
-
-capture_host_kernel_evidence() {
-  {
-    echo "=== dmesg tail ==="
-    dmesg --ctime 2>&1 | tail -n 200 || true
-    echo
-    echo "=== kernel journal tail ==="
-    journalctl -k --no-pager -n 200 2>&1 || true
-  } > "$HOST_KERNEL_LOG"
-}
-
-start_host_resource_monitor() {
-  : > "$HOST_RESOURCE_LOG"
-  capture_host_resource_snapshot
-  (
-    while true; do
-      sleep 5
-      capture_host_resource_snapshot
-    done
-  ) &
-  HOST_MONITOR_PID=$!
-}
-
-capture_exit_diagnostics() {
-  local status=$?
-  trap - EXIT
-  set +e
-  if [[ -n "${HOST_MONITOR_PID:-}" ]]; then
-    kill "$HOST_MONITOR_PID" 2>/dev/null
-    wait "$HOST_MONITOR_PID" 2>/dev/null
-  fi
-  capture_host_resource_snapshot
-  capture_host_kernel_evidence
-  exit "$status"
-}
-
-adb wait-for-device
-test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
-
-gradle --stop || true
-if [[ "$VALIDATION_MODE" != "visual" ]]; then
-  start_host_resource_monitor
-  trap capture_exit_diagnostics EXIT
-  gradle :app:connectedDebugAndroidTest --no-daemon --stacktrace
-fi
-
-if [[ "$VALIDATION_MODE" == "instrumentation" ]]; then
-  echo "Connected instrumentation validation passed."
-  exit 0
-fi
-
-gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
-
-test -s "$DEBUG_APK"
-test -s "$CANDIDATE_APK"
-
-capture_visual_evidence() {
-  local label="$1"
-
-  adb exec-out screencap -p > "device-screen-$label.png"
-  test -s "device-screen-$label.png"
-  adb shell uiautomator dump "/sdcard/device-ui-$label.xml" >/dev/null
-  adb pull "/sdcard/device-ui-$label.xml" "device-ui-$label.xml" >/dev/null
-  test -s "device-ui-$label.xml"
-
-  local size_line density_line display_size density_dpi
-  size_line="$(adb shell wm size | tr -d '\r' | tail -n1)"
-  density_line="$(adb shell wm density | tr -d '\r' | tail -n1)"
-  display_size="${size_line##*: }"
-  density_dpi="${density_line##*: }"
-
-  python3 .github/scripts/validate-screenshot.py \
-    "device-screen-$label.png" \
-    --size "$display_size" \
-    | tee "device-screen-report-$label.txt"
-
-  python3 .github/scripts/validate-ui-hierarchy.py \
-    "device-ui-$label.xml" \
-    --package "$PACKAGE" \
-    --screenshot "device-screen-$label.png" \
-    --density "$density_dpi" \
-    | tee "device-ui-report-$label.txt"
-}
-
-validate_evidence_matrix() {
-  local labels=(
-    "debug"
-    "candidate"
-    "upgrade-candidate"
-    "upgrade-relaunch"
-    "candidate-font-130"
-    "candidate-compact"
-    "candidate-large"
-    "candidate-reduced-motion"
-    "candidate-landscape"
-    "candidate-compact-font-130"
-  )
-
-  : > device-validation-summary.txt
-  for label in "${labels[@]}"; do
-    for artifact in \
-      "device-screen-$label.png" \
-      "device-screen-report-$label.txt" \
-      "device-ui-$label.xml" \
-      "device-ui-report-$label.txt"; do
-      test -s "$artifact"
-      printf 'ok %s\n' "$artifact" >> device-validation-summary.txt
-    done
-  done
-}
-
-capture_reduced_motion_variant() {
-  local label="$1"
-
-  adb shell settings put global window_animation_scale 0
-  adb shell settings put global transition_animation_scale 0
-  adb shell settings put global animator_duration_scale 0
-  adb shell am force-stop "$PACKAGE"
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 2
-  capture_visual_evidence "$label"
-  {
-    echo "label=$label"
-    echo "window_animation_scale=$(adb shell settings get global window_animation_scale | tr -d '\r')"
-    echo "transition_animation_scale=$(adb shell settings get global transition_animation_scale | tr -d '\r')"
-    echo "animator_duration_scale=$(adb shell settings get global animator_duration_scale | tr -d '\r')"
-  } > "device-motion-$label.txt"
-}
-
-capture_landscape_variant() {
-  local label="$1"
-
-  adb shell settings put system accelerometer_rotation 0
-  adb shell settings put system user_rotation 1
-  adb shell am force-stop "$PACKAGE"
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-  capture_visual_evidence "$label"
-  {
-    echo "label=$label"
-    echo "accelerometer_rotation=$(adb shell settings get system accelerometer_rotation | tr -d '\r')"
-    echo "user_rotation=$(adb shell settings get system user_rotation | tr -d '\r')"
-    adb shell dumpsys input | grep -m1 'SurfaceOrientation' || true
-  } > "device-orientation-$label.txt"
-}
-
-capture_display_variant() {
-  local label="$1"
-  local size="$2"
-  local density="$3"
-
-  adb shell wm size "$size"
-  adb shell wm density "$density"
-  adb shell settings put system font_scale 1.0
-  adb shell am force-stop "$PACKAGE"
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-  capture_visual_evidence "$label"
-  {
-    echo "label=$label"
-    adb shell wm size
-    adb shell wm density
-    printf 'font_scale='
-    adb shell settings get system font_scale
-  } > "device-display-$label.txt"
-}
-
-capture_compact_accessibility_variant() {
-  local label="$1"
-  local size="$2"
-  local density="$3"
-  local font_scale="$4"
-
-  adb shell wm size "$size"
-  adb shell wm density "$density"
-  adb shell settings put system font_scale "$font_scale"
-  adb shell am force-stop "$PACKAGE"
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-  capture_visual_evidence "$label"
-  {
-    echo "label=$label"
-    adb shell wm size
-    adb shell wm density
-    printf 'font_scale='
-    adb shell settings get system font_scale
-  } > "device-display-$label.txt"
-}
-
-capture_accessibility_variant() {
-  local label="$1"
-  local font_scale="$2"
-
-  adb shell settings put system font_scale "$font_scale"
-  adb shell am force-stop "$PACKAGE"
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-  capture_visual_evidence "$label"
-}
-
-run_monkey_stress() {
-  local label="$1"
-
-  adb shell monkey -p "$PACKAGE" --throttle 75 --ignore-crashes --ignore-timeouts --ignore-security-exceptions 150 | tee "device-monkey-$label.txt"
-  sleep 2
-}
-
-validate_running_app() {
-  local label="$1"
-
-  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-
-  capture_visual_evidence "$label"
-
-  PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-  test -n "$PID"
-  printf '%s PID: %s\n' "$label" "$PID"
-
-  if [[ "$VALIDATION_MODE" != "visual" ]]; then
-    run_monkey_stress "$label"
-  fi
-
-  adb logcat -d > "device-logcat-$label.txt"
-  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
-  adb shell dumpsys activity exit-info "$PACKAGE" > "device-exit-info-$label.txt" || true
-
-  FINAL_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-  test -n "$FINAL_PID"
-  printf '%s final PID: %s\n' "$label" "$FINAL_PID"
-
-  if grep -F "Process: $PACKAGE" "device-android-runtime-$label.txt"; then
-    echo "Fatal AndroidRuntime crash detected for $PACKAGE ($label)"
-    exit 1
-  fi
-
-  if grep -E "REASON_(CRASH|ANR)" "device-exit-info-$label.txt"; then
-    echo "Crash or ANR exit reason detected for $PACKAGE ($label)"
-    exit 1
-  fi
-}
-
-smoke_apk() {
-  local apk="$1"
-  local label="$2"
-
-  adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
-  adb install "$apk"
-  adb shell am force-stop "$PACKAGE"
-  adb logcat -c
-  validate_running_app "$label"
-}
-
-smoke_apk "$DEBUG_APK" debug
-smoke_apk "$CANDIDATE_APK" candidate
-
-# Validate the real upgrade path: initialize data with the debug build, then
-# replace it in-place with the minified candidate without clearing app data.
-adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
-adb install "$DEBUG_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$UPGRADE_DEBUG_START" | tee device-startup-upgrade-debug.txt
-grep -F "Status: ok" device-startup-upgrade-debug.txt
-sleep 2
-adb shell am force-stop "$PACKAGE"
-
-adb install -r "$CANDIDATE_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-validate_running_app upgrade-candidate
-
-# One more cold relaunch after the upgrade catches startup failures that only
-# appear after process death with migrated/persisted state.
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
-grep -F "Status: ok" device-startup-upgrade-relaunch.txt
-sleep 3
-capture_visual_evidence "upgrade-relaunch"
-RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-test -n "$RELAUNCH_PID"
-adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
-adb shell dumpsys activity exit-info "$PACKAGE" > device-exit-info-upgrade-relaunch.txt || true
-if grep -F "Process: $PACKAGE" device-android-runtime-upgrade-relaunch.txt; then
-  echo "Fatal AndroidRuntime crash detected after upgraded cold relaunch"
-  exit 1
-fi
-if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
-  echo "Crash or ANR exit reason detected after upgraded cold relaunch"
-  exit 1
-fi
-
-capture_accessibility_variant "candidate-font-130" "1.30"
-adb shell settings put system font_scale 1.0
-
-capture_display_variant "candidate-compact" "720x1600" "320"
-capture_compact_accessibility_variant "candidate-compact-font-130" "720x1600" "320" "1.30"
-capture_display_variant "candidate-large" "1600x2560" "320"
-adb shell wm size reset
-adb shell wm density reset
-
-capture_reduced_motion_variant "candidate-reduced-motion"
-adb shell settings put global window_animation_scale 1
-adb shell settings put global transition_animation_scale 1
-adb shell settings put global animator_duration_scale 1
-
-capture_landscape_variant "candidate-landscape"
-adb shell settings put system user_rotation 0
-adb shell settings put system accelerometer_rotation 1
-
-adb shell wm size reset
-adb shell wm density reset
-adb shell settings put system font_scale 1.0
-adb shell am force-stop "$PACKAGE"
-
-adb shell wm size > device-display-metrics.txt
-adb shell wm density >> device-display-metrics.txt
-adb shell settings get system font_scale >> device-display-metrics.txt
-
-validate_evidence_matrix
-python3 .github/scripts/summarize-visual-qa.py \
-  --root . \
-  --output device-visual-qa-summary.md
-
-echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
-```
-
-## File: .github/scripts/android-runtime-stress.sh
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-PACKAGE="com.whoareyou.app"
-ACTIVITY="$PACKAGE/.MainActivity"
-DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
-CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
-
-gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
-
-test -s "$DEBUG_APK"
-test -s "$CANDIDATE_APK"
-
-capture_runtime_evidence() {
-  local label="$1"
-
-  adb logcat -d > "device-logcat-$label.txt"
-  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
-  adb shell dumpsys activity exit-info "$PACKAGE" > "device-exit-info-$label.txt" || true
-}
-
-stress_apk() {
-  local apk="$1"
-  local label="$2"
-
-  adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
-  adb install "$apk"
-  adb shell am force-stop "$PACKAGE"
-  adb logcat -c
-
-  local start_output pid final_pid
-  start_output="$(adb shell am start -W -n "$ACTIVITY")"
-  printf '%s\n' "$start_output" | tee "device-startup-$label.txt"
-  grep -F "Status: ok" "device-startup-$label.txt"
-
-  sleep 2
-  capture_runtime_evidence "$label"
-  pid="$(adb shell pidof "$PACKAGE" | tr -d '\r' || true)"
-  if [[ -z "$pid" ]]; then
-    echo "App process exited during startup for $PACKAGE ($label)"
-    return 1
-  fi
-  printf '%s PID: %s\n' "$label" "$pid"
-
-  adb shell monkey \
-    -p "$PACKAGE" \
-    --throttle 75 \
-    --ignore-crashes \
-    --ignore-timeouts \
-    --ignore-security-exceptions \
-    150 \
-    | tee "device-monkey-$label.txt"
-  sleep 2
-
-  capture_runtime_evidence "$label"
-
-  final_pid="$(adb shell pidof "$PACKAGE" | tr -d '\r' || true)"
-  test -n "$final_pid"
-  printf '%s final PID: %s\n' "$label" "$final_pid"
-
-  if grep -F "Process: $PACKAGE" "device-android-runtime-$label.txt"; then
-    echo "Fatal AndroidRuntime crash detected for $PACKAGE ($label)"
-    exit 1
-  fi
-
-  if grep -E "REASON_(CRASH|ANR)" "device-exit-info-$label.txt"; then
-    echo "Crash or ANR exit reason detected for $PACKAGE ($label)"
-    exit 1
-  fi
-}
-
-stress_apk "$DEBUG_APK" debug-stress
-stress_apk "$CANDIDATE_APK" candidate-stress
-
-echo "ATD debug + candidate runtime stress validation passed."
-```
-
-## File: .github/scripts/summarize-visual-qa.py
-```python
-#!/usr/bin/env python3
-⋮----
-def collect(root: Path)
-⋮----
-rows = []
-⋮----
-label = ui_report.stem.replace("device-ui-report-", "")
-screen_report = root / f"device-screen-report-{label}.txt"
-screenshot = root / f"device-screen-{label}.png"
-hierarchy = root / f"device-ui-{label}.xml"
-⋮----
-ui_text = ui_report.read_text(encoding="utf-8", errors="replace").strip()
-screen_text = screen_report.read_text(encoding="utf-8", errors="replace").strip() if screen_report.exists() else ""
-⋮----
-status = "PASS"
-⋮----
-status = "FAIL"
-⋮----
-def main(root: Path, output: Path) -> int
-⋮----
-rows = collect(root)
-⋮----
-lines = [
-⋮----
-failures = [row for row in rows if row["status"] != "PASS"]
-⋮----
-parser = argparse.ArgumentParser()
-⋮----
-args = parser.parse_args()
-```
-
-## File: .github/scripts/validate-screenshot.py
-```python
-#!/usr/bin/env python3
-⋮----
-PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
-⋮----
-def parse_size(raw: str)
-⋮----
-def paeth(a: int, b: int, c: int) -> int
-⋮----
-p = a + b - c
-pa = abs(p - a)
-pb = abs(p - b)
-pc = abs(p - c)
-⋮----
-def read_png(path: str)
-⋮----
-width = height = bit_depth = color_type = None
-idat = bytearray()
-⋮----
-length_raw = fh.read(4)
-⋮----
-length = struct.unpack(">I", length_raw)[0]
-chunk_type = fh.read(4)
-data = fh.read(length)
-crc = fh.read(4)
-⋮----
-channels = {
-⋮----
-0: 1,  # grayscale
-2: 3,  # RGB
-4: 2,  # grayscale + alpha
-6: 4,  # RGBA
-⋮----
-raw = zlib.decompress(bytes(idat))
-stride = width * channels
-expected = height * (stride + 1)
-⋮----
-rows = []
-previous = bytearray(stride)
-offset = 0
-⋮----
-filter_type = raw[offset]
-⋮----
-scanline = raw[offset:offset + stride]
-⋮----
-reconstructed = bytearray(stride)
-⋮----
-left = reconstructed[i - channels] if i >= channels else 0
-up = previous[i]
-upper_left = previous[i - channels] if i >= channels else 0
-⋮----
-result = value
-⋮----
-result = (value + left) & 0xFF
-⋮----
-result = (value + up) & 0xFF
-⋮----
-result = (value + ((left + up) // 2)) & 0xFF
-⋮----
-result = (value + paeth(left, up, upper_left)) & 0xFF
-⋮----
-previous = reconstructed
-⋮----
-def screen_variation(width, height, color_type, channels, rows)
-⋮----
-total_pixels = width * height
-step = max(1, total_pixels // 6000)
-luminances = []
-buckets = set()
-⋮----
-index = 0
-⋮----
-base = x * channels
-⋮----
-r = g = b = row[base]
-⋮----
-luminance = (54 * r + 183 * g + 19 * b) // 256
-⋮----
-def main(path: str, expected: str) -> int
-⋮----
-size_bytes = os.path.getsize(path)
-⋮----
-valid_sizes = {(expected_w, expected_h), (expected_h, expected_w)}
-⋮----
-luma_range = luma_max - luma_min
-⋮----
-parser = argparse.ArgumentParser()
-⋮----
-args = parser.parse_args()
-```
-
-## File: .github/scripts/validate-ui-hierarchy.py
-```python
-#!/usr/bin/env python3
-⋮----
-BOUNDS_RE = re.compile(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]")
-SIZE_RE = re.compile(r"(\d+)x(\d+)")
-PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
-⋮----
-def parse_bounds(raw: str)
-⋮----
-match = BOUNDS_RE.fullmatch(raw or "")
-⋮----
-def parse_size(raw: str)
-⋮----
-match = SIZE_RE.fullmatch(raw or "")
-⋮----
-def png_size(path: str)
-⋮----
-header = handle.read(24)
-⋮----
-def label_for(node)
-⋮----
-def main(path: str, package: str, display_size: str | None, density_dpi: int, screenshot: str | None = None) -> int
-⋮----
-density = density_dpi / 160.0
-min_touch_px = 48.0 * density
-⋮----
-tree = ET.parse(path)
-root = tree.getroot()
-⋮----
-invalid = []
-zero_clickable = []
-undersized_clickable = []
-outside_viewport = []
-duplicate_ids = {}
-node_count = 0
-app_node_count = 0
-clickable_count = 0
-⋮----
-node_package = node.attrib.get("package", "")
-⋮----
-bounds = parse_bounds(node.attrib.get("bounds", ""))
-⋮----
-clickable = node.attrib.get("clickable") == "true"
-enabled = node.attrib.get("enabled", "true") == "true"
-⋮----
-width = x2 - x1
-height = y2 - y1
-⋮----
-resource_id = node.attrib.get("resource-id", "")
-⋮----
-repeated = sorted(k for k, count in duplicate_ids.items() if count > 1)
-⋮----
-parser = argparse.ArgumentParser()
-⋮----
-args = parser.parse_args()
-```
-
-## File: .github/workflows/ai-repo-map.yml
-```yaml
-name: Repository standards
-
-on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - ".ai/**"
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-concurrency:
-  group: repo-standards-${{ github.repository }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  ai-context:
-    uses: dbrckk/repo-standards/.github/workflows/reusable-ai-repo-map.yml@v4
-
-  repo-health:
-    needs: ai-context
-    uses: dbrckk/repo-standards/.github/workflows/reusable-repo-health.yml@v4
-
-  project-state:
-    needs: repo-health
-    uses: dbrckk/repo-standards/.github/workflows/reusable-project-state.yml@v4
-
-  context-intelligence:
-    needs: project-state
-    uses: dbrckk/repo-standards/.github/workflows/reusable-context-intelligence.yml@v4
-```
-
-## File: .github/workflows/android-apk.yml
-```yaml
-name: Android APK
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-concurrency:
-  group: android-apk-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions:
-  contents: read
-
-jobs:
-  apk:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 35
-    env:
-      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          packages: ''
-
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-          cache-read-only: false
-
-      - name: Verify toolchain
-        run: |
-          java -version
-          gradle --version
-          sdkmanager --list_installed
-
-      - name: JVM unit tests
-        run: gradle :app:testDebugUnitTest --stacktrace
-
-      - name: Android lint
-        run: gradle :app:lintDebug --stacktrace
-
-      - name: Compile Compose UI instrumentation tests
-        run: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - name: Build installable debug APK
-        run: gradle :app:assembleDebug --stacktrace
-
-      - name: Upload validation diagnostics
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-apk-validation-${{ github.sha }}
-          path: |
-            app/build/reports/tests/
-            app/build/reports/lint-results-debug.html
-            app/build/reports/lint-results-debug.xml
-          if-no-files-found: ignore
-          retention-days: 14
-
-      - name: Prepare APK
-        run: |
-          set -euo pipefail
-          APK="app/build/outputs/apk/debug/app-debug.apk"
-          test -s "$APK"
-          cp "$APK" who-are-you-0.1.0-debug.apk
-          sha256sum who-are-you-0.1.0-debug.apk | tee who-are-you-0.1.0-debug.apk.sha256
-          {
-            echo "project=Who Are You?"
-            echo "version=0.1.0-debug"
-            echo "commit=${GITHUB_SHA}"
-            echo "ref=${GITHUB_REF}"
-            echo "run_id=${GITHUB_RUN_ID}"
-            echo "run_attempt=${GITHUB_RUN_ATTEMPT}"
-            echo "runner_os=${RUNNER_OS}"
-            echo "java=17-temurin"
-            echo "gradle=9.5.0"
-            echo "compile_sdk=37"
-            echo "build_tools=37.0.0"
-            echo "apk_sha256=$(cut -d' ' -f1 who-are-you-0.1.0-debug.apk.sha256)"
-          } | tee who-are-you-0.1.0-debug.provenance.txt
-
-      - name: Verify APK release-candidate bundle
-        run: |
-          set -euo pipefail
-          sha256sum --check who-are-you-0.1.0-debug.apk.sha256
-          test "$(grep '^commit=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$GITHUB_SHA"
-          test "$(grep '^apk_sha256=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$(sha256sum who-are-you-0.1.0-debug.apk | cut -d' ' -f1)"
-          test -s who-are-you-0.1.0-debug.apk
-          test -s who-are-you-0.1.0-debug.provenance.txt
-
-      - name: Upload installable APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-android-apk-${{ github.sha }}
-          path: |
-            who-are-you-0.1.0-debug.apk
-            who-are-you-0.1.0-debug.apk.sha256
-            who-are-you-0.1.0-debug.provenance.txt
-          if-no-files-found: error
-          retention-days: 14
-```
-
-## File: .github/workflows/android-ci.yml
-```yaml
-name: Android CI
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: android-ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
-        with:
-          packages: ''
-
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Validate localized quiz catalogs
-        run: |
-          python - <<'PY'
-          import glob, json, os, re
-          files = sorted(glob.glob('app/src/main/assets/quizzes*.json'))
-          assert files, 'No quiz catalog assets found'
-          def locale_for(path):
-              name = os.path.basename(path)
-              match = re.search(r'-(?P<locale>[a-z]{2})(?=\.json$)', name)
-              return match.group('locale') if match else 'en'
-          by_locale = {}
-          for path in files:
-              by_locale.setdefault(locale_for(path), []).append(path)
-          locale_ids, locale_totals = {}, {}
-          for locale, locale_files in sorted(by_locale.items()):
-              ids, total = set(), 0
-              for path in locale_files:
-                  with open(path, encoding='utf-8') as handle:
-                      payload = json.load(handle)
-                  for quiz in payload.get('quizzes', []):
-                      quiz_id = quiz['id']
-                      assert quiz_id not in ids, f'{locale}: duplicate quiz id: {quiz_id}'
-                      ids.add(quiz_id); total += 1
-                      assert len(quiz['questions']) >= 5, f'{locale}/{quiz_id}: expected at least 5 questions'
-                      for index, question in enumerate(quiz['questions'], start=1):
-                          answers = question['answers']
-                          assert len(answers) == 4, f'{locale}/{quiz_id} Q{index}: expected 4 answers'
-                          assert sorted(answer['score'] for answer in answers) == [0,1,2,3], f'{locale}/{quiz_id} Q{index}: scores must be 0,1,2,3'
-              locale_ids[locale], locale_totals[locale] = ids, total
-          assert locale_totals.get('en', 0) >= 30
-          assert locale_totals.get('fr', 0) >= 30
-          assert locale_ids.get('fr', set()) == locale_ids.get('en', set())
-          print(f"Bilingual catalog parity confirmed: {locale_totals.get('en',0)} EN / {locale_totals.get('fr',0)} FR")
-          PY
-
-      - name: Python quality tests
-        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
-
-      - name: JVM unit tests
-        run: gradle :app:testDebugUnitTest --stacktrace
-
-      - name: Compile Compose UI instrumentation tests
-        run: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - name: Compile benchmark variants
-        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmarkRelease --stacktrace
-
-      - name: Android lint
-        run: gradle :app:lintDebug --stacktrace
-
-      - name: Upload CI diagnostics
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-ci-diagnostics-${{ github.sha }}
-          path: |
-            app/build/reports/tests/
-            app/build/reports/lint-results-debug.html
-            app/build/reports/lint-results-debug.xml
-            app/build/reports/androidTests/
-          if-no-files-found: ignore
-          retention-days: 7
-
-      - name: Build debug APK
-        run: gradle :app:assembleDebug --stacktrace
-
-      - name: Create APK checksum
-        run: sha256sum app/build/outputs/apk/debug/app-debug.apk > app/build/outputs/apk/debug/app-debug.apk.sha256
-
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-debug-${{ github.sha }}
-          path: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/debug/app-debug.apk.sha256
-          if-no-files-found: error
-          retention-days: 7
-```
-
-## File: .github/workflows/apk-test.yml
-```yaml
-name: Test APK (manual fallback)
-
-on:
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-jobs:
-  build-test-apk:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Build installable debug APK
-        run: gradle :app:assembleDebug --stacktrace
-
-      - name: Prepare APK
-        run: |
-          set -euo pipefail
-          APK="app/build/outputs/apk/debug/app-debug.apk"
-          test -f "$APK"
-          cp "$APK" who-are-you-0.1.0-test.apk
-          sha256sum who-are-you-0.1.0-test.apk | tee who-are-you-0.1.0-test.apk.sha256
-
-      - name: Upload test APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-0.1.0-test-apk
-          path: |
-            who-are-you-0.1.0-test.apk
-            who-are-you-0.1.0-test.apk.sha256
-          if-no-files-found: error
-          retention-days: 30
-```
-
-## File: .github/workflows/m56-main-rc.yml
-```yaml
-name: M56 Main Release Candidate
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-concurrency:
-  group: m56-main-rc-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  release_candidate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Set up Android SDK tools
-        uses: android-actions/setup-android@v4
-        with:
-          packages: ''
-          accept-android-sdk-licenses: true
-          log-accepted-android-sdk-licenses: false
-
-      - name: Prepare Android SDK 37
-        run: |
-          set -euo pipefail
-          sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
-          test -d "$ANDROID_HOME/platforms/android-37.0"
-          test -x "$ANDROID_HOME/build-tools/37.0.0/zipalign"
-          test -x "$ANDROID_HOME/build-tools/37.0.0/apksigner"
-          test -x "$ANDROID_HOME/build-tools/37.0.0/aapt"
-          sdkmanager --list_installed
-
-      - name: Repository verification tests
-        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
-
-      - name: JVM tests
-        run: gradle :app:testDebugUnitTest --stacktrace
-
-      - name: Compile instrumentation tests
-        run: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - name: Candidate lint
-        run: gradle :app:lintCandidate --stacktrace
-
-      - name: Release lint
-        run: gradle :app:lintRelease --stacktrace
-
-      - name: Build optimized installable candidate APK
-        run: gradle :app:assembleCandidate --stacktrace
-
-      - name: Build unsigned release AAB
-        run: gradle :app:bundleRelease --stacktrace
-
-      - name: Read app version
-        id: version
-        run: |
-          set -euo pipefail
-          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
-          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
-          test -n "$VERSION_NAME"
-          test -n "$VERSION_CODE"
-          echo "name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
-          echo "code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
-
-      - name: Verify and package artifacts
-        env:
-          VERSION_NAME: ${{ steps.version.outputs.name }}
-          VERSION_CODE: ${{ steps.version.outputs.code }}
-        run: |
-          set -euo pipefail
-          APK="app/build/outputs/apk/candidate/app-candidate.apk"
-          BUILD_TOOLS="$ANDROID_HOME/build-tools/37.0.0"
-          test -s "$APK"
-          "$BUILD_TOOLS/zipalign" -c -v 4 "$APK"
-          "$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$APK" | tee apk-signature.txt
-          "$BUILD_TOOLS/aapt" dump badging "$APK" | tee apk-badging.txt
-          grep -F "package: name='com.whoareyou.app' versionCode='${VERSION_CODE}' versionName='${VERSION_NAME}'" apk-badging.txt
-          grep -F "sdkVersion:'26'" apk-badging.txt
-          grep -F "targetSdkVersion:'36'" apk-badging.txt
-
-          cp "$APK" "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk"
-          sha256sum "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk" | tee "who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk.sha256"
-
-          mapfile -t bundles < <(find app/build/outputs/bundle/release -maxdepth 1 -type f -name '*.aab' -print)
-          test "${#bundles[@]}" -eq 1
-          cp "${bundles[0]}" "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab"
-          sha256sum "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab" | tee "who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab.sha256"
-
-      - name: Upload RC artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc
-          path: |
-            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc.apk
-            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-rc.apk.sha256
-            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-release-unsigned.aab
-            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-release-unsigned.aab.sha256
-            apk-signature.txt
-            apk-badging.txt
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Publish GitHub prerelease
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION_NAME: ${{ steps.version.outputs.name }}
-          VERSION_CODE: ${{ steps.version.outputs.code }}
-        run: |
-          set -euo pipefail
-          TAG="v${VERSION_NAME}-${VERSION_CODE}-rc"
-          if ! gh release view "$TAG" >/dev/null 2>&1; then
-            gh release create "$TAG" \
-              --target "$GITHUB_SHA" \
-              --title "Who Are You ${VERSION_NAME} (${VERSION_CODE}) RC" \
-              --notes "Android ${VERSION_NAME} (${VERSION_CODE}) release candidate for real-device testing. Debug-signed candidate APK; not the final Google Play production build." \
-              --prerelease
-          fi
-          gh release upload "$TAG" \
-            who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk \
-            who-are-you-${VERSION_NAME}-${VERSION_CODE}-rc.apk.sha256 \
-            who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab \
-            who-are-you-${VERSION_NAME}-${VERSION_CODE}-release-unsigned.aab.sha256 \
-            apk-signature.txt \
-            apk-badging.txt \
-            --clobber
-```
-
-## File: .github/workflows/m59-device-validation.yml
-```yaml
-name: M59 Android Device Validation
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: m59-device-${{ github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  instrumentation_validation:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Enable KVM acceleration
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-
-      - name: Run connected instrumentation and runtime stress on ATD
-        uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
-        with:
-          api-level: '37.0'
-          system-image-api-level: '35'
-          target: aosp_atd
-          arch: x86_64
-          cores: 2
-          ram-size: 2048M
-          heap-size: 256M
-          disk-size: 2048M
-          disable-animations: true
-          disable-spellchecker: true
-          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
-          script: VALIDATION_MODE=instrumentation bash .github/scripts/android-device-validation.sh && bash .github/scripts/android-runtime-stress.sh
-
-      - name: Upload instrumentation and runtime stress evidence
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-instrumentation-validation-${{ github.sha }}
-          path: |
-            app/build/reports/androidTests/connected/
-            app/build/outputs/androidTest-results/connected/
-            device-host-resources.txt
-            device-host-kernel.txt
-            device-startup-*.txt
-            device-monkey-*.txt
-            device-logcat-*.txt
-            device-android-runtime-*.txt
-            device-exit-info-*.txt
-          if-no-files-found: warn
-          retention-days: 14
-
-  visual_validation:
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Enable KVM acceleration
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-
-      - name: Run rendering-capable visual validation
-        uses: ReactiveCircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
-        with:
-          api-level: '37.0'
-          system-image-api-level: '35'
-          emulator-build: '15004761'
-          target: google_apis
-          arch: x86_64
-          cores: 2
-          ram-size: 2048M
-          heap-size: 256M
-          disk-size: 2048M
-          disable-animations: true
-          disable-spellchecker: true
-          emulator-options: -no-window -gpu software -no-snapshot -noaudio -no-boot-anim -no-metrics -camera-back none -camera-front none
-          script: VALIDATION_MODE=visual bash .github/scripts/android-device-validation.sh
-
-      - name: Upload visual validation evidence
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-visual-validation-${{ github.sha }}
-          path: |
-            device-startup-*.txt
-            device-monkey-*.txt
-            device-logcat-*.txt
-            device-android-runtime-*.txt
-            device-exit-info-*.txt
-            device-screen-*.png
-            device-screen-report-*.txt
-            device-ui-*.xml
-            device-ui-report-*.txt
-            device-display-metrics.txt
-            device-display-*.txt
-            device-motion-*.txt
-            device-orientation-*.txt
-            device-validation-summary.txt
-            device-visual-qa-summary.md
-          if-no-files-found: warn
-          retention-days: 14
-```
-
-## File: .github/workflows/pages.yml
-```yaml
-name: Deploy GitHub Pages
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - "docs/**"
-      - ".github/workflows/pages.yml"
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: docs
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-## File: .github/workflows/play-candidate.yml
-```yaml
-name: Play Candidate
-
-on:
-  workflow_dispatch:
-    inputs:
-      telemetry_enabled:
-        description: "Build with the configured production telemetry endpoint"
-        required: false
-        type: boolean
-        default: false
-
-permissions:
-  contents: read
-
-jobs:
-  play-candidate:
-    runs-on: ubuntu-latest
-    environment: play-internal
-    timeout-minutes: 40
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
-
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Python quality tests
-        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
-
-      - name: JVM unit tests
-        run: gradle :app:testDebugUnitTest --stacktrace
-
-      - name: Compile instrumentation tests
-        run: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - name: Compile performance benchmark variants
-        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace
-
-      - name: Android lint
-        run: gradle :app:lintDebug --stacktrace
-
-      - name: Validate required secrets
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
-          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
-          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
-        run: |
-          set -euo pipefail
-          required=(
-            ADMOB_APP_ID
-            ADMOB_INTERSTITIAL_ID
-            UPLOAD_KEYSTORE_B64
-            UPLOAD_KEYSTORE_PASSWORD
-            UPLOAD_KEY_ALIAS
-          )
-          for name in "${required[@]}"; do
-            if [ -z "${!name:-}" ]; then
-              echo "Missing required Play candidate secret: $name"
-              exit 1
-            fi
-          done
-          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
-            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
-            exit 1
-          fi
-          if [ -z "${UPLOAD_KEY_PASSWORD:-}" ]; then
-            echo "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD is not set; using keystore password for the key"
-          fi
-
-      - name: Materialize upload keystore
-        env:
-          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
-        run: |
-          set -euo pipefail
-          printf '%s' "$UPLOAD_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/who-are-you-upload.jks"
-          test -s "$RUNNER_TEMP/who-are-you-upload.jks"
-          chmod 600 "$RUNNER_TEMP/who-are-you-upload.jks"
-
-      - name: Lint real Play release variant
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
-        run: |
-          set -euo pipefail
-          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:lintPlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
-
-      - name: Build signed Play candidate
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
-          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
-          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
-        run: |
-          set -euo pipefail
-          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          args=(
-            :app:bundlePlayRelease
-            "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
-            "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"
-            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"
-            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"
-            "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"
-            "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"
-            --stacktrace
-          )
-          if [ "$TELEMETRY_ENABLED" = "true" ]; then
-            args+=("-PWHO_ARE_YOU_TELEMETRY_ENDPOINT=$TELEMETRY_ENDPOINT")
-          fi
-          gradle "${args[@]}"
-
-      - name: Locate and verify signed AAB
-        id: bundle
-        run: |
-          set -euo pipefail
-          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n 1)"
-          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n 1)"
-          if [ -z "$VERSION_NAME" ] || [ -z "$VERSION_CODE" ]; then
-            echo "Unable to resolve versionName/versionCode from app/build.gradle.kts"
-            exit 1
-          fi
-          mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -maxdepth 1 -type f -name '*.aab' -print)
-          if [ "${#bundles[@]}" -ne 1 ]; then
-            echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
-            printf '%s\n' "${bundles[@]:-}"
-            exit 1
-          fi
-          PLAY_AAB="${bundles[0]}"
-          OUTPUT_AAB="who-are-you-play-${VERSION_NAME}-${VERSION_CODE}.aab"
-          ARTIFACT_NAME="who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}"
-          jarsigner -verify -verbose -certs "$PLAY_AAB"
-          sha256sum "$PLAY_AAB" | tee play-candidate.sha256
-          {
-            echo "Native libraries packaged in the Play candidate:"
-            unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || echo "(none)"
-          } | tee play-native-libraries.txt
-          python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-bundle-budget.json
-          test -s app/build/outputs/mapping/playRelease/mapping.txt
-          cp "$PLAY_AAB" "$OUTPUT_AAB"
-          echo "output_aab=$OUTPUT_AAB" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
-
-      - name: Upload signed Play candidate
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            ${{ steps.bundle.outputs.output_aab }}
-            play-candidate.sha256
-            play-native-libraries.txt
-            play-bundle-budget.json
-            app/build/outputs/mapping/playRelease/mapping.txt
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove materialized keystore
-        if: always()
-        run: rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
-```
-
-## File: .github/workflows/play-internal-publish.yml
-```yaml
-name: Play Internal Publish
-
-on:
-  workflow_dispatch:
-    inputs:
-      publish_to_play:
-        description: "Actually upload and commit the release to Google Play Internal testing"
-        required: true
-        type: boolean
-        default: false
-      release_status:
-        description: "Google Play release status"
-        required: true
-        type: choice
-        options:
-          - draft
-          - completed
-        default: draft
-
-permissions:
-  contents: read
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Validate locked Play API payload
-        run: python tools/play_publisher.py --validate-only
-
-  publish:
-    if: ${{ inputs.publish_to_play == true }}
-    needs: validate
-    runs-on: ubuntu-latest
-    environment: play-internal
-    timeout-minutes: 40
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
-
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-37.0" "build-tools;37.0.0"
-
-      - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          gradle-version: '9.5.0'
-
-      - name: Python quality tests
-        run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
-
-      - name: JVM unit tests
-        run: gradle :app:testDebugUnitTest --stacktrace
-
-      - name: Compile instrumentation tests
-        run: gradle :app:assembleDebugAndroidTest --stacktrace
-
-      - name: Compile performance benchmark variants
-        run: gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace
-
-      - name: Android lint
-        run: gradle :app:lintDebug --stacktrace
-
-      - name: Set up Python publishing dependencies
-        run: python -m pip install --disable-pip-version-check google-auth requests
-
-      - name: Validate publishing secrets
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
-        run: |
-          set -euo pipefail
-          required=(
-            ADMOB_APP_ID
-            ADMOB_INTERSTITIAL_ID
-            UPLOAD_KEYSTORE_B64
-            UPLOAD_KEYSTORE_PASSWORD
-            UPLOAD_KEY_ALIAS
-            PLAY_SERVICE_ACCOUNT_JSON_B64
-          )
-          for name in "${required[@]}"; do
-            if [ -z "${!name:-}" ]; then
-              echo "Missing required Play publishing secret: $name"
-              exit 1
-            fi
-          done
-
-      - name: Materialize temporary credentials
-        env:
-          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
-          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
-        run: |
-          set -euo pipefail
-          printf '%s' "$UPLOAD_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/who-are-you-upload.jks"
-          printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON_B64" | base64 --decode > "$RUNNER_TEMP/google-play-service-account.json"
-          test -s "$RUNNER_TEMP/who-are-you-upload.jks"
-          test -s "$RUNNER_TEMP/google-play-service-account.json"
-          chmod 600 "$RUNNER_TEMP/who-are-you-upload.jks" "$RUNNER_TEMP/google-play-service-account.json"
-          python - <<'PY'
-          import pathlib
-          from tools.play_publisher import load_service_account
-          load_service_account(pathlib.Path("${{ runner.temp }}/google-play-service-account.json"))
-          print("Service-account JSON structure validated")
-          PY
-
-      - name: Lint real Play release variant
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
-        run: |
-          set -euo pipefail
-          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:lintPlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
-
-      - name: Build signed production Play bundle
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
-        run: |
-          set -euo pipefail
-          UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:bundlePlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
-
-      - name: Locate and verify signed bundle
-        id: bundle
-        run: |
-          set -euo pipefail
-          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n 1)"
-          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n 1)"
-          if [ -z "$VERSION_NAME" ] || [ -z "$VERSION_CODE" ]; then
-            echo "Unable to resolve versionName/versionCode from app/build.gradle.kts"
-            exit 1
-          fi
-          mapfile -t bundles < <(find app/build/outputs/bundle/playRelease -maxdepth 1 -type f -name '*.aab' -print)
-          if [ "${#bundles[@]}" -ne 1 ]; then
-            echo "Expected exactly one playRelease AAB, found ${#bundles[@]}"
-            printf '%s\n' "${bundles[@]:-}"
-            exit 1
-          fi
-          PLAY_AAB="${bundles[0]}"
-          jarsigner -verify -verbose -certs "$PLAY_AAB"
-          sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
-          {
-            echo "Native libraries packaged in the Play bundle:"
-            native_libs="$(unzip -Z1 "$PLAY_AAB" | grep -E '(^|/)lib/[^/]+/[^/]+\.so$' || true)"
-            if [ -n "$native_libs" ]; then
-              printf '%s\n' "$native_libs"
-            else
-              echo "(none)"
-            fi
-          } | tee play-internal-native-libraries.txt
-          python tools/check_play_bundle_budget.py "$PLAY_AAB" --json-out play-internal-bundle-budget.json
-          test -s app/build/outputs/mapping/playRelease/mapping.txt
-          echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
-
-      - name: Upload and commit Google Play edit
-        env:
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          PLAY_AAB: ${{ steps.bundle.outputs.path }}
-        run: |
-          set -euo pipefail
-          python tools/play_publisher.py             --bundle "$PLAY_AAB"             --credentials "$RUNNER_TEMP/google-play-service-account.json"             --status "$RELEASE_STATUS"             --commit | tee play-internal-publish-result.json
-
-      - name: Upload publishing receipt
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.bundle.outputs.artifact_name }}
-          path: |
-            play-internal-upload.sha256
-            play-internal-native-libraries.txt
-            play-internal-bundle-budget.json
-            app/build/outputs/mapping/playRelease/mapping.txt
-            play-internal-publish-result.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove temporary credentials
-        if: always()
-        run: |
-          rm -f "$RUNNER_TEMP/who-are-you-upload.jks"
-          rm -f "$RUNNER_TEMP/google-play-service-account.json"
-```
-
-## File: .github/workflows/play-promote.yml
-```yaml
-name: Play Track Promotion
-
-on:
-  workflow_dispatch:
-    inputs:
-      target_track:
-        description: "Target Play track: qa, beta, production, or an existing closed-test track name"
-        required: true
-        type: string
-        default: beta
-      release_status:
-        description: "Google Play release status"
-        required: true
-        type: choice
-        options:
-          - draft
-          - completed
-          - inProgress
-          - halted
-        default: draft
-      user_fraction:
-        description: "Required only for staged production rollout, e.g. 0.05"
-        required: false
-        type: string
-        default: ""
-      confirm_production:
-        description: "Explicitly authorize production target"
-        required: true
-        type: boolean
-        default: false
-      confirm_vitals_review:
-        description: "Confirm Android Vitals crash/ANR review before Production"
-        required: true
-        type: boolean
-        default: false
-      confirm_prelaunch_report:
-        description: "Confirm Play pre-launch report review before Production"
-        required: true
-        type: boolean
-        default: false
-      commit_edit:
-        description: "Commit the validated Play edit"
-        required: true
-        type: boolean
-        default: false
-
-permissions:
-  contents: read
-
-jobs:
-  promote:
-    runs-on: ubuntu-latest
-    environment: play-promotion
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up Python dependencies
-        run: python -m pip install --disable-pip-version-check google-auth requests
-
-      - name: Materialize service account
-        env:
-          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
-        run: |
-          set -euo pipefail
-          test -n "$PLAY_SERVICE_ACCOUNT_JSON_B64"
-          printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON_B64" | base64 --decode > "$RUNNER_TEMP/google-play-service-account.json"
-          chmod 600 "$RUNNER_TEMP/google-play-service-account.json"
-
-      - name: Validate promotion request
-        env:
-          TARGET_TRACK: ${{ inputs.target_track }}
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          USER_FRACTION: ${{ inputs.user_fraction }}
-          CONFIRM_PRODUCTION: ${{ inputs.confirm_production }}
-          CONFIRM_VITALS_REVIEW: ${{ inputs.confirm_vitals_review }}
-          CONFIRM_PRELAUNCH_REPORT: ${{ inputs.confirm_prelaunch_report }}
-        run: |
-          set -euo pipefail
-          if [ "$TARGET_TRACK" = "production" ]; then
-            if [ "$CONFIRM_PRODUCTION" != "true" ]; then
-              echo "Production promotion requires confirm_production=true"
-              exit 1
-            fi
-            if [ "$CONFIRM_VITALS_REVIEW" != "true" ]; then
-              echo "Production promotion requires Android Vitals review confirmation"
-              exit 1
-            fi
-            if [ "$CONFIRM_PRELAUNCH_REPORT" != "true" ]; then
-              echo "Production promotion requires Play pre-launch report confirmation"
-              exit 1
-            fi
-          fi
-          args=(--validate-only --track "$TARGET_TRACK" --status "$RELEASE_STATUS")
-          if [ -n "$USER_FRACTION" ]; then args+=(--user-fraction "$USER_FRACTION"); fi
-          if [ "$CONFIRM_PRODUCTION" = "true" ]; then args+=(--confirm-production); fi
-          python tools/play_publisher.py "${args[@]}"
-
-      - name: Promote existing version
-        if: ${{ inputs.commit_edit == true }}
-        env:
-          TARGET_TRACK: ${{ inputs.target_track }}
-          RELEASE_STATUS: ${{ inputs.release_status }}
-          USER_FRACTION: ${{ inputs.user_fraction }}
-          CONFIRM_PRODUCTION: ${{ inputs.confirm_production }}
-        run: |
-          set -euo pipefail
-          args=(
-            --credentials "$RUNNER_TEMP/google-play-service-account.json"
-            --track "$TARGET_TRACK"
-            --status "$RELEASE_STATUS"
-            --commit
-          )
-          if [ -n "$USER_FRACTION" ]; then args+=(--user-fraction "$USER_FRACTION"); fi
-          if [ "$CONFIRM_PRODUCTION" = "true" ]; then args+=(--confirm-production); fi
-          python tools/play_promoter.py "${args[@]}" | tee play-promotion-result.json
-
-      - name: Upload promotion receipt
-        if: ${{ inputs.commit_edit == true }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: who-are-you-play-promotion-${{ inputs.target_track }}-run-${{ github.run_number }}
-          path: play-promotion-result.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Remove temporary credentials
-        if: always()
-        run: rm -f "$RUNNER_TEMP/google-play-service-account.json"
-```
-
-## File: .serena/project.yml
-```yaml
-project_name: "Who-are-you"
-language_servers:
-  - kotlin
-ls_workspace_folders:
-  - "."
-ignore_all_files_in_gitignore: true
-ignored_paths:
-  - "**/.gradle/**"
-  - "**/build/**"
-read_only: false
-encoding: utf-8
-symbol_info_budget: 8
-initial_prompt: |
-  Use Serena's symbol and reference tools before reading whole files. Start with symbol overviews, find_symbol and find_referencing_symbols; fetch full file bodies only when required for the task. Prefer targeted edits and preserve the existing architecture.
-```
-
-## File: app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt
+## File: src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2290,7 +261,7 @@ class AppShellUiTest {
 }
 ```
 
-## File: app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt
+## File: src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2356,7 +327,7 @@ class MainActivityRecreationTest {
 }
 ```
 
-## File: app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt
+## File: src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2567,7 +538,7 @@ class MainFlowE2eTest {
 }
 ```
 
-## File: app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt
+## File: src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2732,7 +703,7 @@ class ProfileStorePersistenceTest {
 }
 ```
 
-## File: app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt
+## File: src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2871,7 +842,7 @@ class QuizScreenUiTest {
 }
 ```
 
-## File: app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt
+## File: src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -2956,7 +927,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-extra-fr.json
+## File: src/main/assets/quizzes-extra-fr.json
 ```json
 {
   "version": 2,
@@ -4361,7 +2332,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-extra.json
+## File: src/main/assets/quizzes-extra.json
 ```json
 {
   "version": 2,
@@ -5766,7 +3737,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-fr.json
+## File: src/main/assets/quizzes-fr.json
 ```json
 {
   "version": 2,
@@ -6467,7 +4438,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth-fr.json
+## File: src/main/assets/quizzes-growth-fr.json
 ```json
 {
   "version": 2,
@@ -7172,7 +5143,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth.json
+## File: src/main/assets/quizzes-growth.json
 ```json
 {
   "version": 2,
@@ -7877,7 +5848,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth2-fr.json
+## File: src/main/assets/quizzes-growth2-fr.json
 ```json
 {
   "version": 2,
@@ -8570,7 +6541,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth2.json
+## File: src/main/assets/quizzes-growth2.json
 ```json
 {
   "version": 2,
@@ -9263,7 +7234,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth3-fr.json
+## File: src/main/assets/quizzes-growth3-fr.json
 ```json
 {
   "version": 2,
@@ -9964,7 +7935,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes-growth3.json
+## File: src/main/assets/quizzes-growth3.json
 ```json
 {
   "version": 2,
@@ -10665,7 +8636,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/assets/quizzes.json
+## File: src/main/assets/quizzes.json
 ```json
 {
   "version": 2,
@@ -11366,7 +9337,7 @@ class ResultScreenUiTest {
 }
 ```
 
-## File: app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt
+## File: src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt
 ```kotlin
 package androidx.compose.foundation.lazy
 
@@ -11631,7 +9602,7 @@ private fun integratedThemeLabel(theme: QuizVisualTheme): String = when (theme) 
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AccessibilityUi.kt
+## File: src/main/java/com/whoareyou/app/AccessibilityUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -11665,7 +9636,7 @@ fun AccessibleBackAction(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/Achievements.kt
+## File: src/main/java/com/whoareyou/app/Achievements.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -11702,7 +9673,7 @@ object AchievementEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AchievementUnlockQueue.kt
+## File: src/main/java/com/whoareyou/app/AchievementUnlockQueue.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -11720,7 +9691,7 @@ object AchievementUnlockQueue {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AdaptiveLayoutUi.kt
+## File: src/main/java/com/whoareyou/app/AdaptiveLayoutUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -11738,7 +9709,7 @@ fun Modifier.readableContentWidth(): Modifier =
         .fillMaxWidth()
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AdManager.kt
+## File: src/main/java/com/whoareyou/app/AdManager.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -11913,7 +9884,7 @@ class AdManager(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppEvents.kt
+## File: src/main/java/com/whoareyou/app/AppEvents.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12106,7 +10077,7 @@ object AppEvents {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppLanguage.kt
+## File: src/main/java/com/whoareyou/app/AppLanguage.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12129,7 +10100,7 @@ internal fun localizedAppContext(base: Context): Context {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppNavigation.kt
+## File: src/main/java/com/whoareyou/app/AppNavigation.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12152,7 +10123,7 @@ object AppNavigation {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt
+## File: src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12227,7 +10198,7 @@ private fun navigationDepth(screen: AppScreen): Int = when (screen) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppShellUi.kt
+## File: src/main/java/com/whoareyou/app/AppShellUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12502,7 +10473,7 @@ private fun ShellTab(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/AppThemeUi.kt
+## File: src/main/java/com/whoareyou/app/AppThemeUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12564,7 +10535,7 @@ fun WhoAreYouTheme(content: @Composable () -> Unit) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/BillingManager.kt
+## File: src/main/java/com/whoareyou/app/BillingManager.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12810,7 +10781,7 @@ class BillingManager(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/BillingPriceState.kt
+## File: src/main/java/com/whoareyou/app/BillingPriceState.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12850,7 +10821,7 @@ object BillingPriceState {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/BillingReconnectPolicy.kt
+## File: src/main/java/com/whoareyou/app/BillingReconnectPolicy.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -12873,7 +10844,7 @@ object BillingReconnectPolicy {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/BrandMascotUi.kt
+## File: src/main/java/com/whoareyou/app/BrandMascotUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13158,7 +11129,7 @@ fun BrandMascot(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ChallengeActivity.kt
+## File: src/main/java/com/whoareyou/app/ChallengeActivity.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13212,7 +11183,7 @@ class ChallengeActivity : ComponentActivity() {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ChallengeShare.kt
+## File: src/main/java/com/whoareyou/app/ChallengeShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13276,7 +11247,7 @@ data class IncomingChallenge(
 )
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ChallengeUi.kt
+## File: src/main/java/com/whoareyou/app/ChallengeUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13563,7 +11534,7 @@ fun InvalidChallengeScreen(onClose: () -> Unit) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/CompatibilityShare.kt
+## File: src/main/java/com/whoareyou/app/CompatibilityShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13805,7 +11776,7 @@ object CompatibilityShare {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DailyQuestion.kt
+## File: src/main/java/com/whoareyou/app/DailyQuestion.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13892,7 +11863,7 @@ object StreakEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt
+## File: src/main/java/com/whoareyou/app/DailyQuestionShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -13921,7 +11892,7 @@ object DailyQuestionShare {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DimensionJournal.kt
+## File: src/main/java/com/whoareyou/app/DimensionJournal.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -14021,7 +11992,7 @@ object DimensionJournalEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt
+## File: src/main/java/com/whoareyou/app/DimensionJournalUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -14264,7 +12235,7 @@ private fun journalTrendExplanation(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt
+## File: src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -14619,7 +12590,7 @@ fun DiscoverLibraryHeader() {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt
+## File: src/main/java/com/whoareyou/app/DiscoverHubUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15190,7 +13161,7 @@ private fun PremiumDiscoverCard(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt
+## File: src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15260,7 +13231,7 @@ object DiscoverLibraryEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt
+## File: src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15540,7 +13511,7 @@ private fun themeLabel(theme: QuizVisualTheme): String = when (theme) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt
+## File: src/main/java/com/whoareyou/app/DiscoverPersonalization.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15614,7 +13585,7 @@ object DiscoverPersonalization {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/EntryScreensUi.kt
+## File: src/main/java/com/whoareyou/app/EntryScreensUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15963,7 +13934,7 @@ fun BrandLoadingScreen(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/EventWindowDeduplicator.kt
+## File: src/main/java/com/whoareyou/app/EventWindowDeduplicator.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -15990,7 +13961,7 @@ class EventWindowDeduplicator(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/GlobalProfile.kt
+## File: src/main/java/com/whoareyou/app/GlobalProfile.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16114,7 +14085,7 @@ fun Quiz.resultDescriptionFor(score: Int): String = when {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt
+## File: src/main/java/com/whoareyou/app/GlobalProfileShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16328,7 +14299,7 @@ object GlobalProfileShare {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/GuidedJourneys.kt
+## File: src/main/java/com/whoareyou/app/GuidedJourneys.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16426,7 +14397,7 @@ object GuidedJourneyEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt
+## File: src/main/java/com/whoareyou/app/IdentityAuraUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16546,7 +14517,7 @@ fun IdentityAura(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt
+## File: src/main/java/com/whoareyou/app/LongitudinalTrend.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16649,7 +14620,7 @@ object LongitudinalTrendEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt
+## File: src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -16850,7 +14821,7 @@ private fun trendSummary(trend: LongitudinalTrend, french: Boolean): String = wh
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/MainActivity.kt
+## File: src/main/java/com/whoareyou/app/MainActivity.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17162,7 +15133,7 @@ private fun WhoAreYouApp() {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt
+## File: src/main/java/com/whoareyou/app/NextQuizRecommendation.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17265,7 +15236,7 @@ object NextQuizRecommendationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt
+## File: src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17356,7 +15327,7 @@ private fun recommendationReason(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt
+## File: src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17603,7 +15574,7 @@ private fun DimensionSignal(modifier: Modifier, label: String, score: Int, accen
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileCoverage.kt
+## File: src/main/java/com/whoareyou/app/ProfileCoverage.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17774,7 +15745,7 @@ object CoverageRecommendationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileCoverageUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileCoverageUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17873,7 +15844,7 @@ private fun CoverageStat(value: String, label: String) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileEvolutionShare.kt
+## File: src/main/java/com/whoareyou/app/ProfileEvolutionShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17886,7 +15857,7 @@ object ProfileEvolutionShare {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileEvolutionSummary.kt
+## File: src/main/java/com/whoareyou/app/ProfileEvolutionSummary.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -17918,7 +15889,7 @@ object ProfileEvolutionSummary {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18100,7 +16071,7 @@ private fun EvolutionCompareBar(label: String, value: Int, color: Color) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileIdentityMap.kt
+## File: src/main/java/com/whoareyou/app/ProfileIdentityMap.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18137,7 +16108,7 @@ object ProfileIdentityMapEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18409,7 +16380,7 @@ private fun IdentityStat(value: String, label: String, modifier: Modifier = Modi
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileInsights.kt
+## File: src/main/java/com/whoareyou/app/ProfileInsights.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18441,7 +16412,7 @@ object ProfileInsights {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileInsightUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18574,7 +16545,7 @@ private fun localizedCopy(key: ProfileInsightKey): InsightCopy = when (key) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt
+## File: src/main/java/com/whoareyou/app/ProfileIntegrity.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18681,7 +16652,7 @@ object ProfileIntegrity {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt
+## File: src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18766,7 +16737,7 @@ object ProfileKnowledgeMapEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -18917,7 +16888,7 @@ private fun domainLabel(domain: TraitDomain, french: Boolean): String = when (do
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19062,7 +17033,7 @@ fun ProfileMapPreview(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileMomentum.kt
+## File: src/main/java/com/whoareyou/app/ProfileMomentum.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19093,7 +17064,7 @@ object ProfileMomentumEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileMomentumUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileMomentumUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19168,7 +17139,7 @@ fun ProfileMomentumCard(momentum: ProfileMomentum) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileNarrative.kt
+## File: src/main/java/com/whoareyou/app/ProfileNarrative.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19274,7 +17245,7 @@ object ProfileNarrativeEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19375,7 +17346,7 @@ private fun narrativeText(
 private fun signed(value: Int): String = if (value > 0) "+$value" else "$value"
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt
+## File: src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19496,7 +17467,7 @@ object ProfilePersistenceCodec {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileScreenUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -19957,7 +17928,7 @@ fun ProfileScreen(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileStore.kt
+## File: src/main/java/com/whoareyou/app/ProfileStore.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20250,7 +18221,7 @@ object ProfileStore {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt
+## File: src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20286,7 +18257,7 @@ object ProfileStrengthNuanceEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt
+## File: src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20430,7 +18401,7 @@ private fun SignalRow(eyebrow: String, dimension: ProfileDimension, accent: Colo
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/PurchaseGrantPolicy.kt
+## File: src/main/java/com/whoareyou/app/PurchaseGrantPolicy.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20445,7 +18416,7 @@ object PurchaseGrantPolicy {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/QuizCatalog.kt
+## File: src/main/java/com/whoareyou/app/QuizCatalog.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20572,7 +18543,7 @@ internal fun supportedCatalogLanguage(deviceLanguage: String?): String =
     if (deviceLanguage.equals("fr", ignoreCase = true)) "fr" else "en"
 ```
 
-## File: app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt
+## File: src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20614,7 +18585,7 @@ fun QuizResultCommitEffect(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/QuizScreenUi.kt
+## File: src/main/java/com/whoareyou/app/QuizScreenUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -20928,7 +18899,7 @@ private fun V2StatusNotice(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/QuizVisualUi.kt
+## File: src/main/java/com/whoareyou/app/QuizVisualUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21108,7 +19079,7 @@ fun QuizArtwork(quiz: Quiz, modifier: Modifier = Modifier, compact: Boolean = fa
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt
+## File: src/main/java/com/whoareyou/app/RecommendationAttribution.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21205,7 +19176,7 @@ object RecommendationAttribution {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/RecommendationTelemetry.kt
+## File: src/main/java/com/whoareyou/app/RecommendationTelemetry.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21225,7 +19196,7 @@ object RecommendationTelemetry {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultInterpretation.kt
+## File: src/main/java/com/whoareyou/app/ResultInterpretation.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21270,7 +19241,7 @@ object ResultInterpretationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt
+## File: src/main/java/com/whoareyou/app/ResultInterpretationUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21435,7 +19406,7 @@ fun ResultInterpretationPanel(quiz: Quiz, score: Int) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultNextExploration.kt
+## File: src/main/java/com/whoareyou/app/ResultNextExploration.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21489,7 +19460,7 @@ object ResultNextExplorationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt
+## File: src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -21664,7 +19635,7 @@ fun ResultNextExplorationCard(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultScreenUi.kt
+## File: src/main/java/com/whoareyou/app/ResultScreenUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22012,7 +19983,7 @@ fun ResultScreen(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ResultShare.kt
+## File: src/main/java/com/whoareyou/app/ResultShare.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22268,7 +20239,7 @@ object ResultShare {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/RetakeRecommendation.kt
+## File: src/main/java/com/whoareyou/app/RetakeRecommendation.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22310,7 +20281,7 @@ object RetakeRecommendationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/RetentionUi.kt
+## File: src/main/java/com/whoareyou/app/RetentionUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22699,7 +20670,7 @@ private fun localizedAchievement(id: String, fallbackTitle: String, fallbackDesc
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ScoreChange.kt
+## File: src/main/java/com/whoareyou/app/ScoreChange.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22739,7 +20710,7 @@ object ScoreChangeEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ScoreHistory.kt
+## File: src/main/java/com/whoareyou/app/ScoreHistory.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22786,7 +20757,7 @@ object ScoreHistoryEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/Scoring.kt
+## File: src/main/java/com/whoareyou/app/Scoring.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22807,7 +20778,7 @@ object Scoring {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ShareFileStore.kt
+## File: src/main/java/com/whoareyou/app/ShareFileStore.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22843,7 +20814,7 @@ object ShareFileStore {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/ShareSafety.kt
+## File: src/main/java/com/whoareyou/app/ShareSafety.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -22880,7 +20851,7 @@ object ShareSafety {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/SignatureProfile.kt
+## File: src/main/java/com/whoareyou/app/SignatureProfile.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23243,7 +21214,7 @@ object SignatureProfiles {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt
+## File: src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23279,7 +21250,7 @@ fun localizedSignatureProfileCopy(key: SignatureProfileKey): SignatureProfileCop
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/Telemetry.kt
+## File: src/main/java/com/whoareyou/app/Telemetry.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23401,7 +21372,7 @@ internal class HttpEventSink(private val endpoint: String) : EventSink {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitEvolution.kt
+## File: src/main/java/com/whoareyou/app/TraitEvolution.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23522,7 +21493,7 @@ object TraitEvolutionEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt
+## File: src/main/java/com/whoareyou/app/TraitEvolutionUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23665,7 +21636,7 @@ private fun TraitEvolutionRow(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitExploration.kt
+## File: src/main/java/com/whoareyou/app/TraitExploration.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23712,7 +21683,7 @@ object TraitExplorationEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt
+## File: src/main/java/com/whoareyou/app/TraitExplorationUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23844,7 +21815,7 @@ private fun statusExplanation(trait: TraitCoverage, french: Boolean): String = w
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitGraph.kt
+## File: src/main/java/com/whoareyou/app/TraitGraph.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -23931,7 +21902,7 @@ object TraitGraphEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitGraphUi.kt
+## File: src/main/java/com/whoareyou/app/TraitGraphUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24021,7 +21992,7 @@ fun TraitGraphCard(graph: TraitGraph, modifier: Modifier = Modifier) {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitLocalization.kt
+## File: src/main/java/com/whoareyou/app/TraitLocalization.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24096,7 +22067,7 @@ internal object TraitLocalization {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitTimeline.kt
+## File: src/main/java/com/whoareyou/app/TraitTimeline.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24257,7 +22228,7 @@ object TraitTimelineEngine {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt
+## File: src/main/java/com/whoareyou/app/TraitTimelineUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24557,7 +22528,7 @@ private fun traitTrendText(kind: LongitudinalTrendKind, french: Boolean): String
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/V2DesignSystem.kt
+## File: src/main/java/com/whoareyou/app/V2DesignSystem.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24679,7 +22650,7 @@ object V2Motion {
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt
+## File: src/main/java/com/whoareyou/app/V2InteractiveUi.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24854,7 +22825,7 @@ fun V2Card(
 }
 ```
 
-## File: app/src/main/java/com/whoareyou/app/V2MotionPreferences.kt
+## File: src/main/java/com/whoareyou/app/V2MotionPreferences.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24884,7 +22855,7 @@ private fun powerSaveModeEnabled(context: Context): Boolean = runCatching {
 }.getOrDefault(false)
 ```
 
-## File: app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt
+## File: src/main/java/com/whoareyou/app/WhoAreYouApplication.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24949,7 +22920,7 @@ class WhoAreYouApplication : Application() {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/AchievementUnlockQueueTest.kt
+## File: src/test/java/com/whoareyou/app/AchievementUnlockQueueTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -24992,7 +22963,7 @@ class AchievementUnlockQueueTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/AppNavigationTest.kt
+## File: src/test/java/com/whoareyou/app/AppNavigationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25029,7 +23000,7 @@ class AppNavigationTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt
+## File: src/test/java/com/whoareyou/app/AppShellNavigationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25064,7 +23035,7 @@ class AppShellNavigationTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/BillingReconnectPolicyTest.kt
+## File: src/test/java/com/whoareyou/app/BillingReconnectPolicyTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25098,7 +23069,7 @@ class BillingReconnectPolicyTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt
+## File: src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25163,7 +23134,7 @@ class DimensionJournalEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt
+## File: src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25257,7 +23228,7 @@ class DiscoverLibraryEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt
+## File: src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25364,7 +23335,7 @@ class DiscoverPersonalizationTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/EventWindowDeduplicatorTest.kt
+## File: src/test/java/com/whoareyou/app/EventWindowDeduplicatorTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25422,7 +23393,7 @@ class EventWindowDeduplicatorTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt
+## File: src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25544,7 +23515,7 @@ class GlobalProfileEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt
+## File: src/test/java/com/whoareyou/app/GuidedJourneysTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25656,7 +23627,7 @@ class GuidedJourneysTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt
+## File: src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25723,7 +23694,7 @@ class LongitudinalTrendEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25852,7 +23823,7 @@ class ProfileCoverageEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileEvolutionShareTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileEvolutionShareTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25883,7 +23854,7 @@ class ProfileEvolutionShareTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileEvolutionSummaryTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileEvolutionSummaryTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -25948,7 +23919,7 @@ class ProfileEvolutionSummaryTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileIdentityMapTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileIdentityMapTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26011,7 +23982,7 @@ class ProfileIdentityMapTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileInsightsTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileInsightsTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26069,7 +24040,7 @@ class ProfileInsightsTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26225,7 +24196,7 @@ class ProfileIntegrityTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26284,7 +24255,7 @@ class ProfileKnowledgeMapEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileMomentumEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileMomentumEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26344,7 +24315,7 @@ class ProfileMomentumEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26479,7 +24450,7 @@ class ProfileNarrativeEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt
+## File: src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26558,7 +24529,7 @@ class ProfilePersistenceCodecTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ProfileStrengthNuanceTest.kt
+## File: src/test/java/com/whoareyou/app/ProfileStrengthNuanceTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26619,7 +24590,7 @@ class ProfileStrengthNuanceTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/PurchaseGrantPolicyTest.kt
+## File: src/test/java/com/whoareyou/app/PurchaseGrantPolicyTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26640,7 +24611,7 @@ class PurchaseGrantPolicyTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt
+## File: src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26814,7 +24785,7 @@ class RecommendationAttributionTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/RecommendationTelemetryTest.kt
+## File: src/test/java/com/whoareyou/app/RecommendationTelemetryTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26844,7 +24815,7 @@ class RecommendationTelemetryTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ResultInterpretationTest.kt
+## File: src/test/java/com/whoareyou/app/ResultInterpretationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26890,7 +24861,7 @@ class ResultInterpretationTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt
+## File: src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -26958,7 +24929,7 @@ class ResultNextExplorationTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/RetakeRecommendationEngineTest.kt
+## File: src/test/java/com/whoareyou/app/RetakeRecommendationEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27021,7 +24992,7 @@ class RetakeRecommendationEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ScoreChangeEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ScoreChangeEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27073,7 +25044,7 @@ class ScoreChangeEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt
+## File: src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27167,7 +25138,7 @@ class ScoreHistoryEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/ScoringTest.kt
+## File: src/test/java/com/whoareyou/app/ScoringTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27197,7 +25168,7 @@ class ScoringTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt
+## File: src/test/java/com/whoareyou/app/SignatureProfilesTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27350,7 +25321,7 @@ class SignatureProfilesTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/SignatureProfileTest.kt
+## File: src/test/java/com/whoareyou/app/SignatureProfileTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27453,7 +25424,7 @@ class SignatureProfileTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/SupportedAppLanguageTest.kt
+## File: src/test/java/com/whoareyou/app/SupportedAppLanguageTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27476,7 +25447,7 @@ class SupportedAppLanguageTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/SupportedCatalogLanguageTest.kt
+## File: src/test/java/com/whoareyou/app/SupportedCatalogLanguageTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27499,7 +25470,7 @@ class SupportedCatalogLanguageTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt
+## File: src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27605,7 +25576,7 @@ class TraitEvolutionEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt
+## File: src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27664,7 +25635,7 @@ class TraitExplorationEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt
+## File: src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27737,7 +25708,7 @@ class TraitGraphEngineTest {
 }
 ```
 
-## File: app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt
+## File: src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt
 ```kotlin
 package com.whoareyou.app
 
@@ -27865,7 +25836,7 @@ class TraitTimelineEngineTest {
 }
 ```
 
-## File: app/build.gradle.kts
+## File: build.gradle.kts
 ```kotlin
 plugins {
     id("com.android.application")
@@ -28037,2847 +26008,4 @@ dependencies {
 
     baselineProfile(project(":baseline-profile"))
 }
-```
-
-## File: baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt
-```kotlin
-package com.whoareyou.app.baselineprofile
-
-import androidx.benchmark.macro.junit4.BaselineProfileRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.Until
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class BaselineProfileGenerator {
-    @get:Rule
-    val baselineProfileRule = BaselineProfileRule()
-
-    @Test
-    fun startupAndDiscover() = baselineProfileRule.collect(
-        packageName = PACKAGE_NAME
-    ) {
-        pressHome()
-        startActivityAndWait()
-        device.findObject(By.res("onboarding_start"))?.click()
-        check(device.wait(Until.hasObject(By.res("app_screen_discover")), 5_000)) {
-            "Discover screen did not become ready during Baseline Profile collection"
-        }
-    }
-
-    private companion object {
-        const val PACKAGE_NAME = "com.whoareyou.app"
-    }
-}
-```
-
-## File: baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt
-```kotlin
-package com.whoareyou.app.baselineprofile
-
-import androidx.benchmark.macro.BaselineProfileMode
-import androidx.benchmark.macro.CompilationMode
-import androidx.benchmark.macro.FrameTimingMetric
-import androidx.benchmark.macro.junit4.MacrobenchmarkRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.Direction
-import androidx.test.uiautomator.Until
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class RenderingBenchmark {
-    @get:Rule
-    val benchmarkRule = MacrobenchmarkRule()
-
-    @Test
-    fun discoverScrollFrames() = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(FrameTimingMetric()),
-        compilationMode = CompilationMode.Partial(
-            baselineProfileMode = BaselineProfileMode.Require
-        ),
-        iterations = 7,
-        setupBlock = {
-            device.executeShellCommand("am force-stop $PACKAGE_NAME")
-            startActivityAndWait()
-            device.findObject(By.res("onboarding_start"))?.click()
-            check(device.wait(Until.hasObject(By.res("discover_list")), 5_000)) {
-                "Discover list was not ready"
-            }
-        }
-    ) {
-        val list = device.findObject(By.res("discover_list"))
-        list.setGestureMargin(device.displayWidth / 5)
-        list.fling(Direction.DOWN)
-        device.waitForIdle()
-        list.fling(Direction.UP)
-        device.waitForIdle()
-    }
-
-    @Test
-    fun quizToResultFrames() = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(FrameTimingMetric()),
-        compilationMode = CompilationMode.Partial(
-            baselineProfileMode = BaselineProfileMode.Require
-        ),
-        iterations = 7,
-        setupBlock = {
-            device.executeShellCommand("am force-stop $PACKAGE_NAME")
-            startActivityAndWait()
-            device.findObject(By.res("onboarding_start"))?.click()
-            check(device.wait(Until.hasObject(By.res("discover_next_quiz")), 5_000)) {
-                "Next quiz card was not ready"
-            }
-            device.findObject(By.res("discover_next_quiz")).click()
-            check(device.wait(Until.hasObject(By.res("quiz_answer_0")), 5_000)) {
-                "Quiz answers were not ready"
-            }
-        }
-    ) {
-        repeat(MAX_ANSWER_TAPS) {
-            if (device.hasObject(By.res("result_score"))) return@measureRepeated
-            val answer = device.findObject(By.res("quiz_answer_0")) ?: return@repeat
-            answer.click()
-            device.waitForIdle()
-        }
-        check(device.wait(Until.hasObject(By.res("result_score")), 5_000)) {
-            "Result screen did not become ready"
-        }
-    }
-
-    @Test
-    fun resultScrollFrames() = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(FrameTimingMetric()),
-        compilationMode = CompilationMode.Partial(
-            baselineProfileMode = BaselineProfileMode.Require
-        ),
-        iterations = 7,
-        setupBlock = {
-            device.executeShellCommand("am force-stop $PACKAGE_NAME")
-            startActivityAndWait()
-            device.findObject(By.res("onboarding_start"))?.click()
-            check(device.wait(Until.hasObject(By.res("discover_next_quiz")), 5_000)) {
-                "Next quiz card was not ready"
-            }
-            device.findObject(By.res("discover_next_quiz")).click()
-            check(device.wait(Until.hasObject(By.res("quiz_answer_0")), 5_000)) {
-                "Quiz answers were not ready"
-            }
-            repeat(MAX_ANSWER_TAPS) {
-                if (device.hasObject(By.res("result_score"))) return@repeat
-                device.findObject(By.res("quiz_answer_0"))?.click()
-                device.waitForIdle()
-            }
-            check(device.wait(Until.hasObject(By.res("result_score")), 5_000)) {
-                "Result screen did not become ready"
-            }
-        }
-    ) {
-        device.swipe(
-            device.displayWidth / 2,
-            device.displayHeight * 4 / 5,
-            device.displayWidth / 2,
-            device.displayHeight / 5,
-            24
-        )
-        device.waitForIdle()
-        device.swipe(
-            device.displayWidth / 2,
-            device.displayHeight / 5,
-            device.displayWidth / 2,
-            device.displayHeight * 4 / 5,
-            24
-        )
-        device.waitForIdle()
-    }
-
-    private companion object {
-        const val PACKAGE_NAME = "com.whoareyou.app"
-        const val MAX_ANSWER_TAPS = 24
-    }
-}
-```
-
-## File: baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt
-```kotlin
-package com.whoareyou.app.baselineprofile
-
-import androidx.benchmark.macro.BaselineProfileMode
-import androidx.benchmark.macro.CompilationMode
-import androidx.benchmark.macro.StartupMode
-import androidx.benchmark.macro.StartupTimingMetric
-import androidx.benchmark.macro.junit4.MacrobenchmarkRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class StartupBenchmark {
-    @get:Rule
-    val benchmarkRule = MacrobenchmarkRule()
-
-    @Test
-    fun coldStartupWithBaselineProfile() = startup(StartupMode.COLD)
-
-    @Test
-    fun warmStartupWithBaselineProfile() = startup(StartupMode.WARM)
-
-    private fun startup(mode: StartupMode) = benchmarkRule.measureRepeated(
-        packageName = PACKAGE_NAME,
-        metrics = listOf(StartupTimingMetric()),
-        compilationMode = CompilationMode.Partial(
-            baselineProfileMode = BaselineProfileMode.Require
-        ),
-        startupMode = mode,
-        iterations = 10,
-        setupBlock = {
-            pressHome()
-        }
-    ) {
-        startActivityAndWait()
-    }
-
-    private companion object {
-        const val PACKAGE_NAME = "com.whoareyou.app"
-    }
-}
-```
-
-## File: baseline-profile/build.gradle.kts
-```kotlin
-plugins {
-    id("com.android.test")
-    id("androidx.baselineprofile")
-}
-
-android {
-    namespace = "com.whoareyou.app.baselineprofile"
-    compileSdk = 37
-
-    defaultConfig {
-        minSdk = 26
-        targetSdk = 36
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    targetProjectPath = ":app"
-
-    buildTypes {
-        create("benchmark") {
-            matchingFallbacks += listOf("release")
-        }
-    }
-}
-
-baselineProfile {
-    useConnectedDevices = true
-}
-
-dependencies {
-    implementation("androidx.test.ext:junit:1.3.0")
-    implementation("androidx.test:runner:1.7.0")
-    implementation("androidx.benchmark:benchmark-macro-junit4:1.5.0")
-    implementation("androidx.test.uiautomator:uiautomator:2.4.0")
-}
-```
-
-## File: docs/assetlinks.template.json
-```json
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.whoareyou.app",
-      "sha256_cert_fingerprints": [
-        "REPLACE_WITH_PLAY_APP_SIGNING_SHA256"
-      ]
-    }
-  }
-]
-```
-
-## File: docs/internal-test-release.json
-```json
-{
-  "applicationId": "com.whoareyou.app",
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "minSdk": 26,
-  "targetSdk": 36,
-  "compileSdk": 37,
-  "release": {
-    "minifyEnabled": false,
-    "artifact": "app/build/outputs/bundle/release/app-release.aab",
-    "githubArtifactName": "who-are-you-release-aab"
-  },
-  "billing": {
-    "removeAdsProductId": "remove_ads_lifetime"
-  },
-  "network": {
-    "telemetryEndpointScheme": "https",
-    "appPermissions": [
-      "android.permission.INTERNET"
-    ]
-  },
-  "admob": {
-    "ciFallbackUsesGoogleTestIds": true,
-    "productionIdsRequiredBeforePlayTesting": true
-  },
-  "appLinks": {
-    "host": "dbrckk.github.io",
-    "pathPrefix": "/Who-are-you/challenge/",
-    "autoVerify": true,
-    "productionAssetLinksRequired": true
-  },
-  "externalRequirementsBeforeRealInternalTest": [
-    "Configure Play App Signing/upload key",
-    "Create Play Billing product remove_ads_lifetime",
-    "Provide production AdMob app and interstitial IDs",
-    "Publish production assetlinks.json using Play App Signing SHA-256",
-    "Publish privacy policy at a stable HTTPS URL and complete Play Console forms"
-  ]
-}
-```
-
-## File: docs/m28-external-inputs.template.json
-```json
-{
-  "supportEmail": "REPLACE_BEFORE_SUBMISSION",
-  "privacyPolicyUrl": "https://REPLACE_BEFORE_SUBMISSION",
-  "admob": {
-    "appId": "REPLACE_BEFORE_SUBMISSION",
-    "interstitialId": "REPLACE_BEFORE_SUBMISSION"
-  },
-  "playAppSigningSha256": "REPLACE_AFTER_PLAY_APP_SIGNING",
-  "billing": {
-    "remove_ads_lifetime": {
-      "active": false,
-      "priceConfiguredInPlayConsole": false
-    }
-  },
-  "testerGroup": "REPLACE_BEFORE_INTERNAL_ROLLOUT"
-}
-```
-
-## File: docs/m28-readiness.json
-```json
-{
-  "milestone": "M28",
-  "goal": "Play Internal testing submission handoff",
-  "repoReady": [
-    "release_contract_locked",
-    "play_metadata_manifested",
-    "store_copy_en_fr",
-    "internal_release_notes_en_fr",
-    "privacy_policy_draft",
-    "data_safety_decision_sheet",
-    "store_asset_capture_plan",
-    "internal_smoke_test_matrix",
-    "ci_release_aab"
-  ],
-  "externalBlockingInputs": [
-    "play_console_app_and_app_signing",
-    "upload_key",
-    "production_admob_ids",
-    "active_remove_ads_lifetime_product",
-    "support_email",
-    "published_privacy_policy_https_url",
-    "completed_data_safety_and_policy_declarations",
-    "play_signing_sha256_assetlinks",
-    "final_store_graphics_and_real_app_screenshots",
-    "tester_list_or_group"
-  ],
-  "recommendedTelemetryForFirstInternalCandidate": "disabled_until_production_endpoint_is_documented"
-}
-```
-
-## File: docs/m30-play-build-contract.json
-```json
-{
-  "milestone": "M30",
-  "applicationId": "com.whoareyou.app",
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "ciBuildType": "release",
-  "playBuildType": "playRelease",
-  "playBundleTask": ":app:bundlePlayRelease",
-  "playGuardProbeTask": ":app:playReleaseGuardProbe",
-  "adMob": {
-    "requiredForPlayRelease": true,
-    "appIdProperty": "WHO_ARE_YOU_ADMOB_APP_ID",
-    "interstitialIdProperty": "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
-    "googleTestAppIdRejected": "ca-app-pub-3940256099942544~3347511713",
-    "googleTestInterstitialIdRejected": "ca-app-pub-3940256099942544/1033173712"
-  },
-  "telemetry": {
-    "property": "WHO_ARE_YOU_TELEMETRY_ENDPOINT",
-    "required": false,
-    "whenConfigured": "https_only"
-  },
-  "semantics": {
-    "release": "CI/development release artifact; may use Google's test AdMob fallback IDs",
-    "playRelease": "Google Play candidate; production-shaped non-test AdMob IDs are mandatory"
-  }
-}
-```
-
-## File: docs/m31-readiness.json
-```json
-{
-  "milestone": "M31",
-  "goal": "Signed Google Play candidate without repository-stored credentials",
-  "repoReadyWhen": [
-    "playRelease_requires_production_admob",
-    "playRelease_requires_upload_signing_inputs",
-    "playRelease_bundle_signature_verifies",
-    "keystore_patterns_ignored_by_git",
-    "ci_exercises_ephemeral_signing_only"
-  ],
-  "externalStillRequired": [
-    "real_upload_keystore",
-    "real_upload_keystore_password",
-    "real_upload_key_alias",
-    "real_upload_key_password",
-    "production_admob_app_id",
-    "production_admob_interstitial_id"
-  ]
-}
-```
-
-## File: docs/m32-play-candidate-contract.json
-```json
-{
-  "workflow": ".github/workflows/play-candidate.yml",
-  "trigger": "workflow_dispatch",
-  "environment": "play-internal",
-  "permissions": {
-    "contents": "read"
-  },
-  "buildTask": ":app:bundlePlayRelease",
-  "requiredSecrets": [
-    "WHO_ARE_YOU_ADMOB_APP_ID",
-    "WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID",
-    "WHO_ARE_YOU_UPLOAD_KEYSTORE_B64",
-    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD",
-    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS"
-  ],
-  "optionalSecrets": [
-    "WHO_ARE_YOU_TELEMETRY_ENDPOINT",
-    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
-  ],
-  "keystoreLocation": "RUNNER_TEMP",
-  "signatureVerification": "jarsigner -verify -verbose -certs",
-  "checksum": "sha256",
-  "playUploadAutomated": false,
-  "artifactNameTemplate": "who-are-you-play-candidate-{versionName}-{versionCode}",
-  "artifactFileTemplates": [
-    "who-are-you-play-{versionName}-{versionCode}.aab",
-    "play-candidate.sha256"
-  ],
-  "uploadKeyPasswordFallback": "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD"
-}
-```
-
-## File: docs/m32-readiness.json
-```json
-{
-  "milestone": "M32",
-  "goal": "Secure GitHub Actions Play candidate generation",
-  "repoReady": [
-    "manual_play_candidate_workflow",
-    "environment_scoped_secret_contract",
-    "temporary_keystore_materialization",
-    "playRelease_build_path",
-    "signature_verification",
-    "sha256_output",
-    "candidate_artifact_upload",
-    "keystore_cleanup"
-  ],
-  "externalRequiredBeforeFirstRealRun": [
-    "create_play-internal_github_environment",
-    "add_real_admob_ids_as_secrets",
-    "add_base64_upload_keystore_secret",
-    "add_upload_keystore_password_secret",
-    "add_upload_key_alias_secret",
-    "add_upload_key_password_secret"
-  ],
-  "playPublishing": "manual_after_candidate_generation"
-}
-```
-
-## File: docs/m33-readiness.json
-```json
-{
-  "milestone": "M33",
-  "workflow": ".github/workflows/play-internal-publish.yml",
-  "publisher": "tools/play_publisher.py",
-  "applicationId": "com.whoareyou.app",
-  "track": "internal",
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "publishDefault": false,
-  "releaseStatuses": ["draft", "completed"],
-  "environment": "play-internal",
-  "serviceAccountSecret": "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64",
-  "editFlow": [
-    "insert",
-    "bundle_upload",
-    "track_update",
-    "validate",
-    "commit"
-  ],
-  "externalBlockers": [
-    "play_console_app_exists",
-    "play_app_signing_configured",
-    "service_account_created",
-    "service_account_play_permissions_granted",
-    "google_play_service_account_secret_configured",
-    "production_admob_secrets_configured",
-    "upload_key_secrets_configured"
-  ]
-}
-```
-
-## File: docs/play-internal-test-metadata.json
-```json
-{
-  "track": "internal",
-  "applicationId": "com.whoareyou.app",
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "containsAds": true,
-  "accountRequired": false,
-  "billingProducts": [
-    {
-      "id": "remove_ads_lifetime",
-      "type": "one_time"
-    }
-  ],
-  "listing": {
-    "defaultLanguage": "en-US",
-    "additionalLanguages": ["fr-FR"],
-    "englishSource": "docs/store-listing-en.md",
-    "frenchSource": "docs/store-listing-fr.md",
-    "releaseNotesSource": "docs/release-notes-0.1.0.md"
-  },
-  "privacy": {
-    "policySource": "docs/privacy-policy.md",
-    "dataSafetyWorksheet": "docs/play-data-safety.md",
-    "publicHttpsUrlRequired": true,
-    "supportContactRequired": true
-  },
-  "assetsRequired": [
-    "app_icon",
-    "phone_screenshots",
-    "feature_graphic"
-  ],
-  "productionServicesRequired": [
-    "play_app_signing_and_upload_key",
-    "admob_app_id",
-    "admob_interstitial_id",
-    "billing_remove_ads_lifetime",
-    "privacy_policy_https_url"
-  ],
-  "postPlaySigning": [
-    "publish_assetlinks_with_play_signing_sha256",
-    "verify_https_app_links_on_play_installed_build"
-  ]
-}
-```
-
-## File: docs/play-signing-contract.json
-```json
-{
-  "buildType": "playRelease",
-  "bundleTask": ":app:bundlePlayRelease",
-  "artifact": "app/build/outputs/bundle/playRelease/app-play-release.aab",
-  "requiredSigningProperties": [
-    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH",
-    "WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD",
-    "WHO_ARE_YOU_UPLOAD_KEY_ALIAS",
-    "WHO_ARE_YOU_UPLOAD_KEY_PASSWORD"
-  ],
-  "productionAdMobRequired": true,
-  "telemetryOptionalHttpsOnly": true,
-  "signatureVerification": "jarsigner -verify -verbose -certs",
-  "keystoreMayBeCommitted": false
-}
-```
-
-## File: docs/public-release-inputs.template.json
-```json
-{
-  "developer_display_name": "REQUIRED",
-  "support_email": "REQUIRED",
-  "target_audience": "REQUIRED",
-  "privacy_policy_url": "https://dbrckk.github.io/Who-are-you/privacy/",
-  "challenge_domain": "dbrckk.github.io",
-  "play_app_signing_sha256": "REQUIRED_AFTER_PLAY_APP_SIGNING",
-  "remove_ads_product_id": "remove_ads_lifetime",
-  "remove_ads_target_price_eur": 1.99,
-  "production_telemetry_enabled": false,
-  "production_telemetry_retention_days": null,
-  "production_telemetry_deletion_contact": null
-}
-```
-
-## File: tools/check_play_bundle_budget.py
-```python
-#!/usr/bin/env python3
-⋮----
-MIB = 1024 * 1024
-DEFAULT_WARN_MIB = 30
-DEFAULT_FAIL_MIB = 50
-⋮----
-def inspect_bundle(path: Path) -> dict
-⋮----
-size_bytes = path.stat().st_size
-⋮----
-entries = archive.infolist()
-native = [e for e in entries if "/lib/" in f"/{e.filename}" and e.filename.endswith(".so")]
-dex = [e for e in entries if e.filename.endswith(".dex")]
-resources = [e for e in entries if "/res/" in f"/{e.filename}"]
-⋮----
-def main() -> int
-⋮----
-parser = argparse.ArgumentParser(description="Inspect and enforce the internal Play AAB size budget.")
-⋮----
-args = parser.parse_args()
-⋮----
-report = inspect_bundle(args.bundle)
-⋮----
-rendered = json.dumps(report, indent=2, sort_keys=True)
-```
-
-## File: tools/play_preflight.py
-```python
-#!/usr/bin/env python3
-⋮----
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-def check_repository(root: Path) -> list[dict]
-⋮----
-checks = []
-⋮----
-def add(name: str, ok: bool, detail: str)
-⋮----
-gradle = (root / "app/build.gradle.kts").read_text(encoding="utf-8")
-manifest = (root / "app/src/main/AndroidManifest.xml").read_text(encoding="utf-8")
-ad_manager = (root / "app/src/main/java/com/whoareyou/app/AdManager.kt").read_text(encoding="utf-8")
-billing = (root / "app/src/main/java/com/whoareyou/app/BillingManager.kt").read_text(encoding="utf-8")
-privacy = (root / "docs/privacy-policy.md").read_text(encoding="utf-8")
-data_safety = (root / "docs/play-data-safety.md").read_text(encoding="utf-8")
-app_links = (root / "docs/APP_LINKS.md").read_text(encoding="utf-8")
-⋮----
-def run(root: Path, public_inputs: Path | None, strict_public: bool) -> dict
-⋮----
-checks = check_repository(root)
-repo_ready = all(item["ok"] for item in checks)
-⋮----
-external = {
-⋮----
-payload = load_public_inputs(public_inputs)
-⋮----
-public_ready = repo_ready and external["ready"] if strict_public else repo_ready
-⋮----
-def main() -> int
-⋮----
-parser = argparse.ArgumentParser(description="Autonomous Google Play release readiness preflight")
-⋮----
-args = parser.parse_args()
-⋮----
-report = run(args.repo_root, args.public_inputs, args.strict_public)
-encoded = json.dumps(report, indent=2, sort_keys=True)
-```
-
-## File: tools/play_promoter.py
-```python
-#!/usr/bin/env python3
-"""Promote an already-uploaded Play version to another track without re-uploading it."""
-⋮----
-config = ReleaseConfig(track=track, version_code=version_code)
-⋮----
-payload = release_payload(
-⋮----
-session = _authorized_session(credentials_path)
-⋮----
-response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
-⋮----
-edit_id = response.json()["id"]
-⋮----
-update = session.put(
-⋮----
-validation = session.post(endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)
-⋮----
-result: dict[str, Any] = {
-⋮----
-committed = session.post(endpoint(PACKAGE_NAME, edit_id, "commit"), json={}, timeout=60)
-⋮----
-def main(argv: list[str] | None = None) -> int
-⋮----
-parser = argparse.ArgumentParser(description="Guarded Google Play track promotion")
-⋮----
-args = parser.parse_args(argv)
-⋮----
-result = promote_version(
-```
-
-## File: tools/play_publisher.py
-```python
-#!/usr/bin/env python3
-"""Google Play publishing helper with explicit track and rollout safeguards.
-
-Request/payload construction stays deterministic and testable without Google
-credentials. Network calls are made only by publish_bundle(). Production is
-opt-in and requires an explicit confirmation flag.
-"""
-⋮----
-PACKAGE_NAME = "com.whoareyou.app"
-INTERNAL_TRACK = "qa"
-OPEN_TEST_TRACK = "beta"
-PRODUCTION_TRACK = "production"
-VERSION_CODE = 1
-VERSION_NAME = "0.1.0"
-API_ROOT = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications"
-UPLOAD_ROOT = "https://androidpublisher.googleapis.com/upload/androidpublisher/v3/applications"
-SCOPE = "https://www.googleapis.com/auth/androidpublisher"
-TRACK_RE = re.compile(r"^[a-zA-Z0-9._-]{1,80}$")
-RELEASE_STATUSES = {"draft", "inProgress", "halted", "completed"}
-⋮----
-@dataclass(frozen=True)
-class ReleaseConfig
-⋮----
-package_name: str = PACKAGE_NAME
-track: str = INTERNAL_TRACK
-version_code: int = VERSION_CODE
-version_name: str = VERSION_NAME
-⋮----
-def validate(self, *, allow_production: bool = False) -> None
-⋮----
-def validate_track(track: str, *, allow_production: bool = False) -> str
-⋮----
-release: dict[str, Any] = {
-⋮----
-def endpoint(package_name: str, edit_id: str, resource: str) -> str
-⋮----
-def load_service_account(path: pathlib.Path) -> dict[str, Any]
-⋮----
-data = json.loads(path.read_text(encoding="utf-8"))
-required = {"type", "client_email", "private_key", "token_uri"}
-missing = sorted(required - data.keys())
-⋮----
-def _authorized_session(credentials_path: pathlib.Path)
-⋮----
-except ImportError as exc:  # pragma: no cover
-⋮----
-credentials = service_account.Credentials.from_service_account_file(
-⋮----
-config = ReleaseConfig(track=track)
-⋮----
-payload = release_payload(
-⋮----
-session = _authorized_session(credentials_path)
-response = session.post(f"{API_ROOT}/{config.package_name}/edits", json={}, timeout=60)
-⋮----
-edit_id = response.json()["id"]
-⋮----
-upload_url = f"{UPLOAD_ROOT}/{config.package_name}/edits/{edit_id}/bundles"
-⋮----
-upload = session.post(
-⋮----
-uploaded_version = int(upload.json()["versionCode"])
-⋮----
-track_url = endpoint(config.package_name, edit_id, f"tracks/{track}")
-track_update = session.put(track_url, json=payload, timeout=60)
-⋮----
-validate = session.post(endpoint(config.package_name, edit_id, "validate"), json={}, timeout=60)
-⋮----
-result: dict[str, Any] = {
-⋮----
-commit_response = session.post(endpoint(config.package_name, edit_id, "commit"), json={}, timeout=60)
-⋮----
-def main(argv: list[str] | None = None) -> int
-⋮----
-parser = argparse.ArgumentParser()
-⋮----
-args = parser.parse_args(argv)
-⋮----
-config = ReleaseConfig(track=args.track)
-⋮----
-result = publish_bundle(
-```
-
-## File: tools/prepare_play_submission.py
-```python
-#!/usr/bin/env python3
-⋮----
-PACKAGE_NAME = "com.whoareyou.app"
-PLACEHOLDER_MARKERS = ("REPLACE", "example.com", "REPLACE_BEFORE", "REPLACE_AFTER")
-EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
-ADMOB_APP_RE = re.compile(r"^ca-app-pub-\d{16}~\d{10}$")
-ADMOB_UNIT_RE = re.compile(r"^ca-app-pub-\d{16}/\d{10}$")
-SHA256_RE = re.compile(r"^(?:[0-9A-Fa-f]{2}:){31}[0-9A-Fa-f]{2}$")
-⋮----
-MARKDOWN_CONTACT_PLACEHOLDER = (
-HTML_CONTACT_PLACEHOLDER = (
-HTML_PRERELEASE_NOTICE = (
-⋮----
-class InputError(ValueError)
-⋮----
-def _required_string(payload, key)
-⋮----
-value = payload.get(key)
-⋮----
-value = value.strip()
-⋮----
-def validate_inputs(payload)
-⋮----
-support_email = _required_string(payload, "supportEmail")
-⋮----
-privacy_url = _required_string(payload, "privacyPolicyUrl")
-parsed = urlparse(privacy_url)
-⋮----
-admob = payload.get("admob")
-⋮----
-app_id = _required_string(admob, "appId")
-interstitial_id = _required_string(admob, "interstitialId")
-⋮----
-fingerprint = _required_string(payload, "playAppSigningSha256").upper()
-⋮----
-billing = payload.get("billing")
-product = billing.get("remove_ads_lifetime") if isinstance(billing, dict) else None
-⋮----
-tester_group = _required_string(payload, "testerGroup")
-⋮----
-def render_assetlinks(values)
-⋮----
-def render_gradle_properties(values)
-⋮----
-def render_privacy_policy(template, support_email)
-⋮----
-def render_privacy_html(template, support_email)
-⋮----
-rendered = template.replace(
-⋮----
-def render_summary(values)
-⋮----
-def generate(input_path, repo_root, output_dir)
-⋮----
-payload = json.loads(Path(input_path).read_text(encoding="utf-8"))
-values = validate_inputs(payload)
-repo = Path(repo_root)
-markdown_template = (repo / "docs/privacy-policy.md").read_text(encoding="utf-8")
-html_template = (repo / "docs/privacy/index.html").read_text(encoding="utf-8")
-out = Path(output_dir)
-⋮----
-def main()
-⋮----
-parser = argparse.ArgumentParser(description="Validate external Play inputs and generate the production submission pack.")
-⋮----
-args = parser.parse_args()
-⋮----
-values = generate(args.input, args.repo_root, args.output)
-```
-
-## File: tools/test_accessibility_launch_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class AccessibilityLaunchContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_profile_dashboard_has_button_role(self)
-⋮----
-def test_library_filters_expose_button_and_selection_semantics(self)
-⋮----
-def test_shared_pressable_surface_exposes_enabled_semantics(self)
-```
-
-## File: tools/test_accessibility_system_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class AccessibilitySystemContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_shared_click_targets_are_at_least_52dp(self)
-⋮----
-def test_supporting_text_baseline_is_not_tiny(self)
-⋮----
-def test_library_filters_have_48dp_target(self)
-⋮----
-def test_library_result_content_is_not_forced_to_two_lines(self)
-⋮----
-block = self.library.split('private fun LibraryResultCard', 1)[1]
-⋮----
-def test_library_title_is_exposed_as_heading(self)
-⋮----
-title_block = self.library.split(
-```
-
-## File: tools/test_actionable_knowledge_map_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ActionableKnowledgeMapContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_traits_are_clickable(self)
-⋮----
-def test_profile_opens_exploration_dialog(self)
-⋮----
-def test_dialog_exposes_evidence_and_next_measurement(self)
-⋮----
-def test_profile_can_navigate_directly_to_quiz(self)
-```
-
-## File: tools/test_android_ci_sdk_setup_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW_PATHS = (
-⋮----
-class AndroidCiSdkSetupContractTest(unittest.TestCase)
-⋮----
-def test_setup_android_skips_removed_legacy_tools_package(self)
-⋮----
-workflow = path.read_text(encoding='utf-8')
-setup_block = workflow.split(
-```
-
-## File: tools/test_baseline_profile_manifest_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = (ROOT / 'baseline-profile/src/main/AndroidManifest.xml').read_text(encoding='utf-8')
-BUILD_FILE = (ROOT / 'baseline-profile/build.gradle.kts').read_text(encoding='utf-8')
-⋮----
-class BaselineProfileManifestContractTest(unittest.TestCase)
-⋮----
-def test_min_sdk_is_owned_by_gradle_not_manifest(self)
-```
-
-## File: tools/test_battery_thermal_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class BatteryThermalContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_power_saver_disables_decorative_motion(self)
-⋮----
-def test_compact_quiz_artwork_is_static(self)
-⋮----
-def test_discover_idle_has_no_infinite_animation(self)
-⋮----
-discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')
-⋮----
-def test_ads_are_not_preloaded_at_consent_startup(self)
-⋮----
-start_block = self.ads.split('fun start(activity: Activity?)', 1)[1].split('fun showPrivacyOptions', 1)[0]
-⋮----
-def test_interstitial_preload_waits_until_near_frequency_threshold(self)
-⋮----
-dismissed = self.ads.split('override fun onAdDismissedFullScreenContent()', 1)[1].split('}', 1)[0]
-```
-
-## File: tools/test_billing_launch_readiness.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class BillingLaunchReadinessTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_no_hard_coded_purchase_price_remains(self)
-⋮----
-def test_purchase_button_requires_live_play_price(self)
-⋮----
-def test_transient_product_query_failures_retry_boundedly(self)
-⋮----
-def test_new_manager_resets_price_to_loading(self)
-```
-
-## File: tools/test_challenge_landing_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ChallengeLandingContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_landing_does_not_auto_launch_custom_scheme(self)
-⋮----
-def test_invalid_challenge_hides_open_button(self)
-⋮----
-def test_keyboard_focus_is_visible(self)
-⋮----
-def test_app_and_web_routes_stay_aligned(self)
-```
-
-## File: tools/test_gradle_release_reproducibility.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class GradleReleaseReproducibilityContractTest(unittest.TestCase)
-⋮----
-def test_all_android_workflows_pin_same_gradle_version(self)
-⋮----
-workflows = [
-versions = []
-⋮----
-source = path.read_text(encoding="utf-8")
-match = re.search(r"gradle-version:\s*'([^']+)'", source)
-⋮----
-def test_build_scripts_pin_android_and_compose_plugins(self)
-⋮----
-root = (ROOT / "build.gradle.kts").read_text(encoding="utf-8")
-```
-
-## File: tools/test_healthy_discover_profile_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class HealthyDiscoverProfileContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_discover_exploration_precedes_retention_metrics(self)
-⋮----
-def test_profile_social_actions_are_optional_and_not_accent_primary(self)
-⋮----
-share = self.profile.index('AppEvents.profileShare')
-nearby = self.profile[share:share + 900]
-⋮----
-def test_premium_promotion_disappears_after_purchase(self)
-⋮----
-def test_optional_profile_copy_is_localized(self)
-```
-
-## File: tools/test_large_screen_keyboard_accessibility.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class LargeScreenAndKeyboardAccessibilityTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_readable_width_is_centered_and_bounded(self)
-⋮----
-def test_keyboard_focus_is_visible_on_shell_and_filters(self)
-⋮----
-def test_accent_foregrounds_use_dark_ink_for_contrast(self)
-⋮----
-def test_catalog_failure_can_scroll_with_large_fonts(self)
-⋮----
-catalog_block = self.entry.split('fun CatalogUnavailableScreen()', 1)[1].split('@Composable\nfun OnboardingScreen', 1)[0]
-```
-
-## File: tools/test_local_profile_privacy_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class LocalProfilePrivacyContractTest(unittest.TestCase)
-⋮----
-def test_android_backup_is_disabled_for_local_profile(self)
-⋮----
-manifest = (ROOT / 'app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')
-```
-
-## File: tools/test_localization_parity.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-RES = ROOT / "app/src/main/res"
-⋮----
-FORMAT = re.compile(r"%(?:\d+\$)?[a-zA-Z]")
-⋮----
-def strings_for(folder)
-⋮----
-values = {}
-⋮----
-root = ET.parse(path).getroot()
-⋮----
-name = node.attrib.get("name")
-⋮----
-text = "".join(node.itertext())
-⋮----
-class LocalizationParityContractTest(unittest.TestCase)
-⋮----
-def test_french_covers_all_translatable_english_strings(self)
-⋮----
-en = strings_for("values")
-fr = strings_for("values-fr")
-missing = sorted(set(en) - set(fr))
-⋮----
-def test_format_placeholders_match_between_locales(self)
-⋮----
-mismatches = []
-⋮----
-en_tokens = sorted(FORMAT.findall(en[name][0]))
-fr_tokens = sorted(FORMAT.findall(fr[name][0]))
-```
-
-## File: tools/test_longitudinal_trend_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class LongitudinalTrendIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_dated_history_is_persisted(self)
-⋮----
-def test_global_profile_carries_longitudinal_trends(self)
-⋮----
-def test_profile_renders_accessible_sparklines(self)
-⋮----
-def test_engine_distinguishes_outlier_volatility_and_direction(self)
-```
-
-## File: tools/test_m33_readiness.py
-```python
-class M33ReadinessTest(unittest.TestCase)
-⋮----
-def test_manifest_matches_locked_release(self)
-⋮----
-data = json.loads(pathlib.Path('docs/m33-readiness.json').read_text(encoding='utf-8'))
-```
-
-## File: tools/test_m46_accessibility.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app"
-⋮----
-class CoreAccessibilityContractTest(unittest.TestCase)
-⋮----
-def read(self, filename: str) -> str
-⋮----
-def test_back_action_has_minimum_touch_target(self)
-⋮----
-source = self.read("AccessibilityUi.kt")
-⋮----
-def test_quiz_is_scrollable_and_answers_are_buttons(self)
-⋮----
-quiz = self.read("QuizScreenUi.kt")
-pressable = self.read("V2InteractiveUi.kt")
-⋮----
-def test_shell_tabs_expose_tab_semantics(self)
-⋮----
-source = self.read("AppShellUi.kt")
-⋮----
-def test_result_secondary_actions_keep_touch_targets(self)
-⋮----
-source = self.read("ResultScreenUi.kt")
-⋮----
-def test_profile_progress_is_resource_backed(self)
-⋮----
-source = self.read("ProfileScreenUi.kt")
-```
-
-## File: tools/test_m47_ui_test_wiring.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP_GRADLE = ROOT / "app" / "build.gradle.kts"
-MAIN_RC = ROOT / ".github" / "workflows" / "m56-main-rc.yml"
-ANDROID_TEST = ROOT / "app" / "src" / "androidTest" / "java" / "com" / "whoareyou" / "app"
-⋮----
-class M47UiTestWiringTest(unittest.TestCase)
-⋮----
-def test_compose_ui_test_dependencies_and_runner_stay_enabled(self)
-⋮----
-source = APP_GRADLE.read_text(encoding="utf-8")
-⋮----
-def test_github_actions_compiles_instrumentation_test_apk(self)
-⋮----
-source = MAIN_RC.read_text(encoding="utf-8")
-⋮----
-def test_critical_compose_ui_tests_exist(self)
-```
-
-## File: tools/test_m48_visual_system.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app"
-⋮----
-class M48VisualSystemTest(unittest.TestCase)
-⋮----
-def test_design_system_exposes_shared_type_and_motion_tokens(self)
-⋮----
-source = (APP / "V2DesignSystem.kt").read_text(encoding="utf-8")
-⋮----
-def test_quiz_uses_shared_pressable_surface_and_typography(self)
-⋮----
-source = (APP / "QuizScreenUi.kt").read_text(encoding="utf-8")
-⋮----
-def test_profile_and_result_use_shared_hero_typography(self)
-⋮----
-source = (APP / filename).read_text(encoding="utf-8")
-⋮----
-def test_press_feedback_is_animated_and_reusable(self)
-⋮----
-source = (APP / "V2InteractiveUi.kt").read_text(encoding="utf-8")
-⋮----
-def test_discover_core_uses_shared_typography(self)
-⋮----
-def test_discover_clickable_cards_use_press_feedback(self)
-⋮----
-def test_shell_has_animated_press_feedback(self)
-⋮----
-source = (APP / "AppShellUi.kt").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m49_architecture_cleanup.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app"
-⋮----
-class M49ArchitectureCleanupTest(unittest.TestCase)
-⋮----
-def test_main_activity_is_orchestration_only(self)
-⋮----
-source = (APP / "MainActivity.kt").read_text(encoding="utf-8")
-⋮----
-def test_entry_screens_are_extracted(self)
-⋮----
-source = (APP / "EntryScreensUi.kt").read_text(encoding="utf-8")
-⋮----
-def test_challenge_activity_is_deep_link_orchestration_only(self)
-⋮----
-source = (APP / "ChallengeActivity.kt").read_text(encoding="utf-8")
-⋮----
-def test_challenge_ui_uses_shared_v2_system(self)
-⋮----
-source = (APP / "ChallengeUi.kt").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m50_analytics.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app"
-⋮----
-class M50AnalyticsTest(unittest.TestCase)
-⋮----
-def test_core_funnel_is_explicit(self)
-⋮----
-source = (APP / "AppEvents.kt").read_text(encoding="utf-8")
-⋮----
-def test_behavioral_scores_are_bucketed(self)
-⋮----
-def test_remote_errors_do_not_send_message_or_stack(self)
-⋮----
-source = (APP / "Telemetry.kt").read_text(encoding="utf-8")
-http_section = source.split("internal class HttpEventSink", 1)[1]
-⋮----
-def test_main_app_wires_activation_and_abandonment(self)
-⋮----
-main_source = (APP / "MainActivity.kt").read_text(encoding="utf-8")
-result_commit_source = (APP / "QuizResultCommitEffect.kt").read_text(encoding="utf-8")
-⋮----
-def test_billing_wires_conversion_steps(self)
-⋮----
-source = (APP / "BillingManager.kt").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m51_release_readiness.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class M51ReleaseReadinessTest(unittest.TestCase)
-⋮----
-def test_release_build_is_optimized(self)
-⋮----
-gradle = (ROOT / "app/build.gradle.kts").read_text(encoding="utf-8")
-⋮----
-def test_signing_material_is_never_committed(self)
-⋮----
-gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-⋮----
-def test_manifest_uses_production_safe_defaults(self)
-⋮----
-manifest = (ROOT / "app/src/main/AndroidManifest.xml").read_text(encoding="utf-8")
-⋮----
-def test_github_actions_proves_release_variant(self)
-⋮----
-config = (ROOT / ".github/workflows/m56-main-rc.yml").read_text(encoding="utf-8")
-⋮----
-def test_protected_play_workflows_exist(self)
-⋮----
-candidate = (ROOT / ".github/workflows/play-candidate.yml").read_text(encoding="utf-8")
-publish = (ROOT / ".github/workflows/play-internal-publish.yml").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m52_play_policy.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-⋮----
-class M52PlayPolicyTests(unittest.TestCase)
-⋮----
-def read(self, path: str) -> str
-⋮----
-def test_ump_refreshes_and_exposes_privacy_options(self)
-⋮----
-ad = self.read("app/src/main/java/com/whoareyou/app/AdManager.kt")
-⋮----
-def test_privacy_entry_point_is_user_visible_when_required(self)
-⋮----
-main = self.read("app/src/main/java/com/whoareyou/app/MainActivity.kt")
-hub = self.read("app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt")
-en = self.read("app/src/main/res/values/strings.xml")
-fr = self.read("app/src/main/res/values-fr/strings.xml")
-⋮----
-def test_manifest_is_minimal_and_hardened(self)
-⋮----
-manifest = self.read("app/src/main/AndroidManifest.xml")
-⋮----
-def test_file_provider_exports_only_shared_result_cache(self)
-⋮----
-paths = self.read("app/src/main/res/xml/file_paths.xml")
-⋮----
-def test_billing_uses_play_billing_and_acknowledges_purchases(self)
-⋮----
-billing = self.read("app/src/main/java/com/whoareyou/app/BillingManager.kt")
-⋮----
-def test_https_app_link_is_scoped_to_challenges(self)
-```
-
-## File: tools/test_m53_publication_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class M53PublicationContractTest(unittest.TestCase)
-⋮----
-def test_privacy_page_is_publication_ready(self)
-⋮----
-html = (ROOT / "docs/privacy/index.html").read_text(encoding="utf-8")
-⋮----
-def test_data_safety_tracks_current_admob_disclosures(self)
-⋮----
-text = (ROOT / "docs/play-data-safety.md").read_text(encoding="utf-8")
-⋮----
-def test_public_release_inputs_contract_is_safe(self)
-⋮----
-payload = json.loads(
-⋮----
-def test_strict_public_release_gate_rejects_template_placeholders(self)
-⋮----
-errors = validate(payload, strict=True)
-⋮----
-def test_app_links_docs_explain_root_domain_dependency(self)
-⋮----
-text = (ROOT / "docs/APP_LINKS.md").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m54_play_preflight.py
-```python
-class M54PlayPreflightTest(unittest.TestCase)
-⋮----
-def test_repository_preflight_is_ready_without_external_inputs(self)
-⋮----
-report = run(ROOT, None, strict_public=False)
-⋮----
-def test_strict_public_preflight_requires_external_inputs(self)
-⋮----
-report = run(ROOT, None, strict_public=True)
-⋮----
-def test_strict_public_preflight_rejects_template_placeholders(self)
-⋮----
-template = ROOT / "docs/public-release-inputs.template.json"
-report = run(ROOT, template, strict_public=True)
-⋮----
-def test_strict_public_preflight_accepts_complete_contract_shape(self)
-⋮----
-payload = {
-⋮----
-path = Path(temp) / "inputs.json"
-⋮----
-report = run(ROOT, path, strict_public=True)
-```
-
-## File: tools/test_m55_release_automation.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class M55ReleaseAutomationTest(unittest.TestCase)
-⋮----
-def test_publisher_uses_current_internal_track_and_production_guard(self)
-⋮----
-text = (ROOT / "tools/play_publisher.py").read_text(encoding="utf-8")
-⋮----
-def test_promotion_helper_exists_without_bundle_upload(self)
-⋮----
-text = (ROOT / "tools/play_promoter.py").read_text(encoding="utf-8")
-⋮----
-def test_promotion_workflow_is_manual_and_safe_by_default(self)
-⋮----
-text = (ROOT / ".github/workflows/play-promote.yml").read_text(encoding="utf-8")
-⋮----
-def test_public_preflight_remains_available(self)
-⋮----
-text = (ROOT / "tools/play_preflight.py").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m56_release_candidate.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class M56ReleaseCandidateTest(unittest.TestCase)
-⋮----
-def test_manifest_has_launcher_identity(self)
-⋮----
-manifest = (ROOT / "app/src/main/AndroidManifest.xml").read_text(encoding="utf-8")
-⋮----
-def test_adaptive_and_monochrome_icons_exist(self)
-⋮----
-required = (
-⋮----
-icon = (ROOT / path).read_text(encoding="utf-8")
-⋮----
-themed = (ROOT / "app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml").read_text(encoding="utf-8")
-⋮----
-def test_candidate_build_is_release_like_and_installable(self)
-⋮----
-gradle = (ROOT / "app/build.gradle.kts").read_text(encoding="utf-8")
-⋮----
-def test_github_actions_builds_and_verifies_installable_apk(self)
-⋮----
-config = (ROOT / ".github/workflows/m56-main-rc.yml").read_text(encoding="utf-8")
-⋮----
-version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle)
-version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle)
-⋮----
-version_name = version_name.group(1)
-version_code = version_code.group(1)
-⋮----
-def test_circleci_is_lightweight_contract_gate(self)
-⋮----
-circleci = (ROOT / ".circleci/config.yml").read_text(encoding="utf-8")
-```
-
-## File: tools/test_m59_host_diagnostics_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".github" / "scripts" / "android-device-validation.sh"
-WORKFLOW = ROOT / ".github" / "workflows" / "m59-device-validation.yml"
-⋮----
-class M59HostDiagnosticsContractTest(unittest.TestCase)
-⋮----
-def test_device_validation_captures_host_resource_pressure_during_instrumentation(self)
-⋮----
-script = SCRIPT.read_text(encoding="utf-8")
-⋮----
-def test_device_validation_uploads_host_diagnostics(self)
-⋮----
-workflow = WORKFLOW.read_text(encoding="utf-8")
-```
-
-## File: tools/test_m59_no_kvm_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github" / "workflows" / "m59-device-validation.yml"
-⋮----
-def visual_job(workflow: str) -> str
-⋮----
-class M59HardwareAccelerationContractTest(unittest.TestCase)
-⋮----
-def test_visual_validation_keeps_linux_hardware_acceleration(self)
-⋮----
-workflow = WORKFLOW.read_text(encoding="utf-8")
-visual = visual_job(workflow)
-⋮----
-# M764 proved -accel off takes ~13 minutes to boot and then loses ADB
-# before validation starts. The split visual job must keep KVM enabled.
-```
-
-## File: tools/test_m59_runtime_stress_split_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github" / "workflows" / "m59-device-validation.yml"
-DEVICE_SCRIPT = ROOT / ".github" / "scripts" / "android-device-validation.sh"
-STRESS_SCRIPT = ROOT / ".github" / "scripts" / "android-runtime-stress.sh"
-⋮----
-class M59RuntimeStressSplitContractTest(unittest.TestCase)
-⋮----
-def test_atd_job_owns_runtime_stress(self)
-⋮----
-workflow = WORKFLOW.read_text(encoding="utf-8")
-⋮----
-def test_visual_validation_skips_random_monkey_stress(self)
-⋮----
-script = DEVICE_SCRIPT.read_text(encoding="utf-8")
-⋮----
-def test_runtime_stress_script_preserves_debug_and_candidate_coverage(self)
-⋮----
-script = STRESS_SCRIPT.read_text(encoding="utf-8")
-⋮----
-def test_runtime_stress_captures_startup_evidence_before_pid_assertion(self)
-⋮----
-start = script.index('start_output="$(adb shell am start -W -n "$ACTIVITY")"')
-first_capture = script.index('capture_runtime_evidence "$label"', start)
-pid_lookup = script.index('pid="$(adb shell pidof', start)
-```
-
-## File: tools/test_m59_split_validation_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github" / "workflows" / "m59-device-validation.yml"
-SCRIPT = ROOT / ".github" / "scripts" / "android-device-validation.sh"
-⋮----
-def job_block(workflow: str, job_name: str, next_job_name: str | None = None) -> str
-⋮----
-marker = f"  {job_name}:"
-self_start = workflow.index(marker)
-block = workflow[self_start:]
-⋮----
-next_marker = f"  {next_job_name}:"
-block = block[: block.index(next_marker)]
-⋮----
-class M59SplitValidationContractTest(unittest.TestCase)
-⋮----
-def test_instrumentation_and_visual_validation_use_separate_emulators(self)
-⋮----
-workflow = WORKFLOW.read_text(encoding="utf-8")
-instrumentation = job_block(workflow, "instrumentation_validation", "visual_validation")
-visual = job_block(workflow, "visual_validation")
-⋮----
-def test_visual_mode_skips_connected_instrumentation(self)
-⋮----
-script = SCRIPT.read_text(encoding="utf-8")
-```
-
-## File: tools/test_m59_visual_emulator_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-WORKFLOW = ROOT / ".github" / "workflows" / "m59-device-validation.yml"
-⋮----
-def visual_job(workflow: str) -> str
-⋮----
-class M59VisualEmulatorContractTest(unittest.TestCase)
-⋮----
-def test_visual_validation_uses_rendering_capable_system_image(self)
-⋮----
-workflow = WORKFLOW.read_text(encoding="utf-8")
-visual = visual_job(workflow)
-⋮----
-# Automated Test Device images disable hardware rendering and therefore
-# cannot be used as the source of screenshot-based visual evidence.
-⋮----
-def test_visual_validation_uses_supported_software_renderer(self)
-⋮----
-# Emulator 36.4.9 deprecated swiftshader_indirect. Keep the visual gate
-# on a supported software renderer rather than the legacy indirect backend.
-⋮----
-def test_visual_validation_pins_known_stable_emulator_build(self)
-⋮----
-# Keep rendered evidence on the final stable 36.x patch while the ATD
-# job independently owns connected instrumentation coverage.
-```
-
-## File: tools/test_m769_landscape_viewport.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-VALIDATOR = ROOT / ".github" / "scripts" / "validate-ui-hierarchy.py"
-⋮----
-def _write_png_header(path: Path, width: int, height: int) -> None
-⋮----
-signature = b"\x89PNG\r\n\x1a\n"
-ihdr = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
-⋮----
-class LandscapeViewportValidationTest(unittest.TestCase)
-⋮----
-def test_landscape_viewport_comes_from_rendered_screenshot(self) -> None
-⋮----
-tmp_path = Path(tmp)
-screenshot = tmp_path / "landscape.png"
-hierarchy = tmp_path / "landscape.xml"
-⋮----
-result = subprocess.run(
-```
-
-## File: tools/test_main_activity_architecture.py
-```python
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-APP_PACKAGE = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app"
-MAIN_ACTIVITY = APP_PACKAGE / "MainActivity.kt"
-⋮----
-class MainActivityArchitectureTest(unittest.TestCase)
-⋮----
-def test_main_activity_stays_a_lightweight_shell(self)
-⋮----
-source = MAIN_ACTIVITY.read_text(encoding="utf-8")
-⋮----
-def test_shell_routes_to_extracted_screens(self)
-⋮----
-def test_extracted_screen_files_exist(self)
-```
-
-## File: tools/test_main_activity_recreation_sync_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-SOURCE = (
-⋮----
-class MainActivityRecreationSyncContractTest(unittest.TestCase)
-⋮----
-def test_recreation_test_uses_v2_compose_rule(self)
-⋮----
-def test_recreation_test_waits_for_discover_before_scrolling(self)
-⋮----
-test_body = SOURCE.split(
-wait_index = test_body.index('waitForTag("app_screen_discover")')
-scroll_index = test_body.index('onNodeWithTag("discover_list")')
-```
-
-## File: tools/test_main_flow_recommendation_parity_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-TEST_SOURCE = (
-⋮----
-class MainFlowRecommendationParityContractTest(unittest.TestCase)
-⋮----
-def test_e2e_recommendation_uses_same_profile_coverage_as_discover_ui(self)
-```
-
-## File: tools/test_manifest_security_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ManifestSecurityContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_manifest_uses_minimal_network_permission_and_secure_defaults(self)
-⋮----
-def test_file_provider_is_not_exported_and_paths_are_narrow(self)
-⋮----
-def test_billing_restore_revokes_missing_entitlement(self)
-⋮----
-def test_top_level_compose_surfaces_handle_status_bar_insets(self)
-⋮----
-paths = [
-⋮----
-source = (
-⋮----
-def test_ad_show_failure_preloads_replacement(self)
-⋮----
-marker = "override fun onAdFailedToShowFullScreenContent"
-block = self.ads[self.ads.index(marker):]
-block = block[:block.index("override fun onAdImpression")]
-```
-
-## File: tools/test_offline_resilience_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class OfflineResilienceContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_http_telemetry_queue_is_bounded(self)
-⋮----
-def test_disabled_production_telemetry_is_noop(self)
-⋮----
-def test_share_launcher_handles_non_activity_contexts_and_failures(self)
-```
-
-## File: tools/test_performance_release_gate_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PerformanceReleaseGateContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_baseline_profile_toolchain_is_wired(self)
-⋮----
-def test_benchmark_covers_startup_and_requires_baseline_profile(self)
-⋮----
-def test_play_preflight_compiles_benchmark_variants(self)
-⋮----
-expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace"
-⋮----
-def test_play_artifacts_include_bundle_budget(self)
-⋮----
-def test_production_promotion_requires_vitals_and_prelaunch_review(self)
-```
-
-## File: tools/test_persisted_result_score_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PersistedResultScoreContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_result_callback_uses_persisted_profile_score(self)
-⋮----
-def test_main_activity_sets_final_score_only_after_commit_callback(self)
-⋮----
-finish_block = self.main.split("onFinished = { score ->", 1)[1].split("}", 2)[0]
-```
-
-## File: tools/test_play_2026_readiness.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class Play2026ReadinessContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_target_sdk_meets_august_2026_play_requirement(self)
-⋮----
-match = re.search(r'targetSdk\s*=\s*(\d+)', self.gradle)
-⋮----
-def test_compile_sdk_is_not_below_target_sdk(self)
-⋮----
-compile_sdk = int(re.search(r'compileSdk\s*=\s*(\d+)', self.gradle).group(1))
-target_sdk = int(re.search(r'targetSdk\s*=\s*(\d+)', self.gradle).group(1))
-⋮----
-def test_play_candidate_runs_quality_preflight_before_signing(self)
-⋮----
-build_index = self.workflow.index('Build signed Play candidate')
-⋮----
-def test_play_candidate_installs_declared_android_sdk(self)
-⋮----
-def test_play_artifact_reports_native_libraries(self)
-```
-
-## File: tools/test_play_bundle_budget.py
-```python
-class PlayBundleBudgetTest(unittest.TestCase)
-⋮----
-def test_inspection_reports_bundle_structure(self)
-⋮----
-path = Path(tmp) / "sample.aab"
-⋮----
-report = budget.inspect_bundle(path)
-⋮----
-def test_internal_defaults_are_explicit_and_ordered(self)
-```
-
-## File: tools/test_play_candidate_workflow.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PlayCandidateWorkflowTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_manual_only_and_read_only(self)
-⋮----
-def test_required_secrets_are_referenced(self)
-⋮----
-def test_optional_secrets_are_referenced(self)
-⋮----
-def test_upload_key_password_falls_back_to_keystore_password(self)
-⋮----
-def test_keystore_is_temporary_and_cleaned(self)
-⋮----
-def test_signed_candidate_is_verified_and_uploaded(self)
-⋮----
-gradle = (ROOT / 'app/build.gradle.kts').read_text(encoding='utf-8')
-version_name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle).group(1)
-version_code = re.search(r'versionCode\s*=\s*(\d+)', gradle).group(1)
-artifact_name = self.contract['artifactNameTemplate'].format(
-artifact_files = [
-⋮----
-def test_contract_does_not_pin_a_specific_app_version(self)
-⋮----
-serialized = json.dumps(self.contract)
-⋮----
-def test_workflow_does_not_upload_to_play(self)
-⋮----
-lowered = self.workflow.lower()
-```
-
-## File: tools/test_play_promoter.py
-```python
-class PlayPromotionPayloadTest(unittest.TestCase)
-⋮----
-def test_internal_track_name_matches_current_play_api_contract(self)
-⋮----
-def test_closed_track_can_be_draft(self)
-⋮----
-payload = play_publisher.release_payload(track="closed-test", status="draft")
-⋮----
-def test_open_track_can_complete(self)
-⋮----
-payload = play_publisher.release_payload(track="beta", status="completed")
-⋮----
-def test_production_needs_confirmation(self)
-⋮----
-def test_staged_production_payload(self)
-⋮----
-payload = play_publisher.release_payload(
-release = payload["releases"][0]
-```
-
-## File: tools/test_play_publish_pipeline_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PlayPublishPipelineContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_internal_publish_runs_quality_gates_before_bundle(self)
-⋮----
-build = self.internal.index('Build signed production Play bundle')
-⋮----
-def test_internal_publish_uses_dynamic_versioned_receipt(self)
-⋮----
-def test_internal_publish_uses_optional_key_password_fallback(self)
-⋮----
-def test_promotion_receipt_is_not_pinned_to_old_version(self)
-⋮----
-def test_project_proguard_rules_do_not_keep_unused_room_or_workmanager(self)
-```
-
-## File: tools/test_play_publish_workflow.py
-```python
-class PlayPublishWorkflowContractTest(unittest.TestCase)
-⋮----
-@classmethod
-    def setUpClass(cls)
-⋮----
-def test_manual_only_and_read_only(self)
-⋮----
-def test_publish_is_opt_in(self)
-⋮----
-def test_internal_track_publisher_and_service_account_secret(self)
-⋮----
-def test_build_uses_strict_play_release_and_signature_verification(self)
-⋮----
-def test_actual_upload_commits_edit_only_in_publish_job(self)
-⋮----
-def test_temporary_credentials_are_cleaned(self)
-```
-
-## File: tools/test_play_publisher.py
-```python
-class PlayPublisherTest(unittest.TestCase)
-⋮----
-def test_locked_release_config(self)
-⋮----
-config = play_publisher.ReleaseConfig()
-⋮----
-def test_default_release_payload_uses_internal_qa_track(self)
-⋮----
-payload = play_publisher.release_payload()
-⋮----
-release = payload["releases"][0]
-⋮----
-def test_open_testing_track_is_supported(self)
-⋮----
-payload = play_publisher.release_payload(track="beta", status="completed")
-⋮----
-def test_custom_closed_track_is_supported(self)
-⋮----
-payload = play_publisher.release_payload(track="closed-alpha", status="draft")
-⋮----
-def test_production_requires_explicit_confirmation(self)
-⋮----
-def test_production_staged_rollout_is_supported_when_confirmed(self)
-⋮----
-payload = play_publisher.release_payload(
-⋮----
-def test_production_in_progress_requires_fraction(self)
-⋮----
-def test_non_production_rollout_fraction_is_rejected(self)
-⋮----
-def test_invalid_status_is_rejected(self)
-⋮----
-def test_only_locked_package_is_allowed(self)
-⋮----
-def test_malformed_track_is_rejected(self)
-⋮----
-def test_service_account_validation_rejects_missing_fields(self)
-⋮----
-path = pathlib.Path(directory) / "service-account.json"
-⋮----
-def test_endpoint_shape(self)
-```
-
-## File: tools/test_play_release_safety_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PlayReleaseSafetyContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_upload_key_password_can_fall_back_to_keystore_password(self)
-⋮----
-def test_standard_release_disables_external_services(self)
-⋮----
-release_block = self.gradle.split("release {", 1)[1].split("}", 1)[0]
-⋮----
-def test_play_release_explicitly_reenables_external_services(self)
-⋮----
-play_block = self.gradle.split('create("playRelease") {', 1)[1]
-```
-
-## File: tools/test_prepare_play_submission.py
-```python
-VALID = {
-⋮----
-class PlaySubmissionGeneratorTest(unittest.TestCase)
-⋮----
-def test_valid_inputs_generate_all_files(self)
-⋮----
-root = Path(temp)
-⋮----
-input_path = root / "input.json"
-⋮----
-out = root / "out"
-values = generate(input_path, root, out)
-⋮----
-final_html = (out / "privacy-policy-final.html").read_text()
-⋮----
-def test_placeholder_is_rejected(self)
-⋮----
-payload = dict(VALID)
-⋮----
-def test_non_https_privacy_url_is_rejected(self)
-⋮----
-def test_malformed_admob_id_is_rejected(self)
-⋮----
-payload = json.loads(json.dumps(VALID))
-⋮----
-def test_malformed_fingerprint_is_rejected(self)
-⋮----
-def test_inactive_billing_product_is_rejected(self)
-```
-
-## File: tools/test_profile_coverage_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileCoverageIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_global_profile_carries_coverage(self)
-⋮----
-def test_profile_surfaces_coverage_card(self)
-⋮----
-def test_recommendation_engine_targets_uncertainty(self)
-⋮----
-def test_coverage_model_tracks_confidence_and_contradictions(self)
-```
-
-## File: tools/test_profile_knowledge_map_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileKnowledgeMapContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_map_has_explicit_domains(self)
-⋮----
-def test_map_keeps_three_knowledge_states(self)
-⋮----
-def test_profile_renders_knowledge_map(self)
-```
-
-## File: tools/test_profile_narrative_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileNarrativeIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_global_profile_contains_narrative(self)
-⋮----
-def test_narrative_separates_change_from_more_evidence(self)
-⋮----
-def test_uncertainty_blocks_overconfident_directional_copy(self)
-⋮----
-def test_profile_surfaces_factual_summary(self)
-```
-
-## File: tools/test_profile_reset_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileResetContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_store_exposes_bounded_profile_clear(self)
-⋮----
-def test_reset_requires_confirmation(self)
-⋮----
-def test_main_wires_reset_to_store(self)
-⋮----
-def test_copy_is_localized_and_scope_is_profile_specific(self)
-```
-
-## File: tools/test_profile_result_allocation_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileResultAllocationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_profile_sort_and_catalog_index_are_remembered(self)
-⋮----
-def test_profile_and_result_background_gradients_are_remembered(self)
-⋮----
-def test_result_recommendation_uses_indexed_catalog_and_stable_brush(self)
-⋮----
-def test_identity_aura_uses_draw_cache_for_geometry(self)
-```
-
-## File: tools/test_profile_startup_resilience.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProfileStartupResilienceTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_default_profile_does_not_skip_onboarding(self)
-⋮----
-def test_profile_observation_recovers_with_empty_preferences(self)
-```
-
-## File: tools/test_progression_journal_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ProgressionJournalIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_journal_keeps_dates_and_period_comparison(self)
-⋮----
-def test_profile_opens_journal_from_dimension(self)
-⋮----
-def test_journal_ui_formats_real_dates(self)
-⋮----
-def test_new_trait_evidence_keeps_source_quiz_ids(self)
-```
-
-## File: tools/test_public_launch_experience_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PublicLaunchExperienceContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_privacy_and_support_are_permanently_accessible(self)
-⋮----
-def test_profile_deletion_is_confirmed(self)
-⋮----
-def test_purchase_ui_never_invents_a_price(self)
-⋮----
-def test_onboarding_is_compact_screen_safe(self)
-⋮----
-def test_first_run_copy_states_local_profile_and_non_diagnostic_scope(self)
-```
-
-## File: tools/test_public_result_and_store_positioning.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class PublicResultAndStorePositioningTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_done_is_primary_before_optional_social_actions(self)
-⋮----
-done_index = self.result.index('testTag("result_done")')
-share_index = self.result.index("R.string.share_my_result")
-compare_index = self.result.index("R.string.compare_with_friend")
-⋮----
-def test_completed_catalog_does_not_force_retake_recommendation(self)
-⋮----
-def test_store_positioning_leads_with_self_reflection(self)
-⋮----
-assets = (ROOT / "docs/store-assets-spec.md").read_text(encoding="utf-8")
-⋮----
-def test_play_console_sheet_is_version_agnostic(self)
-```
-
-## File: tools/test_quiz_commit_interaction_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class QuizCommitInteractionContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_system_back_is_blocked_while_result_is_saving(self)
-⋮----
-def test_visible_back_action_does_not_leave_during_commit(self)
-⋮----
-def test_answers_are_semantically_disabled_during_commit(self)
-```
-
-## File: tools/test_quiz_commit_interaction_lock.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class QuizCommitInteractionLockTest(unittest.TestCase)
-⋮----
-def test_quiz_screen_exposes_finishing_state(self)
-⋮----
-source = (ROOT / "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt").read_text(encoding="utf-8")
-⋮----
-def test_main_activity_wires_commit_state_into_quiz_screen(self)
-⋮----
-source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
-```
-
-## File: tools/test_quiz_process_recreation_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class QuizProcessRecreationContractTest(unittest.TestCase)
-⋮----
-def test_critical_attempt_state_is_saveable(self)
-⋮----
-source = (
-expected = (
-⋮----
-def test_pending_result_replays_through_idempotent_commit_effect(self)
-```
-
-## File: tools/test_quiz_replay_window_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class QuizReplayWindowContractTest(unittest.TestCase)
-⋮----
-def test_replay_history_is_large_but_bounded(self)
-⋮----
-source = (
-⋮----
-def test_last_attempt_per_quiz_is_still_retained_for_migration_and_replay_protection(self)
-```
-
-## File: tools/test_quiz_result_persistence_feedback.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class QuizResultPersistenceFeedbackTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_saving_and_failure_states_are_visible_and_localized(self)
-⋮----
-def test_commit_failure_preserves_retry_path(self)
-⋮----
-def test_new_finish_attempt_clears_previous_failure(self)
-```
-
-## File: tools/test_reduced_motion_large_font_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ReducedMotionAndLargeFontContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_android_animation_scale_is_respected(self)
-⋮----
-def test_reduced_motion_uses_snap_for_micro_interactions(self)
-⋮----
-def test_editorial_cards_do_not_force_two_line_truncation(self)
-⋮----
-block = self.collections.split('private fun EditorialCard', 1)[1]
-```
-
-## File: tools/test_release_critical_profile_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ReleaseCriticalProfileContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_profile_store_decodes_both_histories(self)
-⋮----
-update = self.store[self.store.index("val history = ScoreHistoryEngine.update("):]
-update = update[:update.index("prefs[completedKey]")]
-⋮----
-def test_profile_quiz_navigation_uses_mutable_quiz_id(self)
-⋮----
-profile_branch = self.main[self.main.index("AppScreen.PROFILE -> ProfileScreen("):]
-profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
-⋮----
-def test_retake_cadence_has_hard_minimum(self)
-⋮----
-def test_profile_explains_next_quiz(self)
-```
-
-## File: tools/test_release_workflows_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ReleaseWorkflowContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_ci_runs_automatically(self)
-⋮----
-def test_internal_publish_has_single_release_tail(self)
-⋮----
-def test_internal_publish_verifies_bundle_and_budget(self)
-⋮----
-def test_circleci_is_fast_deterministic_contract_gate(self)
-⋮----
-def test_android_37_sdk_package_name_is_valid(self)
-⋮----
-workflows = (self.ci, self.candidate, self.internal)
-⋮----
-def test_candidate_and_internal_run_core_quality_gates(self)
-⋮----
-class ComposeImportContractTest(unittest.TestCase)
-⋮----
-def _assert_extension_import(self, token, import_line, label)
-⋮----
-root = ROOT / "app/src/main/java/com/whoareyou/app"
-offenders = []
-⋮----
-source = path.read_text(encoding="utf-8")
-⋮----
-def test_padding_extension_has_import_when_used(self)
-⋮----
-def test_weight_uses_scope_extension_without_invalid_import(self)
-⋮----
-def test_height_extension_has_import_when_used(self)
-```
-
-## File: tools/test_rendering_performance_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class RenderingPerformanceContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_macrobenchmark_measures_discover_and_quiz_result_frames(self)
-⋮----
-def test_discover_idle_has_no_perpetual_ambient_animation(self)
-⋮----
-def test_remaining_ambient_animation_state_is_read_in_graphics_layer(self)
-⋮----
-def test_result_share_no_longer_reparses_quiz_catalog(self)
-```
-
-## File: tools/test_restored_quiz_recovery.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class RestoredQuizRecoveryTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_missing_restored_quiz_does_not_fall_back_with_stale_progress(self)
-⋮----
-def test_missing_quiz_resets_entire_attempt_before_returning_to_discover(self)
-```
-
-## File: tools/test_result_visual_hierarchy_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ResultVisualHierarchyContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_score_card_has_stable_visual_anchor(self)
-⋮----
-def test_score_card_keeps_accessible_score_semantics(self)
-```
-
-## File: tools/test_runtime_efficiency_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class RuntimeEfficiencyContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_quiz_catalog_cache_returns_before_asset_checks(self)
-⋮----
-load = self.catalog.split('fun load(context: Context)', 1)[1].split('fun find(', 1)[0]
-cache_index = load.index('cached?.takeIf { cachedLanguage == language }?.let { return it }')
-asset_index = load.index('assetExists(appContext, localizedName)')
-⋮----
-def test_premium_users_do_not_create_ad_manager(self)
-⋮----
-def test_discover_sections_use_stable_lazy_keys(self)
-⋮----
-def test_ad_manager_has_explicit_release_path(self)
-```
-
-## File: tools/test_runtime_memory_lifecycle.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class RuntimeMemoryLifecycleContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_billing_uses_application_context_and_cancels_scope(self)
-⋮----
-def test_ads_use_application_context_for_long_lived_services(self)
-⋮----
-def test_http_telemetry_thread_can_time_out(self)
-```
-
-## File: tools/test_runtime_performance_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class RuntimePerformanceContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_catalog_parsing_is_off_main_thread(self)
-⋮----
-def test_external_sdks_are_after_onboarding_and_catalog_guards(self)
-⋮----
-manager_index = self.main.index('val billingManager = remember(context)')
-onboarding_index = self.main.index('if (!storedProfile.onboardingComplete)')
-catalog_index = self.main.index('if (!AppNavigation.hasUsableCatalog')
-⋮----
-def test_billing_reconnects_are_bounded(self)
-⋮----
-def test_datastore_fallback_only_handles_io_errors(self)
-⋮----
-def test_reduced_motion_removes_ambient_frame_loops(self)
-⋮----
-def test_app_reports_first_useful_draw(self)
-```
-
-## File: tools/test_share_rendering_performance.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ShareRenderingPerformanceContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_cpu_rendering_uses_default_dispatcher(self)
-⋮----
-def test_file_work_uses_io_dispatcher(self)
-⋮----
-def test_result_share_uses_known_quiz_id_instead_of_catalog_parse(self)
-```
-
-## File: tools/test_share_storage_safety.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ShareStorageSafetyContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_share_cache_is_bounded_and_png_encoding_is_checked(self)
-⋮----
-def test_file_provider_exposes_only_share_subdirectory(self)
-⋮----
-def test_all_image_shares_use_shared_file_store(self)
-```
-
-## File: tools/test_shell_accessibility_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class ShellAccessibilityContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_shell_respects_reduced_motion(self)
-⋮----
-def test_shell_height_can_expand_for_large_fonts(self)
-⋮----
-def test_back_action_uses_shared_accessible_type_scale(self)
-```
-
-## File: tools/test_startup_loading_state.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class StartupLoadingStateTest(unittest.TestCase)
-⋮----
-def test_profile_loading_has_visible_testable_ui(self)
-⋮----
-source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
-⋮----
-entry = (ROOT / "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt").read_text(encoding="utf-8")
-⋮----
-def test_startup_does_not_return_silently_before_profile_load(self)
-```
-
-## File: tools/test_string_resource_parity.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-VALUES = ROOT / "app/src/main/res/values/strings.xml"
-VALUES_FR = ROOT / "app/src/main/res/values-fr/strings.xml"
-⋮----
-NAME_RE = re.compile(r'<string\s+name="([^"]+)"')
-⋮----
-def resource_names(path: Path) -> set[str]
-⋮----
-class StringResourceParityTest(unittest.TestCase)
-⋮----
-def test_french_catalog_matches_default_string_keys(self)
-⋮----
-default = resource_names(VALUES)
-french = resource_names(VALUES_FR)
-⋮----
-def test_accessibility_pane_title_resources_exist_in_both_locales(self)
-⋮----
-required = {"discover_headline", "your_profile"}
-⋮----
-def test_main_activity_accessibility_string_references_exist(self)
-⋮----
-source = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
-referenced = set(re.findall(r"R[.]string[.]([A-Za-z0-9_]+)", source))
-available = resource_names(VALUES)
-```
-
-## File: tools/test_summarize_visual_qa.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".github" / "scripts" / "summarize-visual-qa.py"
-⋮----
-spec = importlib.util.spec_from_file_location("summarize_visual_qa", SCRIPT)
-module = importlib.util.module_from_spec(spec)
-⋮----
-def write_case(root: Path, label: str, screen_ok: bool = True, ui_ok: bool = True)
-⋮----
-screen_text = (
-ui_text = (
-⋮----
-class VisualQaSummaryTests(unittest.TestCase)
-⋮----
-def test_pass_summary(self)
-⋮----
-root = Path(tmp)
-⋮----
-output = root / "summary.md"
-result = module.main(root, output)
-⋮----
-text = output.read_text(encoding="utf-8")
-⋮----
-def test_failure_summary(self)
-⋮----
-def test_ui_failure_summary(self)
-⋮----
-def test_no_reports_fails(self)
-```
-
-## File: tools/test_trait_evolution_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class TraitEvolutionIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_bounded_history_is_persisted(self)
-⋮----
-def test_global_profile_builds_temporal_trait_summary(self)
-⋮----
-def test_ui_separates_new_evidence_from_real_movement(self)
-⋮----
-def test_legacy_scores_seed_history(self)
-```
-
-## File: tools/test_trait_graph_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class TraitGraphContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_trait_graph_keeps_evidence_provenance(self)
-⋮----
-def test_profile_builds_graph_from_completed_dimensions(self)
-⋮----
-def test_profile_surfaces_fingerprint_with_non_clinical_copy(self)
-⋮----
-def test_trait_scores_are_bounded(self)
-```
-
-## File: tools/test_trait_taxonomy_v2.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-ASSETS = ROOT / "app/src/main/assets"
-⋮----
-EN_FILES = [
-FR_FILES = [
-⋮----
-def load(files)
-⋮----
-quizzes = []
-⋮----
-data = json.loads((ASSETS / name).read_text(encoding="utf-8"))
-⋮----
-class TraitTaxonomyV2ContractTest(unittest.TestCase)
-⋮----
-def test_all_catalogs_are_v2(self)
-⋮----
-def test_all_30_quizzes_have_explicit_valid_traits(self)
-⋮----
-quizzes = load(EN_FILES)
-⋮----
-def test_french_catalog_has_exact_id_and_taxonomy_parity(self)
-⋮----
-en = {q["id"]: q for q in load(EN_FILES)}
-fr = {q["id"]: q for q in load(FR_FILES)}
-⋮----
-def test_growth_catalogs_are_loaded_by_repository(self)
-⋮----
-source = (ROOT / "app/src/main/java/com/whoareyou/app/QuizCatalog.kt").read_text(encoding="utf-8")
-```
-
-## File: tools/test_trait_timeline_integration.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-⋮----
-class TraitTimelineIntegrationContractTest(unittest.TestCase)
-⋮----
-def setUp(self)
-⋮----
-def test_global_profile_carries_trait_timelines(self)
-⋮----
-def test_timeline_distinguishes_retake_and_new_evidence(self)
-⋮----
-def test_trait_period_comparison_tracks_score_and_confidence(self)
-⋮----
-def test_profile_renders_accessible_trait_history(self)
-```
-
-## File: tools/test_validate_screenshot.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".github" / "scripts" / "validate-screenshot.py"
-⋮----
-def png_chunk(kind: bytes, data: bytes) -> bytes
-⋮----
-payload = kind + data
-⋮----
-def write_rgba_png(path: Path, width: int, height: int, uniform: bool = False) -> None
-⋮----
-rows = bytearray()
-rng = random.Random(1337)
-⋮----
-rows.append(0)  # filter: None
-⋮----
-r = g = b = 12
-⋮----
-r = (x * 17 + y * 3 + rng.randrange(0, 64)) & 0xFF
-g = (x * 5 + y * 13 + rng.randrange(0, 64)) & 0xFF
-b = (x * 11 + y * 7 + rng.randrange(0, 64)) & 0xFF
-⋮----
-png = bytearray(b"\x89PNG\r\n\x1a\n")
-⋮----
-def write_highly_compressed_non_uniform_png(path: Path, width: int, height: int) -> None
-⋮----
-palette = (
-⋮----
-band_height = max(1, height // len(palette))
-⋮----
-color = palette[min(y // band_height, len(palette) - 1)]
-⋮----
-class ScreenshotValidatorTests(unittest.TestCase)
-⋮----
-def run_validator(self, png: Path, expected: str)
-⋮----
-def test_accepts_non_uniform_screenshot(self)
-⋮----
-path = Path(tmp) / "screen.png"
-⋮----
-result = self.run_validator(path, "512x768")
-⋮----
-def test_accepts_highly_compressed_non_uniform_screenshot(self)
-⋮----
-result = self.run_validator(path, "320x640")
-⋮----
-def test_accepts_rotated_dimensions(self)
-⋮----
-def test_rejects_uniform_screenshot(self)
-⋮----
-result = self.run_validator(path, "1024x1024")
-⋮----
-def test_rejects_wrong_dimensions(self)
-⋮----
-result = self.run_validator(path, "720x1600")
-```
-
-## File: tools/test_validate_ui_hierarchy.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / ".github" / "scripts" / "validate-ui-hierarchy.py"
-⋮----
-def write_xml(path: Path, bounds: str, clickable: bool = True) -> None
-⋮----
-class UiHierarchyValidatorTests(unittest.TestCase)
-⋮----
-def run_validator(self, xml: Path)
-⋮----
-def test_accepts_valid_48dp_plus_target(self)
-⋮----
-path = Path(tmp) / "ui.xml"
-# 120px at 320dpi = 60dp.
-⋮----
-result = self.run_validator(path)
-⋮----
-def test_rejects_undersized_clickable(self)
-⋮----
-# 80px at 320dpi = 40dp.
-⋮----
-def test_rejects_outside_viewport(self)
-⋮----
-def test_fixture_is_well_formed_and_nested(self)
-⋮----
-root = ET.parse(path).getroot()
-nodes = list(root.iter("node"))
-⋮----
-def test_ignores_other_packages(self)
-```
-
-## File: tools/test_workmanager_r8_contract.py
-```python
-ROOT = Path(__file__).resolve().parents[1]
-APP_GRADLE = ROOT / "app" / "build.gradle.kts"
-PROGUARD = ROOT / "app" / "proguard-rules.pro"
-⋮----
-class WorkManagerR8ContractTest(unittest.TestCase)
-⋮----
-def test_release_graph_pins_workmanager_with_full_mode_safe_rules(self)
-⋮----
-gradle = APP_GRADLE.read_text(encoding="utf-8")
-⋮----
-def test_fix_does_not_disable_minification_or_keep_all_workmanager(self)
-⋮----
-proguard = PROGUARD.read_text(encoding="utf-8")
-```
-
-## File: tools/validate_public_release_inputs.py
-```python
-#!/usr/bin/env python3
-⋮----
-PLACEHOLDER_VALUES = {
-⋮----
-SHA256_RE = re.compile(r"^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$")
-EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-⋮----
-def load(path: Path) -> dict
-⋮----
-payload = json.load(handle)
-⋮----
-def validate(payload: dict, strict: bool = True) -> list[str]
-⋮----
-errors: list[str] = []
-⋮----
-required = (
-⋮----
-support_email = str(payload["support_email"]).strip()
-⋮----
-privacy_url = str(payload["privacy_policy_url"]).strip()
-⋮----
-domain = str(payload["challenge_domain"]).strip()
-⋮----
-fingerprint = str(payload["play_app_signing_sha256"]).strip()
-⋮----
-target_price = float(payload["remove_ads_target_price_eur"])
-⋮----
-telemetry_enabled = payload["production_telemetry_enabled"]
-⋮----
-retention = payload.get("production_telemetry_retention_days")
-contact = payload.get("production_telemetry_deletion_contact")
-⋮----
-def main() -> int
-⋮----
-parser = argparse.ArgumentParser(description="Validate public Google Play release inputs")
-⋮----
-args = parser.parse_args()
-⋮----
-errors = validate(load(args.path), strict=not args.allow_placeholders)
-```
-
-## File: .repo-standards.yml
-```yaml
-source: dbrckk/repo-standards
-ref: v4
-version: 4
-adopted: true
-ai_context:
-  index: .ai/index.md
-  project_state: .ai/project-state.md
-  change_impact: .ai/change-impact.md
-  architecture: .ai/architecture.json
-  commands: .ai/commands.json
-  repo_health: .ai/repo-health.md
-  repo_map: .ai/repo-map.md
-  segmented_maps: .ai/maps/
-workflow:
-  file: .github/workflows/ai-repo-map.yml
-  reusable_ai_map: .github/workflows/reusable-ai-repo-map.yml
-  reusable_health: .github/workflows/reusable-repo-health.yml
-  reusable_project_state: .github/workflows/reusable-project-state.yml
-  reusable_context_intelligence: .github/workflows/reusable-context-intelligence.yml
-```
-
-## File: AGENTS.md
-```markdown
-# Repository agent instructions
-
-This repository adopts shared standards from `dbrckk/repo-standards` at the release recorded in `.repo-standards.yml`.
-
-Before substantial work:
-1. Read the central `AGENTS.md` and relevant files under `standards/` at the configured standards ref.
-2. Read `.ai/project-state.md`.
-3. Read `.ai/change-impact.md`.
-4. Read `.ai/architecture.json`.
-5. Read `.ai/commands.json`.
-6. Read `.ai/repo-health.md`.
-7. Read `.ai/index.md`.
-8. Prefer the relevant file under `.ai/maps/` when present.
-9. Read `.ai/repo-map.md` only when the smaller context is insufficient.
-10. Fetch only task-relevant source files or symbols.
-
-Repository-specific rules:
-- Preserve the existing architecture and public interfaces unless the task requires a change.
-- Prefer the smallest coherent change.
-- Run the relevant tests, lint, build, or validation commands before declaring completion.
-- Treat commands in `.ai/commands.json` as detected candidates; verify them when confidence is not high.
-- Update the manual parts of `.ai/project-state.md` when status, blockers, or next priority materially changes.
-```
-
-## File: build.gradle.kts
-```kotlin
-plugins {
-    id("com.android.application") version "9.3.1" apply false
-    id("com.android.test") version "9.3.1" apply false
-    id("androidx.baselineprofile") version "1.5.0" apply false
-    id("org.jetbrains.kotlin.plugin.compose") version "2.3.21" apply false
-}
-```
-
-## File: README.md
-```markdown
-# Who Are You?
-
-Android-first social self-discovery app built around fast personality quizzes, an evolving profile, guided journeys, shareable results, retention loops, friend challenges and lightweight monetization.
-
-## Product goal
-
-- 60-second personality micro-tests
-- Highly visual result cards
-- Global profile that evolves as tests are completed
-- Guided self-discovery journeys spanning multiple themes
-- Personalized recommendations and next-test guidance
-- Searchable, filterable bilingual quiz library
-- Friend challenges and compatibility comparisons
-- Daily question and achievements for retention
-- Freemium: free core experience + ads, €1.99 one-time purchase to remove ads forever
-
-## Current state
-
-The app has moved well beyond the original prototype. The current product includes:
-
-- Kotlin + Jetpack Compose Android application
-- bilingual EN/FR quiz catalog with 30+ tests per locale
-- onboarding, Discover, quiz, result and profile flows
-- evolving global profile and profile-map visualizations
-- signature profiles and personalized recommendations
-- result interpretation, retake recommendations and profile evolution
-- guided journeys across personality, relationships, inner world, values and direction
-- editorial collections plus searchable/filterable quiz library
-- progressive library result expansion
-- daily question, achievements and retention surfaces
-- result/profile/challenge sharing flows
-- friend challenge and compatibility infrastructure
-- AdMob interstitial support with no ad interruption during quizzes
-- Google Play Billing one-time ad-removal purchase
-- Play release preparation/publishing tooling
-- GitHub Actions validation, device testing and release-candidate workflows
-
-## Quality gates
-
-GitHub Actions validates `main` with:
-
-1. repository and bilingual quiz-catalog integrity checks
-2. JVM unit tests
-3. instrumentation-test compilation
-4. Android candidate and release lint
-5. optimized installable candidate APK and unsigned release AAB builds
-6. emulator/device UI and runtime smoke validation with crash/ANR detection
-7. release-candidate artifact packaging and prerelease publication
-
-## Tech
-
-- Kotlin
-- Jetpack Compose
-- Material 3
-- DataStore
-- Google Play Billing
-- Google Mobile Ads / UMP
-- minSdk 26
-- targetSdk 36
-- compileSdk 37
-- Java 17
-- Gradle 9.5
-
-## Product principles
-
-1. A user must understand the product in under 5 seconds.
-2. First result should be reachable in under 60 seconds.
-3. No ad interrupts a test.
-4. Sharing and friend comparison stay free.
-5. Quiz results are entertainment/self-reflection, not medical or psychological diagnoses.
-6. Recommendations must broaden self-discovery rather than repeatedly surface the same theme.
-7. Product progress must remain deterministic, testable and recoverable from persisted local state.
-```
-
-## File: settings.gradle.kts
-```kotlin
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-rootProject.name = "WhoAreYou"
-include(":app", ":baseline-profile")
 ```
