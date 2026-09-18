@@ -1054,6 +1054,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: repo-standards-${{ github.repository }}-${{ github.ref }}
@@ -1061,19 +1062,23 @@ concurrency:
 
 jobs:
   ai-context:
-    uses: dbrckk/repo-standards/.github/workflows/reusable-ai-repo-map.yml@v4
+    uses: dbrckk/repo-standards/.github/workflows/reusable-ai-repo-map.yml@v5
 
   repo-health:
     needs: ai-context
-    uses: dbrckk/repo-standards/.github/workflows/reusable-repo-health.yml@v4
+    uses: dbrckk/repo-standards/.github/workflows/reusable-repo-health.yml@v5
 
   project-state:
     needs: repo-health
-    uses: dbrckk/repo-standards/.github/workflows/reusable-project-state.yml@v4
+    uses: dbrckk/repo-standards/.github/workflows/reusable-project-state.yml@v5
 
   context-intelligence:
     needs: project-state
-    uses: dbrckk/repo-standards/.github/workflows/reusable-context-intelligence.yml@v4
+    uses: dbrckk/repo-standards/.github/workflows/reusable-context-intelligence.yml@v5
+
+  observability:
+    needs: context-intelligence
+    uses: dbrckk/repo-standards/.github/workflows/reusable-observability.yml@v5
 ```
 
 ## File: .github/workflows/android-apk.yml
@@ -30728,15 +30733,18 @@ errors = validate(load(args.path), strict=not args.allow_placeholders)
 ## File: .repo-standards.yml
 ```yaml
 source: dbrckk/repo-standards
-ref: v4
-version: 4
+ref: v5
+version: 5
 adopted: true
 ai_context:
   index: .ai/index.md
   project_state: .ai/project-state.md
   change_impact: .ai/change-impact.md
   architecture: .ai/architecture.json
+  dependency_map: .ai/dependency-map.json
   commands: .ai/commands.json
+  ci_status: .ai/ci-status.md
+  security_signals: .ai/security-signals.json
   repo_health: .ai/repo-health.md
   repo_map: .ai/repo-map.md
   segmented_maps: .ai/maps/
@@ -30746,6 +30754,7 @@ workflow:
   reusable_health: .github/workflows/reusable-repo-health.yml
   reusable_project_state: .github/workflows/reusable-project-state.yml
   reusable_context_intelligence: .github/workflows/reusable-context-intelligence.yml
+  reusable_observability: .github/workflows/reusable-observability.yml
 ```
 
 ## File: AGENTS.md
@@ -30759,18 +30768,23 @@ Before substantial work:
 2. Read `.ai/project-state.md`.
 3. Read `.ai/change-impact.md`.
 4. Read `.ai/architecture.json`.
-5. Read `.ai/commands.json`.
-6. Read `.ai/repo-health.md`.
-7. Read `.ai/index.md`.
-8. Prefer the relevant file under `.ai/maps/` when present.
-9. Read `.ai/repo-map.md` only when the smaller context is insufficient.
-10. Fetch only task-relevant source files or symbols.
+5. Read `.ai/dependency-map.json` when changes may cross module/package boundaries.
+6. Read `.ai/commands.json`.
+7. Read `.ai/ci-status.md`.
+8. Read `.ai/security-signals.json` for release/security-sensitive work.
+9. Read `.ai/repo-health.md`.
+10. Read `.ai/index.md`.
+11. Prefer the relevant file under `.ai/maps/` when present.
+12. Read `.ai/repo-map.md` only when the smaller context is insufficient.
+13. Fetch only task-relevant source files or symbols.
 
 Repository-specific rules:
 - Preserve the existing architecture and public interfaces unless the task requires a change.
 - Prefer the smallest coherent change.
 - Run the relevant tests, lint, build, or validation commands before declaring completion.
 - Treat commands in `.ai/commands.json` as detected candidates; verify them when confidence is not high.
+- Treat `.ai/security-signals.json` as heuristic evidence, never proof of a secret leak.
+- Never reproduce suspected secret values.
 - Update the manual parts of `.ai/project-state.md` when status, blockers, or next priority materially changes.
 ```
 
