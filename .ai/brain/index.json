@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "generated_by": "dbrckk/repo-brain",
+  "files_indexed": 244,
+  "symbol_count": 1200,
+  "edge_count": 8,
+  "languages": {
+    "python": 93,
+    "kotlin": 151
+  },
+  "top_symbol_files": [
+    {
+      "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "symbols": 39
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "symbols": 17
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "symbols": 17
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
+      "symbols": 17
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt",
+      "symbols": 17
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+      "symbols": 14
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "symbols": 14
+    },
+    {
+      "file": "tools/test_play_publisher.py",
+      "symbols": 14
+    },
+    {
+      "file": "tools/test_release_workflows_contract.py",
+      "symbols": 13
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+      "symbols": 12
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "symbols": 11
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "symbols": 10
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt",
+      "symbols": 10
+    },
+    {
+      "file": "tools/prepare_play_submission.py",
+      "symbols": 10
+    },
+    {
+      "file": "tools/test_play_candidate_workflow.py",
+      "symbols": 10
+    },
+    {
+      "file": "tools/test_validate_screenshot.py",
+      "symbols": 10
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/RetentionUi.kt",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt",
+      "symbols": 9
+    },
+    {
+      "file": "tools/play_publisher.py",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/SignatureProfileTest.kt",
+      "symbols": 8
+    },
+    {
+      "file": "tools/test_m48_visual_system.py",
+      "symbols": 8
+    },
+    {
+      "file": "tools/test_m52_play_policy.py",
+      "symbols": 8
+    },
+    {
+      "file": "tools/test_play_publish_workflow.py",
+      "symbols": 8
+    },
+    {
+      "file": "tools/test_runtime_performance_contract.py",
+      "symbols": 8
+    },
+    {
+      "file": "tools/test_validate_ui_hierarchy.py",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt",
+      "symbols": 7
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt",
+      "symbols": 7
+    },
+    {
+      "file": "tools/test_accessibility_system_contract.py",
+      "symbols": 7
+    },
+    {
+      "file": "tools/test_battery_thermal_contract.py",
+      "symbols": 7
+    },
+    {
+      "file": "tools/test_m46_accessibility.py",
+      "symbols": 7
+    },
+    {
+      "file": "tools/test_manifest_security_contract.py",
+      "symbols": 7
+    }
+  ]
+}

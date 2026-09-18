@@ -1,0 +1,44 @@
+{
+  "edges": [
+    {
+      "source": "tools/play_preflight.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/play_promoter.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_m53_publication_contract.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_m54_play_preflight.py",
+      "target": "tools/play_preflight.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_play_bundle_budget.py",
+      "target": "tools/check_play_bundle_budget.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_play_promoter.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_play_publisher.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_prepare_play_submission.py",
+      "target": "tools/prepare_play_submission.py",
+      "type": "imports"
+    }
+  ]
+}

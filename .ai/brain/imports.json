@@ -1,0 +1,2077 @@
+{
+  "imports": {
+    ".github/scripts/summarize-visual-qa.py": [
+      "argparse",
+      "pathlib"
+    ],
+    ".github/scripts/validate-screenshot.py": [
+      "argparse",
+      "os",
+      "struct",
+      "zlib"
+    ],
+    ".github/scripts/validate-ui-hierarchy.py": [
+      "argparse",
+      "re",
+      "struct",
+      "xml.etree.ElementTree"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt": [
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.SemanticsProperties",
+      "androidx.compose.ui.test.SemanticsMatcher",
+      "androidx.compose.ui.test.assertCountEquals",
+      "androidx.compose.ui.test.assertIsSelected",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.performClick",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": [
+      "androidx.compose.ui.test.ExperimentalTestApi",
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.hasTestTag",
+      "androidx.compose.ui.test.junit4.v2.createEmptyComposeRule",
+      "androidx.compose.ui.test.onAllNodesWithTag",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollToNode",
+      "androidx.test.core.app.ActivityScenario",
+      "androidx.test.platform.app.InstrumentationRegistry",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt": [
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.SemanticsProperties",
+      "androidx.compose.ui.test.SemanticsMatcher",
+      "androidx.compose.ui.test.hasTestTag",
+      "androidx.compose.ui.test.junit4.v2.createAndroidComposeRule",
+      "androidx.compose.ui.test.onAllNodesWithTag",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollTo",
+      "androidx.compose.ui.test.performScrollToNode",
+      "androidx.test.platform.app.InstrumentationRegistry",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "kotlinx.coroutines.withTimeout",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt": [
+      "androidx.test.platform.app.InstrumentationRegistry",
+      "java.util.UUID",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": [
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableIntStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.onNodeWithText",
+      "androidx.compose.ui.test.performClick",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt": [
+      "androidx.compose.ui.test.assertTextEquals",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollTo",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.OutlinedTextField",
+      "androidx.compose.material3.OutlinedTextFieldDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.collectAsState",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp",
+      "com.whoareyou.app.DiscoverLibraryEngine",
+      "com.whoareyou.app.GuidedJourneyEngine",
+      "com.whoareyou.app.GuidedJourneyId",
+      "com.whoareyou.app.GuidedJourneyProgress",
+      "com.whoareyou.app.ProfileStore",
+      "com.whoareyou.app.Quiz",
+      "com.whoareyou.app.QuizVisualTheme",
+      "com.whoareyou.app.QuizVisuals",
+      "com.whoareyou.app.R",
+      "com.whoareyou.app.StoredProfile",
+      "com.whoareyou.app.V2Colors",
+      "com.whoareyou.app.V2Radius"
+    ],
+    "app/src/main/java/com/whoareyou/app/AccessibilityUi.kt": [
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/AdManager.kt": [
+      "android.app.Activity",
+      "android.content.Context",
+      "android.os.SystemClock",
+      "com.google.android.gms.ads.AdRequest",
+      "com.google.android.gms.ads.FullScreenContentCallback",
+      "com.google.android.gms.ads.MobileAds",
+      "com.google.android.gms.ads.interstitial.InterstitialAd",
+      "com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback",
+      "com.google.android.ump.ConsentInformation",
+      "com.google.android.ump.ConsentRequestParameters",
+      "com.google.android.ump.UserMessagingPlatform"
+    ],
+    "app/src/main/java/com/whoareyou/app/AdaptiveLayoutUi.kt": [
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.widthIn",
+      "androidx.compose.foundation.layout.wrapContentWidth",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppLanguage.kt": [
+      "android.content.Context",
+      "android.content.res.Resources",
+      "java.util.Locale"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt": [
+      "androidx.compose.animation.ContentTransform",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.animation.fadeIn",
+      "androidx.compose.animation.fadeOut",
+      "androidx.compose.animation.scaleIn",
+      "androidx.compose.animation.scaleOut",
+      "androidx.compose.animation.slideInHorizontally",
+      "androidx.compose.animation.slideOutHorizontally",
+      "androidx.compose.animation.togetherWith"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppShellUi.kt": [
+      "androidx.annotation.DrawableRes",
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.border",
+      "androidx.compose.foundation.interaction.MutableInteractionSource",
+      "androidx.compose.foundation.interaction.collectIsPressedAsState",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.navigationBarsPadding",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.layout.widthIn",
+      "androidx.compose.foundation.selection.selectable",
+      "androidx.compose.foundation.selection.selectableGroup",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Icon",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.focus.onFocusChanged",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.LocalView",
+      "androidx.compose.ui.res.painterResource",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppThemeUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Surface",
+      "androidx.compose.material3.darkColorScheme",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color"
+    ],
+    "app/src/main/java/com/whoareyou/app/BillingManager.kt": [
+      "android.app.Activity",
+      "android.content.Context",
+      "com.android.billingclient.api.AcknowledgePurchaseParams",
+      "com.android.billingclient.api.BillingClient",
+      "com.android.billingclient.api.BillingClientStateListener",
+      "com.android.billingclient.api.BillingFlowParams",
+      "com.android.billingclient.api.BillingResult",
+      "com.android.billingclient.api.PendingPurchasesParams",
+      "com.android.billingclient.api.ProductDetails",
+      "com.android.billingclient.api.Purchase",
+      "com.android.billingclient.api.QueryProductDetailsParams",
+      "com.android.billingclient.api.QueryPurchasesParams",
+      "kotlinx.coroutines.CoroutineScope",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.Job",
+      "kotlinx.coroutines.SupervisorJob",
+      "kotlinx.coroutines.delay",
+      "kotlinx.coroutines.launch"
+    ],
+    "app/src/main/java/com/whoareyou/app/BillingPriceState.kt": [
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.setValue"
+    ],
+    "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt": [
+      "androidx.compose.animation.core.RepeatMode",
+      "androidx.compose.animation.core.animateFloat",
+      "androidx.compose.animation.core.infiniteRepeatable",
+      "androidx.compose.animation.core.keyframes",
+      "androidx.compose.animation.core.rememberInfiniteTransition",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.Canvas",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.Path",
+      "androidx.compose.ui.graphics.StrokeCap",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.graphics.drawscope.rotate",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt": [
+      "android.content.Context",
+      "android.os.Bundle",
+      "androidx.activity.ComponentActivity",
+      "androidx.activity.compose.setContent",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Surface",
+      "androidx.compose.ui.Modifier"
+    ],
+    "app/src/main/java/com/whoareyou/app/ChallengeShare.kt": [
+      "android.content.Context",
+      "android.content.Intent",
+      "android.net.Uri"
+    ],
+    "app/src/main/java/com/whoareyou/app/ChallengeUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.navigationBarsPadding",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.rememberScrollState",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.foundation.verticalScroll",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableIntStateOf",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextAlign",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt": [
+      "android.content.Context",
+      "android.content.Intent",
+      "android.graphics.Bitmap",
+      "android.graphics.Canvas",
+      "android.graphics.Color",
+      "android.graphics.Paint",
+      "android.graphics.Typeface",
+      "androidx.core.content.FileProvider",
+      "kotlinx.coroutines.CoroutineScope",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.SupervisorJob",
+      "kotlinx.coroutines.launch",
+      "kotlinx.coroutines.withContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/DailyQuestion.kt": [
+      "android.content.res.Resources",
+      "java.time.LocalDate"
+    ],
+    "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt": [
+      "android.content.Context",
+      "android.content.Intent"
+    ],
+    "app/src/main/java/com/whoareyou/app/DimensionJournal.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.semantics.clearAndSetSemantics",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "java.time.LocalDate",
+      "java.time.format.DateTimeFormatter",
+      "java.time.format.FormatStyle",
+      "java.util.Locale",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.lazy.LazyRow",
+      "androidx.compose.foundation.lazy.items",
+      "androidx.compose.foundation.lazy.itemsIndexed",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextOverflow",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxHeight",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.offset",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.lazy.LazyColumn",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.LocalUriHandler",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.border",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.lazy.LazyRow",
+      "androidx.compose.foundation.lazy.items",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.OutlinedTextField",
+      "androidx.compose.material3.OutlinedTextFieldDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.focus.onFocusChanged",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.selected",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt": [
+      "androidx.compose.animation.core.RepeatMode",
+      "androidx.compose.animation.core.animateFloat",
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.infiniteRepeatable",
+      "androidx.compose.animation.core.rememberInfiniteTransition",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.BorderStroke",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.border",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.BoxWithConstraints",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.navigationBarsPadding",
+      "androidx.compose.foundation.layout.offset",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.layout.widthIn",
+      "androidx.compose.foundation.rememberScrollState",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.foundation.verticalScroll",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.semantics.testTagsAsResourceId",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextAlign",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt": [
+      "android.content.Context",
+      "android.content.Intent",
+      "android.graphics.Bitmap",
+      "android.graphics.Canvas",
+      "android.graphics.Color",
+      "android.graphics.Paint",
+      "androidx.core.content.FileProvider",
+      "kotlinx.coroutines.CoroutineScope",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.SupervisorJob",
+      "kotlinx.coroutines.launch",
+      "kotlinx.coroutines.withContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.draw.drawWithCache",
+      "androidx.compose.ui.geometry.Offset",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.graphics.lerp",
+      "androidx.compose.ui.unit.dp",
+      "kotlin.math.cos",
+      "kotlin.math.sin"
+    ],
+    "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt": [
+      "kotlin.math.abs",
+      "kotlin.math.pow",
+      "kotlin.math.sqrt"
+    ],
+    "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt": [
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.drawWithCache",
+      "androidx.compose.ui.geometry.Offset",
+      "androidx.compose.ui.graphics.Path",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt": [
+      "android.app.Activity",
+      "android.content.Context",
+      "android.os.Bundle",
+      "androidx.activity.ComponentActivity",
+      "androidx.activity.compose.BackHandler",
+      "androidx.activity.compose.setContent",
+      "androidx.compose.animation.AnimatedContent",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.DisposableEffect",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.collectAsState",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableIntStateOf",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.produceState",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.rememberCoroutineScope",
+      "androidx.compose.runtime.saveable.rememberSaveable",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.runtime.withFrameNanos",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.paneTitle",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.semantics.testTagsAsResourceId",
+      "java.util.UUID",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.launch",
+      "kotlinx.coroutines.withContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt": [
+      "java.time.LocalDate",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt": [
+      "kotlin.math.abs",
+      "kotlin.math.roundToInt"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileCoverageUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt": [
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileIdentityMap.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt": [
+      "androidx.compose.foundation.Canvas",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.geometry.Offset",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.Path",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextOverflow",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp",
+      "kotlin.math.PI",
+      "kotlin.math.cos",
+      "kotlin.math.sin"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt": [
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt": [
+      "java.time.LocalDate"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt": [
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt": [
+      "androidx.compose.foundation.Canvas",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.geometry.Offset",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Path",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.unit.dp",
+      "kotlin.math.PI",
+      "kotlin.math.cos",
+      "kotlin.math.min",
+      "kotlin.math.sin"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileMomentumUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": [
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxHeight",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.lazy.LazyColumn",
+      "androidx.compose.foundation.lazy.items",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.role",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextAlign",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileStore.kt": [
+      "android.content.Context",
+      "androidx.datastore.core.handlers.ReplaceFileCorruptionHandler",
+      "androidx.datastore.preferences.core.booleanPreferencesKey",
+      "androidx.datastore.preferences.core.edit",
+      "androidx.datastore.preferences.core.emptyPreferences",
+      "androidx.datastore.preferences.core.intPreferencesKey",
+      "androidx.datastore.preferences.core.stringPreferencesKey",
+      "androidx.datastore.preferences.preferencesDataStore",
+      "java.io.IOException",
+      "java.time.LocalDate",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.flow.Flow",
+      "kotlinx.coroutines.flow.catch",
+      "kotlinx.coroutines.flow.map",
+      "kotlinx.coroutines.withContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/QuizCatalog.kt": [
+      "android.content.Context",
+      "java.util.Locale",
+      "org.json.JSONArray",
+      "org.json.JSONObject"
+    ],
+    "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt": [
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.ui.platform.LocalContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": [
+      "androidx.activity.compose.BackHandler",
+      "androidx.compose.animation.AnimatedContent",
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.animation.fadeIn",
+      "androidx.compose.animation.fadeOut",
+      "androidx.compose.animation.slideInHorizontally",
+      "androidx.compose.animation.slideOutHorizontally",
+      "androidx.compose.animation.togetherWith",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxHeight",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.navigationBarsPadding",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.rememberScrollState",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.foundation.verticalScroll",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextAlign",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt": [
+      "androidx.compose.animation.core.RepeatMode",
+      "androidx.compose.animation.core.animateFloat",
+      "androidx.compose.animation.core.infiniteRepeatable",
+      "androidx.compose.animation.core.rememberInfiniteTransition",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.Image",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.border",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.offset",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.size",
+      "androidx.compose.foundation.shape.CircleShape",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.layout.ContentScale",
+      "androidx.compose.ui.res.painterResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt": [
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.saveable.rememberSaveable",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.clearAndSetSemantics",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.role",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt": [
+      "androidx.compose.animation.core.Animatable",
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxHeight",
+      "androidx.compose.foundation.layout.fillMaxSize",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.navigationBarsPadding",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.lazy.LazyColumn",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.HorizontalDivider",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.OutlinedButton",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.clearAndSetSemantics",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.text.style.TextAlign",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp",
+      "kotlin.math.roundToInt"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultShare.kt": [
+      "android.content.Context",
+      "android.content.Intent",
+      "android.graphics.Bitmap",
+      "android.graphics.Canvas",
+      "android.graphics.Color",
+      "android.graphics.Paint",
+      "android.graphics.Typeface",
+      "androidx.core.content.FileProvider",
+      "kotlin.math.max",
+      "kotlinx.coroutines.CoroutineScope",
+      "kotlinx.coroutines.Dispatchers",
+      "kotlinx.coroutines.SupervisorJob",
+      "kotlinx.coroutines.launch",
+      "kotlinx.coroutines.withContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/RetentionUi.kt": [
+      "androidx.compose.animation.animateColorAsState",
+      "androidx.compose.animation.animateContentSize",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.LaunchedEffect",
+      "androidx.compose.runtime.collectAsState",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.rememberCoroutineScope",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Alignment",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.graphics.Brush",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp",
+      "kotlinx.coroutines.launch"
+    ],
+    "app/src/main/java/com/whoareyou/app/Scoring.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ShareFileStore.kt": [
+      "android.content.Context",
+      "android.graphics.Bitmap",
+      "java.io.File",
+      "java.io.FileOutputStream"
+    ],
+    "app/src/main/java/com/whoareyou/app/ShareSafety.kt": [
+      "android.app.Activity",
+      "android.content.Context",
+      "android.content.Intent",
+      "android.widget.Toast"
+    ],
+    "app/src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt": [
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.res.stringResource"
+    ],
+    "app/src/main/java/com/whoareyou/app/Telemetry.kt": [
+      "android.util.Log",
+      "java.net.HttpURLConnection",
+      "java.net.URL",
+      "java.util.concurrent.ArrayBlockingQueue",
+      "java.util.concurrent.ThreadPoolExecutor",
+      "java.util.concurrent.TimeUnit",
+      "org.json.JSONObject"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitEvolution.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitExploration.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.semantics.clearAndSetSemantics",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitGraph.kt": [
+      "kotlin.math.abs",
+      "kotlin.math.roundToInt"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitGraphUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.material3.LinearProgressIndicator",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt": [
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.MaterialTheme",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.drawWithCache",
+      "androidx.compose.ui.geometry.Offset",
+      "androidx.compose.ui.graphics.Path",
+      "androidx.compose.ui.graphics.drawscope.Stroke",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.semantics.contentDescription",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "java.time.LocalDate",
+      "java.time.format.DateTimeFormatter",
+      "java.time.format.FormatStyle",
+      "java.util.Locale"
+    ],
+    "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt": [
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.text.TextStyle",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp",
+      "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt": [
+      "androidx.compose.animation.animateColorAsState",
+      "androidx.compose.animation.core.animateFloatAsState",
+      "androidx.compose.animation.core.snap",
+      "androidx.compose.animation.core.tween",
+      "androidx.compose.foundation.BorderStroke",
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.border",
+      "androidx.compose.foundation.clickable",
+      "androidx.compose.foundation.interaction.MutableInteractionSource",
+      "androidx.compose.foundation.interaction.collectIsPressedAsState",
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.ColumnScope",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.draw.clip",
+      "androidx.compose.ui.focus.onFocusChanged",
+      "androidx.compose.ui.graphics.Color",
+      "androidx.compose.ui.graphics.Shape",
+      "androidx.compose.ui.graphics.graphicsLayer",
+      "androidx.compose.ui.platform.LocalView",
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/V2MotionPreferences.kt": [
+      "android.content.Context",
+      "android.os.PowerManager",
+      "android.provider.Settings",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.platform.LocalContext"
+    ],
+    "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt": [
+      "android.app.Application"
+    ],
+    "app/src/test/java/com/whoareyou/app/AchievementUnlockQueueTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BillingReconnectPolicyTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/EventWindowDeduplicatorTest.kt": [
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertThrows",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNotNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileEvolutionShareTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileEvolutionSummaryTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileIdentityMapTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileInsightsTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileMomentumEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ProfileStrengthNuanceTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNotNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PurchaseGrantPolicyTest.kt": [
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertThrows",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/RecommendationTelemetryTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ResultInterpretationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/RetakeRecommendationEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ScoreChangeEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ScoringTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/SignatureProfileTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/SupportedAppLanguageTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/SupportedCatalogLanguageTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt": [
+      "androidx.benchmark.macro.junit4.BaselineProfileRule",
+      "androidx.test.ext.junit.runners.AndroidJUnit4",
+      "androidx.test.filters.LargeTest",
+      "androidx.test.uiautomator.By",
+      "androidx.test.uiautomator.Until",
+      "org.junit.Rule",
+      "org.junit.Test",
+      "org.junit.runner.RunWith"
+    ],
+    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": [
+      "androidx.benchmark.macro.BaselineProfileMode",
+      "androidx.benchmark.macro.CompilationMode",
+      "androidx.benchmark.macro.FrameTimingMetric",
+      "androidx.benchmark.macro.junit4.MacrobenchmarkRule",
+      "androidx.test.ext.junit.runners.AndroidJUnit4",
+      "androidx.test.filters.LargeTest",
+      "androidx.test.uiautomator.By",
+      "androidx.test.uiautomator.Direction",
+      "androidx.test.uiautomator.Until",
+      "org.junit.Rule",
+      "org.junit.Test",
+      "org.junit.runner.RunWith"
+    ],
+    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt": [
+      "androidx.benchmark.macro.BaselineProfileMode",
+      "androidx.benchmark.macro.CompilationMode",
+      "androidx.benchmark.macro.StartupMode",
+      "androidx.benchmark.macro.StartupTimingMetric",
+      "androidx.benchmark.macro.junit4.MacrobenchmarkRule",
+      "androidx.test.ext.junit.runners.AndroidJUnit4",
+      "androidx.test.filters.LargeTest",
+      "org.junit.Rule",
+      "org.junit.Test",
+      "org.junit.runner.RunWith"
+    ],
+    "tools/check_play_bundle_budget.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "zipfile"
+    ],
+    "tools/play_preflight.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "validate_public_release_inputs"
+    ],
+    "tools/play_promoter.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "play_publisher",
+      "sys",
+      "typing"
+    ],
+    "tools/play_publisher.py": [
+      "__future__",
+      "argparse",
+      "dataclasses",
+      "google.auth.transport.requests",
+      "google.oauth2",
+      "json",
+      "pathlib",
+      "re",
+      "sys",
+      "typing"
+    ],
+    "tools/prepare_play_submission.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "re",
+      "urllib.parse"
+    ],
+    "tools/test_accessibility_launch_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_accessibility_system_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_actionable_knowledge_map_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_android_ci_sdk_setup_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_baseline_profile_manifest_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_battery_thermal_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_billing_launch_readiness.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_challenge_landing_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_gradle_release_reproducibility.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_healthy_discover_profile_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_large_screen_keyboard_accessibility.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_local_profile_privacy_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_localization_parity.py": [
+      "pathlib",
+      "re",
+      "unittest",
+      "xml.etree.ElementTree"
+    ],
+    "tools/test_longitudinal_trend_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m33_readiness.py": [
+      "json",
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m46_accessibility.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m47_ui_test_wiring.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m48_visual_system.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m49_architecture_cleanup.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m50_analytics.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m51_release_readiness.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m52_play_policy.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m53_publication_contract.py": [
+      "json",
+      "pathlib",
+      "unittest",
+      "validate_public_release_inputs"
+    ],
+    "tools/test_m54_play_preflight.py": [
+      "json",
+      "pathlib",
+      "play_preflight",
+      "tempfile",
+      "unittest"
+    ],
+    "tools/test_m55_release_automation.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m56_release_candidate.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_m59_host_diagnostics_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m59_no_kvm_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m59_runtime_stress_split_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m59_split_validation_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m59_visual_emulator_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_m769_landscape_viewport.py": [
+      "pathlib",
+      "struct",
+      "subprocess",
+      "tempfile",
+      "unittest"
+    ],
+    "tools/test_main_activity_architecture.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_main_activity_recreation_sync_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_main_flow_recommendation_parity_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_manifest_security_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_offline_resilience_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_performance_release_gate_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_persisted_result_score_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_play_2026_readiness.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_play_bundle_budget.py": [
+      "check_play_bundle_budget",
+      "json",
+      "pathlib",
+      "tempfile",
+      "unittest",
+      "zipfile"
+    ],
+    "tools/test_play_candidate_workflow.py": [
+      "json",
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_play_promoter.py": [
+      "play_publisher",
+      "unittest"
+    ],
+    "tools/test_play_publish_pipeline_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_play_publish_workflow.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_play_publisher.py": [
+      "json",
+      "pathlib",
+      "play_publisher",
+      "tempfile",
+      "unittest"
+    ],
+    "tools/test_play_release_safety_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_prepare_play_submission.py": [
+      "json",
+      "pathlib",
+      "prepare_play_submission",
+      "tempfile",
+      "unittest"
+    ],
+    "tools/test_profile_coverage_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_profile_knowledge_map_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_profile_narrative_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_profile_reset_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_profile_result_allocation_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_profile_startup_resilience.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_progression_journal_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_public_launch_experience_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_public_result_and_store_positioning.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_quiz_commit_interaction_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_quiz_commit_interaction_lock.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_quiz_process_recreation_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_quiz_replay_window_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_quiz_result_persistence_feedback.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_reduced_motion_large_font_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_release_critical_profile_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_release_workflows_contract.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_rendering_performance_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_restored_quiz_recovery.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_result_visual_hierarchy_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_runtime_efficiency_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_runtime_memory_lifecycle.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_runtime_performance_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_share_rendering_performance.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_share_storage_safety.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_shell_accessibility_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_startup_loading_state.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_string_resource_parity.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_summarize_visual_qa.py": [
+      "importlib.util",
+      "pathlib",
+      "tempfile",
+      "unittest"
+    ],
+    "tools/test_trait_evolution_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_trait_graph_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_trait_taxonomy_v2.py": [
+      "json",
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_trait_timeline_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_validate_screenshot.py": [
+      "pathlib",
+      "random",
+      "struct",
+      "subprocess",
+      "sys",
+      "tempfile",
+      "unittest",
+      "zlib"
+    ],
+    "tools/test_validate_ui_hierarchy.py": [
+      "pathlib",
+      "subprocess",
+      "sys",
+      "tempfile",
+      "unittest",
+      "xml.etree.ElementTree"
+    ],
+    "tools/test_workmanager_r8_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/validate_public_release_inputs.py": [
+      "argparse",
+      "json",
+      "pathlib",
+      "re"
+    ]
+  }
+}
