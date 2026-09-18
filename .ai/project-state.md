@@ -22,19 +22,19 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-18T19:28:58Z
+Generated: 2026-09-18T19:36:23Z
 
 ### Git
 - Branch: `main`
-- Head: `e3668ddae02d`
-- Commit date: 2026-09-18T21:28:36+02:00
-- Commit: chore(ai): enable compact graph routing
-- Tracked files: 450
+- Head: `6af4d3cd97ea`
+- Commit date: 2026-09-18T21:33:32+02:00
+- Commit: chore(ai): adopt graph-first agent routing
+- Tracked files: 469
 
 ### Recently changed files
+- `AGENTS.md`
 - `.repo-standards.yml`
 - `.github/workflows/ai-repo-map.yml`
-- `AGENTS.md`
 
 ### Project signals
 - `build.gradle.kts`

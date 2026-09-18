@@ -1,12 +1,12 @@
 {
   "files": {
     ".repo-standards.yml": {
-      "sha256": "62d3ff325f40cbbd751bad308ac7de3d8636b76d8070fe9d2f4f989724467d72",
-      "size": 1768
+      "sha256": "7d73ed2ffd78f5e2ecb00ff2a11e66393f4a06c93a86c66517ab584c2a9e171b",
+      "size": 1850
     },
     "AGENTS.md": {
-      "sha256": "50058795e108c575d4be0c228849df00d20819347828fd5fb5ed3293b104647c",
-      "size": 2429
+      "sha256": "e07f466d4fc455ed6fb4a9e41212e7f313482ea9e1d21599a4e9aca90ffe85ba",
+      "size": 2646
     },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "4896fdda3377b08013c7617f5a6c33ced25cab7cafb6c177d9ffe3b6c608e263",

@@ -21,7 +21,7 @@
     },
     {
       "extension": ".json",
-      "count": 72
+      "count": 90
     },
     {
       "extension": ".xml",
@@ -52,11 +52,11 @@
       "count": 1
     },
     {
-      "extension": ".pro",
+      "extension": ".mmd",
       "count": 1
     },
     {
-      "extension": ".properties",
+      "extension": ".pro",
       "count": 1
     }
   ],

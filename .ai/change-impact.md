@@ -1,10 +1,10 @@
 # Change impact
 
-Base: 072f83b98296d05ed0d0e4b60b6f9d848ca02b4e
-Head: e3668ddae02d0135eed2afd35d8ff6023e03475b
+Base: d5033b82a3494a259c73647f282d45a535b2941c
+Head: 6af4d3cd97ea8a785737a856aa70765fbdf76b54
 
 ## Changed files
-- M .repo-standards.yml
+- M AGENTS.md
 
 ## Affected areas
 - (root)

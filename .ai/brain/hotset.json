@@ -1,18 +1,19 @@
 {
   "files": [
     {
+      "path": "AGENTS.md",
+      "reasons": [
+        "changed",
+        "recent-project-state"
+      ],
+      "score": 160
+    },
+    {
       "path": ".repo-standards.yml",
       "reasons": [
         "changed"
       ],
       "score": 100
-    },
-    {
-      "path": "AGENTS.md",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
     },
     {
       "path": "app/src/main/AndroidManifest.xml",
