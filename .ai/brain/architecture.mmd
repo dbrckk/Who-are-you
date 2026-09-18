@@ -1,0 +1,9 @@
+flowchart LR
+  n70c7648ceb["tools/play_preflight.py"] --> n649c220834["tools/validate_public_release_inputs.py"]
+  n0479a8ae43["tools/play_promoter.py"] --> n6784c64243["tools/play_publisher.py"]
+  n744049d7d6["tools/test_m53_publication_contract.py"] --> n649c220834["tools/validate_public_release_inputs.py"]
+  n58004970a0["tools/test_m54_play_preflight.py"] --> n70c7648ceb["tools/play_preflight.py"]
+  n2694c62b24["tools/test_play_bundle_budget.py"] --> n51b39627fa["tools/check_play_bundle_budget.py"]
+  n4d149e800d["tools/test_play_promoter.py"] --> n6784c64243["tools/play_publisher.py"]
+  n92ff2b7464["tools/test_play_publisher.py"] --> n6784c64243["tools/play_publisher.py"]
+  n3e39af4c2d["tools/test_prepare_play_submission.py"] --> nb191079773["tools/prepare_play_submission.py"]

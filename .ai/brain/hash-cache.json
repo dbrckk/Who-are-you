@@ -1,12 +1,16 @@
 {
   "files": {
-    ".github/workflows/ai-repo-map.yml": {
-      "sha256": "b513cf7b68f320113e044a8e51d65533f1dadd1acf0e8144885807c00ed836fb",
-      "size": 380
-    },
     ".repo-standards.yml": {
-      "sha256": "d066dedc1d4a189b9f002746a9b9d250c42840c138c6fc49fc86ac214e1fa23c",
-      "size": 1513
+      "sha256": "62d3ff325f40cbbd751bad308ac7de3d8636b76d8070fe9d2f4f989724467d72",
+      "size": 1768
+    },
+    "AGENTS.md": {
+      "sha256": "50058795e108c575d4be0c228849df00d20819347828fd5fb5ed3293b104647c",
+      "size": 2429
+    },
+    "app/src/main/AndroidManifest.xml": {
+      "sha256": "4896fdda3377b08013c7617f5a6c33ced25cab7cafb6c177d9ffe3b6c608e263",
+      "size": 2390
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

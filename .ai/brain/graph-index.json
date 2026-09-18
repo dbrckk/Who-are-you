@@ -1,0 +1,135 @@
+{
+  "areas": [
+    "tools-check-play-bundle-budget.py",
+    "tools-play-preflight.py",
+    "tools-play-promoter.py",
+    "tools-play-publisher.py",
+    "tools-prepare-play-submission.py",
+    "tools-test-m53-publication-contract.py",
+    "tools-test-m54-play-preflight.py",
+    "tools-test-play-bundle-budget.py",
+    "tools-test-play-promoter.py",
+    "tools-test-play-publisher.py",
+    "tools-test-prepare-play-submission.py",
+    "tools-validate-public-release-inputs.py"
+  ],
+  "central_files": [
+    {
+      "dependencies": [],
+      "dependents": [
+        "tools/play_promoter.py",
+        "tools/test_play_promoter.py",
+        "tools/test_play_publisher.py"
+      ],
+      "in_degree": 3,
+      "out_degree": 0,
+      "path": "tools/play_publisher.py"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        "tools/play_preflight.py",
+        "tools/test_m53_publication_contract.py"
+      ],
+      "in_degree": 2,
+      "out_degree": 0,
+      "path": "tools/validate_public_release_inputs.py"
+    },
+    {
+      "dependencies": [
+        "tools/validate_public_release_inputs.py"
+      ],
+      "dependents": [
+        "tools/test_m54_play_preflight.py"
+      ],
+      "in_degree": 1,
+      "out_degree": 1,
+      "path": "tools/play_preflight.py"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        "tools/test_play_bundle_budget.py"
+      ],
+      "in_degree": 1,
+      "out_degree": 0,
+      "path": "tools/check_play_bundle_budget.py"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        "tools/test_prepare_play_submission.py"
+      ],
+      "in_degree": 1,
+      "out_degree": 0,
+      "path": "tools/prepare_play_submission.py"
+    },
+    {
+      "dependencies": [
+        "tools/play_publisher.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/play_promoter.py"
+    },
+    {
+      "dependencies": [
+        "tools/validate_public_release_inputs.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_m53_publication_contract.py"
+    },
+    {
+      "dependencies": [
+        "tools/play_preflight.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_m54_play_preflight.py"
+    },
+    {
+      "dependencies": [
+        "tools/check_play_bundle_budget.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_play_bundle_budget.py"
+    },
+    {
+      "dependencies": [
+        "tools/play_publisher.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_play_promoter.py"
+    },
+    {
+      "dependencies": [
+        "tools/play_publisher.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_play_publisher.py"
+    },
+    {
+      "dependencies": [
+        "tools/prepare_play_submission.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1,
+      "path": "tools/test_prepare_play_submission.py"
+    }
+  ],
+  "edge_count": 8,
+  "generated_by": "dbrckk/repo-brain-v7-graph",
+  "node_count": 12,
+  "schema_version": 1
+}

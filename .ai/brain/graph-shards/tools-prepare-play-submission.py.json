@@ -1,0 +1,11 @@
+{
+  "area": "tools-prepare-play-submission.py",
+  "edges": [
+    {
+      "source": "tools/test_prepare_play_submission.py",
+      "target": "tools/prepare_play_submission.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}

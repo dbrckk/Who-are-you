@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-play-promoter.py",
+  "edges": [
+    {
+      "source": "tools/test_play_promoter.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}

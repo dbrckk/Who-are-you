@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-m53-publication-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_m53_publication_contract.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}

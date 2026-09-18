@@ -22,14 +22,14 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-18T19:17:55Z
+Generated: 2026-09-18T19:28:58Z
 
 ### Git
 - Branch: `main`
-- Head: `491dc1d94a29`
-- Commit date: 2026-09-18T21:16:50+02:00
-- Commit: chore(ai): align config with v6 bounded context
-- Tracked files: 445
+- Head: `e3668ddae02d`
+- Commit date: 2026-09-18T21:28:36+02:00
+- Commit: chore(ai): enable compact graph routing
+- Tracked files: 450
 
 ### Recently changed files
 - `.repo-standards.yml`

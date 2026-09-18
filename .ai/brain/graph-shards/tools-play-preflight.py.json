@@ -1,0 +1,16 @@
+{
+  "area": "tools-play-preflight.py",
+  "edges": [
+    {
+      "source": "tools/play_preflight.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_m54_play_preflight.py",
+      "target": "tools/play_preflight.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}

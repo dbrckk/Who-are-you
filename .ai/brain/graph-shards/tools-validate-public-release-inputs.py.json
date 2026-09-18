@@ -1,0 +1,16 @@
+{
+  "area": "tools-validate-public-release-inputs.py",
+  "edges": [
+    {
+      "source": "tools/play_preflight.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    },
+    {
+      "source": "tools/test_m53_publication_contract.py",
+      "target": "tools/validate_public_release_inputs.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}
