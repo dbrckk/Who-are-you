@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "generated_by": "dbrckk/repo-standards",
+  "project_types": [
+    "python",
+    "kotlin",
+    "gradle"
+  ],
+  "descriptors": [
+    "build.gradle.kts",
+    "settings.gradle.kts"
+  ],
+  "dominant_extensions": [
+    {
+      "extension": ".kt",
+      "count": 147
+    },
+    {
+      "extension": ".py",
+      "count": 93
+    },
+    {
+      "extension": ".xml",
+      "count": 66
+    },
+    {
+      "extension": ".md",
+      "count": 43
+    },
+    {
+      "extension": ".json",
+      "count": 22
+    },
+    {
+      "extension": ".yml",
+      "count": 13
+    },
+    {
+      "extension": ".kts",
+      "count": 4
+    },
+    {
+      "extension": ".html",
+      "count": 2
+    },
+    {
+      "extension": ".sh",
+      "count": 2
+    },
+    {
+      "extension": ".jpg",
+      "count": 1
+    },
+    {
+      "extension": ".pro",
+      "count": 1
+    },
+    {
+      "extension": ".properties",
+      "count": 1
+    }
+  ],
+  "top_level_directories": [
+    ".circleci",
+    ".serena",
+    "app",
+    "baseline-profile",
+    "docs",
+    "tools"
+  ],
+  "source_roots": [
+    ".github",
+    "app",
+    "baseline-profile",
+    "(root)",
+    "tools"
+  ],
+  "test_roots": [
+    "app"
+  ],
+  "entrypoint_candidates": [
+    "app/src/main/AndroidManifest.xml"
+  ],
+  "context_files": {
+    "project_state": ".ai/project-state.md",
+    "repo_health": ".ai/repo-health.md",
+    "repo_map": ".ai/repo-map.md",
+    "commands": ".ai/commands.json",
+    "change_impact": ".ai/change-impact.md"
+  }
+}
