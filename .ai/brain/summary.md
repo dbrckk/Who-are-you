@@ -1,8 +1,8 @@
 # Repo Brain
 
-- Index mode: full
+- Index mode: incremental
 - Files indexed: 244
-- Files reparsed this run: 244
+- Files reparsed this run: 0
 - Symbols: 1200
 - Internal import edges: 8
 - Impacted files: 0
@@ -42,9 +42,11 @@
 
 ## ast-grep enrichment
 - ast-grep outline: available
-- outline files: 238
-- top-level items: 2218
-- direct members: 960
+- AST index mode: incremental
+- AST files reparsed this run: 0
+- outline files retained: 238
+- top-level items retained: 2218
+- direct members retained: 960
 - symbol shards: 26
 - route named symbols via ast-routing.json, then fetch one ast-symbols/<initial>.json shard
 

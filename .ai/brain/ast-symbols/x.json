@@ -1,1 +1,1 @@
-{"schema_version":1,"symbols":{"xml.etree.ElementTree as ET":[{"file":"tools/test_localization_parity.py","type":"module","start":4,"end":4,"language":"Python","exported":false,"import":true}]}}
+{"schema_version":2,"symbols":{"xml.etree.ElementTree as ET":[{"file":"tools/test_localization_parity.py","type":"module","start":4,"end":4,"language":"Python","exported":false,"import":true}]}}

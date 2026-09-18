@@ -8,8 +8,8 @@
     "python": 93,
     "kotlin": 151
   },
-  "index_mode": "full",
-  "reparsed_files": 244,
+  "index_mode": "incremental",
+  "reparsed_files": 0,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
