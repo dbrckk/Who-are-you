@@ -1,5 +1,30 @@
 {
   "files": {
+    "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 2
+    },
+    "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt": {
+      "dependencies": [],
+      "dependents": [
+        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
+      ],
+      "in_degree": 1,
+      "out_degree": 0
+    },
+    "app/src/main/java/com/whoareyou/app/ProfileStore.kt": {
+      "dependencies": [],
+      "dependents": [
+        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
+      ],
+      "in_degree": 1,
+      "out_degree": 0
+    },
     "tools/check_play_bundle_budget.py": {
       "dependencies": [],
       "dependents": [

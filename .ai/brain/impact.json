@@ -1,14 +1,10 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "6af4d3cd97ea8a785737a856aa70765fbdf76b54",
-  "head": "2b030f682338bca88476dacc3f3d4a4f16bc55a2",
+  "base": "2b030f682338bca88476dacc3f3d4a4f16bc55a2",
+  "head": "4c0c9960d480eef8fdde74c71ceda66c0b47ba96",
   "index_mode": "incremental",
   "changed_files": [
-    {
-      "path": ".github/workflows/semantic-refresh.yml",
-      "status": "A"
-    },
     {
       "path": ".repo-standards.yml",
       "status": "M"

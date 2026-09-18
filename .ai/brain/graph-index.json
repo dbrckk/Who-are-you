@@ -1,5 +1,6 @@
 {
   "areas": [
+    "app-src",
     "tools-check-play-bundle-budget.py",
     "tools-play-preflight.py",
     "tools-play-promoter.py",
@@ -45,6 +46,34 @@
       "in_degree": 1,
       "out_degree": 1,
       "path": "tools/play_preflight.py"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 2,
+      "path": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
+      ],
+      "in_degree": 1,
+      "out_degree": 0,
+      "path": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
+      ],
+      "in_degree": 1,
+      "out_degree": 0,
+      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
     },
     {
       "dependencies": [],
@@ -128,8 +157,8 @@
       "path": "tools/test_prepare_play_submission.py"
     }
   ],
-  "edge_count": 8,
+  "edge_count": 10,
   "generated_by": "dbrckk/repo-brain-v7-graph",
-  "node_count": 12,
+  "node_count": 15,
   "schema_version": 1
 }

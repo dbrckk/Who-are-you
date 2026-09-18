@@ -3,6 +3,11 @@
   "schema_version": 1,
   "shards": [
     {
+      "area": "app-src",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/app-src.json"
+    },
+    {
       "area": "tools-check-play-bundle-budget.py",
       "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-check-play-bundle-budget.py.json"

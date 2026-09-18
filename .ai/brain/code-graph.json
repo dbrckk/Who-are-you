@@ -1,6 +1,16 @@
 {
   "edges": [
     {
+      "source": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
+      "target": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+      "type": "imports"
+    },
+    {
+      "source": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "imports"
+    },
+    {
       "source": "tools/play_preflight.py",
       "target": "tools/validate_public_release_inputs.py",
       "type": "imports"
