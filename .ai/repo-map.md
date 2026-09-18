@@ -1055,17 +1055,21 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: repo-standards-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ai-context:
-    uses: dbrckk/repo-standards/.github/workflows/reusable-ai-repo-map.yml@main
+    uses: dbrckk/repo-standards/.github/workflows/reusable-ai-repo-map.yml@v3
 
   repo-health:
     needs: ai-context
-    uses: dbrckk/repo-standards/.github/workflows/reusable-repo-health.yml@main
+    uses: dbrckk/repo-standards/.github/workflows/reusable-repo-health.yml@v3
 
   project-state:
     needs: repo-health
-    uses: dbrckk/repo-standards/.github/workflows/reusable-project-state.yml@main
+    uses: dbrckk/repo-standards/.github/workflows/reusable-project-state.yml@v3
 ```
 
 ## File: .github/workflows/android-apk.yml
@@ -30720,7 +30724,7 @@ errors = validate(load(args.path), strict=not args.allow_placeholders)
 ## File: .repo-standards.yml
 ```yaml
 source: dbrckk/repo-standards
-ref: main
+ref: v3
 version: 3
 adopted: true
 ai_context:
