@@ -12,12 +12,12 @@
   ],
   "dominant_extensions": [
     {
-      "extension": ".kt",
-      "count": 147
+      "extension": ".json",
+      "count": 172
     },
     {
-      "extension": ".json",
-      "count": 123
+      "extension": ".kt",
+      "count": 147
     },
     {
       "extension": ".py",

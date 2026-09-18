@@ -22,19 +22,18 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-18T20:53:50Z
+Generated: 2026-09-18T21:01:10Z
 
 ### Git
 - Branch: `main`
-- Head: `f2bd6b84ff9e`
-- Commit date: 2026-09-18T22:51:03+02:00
-- Commit: chore(ai): enable same-package symbol graph enrichment
-- Tracked files: 503
+- Head: `969d4bbdd348`
+- Commit date: 2026-09-18T22:59:13+02:00
+- Commit: chore(ai): adopt repo standards v15
+- Tracked files: 552
 
 ### Recently changed files
 - `.repo-standards.yml`
 - `.github/workflows/semantic-refresh.yml`
-- `AGENTS.md`
 
 ### Project signals
 - `build.gradle.kts`
