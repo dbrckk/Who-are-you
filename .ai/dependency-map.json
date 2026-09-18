@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "generated_by": "dbrckk/repo-standards",
+  "manifests": [
+    "app/build.gradle.kts",
+    "baseline-profile/build.gradle.kts",
+    "build.gradle.kts",
+    "settings.gradle.kts"
+  ],
+  "external_dependencies": [],
+  "inferred_imports": [
+    "android.app",
+    "android.content",
+    "android.graphics",
+    "android.net",
+    "android.os",
+    "android.provider",
+    "android.util",
+    "android.widget",
+    "androidx.activity",
+    "androidx.annotation",
+    "androidx.benchmark",
+    "androidx.compose",
+    "androidx.core",
+    "androidx.datastore",
+    "androidx.test",
+    "com.android",
+    "com.google",
+    "com.whoareyou",
+    "google",
+    "kotlinx.coroutines",
+    "org.json",
+    "org.junit"
+  ],
+  "internal_roots": [
+    "app",
+    "baseline-profile",
+    "tools"
+  ]
+}
