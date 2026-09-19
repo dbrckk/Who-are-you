@@ -22,13 +22,13 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-18T21:01:10Z
+Generated: 2026-09-19T06:34:47Z
 
 ### Git
 - Branch: `main`
-- Head: `969d4bbdd348`
-- Commit date: 2026-09-18T22:59:13+02:00
-- Commit: chore(ai): adopt repo standards v15
+- Head: `55498ab41785`
+- Commit date: 2026-09-19T08:34:29+02:00
+- Commit: chore(ai): adopt repo standards v16
 - Tracked files: 552
 
 ### Recently changed files
