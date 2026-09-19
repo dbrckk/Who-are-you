@@ -1,8 +1,8 @@
 {
   "files": {
     ".repo-standards.yml": {
-      "sha256": "e3858dc72ed1978cf4a92f4d67729395f350e7d45bce8f827e429d91870af0a8",
-      "size": 2461
+      "sha256": "a517d0adcd0412a4595b8b4310f2551e3969f3fd5ff8cbb581db75bc39d4f2b6",
+      "size": 2559
     },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "4896fdda3377b08013c7617f5a6c33ced25cab7cafb6c177d9ffe3b6c608e263",
