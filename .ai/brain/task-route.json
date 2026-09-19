@@ -1,0 +1,127 @@
+{
+  "budget": {
+    "confidence": "medium",
+    "expand_to": 12,
+    "max_files": 6,
+    "requested_max_files": 12,
+    "score_margin": 4,
+    "tier": "bounded",
+    "top_score": 21
+  },
+  "cache": {
+    "fingerprint": "7ec276df47f408ff729f7ca7b72740c36023433c19b4dd568fadb7fc8da922c4",
+    "hit": false
+  },
+  "candidate_count": 43,
+  "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+  "files": [
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "tools/test_longitudinal_trend_integration.py",
+      "reasons": [
+        "search-index"
+      ],
+      "score": 21,
+      "symbols": [
+        "LongitudinalTrendIntegrationContractTest",
+        "setUp",
+        "test_dated_history_is_persisted",
+        "test_engine_distinguishes_outlier_volatility_and_direction",
+        "test_global_profile_carries_longitudinal_trends",
+        "test_profile_renders_accessible_sparklines"
+      ]
+    },
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "tools/test_profile_narrative_integration.py",
+      "reasons": [
+        "search-index"
+      ],
+      "score": 17,
+      "symbols": [
+        "ProfileNarrativeIntegrationContractTest",
+        "setUp",
+        "test_global_profile_contains_narrative",
+        "test_narrative_separates_change_from_more_evidence",
+        "test_profile_surfaces_factual_summary",
+        "test_uncertainty_blocks_overconfident_directional_copy"
+      ]
+    },
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "tools/test_trait_timeline_integration.py",
+      "reasons": [
+        "search-index"
+      ],
+      "score": 17,
+      "symbols": [
+        "TraitTimelineIntegrationContractTest",
+        "test_global_profile_carries_trait_timelines",
+        "test_profile_renders_accessible_trait_history",
+        "test_timeline_distinguishes_retake_and_new_evidence",
+        "test_trait_period_comparison_tracks_score_and_confidence"
+      ]
+    },
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+      "reasons": [],
+      "score": 10,
+      "symbols": [
+        "DiscoverLibraryEngine",
+        "DiscoverThemeSummary",
+        "search",
+        "summaries",
+        "uncoveredThemes"
+      ]
+    },
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
+      "reasons": [],
+      "score": 10,
+      "symbols": [
+        "DimensionJournalEngineTest"
+      ]
+    },
+    {
+      "learning_score": 0,
+      "matched_terms": [
+        "engine"
+      ],
+      "path": "app/src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt",
+      "reasons": [],
+      "score": 10,
+      "symbols": [
+        "DiscoverLibraryEngineTest",
+        "incompleteThemesAreRankedBeforeCompletedThemes",
+        "quiz",
+        "searchMatchesTitleHookAndMetrics",
+        "uncoveredThemesOnlyContainsThemesWithoutCompletedQuiz",
+        "unfinishedFilterExcludesCompletedTests"
+      ]
+    }
+  ],
+  "generated_by": "dbrckk/repo-brain-v8",
+  "schema_version": 1,
+  "task": "game engine",
+  "terms": [
+    "game",
+    "engine"
+  ]
+}
