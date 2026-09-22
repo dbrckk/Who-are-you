@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="result_intel_title">Why this result?</string>
+    <string name="result_intel_subtitle">A closer look at the answer patterns behind this score — without treating them as a fixed label.</string>
+    <string name="result_intel_evidence_title">ANSWERS THAT SHAPED THE RESULT</string>
+    <string name="result_intel_evidence_intro">These choices sat furthest from the middle of the scale, so they had the clearest directional pull.</string>
+    <string name="result_intel_evidence_unavailable">Detailed answer evidence is not available for this older attempt, but the score interpretation still applies.</string>
+    <string name="result_intel_strengths_title">WHAT MAY WORK IN YOUR FAVOR</string>
+    <string name="result_intel_watchouts_title">WHAT TO WATCH</string>
+    <string name="result_intel_everyday_title">IN EVERYDAY LIFE</string>
+    <string name="result_intel_action_title">TRY THIS</string>
+
+    <string name="result_intel_strength_flexibility">You can move between %1$s and %2$s instead of defaulting rigidly to one side.</string>
+    <string name="result_intel_strength_context">Your pattern leaves room for the situation to shape how you respond.</string>
+    <string name="result_intel_strength_consistency">Several answers point in a consistent direction toward %1$s.</string>
+    <string name="result_intel_strength_decisiveness">When this dimension matters, you may find it easier to commit to %1$s.</string>
+
+    <string name="result_intel_watch_ambiguity">A middle score can hide meaningful differences between situations. The useful signal may be where your answers changed.</string>
+    <string name="result_intel_watch_context_blind">A clear lean toward %1$s can make %2$s easier to overlook when the situation would benefit from it.</string>
+    <string name="result_intel_watch_overextension">A strong %1$s tendency may become less useful when a situation needs more %2$s.</string>
+
+    <string name="result_intel_everyday_social">In conversations and groups, notice when %1$s feels natural and when the situation pulls you toward %2$s.</string>
+    <string name="result_intel_everyday_emotion">In close relationships, %1$s may shape how you connect or protect yourself. Context can still bring out more %2$s.</string>
+    <string name="result_intel_everyday_mind">When thinking or deciding under pressure, %1$s may be your current default. Complex situations may call for more %2$s.</string>
+    <string name="result_intel_everyday_control">When planning, managing risk or dealing with uncertainty, %1$s may feel safer or more effective. Some situations reward more %2$s.</string>
+    <string name="result_intel_everyday_growth">In work, study or personal goals, %1$s may influence how you move forward. Progress can also require deliberate use of %2$s.</string>
+    <string name="result_intel_everyday_values">When priorities compete, %1$s may guide what feels most important. Different contexts can make %2$s more relevant.</string>
+    <string name="result_intel_everyday_energy">In routines and recovery, %1$s may fit your current rhythm. Your needs can shift toward %2$s with workload and energy.</string>
+    <string name="result_intel_everyday_lifestyle">In everyday choices, %1$s may be the more comfortable pattern. New settings can reveal more of %2$s.</string>
+    <string name="result_intel_everyday_identity">Across everyday choices, %1$s may currently feel more like you, while %2$s can still appear in different contexts.</string>
+
+    <string name="result_intel_action_notice_context">For the next few days, notice one situation where you chose %1$s and one where you chose %2$s. Compare what changed.</string>
+    <string name="result_intel_action_use_strength">Use %1$s deliberately once this week, then ask whether a little more %2$s would have improved the situation.</string>
+    <string name="result_intel_action_test_opposite">In one low-stakes situation, deliberately try a little more %2$s and notice what changes.</string>
+</resources>
