@@ -51,7 +51,7 @@ fun QuizScreen(
     isFinishing: Boolean,
     commitFailed: Boolean,
     onProgress: (questionIndex: Int, score: Int) -> Unit,
-    onAnswerSelected: (questionIndex: Int, answerIndex: Int, score: Int) -> Unit,
+    onAnswerSelected: (questionIndex: Int, answerIndex: Int, score: Int) -> Unit = { _, _, _ -> },
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
 ) {
