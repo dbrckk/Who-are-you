@@ -139,7 +139,45 @@
           "id": "assertiveness",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ACCOMMODANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fais souvent passer les autres en premier et peux accepter davantage que ce que tu souhaiterais réellement."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « ACCOMMODANT » et « LIMITES CLAIRES » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais t’adapter pour les personnes qui comptent tout en reconnaissant quand une limite doit être exprimée."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LIMITES CLAIRES » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l’aise pour protéger ton temps, ton énergie et tes standards même si dire non crée un inconfort temporaire."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "adaptability",
@@ -275,7 +313,45 @@
           "id": "adaptability",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « STABLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fonctionnes mieux lorsque les attentes restent cohérentes et préfères disposer de temps pour t’ajuster aux changements."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « STABLE » et « ADAPTABLE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Le changement peut te perturber brièvement, mais tu reconstruis généralement un plan viable une fois la nouvelle situation comprise."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ADAPTABLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu pivotes rapidement quand les conditions changent et considères souvent les nouvelles contraintes comme de simples informations."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "competitiveness",
@@ -411,7 +487,45 @@
           "id": "competitiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RYTHME PERSONNEL » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu accordes davantage d’importance à tes propres standards et au plaisir qu’au fait de battre quelqu’un."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « RYTHME PERSONNEL » et « COMPÉTITIF » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "La compétition peut t’apporter de l’énergie sans définir toute l’expérience, surtout lorsque les enjeux restent sains."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « COMPÉTITIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Un benchmark visible ou un rival peut déclencher chez toi davantage de concentration, d’effort et de satisfaction."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "patience",
@@ -547,7 +661,45 @@
           "id": "patience",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « IMMÉDIAT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères le mouvement visible et les retours rapides ; les processus lents peuvent vite épuiser ton attention."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « IMMÉDIAT » et « PATIENT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais accepter les délais lorsqu’ils ont une raison claire, mais l’attente inutile continue de t’agacer."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PATIENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es relativement à l’aise avec les récompenses différées, la répétition et les progrès qui mettent du temps à devenir visibles."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "independence",
@@ -683,7 +835,45 @@
           "id": "independence",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « COLLABORATIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu réfléchis naturellement avec les autres et prends souvent de meilleures décisions grâce au partage d’idées et au soutien."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « COLLABORATIF » et « INDÉPENDANT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu valorises ton autonomie mais sais reconnaître quand un autre regard, une compétence ou une aide améliore le résultat."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « INDÉPENDANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu préfères fortement l’autonomie et essaies généralement de résoudre les choses seul avant d’impliquer quelqu’un d’autre."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
