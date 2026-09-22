@@ -139,7 +139,45 @@
           "id": "assertiveness",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SUBTIL » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu communiques beaucoup par le contexte, le ton et les sous-entendus et attends souvent des autres qu’ils remarquent les signaux autour des mots."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SUBTIL » et « EXPLICITE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu rends généralement ton message clair tout en adaptant ton niveau de franchise à la personne et à la situation."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « EXPLICITE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu préfères un langage explicite, des attentes concrètes et dire ce que tu penses plutôt que compter sur l’interprétation."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "trust_style",
@@ -275,7 +313,45 @@
           "id": "trust_openness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRUDENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères les preuves et la constance avant de compter sur quelqu’un, surtout lorsque le coût d’une erreur est important."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRUDENT » et « CONFIANT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu commences assez ouvert, puis la répétition des comportements détermine progressivement la confiance et l’accès que tu accordes."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CONFIANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu pars volontiers d’une intention positive et es à l’aise pour donner une vraie chance aux gens avant qu’ils aient tout prouvé."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "self_discipline",
@@ -415,7 +491,45 @@
           "id": "structure",
           "weight": 0.5
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « MOTIVATION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ta productivité dépend fortement de ton intérêt et de ton énergie, et forcer une tâche peu motivante peut être difficile."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « MOTIVATION » et « DISCIPLINE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais avancer sans motivation parfaite lorsque l’objectif compte et que le système reste gérable."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « DISCIPLINE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es relativement capable d’agir à partir de ton engagement plutôt que de ton humeur et de poursuivre un travail répétitif ou peu stimulant."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "optimism",
@@ -551,7 +665,45 @@
           "id": "optimism",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRUDENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ton esprit repère naturellement ce qui pourrait mal tourner, ce qui peut t’aider à anticiper mais aussi rendre l’incertitude plus lourde."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRUDENT » et « OPTIMISTE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu vois à la fois les risques et les possibilités et adaptes généralement tes attentes aux éléments disponibles."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « OPTIMISTE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu remarques naturellement le potentiel positif et t’attends souvent à ce qu’une solution existe même lorsque le chemin n’est pas encore clair."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "stress_response",
@@ -691,7 +843,45 @@
           "id": "adaptability",
           "weight": 0.2
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PAUSE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "La pression a tendance à te faire arrêter, te retirer ou réduire les sollicitations jusqu’à retrouver un sentiment de contrôle."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PAUSE » et « MOBILISATION » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu ressens la pression mais retrouves généralement assez de structure pour choisir une prochaine étape sans complètement t’arrêter ni accélérer."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « MOBILISATION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "La pression te pousse souvent vers l’action, la résolution de problèmes et une augmentation du rythme, surtout lorsqu’une action concrète est possible."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
