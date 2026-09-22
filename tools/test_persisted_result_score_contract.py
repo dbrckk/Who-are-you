@@ -21,7 +21,7 @@ class PersistedResultScoreContractTest(unittest.TestCase):
     def test_main_activity_sets_final_score_only_after_commit_callback(self):
         self.assertIn("onCommitted = { persistedScore ->", self.main)
         self.assertIn("finalScore = persistedScore", self.main)
-        finish_block = self.main.split("onFinished = { score ->", 1)[1].split("}", 2)[0]
+        finish_block = self.main.split("onFinished = {", 1)[1].split("AppScreen.RESULT", 1)[0]
         self.assertNotIn("finalScore = score", finish_block)
         self.assertIn("pendingFinalScore = score", finish_block)
 
