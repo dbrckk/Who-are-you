@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import androidx.compose.ui.test.assertDoesNotExist
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -28,15 +29,7 @@ class ResultScreenUiTest {
                 catalog = listOf(testQuiz()),
                 completed = setOf("result-ui-test"),
                 evidence = listOf(ResultEvidence(0, "Question?", "D", 3)),
-                coverage = ProfileCoverage(
-                    knownTraitCount = 0,
-                    totalTraitCount = 0,
-                    coveragePercent = 0,
-                    averageConfidence = 0,
-                    strongTraitCount = 0,
-                    uncertainTraitCount = 0,
-                    traits = emptyList()
-                ),
+                coverage = emptyCoverage(),
                 onQuizSelected = { },
                 onDone = { doneCount++ },
                 onRetry = { retryCount++ }
@@ -56,6 +49,49 @@ class ResultScreenUiTest {
             assertEquals(1, doneCount)
         }
     }
+
+    @Test
+    fun historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable() {
+        val historicQuiz = testQuiz().copy(resultIntelligence = null, traits = emptyList())
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = historicQuiz,
+                score = 50,
+                previousScore = null,
+                completedCount = 1,
+                totalQuizCount = 30,
+                catalog = listOf(historicQuiz),
+                completed = setOf(historicQuiz.id),
+                evidence = emptyList(),
+                traitGraph = TraitGraph(emptyList(), 0),
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onNodeWithTag("result_evidence").assertDoesNotExist()
+        composeRule.onNodeWithTag("result_strengths_watchouts").assertDoesNotExist()
+        composeRule.onNodeWithTag("result_everyday_life").assertDoesNotExist()
+        composeRule.onNodeWithTag("result_reflection").assertDoesNotExist()
+        composeRule.onNodeWithTag("result_profile_connections").assertDoesNotExist()
+        composeRule.onNodeWithTag("result_done").performScrollTo()
+        composeRule.onNodeWithTag("result_retry").performScrollTo()
+        composeRule.onNodeWithTag("result_share").performScrollTo()
+        composeRule.onNodeWithTag("result_compare").performScrollTo()
+    }
+
+    private fun emptyCoverage() = ProfileCoverage(
+        knownTraitCount = 0,
+        totalTraitCount = 0,
+        coveragePercent = 0,
+        averageConfidence = 0,
+        strongTraitCount = 0,
+        uncertainTraitCount = 0,
+        traits = emptyList()
+    )
 
     private fun testQuiz() = Quiz(
         id = "result-ui-test",
