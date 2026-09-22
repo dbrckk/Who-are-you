@@ -131,6 +131,7 @@ private fun WhoAreYouApp() {
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
+    var quizAnswerIndexes by rememberSaveable { mutableStateOf(arrayListOf<Int>()) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var commitFailed by rememberSaveable { mutableStateOf(false) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
@@ -143,6 +144,7 @@ private fun WhoAreYouApp() {
             quizAttemptId = UUID.randomUUID().toString()
             quizQuestionIndex = 0
             quizRawScore = 0
+            quizAnswerIndexes = arrayListOf()
             pendingFinalScore = null
             commitFailed = false
             finalScore = 0
@@ -158,6 +160,7 @@ private fun WhoAreYouApp() {
         quizAttemptId = UUID.randomUUID().toString()
         quizQuestionIndex = 0
         quizRawScore = 0
+        quizAnswerIndexes = arrayListOf()
         pendingFinalScore = null
         commitFailed = false
     }
@@ -246,8 +249,9 @@ private fun WhoAreYouApp() {
                     score = quizRawScore,
                     isFinishing = quizFinishing,
                     commitFailed = commitFailed,
-                    onProgress = { questionIndex, score ->
+                    onProgress = { questionIndex, score, answerIndex ->
                         if (!quizFinishing) {
+                            quizAnswerIndexes = QuizAnswerTrace.append(quizAnswerIndexes, answerIndex)
                             quizQuestionIndex = questionIndex
                             quizRawScore = score
                         }
@@ -258,8 +262,13 @@ private fun WhoAreYouApp() {
                             navigate(AppScreen.DISCOVER)
                         }
                     },
-                    onFinished = { score ->
+                    onFinished = { score, finalAnswerIndex ->
                         if (!quizFinishing) {
+                            quizAnswerIndexes = QuizAnswerTrace.complete(
+                                previous = quizAnswerIndexes,
+                                finalAnswerIndex = finalAnswerIndex,
+                                expectedQuestionCount = selectedQuiz.questions.size
+                            )
                             commitFailed = false
                             pendingFinalScore = score
                         }
@@ -268,6 +277,7 @@ private fun WhoAreYouApp() {
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz,
                     score = finalScore,
+                    selectedAnswerIndexes = quizAnswerIndexes,
                     previousScore = previousScoreForAttempt,
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
                     totalQuizCount = quizCatalog.size,
