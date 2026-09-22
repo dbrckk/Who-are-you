@@ -27,6 +27,7 @@ class ResultScreenUiTest {
                 totalQuizCount = 30,
                 catalog = listOf(testQuiz()),
                 completed = setOf("result-ui-test"),
+                evidence = listOf(ResultEvidence(0, "Question?", "D", 3)),
                 coverage = ProfileCoverage(
                     knownTraitCount = 0,
                     totalTraitCount = 0,
@@ -43,6 +44,7 @@ class ResultScreenUiTest {
         }
 
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
+        composeRule.onNodeWithTag("result_evidence").performScrollTo()
         composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
         composeRule.onNodeWithTag("result_done").performScrollTo().performClick()
 
