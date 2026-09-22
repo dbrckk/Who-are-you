@@ -45,6 +45,9 @@ class ResultScreenUiTest {
 
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
         composeRule.onNodeWithTag("result_evidence").performScrollTo()
+        composeRule.onNodeWithTag("result_strengths_watchouts").performScrollTo()
+        composeRule.onNodeWithTag("result_everyday_life").performScrollTo()
+        composeRule.onNodeWithTag("result_reflection").performScrollTo()
         composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
         composeRule.onNodeWithTag("result_done").performScrollTo().performClick()
 
@@ -68,6 +71,11 @@ class ResultScreenUiTest {
         highDescription = "High description",
         metricLow = "Reserved",
         metricHigh = "Expressive",
+        resultIntelligence = QuizResultIntelligenceContent(
+            low = ResultInsightContent(listOf("Low strength"), listOf("Low watch"), listOf("Low life"), "Low reflection"),
+            balanced = ResultInsightContent(listOf("Balanced strength"), listOf("Balanced watch"), listOf("Balanced life"), "Balanced reflection"),
+            high = ResultInsightContent(listOf("High strength"), listOf("High watch"), listOf("High life"), "High reflection")
+        ),
         questions = listOf(
             Question(
                 text = "Question?",
