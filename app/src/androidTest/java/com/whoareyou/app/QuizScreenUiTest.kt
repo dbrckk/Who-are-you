@@ -36,7 +36,7 @@ class QuizScreenUiTest {
                     score = nextScore
                 },
                 onBack = {},
-                onFinished = { finalScore = it }
+                onFinished = { scoreResult, _ -> finalScore = scoreResult }
             )
         }
 
@@ -65,7 +65,7 @@ class QuizScreenUiTest {
                 commitFailed = false,
                 onProgress = { _, _ -> error("progress must stay locked") },
                 onBack = {},
-                onFinished = { finalScore = it }
+                onFinished = { scoreResult, _ -> finalScore = scoreResult }
             )
         }
 
@@ -86,9 +86,9 @@ class QuizScreenUiTest {
                 score = 3,
                 isFinishing = false,
                 commitFailed = true,
-                onProgress = { _, _ -> },
+                onProgress = { _, _, _ -> },
                 onBack = {},
-                onFinished = { finalScore = it }
+                onFinished = { scoreResult, _ -> finalScore = scoreResult }
             )
         }
 
