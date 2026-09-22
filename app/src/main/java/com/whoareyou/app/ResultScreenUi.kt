@@ -76,6 +76,7 @@ fun ResultScreen(
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
+    val intelligence = remember(quiz, score, evidence) { ResultScreenIntelligence.derive(quiz, score, evidence) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
     val resultBackground = remember(accent, secondaryAccent) {
@@ -214,9 +215,14 @@ fun ResultScreen(
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
 
-            if (evidence.isNotEmpty()) {
+            if (intelligence.evidence.isNotEmpty()) {
                 Spacer(Modifier.height(sectionGap))
-                ResultEvidenceCard(evidence = evidence)
+                ResultEvidenceCard(evidence = intelligence.evidence)
+            }
+
+            intelligence.insight?.let { insight ->
+                Spacer(Modifier.height(sectionGap))
+                ResultInsightCards(insight = insight)
             }
 
             if (scoreChange != null) {
