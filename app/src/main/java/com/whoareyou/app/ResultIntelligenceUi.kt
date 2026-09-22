@@ -11,7 +11,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -33,7 +35,7 @@ fun ResultEvidenceCard(
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Text(
-                text = "Why this result?",
+                text = stringResource(R.string.m771_why_result),
                 color = V2Colors.TextPrimary,
                 style = V2Type.BodyStrong
             )
@@ -56,7 +58,6 @@ fun ResultEvidenceCard(
     }
 }
 
-
 @Composable
 fun ResultInsightCards(
     insight: ResultInsightSummary,
@@ -77,11 +78,11 @@ fun ResultInsightCards(
                 modifier = Modifier.padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text("Strengths", color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                Text(stringResource(R.string.m771_strengths), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
                 insight.strengths.forEach {
                     Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
                 }
-                Text("Watch-outs", color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                Text(stringResource(R.string.m771_watchouts), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
                 insight.watchOuts.forEach {
                     Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
                 }
@@ -100,7 +101,7 @@ fun ResultInsightCards(
                     modifier = Modifier.padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Text("Everyday life", color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                    Text(stringResource(R.string.m771_everyday_life), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
                     insight.everydayLife.forEach {
                         Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
                     }
@@ -117,7 +118,7 @@ fun ResultInsightCards(
                     .testTag("result_reflection")
             ) {
                 Column(Modifier.padding(20.dp)) {
-                    Text("Reflection", color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                    Text(stringResource(R.string.m771_reflection), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
                     Spacer(Modifier.height(6.dp))
                     Text(insight.reflection, color = V2Colors.TextSecondary, style = V2Type.Body)
                 }
@@ -126,7 +127,6 @@ fun ResultInsightCards(
     }
 }
 
-
 @Composable
 fun ResultProfileConnectionsCard(
     connections: List<ResultProfileConnection>,
@@ -134,7 +134,7 @@ fun ResultProfileConnectionsCard(
 ) {
     if (connections.isEmpty()) return
 
-    val language = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]?.language
+    val language = LocalConfiguration.current.locales[0]?.language
     val french = language.equals("fr", ignoreCase = true)
 
     Card(
@@ -149,7 +149,7 @@ fun ResultProfileConnectionsCard(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = if (french) "Connexions avec votre profil" else "Connections with your profile",
+                text = stringResource(R.string.m771_profile_connections),
                 color = V2Colors.TextPrimary,
                 style = V2Type.BodyStrong
             )
@@ -157,14 +157,11 @@ fun ResultProfileConnectionsCard(
                 val label = TraitLocalization.label(connection.traitId, french)
                 val message = when (connection.kind) {
                     ResultProfileConnectionKind.REINFORCING ->
-                        if (french) "$label va dans le même sens que ce résultat."
-                        else "$label points in the same direction as this result."
+                        stringResource(R.string.m771_connection_reinforcing, label)
                     ResultProfileConnectionKind.CONTRASTING ->
-                        if (french) "$label nuance ou contraste avec ce résultat."
-                        else "$label adds nuance or contrasts with this result."
+                        stringResource(R.string.m771_connection_contrasting, label)
                     ResultProfileConnectionKind.CONTEXTUAL ->
-                        if (french) "$label apporte un contexte supplémentaire à ce résultat."
-                        else "$label adds extra context to this result."
+                        stringResource(R.string.m771_connection_contextual, label)
                 }
                 Text(
                     text = message,
