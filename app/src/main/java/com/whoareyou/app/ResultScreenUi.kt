@@ -59,6 +59,7 @@ fun ResultScreen(
     totalQuizCount: Int,
     catalog: List<Quiz>,
     completed: Set<String>,
+    evidence: List<ResultEvidence> = emptyList(),
     coverage: ProfileCoverage,
     onQuizSelected: (Quiz) -> Unit,
     onDone: () -> Unit,
@@ -212,6 +213,11 @@ fun ResultScreen(
 
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
+
+            if (evidence.isNotEmpty()) {
+                Spacer(Modifier.height(sectionGap))
+                ResultEvidenceCard(evidence = evidence)
+            }
 
             if (scoreChange != null) {
                 Spacer(Modifier.height(16.dp))
