@@ -30,10 +30,17 @@ class ResultScreenIntelligenceTest {
         )
         val evidence = listOf(ResultEvidence(0, "Q?", "D", 3))
 
-        val result = ResultScreenIntelligence.derive(quiz, 80, evidence)
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+        val quizWithTrait = quiz.copy(traits = listOf(QuizTraitWeight("focus", 1.0)))
+
+        val result = ResultScreenIntelligence.derive(quizWithTrait, 80, evidence, graph)
 
         assertNotNull(result.insight)
         assertEquals("HR", result.insight!!.reflection)
         assertEquals(evidence, result.evidence)
+        assertEquals(ResultProfileConnectionKind.REINFORCING, result.connections.single().kind)
     }
 }
