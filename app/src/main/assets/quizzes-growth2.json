@@ -139,7 +139,45 @@
           "id": "assertiveness",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “ACCOMMODATING” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You often make room for other people first and may tolerate more than you actually want to."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “ACCOMMODATING” and “BOUNDARIED” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can adapt for people you care about while still recognizing when a limit needs to be stated."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “BOUNDARIED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable protecting your time, energy and standards even when saying no creates temporary discomfort."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "adaptability",
@@ -275,7 +313,45 @@
           "id": "adaptability",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “STEADY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You work best when expectations stay consistent and prefer enough time to adjust when circumstances change."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “STEADY” and “ADAPTIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Change can disrupt you briefly, but you usually rebuild a workable plan once you understand the new situation."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “ADAPTIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You pivot quickly when conditions change and often treat new constraints as information rather than disruption."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "competitiveness",
@@ -411,7 +487,45 @@
           "id": "competitiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SELF-PACED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You care more about your own standard and enjoyment than beating someone else."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SELF-PACED” and “COMPETITIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Competition can add energy without defining the whole experience, especially when stakes remain healthy."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “COMPETITIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "A visible benchmark or rival can unlock extra focus, effort and satisfaction for you."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "patience",
@@ -547,7 +661,45 @@
           "id": "patience",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “IMMEDIATE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer visible movement and quick feedback, and slow processes can drain your attention fast."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “IMMEDIATE” and “PATIENT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can tolerate delay when the reason is clear, but unnecessary waiting still tests you."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “PATIENT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are relatively comfortable with delayed rewards, repetition and progress that takes time to become visible."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "independence",
@@ -683,7 +835,45 @@
           "id": "independence",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “COLLABORATIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You naturally think with other people and often make better decisions through shared input and support."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “COLLABORATIVE” and “INDEPENDENT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You value autonomy but know when another perspective, skill or hand makes the outcome better."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “INDEPENDENT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You strongly prefer self-direction and usually try to solve things independently before involving anyone else."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
