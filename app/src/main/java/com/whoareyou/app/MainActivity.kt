@@ -280,6 +280,7 @@ private fun WhoAreYouApp() {
                     totalQuizCount = quizCatalog.size,
                     catalog = quizCatalog,
                     completed = storedProfile.completedQuizIds + selectedQuiz.id,
+                    evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()),
                     coverage = globalProfile.coverage,
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]
