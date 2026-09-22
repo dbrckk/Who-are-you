@@ -138,11 +138,19 @@ fun ResultIntelligencePanel(
             accent = accent
         ) {
             Text(
-                text = resultEverydayContextText(
-                    theme = QuizVisuals.themeFor(quiz),
-                    primaryPole = primaryPole,
-                    oppositePole = oppositePole
-                ),
+                text = if (summary.hasDirectionalLean) {
+                    resultEverydayContextText(
+                        theme = QuizVisuals.themeFor(quiz),
+                        primaryPole = primaryPole,
+                        oppositePole = oppositePole
+                    )
+                } else {
+                    stringResource(
+                        R.string.result_intel_everyday_balanced,
+                        quiz.metricLow,
+                        quiz.metricHigh
+                    )
+                },
                 color = V2Colors.TextPrimary,
                 style = V2Type.Body
             )
