@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="result_intel_title">Pourquoi ce résultat ?</string>
+    <string name="result_intel_subtitle">Une lecture plus précise des réponses qui ont façonné ce score — sans en faire une étiquette figée.</string>
+    <string name="result_intel_evidence_title">RÉPONSES QUI ONT FAÇONNÉ LE RÉSULTAT</string>
+    <string name="result_intel_evidence_intro">Ces choix étaient les plus éloignés du milieu de l’échelle : ce sont donc eux qui ont donné la direction la plus nette.</string>
+    <string name="result_intel_evidence_unavailable">Le détail des réponses n’est pas disponible pour cette ancienne tentative, mais l’interprétation du score reste valable.</string>
+    <string name="result_intel_strengths_title">CE QUI PEUT JOUER EN TA FAVEUR</string>
+    <string name="result_intel_watchouts_title">À SURVEILLER</string>
+    <string name="result_intel_everyday_title">DANS LA VIE QUOTIDIENNE</string>
+    <string name="result_intel_action_title">À ESSAYER</string>
+
+    <string name="result_intel_strength_flexibility">Tu peux naviguer entre %1$s et %2$s sans rester rigidement d’un seul côté.</string>
+    <string name="result_intel_strength_context">Ton profil laisse de la place au contexte pour influencer ta manière de réagir.</string>
+    <string name="result_intel_strength_consistency">Plusieurs réponses vont de façon cohérente dans la direction de %1$s.</string>
+    <string name="result_intel_strength_decisiveness">Quand cette dimension compte, il peut être plus facile pour toi d’assumer %1$s.</string>
+
+    <string name="result_intel_watch_ambiguity">Un score central peut masquer de vraies différences selon les situations. Le signal utile se trouve parfois là où tes réponses ont changé.</string>
+    <string name="result_intel_watch_context_blind">Une tendance claire vers %1$s peut faire oublier %2$s même lorsque la situation en bénéficierait.</string>
+    <string name="result_intel_watch_overextension">Une forte tendance vers %1$s peut devenir moins utile lorsqu’une situation demande davantage de %2$s.</string>
+
+    <string name="result_intel_everyday_social">Dans les conversations et les groupes, remarque quand %1$s vient naturellement et quand la situation te pousse davantage vers %2$s.</string>
+    <string name="result_intel_everyday_emotion">Dans les relations proches, %1$s peut influencer ta façon de créer du lien ou de te protéger. Le contexte peut aussi faire ressortir davantage %2$s.</string>
+    <string name="result_intel_everyday_mind">Quand tu réfléchis ou décides sous pression, %1$s peut être ton réflexe actuel. Les situations complexes peuvent demander davantage de %2$s.</string>
+    <string name="result_intel_everyday_control">Face à la planification, au risque ou à l’incertitude, %1$s peut sembler plus sûr ou efficace. Certaines situations récompensent davantage %2$s.</string>
+    <string name="result_intel_everyday_growth">Dans le travail, les études ou tes objectifs personnels, %1$s peut influencer ta façon d’avancer. Progresser peut aussi demander d’utiliser volontairement %2$s.</string>
+    <string name="result_intel_everyday_values">Quand plusieurs priorités s’opposent, %1$s peut guider ce qui te paraît essentiel. D’autres contextes peuvent rendre %2$s plus pertinent.</string>
+    <string name="result_intel_everyday_energy">Dans tes routines et ta récupération, %1$s peut correspondre à ton rythme actuel. Tes besoins peuvent évoluer vers %2$s selon ta charge et ton énergie.</string>
+    <string name="result_intel_everyday_lifestyle">Dans les choix du quotidien, %1$s peut être le schéma le plus confortable. De nouveaux contextes peuvent révéler davantage %2$s.</string>
+    <string name="result_intel_everyday_identity">Dans tes choix quotidiens, %1$s peut actuellement davantage te ressembler, tandis que %2$s peut apparaître dans d’autres contextes.</string>
+
+    <string name="result_intel_action_notice_context">Pendant quelques jours, repère une situation où tu as choisi %1$s et une autre où tu as choisi %2$s. Compare ce qui a changé.</string>
+    <string name="result_intel_action_use_strength">Utilise volontairement %1$s une fois cette semaine, puis demande-toi si un peu plus de %2$s aurait amélioré la situation.</string>
+    <string name="result_intel_action_test_opposite">Dans une situation sans grand enjeu, essaie volontairement un peu plus de %2$s et observe ce qui change.</string>
+</resources>
