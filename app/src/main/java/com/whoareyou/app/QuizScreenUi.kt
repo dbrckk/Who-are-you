@@ -50,9 +50,9 @@ fun QuizScreen(
     score: Int,
     isFinishing: Boolean,
     commitFailed: Boolean,
-    onProgress: (questionIndex: Int, score: Int) -> Unit,
+    onProgress: (questionIndex: Int, score: Int, answerIndex: Int) -> Unit,
     onBack: () -> Unit,
-    onFinished: (Int) -> Unit
+    onFinished: (score: Int, finalAnswerIndex: Int) -> Unit
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
@@ -207,9 +207,12 @@ fun QuizScreen(
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
                             val newScore = score + answer.score
                             if (safeQuestionIndex == quiz.questions.lastIndex) {
-                                onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
+                                onFinished(
+                                    Scoring.quizPercent(newScore, quiz.questions.size),
+                                    answerIndex
+                                )
                             } else {
-                                onProgress(safeQuestionIndex + 1, newScore)
+                                onProgress(safeQuestionIndex + 1, newScore, answerIndex)
                             }
                         },
                         enabled = !isFinishing && animatedIndex == safeQuestionIndex,
