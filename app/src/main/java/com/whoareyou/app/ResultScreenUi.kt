@@ -60,6 +60,7 @@ fun ResultScreen(
     catalog: List<Quiz>,
     completed: Set<String>,
     evidence: List<ResultEvidence> = emptyList(),
+    traitGraph: TraitGraph = TraitGraph(emptyList(), 0),
     coverage: ProfileCoverage,
     onQuizSelected: (Quiz) -> Unit,
     onDone: () -> Unit,
@@ -76,7 +77,7 @@ fun ResultScreen(
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
-    val intelligence = remember(quiz, score, evidence) { ResultScreenIntelligence.derive(quiz, score, evidence) }
+    val intelligence = remember(quiz, score, evidence, traitGraph) { ResultScreenIntelligence.derive(quiz, score, evidence, traitGraph) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
     val resultBackground = remember(accent, secondaryAccent) {
@@ -223,6 +224,11 @@ fun ResultScreen(
             intelligence.insight?.let { insight ->
                 Spacer(Modifier.height(sectionGap))
                 ResultInsightCards(insight = insight)
+            }
+
+            if (intelligence.connections.isNotEmpty()) {
+                Spacer(Modifier.height(sectionGap))
+                ResultProfileConnectionsCard(connections = intelligence.connections)
             }
 
             if (scoreChange != null) {
