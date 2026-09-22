@@ -23,8 +23,8 @@ data class Quiz(
     val metricLow: String,
     val metricHigh: String,
     val questions: List<Question>,
-    val resultIntelligence: QuizResultIntelligenceContent? = null,
-    val traits: List<QuizTraitWeight> = emptyList()
+    val traits: List<QuizTraitWeight> = emptyList(),
+    val resultIntelligence: QuizResultIntelligenceContent? = null
 )
 
 object QuizRepository {
