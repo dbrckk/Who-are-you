@@ -22,6 +22,7 @@ class ResultScreenUiTest {
             ResultScreen(
                 quiz = testQuiz(),
                 score = 75,
+                selectedAnswerIndexes = listOf(3),
                 previousScore = null,
                 completedCount = 4,
                 totalQuizCount = 30,
