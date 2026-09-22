@@ -214,6 +214,13 @@ fun ResultScreen(
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
 
+            Spacer(Modifier.height(sectionGap))
+            ResultIntelligencePanel(
+                quiz = quiz,
+                score = score,
+                selectedAnswerIndexes = selectedAnswerIndexes
+            )
+
             if (scoreChange != null) {
                 Spacer(Modifier.height(16.dp))
                 Card(
