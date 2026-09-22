@@ -20,6 +20,7 @@ class QuizScreenUiTest {
     @Test
     fun answeringEveryQuestionAdvancesAndReturnsFinalScore() {
         var finalScore: Int? = null
+        var finalAnswerIndex: Int? = null
         val quiz = testQuiz()
 
         composeRule.setContent {
@@ -31,12 +32,15 @@ class QuizScreenUiTest {
                 score = score,
                 isFinishing = false,
                 commitFailed = false,
-                onProgress = { nextQuestionIndex, nextScore ->
+                onProgress = { nextQuestionIndex, nextScore, _ ->
                     questionIndex = nextQuestionIndex
                     score = nextScore
                 },
                 onBack = {},
-                onFinished = { scoreResult, _ -> finalScore = scoreResult }
+                onFinished = { scoreResult, answerIndex ->
+                    finalScore = scoreResult
+                    finalAnswerIndex = answerIndex
+                }
             )
         }
 
@@ -48,6 +52,7 @@ class QuizScreenUiTest {
 
         composeRule.runOnIdle {
             assertEquals(100, finalScore)
+            assertEquals(0, finalAnswerIndex)
         }
     }
 
@@ -63,7 +68,7 @@ class QuizScreenUiTest {
                 score = 3,
                 isFinishing = true,
                 commitFailed = false,
-                onProgress = { _, _ -> error("progress must stay locked") },
+                onProgress = { _, _, _ -> error("progress must stay locked") },
                 onBack = {},
                 onFinished = { scoreResult, _ -> finalScore = scoreResult }
             )
