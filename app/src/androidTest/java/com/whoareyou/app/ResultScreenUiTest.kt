@@ -1,8 +1,9 @@
 package com.whoareyou.app
 
-import androidx.compose.ui.test.assertDoesNotExist
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -72,11 +73,11 @@ class ResultScreenUiTest {
             )
         }
 
-        composeRule.onNodeWithTag("result_evidence").assertDoesNotExist()
-        composeRule.onNodeWithTag("result_strengths_watchouts").assertDoesNotExist()
-        composeRule.onNodeWithTag("result_everyday_life").assertDoesNotExist()
-        composeRule.onNodeWithTag("result_reflection").assertDoesNotExist()
-        composeRule.onNodeWithTag("result_profile_connections").assertDoesNotExist()
+        composeRule.onAllNodesWithTag("result_evidence").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_strengths_watchouts").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_everyday_life").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_reflection").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_profile_connections").assertCountEquals(0)
         composeRule.onNodeWithTag("result_done").performScrollTo()
         composeRule.onNodeWithTag("result_retry").performScrollTo()
         composeRule.onNodeWithTag("result_share").performScrollTo()
