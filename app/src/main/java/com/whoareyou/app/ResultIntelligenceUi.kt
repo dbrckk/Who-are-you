@@ -125,3 +125,53 @@ fun ResultInsightCards(
         }
     }
 }
+
+
+@Composable
+fun ResultProfileConnectionsCard(
+    connections: List<ResultProfileConnection>,
+    modifier: Modifier = Modifier
+) {
+    if (connections.isEmpty()) return
+
+    val language = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]?.language
+    val french = language.equals("fr", ignoreCase = true)
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("result_profile_connections")
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = if (french) "Connexions avec votre profil" else "Connections with your profile",
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            connections.forEach { connection ->
+                val label = TraitLocalization.label(connection.traitId, french)
+                val message = when (connection.kind) {
+                    ResultProfileConnectionKind.REINFORCING ->
+                        if (french) "$label va dans le même sens que ce résultat."
+                        else "$label points in the same direction as this result."
+                    ResultProfileConnectionKind.CONTRASTING ->
+                        if (french) "$label nuance ou contraste avec ce résultat."
+                        else "$label adds nuance or contrasts with this result."
+                    ResultProfileConnectionKind.CONTEXTUAL ->
+                        if (french) "$label apporte un contexte supplémentaire à ce résultat."
+                        else "$label adds extra context to this result."
+                }
+                Text(
+                    text = message,
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Body
+                )
+            }
+        }
+    }
+}
