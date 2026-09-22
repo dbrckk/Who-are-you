@@ -129,6 +129,7 @@ private fun WhoAreYouApp() {
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
+    val quizAttemptEvidence = remember { QuizAttemptEvidence() }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -158,6 +159,7 @@ private fun WhoAreYouApp() {
         quizAttemptId = UUID.randomUUID().toString()
         quizQuestionIndex = 0
         quizRawScore = 0
+        quizAttemptEvidence.clear()
         pendingFinalScore = null
         commitFailed = false
     }
@@ -250,6 +252,11 @@ private fun WhoAreYouApp() {
                         if (!quizFinishing) {
                             quizQuestionIndex = questionIndex
                             quizRawScore = score
+                        }
+                    },
+                    onAnswerSelected = { questionIndex, answerIndex, answerScore ->
+                        if (!quizFinishing) {
+                            quizAttemptEvidence.record(questionIndex, answerIndex, answerScore)
                         }
                     },
                     onBack = {
