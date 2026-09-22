@@ -19,6 +19,7 @@
     <string name="result_intel_watch_context_blind">Une tendance claire vers %1$s peut faire oublier %2$s même lorsque la situation en bénéficierait.</string>
     <string name="result_intel_watch_overextension">Une forte tendance vers %1$s peut devenir moins utile lorsqu’une situation demande davantage de %2$s.</string>
 
+    <string name="result_intel_everyday_balanced">Tes réponses naviguent entre %1$s et %2$s. Observe quelles situations font ressortir chaque versant plutôt que de considérer l’un des deux comme ton réflexe par défaut.</string>
     <string name="result_intel_everyday_social">Dans les conversations et les groupes, remarque quand %1$s vient naturellement et quand la situation te pousse davantage vers %2$s.</string>
     <string name="result_intel_everyday_emotion">Dans les relations proches, %1$s peut influencer ta façon de créer du lien ou de te protéger. Le contexte peut aussi faire ressortir davantage %2$s.</string>
     <string name="result_intel_everyday_mind">Quand tu réfléchis ou décides sous pression, %1$s peut être ton réflexe actuel. Les situations complexes peuvent demander davantage de %2$s.</string>
