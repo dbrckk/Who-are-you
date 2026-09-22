@@ -63,6 +63,7 @@ class ResultIntelligenceTest {
         )
 
         assertEquals(ResultIntelligenceFrame.BALANCED, summary.frame)
+        assertEquals(false, summary.hasDirectionalLean)
         assertTrue(ResultInsightCue.FLEXIBILITY in summary.strengthCues)
         assertEquals(ResultInsightCue.NOTICE_CONTEXT, summary.actionCue)
     }
@@ -76,6 +77,7 @@ class ResultIntelligenceTest {
         )
 
         assertEquals(ResultIntelligenceFrame.PRONOUNCED, summary.frame)
+        assertEquals(true, summary.hasDirectionalLean)
         assertEquals(ResultDirection.HIGH, summary.direction)
         assertEquals(
             listOf(ResultInsightCue.DECISIVENESS, ResultInsightCue.CONSISTENCY),
