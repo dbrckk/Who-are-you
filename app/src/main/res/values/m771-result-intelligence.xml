@@ -19,6 +19,7 @@
     <string name="result_intel_watch_context_blind">A clear lean toward %1$s can make %2$s easier to overlook when the situation would benefit from it.</string>
     <string name="result_intel_watch_overextension">A strong %1$s tendency may become less useful when a situation needs more %2$s.</string>
 
+    <string name="result_intel_everyday_balanced">Your answers move between %1$s and %2$s. Notice which situations bring out each side instead of treating either one as your default.</string>
     <string name="result_intel_everyday_social">In conversations and groups, notice when %1$s feels natural and when the situation pulls you toward %2$s.</string>
     <string name="result_intel_everyday_emotion">In close relationships, %1$s may shape how you connect or protect yourself. Context can still bring out more %2$s.</string>
     <string name="result_intel_everyday_mind">When thinking or deciding under pressure, %1$s may be your current default. Complex situations may call for more %2$s.</string>
