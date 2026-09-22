@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.sp
 fun ResultScreen(
     quiz: Quiz,
     score: Int,
+    selectedAnswerIndexes: List<Int>,
     previousScore: Int?,
     completedCount: Int,
     totalQuizCount: Int,
