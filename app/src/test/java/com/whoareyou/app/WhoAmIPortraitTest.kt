@@ -92,6 +92,47 @@ class WhoAmIPortraitTest {
         assertTrue(portrait.isDiscoveryState)
     }
 
+
+    @Test
+    fun `input ordering does not change portrait semantics or gap order`() {
+        val alpha = trait("alpha", 82, PersonalCertainty.LIKELY, distinctive = true, confidence = 64)
+        val beta = trait("beta", 18, PersonalCertainty.ESTABLISHED, distinctive = true, confidence = 78)
+        val socialGap = TraitDomainCoverage(
+            domain = TraitDomain.SOCIAL,
+            knownCount = 0,
+            totalCount = 3,
+            strongCount = 0,
+            coveragePercent = 0
+        )
+        val thinkingGap = TraitDomainCoverage(
+            domain = TraitDomain.THINKING,
+            knownCount = 1,
+            totalCount = 4,
+            strongCount = 0,
+            coveragePercent = 25
+        )
+
+        val first = WhoAmIPortraitEngine.build(
+            personalModel(
+                traits = listOf(alpha, beta),
+                knowledgeGaps = listOf(thinkingGap, socialGap)
+            )
+        )
+        val second = WhoAmIPortraitEngine.build(
+            personalModel(
+                traits = listOf(beta, alpha),
+                knowledgeGaps = listOf(socialGap, thinkingGap)
+            )
+        )
+
+        assertEquals(first.headlineTraits.map { it.traitId }, second.headlineTraits.map { it.traitId })
+        assertEquals(
+            listOf(TraitDomain.SOCIAL, TraitDomain.THINKING),
+            first.discoveryGaps.map { it.domain }
+        )
+        assertEquals(first.discoveryGaps.map { it.domain }, second.discoveryGaps.map { it.domain })
+    }
+
     private fun trait(
         id: String,
         score: Int,
