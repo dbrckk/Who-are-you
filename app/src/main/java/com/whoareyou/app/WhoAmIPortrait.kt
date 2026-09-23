@@ -48,7 +48,7 @@ object WhoAmIPortraitEngine {
             headlineTraits = headline,
             stableTraits = stable,
             nuancedTraits = nuanced,
-            discoveryGaps = model.knowledgeGaps,
+            discoveryGaps = model.knowledgeGaps.sortedBy { it.domain.ordinal },
             evolvingTraits = evolving,
             isDiscoveryState = model.traits.isEmpty() || headline.isEmpty()
         )
