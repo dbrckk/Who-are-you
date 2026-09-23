@@ -28,6 +28,30 @@ class PersonalModelContradictionTest {
     }
 
     @Test
+    fun `moderate contradiction prevents established certainty`() {
+        val trait = ProfileTrait(
+            id = "independence",
+            score = 72,
+            confidence = 80,
+            evidence = listOf(
+                evidence("a", contribution = 82, strength = 0.8),
+                evidence("b", contribution = 78, strength = 0.8),
+                evidence("c", contribution = 74, strength = 0.8),
+                evidence("d", contribution = 20, strength = 0.8)
+            ),
+            contradictoryEvidenceCount = 1
+        )
+
+        val model = PersonalModelEngine.build(
+            TraitGraph(listOf(trait), 4),
+            coverageFor("independence", 4, 80)
+        )
+
+        assertEquals(ContradictionLevel.MODERATE, model.traits.single().contradictionLevel)
+        assertEquals(PersonalCertainty.LIKELY, model.traits.single().certainty)
+    }
+
+    @Test
     fun `strong opposing signals can produce high contradiction`() {
         val trait = ProfileTrait(
             id = "independence",
