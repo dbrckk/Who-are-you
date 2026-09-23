@@ -191,4 +191,14 @@
     <string name="trait_self_discipline">Self-discipline</string>
     <string name="trait_optimism">Optimism</string>
     <string name="trait_stress_mobilization">Stress mobilization</string>
+
+    <string name="who_am_i_domain_social">Social life</string>
+    <string name="who_am_i_domain_emotional">Emotional life</string>
+    <string name="who_am_i_domain_thinking">Thinking style</string>
+    <string name="who_am_i_domain_growth">Growth and exploration</string>
+    <string name="who_am_i_domain_self_management">Self-management</string>
+    <string name="who_am_i_trend_rising">This signal has been moving upward over time.</string>
+    <string name="who_am_i_trend_falling">This signal has been moving downward over time.</string>
+    <string name="who_am_i_trend_variable">This signal has varied across recent measurements.</string>
+    <string name="who_am_i_gap_copy">%1$s is still lightly documented. More evidence can make this part of your portrait clearer.</string>
 </resources>
