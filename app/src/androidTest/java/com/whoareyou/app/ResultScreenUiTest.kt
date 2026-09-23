@@ -52,6 +52,37 @@ class ResultScreenUiTest {
     }
 
     @Test
+    fun resultRendersProfileConnectionFromRealTraitGraphInput() {
+        val connectedQuiz = testQuiz().copy(
+            traits = listOf(QuizTraitWeight("focus", 1.0))
+        )
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = connectedQuiz,
+                score = 84,
+                previousScore = null,
+                completedCount = 4,
+                totalQuizCount = 30,
+                catalog = listOf(connectedQuiz),
+                completed = setOf(connectedQuiz.id),
+                evidence = emptyList(),
+                traitGraph = graph,
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onNodeWithTag("result_profile_connections").performScrollTo()
+    }
+
+    @Test
     fun historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable() {
         val historicQuiz = testQuiz().copy(resultIntelligence = null, traits = emptyList())
 
