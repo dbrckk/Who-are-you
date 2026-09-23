@@ -7,7 +7,7 @@ import org.junit.Test
 
 class WhoAmILegacyCompatibilityTest {
     @Test
-    fun \`empty personal model stays a discovery portrait\`() {
+    fun `empty personal model stays a discovery portrait`() {
         val portrait = WhoAmIPortraitEngine.build(PersonalModel.EMPTY)
 
         assertTrue(portrait.isDiscoveryState)
@@ -21,7 +21,7 @@ class WhoAmILegacyCompatibilityTest {
     }
 
     @Test
-    fun \`single-source exploring evidence never becomes headline or stable\`() {
+    fun `single-source exploring evidence never becomes headline or stable`() {
         val exploring = PersonalTrait(
             traitId = "curiosity",
             score = 80,
@@ -48,7 +48,7 @@ class WhoAmILegacyCompatibilityTest {
     }
 
     @Test
-    fun \`unknown trait id requires generic user-facing fallback\`() {
+    fun `unknown trait id requires generic user-facing fallback`() {
         val unknown = PersonalTrait(
             traitId = "internal_future_trait",
             score = 75,
