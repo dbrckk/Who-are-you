@@ -85,12 +85,28 @@ object PersonalModelEngine {
         else -> PersonalCertainty.EXPLORING
     }
 
-    private fun contradictionLevel(trait: ProfileTrait): ContradictionLevel = when {
-        trait.contradictoryEvidenceCount <= 0 -> ContradictionLevel.NONE
-        trait.evidenceCount <= 1 -> ContradictionLevel.LOW
-        trait.contradictoryEvidenceCount * 2 >= trait.evidenceCount -> ContradictionLevel.HIGH
-        trait.contradictoryEvidenceCount * 3 >= trait.evidenceCount -> ContradictionLevel.MODERATE
-        else -> ContradictionLevel.LOW
+    private fun contradictionLevel(trait: ProfileTrait): ContradictionLevel {
+        if (trait.evidence.isEmpty() || trait.contradictoryEvidenceCount == 0) {
+            return ContradictionLevel.NONE
+        }
+
+        val dominantHigh = trait.score >= 50
+        val totalStrength = trait.evidence.sumOf {
+            (it.signalStrength * abs(it.weight)).coerceAtLeast(0.0)
+        }
+        if (totalStrength <= 0.0) return ContradictionLevel.NONE
+
+        val opposingStrength = trait.evidence
+            .filter { (it.contribution >= 50) != dominantHigh }
+            .sumOf { (it.signalStrength * abs(it.weight)).coerceAtLeast(0.0) }
+
+        val ratio = opposingStrength / totalStrength
+        return when {
+            ratio >= 0.40 -> ContradictionLevel.HIGH
+            ratio >= 0.25 -> ContradictionLevel.MODERATE
+            ratio > 0.0 -> ContradictionLevel.LOW
+            else -> ContradictionLevel.NONE
+        }
     }
 
     private fun aggregate(
