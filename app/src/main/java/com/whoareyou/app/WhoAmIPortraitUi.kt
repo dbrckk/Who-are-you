@@ -44,7 +44,12 @@ fun WhoAmIPortraitCards(
                     traits = card.traits
                 )
                 WhoAmISection.DISCOVERY -> WhoAmIDiscoveryCard(card.discoveryGaps)
-                WhoAmISection.EVOLUTION -> WhoAmIEvolutionCard(card.traits)
+                WhoAmISection.EVOLUTION -> WhoAmITraitCard(
+                    titleRes = R.string.who_am_i_evolution,
+                    tag = "who_am_i_evolution",
+                    traits = card.traits,
+                    showTrend = true
+                )
             }
         }
     }
@@ -55,7 +60,8 @@ private fun WhoAmITraitCard(
     titleRes: Int,
     tag: String,
     traits: List<PersonalTrait>,
-    emptyCopyRes: Int? = null
+    emptyCopyRes: Int? = null,
+    showTrend: Boolean = false
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
@@ -84,7 +90,7 @@ private fun WhoAmITraitCard(
                 }
             } else {
                 traits.forEach { trait ->
-                    WhoAmITraitRow(trait)
+                    WhoAmITraitRow(trait, showTrend)
                 }
             }
         }
@@ -92,11 +98,15 @@ private fun WhoAmITraitCard(
 }
 
 @Composable
-private fun WhoAmITraitRow(trait: PersonalTrait) {
+private fun WhoAmITraitRow(
+    trait: PersonalTrait,
+    showTrend: Boolean = false
+) {
     val row = WhoAmIUiModel.traitRow(trait)
     val label = row.labelRes?.let { stringResource(it) }
         ?: stringResource(R.string.who_am_i_trait_fallback)
     val certainty = stringResource(row.certaintyRes)
+    val trendRes = if (showTrend) WhoAmIProgressModel.trendLabel(trait.trend) else null
 
     Column(
         modifier = Modifier.semantics(mergeDescendants = true) {},
@@ -112,13 +122,18 @@ private fun WhoAmITraitRow(trait: PersonalTrait) {
             color = V2Colors.TextSecondary,
             style = V2Type.Supporting
         )
+        trendRes?.let {
+            Text(
+                text = stringResource(it),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Body
+            )
+        }
     }
 }
 
 @Composable
-private fun WhoAmIDiscoveryCard(
-    discoveryGaps: List<TraitDomainCoverage>
-) {
+private fun WhoAmIDiscoveryCard(gaps: List<TraitDomainCoverage>) {
     Card(
         colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
         shape = RoundedCornerShape(V2Radius.Card),
@@ -136,66 +151,25 @@ private fun WhoAmIDiscoveryCard(
                 style = V2Type.BodyStrong,
                 modifier = Modifier.semantics { heading() }
             )
-            if (discoveryGaps.isEmpty()) {
+            if (gaps.isEmpty()) {
                 Text(
                     text = stringResource(R.string.who_am_i_discovery_empty),
                     color = V2Colors.TextSecondary,
                     style = V2Type.Body
                 )
             } else {
-                discoveryGaps.forEach { gap ->
-                    Text(
-                        text = stringResource(WhoAmIProgressModel.domainLabel(gap.domain)),
-                        color = V2Colors.TextSecondary,
-                        style = V2Type.Body
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun WhoAmIEvolutionCard(
-    traits: List<PersonalTrait>
-) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
-        shape = RoundedCornerShape(V2Radius.Card),
-        modifier = Modifier
-            .fillMaxWidth()
-            .testTag("who_am_i_evolution")
-    ) {
-        Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.who_am_i_evolution),
-                color = V2Colors.TextPrimary,
-                style = V2Type.BodyStrong,
-                modifier = Modifier.semantics { heading() }
-            )
-            traits.forEach { trait ->
-                val row = WhoAmIUiModel.traitRow(trait)
-                val label = row.labelRes?.let { stringResource(it) }
-                    ?: stringResource(R.string.who_am_i_trait_fallback)
-                val trendRes = WhoAmIProgressModel.trendLabel(trait.trend)
-
-                Column(
-                    modifier = Modifier.semantics(mergeDescendants = true) {},
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Text(
-                        text = label,
-                        color = V2Colors.TextPrimary,
-                        style = V2Type.BodyStrong
-                    )
-                    trendRes?.let {
+                gaps.take(3).forEach { gap ->
+                    val domain = stringResource(WhoAmIProgressModel.domainLabel(gap.domain))
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
-                            text = stringResource(it),
+                            text = domain,
+                            color = V2Colors.TextPrimary,
+                            style = V2Type.BodyStrong
+                        )
+                        Text(
+                            text = stringResource(R.string.who_am_i_gap_copy, domain),
                             color = V2Colors.TextSecondary,
-                            style = V2Type.Supporting
+                            style = V2Type.Body
                         )
                     }
                 }
