@@ -1,6 +1,6 @@
 package com.whoareyou.app
 
-import androidx.compose.ui.test.assertExists
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import org.junit.Rule
@@ -50,7 +50,7 @@ class ProfileScreenWhoAmITest {
             }
         }
 
-        composeRule.onNodeWithTag("who_am_i_portrait").assertExists()
-        composeRule.onNodeWithTag("who_am_i_discovery").assertExists()
+        composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
     }
 }
