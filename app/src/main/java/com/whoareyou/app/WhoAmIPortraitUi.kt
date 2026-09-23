@@ -19,7 +19,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun WhoAmIPortraitCards(
     portrait: WhoAmIPortrait,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    recommendation: NextQuizRecommendation? = null,
+    catalog: List<Quiz> = emptyList(),
+    onQuizSelected: (Quiz) -> Unit = {}
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -43,7 +46,19 @@ fun WhoAmIPortraitCards(
                     tag = "who_am_i_nuances",
                     traits = card.traits
                 )
-                WhoAmISection.DISCOVERY -> WhoAmIDiscoveryCard(card.discoveryGaps)
+                WhoAmISection.DISCOVERY -> Column(
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    WhoAmIDiscoveryCard(card.discoveryGaps)
+                    recommendation?.let {
+                        NextQuizRecommendationCard(
+                            recommendation = it,
+                            catalog = catalog,
+                            onStartQuiz = onQuizSelected,
+                            modifier = Modifier.testTag("who_am_i_next_quiz")
+                        )
+                    }
+                }
                 WhoAmISection.EVOLUTION -> WhoAmITraitCard(
                     titleRes = R.string.who_am_i_evolution,
                     tag = "who_am_i_evolution",
