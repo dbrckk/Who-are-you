@@ -38,7 +38,8 @@ data class GlobalProfileSummary(
     val longitudinalTrends: List<LongitudinalTrend> = emptyList(),
     val traitTimelines: List<TraitTimeline> = emptyList(),
     val narrative: ProfileNarrativeSummary = ProfileNarrativeSummary(emptyList()),
-    val nextQuizRecommendation: NextQuizRecommendation? = null
+    val nextQuizRecommendation: NextQuizRecommendation? = null,
+    val personalModel: PersonalModel = PersonalModel.EMPTY
 )
 
 object GlobalProfileEngine {
@@ -74,6 +75,13 @@ object GlobalProfileEngine {
             timedScoreHistory = timedScoreHistory
         )
         val coverage = ProfileCoverageEngine.build(catalog, traitGraph)
+        val knowledgeMap = ProfileKnowledgeMapEngine.build(coverage)
+        val personalModel = PersonalModelEngine.build(
+            graph = traitGraph,
+            coverage = coverage,
+            timelines = traitTimelines,
+            knowledgeMap = knowledgeMap
+        )
         return GlobalProfileSummary(
             dominantArchetype = dominant?.resultTitle ?: "Profile undiscovered",
             completionPercent = completion,
@@ -102,7 +110,8 @@ object GlobalProfileEngine {
                 completedQuizIds = dimensions.mapTo(mutableSetOf()) { it.quizId },
                 coverage = coverage,
                 timedScoreHistory = timedScoreHistory
-            )
+            ),
+            personalModel = personalModel
         )
     }
 }
