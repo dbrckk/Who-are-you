@@ -79,7 +79,9 @@ object PersonalModelEngine {
         contradiction == ContradictionLevel.HIGH -> PersonalCertainty.EXPLORING
         trait.evidenceCount >= 3 &&
             trait.confidence >= 65 &&
-            stability != PersonalStability.VARIABLE -> PersonalCertainty.ESTABLISHED
+            stability != PersonalStability.VARIABLE &&
+            (contradiction == ContradictionLevel.NONE ||
+                contradiction == ContradictionLevel.LOW) -> PersonalCertainty.ESTABLISHED
         trait.evidenceCount >= 2 && trait.confidence >= 45 ->
             PersonalCertainty.LIKELY
         else -> PersonalCertainty.EXPLORING
