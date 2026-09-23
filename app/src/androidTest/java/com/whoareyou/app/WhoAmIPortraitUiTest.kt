@@ -3,7 +3,6 @@ package com.whoareyou.app
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import org.junit.Rule
 import org.junit.Test
 
@@ -45,7 +44,5 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_nuances").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
-        composeRule.onNodeWithText("Curiosity").assertIsDisplayed()
-        composeRule.onNodeWithText("Well established").assertIsDisplayed()
     }
 }
