@@ -191,4 +191,14 @@
     <string name="trait_self_discipline">Autodiscipline</string>
     <string name="trait_optimism">Optimisme</string>
     <string name="trait_stress_mobilization">Mobilisation sous stress</string>
+
+    <string name="who_am_i_domain_social">Vie sociale</string>
+    <string name="who_am_i_domain_emotional">Vie émotionnelle</string>
+    <string name="who_am_i_domain_thinking">Style de pensée</string>
+    <string name="who_am_i_domain_growth">Évolution et exploration</string>
+    <string name="who_am_i_domain_self_management">Gestion de soi</string>
+    <string name="who_am_i_trend_rising">Ce signal évolue plutôt à la hausse au fil du temps.</string>
+    <string name="who_am_i_trend_falling">Ce signal évolue plutôt à la baisse au fil du temps.</string>
+    <string name="who_am_i_trend_variable">Ce signal a varié entre les mesures récentes.</string>
+    <string name="who_am_i_gap_copy">%1$s reste encore peu documenté. Davantage d’indices peuvent préciser cette partie de ton portrait.</string>
 </resources>
