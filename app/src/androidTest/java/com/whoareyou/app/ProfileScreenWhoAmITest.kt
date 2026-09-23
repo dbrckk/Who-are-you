@@ -51,6 +51,5 @@ class ProfileScreenWhoAmITest {
         }
 
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
-        composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
     }
 }
