@@ -7,7 +7,7 @@ class QuizAttemptEvidence {
         contributions[questionIndex] = AnswerContribution(
             questionIndex = questionIndex,
             answerIndex = answerIndex,
-            contribution = score
+            contribution = score.coerceIn(0, 3) * 2 - 3
         )
     }
 
