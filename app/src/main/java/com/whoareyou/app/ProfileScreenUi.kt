@@ -159,15 +159,12 @@ fun ProfileScreen(
                     .semantics { heading() }
             )
             Spacer(Modifier.height(10.dp))
-            WhoAmIPortraitCards(whoAmIPortrait)
-            summary.nextQuizRecommendation?.let { recommendation ->
-                Spacer(Modifier.height(sectionGap))
-                NextQuizRecommendationCard(
-                    recommendation = recommendation,
-                    catalog = catalog,
-                    onStartQuiz = onQuizSelected
-                )
-            }
+            WhoAmIPortraitCards(
+                portrait = whoAmIPortrait,
+                recommendation = summary.nextQuizRecommendation,
+                catalog = catalog,
+                onQuizSelected = onQuizSelected
+            )
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
