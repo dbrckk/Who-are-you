@@ -20,24 +20,28 @@ object PersonalModelEngine {
             domains = emptyList()
         )
     ): PersonalModel {
+        val timelinesByTraitId = timelines.associateBy { it.traitId }
+
         val traits = graph.traits
             .map { trait ->
                 val contradiction = contradictionLevel(trait)
+                val timeline = timelinesByTraitId[trait.id]
+                val stability = stabilityFor(timeline)
                 val certainty = certaintyFor(
                     trait = trait,
                     contradiction = contradiction,
-                    stability = PersonalStability.UNKNOWN
+                    stability = stability
                 )
                 PersonalTrait(
                     traitId = trait.id,
                     score = trait.score,
                     confidence = trait.confidence,
                     certainty = certainty,
-                    stability = PersonalStability.UNKNOWN,
+                    stability = stability,
                     contradictionLevel = contradiction,
                     evidenceCount = trait.evidenceCount,
                     sourceQuizIds = trait.evidence.map { it.quizId }.distinct().sorted(),
-                    trend = PersonalTrend.UNKNOWN,
+                    trend = trendFor(timeline),
                     isDistinctive = certainty.ordinal >= PersonalCertainty.LIKELY.ordinal &&
                         abs(trait.score - 50) >= 15
                 )
@@ -45,6 +49,24 @@ object PersonalModelEngine {
             .sortedWith(personalTraitComparator)
 
         return aggregate(traits, coverage, knowledgeMap)
+    }
+
+    private fun stabilityFor(timeline: TraitTimeline?): PersonalStability = when {
+        timeline == null || timeline.points.size < 2 -> PersonalStability.UNKNOWN
+        timeline.trend.kind == LongitudinalTrendKind.VOLATILE ||
+            timeline.trend.kind == LongitudinalTrendKind.OUTLIER -> PersonalStability.VARIABLE
+        timeline.trend.kind == LongitudinalTrendKind.STABLE &&
+            timeline.points.size >= 3 -> PersonalStability.STABLE
+        else -> PersonalStability.MODERATE
+    }
+
+    private fun trendFor(timeline: TraitTimeline?): PersonalTrend = when (timeline?.trend?.kind) {
+        null, LongitudinalTrendKind.INSUFFICIENT -> PersonalTrend.UNKNOWN
+        LongitudinalTrendKind.RISING -> PersonalTrend.RISING
+        LongitudinalTrendKind.FALLING -> PersonalTrend.FALLING
+        LongitudinalTrendKind.VOLATILE,
+        LongitudinalTrendKind.OUTLIER -> PersonalTrend.VARIABLE
+        LongitudinalTrendKind.STABLE -> PersonalTrend.STABLE
     }
 
     private fun certaintyFor(
