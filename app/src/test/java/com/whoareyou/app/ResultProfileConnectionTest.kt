@@ -54,4 +54,14 @@ class ResultProfileConnectionTest {
 
         assertTrue(ResultProfileConnectionEngine.derive(quiz, 84, graph).isEmpty())
     }
+
+    @Test fun zero_weight_mapping_does_not_claim_a_profile_connection() {
+        val zeroWeightQuiz = quiz.copy(traits = listOf(QuizTraitWeight("focus", 0.0)))
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 2)),
+            evidenceCount = 2
+        )
+
+        assertTrue(ResultProfileConnectionEngine.derive(zeroWeightQuiz, 84, graph).isEmpty())
+    }
 }
