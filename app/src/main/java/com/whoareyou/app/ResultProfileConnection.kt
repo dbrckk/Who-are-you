@@ -30,6 +30,8 @@ object ResultProfileConnectionEngine {
 
         return quiz.traits
             .mapNotNull { mapping ->
+                if (mapping.weight == 0.0) return@mapNotNull null
+
                 val trait = traitsById[mapping.id] ?: return@mapNotNull null
                 if (trait.confidence < MIN_CONFIDENCE) return@mapNotNull null
                 if (trait.evidenceCount == 0 && graph.evidenceCount < 2) return@mapNotNull null
@@ -37,8 +39,7 @@ object ResultProfileConnectionEngine {
                 val currentDirection = centeredResult * mapping.weight
                 val profileDirection = trait.score - 50
                 val kind = when {
-                    currentDirection == 0.0 || profileDirection == 0 ->
-                        ResultProfileConnectionKind.CONTEXTUAL
+                    profileDirection == 0 -> ResultProfileConnectionKind.CONTEXTUAL
                     (currentDirection > 0) == (profileDirection > 0) ->
                         ResultProfileConnectionKind.REINFORCING
                     else ->
