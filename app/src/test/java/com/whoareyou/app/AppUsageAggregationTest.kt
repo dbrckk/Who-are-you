@@ -24,8 +24,9 @@ class AppUsageAggregationTest {
             session("a", "2026-09-24T21:30:00Z", "2026-09-24T23:30:00Z")
         )
         val result = AppUsageAggregator.aggregate(date, zone, events)!!
-        assertTrue(result.totalForegroundMillis > 0L)
-        assertEquals(result.totalForegroundMillis, result.topApps.sumOf { it.foregroundMillis })
+        val measuredTotal = requireNotNull(result.totalForegroundMillis)
+        assertTrue(measuredTotal > 0L)
+        assertEquals(measuredTotal, result.topApps.sumOf { it.foregroundMillis })
     }
 
     @Test
@@ -58,7 +59,7 @@ class AppUsageAggregationTest {
             session("d", "2026-09-24T21:30:00Z", "2026-09-24T22:30:00Z")
         )
         val result = AppUsageAggregator.aggregate(date, zone, events)!!
-        assertEquals(result.totalForegroundMillis, result.daypartUsage.totalMillis)
+        assertEquals(requireNotNull(result.totalForegroundMillis), result.daypartUsage.totalMillis)
     }
 
     @Test
@@ -66,8 +67,8 @@ class AppUsageAggregationTest {
         val dstDate = LocalDate.of(2026, 10, 25)
         val events = listOf(session("a", "2026-10-25T00:30:00Z", "2026-10-25T02:30:00Z"))
         val result = AppUsageAggregator.aggregate(dstDate, zone, events)!!
-        assertEquals(2 * 60 * 60 * 1000L, result.totalForegroundMillis)
-        assertEquals(result.totalForegroundMillis, result.daypartUsage.totalMillis)
+        assertEquals(2 * 60 * 60 * 1000L, requireNotNull(result.totalForegroundMillis))
+        assertEquals(requireNotNull(result.totalForegroundMillis), result.daypartUsage.totalMillis)
     }
 
     private fun session(packageName: String, start: String, end: String) = AppUsageSession(
