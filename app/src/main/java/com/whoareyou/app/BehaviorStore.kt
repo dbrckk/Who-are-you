@@ -1,75 +1,50 @@
 package com.whoareyou.app
 
-import org.json.JSONArray
-import org.json.JSONObject
+import java.nio.charset.StandardCharsets
+import java.util.Base64
 
+/**
+ * Compact deterministic codec for bounded local behavioral aggregates.
+ *
+ * This deliberately uses only JDK/Kotlin primitives so pure JVM tests exercise the same codec as
+ * Android. Android's org.json classes are framework stubs in local unit tests unless Robolectric is
+ * introduced, which is unnecessary for this storage boundary.
+ */
 object BehaviorStoreCodec {
     private const val RETENTION_PREVIOUS_DAYS = 30L
+    private const val VERSION = "v1"
+    private const val NULL = "~"
 
-    fun encode(days: List<DailyBehaviorAggregate>): String {
-        val array = JSONArray()
+    fun encode(days: List<DailyBehaviorAggregate>): String = buildString {
+        append(VERSION)
         days.sortedBy { it.epochDay }.forEach { day ->
-            array.put(JSONObject().apply {
-                put("day", day.epochDay)
-                putNullable("steps", day.steps)
-                putNullable("screen", day.totalForegroundMillis)
-                putNullable("sessions", day.launchesOrSessions)
-                put("morning", day.daypartUsage.morningMillis)
-                put("afternoon", day.daypartUsage.afternoonMillis)
-                put("evening", day.daypartUsage.eveningMillis)
-                put("night", day.daypartUsage.nightMillis)
-                put("apps", JSONArray().apply {
-                    day.topApps.sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
-                        .forEach { app ->
-                            put(JSONObject().apply {
-                                put("package", app.packageName)
-                                put("foreground", app.foregroundMillis)
-                                putNullable("sessions", app.launchesOrSessions)
-                            })
-                        }
-                })
-            })
+            append('\n')
+            append(
+                listOf(
+                    day.epochDay.toString(),
+                    nullableLong(day.steps),
+                    nullableLong(day.totalForegroundMillis),
+                    nullableInt(day.launchesOrSessions),
+                    day.daypartUsage.morningMillis.toString(),
+                    day.daypartUsage.afternoonMillis.toString(),
+                    day.daypartUsage.eveningMillis.toString(),
+                    day.daypartUsage.nightMillis.toString(),
+                    encodeApps(day.topApps)
+                ).joinToString("|")
+            )
         }
-        return array.toString()
     }
 
     fun decode(payload: String?): List<DailyBehaviorAggregate> {
         if (payload.isNullOrBlank()) return emptyList()
         return runCatching {
-            val array = JSONArray(payload)
-            buildList {
-                for (index in 0 until array.length()) {
-                    val item = array.getJSONObject(index)
-                    val apps = item.optJSONArray("apps") ?: JSONArray()
-                    val topApps = buildList {
-                        for (appIndex in 0 until apps.length()) {
-                            val app = apps.getJSONObject(appIndex)
-                            add(
-                                AppUsageAggregate(
-                                    packageName = app.getString("package"),
-                                    foregroundMillis = app.getLong("foreground"),
-                                    launchesOrSessions = app.optNullableInt("sessions")
-                                )
-                            )
-                        }
-                    }
-                    add(
-                        DailyBehaviorAggregate(
-                            epochDay = item.getLong("day"),
-                            steps = item.optNullableLong("steps"),
-                            totalForegroundMillis = item.optNullableLong("screen"),
-                            topApps = topApps,
-                            launchesOrSessions = item.optNullableInt("sessions"),
-                            daypartUsage = DaypartUsage(
-                                morningMillis = item.optLong("morning", 0L),
-                                afternoonMillis = item.optLong("afternoon", 0L),
-                                eveningMillis = item.optLong("evening", 0L),
-                                nightMillis = item.optLong("night", 0L)
-                            )
-                        )
-                    )
-                }
-            }.distinctBy { it.epochDay }.sortedBy { it.epochDay }
+            val lines = payload.lineSequence().toList()
+            require(lines.firstOrNull() == VERSION)
+            lines.drop(1)
+                .filter { it.isNotBlank() }
+                .map(::decodeDay)
+                .distinctBy { it.epochDay }
+                .sortedBy { it.epochDay }
         }.getOrElse { emptyList() }
     }
 
@@ -105,13 +80,58 @@ object BehaviorStoreCodec {
         }
     }
 
-    private fun JSONObject.putNullable(key: String, value: Any?) {
-        put(key, value ?: JSONObject.NULL)
+    private fun decodeDay(line: String): DailyBehaviorAggregate {
+        val fields = line.split('|', limit = 9)
+        require(fields.size == 9)
+        return DailyBehaviorAggregate(
+            epochDay = fields[0].toLong(),
+            steps = parseNullableLong(fields[1]),
+            totalForegroundMillis = parseNullableLong(fields[2]),
+            topApps = decodeApps(fields[8]),
+            launchesOrSessions = parseNullableInt(fields[3]),
+            daypartUsage = DaypartUsage(
+                morningMillis = fields[4].toLong(),
+                afternoonMillis = fields[5].toLong(),
+                eveningMillis = fields[6].toLong(),
+                nightMillis = fields[7].toLong()
+            )
+        )
     }
 
-    private fun JSONObject.optNullableLong(key: String): Long? =
-        if (!has(key) || isNull(key)) null else getLong(key)
+    private fun encodeApps(apps: List<AppUsageAggregate>): String = apps
+        .sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
+        .joinToString(",") { app ->
+            listOf(
+                encodeText(app.packageName),
+                app.foregroundMillis.toString(),
+                nullableInt(app.launchesOrSessions)
+            ).joinToString(":")
+        }
 
-    private fun JSONObject.optNullableInt(key: String): Int? =
-        if (!has(key) || isNull(key)) null else getInt(key)
+    private fun decodeApps(encoded: String): List<AppUsageAggregate> {
+        if (encoded.isBlank()) return emptyList()
+        return encoded.split(',').map { item ->
+            val fields = item.split(':', limit = 3)
+            require(fields.size == 3)
+            AppUsageAggregate(
+                packageName = decodeText(fields[0]),
+                foregroundMillis = fields[1].toLong(),
+                launchesOrSessions = parseNullableInt(fields[2])
+            )
+        }
+    }
+
+    private fun encodeText(value: String): String = Base64.getUrlEncoder()
+        .withoutPadding()
+        .encodeToString(value.toByteArray(StandardCharsets.UTF_8))
+
+    private fun decodeText(value: String): String = String(
+        Base64.getUrlDecoder().decode(value),
+        StandardCharsets.UTF_8
+    )
+
+    private fun nullableLong(value: Long?): String = value?.toString() ?: NULL
+    private fun nullableInt(value: Int?): String = value?.toString() ?: NULL
+    private fun parseNullableLong(value: String): Long? = if (value == NULL) null else value.toLong()
+    private fun parseNullableInt(value: String): Int? = if (value == NULL) null else value.toInt()
 }
