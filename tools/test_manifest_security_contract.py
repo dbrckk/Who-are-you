@@ -10,9 +10,24 @@ class ManifestSecurityContractTest(unittest.TestCase):
         self.billing = (ROOT / "app/src/main/java/com/whoareyou/app/BillingManager.kt").read_text(encoding="utf-8")
         self.ads = (ROOT / "app/src/main/java/com/whoareyou/app/AdManager.kt").read_text(encoding="utf-8")
 
-    def test_manifest_uses_minimal_network_permission_and_secure_defaults(self):
-        self.assertIn('android.permission.INTERNET', self.manifest)
-        self.assertEqual(1, self.manifest.count("<uses-permission"))
+    def test_manifest_uses_only_approved_permissions_and_secure_defaults(self):
+        approved = {
+            'android.permission.INTERNET',
+            'android.permission.PACKAGE_USAGE_STATS',
+        }
+        declared = set()
+        for line in self.manifest.splitlines():
+            if '<uses-permission' not in line:
+                continue
+            marker = 'android:name="'
+            start = line.index(marker) + len(marker)
+            declared.add(line[start:line.index('"', start)])
+        self.assertEqual(approved, declared)
+        self.assertNotIn('android.permission.READ_CALL_LOG', self.manifest)
+        self.assertNotIn('android.permission.READ_SMS', self.manifest)
+        self.assertNotIn('android.permission.READ_CONTACTS', self.manifest)
+        self.assertNotIn('android.permission.ACCESS_FINE_LOCATION', self.manifest)
+        self.assertNotIn('android.permission.ACCESS_COARSE_LOCATION', self.manifest)
         self.assertIn('android:allowBackup="false"', self.manifest)
         self.assertIn('android:usesCleartextTraffic="false"', self.manifest)
 
