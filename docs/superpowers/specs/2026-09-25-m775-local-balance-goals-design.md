@@ -94,9 +94,9 @@ data class BehaviorGoalDayResult(
 - `STEPS_AT_LEAST`: met when measured steps >= target.
 - `SCREEN_TIME_AT_MOST`: met when total foreground millis <= target.
 - `EVENING_USAGE_AT_MOST`: met when an app-usage measurement exists and evening millis <= target.
-- `APP_USAGE_AT_MOST`: met when app-usage measurement exists; absent selected package means measured app usage is zero only when the day's app-usage aggregate itself is known to exist.
+- `APP_USAGE_AT_MOST`: evaluated only when the selected package is present in the retained per-app aggregate for that day.
 
-For v1, selected-app evaluation requires a known daily app-usage aggregate (`totalForegroundMillis != null`). This prevents an empty top-app list caused by missing collection from being interpreted as zero.
+M774 intentionally stores only a bounded top-app list. Therefore an absent selected package is **unknown, not zero**, even when total app usage is known. This prevents a package outside the retained top list from being misclassified as unused.
 
 ## Persistence
 
@@ -138,8 +138,8 @@ No new manifest permission is allowed for M775.
 - current partial day excluded;
 - missing day != zero/failure;
 - missing source measurement != zero;
-- selected app absent on a known usage day => zero;
-- selected app absent on unknown usage day => missing;
+- selected app absent from the retained top-app aggregate => missing;
+- selected app present => evaluate its retained foreground duration;
 - duplicate/input ordering deterministic;
 - experiment window clipping;
 - paused goal preserves evidence but reports paused;
