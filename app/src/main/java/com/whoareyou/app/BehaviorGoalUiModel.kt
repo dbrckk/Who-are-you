@@ -40,8 +40,8 @@ object BehaviorGoalUiModelFactory {
     ): BehaviorGoalUiModel {
         val goal = progress.goal
         val endExclusive = goal.startEpochDay + goal.durationDays.toLong()
-        val nextCompletedCandidate = maxOf(currentEpochDay + 1L, goal.startEpochDay)
-        val remainingDays = (endExclusive - nextCompletedCandidate)
+        val currentOrStart = maxOf(currentEpochDay, goal.startEpochDay)
+        val remainingDays = (endExclusive - currentOrStart)
             .coerceAtLeast(0L)
             .coerceAtMost(Int.MAX_VALUE.toLong())
             .toInt()
