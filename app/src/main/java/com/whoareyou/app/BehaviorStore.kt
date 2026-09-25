@@ -56,6 +56,14 @@ object BehaviorStoreCodec {
             .sortedBy { it.epochDay }
     }
 
+    fun completed(
+        days: List<DailyBehaviorAggregate>,
+        currentEpochDay: Long
+    ): List<DailyBehaviorAggregate> = days
+        .filter { it.epochDay < currentEpochDay }
+        .distinctBy { it.epochDay }
+        .sortedBy { it.epochDay }
+
     fun upsert(
         days: List<DailyBehaviorAggregate>,
         day: DailyBehaviorAggregate,
