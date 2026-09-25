@@ -167,7 +167,7 @@ fun ProfileScreen(
                 onQuizSelected = onQuizSelected
             )
             Spacer(Modifier.height(sectionGap))
-            HabitsProfileEntry(onClick = onOpenHabits)
+            HabitsProfileEntry(onOpenHabits = onOpenHabits)
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
