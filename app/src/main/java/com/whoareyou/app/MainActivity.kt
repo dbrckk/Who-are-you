@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }
 }
 @Composable
-@Suppress("LongMethod")
 private fun WhoAreYouApp(){
     val context=LocalContext.current
     val activity=context as? Activity
@@ -113,7 +112,7 @@ private fun WhoAreYouApp(){
                             }
                             BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION -> scope.launch {
                                 BehaviorRepository.setSourceEnabled(context, source, true)
-                                when (val state=HealthConnectActivityDataSource(context).state()) {
+                                when (val state=runCatching { HealthConnectActivityDataSource(context).state() }.getOrDefault(BehaviorSourceState.ERROR)) {
                                     BehaviorSourceState.AVAILABLE -> {
                                         BehaviorRepository.setSourceState(context, source, state)
                                         refreshBehavior()
@@ -127,7 +126,7 @@ private fun WhoAreYouApp(){
                             }
                             BehaviorIntegrationCommand.OPEN_USAGE_ACCESS -> scope.launch {
                                 BehaviorRepository.setSourceEnabled(context, source, true)
-                                when (val state=UsageAccess.state(context)) {
+                                when (val state=runCatching { UsageAccess.state(context) }.getOrDefault(BehaviorSourceState.ERROR)) {
                                     BehaviorSourceState.AVAILABLE -> {
                                         BehaviorRepository.setSourceState(context, source, state)
                                         refreshBehavior()
