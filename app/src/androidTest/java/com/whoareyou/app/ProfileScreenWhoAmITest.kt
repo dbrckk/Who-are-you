@@ -45,11 +45,14 @@ class ProfileScreenWhoAmITest {
                     catalog = emptyList(),
                     onQuizSelected = {},
                     onBack = {},
-                    onResetLocalData = {}
+                    onResetLocalData = {},
+                    onOpenHabits = {}
                 )
             }
         }
 
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_open_habits").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_habits_privacy_hint").assertIsDisplayed()
     }
 }
