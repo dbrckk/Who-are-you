@@ -63,7 +63,7 @@ class BehaviorGoalEngineTest {
     }
 
     @Test
-    fun `selected app absent on known usage day is measured as zero`() {
+    fun `selected app absent from retained top apps remains missing`() {
         val goal = BehaviorGoal.appUsageAtMost(
             id = "app",
             packageName = "com.example.target",
@@ -82,8 +82,9 @@ class BehaviorGoalEngineTest {
             currentEpochDay = 41L
         )
 
-        assertEquals(0L, progress.days.single().measuredValue)
-        assertEquals(true, progress.days.single().met)
+        assertEquals(0, progress.observedDays)
+        assertNull(progress.days.single().measuredValue)
+        assertNull(progress.days.single().met)
     }
 
     @Test
