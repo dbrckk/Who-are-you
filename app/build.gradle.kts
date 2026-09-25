@@ -147,6 +147,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     implementation("androidx.datastore:datastore-preferences:1.2.1")
+    implementation("androidx.health.connect:connect-client:1.1.0")
     implementation("androidx.profileinstaller:profileinstaller:1.4.1")
     implementation("com.android.billingclient:billing-ktx:9.1.0")
     implementation("com.google.android.gms:play-services-ads:25.4.0")
