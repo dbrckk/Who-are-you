@@ -119,6 +119,41 @@ class BehaviorUiModelTest {
     }
 
     @Test
+    fun `late usage pattern exposes a separate neutral suggestion`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                insights = listOf(
+                    BehaviorInsight(
+                        category = BehaviorInsightCategory.LATE_USAGE_PATTERN,
+                        evidenceTier = BehaviorEvidenceTier.DEVELOPING
+                    )
+                )
+            )
+        )
+
+        assertEquals(
+            listOf(BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE),
+            model.suggestions.map { it.copy }
+        )
+    }
+
+    @Test
+    fun `insufficient history does not fabricate a suggestion`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                insights = listOf(
+                    BehaviorInsight(
+                        category = BehaviorInsightCategory.INSUFFICIENT_HISTORY,
+                        evidenceTier = BehaviorEvidenceTier.EARLY
+                    )
+                )
+            )
+        )
+
+        assertTrue(model.suggestions.isEmpty())
+    }
+
+    @Test
     fun `local only disclosure is always present`() {
         val model = BehaviorUiModelFactory.build(BehaviorSnapshot.EMPTY)
         assertEquals(BehaviorCopyKey.LOCAL_ONLY_BODY, model.privacyCopy)
