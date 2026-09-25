@@ -57,6 +57,34 @@ class BehaviorScreenUiTest {
     }
 
     @Test
+    fun deleteAllRequiresExplicitConfirmation() {
+        var deletes = 0
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    onBack = {},
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = { deletes += 1 }
+                )
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_delete_all"))
+        composeRule.onNodeWithTag("behavior_delete_all").performClick()
+
+        composeRule.runOnIdle { assertEquals(0, deletes) }
+
+        composeRule.onNodeWithTag("behavior_delete_confirm")
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle { assertEquals(1, deletes) }
+    }
+
+    @Test
     fun sourceCtaRoutesTypedAction() {
         var selected: Pair<BehaviorSource, BehaviorSourceAction>? = null
 
