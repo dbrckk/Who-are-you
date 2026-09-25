@@ -30,6 +30,7 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,6 +59,19 @@ private fun WhoAreYouApp() {
     }
     val storedProfileFlow = remember(context) { ProfileStore.observe(context) }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
+    val behaviorFlow = remember(context) { BehaviorRepository.observe(context.applicationContext) }
+    val behaviorSnapshot by behaviorFlow.collectAsState(
+        initial = BehaviorSnapshot(
+            today = null,
+            last7Days = emptyList(),
+            last30Days = emptyList(),
+            sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED },
+            insights = emptyList()
+        )
+    )
+    val behaviorRefreshCoordinator = remember(context) {
+        createAndroidBehaviorRefreshCoordinator(context.applicationContext)
+    }
     val storedProfile = storedProfileState
     val quizCatalog = quizCatalogState
     if (storedProfile == null || quizCatalog == null) {
@@ -117,12 +131,8 @@ private fun WhoAreYouApp() {
         runCatching { billingManager?.start() }
         runCatching { adManager?.start(activity) }
     }
-    DisposableEffect(billingManager) {
-        onDispose { runCatching { billingManager?.close() } }
-    }
-    DisposableEffect(adManager) {
-        onDispose { runCatching { adManager?.close() } }
-    }
+    DisposableEffect(billingManager) { onDispose { runCatching { billingManager?.close() } } }
+    DisposableEffect(adManager) { onDispose { runCatching { adManager?.close() } } }
 
     var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
     val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
@@ -163,19 +173,19 @@ private fun WhoAreYouApp() {
         pendingFinalScore = null
         commitFailed = false
     }
+    fun refreshBehavior() {
+        scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } }
+    }
 
     QuizResultCommitEffect(
         screen, selectedQuiz, quizAttemptId, pendingFinalScore,
-        onCommitFailed = {
-            pendingFinalScore = null
-            commitFailed = true
-        },
-        onCommitted = { persistedScore ->
-            finalScore = persistedScore
-            navigate(AppScreen.RESULT)
-        }
+        onCommitFailed = { pendingFinalScore = null; commitFailed = true },
+        onCommitted = { persistedScore -> finalScore = persistedScore; navigate(AppScreen.RESULT) }
     )
-    LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
+    LaunchedEffect(screen) {
+        runCatching { AppEvents.screenView(screen) }
+        if (screen == AppScreen.HABITS) refreshBehavior()
+    }
     BackHandler(enabled = screen != AppScreen.DISCOVER) {
         if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler
         if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
@@ -190,19 +200,12 @@ private fun WhoAreYouApp() {
         AppScreen.QUIZ -> selectedQuiz.title
         AppScreen.RESULT -> selectedQuiz.title
     }
-    Box(
-        Modifier
-            .fillMaxSize()
-            .semantics { testTagsAsResourceId = true }
-    ) {
+    Box(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
         AnimatedContent(
             targetState = screen,
             transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) },
             label = "screen",
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag("app_screen_${screen.name.lowercase()}")
-                .semantics { paneTitle = screenPaneTitle }
+            modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}").semantics { paneTitle = screenPaneTitle }
         ) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
@@ -220,9 +223,7 @@ private fun WhoAreYouApp() {
                         runCatching { AppEvents.testStart(quiz.id) }
                         navigate(AppScreen.QUIZ)
                     },
-                    onRemoveAds = {
-                        if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) }
-                    },
+                    onRemoveAds = { if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) } },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
                 AppScreen.PROFILE -> ProfileScreen(
@@ -236,26 +237,23 @@ private fun WhoAreYouApp() {
                         navigate(AppScreen.QUIZ)
                     },
                     onBack = { navigate(AppScreen.DISCOVER) },
-                    onResetLocalData = {
-                        scope.launch {
-                            ProfileStore.clearLocalProfile(context)
-                            navigate(AppScreen.DISCOVER)
-                        }
-                    }
+                    onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } }
                 )
                 AppScreen.HABITS -> BehaviorScreen(
-                    model = BehaviorUiModelFactory.build(
-                        BehaviorSnapshot(
-                            today = null,
-                            last7Days = emptyList(),
-                            last30Days = emptyList(),
-                            sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED },
-                            insights = emptyList()
-                        )
-                    ),
+                    model = BehaviorUiModelFactory.build(behaviorSnapshot),
                     onBack = { navigate(AppScreen.DISCOVER) },
-                    onSourceAction = { _, _ -> },
-                    onDeleteAll = { }
+                    onSourceAction = { source, action ->
+                        when (BehaviorIntegrationPolicy.command(source, action)) {
+                            BehaviorIntegrationCommand.DISABLE_SOURCE -> scope.launch { BehaviorRepository.clearSource(context, source) }
+                            BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION,
+                            BehaviorIntegrationCommand.OPEN_USAGE_ACCESS -> scope.launch {
+                                BehaviorRepository.setSourceEnabled(context, source, true)
+                                BehaviorRepository.setSourceState(context, source, BehaviorSourceState.PERMISSION_REQUIRED)
+                            }
+                            BehaviorIntegrationCommand.NONE -> Unit
+                        }
+                    },
+                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } }
                 )
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
@@ -263,29 +261,10 @@ private fun WhoAreYouApp() {
                     score = quizRawScore,
                     isFinishing = quizFinishing,
                     commitFailed = commitFailed,
-                    onProgress = { questionIndex, score ->
-                        if (!quizFinishing) {
-                            quizQuestionIndex = questionIndex
-                            quizRawScore = score
-                        }
-                    },
-                    onAnswerSelected = { questionIndex, answerIndex, answerScore ->
-                        if (!quizFinishing) {
-                            quizAttemptEvidence.record(questionIndex, answerIndex, answerScore)
-                        }
-                    },
-                    onBack = {
-                        if (!quizFinishing) {
-                            runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
-                            navigate(AppScreen.DISCOVER)
-                        }
-                    },
-                    onFinished = { score ->
-                        if (!quizFinishing) {
-                            commitFailed = false
-                            pendingFinalScore = score
-                        }
-                    }
+                    onProgress = { questionIndex, score -> if (!quizFinishing) { quizQuestionIndex = questionIndex; quizRawScore = score } },
+                    onAnswerSelected = { questionIndex, answerIndex, answerScore -> if (!quizFinishing) quizAttemptEvidence.record(questionIndex, answerIndex, answerScore) },
+                    onBack = { if (!quizFinishing) { runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }; navigate(AppScreen.DISCOVER) } },
+                    onFinished = { score -> if (!quizFinishing) { commitFailed = false; pendingFinalScore = score } }
                 )
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz,
@@ -298,35 +277,18 @@ private fun WhoAreYouApp() {
                     evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()),
                     traitGraph = globalProfile.traitGraph,
                     coverage = globalProfile.coverage,
-                    onQuizSelected = { quiz ->
-                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
-                        selectedQuizId = quiz.id
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(quiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    },
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
                     onDone = {
                         pendingFinalScore = null
                         val manager = adManager
-                        if (manager == null) navigate(AppScreen.DISCOVER) else runCatching {
-                            manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) }
-                        }.onFailure { navigate(AppScreen.DISCOVER) }
+                        if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) } }.onFailure { navigate(AppScreen.DISCOVER) }
                     },
-                    onRetry = {
-                        previousScoreForAttempt = finalScore
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(selectedQuiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    }
+                    onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }
                 )
             }
         }
         AppShellNavigation.tabFor(screen)?.let { selectedTab ->
-            PremiumAppShellBar(
-                selectedTab,
-                { tab -> navigate(AppShellNavigation.destination(tab)) },
-                Modifier.align(Alignment.BottomCenter)
-            )
+            PremiumAppShellBar(selectedTab, { tab -> navigate(AppShellNavigation.destination(tab)) }, Modifier.align(Alignment.BottomCenter))
         }
     }
 }
