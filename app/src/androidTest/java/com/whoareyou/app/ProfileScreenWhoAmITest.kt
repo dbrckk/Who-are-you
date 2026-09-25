@@ -54,6 +54,6 @@ class ProfileScreenWhoAmITest {
 
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
         composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
-        composeRule.onNodeWithTag("profile_habits_privacy_hint").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_habits_privacy_hint").performScrollTo().assertIsDisplayed()
     }
 }
