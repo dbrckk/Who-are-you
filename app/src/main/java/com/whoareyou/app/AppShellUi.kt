@@ -47,14 +47,14 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-// The persistent shell belongs only to top-level exploration spaces; focused/secondary flows stay chrome-free.
+// The persistent shell belongs only to top-level exploration spaces; focused quiz/result flows stay chrome-free.
 enum class AppShellTab { DISCOVER, PROFILE }
 
 object AppShellNavigation {
     fun tabFor(screen: AppScreen): AppShellTab? = when (screen) {
         AppScreen.DISCOVER -> AppShellTab.DISCOVER
         AppScreen.PROFILE -> AppShellTab.PROFILE
-        AppScreen.HABITS, AppScreen.QUIZ, AppScreen.RESULT -> null
+        AppScreen.QUIZ, AppScreen.RESULT -> null
     }
 
     fun destination(tab: AppShellTab): AppScreen = when (tab) {
