@@ -23,6 +23,20 @@ class BehaviorUiModelTest {
     }
 
     @Test
+    fun `sources expose privacy preserving permission explanations`() {
+        val model = BehaviorUiModelFactory.build(BehaviorSnapshot.EMPTY)
+
+        assertEquals(
+            BehaviorCopyKey.SOURCE_ACTIVITY_DETAIL,
+            model.sources.first { it.source == BehaviorSource.ACTIVITY }.detail
+        )
+        assertEquals(
+            BehaviorCopyKey.SOURCE_APP_USAGE_DETAIL,
+            model.sources.first { it.source == BehaviorSource.APP_USAGE }.detail
+        )
+    }
+
+    @Test
     fun `permission required produces authorization action`() {
         val model = BehaviorUiModelFactory.build(
             BehaviorSnapshot.EMPTY.copy(
