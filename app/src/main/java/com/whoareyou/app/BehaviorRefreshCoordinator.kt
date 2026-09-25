@@ -115,6 +115,27 @@ class BehaviorRefreshCoordinator(
     )
 }
 
+fun createAndroidBehaviorRefreshCoordinator(
+    context: Context,
+    zone: ZoneId = ZoneId.systemDefault()
+): BehaviorRefreshCoordinator {
+    val appContext = context.applicationContext
+    val activityCollector = ActivityCollector(
+        dataSource = HealthConnectActivityDataSource(appContext),
+        zone = zone
+    )
+    val appUsageCollector = AppUsageCollector(
+        dataSource = AndroidAppUsageDataSource(appContext),
+        zone = zone
+    )
+    return BehaviorRefreshCoordinator(
+        store = AndroidBehaviorRefreshStore(appContext),
+        activityCollector = activityCollector::collectDay,
+        appUsageCollector = appUsageCollector::collectDay,
+        zone = zone
+    )
+}
+
 class AndroidBehaviorRefreshStore(
     context: Context
 ) : BehaviorRefreshStore {
