@@ -46,6 +46,7 @@ private fun WhoAreYouApp(){
     )
     val behaviorRefreshCoordinator=remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }
     fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }
+    BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }
     val activityPermissionLauncher=rememberLauncherForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->
         scope.launch {
             val allowed=HealthConnectActivityDataSource.READ_STEPS_PERMISSION in granted
