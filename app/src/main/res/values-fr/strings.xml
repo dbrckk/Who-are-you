@@ -236,5 +236,9 @@
     <string name="habits_pattern_insufficient">Ta référence locale est encore en cours de construction.</string>
     <string name="habits_observed_label">OBSERVÉ</string>
     <string name="habits_suggested_label">SUGGÉRÉ</string>
+    <string name="habits_suggestion_keep_personal_baseline">Si ce rythme te convient, le garder stable peut rendre les prochaines comparaisons plus claires.</string>
+    <string name="habits_suggestion_review_app_balance">Si tu veux rééquilibrer ton temps d’utilisation, regarde tes apps les plus utilisées et choisis où tu souhaites consacrer ce temps.</string>
+    <string name="habits_suggestion_reduce_evening_use">Si tu veux réduire l’utilisation le soir, un petit minuteur d’app ou une période sans écran peut aider.</string>
+    <string name="habits_suggestion_review_recent_change">Si tu veux mieux comprendre ce changement, compare-le à ta propre routine pendant les prochains jours.</string>
 
 </resources>
