@@ -46,15 +46,13 @@ object BehaviorRepository {
                     prefs[appUsageStateKey]
                 )
             )
+            val completed = BehaviorStoreCodec.completed(history, today)
             BehaviorSnapshot(
                 today = history.firstOrNull { it.epochDay == today },
-                last7Days = history.filter { it.epochDay in (today - 6L)..today },
-                last30Days = history.filter { it.epochDay in (today - 29L)..today },
+                last7Days = completed.filter { it.epochDay >= today - 7L },
+                last30Days = completed.filter { it.epochDay >= today - 30L },
                 sourceStates = states,
-                insights = BehaviorInsightEngine.build(
-                    BehaviorStoreCodec.completed(history, today),
-                    states
-                )
+                insights = BehaviorInsightEngine.build(completed, states)
             )
         }
 
