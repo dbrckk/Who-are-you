@@ -74,6 +74,7 @@ class BehaviorPrivacyContractTest(unittest.TestCase):
             "ActivityCollector.kt",
             "AppUsageCollector.kt",
             "UsageAccess.kt",
+            "BehaviorSourceAccess.kt",
         ]
         for name in behavior_files:
             source = self.read(name)
