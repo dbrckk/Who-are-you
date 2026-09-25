@@ -51,7 +51,10 @@ object BehaviorRepository {
                 last7Days = history.filter { it.epochDay in (today - 6L)..today },
                 last30Days = history.filter { it.epochDay in (today - 29L)..today },
                 sourceStates = states,
-                insights = BehaviorInsightEngine.build(history, states)
+                insights = BehaviorInsightEngine.build(
+                    BehaviorStoreCodec.completed(history, today),
+                    states
+                )
             )
         }
 
