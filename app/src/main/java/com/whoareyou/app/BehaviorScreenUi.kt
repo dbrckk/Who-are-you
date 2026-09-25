@@ -18,7 +18,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
@@ -128,11 +130,25 @@ private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: 
     ) {
         Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(stringResource(title), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
-            if (period.metrics.isEmpty()) {
+            if (period.metrics.isEmpty() && period.topApps.isEmpty()) {
                 Text(stringResource(emptyCopy), color = V2Colors.TextSecondary, style = V2Type.Supporting)
             } else {
                 period.metrics.forEach { metric ->
                     Text(behaviorMetric(metric), color = V2Colors.TextPrimary, style = V2Type.SectionTitle)
+                }
+                if (period.topApps.isNotEmpty()) {
+                    Text(stringResource(R.string.habits_top_apps), color = V2Colors.TextSecondary, style = V2Type.Caption)
+                    period.topApps.forEach { app ->
+                        Text(
+                            stringResource(
+                                R.string.habits_app_usage,
+                                appDisplayName(app.packageName),
+                                durationLabel(app.foregroundMillis)
+                            ),
+                            color = V2Colors.TextPrimary,
+                            style = V2Type.Supporting
+                        )
+                    }
                 }
             }
         }
@@ -184,6 +200,17 @@ private fun behaviorMetric(metric: BehaviorMetricUi): String = when (metric.kind
     BehaviorMetricKind.SESSIONS -> stringResource(R.string.habits_sessions, metric.value)
     BehaviorMetricKind.AVERAGE_STEPS -> stringResource(R.string.habits_average_steps, metric.value)
     BehaviorMetricKind.AVERAGE_SCREEN_TIME -> stringResource(R.string.habits_average_screen_time, durationLabel(metric.value))
+}
+
+@Composable
+private fun appDisplayName(packageName: String): String {
+    val context = LocalContext.current
+    return remember(packageName, context) {
+        runCatching {
+            val info = context.packageManager.getApplicationInfo(packageName, 0)
+            context.packageManager.getApplicationLabel(info).toString().trim()
+        }.getOrNull().takeUnless { it.isNullOrBlank() } ?: packageName
+    }
 }
 
 private fun durationLabel(millis: Long): String {
