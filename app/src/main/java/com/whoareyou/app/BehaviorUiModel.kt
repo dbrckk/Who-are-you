@@ -46,8 +46,14 @@ data class BehaviorMetricUi(
     val value: Long
 )
 
+data class BehaviorAppUsageUi(
+    val packageName: String,
+    val foregroundMillis: Long
+)
+
 data class BehaviorPeriodUi(
-    val metrics: List<BehaviorMetricUi>
+    val metrics: List<BehaviorMetricUi>,
+    val topApps: List<BehaviorAppUsageUi> = emptyList()
 )
 
 data class BehaviorSourceUi(
@@ -109,7 +115,12 @@ object BehaviorUiModelFactory {
                 snapshot.today?.launchesOrSessions?.let {
                     add(BehaviorMetricUi(BehaviorMetricKind.SESSIONS, it.toLong()))
                 }
-            }
+            },
+            topApps = snapshot.today?.topApps
+                .orEmpty()
+                .sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
+                .take(3)
+                .map { BehaviorAppUsageUi(it.packageName, it.foregroundMillis) }
         ),
         last7Days = history(snapshot.last7Days),
         last30Days = history(snapshot.last30Days),
@@ -130,6 +141,18 @@ object BehaviorUiModelFactory {
     private fun history(days: List<DailyBehaviorAggregate>): BehaviorPeriodUi {
         val stepValues = days.mapNotNull { it.steps }
         val screenValues = days.mapNotNull { it.totalForegroundMillis }
+        val topApps = days
+            .flatMap { it.topApps }
+            .groupBy { it.packageName }
+            .map { (packageName, usages) ->
+                BehaviorAppUsageUi(
+                    packageName = packageName,
+                    foregroundMillis = usages.sumOf { it.foregroundMillis }
+                )
+            }
+            .sortedWith(compareByDescending<BehaviorAppUsageUi> { it.foregroundMillis }.thenBy { it.packageName })
+            .take(3)
+
         return BehaviorPeriodUi(
             metrics = buildList {
                 average(stepValues)?.let {
@@ -138,7 +161,8 @@ object BehaviorUiModelFactory {
                 average(screenValues)?.let {
                     add(BehaviorMetricUi(BehaviorMetricKind.AVERAGE_SCREEN_TIME, it))
                 }
-            }
+            },
+            topApps = topApps
         )
     }
 
