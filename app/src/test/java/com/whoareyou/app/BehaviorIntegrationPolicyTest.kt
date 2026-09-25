@@ -1,6 +1,8 @@
 package com.whoareyou.app
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class BehaviorIntegrationPolicyTest {
@@ -46,5 +48,16 @@ class BehaviorIntegrationPolicyTest {
             BehaviorIntegrationCommand.NONE,
             BehaviorIntegrationPolicy.command(BehaviorSource.ACTIVITY, BehaviorSourceAction.NONE)
         )
+    }
+
+    @Test
+    fun `activity permission result refreshes only when granted`() {
+        assertTrue(BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(granted = true))
+        assertFalse(BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(granted = false))
+    }
+
+    @Test
+    fun `return from usage access always rechecks source state`() {
+        assertTrue(BehaviorIntegrationPolicy.shouldRefreshAfterUsageAccessReturn())
     }
 }
