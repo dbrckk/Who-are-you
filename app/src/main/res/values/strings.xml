@@ -236,5 +236,9 @@
     <string name="habits_pattern_insufficient">Your local baseline is still being built.</string>
     <string name="habits_observed_label">OBSERVED</string>
     <string name="habits_suggested_label">SUGGESTED</string>
+    <string name="habits_suggestion_keep_personal_baseline">If this rhythm works for you, keeping it steady can make future comparisons clearer.</string>
+    <string name="habits_suggestion_review_app_balance">If you want to rebalance your app time, review your most-used apps and choose where you want that time to go.</string>
+    <string name="habits_suggestion_reduce_evening_use">If you want to reduce evening use, a small app timer or a screen-free period may help.</string>
+    <string name="habits_suggestion_review_recent_change">If you want to understand this change, compare it with your own routine over the next few days.</string>
 
 </resources>
