@@ -3,6 +3,7 @@ package com.whoareyou.app
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 
@@ -52,7 +53,7 @@ class ProfileScreenWhoAmITest {
         }
 
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
-        composeRule.onNodeWithTag("profile_open_habits").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
         composeRule.onNodeWithTag("profile_habits_privacy_hint").assertIsDisplayed()
     }
 }
