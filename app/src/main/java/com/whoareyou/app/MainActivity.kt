@@ -112,7 +112,7 @@ private fun WhoAreYouApp(){
                             }
                             BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION -> scope.launch {
                                 BehaviorRepository.setSourceEnabled(context, source, true)
-                                when (val state=runCatching { HealthConnectActivityDataSource(context).state() }.getOrDefault(BehaviorSourceState.ERROR)) {
+                                when (val state=BehaviorSourceAccess.activityState(context)) {
                                     BehaviorSourceState.AVAILABLE -> {
                                         BehaviorRepository.setSourceState(context, source, state)
                                         refreshBehavior()
@@ -126,7 +126,7 @@ private fun WhoAreYouApp(){
                             }
                             BehaviorIntegrationCommand.OPEN_USAGE_ACCESS -> scope.launch {
                                 BehaviorRepository.setSourceEnabled(context, source, true)
-                                when (val state=runCatching { UsageAccess.state(context) }.getOrDefault(BehaviorSourceState.ERROR)) {
+                                when (val state=BehaviorSourceAccess.appUsageState(context)) {
                                     BehaviorSourceState.AVAILABLE -> {
                                         BehaviorRepository.setSourceState(context, source, state)
                                         refreshBehavior()
