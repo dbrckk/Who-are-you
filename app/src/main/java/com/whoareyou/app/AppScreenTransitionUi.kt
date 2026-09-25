@@ -66,6 +66,7 @@ fun premiumScreenTransition(
 private fun navigationDepth(screen: AppScreen): Int = when (screen) {
     AppScreen.DISCOVER -> 0
     AppScreen.PROFILE -> 1
+    AppScreen.HABITS -> 2
     AppScreen.QUIZ -> 2
     AppScreen.RESULT -> 3
 }
