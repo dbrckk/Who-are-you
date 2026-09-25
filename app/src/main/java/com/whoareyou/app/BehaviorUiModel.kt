@@ -32,7 +32,11 @@ enum class BehaviorCopyKey {
     PATTERN_APP_CONCENTRATION,
     PATTERN_LATE_USAGE,
     PATTERN_USAGE_REGULARITY,
-    PATTERN_INSUFFICIENT_HISTORY
+    PATTERN_INSUFFICIENT_HISTORY,
+    SUGGESTION_KEEP_PERSONAL_BASELINE,
+    SUGGESTION_REVIEW_APP_BALANCE,
+    SUGGESTION_REDUCE_EVENING_USE,
+    SUGGESTION_REVIEW_RECENT_CHANGE
 }
 
 data class BehaviorMetricUi(
@@ -59,13 +63,18 @@ data class BehaviorPatternUi(
     val supportingValues: List<Long>
 )
 
+data class BehaviorSuggestionUi(
+    val copy: BehaviorCopyKey
+)
+
 data class BehaviorUiModel(
     val privacyCopy: BehaviorCopyKey,
     val sources: List<BehaviorSourceUi>,
     val today: BehaviorPeriodUi,
     val last7Days: BehaviorPeriodUi,
     val last30Days: BehaviorPeriodUi,
-    val patterns: List<BehaviorPatternUi>
+    val patterns: List<BehaviorPatternUi>,
+    val suggestions: List<BehaviorSuggestionUi>
 )
 
 object BehaviorUiModelFactory {
@@ -104,7 +113,11 @@ object BehaviorUiModelFactory {
                 copy = insight.category.copyKey(),
                 supportingValues = insight.supportingValues
             )
-        }
+        },
+        suggestions = snapshot.insights
+            .mapNotNull { it.category.suggestionKey() }
+            .distinct()
+            .map(::BehaviorSuggestionUi)
     )
 
     private fun history(days: List<DailyBehaviorAggregate>): BehaviorPeriodUi {
@@ -141,6 +154,16 @@ object BehaviorUiModelFactory {
         BehaviorSourceState.AVAILABLE -> BehaviorSourceAction.DISABLE
         BehaviorSourceState.UNSUPPORTED,
         BehaviorSourceState.ERROR -> BehaviorSourceAction.NONE
+    }
+
+    private fun BehaviorInsightCategory.suggestionKey(): BehaviorCopyKey? = when (this) {
+        BehaviorInsightCategory.ACTIVITY_CONSISTENCY,
+        BehaviorInsightCategory.USAGE_REGULARITY -> BehaviorCopyKey.SUGGESTION_KEEP_PERSONAL_BASELINE
+        BehaviorInsightCategory.ACTIVITY_CHANGE,
+        BehaviorInsightCategory.SCREEN_TIME_CHANGE -> BehaviorCopyKey.SUGGESTION_REVIEW_RECENT_CHANGE
+        BehaviorInsightCategory.APP_CONCENTRATION -> BehaviorCopyKey.SUGGESTION_REVIEW_APP_BALANCE
+        BehaviorInsightCategory.LATE_USAGE_PATTERN -> BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE
+        BehaviorInsightCategory.INSUFFICIENT_HISTORY -> null
     }
 
     private fun BehaviorInsightCategory.copyKey(): BehaviorCopyKey = when (this) {
