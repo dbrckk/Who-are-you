@@ -50,7 +50,7 @@ fun BehaviorScreen(
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.habits_title), color = V2Colors.Orchid, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
             Spacer(Modifier.height(8.dp))
-            Text(stringResource(R.string.habits_local_only), color = V2Colors.TextSecondary, style = V2Type.Supporting)
+            Text(stringResource(R.string.habits_local_only), color = V2Colors.TextSecondary, style = V2Type.Supporting, modifier = Modifier.testTag("behavior_privacy_copy"))
         }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -59,9 +59,9 @@ fun BehaviorScreen(
                 }
             }
         }
-        item { BehaviorPeriodCard(R.string.habits_today, model.today, emptyCopy = R.string.habits_empty_today) }
-        item { BehaviorPeriodCard(R.string.habits_7_days, model.last7Days, emptyCopy = R.string.habits_history_building) }
-        item { BehaviorPeriodCard(R.string.habits_30_days, model.last30Days, emptyCopy = R.string.habits_history_building) }
+        item { BehaviorPeriodCard(R.string.habits_today, model.today, emptyCopy = R.string.habits_empty_today, tag = "behavior_today") }
+        item { BehaviorPeriodCard(R.string.habits_7_days, model.last7Days, emptyCopy = R.string.habits_history_building, tag = "behavior_7_days") }
+        item { BehaviorPeriodCard(R.string.habits_30_days, model.last30Days, emptyCopy = R.string.habits_history_building, tag = "behavior_30_days") }
         item {
             BehaviorPatternsCard(model.patterns)
         }
@@ -122,9 +122,9 @@ private fun BehaviorSourceCard(
 }
 
 @Composable
-private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: Int) {
+private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: Int, tag: String) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().testTag(tag),
         shape = RoundedCornerShape(V2Radius.Card),
         colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
     ) {
@@ -158,7 +158,7 @@ private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: 
 @Composable
 private fun BehaviorPatternsCard(patterns: List<BehaviorPatternUi>) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().testTag("behavior_patterns"),
         shape = RoundedCornerShape(V2Radius.Card),
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
     ) {
@@ -179,7 +179,7 @@ private fun BehaviorPatternsCard(patterns: List<BehaviorPatternUi>) {
 @Composable
 private fun BehaviorSuggestionsCard(suggestions: List<BehaviorSuggestionUi>) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().testTag("behavior_suggestions"),
         shape = RoundedCornerShape(V2Radius.Card),
         colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
     ) {
