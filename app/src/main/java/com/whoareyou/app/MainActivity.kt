@@ -41,7 +41,8 @@ private fun WhoAreYouApp() {
     val quizCatalogState by produceState<List<Quiz>?>(initialValue = null, context) {
         value = withContext(Dispatchers.IO) { runCatching { QuizRepository.load(context.applicationContext) }.getOrDefault(emptyList()) }
     }
-    val storedProfile by remember(context) { ProfileStore.observe(context) }.collectAsState(initial = null)
+    val storedProfileFlow = remember(context) { ProfileStore.observe(context) }
+    val storedProfileState by storedProfileFlow.collectAsState(initial = null)
     val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(
         initial = BehaviorSnapshot(today = null, last7Days = emptyList(), last30Days = emptyList(), sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED }, insights = emptyList())
     )
@@ -64,14 +65,14 @@ private fun WhoAreYouApp() {
         }
     }
 
-    val profile = storedProfile
+    val storedProfile = storedProfileState
     val quizCatalog = quizCatalogState
-    if (profile == null || quizCatalog == null) { BrandLoadingScreen(tag = "startup_loading"); return }
-    LaunchedEffect(activity, profile.onboardingComplete, quizCatalog.size) { runCatching { activity?.reportFullyDrawn() } }
-    val globalProfile = remember(quizCatalog, profile.latestScores, profile.previousScores, profile.scoreHistory, profile.timedScoreHistory) {
-        GlobalProfileEngine.build(catalog = quizCatalog, latestScores = profile.latestScores, previousScores = profile.previousScores, scoreHistory = profile.scoreHistory, timedScoreHistory = profile.timedScoreHistory)
+    if (storedProfile == null || quizCatalog == null) { BrandLoadingScreen(tag = "startup_loading"); return }
+    LaunchedEffect(activity, storedProfile.onboardingComplete, quizCatalog.size) { runCatching { activity?.reportFullyDrawn() } }
+    val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores, storedProfile.scoreHistory, storedProfile.timedScoreHistory) {
+        GlobalProfileEngine.build(catalog = quizCatalog, latestScores = storedProfile.latestScores, previousScores = storedProfile.previousScores, scoreHistory = storedProfile.scoreHistory, timedScoreHistory = storedProfile.timedScoreHistory)
     }
-    if (!profile.onboardingComplete) {
+    if (!storedProfile.onboardingComplete) {
         LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
         OnboardingScreen { runCatching { AppEvents.onboardingComplete() }; scope.launch { ProfileStore.setOnboardingComplete(context) } }
         return
@@ -80,7 +81,7 @@ private fun WhoAreYouApp() {
 
     var premiumOverride by remember { mutableStateOf(false) }
     var privacyOptionsRequired by remember { mutableStateOf(false) }
-    val adsRemoved = profile.adsRemoved || premiumOverride
+    val adsRemoved = storedProfile.adsRemoved || premiumOverride
     val billingManager = remember(context) { if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching { BillingPriceState.markLoading(); BillingManager(context, { premiumOverride = it }, BillingPriceState::update) }.getOrNull() else null }
     val adManager = remember(context, adsRemoved) { if (BuildConfig.EXTERNAL_SERVICES_ENABLED && !adsRemoved) runCatching { AdManager(context) { privacyOptionsRequired = it } }.getOrNull() else null }
     LaunchedEffect(billingManager, adManager, activity) { withFrameNanos { }; runCatching { billingManager?.start() }; runCatching { adManager?.start(activity) } }
@@ -118,16 +119,16 @@ private fun WhoAreYouApp() {
         AnimatedContent(targetState = screen, transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) }, label = "screen", modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}").semantics { paneTitle = screenPaneTitle }) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
-                    quizzes = quizCatalog, profile = globalProfile, storedProfile = profile, completed = profile.completedQuizIds,
+                    quizzes = quizCatalog, profile = globalProfile, storedProfile = storedProfile, completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved, privacyOptionsRequired = privacyOptionsRequired && !adsRemoved,
                     onOpenProfile = { navigate(AppScreen.PROFILE) },
-                    onQuizSelected = { quiz -> previousScoreForAttempt = profile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
                     onRemoveAds = { if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) } },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
                 AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile, catalog = quizCatalog,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = profile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
                     onBack = { navigate(AppScreen.DISCOVER) },
                     onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } }
                 )
@@ -153,10 +154,10 @@ private fun WhoAreYouApp() {
                 )
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz, score = finalScore, previousScore = previousScoreForAttempt,
-                    completedCount = (profile.completedQuizIds + selectedQuiz.id).size, totalQuizCount = quizCatalog.size,
-                    catalog = quizCatalog, completed = profile.completedQuizIds + selectedQuiz.id,
+                    completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size, totalQuizCount = quizCatalog.size,
+                    catalog = quizCatalog, completed = storedProfile.completedQuizIds + selectedQuiz.id,
                     evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()), traitGraph = globalProfile.traitGraph, coverage = globalProfile.coverage,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = profile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
                     onDone = { pendingFinalScore = null; val manager = adManager; if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) } }.onFailure { navigate(AppScreen.DISCOVER) } },
                     onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }
                 )
