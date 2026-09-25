@@ -19,6 +19,8 @@ enum class BehaviorCopyKey {
     LOCAL_ONLY_BODY,
     SOURCE_ACTIVITY,
     SOURCE_APP_USAGE,
+    SOURCE_ACTIVITY_DETAIL,
+    SOURCE_APP_USAGE_DETAIL,
     SOURCE_DISABLED,
     SOURCE_PERMISSION_REQUIRED,
     SOURCE_AVAILABLE,
@@ -52,6 +54,7 @@ data class BehaviorSourceUi(
     val source: BehaviorSource,
     val state: BehaviorSourceState,
     val title: BehaviorCopyKey,
+    val detail: BehaviorCopyKey,
     val stateCopy: BehaviorCopyKey,
     val action: BehaviorSourceAction
 )
@@ -88,6 +91,10 @@ object BehaviorUiModelFactory {
                 title = when (source) {
                     BehaviorSource.ACTIVITY -> BehaviorCopyKey.SOURCE_ACTIVITY
                     BehaviorSource.APP_USAGE -> BehaviorCopyKey.SOURCE_APP_USAGE
+                },
+                detail = when (source) {
+                    BehaviorSource.ACTIVITY -> BehaviorCopyKey.SOURCE_ACTIVITY_DETAIL
+                    BehaviorSource.APP_USAGE -> BehaviorCopyKey.SOURCE_APP_USAGE_DETAIL
                 },
                 stateCopy = state.copyKey(),
                 action = state.action()
