@@ -5,6 +5,8 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 data class BehaviorRefreshSnapshot(
     val day: DailyBehaviorAggregate?,
@@ -29,7 +31,9 @@ class BehaviorRefreshCoordinator(
     private val appUsageCollector: suspend (LocalDate) -> BehaviorCollectionResult<DailyBehaviorAggregate>,
     private val zone: ZoneId = ZoneId.systemDefault()
 ) {
-    suspend fun refresh(now: Instant): BehaviorRefreshResult {
+    private val refreshMutex = Mutex()
+
+    suspend fun refresh(now: Instant): BehaviorRefreshResult = refreshMutex.withLock {
         val date = now.atZone(zone).toLocalDate()
         val epochDay = date.toEpochDay()
         val initial = store.snapshot(epochDay)
@@ -77,7 +81,7 @@ class BehaviorRefreshCoordinator(
             }
         }
 
-        return BehaviorRefreshResult(
+        BehaviorRefreshResult(
             epochDay = epochDay,
             sourceStates = states.toMap(),
             updatedSources = updated
