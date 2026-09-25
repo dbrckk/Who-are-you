@@ -61,6 +61,11 @@ fun BehaviorScreen(
         item {
             BehaviorPatternsCard(model.patterns)
         }
+        if (model.suggestions.isNotEmpty()) {
+            item {
+                BehaviorSuggestionsCard(model.suggestions)
+            }
+        }
         item {
             Column(Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.habits_data_controls), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
@@ -147,6 +152,23 @@ private fun BehaviorPatternsCard(patterns: List<BehaviorPatternUi>) {
 }
 
 @Composable
+private fun BehaviorSuggestionsCard(suggestions: List<BehaviorSuggestionUi>) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.habits_suggestions), color = V2Colors.AccentCyan, style = V2Type.Eyebrow)
+            suggestions.forEach { suggestion ->
+                Text(stringResource(R.string.habits_suggested_label), color = V2Colors.Orchid, style = V2Type.Caption)
+                Text(behaviorCopy(suggestion.copy), color = V2Colors.TextPrimary, style = V2Type.Supporting)
+            }
+        }
+    }
+}
+
+@Composable
 private fun behaviorMetric(metric: BehaviorMetricUi): String = when (metric.kind) {
     BehaviorMetricKind.STEPS -> stringResource(R.string.habits_steps, metric.value)
     BehaviorMetricKind.SCREEN_TIME -> stringResource(R.string.habits_screen_time, durationLabel(metric.value))
@@ -190,5 +212,9 @@ private fun behaviorCopy(key: BehaviorCopyKey): String = stringResource(
         BehaviorCopyKey.PATTERN_LATE_USAGE -> R.string.habits_pattern_late_usage
         BehaviorCopyKey.PATTERN_USAGE_REGULARITY -> R.string.habits_pattern_usage_regular
         BehaviorCopyKey.PATTERN_INSUFFICIENT_HISTORY -> R.string.habits_pattern_insufficient
+        BehaviorCopyKey.SUGGESTION_KEEP_PERSONAL_BASELINE -> R.string.habits_suggestion_keep_personal_baseline
+        BehaviorCopyKey.SUGGESTION_REVIEW_APP_BALANCE -> R.string.habits_suggestion_review_app_balance
+        BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE -> R.string.habits_suggestion_reduce_evening_use
+        BehaviorCopyKey.SUGGESTION_REVIEW_RECENT_CHANGE -> R.string.habits_suggestion_review_recent_change
     }
 )
