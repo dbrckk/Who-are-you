@@ -204,7 +204,9 @@
     <string name="habits_title">MES HABITUDES</string>
     <string name="habits_local_only">Ces observations sont calculées et stockées localement sur cet appareil. Elles restent séparées de ton profil fondé sur les questionnaires.</string>
     <string name="habits_source_activity">Activité</string>
+    <string name="habits_source_activity_detail">Les totaux de pas en lecture seule depuis Health Connect servent uniquement à créer des observations quotidiennes locales.</string>
     <string name="habits_source_app_usage">Utilisation des apps</string>
+    <string name="habits_source_app_usage_detail">L’accès Android à l’utilisation des apps sert uniquement à créer des résumés locaux de durée et d’horaires. Le contenu n’est pas lu.</string>
     <string name="habits_source_disabled">Désactivé</string>
     <string name="habits_source_permission_required">Autorisation requise</string>
     <string name="habits_source_available">Disponible</string>
