@@ -39,6 +39,17 @@ enum class BehaviorSourceState {
     ERROR
 }
 
+sealed interface BehaviorCollectionResult<out T> {
+    data class Data<T>(val value: T) : BehaviorCollectionResult<T>
+    data object NoData : BehaviorCollectionResult<Nothing>
+    data class Unavailable(val state: BehaviorSourceState) : BehaviorCollectionResult<Nothing>
+}
+
+data class ActivityDay(
+    val epochDay: Long,
+    val steps: Long
+)
+
 enum class BehaviorEvidenceTier { EARLY, DEVELOPING, ESTABLISHED }
 
 enum class BehaviorInsightCategory {
