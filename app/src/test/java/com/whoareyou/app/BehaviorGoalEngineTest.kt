@@ -1,7 +1,6 @@
 package com.whoareyou.app
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFailsWith
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -171,17 +170,18 @@ class BehaviorGoalEngineTest {
 
     @Test
     fun `invalid goal definitions are rejected`() {
-        assertFailsWith<IllegalArgumentException> {
-            BehaviorGoal.stepsAtLeast("", 1_000L, startEpochDay = 1L)
-        }
-        assertFailsWith<IllegalArgumentException> {
-            BehaviorGoal.screenTimeAtMost("screen", -1L, startEpochDay = 1L)
-        }
-        assertFailsWith<IllegalArgumentException> {
-            BehaviorGoal.appUsageAtMost("app", "", 1_000L, startEpochDay = 1L)
-        }
-        assertFailsWith<IllegalArgumentException> {
-            BehaviorGoal.stepsAtLeast("steps", 1_000L, startEpochDay = 1L, durationDays = 0)
+        expectIllegalArgument { BehaviorGoal.stepsAtLeast("", 1_000L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.screenTimeAtMost("screen", -1L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.appUsageAtMost("app", "", 1_000L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.stepsAtLeast("steps", 1_000L, startEpochDay = 1L, durationDays = 0) }
+    }
+
+    private fun expectIllegalArgument(block: () -> Unit) {
+        try {
+            block()
+            throw AssertionError("Expected IllegalArgumentException")
+        } catch (_: IllegalArgumentException) {
+            Unit
         }
     }
 }
