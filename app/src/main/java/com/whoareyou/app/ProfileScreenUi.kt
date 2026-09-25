@@ -56,7 +56,8 @@ fun ProfileScreen(
     catalog: List<Quiz>,
     onQuizSelected: (Quiz) -> Unit,
     onBack: () -> Unit,
-    onResetLocalData: () -> Unit
+    onResetLocalData: () -> Unit,
+    onOpenHabits: () -> Unit
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -165,6 +166,8 @@ fun ProfileScreen(
                 catalog = catalog,
                 onQuizSelected = onQuizSelected
             )
+            Spacer(Modifier.height(sectionGap))
+            HabitsProfileEntry(onClick = onOpenHabits)
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
