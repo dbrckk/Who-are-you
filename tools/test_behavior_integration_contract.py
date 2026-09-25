@@ -16,7 +16,7 @@ class BehaviorIntegrationContractTest(unittest.TestCase):
 
     def test_main_activity_connects_profile_to_habits(self):
         source = self.read("MainActivity.kt")
-        self.assertIn("onOpenHabits={ navigate(AppNavigation.habitsDestination()) }", source)
+        self.assertIn("onOpenHabits = { navigate(AppNavigation.habitsDestination()) }", source)
 
     def test_habits_back_destination_is_profile(self):
         source = self.read("AppNavigation.kt")
@@ -28,6 +28,7 @@ class BehaviorIntegrationContractTest(unittest.TestCase):
         self.assertIn("currentRefresh()", source)
         main = self.read("MainActivity.kt")
         self.assertIn("BehaviorRefreshOnResume(context as? ComponentActivity)", main)
+        self.assertIn("BehaviorSourceActionHandler.handle(context, source, action)", main)
 
 
 if __name__ == "__main__":
