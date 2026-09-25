@@ -3,6 +3,10 @@ package com.whoareyou.app
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -113,6 +117,38 @@ class BehaviorRefreshCoordinatorTest {
         val saved = store.days.values.single()
         assertEquals(5000L, saved.steps)
         assertEquals(90_000L, saved.totalForegroundMillis)
+    }
+
+    @Test
+    fun `concurrent refresh calls are serialized`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+        ))
+        var activeCollectors = 0
+        var maxActiveCollectors = 0
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                activeCollectors += 1
+                maxActiveCollectors = maxOf(maxActiveCollectors, activeCollectors)
+                delay(25)
+                activeCollectors -= 1
+                BehaviorCollectionResult.Data(ActivityDay(it.toEpochDay(), 5000L))
+            },
+            appUsageCollector = { BehaviorCollectionResult.NoData },
+            zone = zone
+        )
+
+        coroutineScope {
+            listOf(
+                async { coordinator.refresh(now) },
+                async { coordinator.refresh(now) }
+            ).awaitAll()
+        }
+
+        assertEquals(1, maxActiveCollectors)
+        assertEquals(1, store.days.size)
     }
 
     @Test
