@@ -225,6 +225,8 @@
     <string name="habits_steps">%1$d pas</string>
     <string name="habits_screen_time">%1$s de temps d’écran</string>
     <string name="habits_sessions">%1$d sessions</string>
+    <string name="habits_top_apps">APPS LES PLUS UTILISÉES</string>
+    <string name="habits_app_usage">%1$s · %2$s</string>
     <string name="habits_average_steps">Moyenne : %1$d pas/jour</string>
     <string name="habits_average_screen_time">Moyenne : %1$s/jour</string>
     <string name="habits_empty_today">Aucune donnée mesurée n’est encore disponible pour aujourd’hui.</string>
