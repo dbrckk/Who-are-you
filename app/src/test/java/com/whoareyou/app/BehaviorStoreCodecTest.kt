@@ -32,6 +32,15 @@ class BehaviorStoreCodecTest {
     }
 
     @Test
+    fun `completed history excludes the current partial local day`() {
+        val days = listOf(day(48), day(49), day(50))
+
+        val completed = BehaviorStoreCodec.completed(days, currentEpochDay = 50L)
+
+        assertEquals(listOf(48L, 49L), completed.map { it.epochDay })
+    }
+
+    @Test
     fun `upsert replaces same day and keeps deterministic day order`() {
         val days = listOf(day(3), day(1), day(2, steps = 10L))
         val updated = BehaviorStoreCodec.upsert(days, day(2, steps = 20L), currentEpochDay = 3L)
