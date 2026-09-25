@@ -17,4 +17,8 @@ object BehaviorIntegrationPolicy {
         BehaviorSourceAction.DISABLE -> BehaviorIntegrationCommand.DISABLE_SOURCE
         BehaviorSourceAction.NONE -> BehaviorIntegrationCommand.NONE
     }
+
+    fun shouldRefreshAfterActivityPermission(granted: Boolean): Boolean = granted
+
+    fun shouldRefreshAfterUsageAccessReturn(): Boolean = true
 }
