@@ -11,8 +11,8 @@ enum class AppScreen {
 object AppNavigation {
     fun backDestination(screen: AppScreen): AppScreen? = when (screen) {
         AppScreen.DISCOVER -> null
+        AppScreen.HABITS -> AppScreen.PROFILE
         AppScreen.PROFILE,
-        AppScreen.HABITS,
         AppScreen.QUIZ,
         AppScreen.RESULT -> AppScreen.DISCOVER
     }
