@@ -3,7 +3,6 @@ package com.whoareyou.app
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.lifecycle.Lifecycle
@@ -20,10 +19,6 @@ fun BehaviorRefreshOnResume(
 ) {
     val currentRefresh by rememberUpdatedState(onRefresh)
 
-    LaunchedEffect(Unit) {
-        currentRefresh()
-    }
-
     DisposableEffect(activity) {
         val owner = activity
         if (owner == null) {
@@ -35,6 +30,9 @@ fun BehaviorRefreshOnResume(
                 }
             }
             owner.lifecycle.addObserver(observer)
+            if (owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                currentRefresh()
+            }
             onDispose {
                 owner.lifecycle.removeObserver(observer)
             }
