@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -18,6 +19,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -35,6 +40,7 @@ fun BehaviorScreen(
     onSourceAction: (BehaviorSource, BehaviorSourceAction) -> Unit,
     onDeleteAll: () -> Unit
 ) {
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
     LazyColumn(
         modifier = Modifier
             .readableContentWidth()
@@ -73,12 +79,36 @@ fun BehaviorScreen(
         item {
             Column(Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.habits_data_controls), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
-                TextButton(onClick = onDeleteAll, modifier = Modifier.testTag("behavior_delete_all")) {
+                TextButton(onClick = { showDeleteConfirmation = true }, modifier = Modifier.testTag("behavior_delete_all")) {
                     Text(stringResource(R.string.habits_delete_all), color = V2Colors.TextSecondary)
                 }
                 Spacer(Modifier.height(28.dp))
             }
         }
+    }
+
+    if (showDeleteConfirmation) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirmation = false },
+            title = { Text(stringResource(R.string.habits_delete_all)) },
+            text = { Text(stringResource(R.string.habits_delete_confirm)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteConfirmation = false
+                        onDeleteAll()
+                    },
+                    modifier = Modifier.testTag("behavior_delete_confirm")
+                ) {
+                    Text(stringResource(R.string.habits_delete_all))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirmation = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
     }
 }
 
