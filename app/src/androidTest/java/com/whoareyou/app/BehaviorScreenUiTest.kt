@@ -1,6 +1,14 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.assertExists
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -54,6 +62,30 @@ class BehaviorScreenUiTest {
         composeRule.onNodeWithTag("behavior_suggestions").assertExists()
         screen.performScrollToNode(hasTestTag("behavior_delete_all"))
         composeRule.onNodeWithTag("behavior_delete_all").assertHasClickAction()
+    }
+
+    @Test
+    fun compactLargeFontLayoutKeepsDataControlsReachable() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.3f)) {
+                Box(Modifier.width(360.dp).height(640.dp)) {
+                    WhoAreYouTheme {
+                        BehaviorScreen(
+                            model = model,
+                            onBack = {},
+                            onSourceAction = { _, _ -> },
+                            onDeleteAll = {}
+                        )
+                    }
+                }
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_delete_all"))
+        composeRule.onNodeWithTag("behavior_delete_all")
+            .assertExists()
+            .assertHasClickAction()
     }
 
     @Test
