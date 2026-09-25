@@ -186,6 +186,7 @@ private fun WhoAreYouApp() {
     val screenPaneTitle = when (screen) {
         AppScreen.DISCOVER -> stringResource(R.string.discover_headline)
         AppScreen.PROFILE -> stringResource(R.string.your_profile)
+        AppScreen.HABITS -> stringResource(R.string.habits_title)
         AppScreen.QUIZ -> selectedQuiz.title
         AppScreen.RESULT -> selectedQuiz.title
     }
@@ -241,6 +242,20 @@ private fun WhoAreYouApp() {
                             navigate(AppScreen.DISCOVER)
                         }
                     }
+                )
+                AppScreen.HABITS -> BehaviorScreen(
+                    model = BehaviorUiModelFactory.build(
+                        BehaviorSnapshot(
+                            today = null,
+                            last7Days = emptyList(),
+                            last30Days = emptyList(),
+                            sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED },
+                            insights = emptyList()
+                        )
+                    ),
+                    onBack = { navigate(AppScreen.DISCOVER) },
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = { }
                 )
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz,
