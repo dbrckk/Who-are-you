@@ -17,6 +17,7 @@ class ManifestSecurityContractTest(unittest.TestCase):
         approved = {
             "android.permission.INTERNET",
             "android.permission.PACKAGE_USAGE_STATS",
+            "android.permission.health.READ_STEPS",
         }
         root = ET.fromstring(self.manifest)
         declared = {
