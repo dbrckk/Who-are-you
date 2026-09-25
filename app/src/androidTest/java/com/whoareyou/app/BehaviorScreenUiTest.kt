@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.test.assertExists
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.test.assertHasClickAction
@@ -47,19 +47,19 @@ class BehaviorScreenUiTest {
             }
         }
 
-        composeRule.onNodeWithTag("behavior_screen").assertExists()
-        composeRule.onNodeWithTag("behavior_privacy_copy").assertExists()
-        composeRule.onNodeWithTag("behavior_today").assertExists()
+        composeRule.onNodeWithTag("behavior_screen").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_privacy_copy").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_today").assertIsDisplayed()
 
         val screen = composeRule.onNodeWithTag("behavior_screen")
         screen.performScrollToNode(hasTestTag("behavior_7_days"))
-        composeRule.onNodeWithTag("behavior_7_days").assertExists()
+        composeRule.onNodeWithTag("behavior_7_days").assertIsDisplayed()
         screen.performScrollToNode(hasTestTag("behavior_30_days"))
-        composeRule.onNodeWithTag("behavior_30_days").assertExists()
+        composeRule.onNodeWithTag("behavior_30_days").assertIsDisplayed()
         screen.performScrollToNode(hasTestTag("behavior_patterns"))
-        composeRule.onNodeWithTag("behavior_patterns").assertExists()
+        composeRule.onNodeWithTag("behavior_patterns").assertIsDisplayed()
         screen.performScrollToNode(hasTestTag("behavior_suggestions"))
-        composeRule.onNodeWithTag("behavior_suggestions").assertExists()
+        composeRule.onNodeWithTag("behavior_suggestions").assertIsDisplayed()
         screen.performScrollToNode(hasTestTag("behavior_delete_all"))
         composeRule.onNodeWithTag("behavior_delete_all").assertHasClickAction()
     }
@@ -84,7 +84,7 @@ class BehaviorScreenUiTest {
         val screen = composeRule.onNodeWithTag("behavior_screen")
         screen.performScrollToNode(hasTestTag("behavior_delete_all"))
         composeRule.onNodeWithTag("behavior_delete_all")
-            .assertExists()
+            .assertIsDisplayed()
             .assertHasClickAction()
     }
 
