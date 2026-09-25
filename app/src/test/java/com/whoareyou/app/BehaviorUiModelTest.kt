@@ -85,6 +85,46 @@ class BehaviorUiModelTest {
     }
 
     @Test
+    fun `seven day history aggregates most used apps deterministically`() {
+        val days = listOf(
+            DailyBehaviorAggregate(
+                epochDay = 1L,
+                steps = null,
+                totalForegroundMillis = 120_000L,
+                topApps = listOf(
+                    AppUsageAggregate("app.beta", 70_000L, 2),
+                    AppUsageAggregate("app.alpha", 50_000L, 1)
+                ),
+                launchesOrSessions = 3,
+                daypartUsage = DaypartUsage.EMPTY
+            ),
+            DailyBehaviorAggregate(
+                epochDay = 2L,
+                steps = null,
+                totalForegroundMillis = 180_000L,
+                topApps = listOf(
+                    AppUsageAggregate("app.alpha", 100_000L, 2),
+                    AppUsageAggregate("app.beta", 80_000L, 2)
+                ),
+                launchesOrSessions = 4,
+                daypartUsage = DaypartUsage.EMPTY
+            )
+        )
+
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(last7Days = days, last30Days = days)
+        )
+
+        assertEquals(
+            listOf(
+                BehaviorAppUsageUi("app.alpha", 150_000L),
+                BehaviorAppUsageUi("app.beta", 150_000L)
+            ),
+            model.last7Days.topApps
+        )
+    }
+
+    @Test
     fun `sufficient history exposes measured summaries and deterministic insight rows`() {
         val days = (1L..7L).map { epoch ->
             DailyBehaviorAggregate(
