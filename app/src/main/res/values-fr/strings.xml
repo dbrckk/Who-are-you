@@ -222,7 +222,7 @@
     <string name="habits_suggestions">SUGGESTIONS</string>
     <string name="habits_data_controls">GESTION DES DONNÉES</string>
     <string name="habits_delete_all">SUPPRIMER LES DONNÉES D’HABITUDES</string>
-    <string name="habits_delete_confirm">Supprimer toutes les observations d’habitudes stockées localement et désactiver les deux sources ? Les autorisations Android elles-mêmes ne seront pas révoquées.</string>
+    <string name="habits_delete_confirm">Supprimer toutes les observations d’habitudes et tous les objectifs stockés localement, puis désactiver les deux sources ? Les autorisations Android elles-mêmes ne seront pas révoquées.</string>
     <string name="goals_title">OBJECTIFS</string>
     <string name="goals_user_defined">C’est toi qui choisis la cible. Les données manquantes ne comptent jamais comme zéro ni comme une journée ratée.</string>
     <string name="goals_create">CRÉER UN OBJECTIF</string>
