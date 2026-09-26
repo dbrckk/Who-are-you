@@ -22,6 +22,15 @@ object BehaviorGoalFactory {
         startEpochDay = startEpochDay,
         packageName = request.packageName
     )
+
+    fun update(
+        existing: BehaviorGoal,
+        request: BehaviorGoalCreateRequest
+    ): BehaviorGoal = existing.copy(
+        metric = request.metric,
+        targetValue = request.targetValue,
+        packageName = request.packageName
+    )
 }
 
 data class BehaviorGoalsHostState(
@@ -67,11 +76,7 @@ fun rememberBehaviorGoalsHostState(
             onEdit = { id, request ->
                 val existing = goals.firstOrNull { it.id == id }
                 if (existing != null) {
-                    val updated = existing.copy(
-                        metric = request.metric,
-                        targetValue = request.targetValue,
-                        packageName = request.packageName
-                    )
+                    val updated = BehaviorGoalFactory.update(existing, request)
                     scope.launch {
                         BehaviorGoalRepository.upsert(context.applicationContext, updated)
                     }
