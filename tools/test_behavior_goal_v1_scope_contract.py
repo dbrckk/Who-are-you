@@ -3,6 +3,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app/src/main/java/com/whoareyou/app"
+EN = ROOT / "app/src/main/res/values/strings.xml"
+FR = ROOT / "app/src/main/res/values-fr/strings.xml"
 
 
 class BehaviorGoalV1ScopeContractTest(unittest.TestCase):
@@ -20,6 +22,12 @@ class BehaviorGoalV1ScopeContractTest(unittest.TestCase):
         self.assertNotIn("editingGoal", ui)
         self.assertNotIn("_edit", ui)
         self.assertNotIn("goals_edit", ui)
+
+    def test_v1_resources_do_not_expose_goal_editing_copy(self):
+        for path in (EN, FR):
+            source = path.read_text(encoding="utf-8")
+            self.assertNotIn('name="goals_edit"', source)
+            self.assertNotIn('name="goals_update"', source)
 
     def test_full_habits_reset_clears_behavior_and_goal_data(self):
         main = self.read("MainActivity.kt")
