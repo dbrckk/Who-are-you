@@ -23,14 +23,6 @@ object BehaviorGoalFactory {
         packageName = request.packageName
     )
 
-    fun update(
-        existing: BehaviorGoal,
-        request: BehaviorGoalCreateRequest
-    ): BehaviorGoal = existing.copy(
-        metric = request.metric,
-        targetValue = request.targetValue,
-        packageName = request.packageName
-    )
 }
 
 data class BehaviorGoalsHostState(
