@@ -11,6 +11,7 @@ import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import org.junit.Assert.assertEquals
@@ -80,6 +81,69 @@ class BehaviorGoalsUiTest {
 
         composeRule.runOnIdle {
             assertEquals("steps" to true, paused)
+        }
+    }
+
+    @Test
+    fun createStepsGoalUsesExplicitUserValue() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("9000")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.STEPS_AT_LEAST,
+                    targetValue = 9_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun createScreenTimeGoalConvertsMinutesToMillis() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_screen_time").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("90")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+                    targetValue = 90L * 60_000L
+                ),
+                request
+            )
         }
     }
 
