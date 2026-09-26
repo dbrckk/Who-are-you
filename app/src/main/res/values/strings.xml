@@ -222,7 +222,7 @@
     <string name="habits_suggestions">SUGGESTIONS</string>
     <string name="habits_data_controls">DATA CONTROLS</string>
     <string name="habits_delete_all">DELETE HABITS DATA</string>
-    <string name="habits_delete_confirm">Delete all locally stored habits observations and disable both sources? Android permissions themselves are not revoked.</string>
+    <string name="habits_delete_confirm">Delete all locally stored habits observations and goals, and disable both sources? Android permissions themselves are not revoked.</string>
     <string name="goals_title">GOALS</string>
     <string name="goals_user_defined">You choose the target. Missing data is never counted as zero or as a missed day.</string>
     <string name="goals_create">CREATE A GOAL</string>
