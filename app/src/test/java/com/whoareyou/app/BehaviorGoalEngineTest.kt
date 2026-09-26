@@ -170,6 +170,50 @@ class BehaviorGoalEngineTest {
     }
 
     @Test
+    fun `paused goal becomes completed when fixed experiment window ends`() {
+        val goal = BehaviorGoal.stepsAtLeast(
+            id = "paused-complete",
+            targetSteps = 1_000L,
+            startEpochDay = 110L,
+            durationDays = 2
+        ).copy(paused = true)
+
+        val progress = BehaviorGoalEngine.evaluate(
+            goal = goal,
+            days = listOf(day(110, steps = 2_000L), day(111, steps = 2_000L)),
+            currentEpochDay = 112L
+        )
+
+        assertEquals(BehaviorGoalStatus.COMPLETED, progress.status)
+        assertEquals(2, progress.observedDays)
+    }
+
+    @Test
+    fun `selected app present evaluates retained foreground duration`() {
+        val goal = BehaviorGoal.appUsageAtMost(
+            id = "app-present",
+            packageName = "com.example.target",
+            targetMillis = 20 * 60 * 1000L,
+            startEpochDay = 120L
+        )
+
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(
+                day(
+                    120L,
+                    totalForegroundMillis = 60 * 60 * 1000L,
+                    apps = listOf(AppUsageAggregate("com.example.target", 15 * 60 * 1000L, 2))
+                )
+            ),
+            currentEpochDay = 121L
+        )
+
+        assertEquals(15 * 60 * 1000L, progress.days.single().measuredValue)
+        assertEquals(true, progress.days.single().met)
+    }
+
+    @Test
     fun `invalid goal definitions are rejected`() {
         expectIllegalArgument { BehaviorGoal.stepsAtLeast("", 1_000L, startEpochDay = 1L) }
         expectIllegalArgument { BehaviorGoal.screenTimeAtMost("screen", -1L, startEpochDay = 1L) }
