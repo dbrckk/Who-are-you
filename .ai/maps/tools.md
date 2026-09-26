@@ -50,6 +50,10 @@ test_android_ci_sdk_setup_contract.py
 test_baseline_profile_manifest_contract.py
 test_battery_thermal_contract.py
 test_behavior_copy_contract.py
+test_behavior_goal_copy_contract.py
+test_behavior_goal_privacy_contract.py
+test_behavior_goal_storage_contract.py
+test_behavior_goal_v1_scope_contract.py
 test_behavior_integration_contract.py
 test_behavior_privacy_contract.py
 test_billing_launch_readiness.py
@@ -512,6 +516,109 @@ def test_habits_copy_stays_non_clinical_and_non_moralizing(self)
 ⋮----
 source = path.read_text(encoding="utf-8")
 habits_copy = " ".join(
+```
+
+## File: test_behavior_goal_copy_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+EN = ROOT / "app/src/main/res/values/strings.xml"
+FR = ROOT / "app/src/main/res/values-fr/strings.xml"
+⋮----
+REQUIRED = {
+⋮----
+FORBIDDEN = {
+⋮----
+def strings(path: Path)
+⋮----
+source = path.read_text(encoding="utf-8")
+⋮----
+class BehaviorGoalCopyContractTest(unittest.TestCase)
+⋮----
+def test_goal_copy_has_en_fr_parity(self)
+⋮----
+en = strings(EN)
+fr = strings(FR)
+⋮----
+def test_goal_copy_states_targets_as_user_defined(self)
+⋮----
+def test_full_habits_reset_explicitly_mentions_goals(self)
+⋮----
+def test_goal_copy_stays_non_clinical_and_non_moralizing(self)
+⋮----
+values = strings(path)
+goal_copy = " ".join(
+```
+
+## File: test_behavior_goal_privacy_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+MANIFEST = ROOT / "app/src/main/AndroidManifest.xml"
+ANDROID_NS = "http://schemas.android.com/apk/res/android"
+⋮----
+GOAL_TOKENS = [
+⋮----
+GOAL_FILES = [
+⋮----
+class BehaviorGoalPrivacyContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_goal_data_does_not_enter_telemetry_share_ads_or_personal_model(self)
+⋮----
+source = self.read(name)
+⋮----
+def test_goal_domain_does_not_write_profile_or_external_services(self)
+⋮----
+forbidden = [
+⋮----
+def test_goal_feature_declares_no_new_android_permission(self)
+⋮----
+root = ET.fromstring(MANIFEST.read_text(encoding="utf-8"))
+declared = {
+```
+
+## File: test_behavior_goal_storage_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+⋮----
+class BehaviorGoalStorageContractTest(unittest.TestCase)
+⋮----
+def test_goal_repository_uses_separate_local_datastore(self)
+⋮----
+path = APP / "BehaviorGoalRepository.kt"
+⋮----
+source = path.read_text(encoding="utf-8")
+⋮----
+def test_goal_repository_does_not_write_profile_or_behavior_history(self)
+⋮----
+source = (APP / "BehaviorGoalRepository.kt").read_text(encoding="utf-8")
+```
+
+## File: test_behavior_goal_v1_scope_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+EN = ROOT / "app/src/main/res/values/strings.xml"
+FR = ROOT / "app/src/main/res/values-fr/strings.xml"
+⋮----
+class BehaviorGoalV1ScopeContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_v1_has_no_goal_editing_surface(self)
+⋮----
+integration = self.read("BehaviorGoalIntegrationUi.kt")
+ui = self.read("BehaviorGoalsUi.kt")
+⋮----
+def test_v1_resources_do_not_expose_goal_editing_copy(self)
+⋮----
+source = path.read_text(encoding="utf-8")
+⋮----
+def test_full_habits_reset_clears_behavior_and_goal_data(self)
+⋮----
+main = self.read("MainActivity.kt")
 ```
 
 ## File: test_behavior_integration_contract.py

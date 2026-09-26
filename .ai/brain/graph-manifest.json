@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 798,
+      "edge_count": 860,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "area": "tools-play-preflight.py",
-      "edge_count": 6,
+      "edge_count": 5,
       "path": ".ai/brain/graph-shards/tools-play-preflight.py.json"
     },
     {
@@ -34,7 +34,7 @@
     },
     {
       "area": "tools-play-publisher.py",
-      "edge_count": 7,
+      "edge_count": 6,
       "path": ".ai/brain/graph-shards/tools-play-publisher.py.json"
     },
     {
@@ -51,6 +51,21 @@
       "area": "tools-test-battery-thermal-contract.py",
       "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-battery-thermal-contract.py.json"
+    },
+    {
+      "area": "tools-test-behavior-goal-privacy-contract.py",
+      "edge_count": 12,
+      "path": ".ai/brain/graph-shards/tools-test-behavior-goal-privacy-contract.py.json"
+    },
+    {
+      "area": "tools-test-behavior-goal-storage-contract.py",
+      "edge_count": 6,
+      "path": ".ai/brain/graph-shards/tools-test-behavior-goal-storage-contract.py.json"
+    },
+    {
+      "area": "tools-test-behavior-goal-v1-scope-contract.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-behavior-goal-v1-scope-contract.py.json"
     },
     {
       "area": "tools-test-behavior-integration-contract.py",
@@ -88,11 +103,6 @@
       "path": ".ai/brain/graph-shards/tools-test-longitudinal-trend-integration.py.json"
     },
     {
-      "area": "tools-test-m33-readiness.py",
-      "edge_count": 1,
-      "path": ".ai/brain/graph-shards/tools-test-m33-readiness.py.json"
-    },
-    {
       "area": "tools-test-m47-ui-test-wiring.py",
       "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-test-m47-ui-test-wiring.py.json"
@@ -119,7 +129,7 @@
     },
     {
       "area": "tools-test-m53-publication-contract.py",
-      "edge_count": 2,
+      "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-m53-publication-contract.py.json"
     },
     {
@@ -199,7 +209,7 @@
     },
     {
       "area": "tools-test-profile-reset-contract.py",
-      "edge_count": 3,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-profile-reset-contract.py.json"
     },
     {

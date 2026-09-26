@@ -1,0 +1,36 @@
+{
+  "area": "tools-test-behavior-goal-storage-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

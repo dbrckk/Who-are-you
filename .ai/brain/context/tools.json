@@ -2,7 +2,7 @@
   "area": "tools",
   "files": [
     {
-      "path": "tools/test_behavior_privacy_contract.py",
+      "path": "tools/test_behavior_goal_privacy_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -11,10 +11,10 @@
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 675
+      "score": 575
     },
     {
-      "path": "tools/test_behavior_integration_contract.py",
+      "path": "tools/test_behavior_goal_v1_scope_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -23,10 +23,22 @@
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 490
+      "score": 455
     },
     {
-      "path": "tools/test_manifest_security_contract.py",
+      "path": "tools/test_behavior_goal_storage_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 445
+    },
+    {
+      "path": "tools/test_behavior_goal_copy_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -34,7 +46,7 @@
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 405
+      "score": 400
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-behavior-goal-v1-scope-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

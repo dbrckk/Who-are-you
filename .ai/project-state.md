@@ -22,19 +22,21 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-26T15:48:43Z
+Generated: 2026-09-26T15:49:26Z
 
 ### Git
 - Branch: `main`
-- Head: `74f5abac791f`
-- Commit date: 2026-09-26T17:48:31+02:00
-- Commit: Merge pull request #74 from dbrckk/m774-local-behavioral-insights
-- Tracked files: 637
+- Head: `acc32afdb415`
+- Commit date: 2026-09-26T15:49:15Z
+- Commit: chore(ai): refresh unified AI context
+- Tracked files: 663
 
 ### Recently changed files
-- `app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt`
-- `app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt`
 - `app/src/main/res/values-fr/strings.xml`
+- `app/src/main/res/values/strings.xml`
+- `tools/test_behavior_goal_v1_scope_contract.py`
+- `app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt`
+- `app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt`
 
 ### Project signals
 - `build.gradle.kts`

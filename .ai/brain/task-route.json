@@ -9,10 +9,10 @@
     "top_score": 21
   },
   "cache": {
-    "fingerprint": "dae02521dc1c5420d52f7fc651158a8d327ef90366e6be277f19a46e1a3479de",
+    "fingerprint": "d86b8676aa93f930c17701390f8c6f915f915371bb514de284ff13e92bf55e4d",
     "hit": false
   },
-  "candidate_count": 89,
+  "candidate_count": 76,
   "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
   "files": [
     {
@@ -39,24 +39,27 @@
       "matched_terms": [
         "engine"
       ],
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
       "reasons": [
         "impact",
         "recently-changed"
       ],
       "score": 19,
       "symbols": [
-        "BehaviorInsightEngine",
-        "activityChange",
-        "activityConsistency",
-        "appConcentration",
-        "build",
-        "lateUsage",
-        "median",
-        "medianDouble",
-        "screenTimeChange",
-        "tier",
-        "usageRegularity"
+        "BehaviorGoal",
+        "BehaviorGoalDayResult",
+        "BehaviorGoalEngine",
+        "BehaviorGoalMetric",
+        "BehaviorGoalProgress",
+        "BehaviorGoalStatus",
+        "appUsageAtMost",
+        "canonicalDayKey",
+        "evaluate",
+        "eveningUsageAtMost",
+        "measuredValue",
+        "meetsTarget",
+        "screenTimeAtMost",
+        "stepsAtLeast"
       ]
     },
     {
@@ -64,16 +67,16 @@
       "matched_terms": [
         "engine"
       ],
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
       "reasons": [
         "impact",
         "recently-changed"
       ],
       "score": 19,
       "symbols": [
-        "BehaviorInsightEngineTest",
-        "availableStates",
-        "day"
+        "BehaviorGoalEngineTest",
+        "day",
+        "expectIllegalArgument"
       ]
     },
     {
@@ -118,20 +121,21 @@
       "matched_terms": [
         "engine"
       ],
-      "path": "tools/test_behavior_privacy_contract.py",
-      "reasons": [
-        "impact",
-        "recently-changed"
-      ],
-      "score": 13,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "reasons": [],
+      "score": 10,
       "symbols": [
-        "BehaviorPrivacyContractTest",
-        "read",
-        "test_behavior_domain_does_not_write_profile_store_or_personal_model",
-        "test_behavior_measurements_do_not_enter_ad_configuration",
-        "test_behavior_measurements_do_not_enter_profile_share",
-        "test_behavior_measurements_do_not_enter_telemetry",
-        "test_personal_model_engine_has_no_behavior_dependency"
+        "BehaviorInsightEngine",
+        "activityChange",
+        "activityConsistency",
+        "appConcentration",
+        "build",
+        "lateUsage",
+        "median",
+        "medianDouble",
+        "screenTimeChange",
+        "tier",
+        "usageRegularity"
       ]
     }
   ],

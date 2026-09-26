@@ -2,35 +2,30 @@
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
   "selected_test_files": [
-    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
     "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-    "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
-    "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
-    "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
-    "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
-    "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
-    "tools/test_behavior_copy_contract.py",
-    "tools/test_behavior_integration_contract.py",
-    "tools/test_behavior_privacy_contract.py",
-    "tools/test_manifest_security_contract.py"
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+    "tools/test_behavior_goal_copy_contract.py",
+    "tools/test_behavior_goal_privacy_contract.py",
+    "tools/test_behavior_goal_storage_contract.py",
+    "tools/test_behavior_goal_v1_scope_contract.py"
   ],
   "commands": [
     {
-      "command": "python -m pytest tools/test_behavior_copy_contract.py tools/test_behavior_integration_contract.py tools/test_behavior_privacy_contract.py tools/test_manifest_security_contract.py",
+      "command": "python -m pytest tools/test_behavior_goal_copy_contract.py tools/test_behavior_goal_privacy_contract.py tools/test_behavior_goal_storage_contract.py tools/test_behavior_goal_v1_scope_contract.py",
       "purpose": "targeted tests",
       "confidence": "high",
       "files": [
-        "tools/test_behavior_copy_contract.py",
-        "tools/test_behavior_integration_contract.py",
-        "tools/test_behavior_privacy_contract.py",
-        "tools/test_manifest_security_contract.py"
+        "tools/test_behavior_goal_copy_contract.py",
+        "tools/test_behavior_goal_privacy_contract.py",
+        "tools/test_behavior_goal_storage_contract.py",
+        "tools/test_behavior_goal_v1_scope_contract.py"
       ]
     },
     {
@@ -38,20 +33,15 @@
       "purpose": "targeted area fallback",
       "confidence": "medium",
       "files": [
-        "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-        "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
-        "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
-        "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
-        "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
-        "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt"
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt"
       ],
       "note": "Exact Gradle test filters are project-specific; inspect these test files first."
     }

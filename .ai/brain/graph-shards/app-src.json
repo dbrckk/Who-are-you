@@ -27,6 +27,36 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
@@ -402,6 +432,121 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
@@ -449,6 +594,16 @@
     {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
       "type": "symbol-reference"
     },
     {
@@ -1069,6 +1224,11 @@
     {
       "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "target": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
       "type": "symbol-reference"
     },
     {
@@ -2472,6 +2632,76 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
       "type": "symbol-reference"
@@ -3343,11 +3573,6 @@
     },
     {
       "source": "tools/play_preflight.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/play_preflight.py",
       "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
       "type": "symbol-reference"
     },
@@ -3359,11 +3584,6 @@
     {
       "source": "tools/play_publisher.py",
       "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/play_publisher.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
     {
@@ -3384,6 +3604,111 @@
     {
       "source": "tools/test_battery_thermal_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_storage_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_v1_scope_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "type": "symbol-reference"
     },
     {
@@ -3532,11 +3857,6 @@
       "type": "symbol-reference"
     },
     {
-      "source": "tools/test_m33_readiness.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-      "type": "symbol-reference"
-    },
-    {
       "source": "tools/test_m47_ui_test_wiring.py",
       "target": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
       "type": "symbol-reference"
@@ -3629,11 +3949,6 @@
     {
       "source": "tools/test_m52_play_policy.py",
       "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_m53_publication_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
     {
@@ -3734,11 +4049,6 @@
     {
       "source": "tools/test_profile_narrative_integration.py",
       "target": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_profile_reset_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
     {

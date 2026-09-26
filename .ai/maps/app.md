@@ -45,6 +45,7 @@ src/
         whoareyou/
           app/
             AppShellUiTest.kt
+            BehaviorGoalsUiTest.kt
             BehaviorScreenUiTest.kt
             MainActivityRecreationTest.kt
             MainFlowE2eTest.kt
@@ -92,6 +93,14 @@ src/
             AppThemeUi.kt
             AppUsageAggregation.kt
             AppUsageCollector.kt
+            BehaviorGoalEngine.kt
+            BehaviorGoalIntegrationUi.kt
+            BehaviorGoalPresentation.kt
+            BehaviorGoalRepository.kt
+            BehaviorGoalStore.kt
+            BehaviorGoalsUi.kt
+            BehaviorGoalTargetParser.kt
+            BehaviorGoalUiModel.kt
             BehaviorInsightEngine.kt
             BehaviorIntegrationPolicy.kt
             BehaviorLifecycleUi.kt
@@ -218,6 +227,12 @@ src/
             AppShellNavigationTest.kt
             AppUsageAggregationTest.kt
             AppUsageCollectorTest.kt
+            BehaviorGoalEngineTest.kt
+            BehaviorGoalFactoryTest.kt
+            BehaviorGoalPresentationTest.kt
+            BehaviorGoalStoreCodecTest.kt
+            BehaviorGoalTargetParserTest.kt
+            BehaviorGoalUiModelTest.kt
             BehaviorInsightEngineTest.kt
             BehaviorIntegrationPolicyTest.kt
             BehaviorRefreshCoordinatorTest.kt
@@ -323,6 +338,317 @@ class AppShellUiTest {
         composeRule.runOnIdle {
             assertEquals(AppShellTab.PROFILE, selectedTab)
         }
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Rule
+import org.junit.Test
+
+class BehaviorGoalsUiTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    private val activeGoal = BehaviorGoalUiModel(
+        id = "steps",
+        metricCopy = BehaviorGoalCopyKey.METRIC_STEPS,
+        statusCopy = BehaviorGoalCopyKey.STATUS_ACTIVE,
+        valueKind = BehaviorGoalValueKind.STEPS,
+        targetValue = 8_000L,
+        packageName = null,
+        observedDays = 3,
+        metDays = 2,
+        elapsedCompletedDays = 3,
+        remainingDays = 4,
+        hasMissingEvidence = false
+    )
+
+    @Test
+    fun emptyStateExplainsUserDefinedTargetsAndOffersCreate() {
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goals_section").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goals_user_defined").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goal_create").assertIsDisplayed()
+    }
+
+    @Test
+    fun activeGoalShowsMeasuredProgressAndRoutesPause() {
+        var paused: Pair<String, Boolean>? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = listOf(activeGoal),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onSetPaused = { id, value -> paused = id to value },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_steps").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goal_steps_progress").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goal_steps_pause").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals("steps" to true, paused)
+        }
+    }
+
+    @Test
+    fun createStepsGoalUsesExplicitUserValue() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("9000")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.STEPS_AT_LEAST,
+                    targetValue = 9_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun createScreenTimeGoalConvertsMinutesToMillis() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_screen_time").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("90")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+                    targetValue = 90L * 60_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun pausedGoalRoutesResume() {
+        var paused: Pair<String, Boolean>? = null
+        val pausedGoal = activeGoal.copy(statusCopy = BehaviorGoalCopyKey.STATUS_PAUSED)
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = listOf(pausedGoal),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onSetPaused = { id, value -> paused = id to value },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_steps_pause").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals("steps" to false, paused)
+        }
+    }
+
+    @Test
+    fun createEveningGoalConvertsMinutesToMillis() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_evening_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("45")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+                    targetValue = 45L * 60_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun createSelectedAppGoalKeepsPackageIdentity() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = listOf(BehaviorAppUsageUi("com.example.video", 1_200_000L)),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_app_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("30")
+        composeRule.onNodeWithTag("behavior_goal_app_com_example_video").performClick()
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
+                    targetValue = 30L * 60_000L,
+                    packageName = "com.example.video"
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun compactLargeFontCreateDialogKeepsLateAppOptionReachable() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.3f)) {
+                Box(Modifier.width(360.dp).height(640.dp)) {
+                    WhoAreYouTheme {
+                        BehaviorGoalsSection(
+                            goals = emptyList(),
+                            availableApps = (1..8).map { index ->
+                                BehaviorAppUsageUi("com.example.app$index", index * 60_000L)
+                            },
+                            onCreate = {},
+                            onSetPaused = { _, _ -> },
+                            onDelete = {}
+                        )
+                    }
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_app_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_app_com_example_app8")
+            .performScrollTo()
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun deleteRequiresConfirmation() {
+        var deleted = false
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = listOf(activeGoal),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onSetPaused = { _, _ -> },
+                    onDelete = { deleted = true }
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_steps_delete").performClick()
+        composeRule.runOnIdle { assertFalse(deleted) }
+        composeRule.onNodeWithTag("behavior_goal_delete_confirm").performClick()
+        composeRule.runOnIdle { assertTrue(deleted) }
+    }
+
+    @Test
+    fun compactLargeFontLayoutKeepsCreateReachable() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.3f)) {
+                Box(Modifier.width(360.dp).height(640.dp)) {
+                    WhoAreYouTheme {
+                        BehaviorGoalsSection(
+                            goals = emptyList(),
+                            availableApps = emptyList(),
+                            onCreate = {},
+                            onSetPaused = { _, _ -> },
+                            onDelete = {}
+                        )
+                    }
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").assertIsDisplayed()
     }
 }
 ```
@@ -445,6 +771,48 @@ class BehaviorScreenUiTest {
             .performClick()
 
         composeRule.runOnIdle { assertEquals(1, deletes) }
+    }
+
+    @Test
+    fun habitsScreenRendersGoalsAndRoutesGoalActions() {
+        val goal = BehaviorGoalUiModel(
+            id = "screen",
+            metricCopy = BehaviorGoalCopyKey.METRIC_SCREEN_TIME,
+            statusCopy = BehaviorGoalCopyKey.STATUS_ACTIVE,
+            valueKind = BehaviorGoalValueKind.DURATION,
+            targetValue = 60L * 60_000L,
+            packageName = null,
+            observedDays = 2,
+            metDays = 1,
+            elapsedCompletedDays = 2,
+            remainingDays = 5,
+            hasMissingEvidence = false
+        )
+        var paused: Pair<String, Boolean>? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    goals = listOf(goal),
+                    onBack = {},
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = {},
+                    onCreateGoal = {},
+                    onSetGoalPaused = { id, value -> paused = id to value },
+                    onDeleteGoal = {}
+                )
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_goals_section"))
+        composeRule.onNodeWithTag("behavior_goals_section").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goal_screen_pause").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals("screen" to true, paused)
+        }
     }
 
     @Test
@@ -13727,6 +14095,956 @@ class AndroidAppUsageDataSource(context: Context) : AppUsageDataSource {
 }
 ```
 
+## File: src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt
+```kotlin
+package com.whoareyou.app
+
+enum class BehaviorGoalMetric {
+    STEPS_AT_LEAST,
+    SCREEN_TIME_AT_MOST,
+    EVENING_USAGE_AT_MOST,
+    APP_USAGE_AT_MOST
+}
+
+data class BehaviorGoal(
+    val id: String,
+    val metric: BehaviorGoalMetric,
+    val targetValue: Long,
+    val startEpochDay: Long,
+    val durationDays: Int = DEFAULT_DURATION_DAYS,
+    val packageName: String? = null,
+    val paused: Boolean = false
+) {
+    init {
+        require(id.isNotBlank()) { "Goal id must not be blank" }
+        require(targetValue >= 0L) { "Goal target must not be negative" }
+        require(durationDays > 0) { "Goal duration must be positive" }
+        if (metric == BehaviorGoalMetric.APP_USAGE_AT_MOST) {
+            require(!packageName.isNullOrBlank()) { "App usage goal requires a package name" }
+        }
+    }
+
+    companion object {
+        const val DEFAULT_DURATION_DAYS = 7
+
+        fun stepsAtLeast(
+            id: String,
+            targetSteps: Long,
+            startEpochDay: Long,
+            durationDays: Int = DEFAULT_DURATION_DAYS
+        ) = BehaviorGoal(
+            id = id,
+            metric = BehaviorGoalMetric.STEPS_AT_LEAST,
+            targetValue = targetSteps,
+            startEpochDay = startEpochDay,
+            durationDays = durationDays
+        )
+
+        fun screenTimeAtMost(
+            id: String,
+            targetMillis: Long,
+            startEpochDay: Long,
+            durationDays: Int = DEFAULT_DURATION_DAYS
+        ) = BehaviorGoal(
+            id = id,
+            metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+            targetValue = targetMillis,
+            startEpochDay = startEpochDay,
+            durationDays = durationDays
+        )
+
+        fun eveningUsageAtMost(
+            id: String,
+            targetMillis: Long,
+            startEpochDay: Long,
+            durationDays: Int = DEFAULT_DURATION_DAYS
+        ) = BehaviorGoal(
+            id = id,
+            metric = BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+            targetValue = targetMillis,
+            startEpochDay = startEpochDay,
+            durationDays = durationDays
+        )
+
+        fun appUsageAtMost(
+            id: String,
+            packageName: String,
+            targetMillis: Long,
+            startEpochDay: Long,
+            durationDays: Int = DEFAULT_DURATION_DAYS
+        ) = BehaviorGoal(
+            id = id,
+            metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
+            targetValue = targetMillis,
+            startEpochDay = startEpochDay,
+            durationDays = durationDays,
+            packageName = packageName
+        )
+    }
+}
+
+enum class BehaviorGoalStatus {
+    ACTIVE,
+    PAUSED,
+    COMPLETED
+}
+
+data class BehaviorGoalDayResult(
+    val epochDay: Long,
+    val measuredValue: Long?,
+    val met: Boolean?
+)
+
+data class BehaviorGoalProgress(
+    val goal: BehaviorGoal,
+    val status: BehaviorGoalStatus,
+    val days: List<BehaviorGoalDayResult>,
+    val observedDays: Int,
+    val metDays: Int
+)
+
+object BehaviorGoalEngine {
+    fun evaluate(
+        goal: BehaviorGoal,
+        days: List<DailyBehaviorAggregate>,
+        currentEpochDay: Long
+    ): BehaviorGoalProgress {
+        val endExclusive = goal.startEpochDay + goal.durationDays.toLong()
+        val completedEndExclusive = minOf(currentEpochDay, endExclusive)
+        val byDay = days
+            .groupBy { it.epochDay }
+            .mapValues { (_, duplicates) -> duplicates.maxBy(::canonicalDayKey) }
+
+        val results = if (completedEndExclusive <= goal.startEpochDay) {
+            emptyList()
+        } else {
+            (goal.startEpochDay until completedEndExclusive).map { epochDay ->
+                val value = measuredValue(goal, byDay[epochDay])
+                BehaviorGoalDayResult(
+                    epochDay = epochDay,
+                    measuredValue = value,
+                    met = value?.let { meetsTarget(goal.metric, it, goal.targetValue) }
+                )
+            }
+        }
+
+        val status = when {
+            currentEpochDay >= endExclusive -> BehaviorGoalStatus.COMPLETED
+            goal.paused -> BehaviorGoalStatus.PAUSED
+            else -> BehaviorGoalStatus.ACTIVE
+        }
+
+        return BehaviorGoalProgress(
+            goal = goal,
+            status = status,
+            days = results,
+            observedDays = results.count { it.measuredValue != null },
+            metDays = results.count { it.met == true }
+        )
+    }
+
+    private fun measuredValue(goal: BehaviorGoal, day: DailyBehaviorAggregate?): Long? = when (goal.metric) {
+        BehaviorGoalMetric.STEPS_AT_LEAST -> day?.steps
+        BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> day?.totalForegroundMillis
+        BehaviorGoalMetric.EVENING_USAGE_AT_MOST ->
+            day?.takeIf { it.totalForegroundMillis != null }?.daypartUsage?.eveningMillis
+        BehaviorGoalMetric.APP_USAGE_AT_MOST ->
+            day?.topApps
+                ?.firstOrNull { it.packageName == goal.packageName }
+                ?.foregroundMillis
+    }
+
+    private fun meetsTarget(metric: BehaviorGoalMetric, value: Long, target: Long): Boolean = when (metric) {
+        BehaviorGoalMetric.STEPS_AT_LEAST -> value >= target
+        BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+        BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+        BehaviorGoalMetric.APP_USAGE_AT_MOST -> value <= target
+    }
+
+    private fun canonicalDayKey(day: DailyBehaviorAggregate): String = buildString {
+        append(day.steps ?: Long.MIN_VALUE)
+        append('|').append(day.totalForegroundMillis ?: Long.MIN_VALUE)
+        append('|').append(day.launchesOrSessions ?: Int.MIN_VALUE)
+        append('|').append(day.daypartUsage.morningMillis)
+        append('|').append(day.daypartUsage.afternoonMillis)
+        append('|').append(day.daypartUsage.eveningMillis)
+        append('|').append(day.daypartUsage.nightMillis)
+        day.topApps
+            .sortedWith(compareBy<AppUsageAggregate> { it.packageName }.thenBy { it.foregroundMillis })
+            .forEach { app ->
+                append('|').append(app.packageName)
+                append(':').append(app.foregroundMillis)
+                append(':').append(app.launchesOrSessions ?: Int.MIN_VALUE)
+            }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import java.time.LocalDate
+import java.util.UUID
+import kotlinx.coroutines.launch
+
+object BehaviorGoalFactory {
+    fun create(
+        request: BehaviorGoalCreateRequest,
+        id: String,
+        startEpochDay: Long
+    ): BehaviorGoal = BehaviorGoal(
+        id = id,
+        metric = request.metric,
+        targetValue = request.targetValue,
+        startEpochDay = startEpochDay,
+        packageName = request.packageName
+    )
+
+}
+
+data class BehaviorGoalsHostState(
+    val goals: List<BehaviorGoalUiModel>,
+    val onCreate: (BehaviorGoalCreateRequest) -> Unit,
+    val onSetPaused: (String, Boolean) -> Unit,
+    val onDelete: (String) -> Unit
+)
+
+@Composable
+fun rememberBehaviorGoalsHostState(
+    context: Context,
+    snapshot: BehaviorSnapshot
+): BehaviorGoalsHostState {
+    val scope = rememberCoroutineScope()
+    val goals by remember(context) {
+        BehaviorGoalRepository.observe(context.applicationContext)
+    }.collectAsState(initial = emptyList())
+
+    val currentEpochDay = LocalDate.now().toEpochDay()
+    val models = remember(goals, snapshot, currentEpochDay) {
+        BehaviorGoalPresentation.build(
+            goals = goals,
+            snapshot = snapshot,
+            currentEpochDay = currentEpochDay
+        )
+    }
+
+    return remember(context, scope, goals, models, currentEpochDay) {
+        BehaviorGoalsHostState(
+            goals = models,
+            onCreate = { request ->
+                val goal = BehaviorGoalFactory.create(
+                    request = request,
+                    id = UUID.randomUUID().toString(),
+                    startEpochDay = currentEpochDay
+                )
+                scope.launch {
+                    BehaviorGoalRepository.upsert(context.applicationContext, goal)
+                }
+            },
+            onSetPaused = { id, paused ->
+                scope.launch {
+                    BehaviorGoalRepository.setPaused(context.applicationContext, id, paused)
+                }
+            },
+            onDelete = { id ->
+                scope.launch {
+                    BehaviorGoalRepository.remove(context.applicationContext, id)
+                }
+            }
+        )
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt
+```kotlin
+package com.whoareyou.app
+
+object BehaviorGoalPresentation {
+    fun build(
+        goals: List<BehaviorGoal>,
+        snapshot: BehaviorSnapshot,
+        currentEpochDay: Long
+    ): List<BehaviorGoalUiModel> = goals
+        .sortedBy { it.id }
+        .map { goal ->
+            val progress = BehaviorGoalEngine.evaluate(
+                goal = goal,
+                days = snapshot.last30Days,
+                currentEpochDay = currentEpochDay
+            )
+            BehaviorGoalUiModelFactory.build(progress, currentEpochDay)
+        }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import java.io.IOException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+
+private val Context.behaviorGoalDataStore by preferencesDataStore(
+    name = "who_are_you_behavior_goals",
+    corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() }
+)
+
+object BehaviorGoalRepository {
+    private val goalsKey = stringPreferencesKey("goals_v1")
+
+    fun observe(context: Context): Flow<List<BehaviorGoal>> = context.behaviorGoalDataStore.data
+        .catch { error ->
+            if (error is IOException) emit(emptyPreferences()) else throw error
+        }
+        .map { prefs ->
+            BehaviorGoalStoreCodec.decode(prefs[goalsKey])
+        }
+
+    suspend fun upsert(context: Context, goal: BehaviorGoal) {
+        context.behaviorGoalDataStore.edit { prefs ->
+            val current = BehaviorGoalStoreCodec.decode(prefs[goalsKey])
+            prefs[goalsKey] = BehaviorGoalStoreCodec.encode(
+                BehaviorGoalStoreCodec.upsert(current, goal)
+            )
+        }
+    }
+
+    suspend fun setPaused(context: Context, id: String, paused: Boolean) {
+        context.behaviorGoalDataStore.edit { prefs ->
+            val current = BehaviorGoalStoreCodec.decode(prefs[goalsKey])
+            prefs[goalsKey] = BehaviorGoalStoreCodec.encode(
+                BehaviorGoalStoreCodec.setPaused(current, id, paused)
+            )
+        }
+    }
+
+    suspend fun remove(context: Context, id: String) {
+        context.behaviorGoalDataStore.edit { prefs ->
+            val current = BehaviorGoalStoreCodec.decode(prefs[goalsKey])
+            prefs[goalsKey] = BehaviorGoalStoreCodec.encode(
+                BehaviorGoalStoreCodec.remove(current, id)
+            )
+        }
+    }
+
+    suspend fun clearAll(context: Context) {
+        context.behaviorGoalDataStore.edit { prefs ->
+            prefs.clear()
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalStore.kt
+```kotlin
+package com.whoareyou.app
+
+import java.nio.charset.StandardCharsets
+import java.util.Base64
+
+object BehaviorGoalStoreCodec {
+    private const val VERSION = "v1"
+    private const val MAX_GOALS = 20
+    private const val NULL = "~"
+
+    fun encode(goals: List<BehaviorGoal>): String = buildString {
+        append(VERSION)
+        retain(goals).forEach { goal ->
+            append('\n')
+            append(
+                listOf(
+                    encodeText(goal.id),
+                    goal.metric.name,
+                    goal.targetValue.toString(),
+                    goal.startEpochDay.toString(),
+                    goal.durationDays.toString(),
+                    if (goal.paused) "1" else "0",
+                    goal.packageName?.let(::encodeText) ?: NULL
+                ).joinToString("|")
+            )
+        }
+    }
+
+    fun decode(payload: String?): List<BehaviorGoal> {
+        if (payload.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val lines = payload.lineSequence().toList()
+            require(lines.firstOrNull() == VERSION)
+            retain(
+                lines.drop(1)
+                    .filter { it.isNotBlank() }
+                    .map(::decodeGoal)
+            )
+        }.getOrElse { emptyList() }
+    }
+
+    fun retain(goals: List<BehaviorGoal>): List<BehaviorGoal> = goals
+        .groupBy { it.id }
+        .map { (_, duplicates) -> duplicates.maxBy(::canonicalGoalKey) }
+        .sortedWith(
+            compareByDescending<BehaviorGoal> { it.startEpochDay }
+                .thenBy { it.id }
+        )
+        .take(MAX_GOALS)
+
+    fun upsert(goals: List<BehaviorGoal>, goal: BehaviorGoal): List<BehaviorGoal> =
+        retain(goals.filterNot { it.id == goal.id } + goal)
+
+    fun setPaused(goals: List<BehaviorGoal>, id: String, paused: Boolean): List<BehaviorGoal> =
+        retain(goals.map { goal -> if (goal.id == id) goal.copy(paused = paused) else goal })
+
+    fun remove(goals: List<BehaviorGoal>, id: String): List<BehaviorGoal> =
+        retain(goals.filterNot { it.id == id })
+
+    private fun decodeGoal(line: String): BehaviorGoal {
+        val fields = line.split('|', limit = 7)
+        require(fields.size == 7)
+        return BehaviorGoal(
+            id = decodeText(fields[0]),
+            metric = BehaviorGoalMetric.valueOf(fields[1]),
+            targetValue = fields[2].toLong(),
+            startEpochDay = fields[3].toLong(),
+            durationDays = fields[4].toInt(),
+            paused = when (fields[5]) {
+                "1" -> true
+                "0" -> false
+                else -> error("Invalid paused flag")
+            },
+            packageName = if (fields[6] == NULL) null else decodeText(fields[6])
+        )
+    }
+
+    private fun canonicalGoalKey(goal: BehaviorGoal): String = listOf(
+        goal.metric.name,
+        goal.targetValue.toString(),
+        goal.startEpochDay.toString(),
+        goal.durationDays.toString(),
+        if (goal.paused) "1" else "0",
+        goal.packageName.orEmpty()
+    ).joinToString("|")
+
+    private fun encodeText(value: String): String = Base64.getUrlEncoder()
+        .withoutPadding()
+        .encodeToString(value.toByteArray(StandardCharsets.UTF_8))
+
+    private fun decodeText(value: String): String = String(
+        Base64.getUrlDecoder().decode(value),
+        StandardCharsets.UTF_8
+    )
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import java.util.concurrent.TimeUnit
+
+data class BehaviorGoalCreateRequest(
+    val metric: BehaviorGoalMetric,
+    val targetValue: Long,
+    val packageName: String? = null
+)
+
+@Composable
+fun BehaviorGoalsSection(
+    goals: List<BehaviorGoalUiModel>,
+    availableApps: List<BehaviorAppUsageUi>,
+    onCreate: (BehaviorGoalCreateRequest) -> Unit,
+    onSetPaused: (String, Boolean) -> Unit,
+    onDelete: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var showCreate by remember { mutableStateOf(false) }
+    var pendingDeleteId by remember { mutableStateOf<String?>(null) }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("behavior_goals_section"),
+        verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+    ) {
+        Text(
+            stringResource(R.string.goals_title),
+            color = V2Colors.AccentCyan,
+            style = V2Type.Eyebrow,
+            modifier = Modifier.semantics { heading() }
+        )
+        Text(
+            stringResource(R.string.goals_user_defined),
+            color = V2Colors.TextSecondary,
+            style = V2Type.Supporting,
+            modifier = Modifier.testTag("behavior_goals_user_defined")
+        )
+
+        goals.forEach { goal ->
+            BehaviorGoalCard(
+                goal = goal,
+                onSetPaused = onSetPaused,
+                onDelete = { pendingDeleteId = goal.id }
+            )
+        }
+
+        Button(
+            onClick = { showCreate = true },
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("behavior_goal_create"),
+            colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Orchid)
+        ) {
+            Text(stringResource(R.string.goals_create))
+        }
+    }
+
+    if (showCreate) {
+        BehaviorGoalEditorDialog(
+            availableApps = availableApps,
+            onDismiss = { showCreate = false },
+            onSubmit = {
+                showCreate = false
+                onCreate(it)
+            }
+        )
+    }
+
+    pendingDeleteId?.let { id ->
+        AlertDialog(
+            onDismissRequest = { pendingDeleteId = null },
+            title = { Text(stringResource(R.string.goals_delete)) },
+            text = { Text(stringResource(R.string.goals_delete_confirm)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        pendingDeleteId = null
+                        onDelete(id)
+                    },
+                    modifier = Modifier.testTag("behavior_goal_delete_confirm")
+                ) {
+                    Text(stringResource(R.string.goals_delete))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { pendingDeleteId = null }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun BehaviorGoalCard(
+    goal: BehaviorGoalUiModel,
+    onSetPaused: (String, Boolean) -> Unit,
+    onDelete: () -> Unit
+) {
+    val tagId = goal.id.replace(Regex("[^A-Za-z0-9_-]"), "_")
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("behavior_goal_" + tagId),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Column(
+            Modifier.padding(V2Spacing.Card),
+            verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+        ) {
+            Text(
+                behaviorGoalCopy(goal.metricCopy),
+                color = V2Colors.TextPrimary,
+                style = V2Type.SectionTitle,
+                modifier = Modifier.semantics { heading() }
+            )
+            Text(
+                behaviorGoalCopy(goal.statusCopy),
+                color = V2Colors.Orchid,
+                style = V2Type.Caption
+            )
+            goal.packageName?.let {
+                Text(it, color = V2Colors.TextSecondary, style = V2Type.Caption)
+            }
+            Text(
+                stringResource(
+                    R.string.goals_target_format,
+                    behaviorGoalTarget(goal)
+                ),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            Text(
+                stringResource(
+                    R.string.goals_progress_format,
+                    goal.observedDays,
+                    goal.metDays
+                ),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting,
+                modifier = Modifier.testTag("behavior_goal_" + tagId + "_progress")
+            )
+            Text(
+                stringResource(R.string.goals_days_remaining, goal.remainingDays),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption
+            )
+            if (goal.hasMissingEvidence) {
+                Text(
+                    stringResource(R.string.goals_missing_evidence),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting
+                )
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
+                if (goal.statusCopy != BehaviorGoalCopyKey.STATUS_COMPLETED) {
+                    val paused = goal.statusCopy == BehaviorGoalCopyKey.STATUS_PAUSED
+                    TextButton(
+                        onClick = { onSetPaused(goal.id, !paused) },
+                        modifier = Modifier.testTag("behavior_goal_" + tagId + "_pause")
+                    ) {
+                        Text(
+                            stringResource(if (paused) R.string.goals_resume else R.string.goals_pause)
+                        )
+                    }
+                }
+                TextButton(
+                    onClick = onDelete,
+                    modifier = Modifier.testTag("behavior_goal_" + tagId + "_delete")
+                ) {
+                    Text(stringResource(R.string.goals_delete), color = V2Colors.TextSecondary)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BehaviorGoalEditorDialog(
+    availableApps: List<BehaviorAppUsageUi>,
+    onDismiss: () -> Unit,
+    onSubmit: (BehaviorGoalCreateRequest) -> Unit
+) {
+    var metric by remember { mutableStateOf(BehaviorGoalMetric.STEPS_AT_LEAST) }
+    var targetText by remember { mutableStateOf("") }
+    var selectedPackage by remember { mutableStateOf<String?>(null) }
+
+    val targetValue = BehaviorGoalTargetParser.parse(metric, targetText)
+    val canSubmit = targetValue != null &&
+        (metric != BehaviorGoalMetric.APP_USAGE_AT_MOST || selectedPackage != null)
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(stringResource(R.string.goals_create))
+        },
+        text = {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+            ) {
+                Text(
+                    stringResource(R.string.goals_user_defined),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting
+                )
+                Text(
+                    stringResource(R.string.goals_select_metric),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.Caption
+                )
+                BehaviorGoalMetric.entries.forEach { option ->
+                    TextButton(
+                        onClick = {
+                            metric = option
+                            if (option != BehaviorGoalMetric.APP_USAGE_AT_MOST) {
+                                selectedPackage = null
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("behavior_goal_metric_" + option.metricTag())
+                    ) {
+                        Text(
+                            behaviorGoalMetricLabel(option),
+                            color = if (metric == option) V2Colors.AccentCyan else V2Colors.TextSecondary
+                        )
+                    }
+                }
+
+                OutlinedTextField(
+                    value = targetText,
+                    onValueChange = { value ->
+                        targetText = value.filter(Char::isDigit)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("behavior_goal_target_input"),
+                    label = {
+                        Text(
+                            stringResource(
+                                if (metric == BehaviorGoalMetric.STEPS_AT_LEAST) {
+                                    R.string.goals_target_steps_input
+                                } else {
+                                    R.string.goals_target_minutes_input
+                                }
+                            )
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true
+                )
+
+                if (metric == BehaviorGoalMetric.APP_USAGE_AT_MOST) {
+                    Text(
+                        stringResource(R.string.goals_select_app),
+                        color = V2Colors.TextPrimary,
+                        style = V2Type.Caption
+                    )
+                    if (availableApps.isEmpty()) {
+                        Text(
+                            stringResource(R.string.goals_missing_evidence),
+                            color = V2Colors.TextSecondary,
+                            style = V2Type.Supporting
+                        )
+                    } else {
+                        availableApps.forEach { app ->
+                            TextButton(
+                                onClick = { selectedPackage = app.packageName },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .testTag("behavior_goal_app_" + app.packageName.safeTag())
+                            ) {
+                                Text(
+                                    app.packageName,
+                                    color = if (selectedPackage == app.packageName) {
+                                        V2Colors.AccentCyan
+                                    } else {
+                                        V2Colors.TextSecondary
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                enabled = canSubmit,
+                onClick = {
+                    val value = targetValue ?: return@TextButton
+                    onSubmit(
+                        BehaviorGoalCreateRequest(
+                            metric = metric,
+                            targetValue = value,
+                            packageName = selectedPackage
+                        )
+                    )
+                },
+                modifier = Modifier.testTag("behavior_goal_create_confirm")
+            ) {
+                Text(stringResource(R.string.goals_save))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+private fun behaviorGoalMetricLabel(metric: BehaviorGoalMetric): String = stringResource(
+    when (metric) {
+        BehaviorGoalMetric.STEPS_AT_LEAST -> R.string.goals_metric_steps
+        BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> R.string.goals_metric_screen_time
+        BehaviorGoalMetric.EVENING_USAGE_AT_MOST -> R.string.goals_metric_evening_usage
+        BehaviorGoalMetric.APP_USAGE_AT_MOST -> R.string.goals_metric_app_usage
+    }
+)
+
+private fun BehaviorGoalMetric.metricTag(): String = when (this) {
+    BehaviorGoalMetric.STEPS_AT_LEAST -> "steps"
+    BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> "screen_time"
+    BehaviorGoalMetric.EVENING_USAGE_AT_MOST -> "evening_usage"
+    BehaviorGoalMetric.APP_USAGE_AT_MOST -> "app_usage"
+}
+
+private fun String.safeTag(): String = replace(Regex("[^A-Za-z0-9_-]"), "_")
+
+@Composable
+private fun behaviorGoalTarget(goal: BehaviorGoalUiModel): String = when (goal.valueKind) {
+    BehaviorGoalValueKind.STEPS -> goal.targetValue.toString()
+    BehaviorGoalValueKind.DURATION -> goalDurationLabel(goal.targetValue)
+}
+
+@Composable
+private fun behaviorGoalCopy(key: BehaviorGoalCopyKey): String = stringResource(
+    when (key) {
+        BehaviorGoalCopyKey.METRIC_STEPS -> R.string.goals_metric_steps
+        BehaviorGoalCopyKey.METRIC_SCREEN_TIME -> R.string.goals_metric_screen_time
+        BehaviorGoalCopyKey.METRIC_EVENING_USAGE -> R.string.goals_metric_evening_usage
+        BehaviorGoalCopyKey.METRIC_APP_USAGE -> R.string.goals_metric_app_usage
+        BehaviorGoalCopyKey.STATUS_ACTIVE -> R.string.goals_status_active
+        BehaviorGoalCopyKey.STATUS_PAUSED -> R.string.goals_status_paused
+        BehaviorGoalCopyKey.STATUS_COMPLETED -> R.string.goals_status_completed
+        BehaviorGoalCopyKey.USER_DEFINED_TARGET -> R.string.goals_your_target
+        BehaviorGoalCopyKey.OBSERVED_DAYS -> R.string.goals_observed_days
+        BehaviorGoalCopyKey.TARGET_MET_DAYS -> R.string.goals_target_met_days
+        BehaviorGoalCopyKey.MISSING_EVIDENCE -> R.string.goals_missing_evidence
+    }
+)
+
+private fun goalDurationLabel(millis: Long): String {
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(millis.coerceAtLeast(0L))
+    val hours = minutes / 60
+    val remainder = minutes % 60
+    return if (hours > 0) hours.toString() + "h " + remainder + "m" else remainder.toString() + "m"
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt
+```kotlin
+package com.whoareyou.app
+
+object BehaviorGoalTargetParser {
+    fun parse(metric: BehaviorGoalMetric, text: String): Long? {
+        val value = text.toLongOrNull()?.takeIf { it >= 0L } ?: return null
+        return when (metric) {
+            BehaviorGoalMetric.STEPS_AT_LEAST -> value
+            BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+            BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+            BehaviorGoalMetric.APP_USAGE_AT_MOST ->
+                runCatching { Math.multiplyExact(value, 60_000L) }.getOrNull()
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt
+```kotlin
+package com.whoareyou.app
+
+enum class BehaviorGoalCopyKey {
+    METRIC_STEPS,
+    METRIC_SCREEN_TIME,
+    METRIC_EVENING_USAGE,
+    METRIC_APP_USAGE,
+    STATUS_ACTIVE,
+    STATUS_PAUSED,
+    STATUS_COMPLETED,
+    USER_DEFINED_TARGET,
+    OBSERVED_DAYS,
+    TARGET_MET_DAYS,
+    MISSING_EVIDENCE
+}
+
+enum class BehaviorGoalValueKind {
+    STEPS,
+    DURATION
+}
+
+data class BehaviorGoalUiModel(
+    val id: String,
+    val metricCopy: BehaviorGoalCopyKey,
+    val statusCopy: BehaviorGoalCopyKey,
+    val valueKind: BehaviorGoalValueKind,
+    val targetValue: Long,
+    val packageName: String?,
+    val observedDays: Int,
+    val metDays: Int,
+    val elapsedCompletedDays: Int,
+    val remainingDays: Int,
+    val hasMissingEvidence: Boolean
+)
+
+object BehaviorGoalUiModelFactory {
+    fun build(
+        progress: BehaviorGoalProgress,
+        currentEpochDay: Long
+    ): BehaviorGoalUiModel {
+        val goal = progress.goal
+        val endExclusive = goal.startEpochDay + goal.durationDays.toLong()
+        val currentOrStart = maxOf(currentEpochDay, goal.startEpochDay)
+        val remainingDays = (endExclusive - currentOrStart)
+            .coerceAtLeast(0L)
+            .coerceAtMost(Int.MAX_VALUE.toLong())
+            .toInt()
+
+        return BehaviorGoalUiModel(
+            id = goal.id,
+            metricCopy = when (goal.metric) {
+                BehaviorGoalMetric.STEPS_AT_LEAST -> BehaviorGoalCopyKey.METRIC_STEPS
+                BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> BehaviorGoalCopyKey.METRIC_SCREEN_TIME
+                BehaviorGoalMetric.EVENING_USAGE_AT_MOST -> BehaviorGoalCopyKey.METRIC_EVENING_USAGE
+                BehaviorGoalMetric.APP_USAGE_AT_MOST -> BehaviorGoalCopyKey.METRIC_APP_USAGE
+            },
+            statusCopy = when (progress.status) {
+                BehaviorGoalStatus.ACTIVE -> BehaviorGoalCopyKey.STATUS_ACTIVE
+                BehaviorGoalStatus.PAUSED -> BehaviorGoalCopyKey.STATUS_PAUSED
+                BehaviorGoalStatus.COMPLETED -> BehaviorGoalCopyKey.STATUS_COMPLETED
+            },
+            valueKind = when (goal.metric) {
+                BehaviorGoalMetric.STEPS_AT_LEAST -> BehaviorGoalValueKind.STEPS
+                BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+                BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+                BehaviorGoalMetric.APP_USAGE_AT_MOST -> BehaviorGoalValueKind.DURATION
+            },
+            targetValue = goal.targetValue,
+            packageName = goal.packageName,
+            observedDays = progress.observedDays,
+            metDays = progress.metDays,
+            elapsedCompletedDays = progress.days.size,
+            remainingDays = remainingDays,
+            hasMissingEvidence = progress.days.any { it.measuredValue == null }
+        )
+    }
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt
 ```kotlin
 package com.whoareyou.app
@@ -14381,7 +15699,11 @@ fun BehaviorScreen(
     model: BehaviorUiModel,
     onBack: () -> Unit,
     onSourceAction: (BehaviorSource, BehaviorSourceAction) -> Unit,
-    onDeleteAll: () -> Unit
+    onDeleteAll: () -> Unit,
+    goals: List<BehaviorGoalUiModel> = emptyList(),
+    onCreateGoal: (BehaviorGoalCreateRequest) -> Unit = {},
+    onSetGoalPaused: (String, Boolean) -> Unit = { _, _ -> },
+    onDeleteGoal: (String) -> Unit = {}
 ) {
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     LazyColumn(
@@ -14418,6 +15740,15 @@ fun BehaviorScreen(
             item {
                 BehaviorSuggestionsCard(model.suggestions)
             }
+        }
+        item {
+            BehaviorGoalsSection(
+                goals = goals,
+                availableApps = model.last7Days.topApps,
+                onCreate = onCreateGoal,
+                onSetPaused = onSetGoalPaused,
+                onDelete = onDeleteGoal
+            )
         }
         item {
             Column(Modifier.fillMaxWidth()) {
@@ -19455,6 +20786,7 @@ private fun WhoAreYouApp() {
     val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(
         initial = BehaviorSnapshot(today = null, last7Days = emptyList(), last30Days = emptyList(), sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED }, insights = emptyList())
     )
+    val behaviorGoalsState = rememberBehaviorGoalsHostState(context, behaviorSnapshot)
     val behaviorRefreshCoordinator = remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }
     fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }
     BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }
@@ -19553,7 +20885,11 @@ private fun WhoAreYouApp() {
                             BehaviorSourceEffect.NONE -> Unit
                         }
                     } },
-                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } }
+                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context); BehaviorGoalRepository.clearAll(context) } },
+                    goals = behaviorGoalsState.goals,
+                    onCreateGoal = behaviorGoalsState.onCreate,
+                    onSetGoalPaused = behaviorGoalsState.onSetPaused,
+                    onDeleteGoal = behaviorGoalsState.onDelete
                 )
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz, questionIndex = quizQuestionIndex, score = quizRawScore,
@@ -28961,6 +30297,607 @@ class AppUsageCollectorTest {
         Instant.parse(timestamp),
         RawAppUsageEvent.Type.PAUSED
     )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Test
+
+class BehaviorGoalEngineTest {
+    private fun day(
+        epochDay: Long,
+        steps: Long? = null,
+        totalForegroundMillis: Long? = null,
+        eveningMillis: Long = 0L,
+        apps: List<AppUsageAggregate> = emptyList()
+    ) = DailyBehaviorAggregate(
+        epochDay = epochDay,
+        steps = steps,
+        totalForegroundMillis = totalForegroundMillis,
+        topApps = apps,
+        launchesOrSessions = null,
+        daypartUsage = DaypartUsage(
+            morningMillis = 0L,
+            afternoonMillis = 0L,
+            eveningMillis = eveningMillis,
+            nightMillis = 0L
+        )
+    )
+
+    @Test
+    fun `steps goal meets user target when observed value is at least target`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 8_000L, startEpochDay = 10L)
+        val progress = BehaviorGoalEngine.evaluate(goal, listOf(day(10, steps = 8_500L)), currentEpochDay = 11L)
+
+        assertEquals(1, progress.observedDays)
+        assertEquals(1, progress.metDays)
+        assertEquals(8_500L, progress.days.single().measuredValue)
+        assertEquals(true, progress.days.single().met)
+    }
+
+    @Test
+    fun `screen time goal meets target when observed duration is at most target`() {
+        val goal = BehaviorGoal.screenTimeAtMost("screen", 2 * 60 * 60 * 1000L, startEpochDay = 20L)
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(20, totalForegroundMillis = 90 * 60 * 1000L)),
+            currentEpochDay = 21L
+        )
+
+        assertEquals(1, progress.metDays)
+    }
+
+    @Test
+    fun `evening goal requires known app usage and does not treat missing usage as zero`() {
+        val goal = BehaviorGoal.eveningUsageAtMost("evening", 30 * 60 * 1000L, startEpochDay = 30L)
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(30, totalForegroundMillis = null, eveningMillis = 0L)),
+            currentEpochDay = 31L
+        )
+
+        assertEquals(0, progress.observedDays)
+        assertNull(progress.days.single().measuredValue)
+        assertNull(progress.days.single().met)
+    }
+
+    @Test
+    fun `selected app absent from retained top apps remains missing`() {
+        val goal = BehaviorGoal.appUsageAtMost(
+            id = "app",
+            packageName = "com.example.target",
+            targetMillis = 20 * 60 * 1000L,
+            startEpochDay = 40L
+        )
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(
+                day(
+                    40,
+                    totalForegroundMillis = 60 * 60 * 1000L,
+                    apps = listOf(AppUsageAggregate("com.example.other", 60 * 60 * 1000L, 2))
+                )
+            ),
+            currentEpochDay = 41L
+        )
+
+        assertEquals(0, progress.observedDays)
+        assertNull(progress.days.single().measuredValue)
+        assertNull(progress.days.single().met)
+    }
+
+    @Test
+    fun `selected app absent on unknown usage day remains missing`() {
+        val goal = BehaviorGoal.appUsageAtMost(
+            id = "app",
+            packageName = "com.example.target",
+            targetMillis = 20 * 60 * 1000L,
+            startEpochDay = 50L
+        )
+        val progress = BehaviorGoalEngine.evaluate(goal, listOf(day(50)), currentEpochDay = 51L)
+
+        assertEquals(0, progress.observedDays)
+        assertNull(progress.days.single().measuredValue)
+    }
+
+    @Test
+    fun `current partial local day is excluded from experiment evidence`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 5_000L, startEpochDay = 60L)
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(60, steps = 6_000L), day(61, steps = 100L)),
+            currentEpochDay = 61L
+        )
+
+        assertEquals(listOf(60L), progress.days.map { it.epochDay })
+        assertEquals(1, progress.metDays)
+    }
+
+    @Test
+    fun `missing completed day is represented as missing and not as failed target`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 5_000L, startEpochDay = 70L)
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(70, steps = 6_000L), day(72, steps = 7_000L)),
+            currentEpochDay = 73L
+        )
+
+        assertEquals(listOf(70L, 71L, 72L), progress.days.map { it.epochDay })
+        assertNull(progress.days[1].measuredValue)
+        assertNull(progress.days[1].met)
+        assertEquals(2, progress.observedDays)
+        assertEquals(2, progress.metDays)
+    }
+
+    @Test
+    fun `evaluation is deterministic across input ordering and duplicate days`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 5_000L, startEpochDay = 80L)
+        val a = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(81, steps = 6_000L), day(80, steps = 5_500L), day(80, steps = 5_500L)),
+            currentEpochDay = 82L
+        )
+        val b = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(80, steps = 5_500L), day(81, steps = 6_000L)),
+            currentEpochDay = 82L
+        )
+
+        assertEquals(b, a)
+    }
+
+    @Test
+    fun `experiment window clips evidence after configured duration`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 1_000L, startEpochDay = 90L, durationDays = 2)
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(day(90, steps = 2_000L), day(91, steps = 2_000L), day(92, steps = 2_000L)),
+            currentEpochDay = 94L
+        )
+
+        assertEquals(listOf(90L, 91L), progress.days.map { it.epochDay })
+        assertEquals(BehaviorGoalStatus.COMPLETED, progress.status)
+    }
+
+    @Test
+    fun `paused goal preserves evidence but reports paused status`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 1_000L, startEpochDay = 100L).copy(paused = true)
+        val progress = BehaviorGoalEngine.evaluate(goal, listOf(day(100, steps = 2_000L)), currentEpochDay = 101L)
+
+        assertEquals(BehaviorGoalStatus.PAUSED, progress.status)
+        assertEquals(1, progress.observedDays)
+    }
+
+    @Test
+    fun `paused goal becomes completed when fixed experiment window ends`() {
+        val goal = BehaviorGoal.stepsAtLeast(
+            id = "paused-complete",
+            targetSteps = 1_000L,
+            startEpochDay = 110L,
+            durationDays = 2
+        ).copy(paused = true)
+
+        val progress = BehaviorGoalEngine.evaluate(
+            goal = goal,
+            days = listOf(day(110, steps = 2_000L), day(111, steps = 2_000L)),
+            currentEpochDay = 112L
+        )
+
+        assertEquals(BehaviorGoalStatus.COMPLETED, progress.status)
+        assertEquals(2, progress.observedDays)
+    }
+
+    @Test
+    fun `selected app present evaluates retained foreground duration`() {
+        val goal = BehaviorGoal.appUsageAtMost(
+            id = "app-present",
+            packageName = "com.example.target",
+            targetMillis = 20 * 60 * 1000L,
+            startEpochDay = 120L
+        )
+
+        val progress = BehaviorGoalEngine.evaluate(
+            goal,
+            listOf(
+                day(
+                    120L,
+                    totalForegroundMillis = 60 * 60 * 1000L,
+                    apps = listOf(AppUsageAggregate("com.example.target", 15 * 60 * 1000L, 2))
+                )
+            ),
+            currentEpochDay = 121L
+        )
+
+        assertEquals(15 * 60 * 1000L, progress.days.single().measuredValue)
+        assertEquals(true, progress.days.single().met)
+    }
+
+    @Test
+    fun `invalid goal definitions are rejected`() {
+        expectIllegalArgument { BehaviorGoal.stepsAtLeast("", 1_000L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.screenTimeAtMost("screen", -1L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.appUsageAtMost("app", "", 1_000L, startEpochDay = 1L) }
+        expectIllegalArgument { BehaviorGoal.stepsAtLeast("steps", 1_000L, startEpochDay = 1L, durationDays = 0) }
+    }
+
+    private fun expectIllegalArgument(block: () -> Unit) {
+        try {
+            block()
+            throw AssertionError("Expected IllegalArgumentException")
+        } catch (_: IllegalArgumentException) {
+            Unit
+        }
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class BehaviorGoalFactoryTest {
+    @Test
+    fun `create request becomes seven day goal starting today`() {
+        val request = BehaviorGoalCreateRequest(
+            metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+            targetValue = 90L * 60_000L
+        )
+
+        val goal = BehaviorGoalFactory.create(
+            request = request,
+            id = "goal-1",
+            startEpochDay = 500L
+        )
+
+        assertEquals("goal-1", goal.id)
+        assertEquals(BehaviorGoalMetric.SCREEN_TIME_AT_MOST, goal.metric)
+        assertEquals(90L * 60_000L, goal.targetValue)
+        assertEquals(500L, goal.startEpochDay)
+        assertEquals(BehaviorGoal.DEFAULT_DURATION_DAYS, goal.durationDays)
+        assertEquals(null, goal.packageName)
+    }
+
+    @Test
+    fun `app request preserves selected package`() {
+        val request = BehaviorGoalCreateRequest(
+            metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
+            targetValue = 30L * 60_000L,
+            packageName = "com.example.video"
+        )
+
+        val goal = BehaviorGoalFactory.create(request, "goal-app", 600L)
+
+        assertEquals("com.example.video", goal.packageName)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorGoalPresentationTest {
+    @Test
+    fun `goals are recomputed from completed M774 history`() {
+        val goal = BehaviorGoal.stepsAtLeast(
+            id = "steps",
+            targetSteps = 8_000L,
+            startEpochDay = 100L
+        )
+        val snapshot = BehaviorSnapshot.EMPTY.copy(
+            last30Days = listOf(
+                DailyBehaviorAggregate(
+                    epochDay = 100L,
+                    steps = 9_000L,
+                    totalForegroundMillis = null,
+                    topApps = emptyList(),
+                    launchesOrSessions = null,
+                    daypartUsage = DaypartUsage.EMPTY
+                ),
+                DailyBehaviorAggregate(
+                    epochDay = 101L,
+                    steps = 7_000L,
+                    totalForegroundMillis = null,
+                    topApps = emptyList(),
+                    launchesOrSessions = null,
+                    daypartUsage = DaypartUsage.EMPTY
+                )
+            )
+        )
+
+        val models = BehaviorGoalPresentation.build(
+            goals = listOf(goal),
+            snapshot = snapshot,
+            currentEpochDay = 102L
+        )
+
+        assertEquals(1, models.size)
+        assertEquals(2, models.single().observedDays)
+        assertEquals(1, models.single().metDays)
+    }
+
+    @Test
+    fun `cleared behavior history leaves goal with missing progress`() {
+        val goal = BehaviorGoal.screenTimeAtMost(
+            id = "screen",
+            targetMillis = 60L * 60_000L,
+            startEpochDay = 200L
+        )
+
+        val models = BehaviorGoalPresentation.build(
+            goals = listOf(goal),
+            snapshot = BehaviorSnapshot.EMPTY,
+            currentEpochDay = 203L
+        )
+
+        assertEquals(1, models.size)
+        assertEquals(0, models.single().observedDays)
+        assertTrue(models.single().hasMissingEvidence)
+    }
+
+    @Test
+    fun `presentation is deterministic regardless of stored goal order`() {
+        val first = BehaviorGoal.stepsAtLeast("b", 5_000L, 300L)
+        val second = BehaviorGoal.stepsAtLeast("a", 6_000L, 300L)
+
+        val ids = BehaviorGoalPresentation.build(
+            goals = listOf(first, second).reversed(),
+            snapshot = BehaviorSnapshot.EMPTY,
+            currentEpochDay = 301L
+        ).map { it.id }
+
+        assertEquals(listOf("a", "b"), ids)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorGoalStoreCodecTest {
+    @Test
+    fun `round trip preserves all supported goal fields deterministically`() {
+        val goals = listOf(
+            BehaviorGoal.stepsAtLeast("steps", 8_000L, startEpochDay = 10L),
+            BehaviorGoal.screenTimeAtMost("screen", 7_200_000L, startEpochDay = 11L).copy(paused = true),
+            BehaviorGoal.eveningUsageAtMost("evening", 1_800_000L, startEpochDay = 12L, durationDays = 14),
+            BehaviorGoal.appUsageAtMost("app", "com.example.video", 1_200_000L, startEpochDay = 13L)
+        )
+
+        val encoded = BehaviorGoalStoreCodec.encode(goals)
+        val decoded = BehaviorGoalStoreCodec.decode(encoded)
+
+        assertEquals(BehaviorGoalStoreCodec.retain(goals), decoded)
+        assertEquals(encoded, BehaviorGoalStoreCodec.encode(decoded))
+    }
+
+    @Test
+    fun `corrupt payload falls back safely to empty goals`() {
+        assertEquals(emptyList<BehaviorGoal>(), BehaviorGoalStoreCodec.decode("not-a-valid-payload"))
+        assertEquals(emptyList<BehaviorGoal>(), BehaviorGoalStoreCodec.decode("v1\ninvalid|row"))
+    }
+
+    @Test
+    fun `retention keeps only the newest bounded number of goals`() {
+        val goals = (0 until 25).map { index ->
+            BehaviorGoal.stepsAtLeast(
+                id = "goal-$index",
+                targetSteps = 1_000L + index,
+                startEpochDay = index.toLong()
+            )
+        }
+
+        val retained = BehaviorGoalStoreCodec.retain(goals)
+
+        assertEquals(20, retained.size)
+        assertEquals("goal-24", retained.first().id)
+        assertEquals("goal-5", retained.last().id)
+    }
+
+    @Test
+    fun `upsert replaces same id without duplicating goal`() {
+        val original = BehaviorGoal.stepsAtLeast("same", 5_000L, startEpochDay = 1L)
+        val replacement = BehaviorGoal.stepsAtLeast("same", 7_000L, startEpochDay = 2L)
+
+        val result = BehaviorGoalStoreCodec.upsert(listOf(original), replacement)
+
+        assertEquals(1, result.size)
+        assertEquals(7_000L, result.single().targetValue)
+        assertEquals(2L, result.single().startEpochDay)
+    }
+
+    @Test
+    fun `set paused changes only selected goal`() {
+        val first = BehaviorGoal.stepsAtLeast("first", 5_000L, startEpochDay = 1L)
+        val second = BehaviorGoal.screenTimeAtMost("second", 3_600_000L, startEpochDay = 2L)
+
+        val paused = BehaviorGoalStoreCodec.setPaused(listOf(first, second), "first", true)
+
+        assertTrue(paused.first { it.id == "first" }.paused)
+        assertFalse(paused.first { it.id == "second" }.paused)
+    }
+
+    @Test
+    fun `remove deletes only selected goal`() {
+        val first = BehaviorGoal.stepsAtLeast("first", 5_000L, startEpochDay = 1L)
+        val second = BehaviorGoal.screenTimeAtMost("second", 3_600_000L, startEpochDay = 2L)
+
+        val result = BehaviorGoalStoreCodec.remove(listOf(first, second), "first")
+
+        assertEquals(listOf("second"), result.map { it.id })
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Test
+
+class BehaviorGoalTargetParserTest {
+    @Test
+    fun `steps target keeps explicit integer value`() {
+        assertEquals(
+            9_000L,
+            BehaviorGoalTargetParser.parse(BehaviorGoalMetric.STEPS_AT_LEAST, "9000")
+        )
+    }
+
+    @Test
+    fun `duration target converts minutes to millis`() {
+        assertEquals(
+            90L * 60_000L,
+            BehaviorGoalTargetParser.parse(BehaviorGoalMetric.SCREEN_TIME_AT_MOST, "90")
+        )
+    }
+
+    @Test
+    fun `duration overflow is rejected instead of wrapping negative`() {
+        assertNull(
+            BehaviorGoalTargetParser.parse(
+                BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+                Long.MAX_VALUE.toString()
+            )
+        )
+    }
+
+    @Test
+    fun `blank and non numeric target are rejected`() {
+        assertNull(BehaviorGoalTargetParser.parse(BehaviorGoalMetric.STEPS_AT_LEAST, ""))
+        assertNull(BehaviorGoalTargetParser.parse(BehaviorGoalMetric.APP_USAGE_AT_MOST, "abc"))
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorGoalUiModelTest {
+    private fun progress(
+        goal: BehaviorGoal,
+        status: BehaviorGoalStatus = BehaviorGoalStatus.ACTIVE,
+        observedDays: Int = 3,
+        metDays: Int = 2,
+        days: Int = 3
+    ) = BehaviorGoalProgress(
+        goal = goal,
+        status = status,
+        days = (0 until days).map { index ->
+            BehaviorGoalDayResult(
+                epochDay = goal.startEpochDay + index,
+                measuredValue = if (index < observedDays) goal.targetValue else null,
+                met = if (index < observedDays) index < metDays else null
+            )
+        },
+        observedDays = observedDays,
+        metDays = metDays
+    )
+
+    @Test
+    fun `steps goal exposes user target and measured progress`() {
+        val goal = BehaviorGoal.stepsAtLeast("steps", 8_000L, startEpochDay = 100L)
+        val model = BehaviorGoalUiModelFactory.build(progress(goal), currentEpochDay = 104L)
+
+        assertEquals(BehaviorGoalCopyKey.METRIC_STEPS, model.metricCopy)
+        assertEquals(BehaviorGoalCopyKey.STATUS_ACTIVE, model.statusCopy)
+        assertEquals(BehaviorGoalValueKind.STEPS, model.valueKind)
+        assertEquals(8_000L, model.targetValue)
+        assertEquals(3, model.observedDays)
+        assertEquals(2, model.metDays)
+        assertEquals(3, model.elapsedCompletedDays)
+        assertEquals(3, model.remainingDays)
+        assertFalse(model.hasMissingEvidence)
+    }
+
+    @Test
+    fun `partial evidence is explicitly marked missing without counting failure`() {
+        val goal = BehaviorGoal.screenTimeAtMost("screen", 3_600_000L, startEpochDay = 200L)
+        val model = BehaviorGoalUiModelFactory.build(
+            progress(goal, observedDays = 2, metDays = 1, days = 4),
+            currentEpochDay = 204L
+        )
+
+        assertTrue(model.hasMissingEvidence)
+        assertEquals(2, model.observedDays)
+        assertEquals(1, model.metDays)
+        assertEquals(4, model.elapsedCompletedDays)
+    }
+
+    @Test
+    fun `paused and completed states are separate presentation states`() {
+        val goal = BehaviorGoal.eveningUsageAtMost("evening", 1_800_000L, startEpochDay = 300L)
+
+        val paused = BehaviorGoalUiModelFactory.build(
+            progress(goal.copy(paused = true), BehaviorGoalStatus.PAUSED),
+            currentEpochDay = 304L
+        )
+        val completed = BehaviorGoalUiModelFactory.build(
+            progress(goal, BehaviorGoalStatus.COMPLETED, days = 7),
+            currentEpochDay = 308L
+        )
+
+        assertEquals(BehaviorGoalCopyKey.STATUS_PAUSED, paused.statusCopy)
+        assertEquals(BehaviorGoalCopyKey.STATUS_COMPLETED, completed.statusCopy)
+        assertEquals(0, completed.remainingDays)
+    }
+
+    @Test
+    fun `app goal keeps package identity for later safe label resolution`() {
+        val goal = BehaviorGoal.appUsageAtMost(
+            id = "app",
+            packageName = "com.example.video",
+            targetMillis = 1_200_000L,
+            startEpochDay = 400L
+        )
+
+        val model = BehaviorGoalUiModelFactory.build(progress(goal), currentEpochDay = 404L)
+
+        assertEquals(BehaviorGoalCopyKey.METRIC_APP_USAGE, model.metricCopy)
+        assertEquals(BehaviorGoalValueKind.DURATION, model.valueKind)
+        assertEquals("com.example.video", model.packageName)
+    }
+
+    @Test
+    fun `presentation vocabulary contains no health personality or moral judgment`() {
+        val forbidden = listOf(
+            "healthy", "unhealthy", "good", "bad", "addict", "diagnos",
+            "personality", "depress", "anxiety", "lazy", "success", "failure"
+        )
+
+        BehaviorGoalCopyKey.entries.forEach { key ->
+            val normalized = key.name.lowercase()
+            forbidden.forEach { word ->
+                assertFalse("$key contains $word", normalized.contains(word))
+            }
+        }
+    }
 }
 ```
 

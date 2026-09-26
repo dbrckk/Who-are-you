@@ -106,6 +106,83 @@
       "line": 19
     },
     {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalsUiTest",
+      "line": 22
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "emptyStateExplainsUserDefinedTargetsAndOffersCreate",
+      "line": 42
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "activeGoalShowsMeasuredProgressAndRoutesPause",
+      "line": 61
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "createStepsGoalUsesExplicitUserValue",
+      "line": 86
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "createScreenTimeGoalConvertsMinutesToMillis",
+      "line": 117
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "pausedGoalRoutesResume",
+      "line": 149
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "createEveningGoalConvertsMinutesToMillis",
+      "line": 173
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "createSelectedAppGoalKeepsPackageIdentity",
+      "line": 205
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "compactLargeFontCreateDialogKeepsLateAppOptionReachable",
+      "line": 239
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "deleteRequiresConfirmation",
+      "line": 266
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "compactLargeFontLayoutKeepsCreateReachable",
+      "line": 288
+    },
+    {
       "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
       "language": "kotlin",
       "kind": "class",
@@ -137,8 +214,15 @@
       "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
-      "name": "sourceCtaRoutesTypedAction",
+      "name": "habitsScreenRendersGoalsAndRoutesGoalActions",
       "line": 120
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "sourceCtaRoutesTypedAction",
+      "line": 162
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
@@ -1233,6 +1317,370 @@
       "line": 81
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalMetric",
+      "line": 2
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoal",
+      "line": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "stepsAtLeast",
+      "line": 30
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "screenTimeAtMost",
+      "line": 43
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "eveningUsageAtMost",
+      "line": 56
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "appUsageAtMost",
+      "line": 69
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalStatus",
+      "line": 86
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalDayResult",
+      "line": 92
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalProgress",
+      "line": 98
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalEngine",
+      "line": 106
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "evaluate",
+      "line": 108
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "measuredValue",
+      "line": 146
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "meetsTarget",
+      "line": 157
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "canonicalDayKey",
+      "line": 164
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalFactory",
+      "line": 12
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "create",
+      "line": 14
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalsHostState",
+      "line": 27
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "rememberBehaviorGoalsHostState",
+      "line": 36
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalPresentation",
+      "line": 2
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "build",
+      "line": 4
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalRepository",
+      "line": 18
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "observe",
+      "line": 21
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "upsert",
+      "line": 29
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "setPaused",
+      "line": 38
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "remove",
+      "line": 47
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "clearAll",
+      "line": 56
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalStoreCodec",
+      "line": 5
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "encode",
+      "line": 10
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "decode",
+      "line": 28
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "retain",
+      "line": 41
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "upsert",
+      "line": 50
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "setPaused",
+      "line": 53
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "remove",
+      "line": 56
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "decodeGoal",
+      "line": 59
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "canonicalGoalKey",
+      "line": 77
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "encodeText",
+      "line": 86
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "decodeText",
+      "line": 90
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalTargetParser",
+      "line": 2
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "parse",
+      "line": 4
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalCopyKey",
+      "line": 2
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalValueKind",
+      "line": 16
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalUiModel",
+      "line": 21
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalUiModelFactory",
+      "line": 35
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "build",
+      "line": 37
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalCreateRequest",
+      "line": 32
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "BehaviorGoalsSection",
+      "line": 40
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "BehaviorGoalCard",
+      "line": 126
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "BehaviorGoalEditorDialog",
+      "line": 211
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "behaviorGoalMetricLabel",
+      "line": 346
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "behaviorGoalTarget",
+      "line": 365
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "behaviorGoalCopy",
+      "line": 371
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "goalDurationLabel",
+      "line": 386
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
       "language": "kotlin",
       "kind": "class",
@@ -1643,63 +2091,63 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorSourceCard",
-      "line": 115
+      "line": 128
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorPeriodCard",
-      "line": 154
+      "line": 167
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorPatternsCard",
-      "line": 188
+      "line": 201
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorSuggestionsCard",
-      "line": 209
+      "line": 222
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorMetric",
-      "line": 226
+      "line": 239
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "appDisplayName",
-      "line": 235
+      "line": 248
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "durationLabel",
-      "line": 244
+      "line": 257
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorAction",
-      "line": 253
+      "line": 266
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorCopy",
-      "line": 261
+      "line": 274
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
@@ -2938,21 +3386,21 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "refreshBehavior",
-      "line": 50
+      "line": 51
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "navigate",
-      "line": 106
+      "line": 107
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "resetQuizAttempt",
-      "line": 108
+      "line": 109
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
@@ -5524,6 +5972,69 @@
       "line": 121
     },
     {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalEngineTest",
+      "line": 6
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "day",
+      "line": 8
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "expectIllegalArgument",
+      "line": 223
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalFactoryTest",
+      "line": 5
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalPresentationTest",
+      "line": 6
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalStoreCodecTest",
+      "line": 7
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalTargetParserTest",
+      "line": 6
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "BehaviorGoalUiModelTest",
+      "line": 7
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "progress",
+      "line": 9
+    },
+    {
       "file": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
       "language": "kotlin",
       "kind": "class",
@@ -7328,6 +7839,139 @@
       "kind": "function",
       "name": "test_habits_copy_stays_non_clinical_and_non_moralizing",
       "line": 33
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "strings",
+      "line": 38
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "BehaviorGoalCopyContractTest",
+      "line": 43
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_copy_has_en_fr_parity",
+      "line": 44
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_copy_states_targets_as_user_defined",
+      "line": 50
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_full_habits_reset_explicitly_mentions_goals",
+      "line": 58
+    },
+    {
+      "file": "tools/test_behavior_goal_copy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_copy_stays_non_clinical_and_non_moralizing",
+      "line": 64
+    },
+    {
+      "file": "tools/test_behavior_goal_privacy_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "BehaviorGoalPrivacyContractTest",
+      "line": 30
+    },
+    {
+      "file": "tools/test_behavior_goal_privacy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "read",
+      "line": 31
+    },
+    {
+      "file": "tools/test_behavior_goal_privacy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_data_does_not_enter_telemetry_share_ads_or_personal_model",
+      "line": 34
+    },
+    {
+      "file": "tools/test_behavior_goal_privacy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_domain_does_not_write_profile_or_external_services",
+      "line": 45
+    },
+    {
+      "file": "tools/test_behavior_goal_privacy_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_feature_declares_no_new_android_permission",
+      "line": 62
+    },
+    {
+      "file": "tools/test_behavior_goal_storage_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "BehaviorGoalStorageContractTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_behavior_goal_storage_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_repository_uses_separate_local_datastore",
+      "line": 9
+    },
+    {
+      "file": "tools/test_behavior_goal_storage_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_repository_does_not_write_profile_or_behavior_history",
+      "line": 22
+    },
+    {
+      "file": "tools/test_behavior_goal_v1_scope_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "BehaviorGoalV1ScopeContractTest",
+      "line": 10
+    },
+    {
+      "file": "tools/test_behavior_goal_v1_scope_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "read",
+      "line": 11
+    },
+    {
+      "file": "tools/test_behavior_goal_v1_scope_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_v1_has_no_goal_editing_surface",
+      "line": 14
+    },
+    {
+      "file": "tools/test_behavior_goal_v1_scope_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_v1_resources_do_not_expose_goal_editing_copy",
+      "line": 26
+    },
+    {
+      "file": "tools/test_behavior_goal_v1_scope_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_full_habits_reset_clears_behavior_and_goal_data",
+      "line": 32
     },
     {
       "file": "tools/test_behavior_integration_contract.py",

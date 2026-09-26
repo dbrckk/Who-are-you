@@ -28,6 +28,27 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt": [
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.runtime.CompositionLocalProvider",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollTo",
+      "androidx.compose.ui.test.performTextInput",
+      "androidx.compose.ui.unit.Density",
+      "androidx.compose.ui.unit.dp",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt": [
       "androidx.compose.foundation.layout.Box",
       "androidx.compose.foundation.layout.height",
@@ -344,6 +365,64 @@
       "java.time.Instant",
       "java.time.LocalDate",
       "java.time.ZoneId"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt": [
+      "android.content.Context",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.collectAsState",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.rememberCoroutineScope",
+      "java.time.LocalDate",
+      "java.util.UUID",
+      "kotlinx.coroutines.launch"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt": [
+      "android.content.Context",
+      "androidx.datastore.core.handlers.ReplaceFileCorruptionHandler",
+      "androidx.datastore.preferences.core.edit",
+      "androidx.datastore.preferences.core.emptyPreferences",
+      "androidx.datastore.preferences.core.stringPreferencesKey",
+      "androidx.datastore.preferences.preferencesDataStore",
+      "java.io.IOException",
+      "kotlinx.coroutines.flow.Flow",
+      "kotlinx.coroutines.flow.catch",
+      "kotlinx.coroutines.flow.map"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt": [
+      "java.nio.charset.StandardCharsets",
+      "java.util.Base64"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.rememberScrollState",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.foundation.text.KeyboardOptions",
+      "androidx.compose.foundation.verticalScroll",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.OutlinedTextField",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.text.input.KeyboardType",
+      "java.util.concurrent.TimeUnit"
     ],
     "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt": [
       "kotlin.math.abs"
@@ -1694,6 +1773,37 @@
       "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
     "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
@@ -2113,6 +2223,24 @@
     "tools/test_behavior_copy_contract.py": [
       "pathlib",
       "re",
+      "unittest"
+    ],
+    "tools/test_behavior_goal_copy_contract.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_behavior_goal_privacy_contract.py": [
+      "pathlib",
+      "unittest",
+      "xml.etree.ElementTree"
+    ],
+    "tools/test_behavior_goal_storage_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_behavior_goal_v1_scope_contract.py": [
+      "pathlib",
       "unittest"
     ],
     "tools/test_behavior_integration_contract.py": [

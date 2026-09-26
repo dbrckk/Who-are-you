@@ -7,8 +7,13 @@
       "path": ".ai/brain/context/app-src.json"
     },
     {
+      "area": "docs",
+      "file_count": 2,
+      "path": ".ai/brain/context/docs.json"
+    },
+    {
       "area": "tools",
-      "file_count": 3,
+      "file_count": 4,
       "path": ".ai/brain/context/tools.json"
     }
   ],

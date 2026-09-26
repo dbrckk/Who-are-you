@@ -1,15 +1,15 @@
 {
   "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
-  "files_indexed": 315,
-  "symbol_count": 1500,
+  "files_indexed": 334,
+  "symbol_count": 1592,
   "edge_count": 10,
   "languages": {
-    "python": 98,
-    "kotlin": 217
+    "python": 102,
+    "kotlin": 232
   },
-  "index_mode": "full",
-  "reparsed_files": 315,
+  "index_mode": "incremental",
+  "reparsed_files": 22,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
@@ -38,6 +38,10 @@
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
       "symbols": 16
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "symbols": 14
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
@@ -72,7 +76,15 @@
       "symbols": 12
     },
     {
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+      "symbols": 11
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "symbols": 11
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
       "symbols": 11
     },
     {
@@ -136,6 +148,10 @@
       "symbols": 9
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "symbols": 8
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
       "symbols": 8
     },
@@ -193,22 +209,6 @@
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt",
       "symbols": 7
     }
   ]

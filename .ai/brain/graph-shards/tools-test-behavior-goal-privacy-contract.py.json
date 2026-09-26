@@ -1,0 +1,66 @@
+{
+  "area": "tools-test-behavior-goal-privacy-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_goal_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -17,11 +17,6 @@
       "type": "symbol-reference"
     },
     {
-      "source": "tools/play_publisher.py",
-      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-      "type": "symbol-reference"
-    },
-    {
       "source": "tools/test_play_promoter.py",
       "target": "tools/play_publisher.py",
       "type": "imports"
