@@ -241,6 +241,9 @@
     <string name="goals_pause">PAUSE</string>
     <string name="goals_resume">RESUME</string>
     <string name="goals_delete">DELETE GOAL</string>
+    <string name="goals_delete_confirm">Delete this local goal? Your measured habits history will stay on this device.</string>
+    <string name="goals_target_format">Your target: %1$s</string>
+    <string name="goals_progress_format">%1$d observed days · %2$d days matching your target</string>
     <string name="habits_steps">%1$d steps</string>
     <string name="habits_screen_time">%1$s screen time</string>
     <string name="habits_sessions">%1$d sessions</string>
