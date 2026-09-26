@@ -106,8 +106,9 @@ Requirements:
 - bounded number of goals;
 - deterministic codec/serialization;
 - corrupt payload safely falls back to no goals;
-- deleting M774 behavioral history leaves goal definitions intact but progress becomes missing;
-- deleting a goal removes only that goal.
+- clearing one M774 source leaves goal definitions intact and may make affected progress missing;
+- a full local My Habits reset clears both M774 behavioral history and M775 goal definitions through an explicit local bridge;
+- removing one goal removes only that goal.
 
 ## UI
 
@@ -115,6 +116,7 @@ Add a `Goals / Objectifs` section to My Habits:
 - empty state explains that targets are user-defined;
 - create action opens a simple local form;
 - active cards show target, observed days, target-met days, and remaining experiment days;
+- pause/resume and remove are available per goal;
 - paused/completed states are explicit;
 - no red/green moral scoring;
 - compact width and >=130% font scale supported;
@@ -149,12 +151,13 @@ No new manifest permission is allowed for M775.
 - deterministic round-trip;
 - corrupt payload fallback;
 - bounded goal count;
-- create/update/pause/delete.
+- create/pause/resume/remove;
+- full local My Habits reset clears goals together with behavioral history.
 
 ### UI/integration
 - goals section empty state;
 - user-defined framing;
-- create/edit/pause/delete routing;
+- create/pause/resume/remove routing;
 - progress with partial data;
 - compact + 130% font scale;
 - no new permissions;
