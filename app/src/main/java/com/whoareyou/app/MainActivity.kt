@@ -148,6 +148,7 @@ private fun WhoAreYouApp() {
                     onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } },
                     goals = behaviorGoalsState.goals,
                     onCreateGoal = behaviorGoalsState.onCreate,
+                    onEditGoal = behaviorGoalsState.onEdit,
                     onSetGoalPaused = behaviorGoalsState.onSetPaused,
                     onDeleteGoal = behaviorGoalsState.onDelete
                 )
