@@ -12,6 +12,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import org.junit.Assert.assertEquals
@@ -143,6 +144,39 @@ class BehaviorGoalsUiTest {
                     targetValue = 90L * 60_000L
                 ),
                 request
+            )
+        }
+    }
+
+    @Test
+    fun editGoalUsesPrefilledFormAndRoutesUpdatedTarget() {
+        var edited: Pair<String, BehaviorGoalCreateRequest>? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = listOf(activeGoal),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onEdit = { id, request -> edited = id to request },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_steps_edit").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input")
+            .performTextReplacement("10000")
+        composeRule.onNodeWithTag("behavior_goal_edit_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                "steps" to BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.STEPS_AT_LEAST,
+                    targetValue = 10_000L
+                ),
+                edited
             )
         }
     }
