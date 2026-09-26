@@ -23,6 +23,7 @@ GOAL_FILES = [
     "BehaviorGoalPresentation.kt",
     "BehaviorGoalIntegrationUi.kt",
     "BehaviorGoalsUi.kt",
+    "BehaviorGoalTargetParser.kt",
 ]
 
 
