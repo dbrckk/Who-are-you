@@ -37,7 +37,11 @@ fun BehaviorScreen(
     model: BehaviorUiModel,
     onBack: () -> Unit,
     onSourceAction: (BehaviorSource, BehaviorSourceAction) -> Unit,
-    onDeleteAll: () -> Unit
+    onDeleteAll: () -> Unit,
+    goals: List<BehaviorGoalUiModel> = emptyList(),
+    onCreateGoal: (BehaviorGoalCreateRequest) -> Unit = {},
+    onSetGoalPaused: (String, Boolean) -> Unit = { _, _ -> },
+    onDeleteGoal: (String) -> Unit = {}
 ) {
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     LazyColumn(
@@ -74,6 +78,15 @@ fun BehaviorScreen(
             item {
                 BehaviorSuggestionsCard(model.suggestions)
             }
+        }
+        item {
+            BehaviorGoalsSection(
+                goals = goals,
+                availableApps = model.last7Days.topApps,
+                onCreate = onCreateGoal,
+                onSetPaused = onSetGoalPaused,
+                onDelete = onDeleteGoal
+            )
         }
         item {
             Column(Modifier.fillMaxWidth()) {

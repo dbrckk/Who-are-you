@@ -117,6 +117,48 @@ class BehaviorScreenUiTest {
     }
 
     @Test
+    fun habitsScreenRendersGoalsAndRoutesGoalActions() {
+        val goal = BehaviorGoalUiModel(
+            id = "screen",
+            metricCopy = BehaviorGoalCopyKey.METRIC_SCREEN_TIME,
+            statusCopy = BehaviorGoalCopyKey.STATUS_ACTIVE,
+            valueKind = BehaviorGoalValueKind.DURATION,
+            targetValue = 60L * 60_000L,
+            packageName = null,
+            observedDays = 2,
+            metDays = 1,
+            elapsedCompletedDays = 2,
+            remainingDays = 5,
+            hasMissingEvidence = false
+        )
+        var paused: Pair<String, Boolean>? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    goals = listOf(goal),
+                    onBack = {},
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = {},
+                    onCreateGoal = {},
+                    onSetGoalPaused = { id, value -> paused = id to value },
+                    onDeleteGoal = {}
+                )
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_goals_section"))
+        composeRule.onNodeWithTag("behavior_goals_section").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_goal_screen_pause").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals("screen" to true, paused)
+        }
+    }
+
+    @Test
     fun sourceCtaRoutesTypedAction() {
         var selected: Pair<BehaviorSource, BehaviorSourceAction>? = null
 
