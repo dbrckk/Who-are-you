@@ -130,8 +130,8 @@ object BehaviorGoalEngine {
         }
 
         val status = when {
-            goal.paused -> BehaviorGoalStatus.PAUSED
             currentEpochDay >= endExclusive -> BehaviorGoalStatus.COMPLETED
+            goal.paused -> BehaviorGoalStatus.PAUSED
             else -> BehaviorGoalStatus.ACTIVE
         }
 
