@@ -241,6 +241,9 @@
     <string name="goals_pause">METTRE EN PAUSE</string>
     <string name="goals_resume">REPRENDRE</string>
     <string name="goals_delete">SUPPRIMER L’OBJECTIF</string>
+    <string name="goals_delete_confirm">Supprimer cet objectif local ? Ton historique d’habitudes mesurées restera sur cet appareil.</string>
+    <string name="goals_target_format">Ton objectif : %1$s</string>
+    <string name="goals_progress_format">%1$d jours observés · %2$d jours correspondant à ton objectif</string>
     <string name="habits_steps">%1$d pas</string>
     <string name="habits_screen_time">%1$s de temps d’écran</string>
     <string name="habits_sessions">%1$d sessions</string>
