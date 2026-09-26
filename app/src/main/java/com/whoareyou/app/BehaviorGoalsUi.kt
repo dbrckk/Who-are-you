@@ -215,11 +215,7 @@ private fun BehaviorGoalEditorDialog(
     var targetText by remember { mutableStateOf("") }
     var selectedPackage by remember { mutableStateOf<String?>(null) }
 
-    val numericTarget = targetText.toLongOrNull()?.takeIf { it >= 0L }
-    val targetValue = numericTarget?.let { value ->
-        if (metric == BehaviorGoalMetric.STEPS_AT_LEAST) value
-        else value * 60_000L
-    }
+    val targetValue = BehaviorGoalTargetParser.parse(metric, targetText)
     val canSubmit = targetValue != null &&
         (metric != BehaviorGoalMetric.APP_USAGE_AT_MOST || selectedPackage != null)
     AlertDialog(
