@@ -1,0 +1,259 @@
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import java.util.concurrent.TimeUnit
+
+data class BehaviorGoalCreateRequest(
+    val metric: BehaviorGoalMetric,
+    val targetValue: Long,
+    val packageName: String? = null
+)
+
+@Composable
+fun BehaviorGoalsSection(
+    goals: List<BehaviorGoalUiModel>,
+    availableApps: List<BehaviorAppUsageUi>,
+    onCreate: (BehaviorGoalCreateRequest) -> Unit,
+    onSetPaused: (String, Boolean) -> Unit,
+    onDelete: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var showCreate by remember { mutableStateOf(false) }
+    var pendingDeleteId by remember { mutableStateOf<String?>(null) }
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("behavior_goals_section"),
+        verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+    ) {
+        Text(
+            stringResource(R.string.goals_title),
+            color = V2Colors.AccentCyan,
+            style = V2Type.Eyebrow,
+            modifier = Modifier.semantics { heading() }
+        )
+        Text(
+            stringResource(R.string.goals_user_defined),
+            color = V2Colors.TextSecondary,
+            style = V2Type.Supporting,
+            modifier = Modifier.testTag("behavior_goals_user_defined")
+        )
+
+        goals.forEach { goal ->
+            BehaviorGoalCard(
+                goal = goal,
+                onSetPaused = onSetPaused,
+                onDelete = { pendingDeleteId = goal.id }
+            )
+        }
+
+        Button(
+            onClick = { showCreate = true },
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("behavior_goal_create"),
+            colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Orchid)
+        ) {
+            Text(stringResource(R.string.goals_create))
+        }
+    }
+
+    if (showCreate) {
+        BehaviorGoalCreateDialog(
+            availableApps = availableApps,
+            onDismiss = { showCreate = false },
+            onCreate = {
+                showCreate = false
+                onCreate(it)
+            }
+        )
+    }
+
+    pendingDeleteId?.let { id ->
+        AlertDialog(
+            onDismissRequest = { pendingDeleteId = null },
+            title = { Text(stringResource(R.string.goals_delete)) },
+            text = { Text(stringResource(R.string.goals_delete_confirm)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        pendingDeleteId = null
+                        onDelete(id)
+                    },
+                    modifier = Modifier.testTag("behavior_goal_delete_confirm")
+                ) {
+                    Text(stringResource(R.string.goals_delete))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { pendingDeleteId = null }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun BehaviorGoalCard(
+    goal: BehaviorGoalUiModel,
+    onSetPaused: (String, Boolean) -> Unit,
+    onDelete: () -> Unit
+) {
+    val tagId = goal.id.replace(Regex("[^A-Za-z0-9_-]"), "_")
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("behavior_goal_" + tagId),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Column(
+            Modifier.padding(V2Spacing.Card),
+            verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+        ) {
+            Text(
+                behaviorGoalCopy(goal.metricCopy),
+                color = V2Colors.TextPrimary,
+                style = V2Type.SectionTitle,
+                modifier = Modifier.semantics { heading() }
+            )
+            Text(
+                behaviorGoalCopy(goal.statusCopy),
+                color = V2Colors.Orchid,
+                style = V2Type.Caption
+            )
+            goal.packageName?.let {
+                Text(it, color = V2Colors.TextSecondary, style = V2Type.Caption)
+            }
+            Text(
+                stringResource(
+                    R.string.goals_target_format,
+                    behaviorGoalTarget(goal)
+                ),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            Text(
+                stringResource(
+                    R.string.goals_progress_format,
+                    goal.observedDays,
+                    goal.metDays
+                ),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Supporting,
+                modifier = Modifier.testTag("behavior_goal_" + tagId + "_progress")
+            )
+            Text(
+                stringResource(R.string.goals_days_remaining, goal.remainingDays),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption
+            )
+            if (goal.hasMissingEvidence) {
+                Text(
+                    stringResource(R.string.goals_missing_evidence),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting
+                )
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
+                if (goal.statusCopy != BehaviorGoalCopyKey.STATUS_COMPLETED) {
+                    val paused = goal.statusCopy == BehaviorGoalCopyKey.STATUS_PAUSED
+                    TextButton(
+                        onClick = { onSetPaused(goal.id, !paused) },
+                        modifier = Modifier.testTag("behavior_goal_" + tagId + "_pause")
+                    ) {
+                        Text(
+                            stringResource(if (paused) R.string.goals_resume else R.string.goals_pause)
+                        )
+                    }
+                }
+                TextButton(
+                    onClick = onDelete,
+                    modifier = Modifier.testTag("behavior_goal_" + tagId + "_delete")
+                ) {
+                    Text(stringResource(R.string.goals_delete), color = V2Colors.TextSecondary)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BehaviorGoalCreateDialog(
+    availableApps: List<BehaviorAppUsageUi>,
+    onDismiss: () -> Unit,
+    onCreate: (BehaviorGoalCreateRequest) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.goals_create)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
+                Text(stringResource(R.string.goals_user_defined))
+                if (availableApps.isEmpty()) {
+                    Text(stringResource(R.string.goals_missing_evidence))
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+private fun behaviorGoalTarget(goal: BehaviorGoalUiModel): String = when (goal.valueKind) {
+    BehaviorGoalValueKind.STEPS -> goal.targetValue.toString()
+    BehaviorGoalValueKind.DURATION -> goalDurationLabel(goal.targetValue)
+}
+
+@Composable
+private fun behaviorGoalCopy(key: BehaviorGoalCopyKey): String = stringResource(
+    when (key) {
+        BehaviorGoalCopyKey.METRIC_STEPS -> R.string.goals_metric_steps
+        BehaviorGoalCopyKey.METRIC_SCREEN_TIME -> R.string.goals_metric_screen_time
+        BehaviorGoalCopyKey.METRIC_EVENING_USAGE -> R.string.goals_metric_evening_usage
+        BehaviorGoalCopyKey.METRIC_APP_USAGE -> R.string.goals_metric_app_usage
+        BehaviorGoalCopyKey.STATUS_ACTIVE -> R.string.goals_status_active
+        BehaviorGoalCopyKey.STATUS_PAUSED -> R.string.goals_status_paused
+        BehaviorGoalCopyKey.STATUS_COMPLETED -> R.string.goals_status_completed
+        BehaviorGoalCopyKey.USER_DEFINED_TARGET -> R.string.goals_your_target
+        BehaviorGoalCopyKey.OBSERVED_DAYS -> R.string.goals_observed_days
+        BehaviorGoalCopyKey.TARGET_MET_DAYS -> R.string.goals_target_met_days
+        BehaviorGoalCopyKey.MISSING_EVIDENCE -> R.string.goals_missing_evidence
+    }
+)
+
+private fun goalDurationLabel(millis: Long): String {
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(millis.coerceAtLeast(0L))
+    val hours = minutes / 60
+    val remainder = minutes % 60
+    return if (hours > 0) hours.toString() + "h " + remainder + "m" else remainder.toString() + "m"
+}
