@@ -10,6 +10,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
@@ -232,6 +233,33 @@ class BehaviorGoalsUiTest {
                 request
             )
         }
+    }
+
+    @Test
+    fun compactLargeFontCreateDialogKeepsLateAppOptionReachable() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.3f)) {
+                Box(Modifier.width(360.dp).height(640.dp)) {
+                    WhoAreYouTheme {
+                        BehaviorGoalsSection(
+                            goals = emptyList(),
+                            availableApps = (1..8).map { index ->
+                                BehaviorAppUsageUi("com.example.app$index", index * 60_000L)
+                            },
+                            onCreate = {},
+                            onSetPaused = { _, _ -> },
+                            onDelete = {}
+                        )
+                    }
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_app_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_app_com_example_app8")
+            .performScrollTo()
+            .assertIsDisplayed()
     }
 
     @Test
