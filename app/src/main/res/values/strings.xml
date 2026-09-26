@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Who Are You?</string>
+    <string name="m771_why_result">Why this result?</string>
+    <string name="m771_strengths">Strengths</string>
+    <string name="m771_watchouts">Watch-outs</string>
+    <string name="m771_everyday_life">Everyday life</string>
+    <string name="m771_reflection">Reflection</string>
+    <string name="m771_profile_connections">Connections with your profile</string>
+    <string name="m771_connection_reinforcing">%1$s points in the same direction as this result.</string>
+    <string name="m771_connection_contrasting">%1$s adds nuance or contrasts with this result.</string>
+    <string name="m771_connection_contextual">%1$s adds extra context to this result.</string>
     <string name="onboarding_title">WHO\nARE\nYOU?</string>
     <string name="onboarding_subtitle">Discover what makes you, you.</string>
     <string name="onboarding_body">Fast personality tests. Visual results. Compare with friends. Built for self-reflection, not diagnosis.</string>

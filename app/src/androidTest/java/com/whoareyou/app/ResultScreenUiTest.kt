@@ -1,7 +1,9 @@
 package com.whoareyou.app
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -27,15 +29,8 @@ class ResultScreenUiTest {
                 totalQuizCount = 30,
                 catalog = listOf(testQuiz()),
                 completed = setOf("result-ui-test"),
-                coverage = ProfileCoverage(
-                    knownTraitCount = 0,
-                    totalTraitCount = 0,
-                    coveragePercent = 0,
-                    averageConfidence = 0,
-                    strongTraitCount = 0,
-                    uncertainTraitCount = 0,
-                    traits = emptyList()
-                ),
+                evidence = listOf(ResultEvidence(0, "Question?", "D", 3)),
+                coverage = emptyCoverage(),
                 onQuizSelected = { },
                 onDone = { doneCount++ },
                 onRetry = { retryCount++ }
@@ -43,6 +38,10 @@ class ResultScreenUiTest {
         }
 
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
+        composeRule.onNodeWithTag("result_evidence").performScrollTo()
+        composeRule.onNodeWithTag("result_strengths_watchouts").performScrollTo()
+        composeRule.onNodeWithTag("result_everyday_life").performScrollTo()
+        composeRule.onNodeWithTag("result_reflection").performScrollTo()
         composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
         composeRule.onNodeWithTag("result_done").performScrollTo().performClick()
 
@@ -51,6 +50,80 @@ class ResultScreenUiTest {
             assertEquals(1, doneCount)
         }
     }
+
+    @Test
+    fun resultRendersProfileConnectionFromRealTraitGraphInput() {
+        val connectedQuiz = testQuiz().copy(
+            traits = listOf(QuizTraitWeight("focus", 1.0))
+        )
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = connectedQuiz,
+                score = 84,
+                previousScore = null,
+                completedCount = 4,
+                totalQuizCount = 30,
+                catalog = listOf(connectedQuiz),
+                completed = setOf(connectedQuiz.id),
+                evidence = emptyList(),
+                traitGraph = graph,
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onNodeWithTag("result_profile_connections").performScrollTo()
+    }
+
+    @Test
+    fun historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable() {
+        val historicQuiz = testQuiz().copy(resultIntelligence = null, traits = emptyList())
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = historicQuiz,
+                score = 50,
+                previousScore = null,
+                completedCount = 1,
+                totalQuizCount = 30,
+                catalog = listOf(historicQuiz),
+                completed = setOf(historicQuiz.id),
+                evidence = emptyList(),
+                traitGraph = TraitGraph(emptyList(), 0),
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onAllNodesWithTag("result_evidence").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_strengths_watchouts").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_everyday_life").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_reflection").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_profile_connections").assertCountEquals(0)
+        composeRule.onNodeWithTag("result_done").performScrollTo()
+        composeRule.onNodeWithTag("result_retry").performScrollTo()
+        composeRule.onNodeWithTag("result_share").performScrollTo()
+        composeRule.onNodeWithTag("result_compare").performScrollTo()
+    }
+
+    private fun emptyCoverage() = ProfileCoverage(
+        knownTraitCount = 0,
+        totalTraitCount = 0,
+        coveragePercent = 0,
+        averageConfidence = 0,
+        strongTraitCount = 0,
+        uncertainTraitCount = 0,
+        traits = emptyList()
+    )
 
     private fun testQuiz() = Quiz(
         id = "result-ui-test",
@@ -66,6 +139,11 @@ class ResultScreenUiTest {
         highDescription = "High description",
         metricLow = "Reserved",
         metricHigh = "Expressive",
+        resultIntelligence = QuizResultIntelligenceContent(
+            low = ResultInsightContent(listOf("Low strength"), listOf("Low watch"), listOf("Low life"), "Low reflection"),
+            balanced = ResultInsightContent(listOf("Balanced strength"), listOf("Balanced watch"), listOf("Balanced life"), "Balanced reflection"),
+            high = ResultInsightContent(listOf("High strength"), listOf("High watch"), listOf("High life"), "High reflection")
+        ),
         questions = listOf(
             Question(
                 text = "Question?",

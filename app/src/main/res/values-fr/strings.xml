@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Who Are You?</string>
+    <string name="m771_why_result">Pourquoi ce résultat ?</string>
+    <string name="m771_strengths">Points forts</string>
+    <string name="m771_watchouts">Points de vigilance</string>
+    <string name="m771_everyday_life">Au quotidien</string>
+    <string name="m771_reflection">Réflexion</string>
+    <string name="m771_profile_connections">Connexions avec ton profil</string>
+    <string name="m771_connection_reinforcing">%1$s va dans le même sens que ce résultat.</string>
+    <string name="m771_connection_contrasting">%1$s nuance ou contraste avec ce résultat.</string>
+    <string name="m771_connection_contextual">%1$s apporte un contexte supplémentaire à ce résultat.</string>
     <string name="onboarding_title">QUI\nES-TU ?</string>
     <string name="onboarding_subtitle">Découvre ce qui fait de toi, toi.</string>
     <string name="onboarding_body">Tests de personnalité rapides. Résultats visuels. Compare-toi avec tes amis. Pour la réflexion personnelle, pas pour établir un diagnostic.</string>

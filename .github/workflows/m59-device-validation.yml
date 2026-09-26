@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    paths:
+      - 'app/**'
+      - '.github/scripts/android-device-validation.sh'
+      - '.github/scripts/android-runtime-stress.sh'
+      - '.github/workflows/m59-device-validation.yml'
   workflow_dispatch:
 
 permissions:

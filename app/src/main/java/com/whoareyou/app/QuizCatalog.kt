@@ -23,7 +23,8 @@ data class Quiz(
     val metricLow: String,
     val metricHigh: String,
     val questions: List<Question>,
-    val traits: List<QuizTraitWeight> = emptyList()
+    val traits: List<QuizTraitWeight> = emptyList(),
+    val resultIntelligence: QuizResultIntelligenceContent? = null
 )
 
 object QuizRepository {
@@ -95,6 +96,27 @@ object QuizRepository {
         }.orEmpty()
         require(traits.isNotEmpty()) { "Quiz ${json.getString("id")} must define at least one trait" }
 
+        val resultIntelligence = json.optJSONObject("resultIntelligence")?.let { intelligenceJson ->
+            fun parseInsight(branch: String): ResultInsightContent {
+                val payload = intelligenceJson.getJSONObject(branch)
+                fun strings(name: String): List<String> =
+                    payload.getJSONArray(name).let { array ->
+                        List(array.length()) { index -> array.getString(index) }
+                    }
+                return ResultInsightContent(
+                    strengths = strings("strengths").take(3),
+                    watchOuts = strings("watchOuts").take(3),
+                    everydayLife = strings("everydayLife").take(3),
+                    reflection = payload.getString("reflection")
+                )
+            }
+            QuizResultIntelligenceContent(
+                low = parseInsight("low"),
+                balanced = parseInsight("balanced"),
+                high = parseInsight("high")
+            )
+        }
+
         return Quiz(
             id = json.getString("id"),
             title = json.getString("title"),
@@ -110,7 +132,8 @@ object QuizRepository {
             metricLow = json.getString("metricLow"),
             metricHigh = json.getString("metricHigh"),
             questions = questions,
-            traits = traits
+            traits = traits,
+            resultIntelligence = resultIntelligence
         )
     }
 

@@ -135,7 +135,45 @@
           "id": "social_energy",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SOLITUDE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ton énergie se recharge surtout dans le calme. Tu peux apprécier les autres, mais trop d’interactions te fatiguent rapidement."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SOLITUDE » et « ÉNERGIE SOCIALE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies les interactions quand le contexte te convient. Ton énergie sociale dépend beaucoup des personnes, du lieu et de ton humeur."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ÉNERGIE SOCIALE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Les interactions te donnent souvent de l’élan. Tu as tendance à te recharger grâce aux autres, à l’activité et aux expériences partagées."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "logic_emotion",
@@ -275,7 +313,45 @@
           "id": "analytical_style",
           "weight": -0.6
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LOGIQUE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fais d’abord confiance aux faits, à la cohérence et à la structure. Les émotions comptent, mais elles ont rarement le dernier mot."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « LOGIQUE » et « ÉMOTION » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu combines naturellement analyse et ressenti. Selon l’enjeu, tu sais passer des faits à l’intuition."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ÉMOTION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Ton ressenti intérieur influence fortement tes choix. L’impact humain compte souvent davantage qu’une logique parfaite."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "overthinker",
@@ -411,7 +487,45 @@
           "id": "rumination",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LÂCHER-PRISE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu traites généralement l’essentiel puis tu avances. L’incertitude peut te gêner, mais elle emprisonne rarement ton esprit longtemps."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « LÂCHER-PRISE » et « SURANALYSE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu réfléchis profondément et rejoues souvent les situations importantes. L’analyse t’aide, même si elle peut parfois devenir du bruit mental."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SURANALYSE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Ton esprit génère presque automatiquement des alternatives, des scénarios et leurs conséquences. Arrêter de penser peut être plus difficile que décider."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "chaos_control",
@@ -551,7 +665,45 @@
           "id": "adaptability",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CONTRÔLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "La structure te donne de la liberté. Tu préfères savoir ce qui arrive et réduire les surprises évitables avant qu’elles ne surviennent."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « CONTRÔLE » et « CHAOS » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies un cadre sans vouloir en devenir prisonnier. Un plan est utile, mais tu sais l’abandonner quand la réalité change."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CHAOS » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l’aise sans carte complète. L’improvisation, la nouveauté et les décisions de dernière minute peuvent te sembler plus vivantes qu’un plan rigide."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "risk_taker",
@@ -691,7 +843,45 @@
           "id": "opportunity_orientation",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SÉCURITÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères protéger d’abord le scénario défavorable avant d’avancer. La sécurité et la prévisibilité ont une vraie valeur pour toi."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SÉCURITÉ » et « RISQUE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu prends des risques significatifs lorsque le potentiel le justifie. Tu n’es ni téméraire ni systématiquement prudent."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RISQUE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "L’incertitude peut te stimuler plutôt que t’effrayer. Quand quelque chose compte, tu es souvent prêt à agir avant d’avoir toutes les garanties."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }

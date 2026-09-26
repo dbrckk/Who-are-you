@@ -129,6 +129,7 @@ private fun WhoAreYouApp() {
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
+    val quizAttemptEvidence = remember { QuizAttemptEvidence() }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -158,6 +159,7 @@ private fun WhoAreYouApp() {
         quizAttemptId = UUID.randomUUID().toString()
         quizQuestionIndex = 0
         quizRawScore = 0
+        quizAttemptEvidence.clear()
         pendingFinalScore = null
         commitFailed = false
     }
@@ -252,6 +254,11 @@ private fun WhoAreYouApp() {
                             quizRawScore = score
                         }
                     },
+                    onAnswerSelected = { questionIndex, answerIndex, answerScore ->
+                        if (!quizFinishing) {
+                            quizAttemptEvidence.record(questionIndex, answerIndex, answerScore)
+                        }
+                    },
                     onBack = {
                         if (!quizFinishing) {
                             runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
@@ -273,6 +280,8 @@ private fun WhoAreYouApp() {
                     totalQuizCount = quizCatalog.size,
                     catalog = quizCatalog,
                     completed = storedProfile.completedQuizIds + selectedQuiz.id,
+                    evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()),
+                    traitGraph = globalProfile.traitGraph,
                     coverage = globalProfile.coverage,
                     onQuizSelected = { quiz ->
                         previousScoreForAttempt = storedProfile.latestScores[quiz.id]

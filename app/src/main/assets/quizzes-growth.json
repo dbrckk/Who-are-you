@@ -135,7 +135,45 @@
           "id": "assertiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “ACCOMMODATING” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You often protect harmony first and may hold back your position when speaking up could create friction."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “ACCOMMODATING” and “ASSERTIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can state what you need while still adapting your tone and timing to the person and situation."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “ASSERTIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable stating needs, boundaries and opinions clearly even when doing so creates temporary discomfort."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "learning_drive",
@@ -275,7 +313,45 @@
           "id": "curiosity",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “PRACTICAL” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer learning what is useful and rarely go deeper unless the extra knowledge serves a clear purpose."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “PRACTICAL” and “DEEP LEARNER” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy understanding topics that matter to you and can balance exploration with staying focused."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “DEEP LEARNER” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Once something catches your attention, you naturally want context, mechanisms and the larger system behind it."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "novelty_seeker",
@@ -415,7 +491,45 @@
           "id": "openness",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “FAMILIAR” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You get value from known favorites, reliable routines and experiences you already know suit you."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “FAMILIAR” and “NOVELTY” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy novelty when the upside is clear, while keeping enough familiar structure to feel grounded."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “NOVELTY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "New places, ideas and experiences tend to energize you, and repetition can become stale quickly."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "planning_style",
@@ -555,7 +669,45 @@
           "id": "structure",
           "weight": 0.65
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SPONTANEOUS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer keeping options open and adapting in real time rather than committing too early."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SPONTANEOUS” and “PLANNED” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You like enough structure to reduce friction while leaving room to change direction when reality shifts."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “PLANNED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Clear plans reduce mental load for you. You prefer knowing the sequence, timing and next steps in advance."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "emotional_openness",
@@ -695,7 +847,45 @@
           "id": "emotional_expression",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “PRIVATE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You tend to process feelings internally and share selectively, often only after you understand them yourself."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “PRIVATE” and “OPEN” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can be emotionally open with the right people and context without needing everyone to see what is happening inside."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OPEN” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You naturally put feelings into words and often prefer being understood in real time rather than processing everything alone."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
