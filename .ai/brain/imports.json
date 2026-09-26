@@ -28,6 +28,26 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt": [
+      "androidx.compose.foundation.layout.Box",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.width",
+      "androidx.compose.runtime.CompositionLocalProvider",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.test.assertHasClickAction",
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.hasTestTag",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollToNode",
+      "androidx.compose.ui.unit.Density",
+      "androidx.compose.ui.unit.dp",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": [
       "androidx.compose.ui.test.ExperimentalTestApi",
       "androidx.compose.ui.test.assertIsDisplayed",
@@ -64,6 +84,14 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performScrollTo",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt": [
       "androidx.test.platform.app.InstrumentationRegistry",
       "java.util.UUID",
@@ -88,13 +116,53 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.onNodeWithText",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.onNodeWithText",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt": [
+      "androidx.compose.ui.test.assertCountEquals",
       "androidx.compose.ui.test.assertTextEquals",
       "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onAllNodesWithTag",
       "androidx.compose.ui.test.onNodeWithTag",
       "androidx.compose.ui.test.performClick",
       "androidx.compose.ui.test.performScrollTo",
       "org.junit.Assert.assertEquals",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
+    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt": [
+      "androidx.compose.ui.test.assertIsDisplayed",
+      "androidx.compose.ui.test.junit4.v2.createComposeRule",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.onNodeWithText",
       "org.junit.Rule",
       "org.junit.Test"
     ],
@@ -152,6 +220,17 @@
       "androidx.compose.ui.res.stringResource",
       "androidx.compose.ui.text.font.FontWeight",
       "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ActivityCollector.kt": [
+      "android.content.Context",
+      "androidx.health.connect.client.HealthConnectClient",
+      "androidx.health.connect.client.permission.HealthPermission",
+      "androidx.health.connect.client.records.StepsRecord",
+      "androidx.health.connect.client.request.AggregateRequest",
+      "androidx.health.connect.client.time.TimeRangeFilter",
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId"
     ],
     "app/src/main/java/com/whoareyou/app/AdManager.kt": [
       "android.app.Activity",
@@ -250,6 +329,99 @@
       "androidx.compose.ui.Modifier",
       "androidx.compose.ui.graphics.Brush",
       "androidx.compose.ui.graphics.Color"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.LocalTime",
+      "java.time.ZoneId",
+      "java.time.ZonedDateTime"
+    ],
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": [
+      "android.app.usage.UsageEvents",
+      "android.app.usage.UsageStatsManager",
+      "android.content.Context",
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt": [
+      "androidx.activity.ComponentActivity",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.DisposableEffect",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.rememberUpdatedState",
+      "androidx.lifecycle.Lifecycle",
+      "androidx.lifecycle.LifecycleEventObserver"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": [
+      "android.content.Context",
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.sync.Mutex",
+      "kotlinx.coroutines.sync.withLock"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": [
+      "android.content.Context",
+      "androidx.datastore.core.handlers.ReplaceFileCorruptionHandler",
+      "androidx.datastore.preferences.core.booleanPreferencesKey",
+      "androidx.datastore.preferences.core.edit",
+      "androidx.datastore.preferences.core.emptyPreferences",
+      "androidx.datastore.preferences.core.stringPreferencesKey",
+      "androidx.datastore.preferences.preferencesDataStore",
+      "java.io.IOException",
+      "java.time.LocalDate",
+      "kotlinx.coroutines.flow.Flow",
+      "kotlinx.coroutines.flow.catch",
+      "kotlinx.coroutines.flow.map"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": [
+      "androidx.compose.foundation.background",
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Row",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.layout.statusBarsPadding",
+      "androidx.compose.foundation.lazy.LazyColumn",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.AlertDialog",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.material3.TextButton",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalContext",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.unit.dp",
+      "java.util.concurrent.TimeUnit"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt": [
+      "android.content.Context"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt": [
+      "android.content.Context"
+    ],
+    "app/src/main/java/com/whoareyou/app/BehaviorStore.kt": [
+      "java.nio.charset.StandardCharsets",
+      "java.util.Base64"
     ],
     "app/src/main/java/com/whoareyou/app/BillingManager.kt": [
       "android.app.Activity",
@@ -579,6 +751,22 @@
       "kotlinx.coroutines.launch",
       "kotlinx.coroutines.withContext"
     ],
+    "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt": [
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.heightIn",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Button",
+      "androidx.compose.material3.ButtonDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.text.font.FontWeight",
+      "androidx.compose.ui.unit.dp"
+    ],
     "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt": [
       "androidx.compose.foundation.background",
       "androidx.compose.foundation.layout.Box",
@@ -636,23 +824,14 @@
       "android.os.Bundle",
       "androidx.activity.ComponentActivity",
       "androidx.activity.compose.BackHandler",
+      "androidx.activity.compose.rememberLauncherForActivityResult",
       "androidx.activity.compose.setContent",
+      "androidx.activity.result.contract.ActivityResultContracts",
       "androidx.compose.animation.AnimatedContent",
       "androidx.compose.foundation.layout.Box",
       "androidx.compose.foundation.layout.fillMaxSize",
-      "androidx.compose.runtime.Composable",
-      "androidx.compose.runtime.DisposableEffect",
-      "androidx.compose.runtime.LaunchedEffect",
-      "androidx.compose.runtime.collectAsState",
-      "androidx.compose.runtime.getValue",
-      "androidx.compose.runtime.mutableIntStateOf",
-      "androidx.compose.runtime.mutableStateOf",
-      "androidx.compose.runtime.produceState",
-      "androidx.compose.runtime.remember",
-      "androidx.compose.runtime.rememberCoroutineScope",
+      "androidx.compose.runtime.*",
       "androidx.compose.runtime.saveable.rememberSaveable",
-      "androidx.compose.runtime.setValue",
-      "androidx.compose.runtime.withFrameNanos",
       "androidx.compose.ui.Alignment",
       "androidx.compose.ui.Modifier",
       "androidx.compose.ui.platform.LocalContext",
@@ -661,6 +840,8 @@
       "androidx.compose.ui.semantics.paneTitle",
       "androidx.compose.ui.semantics.semantics",
       "androidx.compose.ui.semantics.testTagsAsResourceId",
+      "androidx.health.connect.client.PermissionController",
+      "java.time.Instant",
       "java.util.UUID",
       "kotlinx.coroutines.Dispatchers",
       "kotlinx.coroutines.launch",
@@ -682,6 +863,9 @@
       "androidx.compose.ui.platform.LocalConfiguration",
       "androidx.compose.ui.text.font.FontWeight",
       "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt": [
+      "kotlin.math.abs"
     ],
     "app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt": [
       "androidx.compose.foundation.background",
@@ -929,6 +1113,7 @@
       "androidx.compose.ui.platform.LocalConfiguration",
       "androidx.compose.ui.platform.LocalContext",
       "androidx.compose.ui.platform.LocalDensity",
+      "androidx.compose.ui.platform.testTag",
       "androidx.compose.ui.res.stringResource",
       "androidx.compose.ui.semantics.Role",
       "androidx.compose.ui.semantics.contentDescription",
@@ -1071,6 +1256,26 @@
       "androidx.compose.ui.text.font.FontWeight",
       "androidx.compose.ui.unit.dp",
       "androidx.compose.ui.unit.sp"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultEvidence.kt": [
+      "kotlin.math.abs"
+    ],
+    "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.Spacer",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.height",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.LocalConfiguration",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.unit.dp"
     ],
     "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt": [
       "kotlin.math.abs"
@@ -1361,6 +1566,13 @@
       "java.time.format.FormatStyle",
       "java.util.Locale"
     ],
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt": [
+      "android.app.AppOpsManager",
+      "android.content.Context",
+      "android.content.Intent",
+      "android.os.Process",
+      "android.provider.Settings"
+    ],
     "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt": [
       "androidx.compose.ui.graphics.Color",
       "androidx.compose.ui.text.TextStyle",
@@ -1409,11 +1621,46 @@
       "androidx.compose.runtime.Composable",
       "androidx.compose.ui.platform.LocalContext"
     ],
+    "app/src/main/java/com/whoareyou/app/WhoAmICopy.kt": [
+      "androidx.annotation.StringRes"
+    ],
+    "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": [
+      "androidx.compose.foundation.layout.Arrangement",
+      "androidx.compose.foundation.layout.Column",
+      "androidx.compose.foundation.layout.fillMaxWidth",
+      "androidx.compose.foundation.layout.padding",
+      "androidx.compose.foundation.shape.RoundedCornerShape",
+      "androidx.compose.material3.Card",
+      "androidx.compose.material3.CardDefaults",
+      "androidx.compose.material3.Text",
+      "androidx.compose.runtime.Composable",
+      "androidx.compose.ui.Modifier",
+      "androidx.compose.ui.platform.testTag",
+      "androidx.compose.ui.res.stringResource",
+      "androidx.compose.ui.semantics.heading",
+      "androidx.compose.ui.semantics.semantics",
+      "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt": [
+      "androidx.annotation.StringRes"
+    ],
+    "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt": [
+      "androidx.annotation.StringRes"
+    ],
     "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt": [
       "android.app.Application"
     ],
     "app/src/test/java/com/whoareyou/app/AchievementUnlockQueueTest.kt": [
       "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
     "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": [
@@ -1427,6 +1674,61 @@
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
       "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "kotlinx.coroutines.async",
+      "kotlinx.coroutines.awaitAll",
+      "kotlinx.coroutines.coroutineScope",
+      "kotlinx.coroutines.delay",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
       "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
@@ -1461,6 +1763,11 @@
       "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
+    "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNotNull",
+      "org.junit.Test"
+    ],
     "app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
@@ -1470,6 +1777,34 @@
     "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt": [
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelContractTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt": [
+      "org.junit.Assert.assertEquals",
       "org.junit.Test"
     ],
     "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt": [
@@ -1532,6 +1867,11 @@
       "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
+    "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
     "app/src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
@@ -1545,6 +1885,16 @@
       "org.junit.Assert.assertFalse",
       "org.junit.Test"
     ],
+    "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
     "app/src/test/java/com/whoareyou/app/ResultInterpretationTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Test"
@@ -1552,6 +1902,16 @@
     "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNotNull",
       "org.junit.Test"
     ],
     "app/src/test/java/com/whoareyou/app/RetakeRecommendationEngineTest.kt": [
@@ -1612,6 +1972,42 @@
     "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmICopyTest.kt": [
+      "org.junit.Assert.assertNotNull",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertFalse",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/WhoAmIUiModelTest.kt": [
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertNull",
       "org.junit.Test"
     ],
     "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt": [
@@ -1711,6 +2107,19 @@
       "unittest"
     ],
     "tools/test_battery_thermal_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_behavior_copy_contract.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
+    "tools/test_behavior_integration_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_behavior_privacy_contract.py": [
       "pathlib",
       "unittest"
     ],
@@ -1831,6 +2240,16 @@
       "tempfile",
       "unittest"
     ],
+    "tools/test_m771_localization.py": [
+      "pathlib",
+      "unittest",
+      "xml.etree.ElementTree"
+    ],
+    "tools/test_m771_result_intelligence_catalog.py": [
+      "json",
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_main_activity_architecture.py": [
       "pathlib",
       "unittest"
@@ -1845,7 +2264,8 @@
     ],
     "tools/test_manifest_security_contract.py": [
       "pathlib",
-      "unittest"
+      "unittest",
+      "xml.etree.ElementTree"
     ],
     "tools/test_offline_resilience_contract.py": [
       "pathlib",

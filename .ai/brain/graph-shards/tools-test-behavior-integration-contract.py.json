@@ -1,0 +1,21 @@
+{
+  "area": "tools-test-behavior-integration-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_behavior_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

@@ -49,6 +49,9 @@ test_actionable_knowledge_map_contract.py
 test_android_ci_sdk_setup_contract.py
 test_baseline_profile_manifest_contract.py
 test_battery_thermal_contract.py
+test_behavior_copy_contract.py
+test_behavior_integration_contract.py
+test_behavior_privacy_contract.py
 test_billing_launch_readiness.py
 test_challenge_landing_contract.py
 test_gradle_release_reproducibility.py
@@ -75,6 +78,8 @@ test_m59_runtime_stress_split_contract.py
 test_m59_split_validation_contract.py
 test_m59_visual_emulator_contract.py
 test_m769_landscape_viewport.py
+test_m771_localization.py
+test_m771_result_intelligence_catalog.py
 test_main_activity_architecture.py
 test_main_activity_recreation_sync_contract.py
 test_main_flow_recommendation_parity_contract.py
@@ -492,6 +497,82 @@ start_block = self.ads.split('fun start(activity: Activity?)', 1)[1].split('fun 
 def test_interstitial_preload_waits_until_near_frequency_threshold(self)
 ⋮----
 dismissed = self.ads.split('override fun onAdDismissedFullScreenContent()', 1)[1].split('}', 1)[0]
+```
+
+## File: test_behavior_copy_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+RESOURCE_FILES = [
+⋮----
+FORBIDDEN = {
+⋮----
+class BehaviorCopyContractTest(unittest.TestCase)
+⋮----
+def test_habits_copy_stays_non_clinical_and_non_moralizing(self)
+⋮----
+source = path.read_text(encoding="utf-8")
+habits_copy = " ".join(
+```
+
+## File: test_behavior_integration_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+⋮----
+class BehaviorIntegrationContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_profile_exposes_habits_entry(self)
+⋮----
+profile = self.read("ProfileScreenUi.kt")
+⋮----
+def test_main_activity_connects_profile_to_habits(self)
+⋮----
+source = self.read("MainActivity.kt")
+⋮----
+def test_habits_back_destination_is_profile(self)
+⋮----
+source = self.read("AppNavigation.kt")
+⋮----
+def test_behavior_refreshes_on_app_resume(self)
+⋮----
+source = self.read("BehaviorLifecycleUi.kt")
+⋮----
+main = self.read("MainActivity.kt")
+```
+
+## File: test_behavior_privacy_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+⋮----
+class BehaviorPrivacyContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_behavior_measurements_do_not_enter_telemetry(self)
+⋮----
+source = self.read("AppEvents.kt")
+forbidden = [
+⋮----
+def test_behavior_measurements_do_not_enter_profile_share(self)
+⋮----
+source = self.read("GlobalProfileShare.kt")
+⋮----
+def test_behavior_measurements_do_not_enter_ad_configuration(self)
+⋮----
+source = self.read("AdManager.kt")
+⋮----
+def test_personal_model_engine_has_no_behavior_dependency(self)
+⋮----
+source = self.read("PersonalModelEngine.kt")
+⋮----
+def test_behavior_domain_does_not_write_profile_store_or_personal_model(self)
+⋮----
+behavior_files = [
+⋮----
+source = self.read(name)
 ```
 
 ## File: test_billing_launch_readiness.py
@@ -1106,6 +1187,51 @@ hierarchy = tmp_path / "landscape.xml"
 result = subprocess.run(
 ```
 
+## File: test_m771_localization.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+UI = ROOT / "app" / "src" / "main" / "java" / "com" / "whoareyou" / "app" / "ResultIntelligenceUi.kt"
+EN = ROOT / "app" / "src" / "main" / "res" / "values" / "strings.xml"
+FR = ROOT / "app" / "src" / "main" / "res" / "values-fr" / "strings.xml"
+⋮----
+KEYS = {
+⋮----
+def keys(path)
+⋮----
+root = ET.parse(path).getroot()
+⋮----
+class M771LocalizationTest(unittest.TestCase)
+⋮----
+def test_m771_ui_copy_is_resource_backed_and_bilingual(self)
+⋮----
+source = UI.read_text(encoding="utf-8")
+en = keys(EN)
+fr = keys(FR)
+```
+
+## File: test_m771_result_intelligence_catalog.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+ASSETS = ROOT / "app" / "src" / "main" / "assets"
+PAIRS = [
+⋮----
+REQUIRED_BRANCHES = ("low", "balanced", "high")
+REQUIRED_FIELDS = ("strengths", "watchOuts", "everydayLife", "reflection")
+⋮----
+def load(path)
+⋮----
+class ResultIntelligenceCatalogTest(unittest.TestCase)
+⋮----
+def test_all_quizzes_have_complete_result_intelligence_with_en_fr_parity(self)
+⋮----
+en = {q["id"]: q for q in load(ASSETS / en_name)}
+fr = {q["id"]: q for q in load(ASSETS / fr_name)}
+⋮----
+intelligence = quiz.get("resultIntelligence")
+⋮----
+payload = intelligence[branch]
+```
+
 ## File: test_main_activity_architecture.py
 ```python
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -1152,12 +1278,17 @@ def test_e2e_recommendation_uses_same_profile_coverage_as_discover_ui(self)
 ## File: test_manifest_security_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
+ANDROID_NS = "http://schemas.android.com/apk/res/android"
 ⋮----
 class ManifestSecurityContractTest(unittest.TestCase)
 ⋮----
 def setUp(self)
 ⋮----
-def test_manifest_uses_minimal_network_permission_and_secure_defaults(self)
+def test_manifest_uses_only_approved_permissions_and_secure_defaults(self)
+⋮----
+approved = {
+root = ET.fromstring(self.manifest)
+declared = {
 ⋮----
 def test_file_provider_is_not_exported_and_paths_are_narrow(self)
 ⋮----

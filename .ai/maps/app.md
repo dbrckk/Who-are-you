@@ -45,11 +45,18 @@ src/
         whoareyou/
           app/
             AppShellUiTest.kt
+            BehaviorScreenUiTest.kt
             MainActivityRecreationTest.kt
             MainFlowE2eTest.kt
+            ProfileScreenWhoAmITest.kt
             ProfileStorePersistenceTest.kt
             QuizScreenUiTest.kt
+            ResultEvidenceCardTest.kt
+            ResultInsightCardsTest.kt
+            ResultProfileConnectionsCardTest.kt
             ResultScreenUiTest.kt
+            WhoAmIDiscoveryUiTest.kt
+            WhoAmIPortraitUiTest.kt
   main/
     assets/
       quizzes-extra-fr.json
@@ -74,6 +81,7 @@ src/
             AccessibilityUi.kt
             Achievements.kt
             AchievementUnlockQueue.kt
+            ActivityCollector.kt
             AdaptiveLayoutUi.kt
             AdManager.kt
             AppEvents.kt
@@ -82,6 +90,19 @@ src/
             AppScreenTransitionUi.kt
             AppShellUi.kt
             AppThemeUi.kt
+            AppUsageAggregation.kt
+            AppUsageCollector.kt
+            BehaviorInsightEngine.kt
+            BehaviorIntegrationPolicy.kt
+            BehaviorLifecycleUi.kt
+            BehaviorModels.kt
+            BehaviorRefreshCoordinator.kt
+            BehaviorRepository.kt
+            BehaviorScreenUi.kt
+            BehaviorSourceAccess.kt
+            BehaviorSourceActionHandler.kt
+            BehaviorStore.kt
+            BehaviorUiModel.kt
             BillingManager.kt
             BillingPriceState.kt
             BillingReconnectPolicy.kt
@@ -104,6 +125,7 @@ src/
             GlobalProfile.kt
             GlobalProfileShare.kt
             GuidedJourneys.kt
+            HabitsProfileEntryUi.kt
             IdentityAuraUi.kt
             LongitudinalTrend.kt
             LongitudinalTrendUi.kt
@@ -111,6 +133,8 @@ src/
             NextQuizRecommendation.kt
             NextQuizRecommendationUi.kt
             PersonalizedDiscoverUi.kt
+            PersonalModel.kt
+            PersonalModelEngine.kt
             ProfileCoverage.kt
             ProfileCoverageUi.kt
             ProfileEvolutionShare.kt
@@ -134,16 +158,22 @@ src/
             ProfileStrengthNuance.kt
             ProfileStrengthNuanceUi.kt
             PurchaseGrantPolicy.kt
+            QuizAttemptEvidence.kt
             QuizCatalog.kt
             QuizResultCommitEffect.kt
             QuizScreenUi.kt
             QuizVisualUi.kt
             RecommendationAttribution.kt
             RecommendationTelemetry.kt
+            ResultEvidence.kt
+            ResultIntelligence.kt
+            ResultIntelligenceUi.kt
             ResultInterpretation.kt
             ResultInterpretationUi.kt
             ResultNextExploration.kt
             ResultNextExplorationUi.kt
+            ResultProfileConnection.kt
+            ResultScreenIntelligence.kt
             ResultScreenUi.kt
             ResultShare.kt
             RetakeRecommendation.kt
@@ -165,9 +195,17 @@ src/
             TraitLocalization.kt
             TraitTimeline.kt
             TraitTimelineUi.kt
+            UsageAccess.kt
             V2DesignSystem.kt
             V2InteractiveUi.kt
             V2MotionPreferences.kt
+            WhoAmICardModel.kt
+            WhoAmICopy.kt
+            WhoAmIPortrait.kt
+            WhoAmIPortraitUi.kt
+            WhoAmIProgressModel.kt
+            WhoAmISectionModel.kt
+            WhoAmIUiModel.kt
             WhoAreYouApplication.kt
   test/
     java/
@@ -175,16 +213,32 @@ src/
         whoareyou/
           app/
             AchievementUnlockQueueTest.kt
+            ActivityAggregationTest.kt
             AppNavigationTest.kt
             AppShellNavigationTest.kt
+            AppUsageAggregationTest.kt
+            AppUsageCollectorTest.kt
+            BehaviorInsightEngineTest.kt
+            BehaviorIntegrationPolicyTest.kt
+            BehaviorRefreshCoordinatorTest.kt
+            BehaviorStoreCodecTest.kt
+            BehaviorUiModelTest.kt
             BillingReconnectPolicyTest.kt
             DimensionJournalEngineTest.kt
             DiscoverLibraryEngineTest.kt
             DiscoverPersonalizationTest.kt
             EventWindowDeduplicatorTest.kt
             GlobalProfileEngineTest.kt
+            GlobalProfilePersonalModelTest.kt
             GuidedJourneysTest.kt
             LongitudinalTrendEngineTest.kt
+            PersonalModelAggregationTest.kt
+            PersonalModelCertaintyTest.kt
+            PersonalModelCompatibilityTest.kt
+            PersonalModelContractTest.kt
+            PersonalModelContradictionTest.kt
+            PersonalModelStabilityTest.kt
+            PersonalModelTestFixtures.kt
             ProfileCoverageEngineTest.kt
             ProfileEvolutionShareTest.kt
             ProfileEvolutionSummaryTest.kt
@@ -197,10 +251,15 @@ src/
             ProfilePersistenceCodecTest.kt
             ProfileStrengthNuanceTest.kt
             PurchaseGrantPolicyTest.kt
+            QuizAttemptEvidenceTest.kt
             RecommendationAttributionTest.kt
             RecommendationTelemetryTest.kt
+            ResultEvidenceTest.kt
+            ResultIntelligenceTest.kt
             ResultInterpretationTest.kt
             ResultNextExplorationTest.kt
+            ResultProfileConnectionTest.kt
+            ResultScreenIntelligenceTest.kt
             RetakeRecommendationEngineTest.kt
             ScoreChangeEngineTest.kt
             ScoreHistoryEngineTest.kt
@@ -213,6 +272,13 @@ src/
             TraitExplorationEngineTest.kt
             TraitGraphEngineTest.kt
             TraitTimelineEngineTest.kt
+            WhoAmICardModelTest.kt
+            WhoAmICopyTest.kt
+            WhoAmILegacyCompatibilityTest.kt
+            WhoAmIPortraitTest.kt
+            WhoAmIProgressModelTest.kt
+            WhoAmISectionModelTest.kt
+            WhoAmIUiModelTest.kt
 build.gradle.kts
 ```
 
@@ -256,6 +322,155 @@ class AppShellUiTest {
 
         composeRule.runOnIdle {
             assertEquals(AppShellTab.PROFILE, selectedTab)
+        }
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
+import org.junit.Assert.assertEquals
+import org.junit.Rule
+import org.junit.Test
+
+class BehaviorScreenUiTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    private val model = BehaviorUiModelFactory.build(
+        BehaviorSnapshot.EMPTY.copy(
+            insights = listOf(
+                BehaviorInsight(
+                    category = BehaviorInsightCategory.LATE_USAGE_PATTERN,
+                    evidenceTier = BehaviorEvidenceTier.DEVELOPING
+                )
+            )
+        )
+    )
+
+    @Test
+    fun habitsScreenSeparatesFactsPatternsSuggestionsAndControls() {
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    onBack = {},
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_screen").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_privacy_copy").assertIsDisplayed()
+        composeRule.onNodeWithTag("behavior_today").assertIsDisplayed()
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_7_days"))
+        composeRule.onNodeWithTag("behavior_7_days").assertIsDisplayed()
+        screen.performScrollToNode(hasTestTag("behavior_30_days"))
+        composeRule.onNodeWithTag("behavior_30_days").assertIsDisplayed()
+        screen.performScrollToNode(hasTestTag("behavior_patterns"))
+        composeRule.onNodeWithTag("behavior_patterns").assertIsDisplayed()
+        screen.performScrollToNode(hasTestTag("behavior_suggestions"))
+        composeRule.onNodeWithTag("behavior_suggestions").assertIsDisplayed()
+        screen.performScrollToNode(hasTestTag("behavior_delete_all"))
+        composeRule.onNodeWithTag("behavior_delete_all").assertHasClickAction()
+    }
+
+    @Test
+    fun compactLargeFontLayoutKeepsDataControlsReachable() {
+        composeRule.setContent {
+            CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.3f)) {
+                Box(Modifier.width(360.dp).height(640.dp)) {
+                    WhoAreYouTheme {
+                        BehaviorScreen(
+                            model = model,
+                            onBack = {},
+                            onSourceAction = { _, _ -> },
+                            onDeleteAll = {}
+                        )
+                    }
+                }
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_delete_all"))
+        composeRule.onNodeWithTag("behavior_delete_all")
+            .assertIsDisplayed()
+            .assertHasClickAction()
+    }
+
+    @Test
+    fun deleteAllRequiresExplicitConfirmation() {
+        var deletes = 0
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    onBack = {},
+                    onSourceAction = { _, _ -> },
+                    onDeleteAll = { deletes += 1 }
+                )
+            }
+        }
+
+        val screen = composeRule.onNodeWithTag("behavior_screen")
+        screen.performScrollToNode(hasTestTag("behavior_delete_all"))
+        composeRule.onNodeWithTag("behavior_delete_all").performClick()
+
+        composeRule.runOnIdle { assertEquals(0, deletes) }
+
+        composeRule.onNodeWithTag("behavior_delete_confirm")
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle { assertEquals(1, deletes) }
+    }
+
+    @Test
+    fun sourceCtaRoutesTypedAction() {
+        var selected: Pair<BehaviorSource, BehaviorSourceAction>? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorScreen(
+                    model = model,
+                    onBack = {},
+                    onSourceAction = { source, action -> selected = source to action },
+                    onDeleteAll = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_source_activity")
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorSource.ACTIVITY to BehaviorSourceAction.ENABLE,
+                selected
+            )
         }
     }
 }
@@ -534,6 +749,69 @@ class MainFlowE2eTest {
             composeRule.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
         }
         composeRule.onNode(hasTestTag(tag), useUnmergedTree = true).assertExists()
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performScrollTo
+import org.junit.Rule
+import org.junit.Test
+
+class ProfileScreenWhoAmITest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun profileScreenContainsWhoAmIPortraitAndDiscovery() {
+        val trait = PersonalTrait(
+            traitId = "curiosity",
+            score = 78,
+            confidence = 72,
+            certainty = PersonalCertainty.ESTABLISHED,
+            stability = PersonalStability.STABLE,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 3,
+            sourceQuizIds = listOf("q1", "q2", "q3"),
+            trend = PersonalTrend.STABLE,
+            isDistinctive = true
+        )
+        val model = PersonalModel.EMPTY.copy(
+            traits = listOf(trait),
+            establishedTraits = listOf(trait),
+            stableTraits = listOf(trait)
+        )
+        val summary = GlobalProfileSummary(
+            dominantArchetype = "Explorer",
+            completionPercent = 0,
+            completedCount = 0,
+            totalCount = 0,
+            dimensions = emptyList(),
+            personalModel = model
+        )
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                ProfileScreen(
+                    summary = summary,
+                    catalog = emptyList(),
+                    onQuizSelected = {},
+                    onBack = {},
+                    onResetLocalData = {},
+                    onOpenHabits = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_habits_privacy_hint").performScrollTo().assertIsDisplayed()
     }
 }
 ```
@@ -842,12 +1120,128 @@ class QuizScreenUiTest {
 }
 ```
 
+## File: src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import org.junit.Rule
+import org.junit.Test
+
+class ResultEvidenceCardTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun evidenceCardShowsWhyResultAndTopEvidence() {
+        composeRule.setContent {
+            WhoAreYouTheme {
+                ResultEvidenceCard(
+                    evidence = listOf(
+                        ResultEvidence(0, "I recharge alone", "Very true", 3),
+                        ResultEvidence(1, "I seek novelty", "Sometimes", -2)
+                    )
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("result_evidence").assertIsDisplayed()
+        composeRule.onNodeWithText("I recharge alone").assertIsDisplayed()
+        composeRule.onNodeWithText("Very true").assertIsDisplayed()
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import org.junit.Rule
+import org.junit.Test
+
+class ResultInsightCardsTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun insightCardsShowAuthoredStrengthsWatchoutsEverydayLifeAndReflection() {
+        composeRule.setContent {
+            WhoAreYouTheme {
+                ResultInsightCards(
+                    insight = ResultInsightSummary(
+                        direction = ResultDirection.HIGH,
+                        strength = ResultSignalStrength.STRONG,
+                        strengths = listOf("Clear strength"),
+                        watchOuts = listOf("Watch this"),
+                        everydayLife = listOf("Everyday example"),
+                        reflection = "Try this reflection"
+                    )
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("result_strengths_watchouts").assertIsDisplayed()
+        composeRule.onNodeWithTag("result_everyday_life").assertIsDisplayed()
+        composeRule.onNodeWithTag("result_reflection").assertIsDisplayed()
+        composeRule.onNodeWithText("Clear strength").assertIsDisplayed()
+        composeRule.onNodeWithText("Watch this").assertIsDisplayed()
+        composeRule.onNodeWithText("Everyday example").assertIsDisplayed()
+        composeRule.onNodeWithText("Try this reflection").assertIsDisplayed()
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import org.junit.Rule
+import org.junit.Test
+
+class ResultProfileConnectionsCardTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun profileConnectionsCardRendersWhenConnectionsExist() {
+        composeRule.setContent {
+            WhoAreYouTheme {
+                ResultProfileConnectionsCard(
+                    connections = listOf(
+                        ResultProfileConnection(
+                            traitId = "focus",
+                            kind = ResultProfileConnectionKind.REINFORCING,
+                            traitScore = 82,
+                            confidence = 80
+                        )
+                    )
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("result_profile_connections").assertIsDisplayed()
+    }
+}
+```
+
 ## File: src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt
 ```kotlin
 package com.whoareyou.app
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -873,15 +1267,8 @@ class ResultScreenUiTest {
                 totalQuizCount = 30,
                 catalog = listOf(testQuiz()),
                 completed = setOf("result-ui-test"),
-                coverage = ProfileCoverage(
-                    knownTraitCount = 0,
-                    totalTraitCount = 0,
-                    coveragePercent = 0,
-                    averageConfidence = 0,
-                    strongTraitCount = 0,
-                    uncertainTraitCount = 0,
-                    traits = emptyList()
-                ),
+                evidence = listOf(ResultEvidence(0, "Question?", "D", 3)),
+                coverage = emptyCoverage(),
                 onQuizSelected = { },
                 onDone = { doneCount++ },
                 onRetry = { retryCount++ }
@@ -889,6 +1276,10 @@ class ResultScreenUiTest {
         }
 
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
+        composeRule.onNodeWithTag("result_evidence").performScrollTo()
+        composeRule.onNodeWithTag("result_strengths_watchouts").performScrollTo()
+        composeRule.onNodeWithTag("result_everyday_life").performScrollTo()
+        composeRule.onNodeWithTag("result_reflection").performScrollTo()
         composeRule.onNodeWithTag("result_retry").performScrollTo().performClick()
         composeRule.onNodeWithTag("result_done").performScrollTo().performClick()
 
@@ -897,6 +1288,80 @@ class ResultScreenUiTest {
             assertEquals(1, doneCount)
         }
     }
+
+    @Test
+    fun resultRendersProfileConnectionFromRealTraitGraphInput() {
+        val connectedQuiz = testQuiz().copy(
+            traits = listOf(QuizTraitWeight("focus", 1.0))
+        )
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = connectedQuiz,
+                score = 84,
+                previousScore = null,
+                completedCount = 4,
+                totalQuizCount = 30,
+                catalog = listOf(connectedQuiz),
+                completed = setOf(connectedQuiz.id),
+                evidence = emptyList(),
+                traitGraph = graph,
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onNodeWithTag("result_profile_connections").performScrollTo()
+    }
+
+    @Test
+    fun historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable() {
+        val historicQuiz = testQuiz().copy(resultIntelligence = null, traits = emptyList())
+
+        composeRule.setContent {
+            ResultScreen(
+                quiz = historicQuiz,
+                score = 50,
+                previousScore = null,
+                completedCount = 1,
+                totalQuizCount = 30,
+                catalog = listOf(historicQuiz),
+                completed = setOf(historicQuiz.id),
+                evidence = emptyList(),
+                traitGraph = TraitGraph(emptyList(), 0),
+                coverage = emptyCoverage(),
+                onQuizSelected = { },
+                onDone = { },
+                onRetry = { }
+            )
+        }
+
+        composeRule.onAllNodesWithTag("result_evidence").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_strengths_watchouts").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_everyday_life").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_reflection").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("result_profile_connections").assertCountEquals(0)
+        composeRule.onNodeWithTag("result_done").performScrollTo()
+        composeRule.onNodeWithTag("result_retry").performScrollTo()
+        composeRule.onNodeWithTag("result_share").performScrollTo()
+        composeRule.onNodeWithTag("result_compare").performScrollTo()
+    }
+
+    private fun emptyCoverage() = ProfileCoverage(
+        knownTraitCount = 0,
+        totalTraitCount = 0,
+        coveragePercent = 0,
+        averageConfidence = 0,
+        strongTraitCount = 0,
+        uncertainTraitCount = 0,
+        traits = emptyList()
+    )
 
     private fun testQuiz() = Quiz(
         id = "result-ui-test",
@@ -912,6 +1377,11 @@ class ResultScreenUiTest {
         highDescription = "High description",
         metricLow = "Reserved",
         metricHigh = "Expressive",
+        resultIntelligence = QuizResultIntelligenceContent(
+            low = ResultInsightContent(listOf("Low strength"), listOf("Low watch"), listOf("Low life"), "Low reflection"),
+            balanced = ResultInsightContent(listOf("Balanced strength"), listOf("Balanced watch"), listOf("Balanced life"), "Balanced reflection"),
+            high = ResultInsightContent(listOf("High strength"), listOf("High watch"), listOf("High life"), "High reflection")
+        ),
         questions = listOf(
             Question(
                 text = "Question?",
@@ -924,6 +1394,135 @@ class ResultScreenUiTest {
             )
         )
     )
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import org.junit.Rule
+import org.junit.Test
+
+class WhoAmIDiscoveryUiTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun discoveryOwnsTheSingleNextQuizRecommendation() {
+        val quiz = Quiz(
+            id = "next",
+            title = "Next quiz",
+            hook = "Learn more",
+            time = "2 min",
+            accent = "#7C4DFF",
+            lowTitle = "Low",
+            midTitle = "Mid",
+            highTitle = "High",
+            lowDescription = "Low",
+            midDescription = "Mid",
+            highDescription = "High",
+            metricLow = "Low",
+            metricHigh = "High",
+            questions = listOf(
+                Question(
+                    text = "Question",
+                    answers = listOf(
+                        Answer("A", 0),
+                        Answer("B", 1),
+                        Answer("C", 2),
+                        Answer("D", 3)
+                    )
+                )
+            ),
+            traits = listOf(QuizTraitWeight("curiosity", 1.0))
+        )
+        val recommendation = NextQuizRecommendation(
+            quizId = quiz.id,
+            reason = NextQuizReason.NEW_COVERAGE,
+            targetedTraitIds = listOf("curiosity"),
+            informationGainScore = 1.0
+        )
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                WhoAmIPortraitCards(
+                    portrait = WhoAmIPortraitEngine.build(PersonalModel.EMPTY),
+                    recommendation = recommendation,
+                    catalog = listOf(quiz),
+                    onQuizSelected = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("who_am_i_next_quiz").assertIsDisplayed()
+    }
+}
+```
+
+## File: src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import org.junit.Rule
+import org.junit.Test
+
+class WhoAmIPortraitUiTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun portraitCardsRenderFivePartHierarchyAndSafeLabels() {
+        val trait = PersonalTrait(
+            traitId = "curiosity",
+            score = 78,
+            confidence = 72,
+            certainty = PersonalCertainty.ESTABLISHED,
+            stability = PersonalStability.STABLE,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 3,
+            sourceQuizIds = listOf("q1", "q2", "q3"),
+            trend = PersonalTrend.RISING,
+            isDistinctive = true
+        )
+        val portrait = WhoAmIPortrait(
+            headlineTraits = listOf(trait),
+            stableTraits = listOf(trait),
+            nuancedTraits = listOf(trait.copy(stability = PersonalStability.VARIABLE)),
+            discoveryGaps = listOf(
+                TraitDomainCoverage(
+                    domain = TraitDomain.THINKING,
+                    knownCount = 1,
+                    totalCount = 4,
+                    strongCount = 0,
+                    coveragePercent = 25
+                )
+            ),
+            evolvingTraits = listOf(trait),
+            isDiscoveryState = false
+        )
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                WhoAmIPortraitCards(portrait)
+            }
+        }
+
+        composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_stable").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_nuances").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
+        composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
+        composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
+    }
 }
 ```
 
@@ -1070,7 +1669,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RÉSERVÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu entres prudemment dans les situations sociales et préfères repérer des signes de sécurité avant de te rendre visible."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « RÉSERVÉ » et « ASSURÉ » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Ta confiance augmente une fois que tu comprends l'ambiance. Tu peux participer confortablement sans avoir besoin de dominer."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ASSURÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu te fais généralement confiance socialement et tu es à l'aise pour initier, prendre la parole et être remarqué."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "decision_style",
@@ -1210,7 +1847,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RÉFLÉCHI » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères réduire l'incertitude avant de t'engager. Obtenir davantage d'informations te semble souvent valoir le temps investi."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « RÉFLÉCHI » et « INSTINCTIF » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu recueilles assez d'informations pour te sentir solide, puis tu avances sans exiger une certitude parfaite."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « INSTINCTIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu décides vite et fais davantage confiance à ta capacité d'adaptation qu'à une analyse exhaustive."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "love_style",
@@ -1350,7 +2025,45 @@ class ResultScreenUiTest {
           "id": "emotional_openness",
           "weight": 0.4
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CONSTANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu montres surtout ton attachement par la fiabilité, l'aide concrète et une présence régulière."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « CONSTANT » et « EXPRESSIF » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu combines actions fiables et attention émotionnelle, en t'adaptant à ce dont la relation a besoin."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « EXPRESSIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu exprimes naturellement ton affection de façon visible, par les mots, les gestes, la proximité et l'enthousiasme."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "friendship_type",
@@ -1490,7 +2203,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PROFONDEUR » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu valorises la loyauté, la profondeur et la constance. Quelques amitiés solides comptent souvent plus pour toi qu'un large réseau."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PROFONDEUR » et « RÉSEAU » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu combines profondeur et diversité, avec des liens forts tout en restant ouvert à différents groupes."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RÉSEAU » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu crées naturellement des ponts entre les gens et apprécies d'entretenir un réseau large et actif."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "money_personality",
@@ -1630,7 +2381,45 @@ class ResultScreenUiTest {
           "id": "risk_tolerance",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SÉCURITÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu privilégies naturellement les réserves, la prévisibilité et la protection de tes options futures."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SÉCURITÉ » et « OPPORTUNITÉ » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu cherches un équilibre entre sécurité et plaisir en répartissant ton argent entre plusieurs objectifs."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « OPPORTUNITÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es plus disposé à échanger une partie de ta sécurité financière contre des expériences, de la rapidité ou des opportunités à fort potentiel."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "productivity_type",
@@ -1770,7 +2559,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « STRUCTURE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu travailles mieux avec des systèmes clairs, des routines prévisibles et une progression commencée tôt."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « STRUCTURE » et « SPRINT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu comptes davantage sur l'élan que sur un planning rigide. Une fois lancé, tu peux avancer vite et régulièrement."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SPRINT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "La pression déclenche souvent ta meilleure concentration. Tu peux attendre puis produire des efforts très intenses près de l'échéance."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "night_owl",
@@ -1906,7 +2733,45 @@ class ResultScreenUiTest {
           "id": "circadian_lateness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « MATIN » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu tends à te sentir plus clair et opérationnel plus tôt dans la journée, surtout avec un rythme régulier."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « MATIN » et « NUIT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Ton énergie dépend davantage du sommeil et du contexte que d'une heure précise, et tu peux t'adapter dans les deux sens."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « NUIT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Ta concentration et ta créativité augmentent souvent plus tard, et les soirées peuvent te sembler plus naturelles mentalement que les matinées."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "conflict_style",
@@ -2046,7 +2911,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « HARMONIE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères réduire la tension et protéger la relation avant de pousser ta position."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « HARMONIE » et « FRANCHISE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu abordes les désaccords tout en recherchant un terrain d'entente praticable."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « FRANCHISE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l'aise pour confronter directement un désaccord et préfères résoudre le vrai problème plutôt qu'éviter l'inconfort."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "curiosity",
@@ -2186,7 +3089,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.55
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CIBLÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu apprends généralement avec un objectif et préfères approfondir l'utile plutôt que d'ouvrir sans cesse de nouveaux sujets."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « CIBLÉ » et « CURIEUX » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu aimes découvrir de nouvelles idées tout en gardant assez de concentration pour revenir à ce qui compte."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CURIEUX » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Une question en entraîne souvent dix autres. La nouveauté, les motifs et les détails inexpliqués peuvent t'entraîner très loin dans un sujet."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "novelty_seek",
@@ -2326,7 +3267,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « FAMILIER » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu apprécies ce que tu connais déjà et préfères améliorer les expériences familières plutôt que de les remplacer en permanence."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « FAMILIER » et « NOUVEAU » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies la nouveauté lorsqu'elle a du sens, tout en accordant de la valeur à tes favoris et à certaines routines stables."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « NOUVEAU » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Les nouveaux lieux, idées et expériences te donnent de l'énergie, tandis que la répétition peut vite devenir lassante."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
@@ -2475,7 +3454,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “RESERVED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You enter social situations carefully and prefer signals of safety before becoming visible."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “RESERVED” and “CONFIDENT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Confidence grows once you understand the room. You can participate comfortably without needing to dominate."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “CONFIDENT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You usually trust yourself socially and are comfortable initiating, speaking up and being noticed."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "decision_style",
@@ -2615,7 +3632,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “DELIBERATE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer reducing uncertainty before committing. Extra information often feels worth the time."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “DELIBERATE” and “INSTINCTIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You gather enough information to feel grounded, then move without needing perfect certainty."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “INSTINCTIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You decide quickly and trust adaptation more than exhaustive analysis."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "love_style",
@@ -2755,7 +3810,45 @@ class ResultScreenUiTest {
           "id": "emotional_openness",
           "weight": 0.4
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “STEADY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You tend to show care through reliability, practical support and being there consistently."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “STEADY” and “EXPRESSIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You mix dependable action with emotional attention and adapt to what the relationship needs."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “EXPRESSIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You naturally communicate affection openly through words, gestures, closeness and visible enthusiasm."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "friendship_type",
@@ -2895,7 +3988,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “DEPTH” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You value loyalty, depth and consistency. A few durable friendships often matter more than a wide network."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “DEPTH” and “NETWORK” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You balance depth with variety, keeping close bonds while remaining open to different circles."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “NETWORK” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You naturally build bridges between people and enjoy maintaining a broad, active network."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "money_personality",
@@ -3035,7 +4166,45 @@ class ResultScreenUiTest {
           "id": "risk_tolerance",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SECURITY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You naturally prioritize buffers, predictability and protecting future options."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SECURITY” and “OPPORTUNITY” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You prefer balancing security with enjoyment and allocating money across competing goals."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OPPORTUNITY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are more willing to trade financial certainty for experiences, speed or high-upside opportunities."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "productivity_type",
@@ -3175,7 +4344,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “STRUCTURE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You work best with clear systems, predictable routines and progress that starts early."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “STRUCTURE” and “SPRINT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You rely on momentum more than rigid scheduling. Once engaged, you can move quickly and consistently."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “SPRINT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Pressure often unlocks your strongest focus. You may delay, then produce intense bursts near the deadline."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "night_owl",
@@ -3311,7 +4518,45 @@ class ResultScreenUiTest {
           "id": "circadian_lateness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “MORNING” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You tend to feel clearer and more usable earlier in the day, especially with a consistent schedule."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “MORNING” and “NIGHT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Your energy depends more on sleep and context than a fixed time of day, and you can adapt in either direction."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “NIGHT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Your focus and creativity often rise later, and evenings can feel more mentally natural than mornings."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "conflict_style",
@@ -3451,7 +4696,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “HARMONY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer lowering tension and protecting the relationship before pushing your position."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “HARMONY” and “DIRECTNESS” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You tend to address disagreements while looking for a workable middle ground."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “DIRECTNESS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable confronting disagreement directly and would rather resolve the real issue than avoid discomfort."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "curiosity",
@@ -3591,7 +4874,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.55
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “FOCUSED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You usually learn with purpose and prefer useful depth over constantly opening new topics."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “FOCUSED” and “CURIOUS” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy exploring new ideas while keeping enough focus to return to what matters."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “CURIOUS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "One question often leads to ten more. Novelty, patterns and unexplained details can pull you deep into a topic."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "novelty_seek",
@@ -3731,7 +5052,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “FAMILIAR” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You appreciate familiarity and prefer improving known experiences rather than constantly replacing them."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “FAMILIAR” and “NOVEL” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You like novelty when it feels meaningful, but also value reliable favorites and stable routines."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “NOVEL” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "New places, ideas and experiences generate energy for you, while repetition can become stale quickly."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
@@ -3876,7 +5235,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SOLITUDE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ton énergie se recharge surtout dans le calme. Tu peux apprécier les autres, mais trop d’interactions te fatiguent rapidement."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SOLITUDE » et « ÉNERGIE SOCIALE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies les interactions quand le contexte te convient. Ton énergie sociale dépend beaucoup des personnes, du lieu et de ton humeur."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ÉNERGIE SOCIALE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Les interactions te donnent souvent de l’élan. Tu as tendance à te recharger grâce aux autres, à l’activité et aux expériences partagées."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "logic_emotion",
@@ -4016,7 +5413,45 @@ class ResultScreenUiTest {
           "id": "analytical_style",
           "weight": -0.6
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LOGIQUE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fais d’abord confiance aux faits, à la cohérence et à la structure. Les émotions comptent, mais elles ont rarement le dernier mot."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « LOGIQUE » et « ÉMOTION » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu combines naturellement analyse et ressenti. Selon l’enjeu, tu sais passer des faits à l’intuition."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ÉMOTION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Ton ressenti intérieur influence fortement tes choix. L’impact humain compte souvent davantage qu’une logique parfaite."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "overthinker",
@@ -4152,7 +5587,45 @@ class ResultScreenUiTest {
           "id": "rumination",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LÂCHER-PRISE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu traites généralement l’essentiel puis tu avances. L’incertitude peut te gêner, mais elle emprisonne rarement ton esprit longtemps."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « LÂCHER-PRISE » et « SURANALYSE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu réfléchis profondément et rejoues souvent les situations importantes. L’analyse t’aide, même si elle peut parfois devenir du bruit mental."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SURANALYSE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Ton esprit génère presque automatiquement des alternatives, des scénarios et leurs conséquences. Arrêter de penser peut être plus difficile que décider."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "chaos_control",
@@ -4292,7 +5765,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CONTRÔLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "La structure te donne de la liberté. Tu préfères savoir ce qui arrive et réduire les surprises évitables avant qu’elles ne surviennent."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « CONTRÔLE » et « CHAOS » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies un cadre sans vouloir en devenir prisonnier. Un plan est utile, mais tu sais l’abandonner quand la réalité change."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CHAOS » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l’aise sans carte complète. L’improvisation, la nouveauté et les décisions de dernière minute peuvent te sembler plus vivantes qu’un plan rigide."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "risk_taker",
@@ -4432,7 +5943,45 @@ class ResultScreenUiTest {
           "id": "opportunity_orientation",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SÉCURITÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères protéger d’abord le scénario défavorable avant d’avancer. La sécurité et la prévisibilité ont une vraie valeur pour toi."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SÉCURITÉ » et « RISQUE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu prends des risques significatifs lorsque le potentiel le justifie. Tu n’es ni téméraire ni systématiquement prudent."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RISQUE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "L’incertitude peut te stimuler plutôt que t’effrayer. Quand quelque chose compte, tu es souvent prêt à agir avant d’avoir toutes les garanties."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
@@ -4577,7 +6126,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ACCOMMODANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu protèges souvent l’harmonie en premier et peux retenir ton point de vue lorsque parler risque de créer des frictions."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « ACCOMMODANT » et « AFFIRMÉ » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais exprimer ce dont tu as besoin tout en adaptant ton ton et ton timing à la personne et à la situation."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « AFFIRMÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l’aise pour exprimer clairement tes besoins, tes limites et tes opinions même si cela crée un inconfort temporaire."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "learning_drive",
@@ -4717,7 +6304,45 @@ class ResultScreenUiTest {
           "id": "curiosity",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRATIQUE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères apprendre ce qui est utile et vas rarement plus loin si les connaissances supplémentaires n’ont pas d’objectif clair."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRATIQUE » et « APPRENTISSAGE PROFOND » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu aimes comprendre les sujets qui comptent pour toi et sais équilibrer exploration et concentration."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « APPRENTISSAGE PROFOND » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Lorsqu’un sujet attire ton attention, tu veux naturellement comprendre le contexte, les mécanismes et le système qui se cache derrière."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "novelty_seeker",
@@ -4857,7 +6482,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « FAMILIER » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu apprécies les valeurs sûres, les routines fiables et les expériences dont tu sais déjà qu’elles te conviennent."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « FAMILIER » et « NOUVEAUTÉ » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu apprécies la nouveauté quand son intérêt est clair, tout en gardant assez de repères pour rester à l’aise."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « NOUVEAUTÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Les nouveaux lieux, idées et expériences ont tendance à t’énergiser, tandis que la répétition peut vite devenir monotone."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "planning_style",
@@ -4997,7 +6660,45 @@ class ResultScreenUiTest {
           "id": "structure",
           "weight": 0.65
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SPONTANÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères garder les options ouvertes et t’adapter en temps réel plutôt que décider trop tôt."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SPONTANÉ » et « PLANIFIÉ » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu aimes disposer d’assez de structure pour réduire les frictions tout en gardant la possibilité de changer de direction."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PLANIFIÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Les plans clairs réduisent ta charge mentale. Tu préfères connaître à l’avance la séquence, le timing et les prochaines étapes."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "emotional_openness",
@@ -5137,7 +6838,45 @@ class ResultScreenUiTest {
           "id": "emotional_expression",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRIVÉ » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu as tendance à traiter tes émotions intérieurement et à les partager de façon sélective, souvent après les avoir comprises toi-même."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRIVÉ » et « OUVERT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu peux être émotionnellement ouvert avec les bonnes personnes et dans le bon contexte, sans avoir besoin de tout montrer à chacun."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « OUVERT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu mets naturellement tes émotions en mots et préfères souvent être compris sur le moment plutôt que tout gérer seul."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
@@ -5282,7 +7021,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “ACCOMMODATING” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You often protect harmony first and may hold back your position when speaking up could create friction."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “ACCOMMODATING” and “ASSERTIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can state what you need while still adapting your tone and timing to the person and situation."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “ASSERTIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable stating needs, boundaries and opinions clearly even when doing so creates temporary discomfort."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "learning_drive",
@@ -5422,7 +7199,45 @@ class ResultScreenUiTest {
           "id": "curiosity",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “PRACTICAL” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer learning what is useful and rarely go deeper unless the extra knowledge serves a clear purpose."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “PRACTICAL” and “DEEP LEARNER” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy understanding topics that matter to you and can balance exploration with staying focused."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “DEEP LEARNER” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Once something catches your attention, you naturally want context, mechanisms and the larger system behind it."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "novelty_seeker",
@@ -5562,7 +7377,45 @@ class ResultScreenUiTest {
           "id": "openness",
           "weight": 0.45
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “FAMILIAR” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You get value from known favorites, reliable routines and experiences you already know suit you."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “FAMILIAR” and “NOVELTY” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy novelty when the upside is clear, while keeping enough familiar structure to feel grounded."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “NOVELTY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "New places, ideas and experiences tend to energize you, and repetition can become stale quickly."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "planning_style",
@@ -5702,7 +7555,45 @@ class ResultScreenUiTest {
           "id": "structure",
           "weight": 0.65
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SPONTANEOUS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer keeping options open and adapting in real time rather than committing too early."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SPONTANEOUS” and “PLANNED” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You like enough structure to reduce friction while leaving room to change direction when reality shifts."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “PLANNED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Clear plans reduce mental load for you. You prefer knowing the sequence, timing and next steps in advance."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "emotional_openness",
@@ -5842,7 +7733,45 @@ class ResultScreenUiTest {
           "id": "emotional_expression",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “PRIVATE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You tend to process feelings internally and share selectively, often only after you understand them yourself."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “PRIVATE” and “OPEN” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can be emotionally open with the right people and context without needing everyone to see what is happening inside."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OPEN” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You naturally put feelings into words and often prefer being understood in real time rather than processing everything alone."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
@@ -5991,7 +7920,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ACCOMMODANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fais souvent passer les autres en premier et peux accepter davantage que ce que tu souhaiterais réellement."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « ACCOMMODANT » et « LIMITES CLAIRES » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais t’adapter pour les personnes qui comptent tout en reconnaissant quand une limite doit être exprimée."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « LIMITES CLAIRES » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es à l’aise pour protéger ton temps, ton énergie et tes standards même si dire non crée un inconfort temporaire."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "adaptability",
@@ -6127,7 +8094,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « STABLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu fonctionnes mieux lorsque les attentes restent cohérentes et préfères disposer de temps pour t’ajuster aux changements."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « STABLE » et « ADAPTABLE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Le changement peut te perturber brièvement, mais tu reconstruis généralement un plan viable une fois la nouvelle situation comprise."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « ADAPTABLE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu pivotes rapidement quand les conditions changent et considères souvent les nouvelles contraintes comme de simples informations."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "competitiveness",
@@ -6263,7 +8268,45 @@ class ResultScreenUiTest {
           "id": "competitiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « RYTHME PERSONNEL » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu accordes davantage d’importance à tes propres standards et au plaisir qu’au fait de battre quelqu’un."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « RYTHME PERSONNEL » et « COMPÉTITIF » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "La compétition peut t’apporter de l’énergie sans définir toute l’expérience, surtout lorsque les enjeux restent sains."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « COMPÉTITIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Un benchmark visible ou un rival peut déclencher chez toi davantage de concentration, d’effort et de satisfaction."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "patience",
@@ -6399,7 +8442,45 @@ class ResultScreenUiTest {
           "id": "patience",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « IMMÉDIAT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères le mouvement visible et les retours rapides ; les processus lents peuvent vite épuiser ton attention."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « IMMÉDIAT » et « PATIENT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais accepter les délais lorsqu’ils ont une raison claire, mais l’attente inutile continue de t’agacer."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PATIENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es relativement à l’aise avec les récompenses différées, la répétition et les progrès qui mettent du temps à devenir visibles."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "independence",
@@ -6535,7 +8616,45 @@ class ResultScreenUiTest {
           "id": "independence",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « COLLABORATIF » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu réfléchis naturellement avec les autres et prends souvent de meilleures décisions grâce au partage d’idées et au soutien."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « COLLABORATIF » et « INDÉPENDANT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu valorises ton autonomie mais sais reconnaître quand un autre regard, une compétence ou une aide améliore le résultat."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « INDÉPENDANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu préfères fortement l’autonomie et essaies généralement de résoudre les choses seul avant d’impliquer quelqu’un d’autre."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
@@ -6684,7 +8803,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.3
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “ACCOMMODATING” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You often make room for other people first and may tolerate more than you actually want to."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “ACCOMMODATING” and “BOUNDARIED” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can adapt for people you care about while still recognizing when a limit needs to be stated."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “BOUNDARIED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable protecting your time, energy and standards even when saying no creates temporary discomfort."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "adaptability",
@@ -6820,7 +8977,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “STEADY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You work best when expectations stay consistent and prefer enough time to adjust when circumstances change."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “STEADY” and “ADAPTIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Change can disrupt you briefly, but you usually rebuild a workable plan once you understand the new situation."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “ADAPTIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You pivot quickly when conditions change and often treat new constraints as information rather than disruption."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "competitiveness",
@@ -6956,7 +9151,45 @@ class ResultScreenUiTest {
           "id": "competitiveness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SELF-PACED” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You care more about your own standard and enjoyment than beating someone else."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SELF-PACED” and “COMPETITIVE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "Competition can add energy without defining the whole experience, especially when stakes remain healthy."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “COMPETITIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "A visible benchmark or rival can unlock extra focus, effort and satisfaction for you."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "patience",
@@ -7092,7 +9325,45 @@ class ResultScreenUiTest {
           "id": "patience",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “IMMEDIATE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer visible movement and quick feedback, and slow processes can drain your attention fast."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “IMMEDIATE” and “PATIENT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can tolerate delay when the reason is clear, but unnecessary waiting still tests you."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “PATIENT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are relatively comfortable with delayed rewards, repetition and progress that takes time to become visible."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "independence",
@@ -7228,7 +9499,45 @@ class ResultScreenUiTest {
           "id": "independence",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “COLLABORATIVE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You naturally think with other people and often make better decisions through shared input and support."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “COLLABORATIVE” and “INDEPENDENT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You value autonomy but know when another perspective, skill or hand makes the outcome better."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “INDEPENDENT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You strongly prefer self-direction and usually try to solve things independently before involving anyone else."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
@@ -7377,7 +9686,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « SUBTIL » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu communiques beaucoup par le contexte, le ton et les sous-entendus et attends souvent des autres qu’ils remarquent les signaux autour des mots."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « SUBTIL » et « EXPLICITE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu rends généralement ton message clair tout en adaptant ton niveau de franchise à la personne et à la situation."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « EXPLICITE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu préfères un langage explicite, des attentes concrètes et dire ce que tu penses plutôt que compter sur l’interprétation."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "trust_style",
@@ -7513,7 +9860,45 @@ class ResultScreenUiTest {
           "id": "trust_openness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRUDENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Tu préfères les preuves et la constance avant de compter sur quelqu’un, surtout lorsque le coût d’une erreur est important."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRUDENT » et « CONFIANT » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu commences assez ouvert, puis la répétition des comportements détermine progressivement la confiance et l’accès que tu accordes."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « CONFIANT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu pars volontiers d’une intention positive et es à l’aise pour donner une vraie chance aux gens avant qu’ils aient tout prouvé."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "self_discipline",
@@ -7653,7 +10038,45 @@ class ResultScreenUiTest {
           "id": "structure",
           "weight": 0.5
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « MOTIVATION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ta productivité dépend fortement de ton intérêt et de ton énergie, et forcer une tâche peu motivante peut être difficile."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « MOTIVATION » et « DISCIPLINE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu sais avancer sans motivation parfaite lorsque l’objectif compte et que le système reste gérable."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « DISCIPLINE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu es relativement capable d’agir à partir de ton engagement plutôt que de ton humeur et de poursuivre un travail répétitif ou peu stimulant."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "optimism",
@@ -7789,7 +10212,45 @@ class ResultScreenUiTest {
           "id": "optimism",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PRUDENT » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "Ton esprit repère naturellement ce qui pourrait mal tourner, ce qui peut t’aider à anticiper mais aussi rendre l’incertitude plus lourde."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PRUDENT » et « OPTIMISTE » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu vois à la fois les risques et les possibilités et adaptes généralement tes attentes aux éléments disponibles."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « OPTIMISTE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "Tu remarques naturellement le potentiel positif et t’attends souvent à ce qu’une solution existe même lorsque le chemin n’est pas encore clair."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     },
     {
       "id": "stress_response",
@@ -7929,7 +10390,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.2
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « PAUSE » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop rigide."
+          ],
+          "everydayLife": [
+            "La pression a tendance à te faire arrêter, te retirer ou réduire les sollicitations jusqu’à retrouver un sentiment de contrôle."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        },
+        "balanced": {
+          "strengths": [
+            "Vous pouvez généralement naviguer entre « PAUSE » et « MOBILISATION » selon le contexte."
+          ],
+          "watchOuts": [
+            "L'équilibre peut parfois devenir de l'hésitation si les priorités ne sont pas claires."
+          ],
+          "everydayLife": [
+            "Tu ressens la pression mais retrouves généralement assez de structure pour choisir une prochaine étape sans complètement t’arrêter ni accélérer."
+          ],
+          "reflection": "Quels contextes vous font pencher vers chaque extrémité de cette dimension ?"
+        },
+        "high": {
+          "strengths": [
+            "Vous savez souvent fonctionner du côté « MOBILISATION » de cette dimension."
+          ],
+          "watchOuts": [
+            "En situation de stress, cette préférence peut devenir trop dominante."
+          ],
+          "everydayLife": [
+            "La pression te pousse souvent vers l’action, la résolution de problèmes et une augmentation du rythme, surtout lorsqu’une action concrète est possible."
+          ],
+          "reflection": "Dans quelle situation récente cette tendance vous a-t-elle aidé, et dans laquelle vous a-t-elle limité ?"
+        }
+      }
     }
   ]
 }
@@ -8078,7 +10577,45 @@ class ResultScreenUiTest {
           "id": "assertiveness",
           "weight": 0.25
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SUBTLE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You communicate with context, tone and implication and often expect other people to notice the signals around the words."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SUBTLE” and “EXPLICIT” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You usually make your point clear while adjusting how direct you are to the person and situation."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “EXPLICIT” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You prefer explicit language, concrete expectations and saying what you mean rather than relying on interpretation."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "trust_style",
@@ -8214,7 +10751,45 @@ class ResultScreenUiTest {
           "id": "trust_openness",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “CAUTIOUS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer evidence and consistency before relying on someone, especially when the cost of being wrong is meaningful."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “CAUTIOUS” and “OPEN TRUST” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You begin reasonably open but let repeated behavior determine how much access and confidence someone receives."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OPEN TRUST” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You tend to start from goodwill and are comfortable giving people a meaningful chance before they fully prove themselves."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "self_discipline",
@@ -8354,7 +10929,45 @@ class ResultScreenUiTest {
           "id": "structure",
           "weight": 0.5
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “MOTIVATION” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "Your output is strongly shaped by interest and energy, and forcing low-motivation work can be difficult."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “MOTIVATION” and “DISCIPLINE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can follow through without perfect motivation when the goal matters and the system is manageable."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “DISCIPLINE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are relatively good at acting from commitment rather than mood and can keep moving through repetitive or unexciting work."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "optimism",
@@ -8490,7 +11103,45 @@ class ResultScreenUiTest {
           "id": "optimism",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “CAUTIOUS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "Your mind naturally looks for what could go wrong, which can help you prepare but may make uncertainty feel heavier."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “CAUTIOUS” and “OPTIMISTIC” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You can see both risk and possibility and usually adjust your expectations to the evidence in front of you."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OPTIMISTIC” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You naturally notice upside and often expect that problems can be solved even when the path is not yet obvious."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "stress_response",
@@ -8630,7 +11281,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.2
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “PAUSE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "Pressure tends to make you stop, withdraw or reduce input until you can regain a sense of control."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “PAUSE” and “MOBILIZE” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You may feel the pressure, but you usually regain enough structure to choose a next step without fully shutting down or speeding up."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “MOBILIZE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Pressure often pushes you toward action, problem-solving and increased pace, especially when there is something concrete to do."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
@@ -8775,7 +11464,45 @@ class ResultScreenUiTest {
           "id": "social_energy",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SOLITUDE” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "Your energy tends to recover in quiet spaces. You can enjoy people, but too much social input drains you quickly."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SOLITUDE” and “SOCIAL ENERGY” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You enjoy connection when the context feels right. Your social energy depends heavily on the people, place and mood."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “SOCIAL ENERGY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Interaction often gives you momentum. You tend to recharge through people, activity and shared experiences."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "logic_emotion",
@@ -8915,7 +11642,45 @@ class ResultScreenUiTest {
           "id": "analytical_style",
           "weight": -0.6
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “LOGIC” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You tend to trust evidence, consistency and structure before feelings. Emotions matter, but they rarely get the final vote."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “LOGIC” and “EMOTION” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You naturally combine analysis and feeling. You can switch between evidence and intuition depending on what is at stake."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “EMOTION” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Your internal sense of what feels right strongly shapes your choices. Human impact often matters more than perfect logic."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "overthinker",
@@ -9051,7 +11816,45 @@ class ResultScreenUiTest {
           "id": "rumination",
           "weight": 1
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “LET GO” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You usually process what matters and move forward. Uncertainty may bother you, but it rarely keeps your mind trapped for long."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “LET GO” and “OVERTHINK” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You think deeply and often replay important situations. Analysis helps you, though it can occasionally become mental noise."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “OVERTHINK” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Your mind generates branches, alternatives and second-order consequences almost automatically. Switching off can be harder than deciding."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "chaos_control",
@@ -9191,7 +11994,45 @@ class ResultScreenUiTest {
           "id": "adaptability",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “CONTROL” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "Structure gives you freedom. You prefer knowing what comes next and reducing avoidable surprises before they happen."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “CONTROL” and “CHAOS” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You like having a framework without becoming trapped by it. A plan is useful, but you can abandon it when reality changes."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “CHAOS” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "You are comfortable moving without a complete map. Improvisation, novelty and last-minute decisions can feel more alive than rigid plans."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     },
     {
       "id": "risk_taker",
@@ -9331,7 +12172,45 @@ class ResultScreenUiTest {
           "id": "opportunity_orientation",
           "weight": 0.35
         }
-      ]
+      ],
+      "resultIntelligence": {
+        "low": {
+          "strengths": [
+            "You often know how to operate from the “SECURITY” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too rigid."
+          ],
+          "everydayLife": [
+            "You prefer asymmetric bets: protect the downside first, then move. Security and predictability carry real value for you."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        },
+        "balanced": {
+          "strengths": [
+            "You can usually move between “SECURITY” and “RISK” depending on context."
+          ],
+          "watchOuts": [
+            "Balance can sometimes turn into hesitation when priorities are unclear."
+          ],
+          "everydayLife": [
+            "You will take meaningful risks when the upside is justified. You are neither reckless nor automatically conservative."
+          ],
+          "reflection": "Which situations pull you toward each end of this dimension?"
+        },
+        "high": {
+          "strengths": [
+            "You often know how to operate from the “RISK” side of this dimension."
+          ],
+          "watchOuts": [
+            "Under stress, this preference can become too dominant."
+          ],
+          "everydayLife": [
+            "Uncertainty can feel energizing rather than threatening. When something matters, you are often willing to move before certainty arrives."
+          ],
+          "reflection": "Where did this tendency help you recently, and where did it limit you?"
+        }
+      }
     }
   ]
 }
@@ -9688,6 +12567,90 @@ object AchievementUnlockQueue {
 
     fun consume(pendingIds: List<String>, achievementId: String): List<String> =
         pendingIds.filterNot { it == achievementId }.distinct()
+}
+```
+
+## File: src/main/java/com/whoareyou/app/ActivityCollector.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+import androidx.health.connect.client.HealthConnectClient
+import androidx.health.connect.client.permission.HealthPermission
+import androidx.health.connect.client.records.StepsRecord
+import androidx.health.connect.client.request.AggregateRequest
+import androidx.health.connect.client.time.TimeRangeFilter
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+
+interface ActivityDataSource {
+    suspend fun state(): BehaviorSourceState
+    suspend fun readSteps(start: Instant, end: Instant): Long?
+}
+
+class ActivityCollector(
+    private val dataSource: ActivityDataSource,
+    private val zone: ZoneId = ZoneId.systemDefault()
+) {
+    suspend fun collectDay(date: LocalDate): BehaviorCollectionResult<ActivityDay> {
+        val state = runCatching { dataSource.state() }
+            .getOrElse { return BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR) }
+
+        if (state != BehaviorSourceState.AVAILABLE) {
+            return BehaviorCollectionResult.Unavailable(state)
+        }
+
+        val start = date.atStartOfDay(zone).toInstant()
+        val end = date.plusDays(1).atStartOfDay(zone).toInstant()
+        val steps = runCatching { dataSource.readSteps(start, end) }
+            .getOrElse { return BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR) }
+            ?: return BehaviorCollectionResult.NoData
+
+        if (steps < 0L) {
+            return BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR)
+        }
+
+        return BehaviorCollectionResult.Data(
+            ActivityDay(
+                epochDay = date.toEpochDay(),
+                steps = steps
+            )
+        )
+    }
+}
+
+class HealthConnectActivityDataSource(context: Context) : ActivityDataSource {
+    private val appContext = context.applicationContext
+
+    override suspend fun state(): BehaviorSourceState {
+        if (HealthConnectClient.getSdkStatus(appContext) != HealthConnectClient.SDK_AVAILABLE) {
+            return BehaviorSourceState.UNSUPPORTED
+        }
+        val granted = client().permissionController.getGrantedPermissions()
+        return if (READ_STEPS_PERMISSION in granted) {
+            BehaviorSourceState.AVAILABLE
+        } else {
+            BehaviorSourceState.PERMISSION_REQUIRED
+        }
+    }
+
+    override suspend fun readSteps(start: Instant, end: Instant): Long? {
+        val response = client().aggregate(
+            AggregateRequest(
+                metrics = setOf(StepsRecord.COUNT_TOTAL),
+                timeRangeFilter = TimeRangeFilter.between(start, end)
+            )
+        )
+        return response[StepsRecord.COUNT_TOTAL]
+    }
+
+    private fun client(): HealthConnectClient = HealthConnectClient.getOrCreate(appContext)
+
+    companion object {
+        val READ_STEPS_PERMISSION: String =
+            HealthPermission.getReadPermission(StepsRecord::class)
+    }
 }
 ```
 
@@ -10107,6 +13070,7 @@ package com.whoareyou.app
 enum class AppScreen {
     DISCOVER,
     PROFILE,
+    HABITS,
     QUIZ,
     RESULT
 }
@@ -10114,10 +13078,13 @@ enum class AppScreen {
 object AppNavigation {
     fun backDestination(screen: AppScreen): AppScreen? = when (screen) {
         AppScreen.DISCOVER -> null
+        AppScreen.HABITS -> AppScreen.PROFILE
         AppScreen.PROFILE,
         AppScreen.QUIZ,
         AppScreen.RESULT -> AppScreen.DISCOVER
     }
+
+    fun habitsDestination(): AppScreen = AppScreen.HABITS
 
     fun hasUsableCatalog(quizCount: Int): Boolean = quizCount > 0
 }
@@ -10193,6 +13160,7 @@ fun premiumScreenTransition(
 private fun navigationDepth(screen: AppScreen): Int = when (screen) {
     AppScreen.DISCOVER -> 0
     AppScreen.PROFILE -> 1
+    AppScreen.HABITS -> 2
     AppScreen.QUIZ -> 2
     AppScreen.RESULT -> 3
 }
@@ -10249,14 +13217,14 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-// The persistent shell belongs only to top-level exploration spaces; focused quiz/result flows stay chrome-free.
+// The persistent shell belongs only to top-level exploration spaces; focused/secondary flows stay chrome-free.
 enum class AppShellTab { DISCOVER, PROFILE }
 
 object AppShellNavigation {
     fun tabFor(screen: AppScreen): AppShellTab? = when (screen) {
         AppScreen.DISCOVER -> AppShellTab.DISCOVER
         AppScreen.PROFILE -> AppShellTab.PROFILE
-        AppScreen.QUIZ, AppScreen.RESULT -> null
+        AppScreen.HABITS, AppScreen.QUIZ, AppScreen.RESULT -> null
     }
 
     fun destination(tab: AppShellTab): AppScreen = when (tab) {
@@ -10531,6 +13499,1561 @@ fun WhoAreYouTheme(content: @Composable () -> Unit) {
                 content()
             }
         }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/AppUsageAggregation.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
+
+data class AppUsageSession(
+    val packageName: String,
+    val start: Instant,
+    val end: Instant
+)
+
+object AppUsageAggregator {
+    fun aggregate(
+        date: LocalDate,
+        zone: ZoneId,
+        sessions: List<AppUsageSession>,
+        topLimit: Int = 5
+    ): DailyBehaviorAggregate? {
+        if (sessions.isEmpty()) return null
+
+        val dayStart = date.atStartOfDay(zone).toInstant()
+        val dayEnd = date.plusDays(1).atStartOfDay(zone).toInstant()
+        val clipped = sessions.mapNotNull { session ->
+            if (session.packageName.isBlank() || !session.end.isAfter(session.start)) return@mapNotNull null
+            val start = maxOf(session.start, dayStart)
+            val end = minOf(session.end, dayEnd)
+            if (!end.isAfter(start)) null else session.copy(start = start, end = end)
+        }
+        if (clipped.isEmpty()) return null
+
+        val byPackage = clipped.groupBy { it.packageName }.map { (packageName, appSessions) ->
+            AppUsageAggregate(
+                packageName = packageName,
+                foregroundMillis = appSessions.sumOf { it.end.toEpochMilli() - it.start.toEpochMilli() },
+                launchesOrSessions = appSessions.size
+            )
+        }.sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
+
+        val total = byPackage.sumOf { it.foregroundMillis }
+        val dayparts = clipped.fold(DaypartUsage.EMPTY) { acc, session -> acc + splitIntoDayparts(session, zone) }
+
+        return DailyBehaviorAggregate(
+            epochDay = date.toEpochDay(),
+            steps = null,
+            totalForegroundMillis = total,
+            topApps = byPackage.take(topLimit.coerceAtLeast(0)),
+            launchesOrSessions = clipped.size,
+            daypartUsage = dayparts
+        )
+    }
+
+    private fun splitIntoDayparts(session: AppUsageSession, zone: ZoneId): DaypartUsage {
+        var cursor = session.start
+        var result = DaypartUsage.EMPTY
+        while (cursor.isBefore(session.end)) {
+            val local = cursor.atZone(zone)
+            val boundary = nextBoundary(local)
+            val segmentEnd = minOf(session.end, boundary.toInstant())
+            val millis = segmentEnd.toEpochMilli() - cursor.toEpochMilli()
+            result = result.add(classify(local.toLocalTime()), millis)
+            cursor = segmentEnd
+        }
+        return result
+    }
+
+    private fun nextBoundary(time: ZonedDateTime): ZonedDateTime {
+        val date = time.toLocalDate()
+        val localTime = time.toLocalTime()
+        val next = when {
+            localTime < MORNING -> MORNING
+            localTime < AFTERNOON -> AFTERNOON
+            localTime < EVENING -> EVENING
+            localTime < NIGHT -> NIGHT
+            else -> null
+        }
+        return if (next != null) ZonedDateTime.of(date, next, time.zone)
+        else date.plusDays(1).atStartOfDay(time.zone)
+    }
+
+    private fun classify(time: LocalTime): Daypart = when {
+        time >= MORNING && time < AFTERNOON -> Daypart.MORNING
+        time >= AFTERNOON && time < EVENING -> Daypart.AFTERNOON
+        time >= EVENING && time < NIGHT -> Daypart.EVENING
+        else -> Daypart.NIGHT
+    }
+
+    private fun DaypartUsage.add(daypart: Daypart, millis: Long) = when (daypart) {
+        Daypart.MORNING -> copy(morningMillis = morningMillis + millis)
+        Daypart.AFTERNOON -> copy(afternoonMillis = afternoonMillis + millis)
+        Daypart.EVENING -> copy(eveningMillis = eveningMillis + millis)
+        Daypart.NIGHT -> copy(nightMillis = nightMillis + millis)
+    }
+
+    private operator fun DaypartUsage.plus(other: DaypartUsage) = DaypartUsage(
+        morningMillis + other.morningMillis,
+        afternoonMillis + other.afternoonMillis,
+        eveningMillis + other.eveningMillis,
+        nightMillis + other.nightMillis
+    )
+
+    private enum class Daypart { MORNING, AFTERNOON, EVENING, NIGHT }
+
+    private val MORNING = LocalTime.of(6, 0)
+    private val AFTERNOON = LocalTime.of(12, 0)
+    private val EVENING = LocalTime.of(18, 0)
+    private val NIGHT = LocalTime.of(22, 0)
+}
+```
+
+## File: src/main/java/com/whoareyou/app/AppUsageCollector.kt
+```kotlin
+package com.whoareyou.app
+
+import android.app.usage.UsageEvents
+import android.app.usage.UsageStatsManager
+import android.content.Context
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+
+data class RawAppUsageEvent(
+    val packageName: String,
+    val timestamp: Instant,
+    val type: Type
+) {
+    enum class Type { RESUMED, PAUSED }
+}
+
+interface AppUsageDataSource {
+    fun state(): BehaviorSourceState
+    fun events(start: Instant, end: Instant): List<RawAppUsageEvent>
+}
+
+class AppUsageCollector(
+    private val dataSource: AppUsageDataSource,
+    private val zone: ZoneId = ZoneId.systemDefault()
+) {
+    fun collectDay(date: LocalDate): BehaviorCollectionResult<DailyBehaviorAggregate> {
+        val state = runCatching { dataSource.state() }
+            .getOrElse { return BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR) }
+
+        if (state != BehaviorSourceState.AVAILABLE) {
+            return BehaviorCollectionResult.Unavailable(state)
+        }
+
+        val start = date.atStartOfDay(zone).toInstant()
+        val end = date.plusDays(1).atStartOfDay(zone).toInstant()
+        val events = runCatching { dataSource.events(start, end) }
+            .getOrElse { return BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR) }
+
+        if (events.isEmpty()) return BehaviorCollectionResult.NoData
+
+        val sessions = reconstructSessions(events)
+        if (sessions.isEmpty()) return BehaviorCollectionResult.NoData
+
+        val aggregate = AppUsageAggregator.aggregate(date, zone, sessions)
+            ?: return BehaviorCollectionResult.NoData
+        return BehaviorCollectionResult.Data(aggregate)
+    }
+
+    private fun reconstructSessions(events: List<RawAppUsageEvent>): List<AppUsageSession> {
+        val active = mutableMapOf<String, Instant>()
+        val sessions = mutableListOf<AppUsageSession>()
+
+        events.asSequence()
+            .filter { it.packageName.isNotBlank() }
+            .sortedWith(compareBy<RawAppUsageEvent> { it.timestamp }.thenBy { it.packageName })
+            .forEach { event ->
+                when (event.type) {
+                    RawAppUsageEvent.Type.RESUMED -> active.putIfAbsent(event.packageName, event.timestamp)
+                    RawAppUsageEvent.Type.PAUSED -> {
+                        val started = active.remove(event.packageName) ?: return@forEach
+                        if (event.timestamp.isAfter(started)) {
+                            sessions += AppUsageSession(
+                                packageName = event.packageName,
+                                start = started,
+                                end = event.timestamp
+                            )
+                        }
+                    }
+                }
+            }
+
+        return sessions
+    }
+}
+
+class AndroidAppUsageDataSource(context: Context) : AppUsageDataSource {
+    private val appContext = context.applicationContext
+
+    override fun state(): BehaviorSourceState = UsageAccess.state(appContext)
+
+    override fun events(start: Instant, end: Instant): List<RawAppUsageEvent> {
+        val manager = appContext.getSystemService(Context.USAGE_STATS_SERVICE) as? UsageStatsManager
+            ?: return emptyList()
+        val usageEvents = manager.queryEvents(start.toEpochMilli(), end.toEpochMilli())
+        val event = UsageEvents.Event()
+        val result = mutableListOf<RawAppUsageEvent>()
+
+        while (usageEvents.hasNextEvent()) {
+            usageEvents.getNextEvent(event)
+            val type = when (event.eventType) {
+                UsageEvents.Event.ACTIVITY_RESUMED -> RawAppUsageEvent.Type.RESUMED
+                UsageEvents.Event.ACTIVITY_PAUSED -> RawAppUsageEvent.Type.PAUSED
+                else -> null
+            } ?: continue
+
+            result += RawAppUsageEvent(
+                packageName = event.packageName.orEmpty(),
+                timestamp = Instant.ofEpochMilli(event.timeStamp),
+                type = type
+            )
+        }
+
+        return result
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt
+```kotlin
+package com.whoareyou.app
+
+import kotlin.math.abs
+
+object BehaviorInsightEngine {
+    private const val MIN_PATTERN_DAYS = 5
+    private const val CHANGE_RATIO = 0.25
+    private const val LATE_SHARE = 0.35
+    private const val CONCENTRATION_SHARE = 0.70
+
+    fun build(
+        days: List<DailyBehaviorAggregate>,
+        sourceStates: Map<BehaviorSource, BehaviorSourceState>
+    ): List<BehaviorInsight> {
+        val ordered = days.distinctBy { it.epochDay }.sortedBy { it.epochDay }
+        if (ordered.size < MIN_PATTERN_DAYS) {
+            return listOf(
+                BehaviorInsight(
+                    BehaviorInsightCategory.INSUFFICIENT_HISTORY,
+                    BehaviorEvidenceTier.EARLY,
+                    copyTokens = listOf("insufficient_history")
+                )
+            )
+        }
+
+        val insights = mutableListOf<BehaviorInsight>()
+        if (sourceStates[BehaviorSource.APP_USAGE] == BehaviorSourceState.AVAILABLE) {
+            screenTimeChange(ordered)?.let(insights::add)
+            appConcentration(ordered)?.let(insights::add)
+            lateUsage(ordered)?.let(insights::add)
+            usageRegularity(ordered)?.let(insights::add)
+        }
+        if (sourceStates[BehaviorSource.ACTIVITY] == BehaviorSourceState.AVAILABLE) {
+            activityConsistency(ordered)?.let(insights::add)
+            activityChange(ordered)?.let(insights::add)
+        }
+        return insights.ifEmpty {
+            listOf(
+                BehaviorInsight(
+                    BehaviorInsightCategory.INSUFFICIENT_HISTORY,
+                    BehaviorEvidenceTier.DEVELOPING,
+                    copyTokens = listOf("building_baseline")
+                )
+            )
+        }
+    }
+
+    private fun screenTimeChange(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val measured = days.mapNotNull { d -> d.totalForegroundMillis?.let { d.epochDay to it } }
+        if (measured.size < 6) return null
+        val split = measured.size / 2
+        val baseline = median(measured.take(split).map { it.second })
+        val recent = median(measured.drop(split).map { it.second })
+        if (baseline <= 0L || abs(recent - baseline).toDouble() / baseline < CHANGE_RATIO) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.SCREEN_TIME_CHANGE,
+            tier(measured.size),
+            listOf(baseline, recent),
+            listOf(if (recent > baseline) "screen_time_higher" else "screen_time_lower")
+        )
+    }
+
+    private fun activityChange(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val measured = days.mapNotNull { d -> d.steps?.let { d.epochDay to it } }
+        if (measured.size < 6) return null
+        val split = measured.size / 2
+        val baseline = median(measured.take(split).map { it.second })
+        val recent = median(measured.drop(split).map { it.second })
+        if (baseline <= 0L || abs(recent - baseline).toDouble() / baseline < CHANGE_RATIO) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.ACTIVITY_CHANGE,
+            tier(measured.size),
+            listOf(baseline, recent),
+            listOf(if (recent > baseline) "activity_higher" else "activity_lower")
+        )
+    }
+
+    private fun appConcentration(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val shares = days.mapNotNull { day ->
+            val total = day.totalForegroundMillis?.takeIf { it > 0L } ?: return@mapNotNull null
+            val top = day.topApps.take(2).sumOf { it.foregroundMillis }
+            top.toDouble() / total
+        }
+        if (shares.size < MIN_PATTERN_DAYS || shares.count { it >= CONCENTRATION_SHARE } < MIN_PATTERN_DAYS) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.APP_CONCENTRATION,
+            tier(shares.size),
+            supportingValues = listOf((medianDouble(shares) * 100).toLong()),
+            copyTokens = listOf("usage_concentrated")
+        )
+    }
+
+    private fun lateUsage(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val shares = days.mapNotNull { day ->
+            val total = day.daypartUsage.totalMillis.takeIf { it > 0L } ?: return@mapNotNull null
+            day.daypartUsage.nightMillis.toDouble() / total
+        }
+        if (shares.size < MIN_PATTERN_DAYS || shares.count { it >= LATE_SHARE } < MIN_PATTERN_DAYS) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.LATE_USAGE_PATTERN,
+            tier(shares.size),
+            listOf((medianDouble(shares) * 100).toLong()),
+            listOf("late_usage_pattern")
+        )
+    }
+
+    private fun usageRegularity(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val values = days.mapNotNull { it.totalForegroundMillis }
+        if (values.size < MIN_PATTERN_DAYS) return null
+        val median = median(values)
+        if (median <= 0L) return null
+        val medianDeviation = median(values.map { abs(it - median) })
+        if (medianDeviation.toDouble() / median > 0.20) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.USAGE_REGULARITY,
+            tier(values.size),
+            listOf(median),
+            listOf("usage_regular")
+        )
+    }
+
+    private fun activityConsistency(days: List<DailyBehaviorAggregate>): BehaviorInsight? {
+        val values = days.mapNotNull { it.steps }
+        if (values.size < MIN_PATTERN_DAYS) return null
+        val median = median(values)
+        if (median <= 0L) return null
+        val medianDeviation = median(values.map { abs(it - median) })
+        if (medianDeviation.toDouble() / median > 0.25) return null
+        return BehaviorInsight(
+            BehaviorInsightCategory.ACTIVITY_CONSISTENCY,
+            tier(values.size),
+            listOf(median),
+            listOf("activity_consistent")
+        )
+    }
+
+    private fun median(values: List<Long>): Long {
+        if (values.isEmpty()) return 0L
+        val sorted = values.sorted()
+        val middle = sorted.size / 2
+        return if (sorted.size % 2 == 1) sorted[middle]
+        else (sorted[middle - 1] / 2L) + (sorted[middle] / 2L) + ((sorted[middle - 1] % 2L + sorted[middle] % 2L) / 2L)
+    }
+
+    private fun medianDouble(values: List<Double>): Double {
+        if (values.isEmpty()) return 0.0
+        val sorted = values.sorted()
+        val middle = sorted.size / 2
+        return if (sorted.size % 2 == 1) sorted[middle] else (sorted[middle - 1] + sorted[middle]) / 2.0
+    }
+
+    private fun tier(count: Int) = when {
+        count >= 14 -> BehaviorEvidenceTier.ESTABLISHED
+        count >= 7 -> BehaviorEvidenceTier.DEVELOPING
+        else -> BehaviorEvidenceTier.EARLY
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt
+```kotlin
+package com.whoareyou.app
+
+enum class BehaviorIntegrationCommand {
+    REQUEST_ACTIVITY_PERMISSION,
+    OPEN_USAGE_ACCESS,
+    DISABLE_SOURCE,
+    NONE
+}
+
+object BehaviorIntegrationPolicy {
+    fun command(source: BehaviorSource, action: BehaviorSourceAction): BehaviorIntegrationCommand = when (action) {
+        BehaviorSourceAction.ENABLE,
+        BehaviorSourceAction.AUTHORIZE -> when (source) {
+            BehaviorSource.ACTIVITY -> BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION
+            BehaviorSource.APP_USAGE -> BehaviorIntegrationCommand.OPEN_USAGE_ACCESS
+        }
+        BehaviorSourceAction.DISABLE -> BehaviorIntegrationCommand.DISABLE_SOURCE
+        BehaviorSourceAction.NONE -> BehaviorIntegrationCommand.NONE
+    }
+
+    fun shouldRefreshAfterActivityPermission(granted: Boolean): Boolean = granted
+
+    fun shouldRefreshAfterUsageAccessReturn(): Boolean = true
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+
+/**
+ * Opportunistically refreshes enabled behavioral sources when the app starts or resumes.
+ * The coordinator remains responsible for skipping disabled sources.
+ */
+@Composable
+fun BehaviorRefreshOnResume(
+    activity: ComponentActivity?,
+    onRefresh: () -> Unit
+) {
+    val currentRefresh by rememberUpdatedState(onRefresh)
+
+    DisposableEffect(activity) {
+        val owner = activity
+        if (owner == null) {
+            onDispose { }
+        } else {
+            val observer = LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    currentRefresh()
+                }
+            }
+            owner.lifecycle.addObserver(observer)
+            if (owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                currentRefresh()
+            }
+            onDispose {
+                owner.lifecycle.removeObserver(observer)
+            }
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorModels.kt
+```kotlin
+package com.whoareyou.app
+
+data class AppUsageAggregate(
+    val packageName: String,
+    val foregroundMillis: Long,
+    val launchesOrSessions: Int?
+)
+
+data class DaypartUsage(
+    val morningMillis: Long,
+    val afternoonMillis: Long,
+    val eveningMillis: Long,
+    val nightMillis: Long
+) {
+    val totalMillis: Long
+        get() = morningMillis + afternoonMillis + eveningMillis + nightMillis
+
+    companion object {
+        val EMPTY = DaypartUsage(0L, 0L, 0L, 0L)
+    }
+}
+
+data class DailyBehaviorAggregate(
+    val epochDay: Long,
+    val steps: Long?,
+    val totalForegroundMillis: Long?,
+    val topApps: List<AppUsageAggregate>,
+    val launchesOrSessions: Int?,
+    val daypartUsage: DaypartUsage
+)
+
+enum class BehaviorSource { ACTIVITY, APP_USAGE }
+
+enum class BehaviorSourceState {
+    DISABLED,
+    PERMISSION_REQUIRED,
+    AVAILABLE,
+    UNSUPPORTED,
+    ERROR
+}
+
+sealed interface BehaviorCollectionResult<out T> {
+    data class Data<T>(val value: T) : BehaviorCollectionResult<T>
+    data object NoData : BehaviorCollectionResult<Nothing>
+    data class Unavailable(val state: BehaviorSourceState) : BehaviorCollectionResult<Nothing>
+}
+
+data class ActivityDay(
+    val epochDay: Long,
+    val steps: Long
+)
+
+enum class BehaviorEvidenceTier { EARLY, DEVELOPING, ESTABLISHED }
+
+enum class BehaviorInsightCategory {
+    ACTIVITY_CONSISTENCY,
+    ACTIVITY_CHANGE,
+    SCREEN_TIME_CHANGE,
+    APP_CONCENTRATION,
+    LATE_USAGE_PATTERN,
+    USAGE_REGULARITY,
+    INSUFFICIENT_HISTORY
+}
+
+data class BehaviorInsight(
+    val category: BehaviorInsightCategory,
+    val evidenceTier: BehaviorEvidenceTier,
+    val supportingValues: List<Long> = emptyList(),
+    val copyTokens: List<String> = emptyList()
+)
+
+data class BehaviorSnapshot(
+    val today: DailyBehaviorAggregate?,
+    val last7Days: List<DailyBehaviorAggregate>,
+    val last30Days: List<DailyBehaviorAggregate>,
+    val sourceStates: Map<BehaviorSource, BehaviorSourceState>,
+    val insights: List<BehaviorInsight>
+) {
+    companion object {
+        val EMPTY = BehaviorSnapshot(
+            today = null,
+            last7Days = emptyList(),
+            last30Days = emptyList(),
+            sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED },
+            insights = emptyList()
+        )
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+
+data class BehaviorRefreshSnapshot(
+    val day: DailyBehaviorAggregate?,
+    val sourceStates: Map<BehaviorSource, BehaviorSourceState>
+)
+
+interface BehaviorRefreshStore {
+    suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot
+    suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long)
+    suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState)
+}
+
+data class BehaviorRefreshResult(
+    val epochDay: Long,
+    val sourceStates: Map<BehaviorSource, BehaviorSourceState>,
+    val updatedSources: Set<BehaviorSource>
+)
+
+class BehaviorRefreshCoordinator(
+    private val store: BehaviorRefreshStore,
+    private val activityCollector: suspend (LocalDate) -> BehaviorCollectionResult<ActivityDay>,
+    private val appUsageCollector: suspend (LocalDate) -> BehaviorCollectionResult<DailyBehaviorAggregate>,
+    private val zone: ZoneId = ZoneId.systemDefault()
+) {
+    private val refreshMutex = Mutex()
+
+    suspend fun refresh(now: Instant): BehaviorRefreshResult = refreshMutex.withLock {
+        val date = now.atZone(zone).toLocalDate()
+        val epochDay = date.toEpochDay()
+        val initial = store.snapshot(epochDay)
+        val states = initial.sourceStates.toMutableMap()
+        val updated = linkedSetOf<BehaviorSource>()
+        var day = initial.day
+
+        if (states[BehaviorSource.ACTIVITY] != BehaviorSourceState.DISABLED) {
+            when (val result = activityCollector(date)) {
+                is BehaviorCollectionResult.Data -> {
+                    day = mergeActivity(day, result.value)
+                    store.upsert(requireNotNull(day), epochDay)
+                    store.setSourceState(BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)
+                    states[BehaviorSource.ACTIVITY] = BehaviorSourceState.AVAILABLE
+                    updated += BehaviorSource.ACTIVITY
+                }
+                BehaviorCollectionResult.NoData -> {
+                    store.setSourceState(BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)
+                    states[BehaviorSource.ACTIVITY] = BehaviorSourceState.AVAILABLE
+                }
+                is BehaviorCollectionResult.Unavailable -> {
+                    store.setSourceState(BehaviorSource.ACTIVITY, result.state)
+                    states[BehaviorSource.ACTIVITY] = result.state
+                }
+            }
+        }
+
+        if (states[BehaviorSource.APP_USAGE] != BehaviorSourceState.DISABLED) {
+            when (val result = appUsageCollector(date)) {
+                is BehaviorCollectionResult.Data -> {
+                    day = mergeAppUsage(day, result.value)
+                    store.upsert(requireNotNull(day), epochDay)
+                    store.setSourceState(BehaviorSource.APP_USAGE, BehaviorSourceState.AVAILABLE)
+                    states[BehaviorSource.APP_USAGE] = BehaviorSourceState.AVAILABLE
+                    updated += BehaviorSource.APP_USAGE
+                }
+                BehaviorCollectionResult.NoData -> {
+                    store.setSourceState(BehaviorSource.APP_USAGE, BehaviorSourceState.AVAILABLE)
+                    states[BehaviorSource.APP_USAGE] = BehaviorSourceState.AVAILABLE
+                }
+                is BehaviorCollectionResult.Unavailable -> {
+                    store.setSourceState(BehaviorSource.APP_USAGE, result.state)
+                    states[BehaviorSource.APP_USAGE] = result.state
+                }
+            }
+        }
+
+        BehaviorRefreshResult(
+            epochDay = epochDay,
+            sourceStates = states.toMap(),
+            updatedSources = updated
+        )
+    }
+
+    private fun mergeActivity(
+        existing: DailyBehaviorAggregate?,
+        activity: ActivityDay
+    ): DailyBehaviorAggregate {
+        require(existing == null || existing.epochDay == activity.epochDay)
+        return (existing ?: emptyDay(activity.epochDay)).copy(steps = activity.steps)
+    }
+
+    private fun mergeAppUsage(
+        existing: DailyBehaviorAggregate?,
+        usage: DailyBehaviorAggregate
+    ): DailyBehaviorAggregate {
+        require(existing == null || existing.epochDay == usage.epochDay)
+        return (existing ?: emptyDay(usage.epochDay)).copy(
+            totalForegroundMillis = usage.totalForegroundMillis,
+            topApps = usage.topApps,
+            launchesOrSessions = usage.launchesOrSessions,
+            daypartUsage = usage.daypartUsage
+        )
+    }
+
+    private fun emptyDay(epochDay: Long) = DailyBehaviorAggregate(
+        epochDay = epochDay,
+        steps = null,
+        totalForegroundMillis = null,
+        topApps = emptyList(),
+        launchesOrSessions = null,
+        daypartUsage = DaypartUsage.EMPTY
+    )
+}
+
+fun createAndroidBehaviorRefreshCoordinator(
+    context: Context,
+    zone: ZoneId = ZoneId.systemDefault()
+): BehaviorRefreshCoordinator {
+    val appContext = context.applicationContext
+    val activityCollector = ActivityCollector(
+        dataSource = HealthConnectActivityDataSource(appContext),
+        zone = zone
+    )
+    val appUsageCollector = AppUsageCollector(
+        dataSource = AndroidAppUsageDataSource(appContext),
+        zone = zone
+    )
+    return BehaviorRefreshCoordinator(
+        store = AndroidBehaviorRefreshStore(appContext),
+        activityCollector = activityCollector::collectDay,
+        appUsageCollector = appUsageCollector::collectDay,
+        zone = zone
+    )
+}
+
+class AndroidBehaviorRefreshStore(
+    context: Context
+) : BehaviorRefreshStore {
+    private val appContext = context.applicationContext
+
+    override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot {
+        val snapshot = BehaviorRepository.observe(appContext).first()
+        val day = (snapshot.last30Days + listOfNotNull(snapshot.today))
+            .firstOrNull { it.epochDay == epochDay }
+        return BehaviorRefreshSnapshot(
+            day = day,
+            sourceStates = snapshot.sourceStates
+        )
+    }
+
+    override suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long) {
+        BehaviorRepository.upsert(appContext, day, currentEpochDay)
+    }
+
+    override suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState) {
+        BehaviorRepository.setSourceState(appContext, source, state)
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorRepository.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import java.io.IOException
+import java.time.LocalDate
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+
+private val Context.behaviorDataStore by preferencesDataStore(
+    name = "who_are_you_behavior",
+    corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() }
+)
+
+/** Local-only persistence boundary for M774 behavioral observations. */
+object BehaviorRepository {
+    private val historyKey = stringPreferencesKey("daily_behavior_v1")
+    private val activityEnabledKey = booleanPreferencesKey("activity_enabled")
+    private val appUsageEnabledKey = booleanPreferencesKey("app_usage_enabled")
+    private val activityStateKey = stringPreferencesKey("activity_state")
+    private val appUsageStateKey = stringPreferencesKey("app_usage_state")
+
+    fun observe(context: Context): Flow<BehaviorSnapshot> = context.behaviorDataStore.data
+        .catch { error ->
+            if (error is IOException) emit(emptyPreferences()) else throw error
+        }
+        .map { prefs ->
+            val today = LocalDate.now().toEpochDay()
+            val history = BehaviorStoreCodec.retain(
+                BehaviorStoreCodec.decode(prefs[historyKey]),
+                today
+            )
+            val states = mapOf(
+                BehaviorSource.ACTIVITY to resolvedState(
+                    prefs[activityEnabledKey] ?: false,
+                    prefs[activityStateKey]
+                ),
+                BehaviorSource.APP_USAGE to resolvedState(
+                    prefs[appUsageEnabledKey] ?: false,
+                    prefs[appUsageStateKey]
+                )
+            )
+            val completed = BehaviorStoreCodec.completed(history, today)
+            BehaviorSnapshot(
+                today = history.firstOrNull { it.epochDay == today },
+                last7Days = completed.filter { it.epochDay >= today - 7L },
+                last30Days = completed.filter { it.epochDay >= today - 30L },
+                sourceStates = states,
+                insights = BehaviorInsightEngine.build(completed, states)
+            )
+        }
+
+    suspend fun upsert(
+        context: Context,
+        day: DailyBehaviorAggregate,
+        currentEpochDay: Long = LocalDate.now().toEpochDay()
+    ) {
+        context.behaviorDataStore.edit { prefs ->
+            val history = BehaviorStoreCodec.decode(prefs[historyKey])
+            prefs[historyKey] = BehaviorStoreCodec.encode(
+                BehaviorStoreCodec.upsert(history, day, currentEpochDay)
+            )
+        }
+    }
+
+    suspend fun setSourceEnabled(context: Context, source: BehaviorSource, enabled: Boolean) {
+        context.behaviorDataStore.edit { prefs ->
+            prefs[enabledKey(source)] = enabled
+            if (!enabled) prefs[stateKey(source)] = BehaviorSourceState.DISABLED.name
+        }
+    }
+
+    suspend fun setSourceState(context: Context, source: BehaviorSource, state: BehaviorSourceState) {
+        context.behaviorDataStore.edit { prefs ->
+            prefs[stateKey(source)] = state.name
+        }
+    }
+
+    suspend fun clearSource(context: Context, source: BehaviorSource) {
+        context.behaviorDataStore.edit { prefs ->
+            val history = BehaviorStoreCodec.decode(prefs[historyKey])
+            prefs[historyKey] = BehaviorStoreCodec.encode(BehaviorStoreCodec.clearSource(history, source))
+            prefs[enabledKey(source)] = false
+            prefs[stateKey(source)] = BehaviorSourceState.DISABLED.name
+        }
+    }
+
+    suspend fun clearAll(context: Context) {
+        context.behaviorDataStore.edit { it.clear() }
+    }
+
+    private fun resolvedState(enabled: Boolean, stored: String?): BehaviorSourceState {
+        if (!enabled) return BehaviorSourceState.DISABLED
+        return stored?.let { raw ->
+            BehaviorSourceState.entries.firstOrNull { it.name == raw }
+        } ?: BehaviorSourceState.PERMISSION_REQUIRED
+    }
+
+    private fun enabledKey(source: BehaviorSource) = when (source) {
+        BehaviorSource.ACTIVITY -> activityEnabledKey
+        BehaviorSource.APP_USAGE -> appUsageEnabledKey
+    }
+
+    private fun stateKey(source: BehaviorSource) = when (source) {
+        BehaviorSource.ACTIVITY -> activityStateKey
+        BehaviorSource.APP_USAGE -> appUsageStateKey
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorScreenUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
+import java.util.concurrent.TimeUnit
+
+@Composable
+fun BehaviorScreen(
+    model: BehaviorUiModel,
+    onBack: () -> Unit,
+    onSourceAction: (BehaviorSource, BehaviorSourceAction) -> Unit,
+    onDeleteAll: () -> Unit
+) {
+    var showDeleteConfirmation by remember { mutableStateOf(false) }
+    LazyColumn(
+        modifier = Modifier
+            .readableContentWidth()
+            .background(V2Colors.Ink)
+            .statusBarsPadding()
+            .padding(horizontal = V2Spacing.Screen)
+            .testTag("behavior_screen"),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+        item {
+            Spacer(Modifier.height(12.dp))
+            AccessibleBackAction(onClick = onBack)
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.habits_title), color = V2Colors.Orchid, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            Spacer(Modifier.height(8.dp))
+            Text(stringResource(R.string.habits_local_only), color = V2Colors.TextSecondary, style = V2Type.Supporting, modifier = Modifier.testTag("behavior_privacy_copy"))
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                model.sources.forEach { source ->
+                    BehaviorSourceCard(source, onSourceAction)
+                }
+            }
+        }
+        item { BehaviorPeriodCard(R.string.habits_today, model.today, emptyCopy = R.string.habits_empty_today, tag = "behavior_today") }
+        item { BehaviorPeriodCard(R.string.habits_7_days, model.last7Days, emptyCopy = R.string.habits_history_building, tag = "behavior_7_days") }
+        item { BehaviorPeriodCard(R.string.habits_30_days, model.last30Days, emptyCopy = R.string.habits_history_building, tag = "behavior_30_days") }
+        item {
+            BehaviorPatternsCard(model.patterns)
+        }
+        if (model.suggestions.isNotEmpty()) {
+            item {
+                BehaviorSuggestionsCard(model.suggestions)
+            }
+        }
+        item {
+            Column(Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.habits_data_controls), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+                TextButton(onClick = { showDeleteConfirmation = true }, modifier = Modifier.testTag("behavior_delete_all")) {
+                    Text(stringResource(R.string.habits_delete_all), color = V2Colors.TextSecondary)
+                }
+                Spacer(Modifier.height(28.dp))
+            }
+        }
+    }
+
+    if (showDeleteConfirmation) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirmation = false },
+            title = { Text(stringResource(R.string.habits_delete_all)) },
+            text = { Text(stringResource(R.string.habits_delete_confirm)) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteConfirmation = false
+                        onDeleteAll()
+                    },
+                    modifier = Modifier.testTag("behavior_delete_confirm")
+                ) {
+                    Text(stringResource(R.string.habits_delete_all))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirmation = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun BehaviorSourceCard(
+    source: BehaviorSourceUi,
+    onAction: (BehaviorSource, BehaviorSourceAction) -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(V2Radius.Compact),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    behaviorCopy(source.title),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.SectionTitle,
+                    modifier = Modifier.semantics { heading() }
+                )
+                Spacer(Modifier.height(3.dp))
+                Text(behaviorCopy(source.detail), color = V2Colors.TextSecondary, style = V2Type.Supporting)
+                Spacer(Modifier.height(5.dp))
+                Text(behaviorCopy(source.stateCopy), color = V2Colors.TextSecondary, style = V2Type.Caption)
+            }
+            if (source.action != BehaviorSourceAction.NONE) {
+                Button(
+                    onClick = { onAction(source.source, source.action) },
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.Orchid),
+                    modifier = Modifier.testTag("behavior_source_${source.source.name.lowercase()}")
+                ) {
+                    Text(behaviorAction(source.action))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: Int, tag: String) {
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag(tag),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated)
+    ) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(stringResource(title), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            if (period.metrics.isEmpty() && period.topApps.isEmpty()) {
+                Text(stringResource(emptyCopy), color = V2Colors.TextSecondary, style = V2Type.Supporting)
+            } else {
+                period.metrics.forEach { metric ->
+                    Text(behaviorMetric(metric), color = V2Colors.TextPrimary, style = V2Type.SectionTitle)
+                }
+                if (period.topApps.isNotEmpty()) {
+                    Text(stringResource(R.string.habits_top_apps), color = V2Colors.TextSecondary, style = V2Type.Caption)
+                    period.topApps.forEach { app ->
+                        Text(
+                            stringResource(
+                                R.string.habits_app_usage,
+                                appDisplayName(app.packageName),
+                                durationLabel(app.foregroundMillis)
+                            ),
+                            color = V2Colors.TextPrimary,
+                            style = V2Type.Supporting
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BehaviorPatternsCard(patterns: List<BehaviorPatternUi>) {
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("behavior_patterns"),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.habits_patterns), color = V2Colors.Orchid, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            if (patterns.isEmpty()) {
+                Text(stringResource(R.string.habits_history_building), color = V2Colors.TextSecondary, style = V2Type.Supporting)
+            } else {
+                patterns.forEach { pattern ->
+                    Text(stringResource(R.string.habits_observed_label), color = V2Colors.AccentCyan, style = V2Type.Caption)
+                    Text(behaviorCopy(pattern.copy), color = V2Colors.TextPrimary, style = V2Type.Supporting)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BehaviorSuggestionsCard(suggestions: List<BehaviorSuggestionUi>) {
+    Card(
+        modifier = Modifier.fillMaxWidth().testTag("behavior_suggestions"),
+        shape = RoundedCornerShape(V2Radius.Card),
+        colors = CardDefaults.cardColors(containerColor = V2Colors.Surface)
+    ) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(stringResource(R.string.habits_suggestions), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            suggestions.forEach { suggestion ->
+                Text(stringResource(R.string.habits_suggested_label), color = V2Colors.Orchid, style = V2Type.Caption)
+                Text(behaviorCopy(suggestion.copy), color = V2Colors.TextPrimary, style = V2Type.Supporting)
+            }
+        }
+    }
+}
+
+@Composable
+private fun behaviorMetric(metric: BehaviorMetricUi): String = when (metric.kind) {
+    BehaviorMetricKind.STEPS -> stringResource(R.string.habits_steps, metric.value)
+    BehaviorMetricKind.SCREEN_TIME -> stringResource(R.string.habits_screen_time, durationLabel(metric.value))
+    BehaviorMetricKind.SESSIONS -> stringResource(R.string.habits_sessions, metric.value)
+    BehaviorMetricKind.AVERAGE_STEPS -> stringResource(R.string.habits_average_steps, metric.value)
+    BehaviorMetricKind.AVERAGE_SCREEN_TIME -> stringResource(R.string.habits_average_screen_time, durationLabel(metric.value))
+}
+
+@Composable
+private fun appDisplayName(packageName: String): String {
+    val context = LocalContext.current
+    return remember(packageName, context) {
+        runCatching {
+            val info = context.packageManager.getApplicationInfo(packageName, 0)
+            context.packageManager.getApplicationLabel(info).toString().trim()
+        }.getOrNull().takeUnless { it.isNullOrBlank() } ?: packageName
+    }
+}
+
+private fun durationLabel(millis: Long): String {
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(millis.coerceAtLeast(0L))
+    val hours = minutes / 60
+    val remainder = minutes % 60
+    return if (hours > 0) "${hours}h ${remainder}m" else "${remainder}m"
+}
+
+@Composable
+private fun behaviorAction(action: BehaviorSourceAction): String = when (action) {
+    BehaviorSourceAction.ENABLE -> stringResource(R.string.habits_enable)
+    BehaviorSourceAction.AUTHORIZE -> stringResource(R.string.habits_authorize)
+    BehaviorSourceAction.DISABLE -> stringResource(R.string.habits_disable)
+    BehaviorSourceAction.NONE -> ""
+}
+
+@Composable
+private fun behaviorCopy(key: BehaviorCopyKey): String = stringResource(
+    when (key) {
+        BehaviorCopyKey.LOCAL_ONLY_BODY -> R.string.habits_local_only
+        BehaviorCopyKey.SOURCE_ACTIVITY -> R.string.habits_source_activity
+        BehaviorCopyKey.SOURCE_APP_USAGE -> R.string.habits_source_app_usage
+        BehaviorCopyKey.SOURCE_ACTIVITY_DETAIL -> R.string.habits_source_activity_detail
+        BehaviorCopyKey.SOURCE_APP_USAGE_DETAIL -> R.string.habits_source_app_usage_detail
+        BehaviorCopyKey.SOURCE_DISABLED -> R.string.habits_source_disabled
+        BehaviorCopyKey.SOURCE_PERMISSION_REQUIRED -> R.string.habits_source_permission_required
+        BehaviorCopyKey.SOURCE_AVAILABLE -> R.string.habits_source_available
+        BehaviorCopyKey.SOURCE_UNSUPPORTED -> R.string.habits_source_unsupported
+        BehaviorCopyKey.SOURCE_ERROR -> R.string.habits_source_error
+        BehaviorCopyKey.TODAY_EMPTY -> R.string.habits_empty_today
+        BehaviorCopyKey.HISTORY_BUILDING -> R.string.habits_history_building
+        BehaviorCopyKey.PATTERN_ACTIVITY_CONSISTENT -> R.string.habits_pattern_activity_consistent
+        BehaviorCopyKey.PATTERN_ACTIVITY_CHANGE -> R.string.habits_pattern_activity_change
+        BehaviorCopyKey.PATTERN_SCREEN_TIME_CHANGE -> R.string.habits_pattern_screen_time_change
+        BehaviorCopyKey.PATTERN_APP_CONCENTRATION -> R.string.habits_pattern_app_concentration
+        BehaviorCopyKey.PATTERN_LATE_USAGE -> R.string.habits_pattern_late_usage
+        BehaviorCopyKey.PATTERN_USAGE_REGULARITY -> R.string.habits_pattern_usage_regular
+        BehaviorCopyKey.PATTERN_INSUFFICIENT_HISTORY -> R.string.habits_pattern_insufficient
+        BehaviorCopyKey.SUGGESTION_KEEP_PERSONAL_BASELINE -> R.string.habits_suggestion_keep_personal_baseline
+        BehaviorCopyKey.SUGGESTION_REVIEW_APP_BALANCE -> R.string.habits_suggestion_review_app_balance
+        BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE -> R.string.habits_suggestion_reduce_evening_use
+        BehaviorCopyKey.SUGGESTION_REVIEW_RECENT_CHANGE -> R.string.habits_suggestion_review_recent_change
+    }
+)
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+
+object BehaviorSourceAccess {
+    suspend fun activityState(context: Context): BehaviorSourceState =
+        runCatching { HealthConnectActivityDataSource(context).state() }
+            .getOrDefault(BehaviorSourceState.ERROR)
+
+    fun appUsageState(context: Context): BehaviorSourceState =
+        runCatching { UsageAccess.state(context) }
+            .getOrDefault(BehaviorSourceState.ERROR)
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.Context
+
+enum class BehaviorSourceEffect {
+    NONE,
+    REFRESH,
+    REQUEST_ACTIVITY_PERMISSION,
+    OPEN_USAGE_ACCESS
+}
+
+object BehaviorSourceActionHandler {
+    suspend fun handle(
+        context: Context,
+        source: BehaviorSource,
+        action: BehaviorSourceAction
+    ): BehaviorSourceEffect = when (BehaviorIntegrationPolicy.command(source, action)) {
+        BehaviorIntegrationCommand.DISABLE_SOURCE -> {
+            BehaviorRepository.clearSource(context, source)
+            BehaviorSourceEffect.NONE
+        }
+        BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION -> {
+            BehaviorRepository.setSourceEnabled(context, source, true)
+            val state = BehaviorSourceAccess.activityState(context)
+            BehaviorRepository.setSourceState(context, source, state)
+            when (state) {
+                BehaviorSourceState.AVAILABLE -> BehaviorSourceEffect.REFRESH
+                BehaviorSourceState.PERMISSION_REQUIRED -> BehaviorSourceEffect.REQUEST_ACTIVITY_PERMISSION
+                else -> BehaviorSourceEffect.NONE
+            }
+        }
+        BehaviorIntegrationCommand.OPEN_USAGE_ACCESS -> {
+            BehaviorRepository.setSourceEnabled(context, source, true)
+            val state = BehaviorSourceAccess.appUsageState(context)
+            BehaviorRepository.setSourceState(context, source, state)
+            when (state) {
+                BehaviorSourceState.AVAILABLE -> BehaviorSourceEffect.REFRESH
+                BehaviorSourceState.PERMISSION_REQUIRED -> BehaviorSourceEffect.OPEN_USAGE_ACCESS
+                else -> BehaviorSourceEffect.NONE
+            }
+        }
+        BehaviorIntegrationCommand.NONE -> BehaviorSourceEffect.NONE
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorStore.kt
+```kotlin
+package com.whoareyou.app
+
+import java.nio.charset.StandardCharsets
+import java.util.Base64
+
+/**
+ * Compact deterministic codec for bounded local behavioral aggregates.
+ *
+ * This deliberately uses only JDK/Kotlin primitives so pure JVM tests exercise the same codec as
+ * Android. Android's org.json classes are framework stubs in local unit tests unless Robolectric is
+ * introduced, which is unnecessary for this storage boundary.
+ */
+object BehaviorStoreCodec {
+    private const val RETENTION_PREVIOUS_DAYS = 30L
+    private const val VERSION = "v1"
+    private const val NULL = "~"
+
+    fun encode(days: List<DailyBehaviorAggregate>): String = buildString {
+        append(VERSION)
+        days.sortedBy { it.epochDay }.forEach { day ->
+            append('\n')
+            append(
+                listOf(
+                    day.epochDay.toString(),
+                    nullableLong(day.steps),
+                    nullableLong(day.totalForegroundMillis),
+                    nullableInt(day.launchesOrSessions),
+                    day.daypartUsage.morningMillis.toString(),
+                    day.daypartUsage.afternoonMillis.toString(),
+                    day.daypartUsage.eveningMillis.toString(),
+                    day.daypartUsage.nightMillis.toString(),
+                    encodeApps(day.topApps)
+                ).joinToString("|")
+            )
+        }
+    }
+
+    fun decode(payload: String?): List<DailyBehaviorAggregate> {
+        if (payload.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val lines = payload.lineSequence().toList()
+            require(lines.firstOrNull() == VERSION)
+            lines.drop(1)
+                .filter { it.isNotBlank() }
+                .map(::decodeDay)
+                .distinctBy { it.epochDay }
+                .sortedBy { it.epochDay }
+        }.getOrElse { emptyList() }
+    }
+
+    fun retain(days: List<DailyBehaviorAggregate>, currentEpochDay: Long): List<DailyBehaviorAggregate> {
+        val firstRetainedDay = currentEpochDay - RETENTION_PREVIOUS_DAYS
+        return days
+            .filter { it.epochDay in firstRetainedDay..currentEpochDay }
+            .distinctBy { it.epochDay }
+            .sortedBy { it.epochDay }
+    }
+
+    fun completed(
+        days: List<DailyBehaviorAggregate>,
+        currentEpochDay: Long
+    ): List<DailyBehaviorAggregate> = days
+        .filter { it.epochDay < currentEpochDay }
+        .distinctBy { it.epochDay }
+        .sortedBy { it.epochDay }
+
+    fun upsert(
+        days: List<DailyBehaviorAggregate>,
+        day: DailyBehaviorAggregate,
+        currentEpochDay: Long
+    ): List<DailyBehaviorAggregate> = retain(
+        days.filterNot { it.epochDay == day.epochDay } + day,
+        currentEpochDay
+    )
+
+    fun clearSource(
+        days: List<DailyBehaviorAggregate>,
+        source: BehaviorSource
+    ): List<DailyBehaviorAggregate> = days.map { day ->
+        when (source) {
+            BehaviorSource.ACTIVITY -> day.copy(steps = null)
+            BehaviorSource.APP_USAGE -> day.copy(
+                totalForegroundMillis = null,
+                topApps = emptyList(),
+                launchesOrSessions = null,
+                daypartUsage = DaypartUsage.EMPTY
+            )
+        }
+    }
+
+    private fun decodeDay(line: String): DailyBehaviorAggregate {
+        val fields = line.split('|', limit = 9)
+        require(fields.size == 9)
+        return DailyBehaviorAggregate(
+            epochDay = fields[0].toLong(),
+            steps = parseNullableLong(fields[1]),
+            totalForegroundMillis = parseNullableLong(fields[2]),
+            topApps = decodeApps(fields[8]),
+            launchesOrSessions = parseNullableInt(fields[3]),
+            daypartUsage = DaypartUsage(
+                morningMillis = fields[4].toLong(),
+                afternoonMillis = fields[5].toLong(),
+                eveningMillis = fields[6].toLong(),
+                nightMillis = fields[7].toLong()
+            )
+        )
+    }
+
+    private fun encodeApps(apps: List<AppUsageAggregate>): String = apps
+        .sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
+        .joinToString(",") { app ->
+            listOf(
+                encodeText(app.packageName),
+                app.foregroundMillis.toString(),
+                nullableInt(app.launchesOrSessions)
+            ).joinToString(":")
+        }
+
+    private fun decodeApps(encoded: String): List<AppUsageAggregate> {
+        if (encoded.isBlank()) return emptyList()
+        return encoded.split(',').map { item ->
+            val fields = item.split(':', limit = 3)
+            require(fields.size == 3)
+            AppUsageAggregate(
+                packageName = decodeText(fields[0]),
+                foregroundMillis = fields[1].toLong(),
+                launchesOrSessions = parseNullableInt(fields[2])
+            )
+        }
+    }
+
+    private fun encodeText(value: String): String = Base64.getUrlEncoder()
+        .withoutPadding()
+        .encodeToString(value.toByteArray(StandardCharsets.UTF_8))
+
+    private fun decodeText(value: String): String = String(
+        Base64.getUrlDecoder().decode(value),
+        StandardCharsets.UTF_8
+    )
+
+    private fun nullableLong(value: Long?): String = value?.toString() ?: NULL
+    private fun nullableInt(value: Int?): String = value?.toString() ?: NULL
+    private fun parseNullableLong(value: String): Long? = if (value == NULL) null else value.toLong()
+    private fun parseNullableInt(value: String): Int? = if (value == NULL) null else value.toInt()
+}
+```
+
+## File: src/main/java/com/whoareyou/app/BehaviorUiModel.kt
+```kotlin
+package com.whoareyou.app
+
+enum class BehaviorMetricKind {
+    STEPS,
+    SCREEN_TIME,
+    SESSIONS,
+    AVERAGE_STEPS,
+    AVERAGE_SCREEN_TIME
+}
+
+enum class BehaviorSourceAction {
+    ENABLE,
+    AUTHORIZE,
+    DISABLE,
+    NONE
+}
+
+enum class BehaviorCopyKey {
+    LOCAL_ONLY_BODY,
+    SOURCE_ACTIVITY,
+    SOURCE_APP_USAGE,
+    SOURCE_ACTIVITY_DETAIL,
+    SOURCE_APP_USAGE_DETAIL,
+    SOURCE_DISABLED,
+    SOURCE_PERMISSION_REQUIRED,
+    SOURCE_AVAILABLE,
+    SOURCE_UNSUPPORTED,
+    SOURCE_ERROR,
+    TODAY_EMPTY,
+    HISTORY_BUILDING,
+    PATTERN_ACTIVITY_CONSISTENT,
+    PATTERN_ACTIVITY_CHANGE,
+    PATTERN_SCREEN_TIME_CHANGE,
+    PATTERN_APP_CONCENTRATION,
+    PATTERN_LATE_USAGE,
+    PATTERN_USAGE_REGULARITY,
+    PATTERN_INSUFFICIENT_HISTORY,
+    SUGGESTION_KEEP_PERSONAL_BASELINE,
+    SUGGESTION_REVIEW_APP_BALANCE,
+    SUGGESTION_REDUCE_EVENING_USE,
+    SUGGESTION_REVIEW_RECENT_CHANGE
+}
+
+data class BehaviorMetricUi(
+    val kind: BehaviorMetricKind,
+    val value: Long
+)
+
+data class BehaviorAppUsageUi(
+    val packageName: String,
+    val foregroundMillis: Long
+)
+
+data class BehaviorPeriodUi(
+    val metrics: List<BehaviorMetricUi>,
+    val topApps: List<BehaviorAppUsageUi> = emptyList()
+)
+
+data class BehaviorSourceUi(
+    val source: BehaviorSource,
+    val state: BehaviorSourceState,
+    val title: BehaviorCopyKey,
+    val detail: BehaviorCopyKey,
+    val stateCopy: BehaviorCopyKey,
+    val action: BehaviorSourceAction
+)
+
+data class BehaviorPatternUi(
+    val category: BehaviorInsightCategory,
+    val evidenceTier: BehaviorEvidenceTier,
+    val copy: BehaviorCopyKey,
+    val supportingValues: List<Long>
+)
+
+data class BehaviorSuggestionUi(
+    val copy: BehaviorCopyKey
+)
+
+data class BehaviorUiModel(
+    val privacyCopy: BehaviorCopyKey,
+    val sources: List<BehaviorSourceUi>,
+    val today: BehaviorPeriodUi,
+    val last7Days: BehaviorPeriodUi,
+    val last30Days: BehaviorPeriodUi,
+    val patterns: List<BehaviorPatternUi>,
+    val suggestions: List<BehaviorSuggestionUi>
+)
+
+object BehaviorUiModelFactory {
+    fun build(snapshot: BehaviorSnapshot): BehaviorUiModel = BehaviorUiModel(
+        privacyCopy = BehaviorCopyKey.LOCAL_ONLY_BODY,
+        sources = BehaviorSource.entries.map { source ->
+            val state = snapshot.sourceStates[source] ?: BehaviorSourceState.DISABLED
+            BehaviorSourceUi(
+                source = source,
+                state = state,
+                title = when (source) {
+                    BehaviorSource.ACTIVITY -> BehaviorCopyKey.SOURCE_ACTIVITY
+                    BehaviorSource.APP_USAGE -> BehaviorCopyKey.SOURCE_APP_USAGE
+                },
+                detail = when (source) {
+                    BehaviorSource.ACTIVITY -> BehaviorCopyKey.SOURCE_ACTIVITY_DETAIL
+                    BehaviorSource.APP_USAGE -> BehaviorCopyKey.SOURCE_APP_USAGE_DETAIL
+                },
+                stateCopy = state.copyKey(),
+                action = state.action()
+            )
+        },
+        today = BehaviorPeriodUi(
+            metrics = buildList {
+                snapshot.today?.steps?.let { add(BehaviorMetricUi(BehaviorMetricKind.STEPS, it)) }
+                snapshot.today?.totalForegroundMillis?.let {
+                    add(BehaviorMetricUi(BehaviorMetricKind.SCREEN_TIME, it))
+                }
+                snapshot.today?.launchesOrSessions?.let {
+                    add(BehaviorMetricUi(BehaviorMetricKind.SESSIONS, it.toLong()))
+                }
+            },
+            topApps = snapshot.today?.topApps
+                .orEmpty()
+                .sortedWith(compareByDescending<AppUsageAggregate> { it.foregroundMillis }.thenBy { it.packageName })
+                .take(3)
+                .map { BehaviorAppUsageUi(it.packageName, it.foregroundMillis) }
+        ),
+        last7Days = history(snapshot.last7Days),
+        last30Days = history(snapshot.last30Days),
+        patterns = snapshot.insights.map { insight ->
+            BehaviorPatternUi(
+                category = insight.category,
+                evidenceTier = insight.evidenceTier,
+                copy = insight.category.copyKey(),
+                supportingValues = insight.supportingValues
+            )
+        },
+        suggestions = snapshot.insights
+            .mapNotNull { it.category.suggestionKey() }
+            .distinct()
+            .map(::BehaviorSuggestionUi)
+    )
+
+    private fun history(days: List<DailyBehaviorAggregate>): BehaviorPeriodUi {
+        val stepValues = days.mapNotNull { it.steps }
+        val screenValues = days.mapNotNull { it.totalForegroundMillis }
+        val topApps = days
+            .flatMap { it.topApps }
+            .groupBy { it.packageName }
+            .map { (packageName, usages) ->
+                BehaviorAppUsageUi(
+                    packageName = packageName,
+                    foregroundMillis = usages.sumOf { it.foregroundMillis }
+                )
+            }
+            .sortedWith(compareByDescending<BehaviorAppUsageUi> { it.foregroundMillis }.thenBy { it.packageName })
+            .take(3)
+
+        return BehaviorPeriodUi(
+            metrics = buildList {
+                average(stepValues)?.let {
+                    add(BehaviorMetricUi(BehaviorMetricKind.AVERAGE_STEPS, it))
+                }
+                average(screenValues)?.let {
+                    add(BehaviorMetricUi(BehaviorMetricKind.AVERAGE_SCREEN_TIME, it))
+                }
+            },
+            topApps = topApps
+        )
+    }
+
+    private fun average(values: List<Long>): Long? {
+        if (values.isEmpty()) return null
+        return values.sum() / values.size
+    }
+
+    private fun BehaviorSourceState.copyKey(): BehaviorCopyKey = when (this) {
+        BehaviorSourceState.DISABLED -> BehaviorCopyKey.SOURCE_DISABLED
+        BehaviorSourceState.PERMISSION_REQUIRED -> BehaviorCopyKey.SOURCE_PERMISSION_REQUIRED
+        BehaviorSourceState.AVAILABLE -> BehaviorCopyKey.SOURCE_AVAILABLE
+        BehaviorSourceState.UNSUPPORTED -> BehaviorCopyKey.SOURCE_UNSUPPORTED
+        BehaviorSourceState.ERROR -> BehaviorCopyKey.SOURCE_ERROR
+    }
+
+    private fun BehaviorSourceState.action(): BehaviorSourceAction = when (this) {
+        BehaviorSourceState.DISABLED -> BehaviorSourceAction.ENABLE
+        BehaviorSourceState.PERMISSION_REQUIRED -> BehaviorSourceAction.AUTHORIZE
+        BehaviorSourceState.AVAILABLE -> BehaviorSourceAction.DISABLE
+        BehaviorSourceState.UNSUPPORTED,
+        BehaviorSourceState.ERROR -> BehaviorSourceAction.NONE
+    }
+
+    private fun BehaviorInsightCategory.suggestionKey(): BehaviorCopyKey? = when (this) {
+        BehaviorInsightCategory.ACTIVITY_CONSISTENCY,
+        BehaviorInsightCategory.USAGE_REGULARITY -> BehaviorCopyKey.SUGGESTION_KEEP_PERSONAL_BASELINE
+        BehaviorInsightCategory.ACTIVITY_CHANGE,
+        BehaviorInsightCategory.SCREEN_TIME_CHANGE -> BehaviorCopyKey.SUGGESTION_REVIEW_RECENT_CHANGE
+        BehaviorInsightCategory.APP_CONCENTRATION -> BehaviorCopyKey.SUGGESTION_REVIEW_APP_BALANCE
+        BehaviorInsightCategory.LATE_USAGE_PATTERN -> BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE
+        BehaviorInsightCategory.INSUFFICIENT_HISTORY -> null
+    }
+
+    private fun BehaviorInsightCategory.copyKey(): BehaviorCopyKey = when (this) {
+        BehaviorInsightCategory.ACTIVITY_CONSISTENCY -> BehaviorCopyKey.PATTERN_ACTIVITY_CONSISTENT
+        BehaviorInsightCategory.ACTIVITY_CHANGE -> BehaviorCopyKey.PATTERN_ACTIVITY_CHANGE
+        BehaviorInsightCategory.SCREEN_TIME_CHANGE -> BehaviorCopyKey.PATTERN_SCREEN_TIME_CHANGE
+        BehaviorInsightCategory.APP_CONCENTRATION -> BehaviorCopyKey.PATTERN_APP_CONCENTRATION
+        BehaviorInsightCategory.LATE_USAGE_PATTERN -> BehaviorCopyKey.PATTERN_LATE_USAGE
+        BehaviorInsightCategory.USAGE_REGULARITY -> BehaviorCopyKey.PATTERN_USAGE_REGULARITY
+        BehaviorInsightCategory.INSUFFICIENT_HISTORY -> BehaviorCopyKey.PATTERN_INSUFFICIENT_HISTORY
     }
 }
 ```
@@ -14003,7 +18526,8 @@ data class GlobalProfileSummary(
     val longitudinalTrends: List<LongitudinalTrend> = emptyList(),
     val traitTimelines: List<TraitTimeline> = emptyList(),
     val narrative: ProfileNarrativeSummary = ProfileNarrativeSummary(emptyList()),
-    val nextQuizRecommendation: NextQuizRecommendation? = null
+    val nextQuizRecommendation: NextQuizRecommendation? = null,
+    val personalModel: PersonalModel = PersonalModel.EMPTY
 )
 
 object GlobalProfileEngine {
@@ -14039,6 +18563,13 @@ object GlobalProfileEngine {
             timedScoreHistory = timedScoreHistory
         )
         val coverage = ProfileCoverageEngine.build(catalog, traitGraph)
+        val knowledgeMap = ProfileKnowledgeMapEngine.build(coverage)
+        val personalModel = PersonalModelEngine.build(
+            graph = traitGraph,
+            coverage = coverage,
+            timelines = traitTimelines,
+            knowledgeMap = knowledgeMap
+        )
         return GlobalProfileSummary(
             dominantArchetype = dominant?.resultTitle ?: "Profile undiscovered",
             completionPercent = completion,
@@ -14067,7 +18598,8 @@ object GlobalProfileEngine {
                 completedQuizIds = dimensions.mapTo(mutableSetOf()) { it.quizId },
                 coverage = coverage,
                 timedScoreHistory = timedScoreHistory
-            )
+            ),
+            personalModel = personalModel
         )
     }
 }
@@ -14393,6 +18925,58 @@ object GuidedJourneyEngine {
         }
 
         return selected
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun HabitsProfileEntry(
+    onOpenHabits: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Button(
+            onClick = onOpenHabits,
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 52.dp)
+                .testTag("profile_open_habits"),
+            colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+            shape = RoundedCornerShape(18.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.habits_title),
+                color = V2Colors.TextPrimary,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Text(
+            text = stringResource(R.string.habits_local_only),
+            color = V2Colors.TextSecondary,
+            style = V2Type.Supporting,
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .testTag("profile_habits_privacy_hint")
+        )
     }
 }
 ```
@@ -14830,45 +19414,32 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.health.connect.client.PermissionController
+import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(localizedAppContext(newBase))
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent { WhoAreYouTheme { WhoAreYouApp() } }
-    }
+    override fun attachBaseContext(newBase: Context) { super.attachBaseContext(localizedAppContext(newBase)) }
+    override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }
 }
 
 @Composable
@@ -14877,83 +19448,62 @@ private fun WhoAreYouApp() {
     val activity = context as? Activity
     val scope = rememberCoroutineScope()
     val quizCatalogState by produceState<List<Quiz>?>(initialValue = null, context) {
-        value = withContext(Dispatchers.IO) {
-            runCatching { QuizRepository.load(context.applicationContext) }.getOrDefault(emptyList())
-        }
+        value = withContext(Dispatchers.IO) { runCatching { QuizRepository.load(context.applicationContext) }.getOrDefault(emptyList()) }
     }
     val storedProfileFlow = remember(context) { ProfileStore.observe(context) }
     val storedProfileState by storedProfileFlow.collectAsState(initial = null)
-    val storedProfile = storedProfileState
-    val quizCatalog = quizCatalogState
-    if (storedProfile == null || quizCatalog == null) {
-        BrandLoadingScreen(tag = "startup_loading")
-        return
+    val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(
+        initial = BehaviorSnapshot(today = null, last7Days = emptyList(), last30Days = emptyList(), sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED }, insights = emptyList())
+    )
+    val behaviorRefreshCoordinator = remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }
+    fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }
+    BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }
+
+    val activityPermissionLauncher = rememberLauncherForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->
+        scope.launch {
+            val allowed = HealthConnectActivityDataSource.READ_STEPS_PERMISSION in granted
+            BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)
+            BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, if (allowed) BehaviorSourceState.AVAILABLE else BehaviorSourceState.PERMISSION_REQUIRED)
+            if (BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(allowed)) refreshBehavior()
+        }
     }
-    LaunchedEffect(activity, storedProfile.onboardingComplete, quizCatalog.size) {
-        runCatching { activity?.reportFullyDrawn() }
+    val usageAccessLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        scope.launch {
+            BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)
+            BehaviorRepository.setSourceState(context, BehaviorSource.APP_USAGE, UsageAccess.state(context))
+            if (BehaviorIntegrationPolicy.shouldRefreshAfterUsageAccessReturn()) refreshBehavior()
+        }
     }
 
-    val globalProfile = remember(
-        quizCatalog,
-        storedProfile.latestScores,
-        storedProfile.previousScores,
-        storedProfile.scoreHistory,
-        storedProfile.timedScoreHistory
-    ) {
-        GlobalProfileEngine.build(
-            catalog = quizCatalog,
-            latestScores = storedProfile.latestScores,
-            previousScores = storedProfile.previousScores,
-            scoreHistory = storedProfile.scoreHistory,
-            timedScoreHistory = storedProfile.timedScoreHistory
-        )
+    val storedProfile = storedProfileState
+    val quizCatalog = quizCatalogState
+    if (storedProfile == null || quizCatalog == null) { BrandLoadingScreen(tag = "startup_loading"); return }
+    LaunchedEffect(activity, storedProfile.onboardingComplete, quizCatalog.size) { runCatching { activity?.reportFullyDrawn() } }
+    val globalProfile = remember(quizCatalog, storedProfile.latestScores, storedProfile.previousScores, storedProfile.scoreHistory, storedProfile.timedScoreHistory) {
+        GlobalProfileEngine.build(catalog = quizCatalog, latestScores = storedProfile.latestScores, previousScores = storedProfile.previousScores, scoreHistory = storedProfile.scoreHistory, timedScoreHistory = storedProfile.timedScoreHistory)
     }
     if (!storedProfile.onboardingComplete) {
         LaunchedEffect(Unit) { runCatching { AppEvents.onboardingView() } }
-        OnboardingScreen {
-            runCatching { AppEvents.onboardingComplete() }
-            scope.launch { ProfileStore.setOnboardingComplete(context) }
-        }
+        OnboardingScreen { runCatching { AppEvents.onboardingComplete() }; scope.launch { ProfileStore.setOnboardingComplete(context) } }
         return
     }
-    if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) {
-        LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }
-        CatalogUnavailableScreen()
-        return
-    }
+    if (!AppNavigation.hasUsableCatalog(quizCatalog.size)) { LaunchedEffect(quizCatalog.size) { runCatching { AppEvents.catalogUnavailable() } }; CatalogUnavailableScreen(); return }
 
     var premiumOverride by remember { mutableStateOf(false) }
     var privacyOptionsRequired by remember { mutableStateOf(false) }
     val adsRemoved = storedProfile.adsRemoved || premiumOverride
-    val billingManager = remember(context) {
-        if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching {
-            BillingPriceState.markLoading()
-            BillingManager(context, { premiumOverride = it }, BillingPriceState::update)
-        }.getOrNull() else null
-    }
-    val adManager = remember(context, adsRemoved) {
-        if (BuildConfig.EXTERNAL_SERVICES_ENABLED && !adsRemoved) runCatching {
-            AdManager(context) { required -> privacyOptionsRequired = required }
-        }.getOrNull() else null
-    }
-
-    LaunchedEffect(billingManager, adManager, activity) {
-        withFrameNanos { }
-        runCatching { billingManager?.start() }
-        runCatching { adManager?.start(activity) }
-    }
-    DisposableEffect(billingManager) {
-        onDispose { runCatching { billingManager?.close() } }
-    }
-    DisposableEffect(adManager) {
-        onDispose { runCatching { adManager?.close() } }
-    }
+    val billingManager = remember(context) { if (BuildConfig.EXTERNAL_SERVICES_ENABLED) runCatching { BillingPriceState.markLoading(); BillingManager(context, { premiumOverride = it }, BillingPriceState::update) }.getOrNull() else null }
+    val adManager = remember(context, adsRemoved) { if (BuildConfig.EXTERNAL_SERVICES_ENABLED && !adsRemoved) runCatching { AdManager(context) { privacyOptionsRequired = it } }.getOrNull() else null }
+    LaunchedEffect(billingManager, adManager, activity) { withFrameNanos { }; runCatching { billingManager?.start() }; runCatching { adManager?.start(activity) } }
+    DisposableEffect(billingManager) { onDispose { runCatching { billingManager?.close() } } }
+    DisposableEffect(adManager) { onDispose { runCatching { adManager?.close() } } }
 
     var screenName by rememberSaveable { mutableStateOf(AppScreen.DISCOVER.name) }
     val screen = runCatching { AppScreen.valueOf(screenName) }.getOrDefault(AppScreen.DISCOVER)
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
+    val quizAttemptEvidence = remember { QuizAttemptEvidence() }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -14961,174 +19511,70 @@ private fun WhoAreYouApp() {
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
     val quizFinishing = pendingFinalScore != null
-
-    if (selectedQuiz == null) {
-        LaunchedEffect(selectedQuizId, quizCatalog) {
-            selectedQuizId = quizCatalog.first().id
-            quizAttemptId = UUID.randomUUID().toString()
-            quizQuestionIndex = 0
-            quizRawScore = 0
-            pendingFinalScore = null
-            commitFailed = false
-            finalScore = 0
-            previousScoreForAttempt = null
-            screenName = AppScreen.DISCOVER.name
-        }
-        BrandLoadingScreen(tag = "quiz_session_recovering")
-        return
-    }
+    if (selectedQuiz == null) { LaunchedEffect(selectedQuizId, quizCatalog) { selectedQuizId = quizCatalog.first().id; quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; pendingFinalScore = null; commitFailed = false; finalScore = 0; previousScoreForAttempt = null; screenName = AppScreen.DISCOVER.name }; BrandLoadingScreen(tag = "quiz_session_recovering"); return }
 
     fun navigate(destination: AppScreen) { screenName = destination.name }
-    fun resetQuizAttempt() {
-        quizAttemptId = UUID.randomUUID().toString()
-        quizQuestionIndex = 0
-        quizRawScore = 0
-        pendingFinalScore = null
-        commitFailed = false
-    }
-
+    fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; commitFailed = false }
     QuizResultCommitEffect(
         screen, selectedQuiz, quizAttemptId, pendingFinalScore,
-        onCommitFailed = {
-            pendingFinalScore = null
-            commitFailed = true
-        },
-        onCommitted = { persistedScore ->
-            finalScore = persistedScore
-            navigate(AppScreen.RESULT)
-        }
+        onCommitFailed = { pendingFinalScore = null; commitFailed = true },
+        onCommitted = { persistedScore -> finalScore = persistedScore; navigate(AppScreen.RESULT) }
     )
-    LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) } }
-    BackHandler(enabled = screen != AppScreen.DISCOVER) {
-        if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler
-        if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }
-        navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER)
-    }
+    LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) }; if (screen == AppScreen.HABITS) refreshBehavior() }
+    BackHandler(enabled = screen != AppScreen.DISCOVER) { if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler; if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }; navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER) }
 
     val reduceMotion = reducedMotionEnabled()
-    val screenPaneTitle = when (screen) {
-        AppScreen.DISCOVER -> stringResource(R.string.discover_headline)
-        AppScreen.PROFILE -> stringResource(R.string.your_profile)
-        AppScreen.QUIZ -> selectedQuiz.title
-        AppScreen.RESULT -> selectedQuiz.title
-    }
-    Box(
-        Modifier
-            .fillMaxSize()
-            .semantics { testTagsAsResourceId = true }
-    ) {
-        AnimatedContent(
-            targetState = screen,
-            transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) },
-            label = "screen",
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag("app_screen_${screen.name.lowercase()}")
-                .semantics { paneTitle = screenPaneTitle }
-        ) { destination ->
+    val screenPaneTitle = when (screen) { AppScreen.DISCOVER -> stringResource(R.string.discover_headline); AppScreen.PROFILE -> stringResource(R.string.your_profile); AppScreen.HABITS -> stringResource(R.string.habits_title); AppScreen.QUIZ, AppScreen.RESULT -> selectedQuiz.title }
+    Box(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
+        AnimatedContent(targetState = screen, transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) }, label = "screen", modifier = Modifier.fillMaxSize().testTag("app_screen_${screen.name.lowercase()}").semantics { paneTitle = screenPaneTitle }) { destination ->
             when (destination) {
                 AppScreen.DISCOVER -> DiscoverHub(
-                    quizzes = quizCatalog,
-                    profile = globalProfile,
-                    storedProfile = storedProfile,
-                    completed = storedProfile.completedQuizIds,
-                    adsRemoved = adsRemoved,
-                    privacyOptionsRequired = privacyOptionsRequired && !adsRemoved,
+                    quizzes = quizCatalog, profile = globalProfile, storedProfile = storedProfile, completed = storedProfile.completedQuizIds,
+                    adsRemoved = adsRemoved, privacyOptionsRequired = privacyOptionsRequired && !adsRemoved,
                     onOpenProfile = { navigate(AppScreen.PROFILE) },
-                    onQuizSelected = { quiz ->
-                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
-                        selectedQuizId = quiz.id
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(quiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    },
-                    onRemoveAds = {
-                        if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) }
-                    },
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onRemoveAds = { if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) } },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
                 AppScreen.PROFILE -> ProfileScreen(
-                    summary = globalProfile,
-                    catalog = quizCatalog,
-                    onQuizSelected = { quiz ->
-                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
-                        selectedQuizId = quiz.id
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(quiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    },
+                    summary = globalProfile, catalog = quizCatalog,
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
                     onBack = { navigate(AppScreen.DISCOVER) },
-                    onResetLocalData = {
-                        scope.launch {
-                            ProfileStore.clearLocalProfile(context)
-                            navigate(AppScreen.DISCOVER)
+                    onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } },
+                    onOpenHabits = { navigate(AppNavigation.habitsDestination()) }
+                )
+                AppScreen.HABITS -> BehaviorScreen(
+                    model = BehaviorUiModelFactory.build(behaviorSnapshot), onBack = { navigate(AppScreen.PROFILE) },
+                    onSourceAction = { source, action -> scope.launch {
+                        when (BehaviorSourceActionHandler.handle(context, source, action)) {
+                            BehaviorSourceEffect.REFRESH -> refreshBehavior()
+                            BehaviorSourceEffect.REQUEST_ACTIVITY_PERMISSION -> activityPermissionLauncher.launch(setOf(HealthConnectActivityDataSource.READ_STEPS_PERMISSION))
+                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> usageAccessLauncher.launch(UsageAccess.settingsIntent())
+                            BehaviorSourceEffect.NONE -> Unit
                         }
-                    }
+                    } },
+                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } }
                 )
                 AppScreen.QUIZ -> QuizScreen(
-                    quiz = selectedQuiz,
-                    questionIndex = quizQuestionIndex,
-                    score = quizRawScore,
-                    isFinishing = quizFinishing,
-                    commitFailed = commitFailed,
-                    onProgress = { questionIndex, score ->
-                        if (!quizFinishing) {
-                            quizQuestionIndex = questionIndex
-                            quizRawScore = score
-                        }
-                    },
-                    onBack = {
-                        if (!quizFinishing) {
-                            runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }
-                            navigate(AppScreen.DISCOVER)
-                        }
-                    },
-                    onFinished = { score ->
-                        if (!quizFinishing) {
-                            commitFailed = false
-                            pendingFinalScore = score
-                        }
-                    }
+                    quiz = selectedQuiz, questionIndex = quizQuestionIndex, score = quizRawScore,
+                    isFinishing = quizFinishing, commitFailed = commitFailed,
+                    onProgress = { questionIndex, score -> if (!quizFinishing) { quizQuestionIndex = questionIndex; quizRawScore = score } },
+                    onAnswerSelected = { questionIndex, answerIndex, answerScore -> if (!quizFinishing) quizAttemptEvidence.record(questionIndex, answerIndex, answerScore) },
+                    onBack = { if (!quizFinishing) { runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }; navigate(AppScreen.DISCOVER) } },
+                    onFinished = { score -> if (!quizFinishing) { commitFailed = false; pendingFinalScore = score } }
                 )
                 AppScreen.RESULT -> ResultScreen(
-                    quiz = selectedQuiz,
-                    score = finalScore,
-                    previousScore = previousScoreForAttempt,
-                    completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size,
-                    totalQuizCount = quizCatalog.size,
-                    catalog = quizCatalog,
-                    completed = storedProfile.completedQuizIds + selectedQuiz.id,
-                    coverage = globalProfile.coverage,
-                    onQuizSelected = { quiz ->
-                        previousScoreForAttempt = storedProfile.latestScores[quiz.id]
-                        selectedQuizId = quiz.id
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(quiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    },
-                    onDone = {
-                        pendingFinalScore = null
-                        val manager = adManager
-                        if (manager == null) navigate(AppScreen.DISCOVER) else runCatching {
-                            manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) }
-                        }.onFailure { navigate(AppScreen.DISCOVER) }
-                    },
-                    onRetry = {
-                        previousScoreForAttempt = finalScore
-                        resetQuizAttempt()
-                        runCatching { AppEvents.testStart(selectedQuiz.id) }
-                        navigate(AppScreen.QUIZ)
-                    }
+                    quiz = selectedQuiz, score = finalScore, previousScore = previousScoreForAttempt,
+                    completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size, totalQuizCount = quizCatalog.size,
+                    catalog = quizCatalog, completed = storedProfile.completedQuizIds + selectedQuiz.id,
+                    evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()), traitGraph = globalProfile.traitGraph, coverage = globalProfile.coverage,
+                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onDone = { pendingFinalScore = null; val manager = adManager; if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) } }.onFailure { navigate(AppScreen.DISCOVER) } },
+                    onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }
                 )
             }
         }
-        AppShellNavigation.tabFor(screen)?.let { selectedTab ->
-            PremiumAppShellBar(
-                selectedTab,
-                { tab -> navigate(AppShellNavigation.destination(tab)) },
-                Modifier.align(Alignment.BottomCenter)
-            )
-        }
+        AppShellNavigation.tabFor(screen)?.let { selectedTab -> PremiumAppShellBar(selectedTab, { tab -> navigate(AppShellNavigation.destination(tab)) }, Modifier.align(Alignment.BottomCenter)) }
     }
 }
 ```
@@ -15571,6 +20017,240 @@ private fun DimensionSignal(modifier: Modifier, label: String, score: Int, accen
             fontWeight = FontWeight.Black
         )
     }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/PersonalModel.kt
+```kotlin
+package com.whoareyou.app
+
+enum class PersonalCertainty {
+    UNKNOWN,
+    EXPLORING,
+    LIKELY,
+    ESTABLISHED
+}
+
+enum class PersonalStability {
+    UNKNOWN,
+    VARIABLE,
+    MODERATE,
+    STABLE
+}
+
+enum class ContradictionLevel {
+    NONE,
+    LOW,
+    MODERATE,
+    HIGH
+}
+
+enum class PersonalTrend {
+    UNKNOWN,
+    STABLE,
+    RISING,
+    FALLING,
+    VARIABLE
+}
+
+data class PersonalTrait(
+    val traitId: String,
+    val score: Int,
+    val confidence: Int,
+    val certainty: PersonalCertainty,
+    val stability: PersonalStability,
+    val contradictionLevel: ContradictionLevel,
+    val evidenceCount: Int,
+    val sourceQuizIds: List<String>,
+    val trend: PersonalTrend,
+    val isDistinctive: Boolean
+)
+
+data class PersonalModel(
+    val traits: List<PersonalTrait>,
+    val establishedTraits: List<PersonalTrait>,
+    val likelyTraits: List<PersonalTrait>,
+    val exploringTraits: List<PersonalTrait>,
+    val unknownTraitIds: List<String>,
+    val stableTraits: List<PersonalTrait>,
+    val variableTraits: List<PersonalTrait>,
+    val contradictoryTraits: List<PersonalTrait>,
+    val strongestKnowledgeDomains: List<TraitDomainCoverage>,
+    val knowledgeGaps: List<TraitDomainCoverage>
+) {
+    companion object {
+        val EMPTY = PersonalModel(
+            traits = emptyList(),
+            establishedTraits = emptyList(),
+            likelyTraits = emptyList(),
+            exploringTraits = emptyList(),
+            unknownTraitIds = emptyList(),
+            stableTraits = emptyList(),
+            variableTraits = emptyList(),
+            contradictoryTraits = emptyList(),
+            strongestKnowledgeDomains = emptyList(),
+            knowledgeGaps = emptyList()
+        )
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/PersonalModelEngine.kt
+```kotlin
+package com.whoareyou.app
+
+import kotlin.math.abs
+
+object PersonalModelEngine {
+    private val personalTraitComparator =
+        compareByDescending<PersonalTrait> { it.certainty.ordinal }
+            .thenByDescending { it.confidence }
+            .thenByDescending { abs(it.score - 50) }
+            .thenBy { it.traitId }
+
+    fun build(
+        graph: TraitGraph,
+        coverage: ProfileCoverage,
+        timelines: List<TraitTimeline> = emptyList(),
+        knowledgeMap: ProfileKnowledgeMap = ProfileKnowledgeMap(
+            strong = emptyList(),
+            developing = emptyList(),
+            unknown = emptyList(),
+            domains = emptyList()
+        )
+    ): PersonalModel {
+        val timelinesByTraitId = timelines.associateBy { it.traitId }
+
+        val traits = graph.traits
+            .map { trait ->
+                val contradiction = contradictionLevel(trait)
+                val timeline = timelinesByTraitId[trait.id]
+                val stability = stabilityFor(timeline)
+                val certainty = certaintyFor(
+                    trait = trait,
+                    contradiction = contradiction,
+                    stability = stability
+                )
+                PersonalTrait(
+                    traitId = trait.id,
+                    score = trait.score,
+                    confidence = trait.confidence,
+                    certainty = certainty,
+                    stability = stability,
+                    contradictionLevel = contradiction,
+                    evidenceCount = trait.evidenceCount,
+                    sourceQuizIds = trait.evidence.map { it.quizId }.distinct().sorted(),
+                    trend = trendFor(timeline),
+                    isDistinctive = certainty.ordinal >= PersonalCertainty.LIKELY.ordinal &&
+                        abs(trait.score - 50) >= 15
+                )
+            }
+            .sortedWith(personalTraitComparator)
+
+        return aggregate(traits, coverage, knowledgeMap)
+    }
+
+    private fun stabilityFor(timeline: TraitTimeline?): PersonalStability = when {
+        timeline == null || timeline.points.size < 2 -> PersonalStability.UNKNOWN
+        timeline.trend.kind == LongitudinalTrendKind.VOLATILE ||
+            timeline.trend.kind == LongitudinalTrendKind.OUTLIER -> PersonalStability.VARIABLE
+        timeline.trend.kind == LongitudinalTrendKind.STABLE &&
+            timeline.points.size >= 3 -> PersonalStability.STABLE
+        else -> PersonalStability.MODERATE
+    }
+
+    private fun trendFor(timeline: TraitTimeline?): PersonalTrend = when (timeline?.trend?.kind) {
+        null, LongitudinalTrendKind.INSUFFICIENT -> PersonalTrend.UNKNOWN
+        LongitudinalTrendKind.RISING -> PersonalTrend.RISING
+        LongitudinalTrendKind.FALLING -> PersonalTrend.FALLING
+        LongitudinalTrendKind.VOLATILE,
+        LongitudinalTrendKind.OUTLIER -> PersonalTrend.VARIABLE
+        LongitudinalTrendKind.STABLE -> PersonalTrend.STABLE
+    }
+
+    private fun certaintyFor(
+        trait: ProfileTrait,
+        contradiction: ContradictionLevel,
+        stability: PersonalStability
+    ): PersonalCertainty = when {
+        trait.evidenceCount == 0 -> PersonalCertainty.UNKNOWN
+        trait.evidenceCount == 1 -> PersonalCertainty.EXPLORING
+        contradiction == ContradictionLevel.HIGH -> PersonalCertainty.EXPLORING
+        trait.evidenceCount >= 3 &&
+            trait.confidence >= 65 &&
+            stability != PersonalStability.VARIABLE &&
+            (contradiction == ContradictionLevel.NONE ||
+                contradiction == ContradictionLevel.LOW) -> PersonalCertainty.ESTABLISHED
+        trait.evidenceCount >= 2 && trait.confidence >= 45 ->
+            PersonalCertainty.LIKELY
+        else -> PersonalCertainty.EXPLORING
+    }
+
+    private fun contradictionLevel(trait: ProfileTrait): ContradictionLevel {
+        if (trait.evidence.isEmpty() || trait.contradictoryEvidenceCount == 0) {
+            return ContradictionLevel.NONE
+        }
+
+        val dominantHigh = trait.score >= 50
+        val totalStrength = trait.evidence.sumOf {
+            (it.signalStrength * abs(it.weight)).coerceAtLeast(0.0)
+        }
+        if (totalStrength <= 0.0) return ContradictionLevel.NONE
+
+        val opposingStrength = trait.evidence
+            .filter { (it.contribution >= 50) != dominantHigh }
+            .sumOf { (it.signalStrength * abs(it.weight)).coerceAtLeast(0.0) }
+
+        val ratio = opposingStrength / totalStrength
+        return when {
+            ratio >= 0.40 -> ContradictionLevel.HIGH
+            ratio >= 0.25 -> ContradictionLevel.MODERATE
+            ratio > 0.0 -> ContradictionLevel.LOW
+            else -> ContradictionLevel.NONE
+        }
+    }
+
+    private fun aggregate(
+        traits: List<PersonalTrait>,
+        coverage: ProfileCoverage,
+        knowledgeMap: ProfileKnowledgeMap
+    ): PersonalModel = PersonalModel(
+        traits = traits,
+        establishedTraits = traits
+            .filter { it.certainty == PersonalCertainty.ESTABLISHED }
+            .sortedWith(personalTraitComparator),
+        likelyTraits = traits
+            .filter { it.certainty == PersonalCertainty.LIKELY }
+            .sortedWith(personalTraitComparator),
+        exploringTraits = traits
+            .filter { it.certainty == PersonalCertainty.EXPLORING }
+            .sortedWith(personalTraitComparator),
+        unknownTraitIds = coverage.traits
+            .filter { it.status == CoverageStatus.UNKNOWN }
+            .map { it.traitId }
+            .sorted(),
+        stableTraits = traits
+            .filter { it.stability == PersonalStability.STABLE }
+            .sortedWith(personalTraitComparator),
+        variableTraits = traits
+            .filter { it.stability == PersonalStability.VARIABLE }
+            .sortedWith(personalTraitComparator),
+        contradictoryTraits = traits
+            .filter { it.contradictionLevel.ordinal >= ContradictionLevel.MODERATE.ordinal }
+            .sortedWith(personalTraitComparator),
+        strongestKnowledgeDomains = knowledgeMap.domains
+            .sortedWith(
+                compareByDescending<TraitDomainCoverage> { it.coveragePercent }
+                    .thenBy { it.domain.name }
+            )
+            .take(3),
+        knowledgeGaps = knowledgeMap.domains
+            .sortedWith(
+                compareBy<TraitDomainCoverage> { it.coveragePercent }
+                    .thenBy { it.domain.name }
+            )
+            .take(3)
+    )
 }
 ```
 
@@ -17509,6 +22189,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -17526,7 +22207,8 @@ fun ProfileScreen(
     catalog: List<Quiz>,
     onQuizSelected: (Quiz) -> Unit,
     onBack: () -> Unit,
-    onResetLocalData: () -> Unit
+    onResetLocalData: () -> Unit,
+    onOpenHabits: () -> Unit
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -17544,6 +22226,9 @@ fun ProfileScreen(
     }
     val sortedDimensions = remember(summary.dimensions) {
         summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }
+    }
+    val whoAmIPortrait = remember(summary.personalModel) {
+        WhoAmIPortraitEngine.build(summary.personalModel)
     }
     val strongestDimension = sortedDimensions.firstOrNull()
     val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
@@ -17617,57 +22302,23 @@ fun ProfileScreen(
             }
             Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
             Text(
-                stringResource(R.string.profile_optional_social_actions),
-                color = V2Colors.TextSecondary,
-                style = V2Type.Caption,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                text = stringResource(R.string.who_am_i_title),
+                color = primaryAccent,
+                style = V2Type.Eyebrow,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("who_am_i_title")
+                    .semantics { heading() }
             )
             Spacer(Modifier.height(10.dp))
-            Button(
-                onClick = {
-                    AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
-                    GlobalProfileShare.share(context, summary)
-                },
-                enabled = summary.dimensions.isNotEmpty(),
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
-                shape = RoundedCornerShape(18.dp)
-            ) {
-                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            }
-            Spacer(Modifier.height(10.dp))
-            Button(
-                enabled = strongestDimension != null && strongestQuiz != null,
-                onClick = {
-                    val dimension = strongestDimension ?: return@Button
-                    val quiz = strongestQuiz ?: return@Button
-                    AppEvents.profileChallenge(quiz.id, dimension.score)
-                    ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
-                },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
-                shape = RoundedCornerShape(18.dp)
-            ) {
-                Text(stringResource(R.string.compare_profile_friend), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            }
-            Spacer(Modifier.height(8.dp))
-            Text(
-                if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
-                else stringResource(R.string.starts_with_dimension, strongestDimension.title),
-                color = V2Colors.TextSecondary,
-                style = V2Type.Supporting,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+            WhoAmIPortraitCards(
+                portrait = whoAmIPortrait,
+                recommendation = summary.nextQuizRecommendation,
+                catalog = catalog,
+                onQuizSelected = onQuizSelected
             )
-            summary.nextQuizRecommendation?.let { recommendation ->
-                Spacer(Modifier.height(sectionGap))
-                NextQuizRecommendationCard(
-                    recommendation = recommendation,
-                    catalog = catalog,
-                    onStartQuiz = onQuizSelected
-                )
-            }
+            Spacer(Modifier.height(sectionGap))
+            HabitsProfileEntry(onOpenHabits = onOpenHabits)
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
@@ -17824,6 +22475,68 @@ fun ProfileScreen(
                         }
                     }
                 }
+            }
+        }
+
+        item {
+            Spacer(Modifier.height(sectionGap))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("profile_social_actions")
+            ) {
+                Text(
+                    stringResource(R.string.profile_optional_social_actions),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Caption,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(Modifier.height(10.dp))
+                Button(
+                    onClick = {
+                        AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
+                        GlobalProfileShare.share(context, summary)
+                    },
+                    enabled = summary.dimensions.isNotEmpty(),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                    shape = RoundedCornerShape(18.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.share_my_profile),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Spacer(Modifier.height(10.dp))
+                Button(
+                    enabled = strongestDimension != null && strongestQuiz != null,
+                    onClick = {
+                        val dimension = strongestDimension ?: return@Button
+                        val quiz = strongestQuiz ?: return@Button
+                        AppEvents.profileChallenge(quiz.id, dimension.score)
+                        ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
+                    },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                    shape = RoundedCornerShape(18.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.compare_profile_friend),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
+                    else stringResource(R.string.starts_with_dimension, strongestDimension.title),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
 
@@ -18416,6 +23129,30 @@ object PurchaseGrantPolicy {
 }
 ```
 
+## File: src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt
+```kotlin
+package com.whoareyou.app
+
+class QuizAttemptEvidence {
+    private val contributions = linkedMapOf<Int, AnswerContribution>()
+
+    fun record(questionIndex: Int, answerIndex: Int, score: Int) {
+        contributions[questionIndex] = AnswerContribution(
+            questionIndex = questionIndex,
+            answerIndex = answerIndex,
+            contribution = score.coerceIn(0, 3) * 2 - 3
+        )
+    }
+
+    fun snapshot(): List<AnswerContribution> =
+        contributions.values.sortedBy { it.questionIndex }
+
+    fun clear() {
+        contributions.clear()
+    }
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/QuizCatalog.kt
 ```kotlin
 package com.whoareyou.app
@@ -18443,7 +23180,8 @@ data class Quiz(
     val metricLow: String,
     val metricHigh: String,
     val questions: List<Question>,
-    val traits: List<QuizTraitWeight> = emptyList()
+    val traits: List<QuizTraitWeight> = emptyList(),
+    val resultIntelligence: QuizResultIntelligenceContent? = null
 )
 
 object QuizRepository {
@@ -18515,6 +23253,27 @@ object QuizRepository {
         }.orEmpty()
         require(traits.isNotEmpty()) { "Quiz ${json.getString("id")} must define at least one trait" }
 
+        val resultIntelligence = json.optJSONObject("resultIntelligence")?.let { intelligenceJson ->
+            fun parseInsight(branch: String): ResultInsightContent {
+                val payload = intelligenceJson.getJSONObject(branch)
+                fun strings(name: String): List<String> =
+                    payload.getJSONArray(name).let { array ->
+                        List(array.length()) { index -> array.getString(index) }
+                    }
+                return ResultInsightContent(
+                    strengths = strings("strengths").take(3),
+                    watchOuts = strings("watchOuts").take(3),
+                    everydayLife = strings("everydayLife").take(3),
+                    reflection = payload.getString("reflection")
+                )
+            }
+            QuizResultIntelligenceContent(
+                low = parseInsight("low"),
+                balanced = parseInsight("balanced"),
+                high = parseInsight("high")
+            )
+        }
+
         return Quiz(
             id = json.getString("id"),
             title = json.getString("title"),
@@ -18530,7 +23289,8 @@ object QuizRepository {
             metricLow = json.getString("metricLow"),
             metricHigh = json.getString("metricHigh"),
             questions = questions,
-            traits = traits
+            traits = traits,
+            resultIntelligence = resultIntelligence
         )
     }
 
@@ -18640,6 +23400,7 @@ fun QuizScreen(
     isFinishing: Boolean,
     commitFailed: Boolean,
     onProgress: (questionIndex: Int, score: Int) -> Unit,
+    onAnswerSelected: (questionIndex: Int, answerIndex: Int, score: Int) -> Unit = { _, _, _ -> },
     onBack: () -> Unit,
     onFinished: (Int) -> Unit
 ) {
@@ -18794,6 +23555,7 @@ fun QuizScreen(
                         onClick = {
                             if (isFinishing) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
+                            onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
                             val newScore = score + answer.score
                             if (safeQuestionIndex == quiz.questions.lastIndex) {
                                 onFinished(Scoring.quizPercent(newScore, quiz.questions.size))
@@ -19193,6 +23955,273 @@ object RecommendationTelemetry {
         "quiz_id" to quizId,
         "mode" to mode(signatureGuided).wireValue
     )
+}
+```
+
+## File: src/main/java/com/whoareyou/app/ResultEvidence.kt
+```kotlin
+package com.whoareyou.app
+
+import kotlin.math.abs
+
+data class AnswerContribution(
+    val questionIndex: Int,
+    val answerIndex: Int,
+    val contribution: Int
+)
+
+data class ResultEvidence(
+    val questionIndex: Int,
+    val questionText: String,
+    val answerText: String,
+    val contribution: Int
+)
+
+object ResultEvidenceEngine {
+    fun derive(
+        questions: List<Question>,
+        contributions: List<AnswerContribution>
+    ): List<ResultEvidence> = contributions
+        .mapNotNull { item ->
+            val question = questions.getOrNull(item.questionIndex) ?: return@mapNotNull null
+            val answer = question.answers.getOrNull(item.answerIndex) ?: return@mapNotNull null
+            ResultEvidence(
+                questionIndex = item.questionIndex,
+                questionText = question.text,
+                answerText = answer.text,
+                contribution = item.contribution
+            )
+        }
+        .sortedWith(
+            compareByDescending<ResultEvidence> { abs(it.contribution) }
+                .thenBy { it.questionIndex }
+        )
+        .take(3)
+}
+```
+
+## File: src/main/java/com/whoareyou/app/ResultIntelligence.kt
+```kotlin
+package com.whoareyou.app
+
+data class ResultInsightContent(
+    val strengths: List<String>,
+    val watchOuts: List<String>,
+    val everydayLife: List<String>,
+    val reflection: String
+)
+
+data class QuizResultIntelligenceContent(
+    val low: ResultInsightContent,
+    val balanced: ResultInsightContent,
+    val high: ResultInsightContent
+)
+
+data class ResultInsightSummary(
+    val direction: ResultDirection,
+    val strength: ResultSignalStrength,
+    val strengths: List<String>,
+    val watchOuts: List<String>,
+    val everydayLife: List<String>,
+    val reflection: String
+)
+
+object ResultInsightEngine {
+    fun derive(quiz: Quiz, score: Int): ResultInsightSummary? {
+        val authored = quiz.resultIntelligence ?: return null
+        val interpretation = ResultInterpretationEngine.derive(score)
+        val content = when {
+            interpretation.strength == ResultSignalStrength.BALANCED -> authored.balanced
+            interpretation.direction == ResultDirection.LOW -> authored.low
+            else -> authored.high
+        }
+        return ResultInsightSummary(
+            direction = interpretation.direction,
+            strength = interpretation.strength,
+            strengths = content.strengths.take(3),
+            watchOuts = content.watchOuts.take(3),
+            everydayLife = content.everydayLife.take(3),
+            reflection = content.reflection
+        )
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun ResultEvidenceCard(
+    evidence: List<ResultEvidence>,
+    modifier: Modifier = Modifier
+) {
+    if (evidence.isEmpty()) return
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("result_evidence")
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.m771_why_result),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            evidence.forEach { item ->
+                Column {
+                    Text(
+                        text = item.questionText,
+                        color = V2Colors.TextPrimary,
+                        style = V2Type.BodyStrong
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = item.answerText,
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ResultInsightCards(
+    insight: ResultInsightSummary,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("result_strengths_watchouts")
+        ) {
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Text(stringResource(R.string.m771_strengths), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                insight.strengths.forEach {
+                    Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
+                }
+                Text(stringResource(R.string.m771_watchouts), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                insight.watchOuts.forEach {
+                    Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
+                }
+            }
+        }
+
+        if (insight.everydayLife.isNotEmpty()) {
+            Card(
+                colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("result_everyday_life")
+            ) {
+                Column(
+                    modifier = Modifier.padding(20.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Text(stringResource(R.string.m771_everyday_life), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                    insight.everydayLife.forEach {
+                        Text(it, color = V2Colors.TextSecondary, style = V2Type.Body)
+                    }
+                }
+            }
+        }
+
+        if (insight.reflection.isNotBlank()) {
+            Card(
+                colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("result_reflection")
+            ) {
+                Column(Modifier.padding(20.dp)) {
+                    Text(stringResource(R.string.m771_reflection), color = V2Colors.TextPrimary, style = V2Type.BodyStrong)
+                    Spacer(Modifier.height(6.dp))
+                    Text(insight.reflection, color = V2Colors.TextSecondary, style = V2Type.Body)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ResultProfileConnectionsCard(
+    connections: List<ResultProfileConnection>,
+    modifier: Modifier = Modifier
+) {
+    if (connections.isEmpty()) return
+
+    val language = LocalConfiguration.current.locales[0]?.language
+    val french = language.equals("fr", ignoreCase = true)
+
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(V2Radius.Card),
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("result_profile_connections")
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.m771_profile_connections),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong
+            )
+            connections.forEach { connection ->
+                val label = TraitLocalization.label(connection.traitId, french)
+                val message = when (connection.kind) {
+                    ResultProfileConnectionKind.REINFORCING ->
+                        stringResource(R.string.m771_connection_reinforcing, label)
+                    ResultProfileConnectionKind.CONTRASTING ->
+                        stringResource(R.string.m771_connection_contrasting, label)
+                    ResultProfileConnectionKind.CONTEXTUAL ->
+                        stringResource(R.string.m771_connection_contextual, label)
+                }
+                Text(
+                    text = message,
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Body
+                )
+            }
+        }
+    }
 }
 ```
 
@@ -19635,6 +24664,96 @@ fun ResultNextExplorationCard(
 }
 ```
 
+## File: src/main/java/com/whoareyou/app/ResultProfileConnection.kt
+```kotlin
+package com.whoareyou.app
+
+enum class ResultProfileConnectionKind {
+    REINFORCING,
+    CONTRASTING,
+    CONTEXTUAL
+}
+
+data class ResultProfileConnection(
+    val traitId: String,
+    val kind: ResultProfileConnectionKind,
+    val traitScore: Int,
+    val confidence: Int
+)
+
+object ResultProfileConnectionEngine {
+    private const val MIN_CONFIDENCE = 35
+
+    fun derive(
+        quiz: Quiz,
+        score: Int,
+        graph: TraitGraph
+    ): List<ResultProfileConnection> {
+        if (quiz.traits.isEmpty()) return emptyList()
+
+        val centeredResult = score.coerceIn(0, 100) - 50
+        if (centeredResult == 0) return emptyList()
+
+        val traitsById = graph.traits.associateBy { it.id }
+
+        return quiz.traits
+            .mapNotNull { mapping ->
+                if (mapping.weight == 0.0) return@mapNotNull null
+
+                val trait = traitsById[mapping.id] ?: return@mapNotNull null
+                if (trait.confidence < MIN_CONFIDENCE) return@mapNotNull null
+                if (trait.evidenceCount == 0 && graph.evidenceCount < 2) return@mapNotNull null
+
+                val currentDirection = centeredResult * mapping.weight
+                val profileDirection = trait.score - 50
+                val kind = when {
+                    profileDirection == 0 -> ResultProfileConnectionKind.CONTEXTUAL
+                    (currentDirection > 0) == (profileDirection > 0) ->
+                        ResultProfileConnectionKind.REINFORCING
+                    else ->
+                        ResultProfileConnectionKind.CONTRASTING
+                }
+
+                ResultProfileConnection(
+                    traitId = mapping.id,
+                    kind = kind,
+                    traitScore = trait.score,
+                    confidence = trait.confidence
+                )
+            }
+            .sortedWith(
+                compareByDescending<ResultProfileConnection> { it.confidence }
+                    .thenBy { it.traitId }
+            )
+            .take(3)
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt
+```kotlin
+package com.whoareyou.app
+
+data class ResultScreenIntelligenceState(
+    val insight: ResultInsightSummary?,
+    val evidence: List<ResultEvidence>,
+    val connections: List<ResultProfileConnection>
+)
+
+object ResultScreenIntelligence {
+    fun derive(
+        quiz: Quiz,
+        score: Int,
+        evidence: List<ResultEvidence>,
+        graph: TraitGraph = TraitGraph(emptyList(), 0)
+    ): ResultScreenIntelligenceState = ResultScreenIntelligenceState(
+        insight = ResultInsightEngine.derive(quiz, score),
+        evidence = evidence,
+        connections = ResultProfileConnectionEngine.derive(quiz, score, graph)
+    )
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/ResultScreenUi.kt
 ```kotlin
 package com.whoareyou.app
@@ -19698,6 +24817,8 @@ fun ResultScreen(
     totalQuizCount: Int,
     catalog: List<Quiz>,
     completed: Set<String>,
+    evidence: List<ResultEvidence> = emptyList(),
+    traitGraph: TraitGraph = TraitGraph(emptyList(), 0),
     coverage: ProfileCoverage,
     onQuizSelected: (Quiz) -> Unit,
     onDone: () -> Unit,
@@ -19714,6 +24835,7 @@ fun ResultScreen(
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
+    val intelligence = remember(quiz, score, evidence, traitGraph) { ResultScreenIntelligence.derive(quiz, score, evidence, traitGraph) }
     val accent = QuizVisuals.accentFor(quiz)
     val secondaryAccent = QuizVisuals.companionAccentFor(quiz)
     val resultBackground = remember(accent, secondaryAccent) {
@@ -19851,6 +24973,21 @@ fun ResultScreen(
 
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
+
+            if (intelligence.evidence.isNotEmpty()) {
+                Spacer(Modifier.height(sectionGap))
+                ResultEvidenceCard(evidence = intelligence.evidence)
+            }
+
+            intelligence.insight?.let { insight ->
+                Spacer(Modifier.height(sectionGap))
+                ResultInsightCards(insight = insight)
+            }
+
+            if (intelligence.connections.isNotEmpty()) {
+                Spacer(Modifier.height(sectionGap))
+                ResultProfileConnectionsCard(connections = intelligence.connections)
+            }
 
             if (scoreChange != null) {
                 Spacer(Modifier.height(16.dp))
@@ -22528,6 +27665,37 @@ private fun traitTrendText(kind: LongitudinalTrendKind, french: Boolean): String
 }
 ```
 
+## File: src/main/java/com/whoareyou/app/UsageAccess.kt
+```kotlin
+package com.whoareyou.app
+
+import android.app.AppOpsManager
+import android.content.Context
+import android.content.Intent
+import android.os.Process
+import android.provider.Settings
+
+/** Android special-access boundary for local app-usage observations. */
+object UsageAccess {
+    fun state(context: Context): BehaviorSourceState {
+        val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
+            ?: return BehaviorSourceState.UNSUPPORTED
+        val mode = appOps.checkOpNoThrow(
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
+            Process.myUid(),
+            context.packageName
+        )
+        return if (mode == AppOpsManager.MODE_ALLOWED) {
+            BehaviorSourceState.AVAILABLE
+        } else {
+            BehaviorSourceState.PERMISSION_REQUIRED
+        }
+    }
+
+    fun settingsIntent(): Intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/V2DesignSystem.kt
 ```kotlin
 package com.whoareyou.app
@@ -22855,6 +28023,421 @@ private fun powerSaveModeEnabled(context: Context): Boolean = runCatching {
 }.getOrDefault(false)
 ```
 
+## File: src/main/java/com/whoareyou/app/WhoAmICardModel.kt
+```kotlin
+package com.whoareyou.app
+
+data class WhoAmICard(
+    val section: WhoAmISection,
+    val traits: List<PersonalTrait> = emptyList(),
+    val discoveryGaps: List<TraitDomainCoverage> = emptyList()
+)
+
+object WhoAmICardModel {
+    private const val MAX_TRAITS_PER_CARD = 3
+
+    fun from(portrait: WhoAmIPortrait): List<WhoAmICard> = buildList {
+        add(WhoAmICard(WhoAmISection.PORTRAIT, portrait.headlineTraits.take(MAX_TRAITS_PER_CARD)))
+        if (portrait.stableTraits.isNotEmpty()) {
+            add(WhoAmICard(WhoAmISection.STABLE, portrait.stableTraits.take(MAX_TRAITS_PER_CARD)))
+        }
+        if (portrait.nuancedTraits.isNotEmpty()) {
+            add(WhoAmICard(WhoAmISection.NUANCES, portrait.nuancedTraits.take(MAX_TRAITS_PER_CARD)))
+        }
+        add(WhoAmICard(WhoAmISection.DISCOVERY, discoveryGaps = portrait.discoveryGaps))
+        if (portrait.evolvingTraits.isNotEmpty()) {
+            add(WhoAmICard(WhoAmISection.EVOLUTION, portrait.evolvingTraits.take(MAX_TRAITS_PER_CARD)))
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmICopy.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.annotation.StringRes
+
+object WhoAmICopy {
+    @StringRes
+    fun traitLabelResource(traitId: String): Int? = when (traitId) {
+        "social_energy" -> R.string.trait_social_energy
+        "emotional_orientation" -> R.string.trait_emotional_orientation
+        "analytical_style" -> R.string.trait_analytical_style
+        "rumination" -> R.string.trait_rumination
+        "structure" -> R.string.trait_structure
+        "adaptability" -> R.string.trait_adaptability
+        "risk_tolerance" -> R.string.trait_risk_tolerance
+        "opportunity_orientation" -> R.string.trait_opportunity_orientation
+        "assertiveness" -> R.string.trait_assertiveness
+        "deliberation" -> R.string.trait_deliberation
+        "emotional_expression" -> R.string.trait_emotional_expression
+        "emotional_openness" -> R.string.trait_emotional_openness
+        "social_breadth" -> R.string.trait_social_breadth
+        "circadian_lateness" -> R.string.trait_circadian_lateness
+        "conflict_directness" -> R.string.trait_conflict_directness
+        "curiosity" -> R.string.trait_curiosity
+        "openness" -> R.string.trait_openness
+        "novelty_seeking" -> R.string.trait_novelty_seeking
+        "learning_depth" -> R.string.trait_learning_depth
+        "planning" -> R.string.trait_planning
+        "boundaries" -> R.string.trait_boundaries
+        "competitiveness" -> R.string.trait_competitiveness
+        "patience" -> R.string.trait_patience
+        "independence" -> R.string.trait_independence
+        "communication_directness" -> R.string.trait_communication_directness
+        "trust_openness" -> R.string.trait_trust_openness
+        "self_discipline" -> R.string.trait_self_discipline
+        "optimism" -> R.string.trait_optimism
+        "stress_mobilization" -> R.string.trait_stress_mobilization
+        else -> null
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmIPortrait.kt
+```kotlin
+package com.whoareyou.app
+
+data class WhoAmIPortrait(
+    val headlineTraits: List<PersonalTrait>,
+    val stableTraits: List<PersonalTrait>,
+    val nuancedTraits: List<PersonalTrait>,
+    val discoveryGaps: List<TraitDomainCoverage>,
+    val evolvingTraits: List<PersonalTrait>,
+    val isDiscoveryState: Boolean
+)
+
+object WhoAmIPortraitEngine {
+    private val portraitTraitComparator =
+        compareByDescending<PersonalTrait> { it.certainty.ordinal }
+            .thenByDescending { it.confidence }
+            .thenByDescending { kotlin.math.abs(it.score - 50) }
+            .thenBy { it.traitId }
+
+    fun build(model: PersonalModel): WhoAmIPortrait {
+        val headline = model.traits
+            .filter {
+                it.isDistinctive &&
+                    it.certainty.ordinal >= PersonalCertainty.LIKELY.ordinal
+            }
+            .sortedWith(portraitTraitComparator)
+            .take(3)
+
+        val stable = model.traits
+            .filter {
+                it.stability == PersonalStability.STABLE &&
+                    it.certainty.ordinal >= PersonalCertainty.LIKELY.ordinal
+            }
+            .sortedWith(portraitTraitComparator)
+
+        val nuanced = (model.variableTraits + model.contradictoryTraits)
+            .distinctBy { it.traitId }
+            .sortedWith(portraitTraitComparator)
+
+        val evolving = model.traits
+            .filter {
+                it.trend == PersonalTrend.RISING ||
+                    it.trend == PersonalTrend.FALLING ||
+                    it.trend == PersonalTrend.VARIABLE
+            }
+            .sortedWith(portraitTraitComparator)
+
+        return WhoAmIPortrait(
+            headlineTraits = headline,
+            stableTraits = stable,
+            nuancedTraits = nuanced,
+            discoveryGaps = model.knowledgeGaps.sortedBy { it.domain.ordinal },
+            evolvingTraits = evolving,
+            isDiscoveryState = model.traits.isEmpty() || headline.isEmpty()
+        )
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun WhoAmIPortraitCards(
+    portrait: WhoAmIPortrait,
+    modifier: Modifier = Modifier,
+    recommendation: NextQuizRecommendation? = null,
+    catalog: List<Quiz> = emptyList(),
+    onQuizSelected: (Quiz) -> Unit = {}
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+        WhoAmICardModel.from(portrait).forEach { card ->
+            when (card.section) {
+                WhoAmISection.PORTRAIT -> WhoAmITraitCard(
+                    titleRes = R.string.who_am_i_portrait,
+                    tag = "who_am_i_portrait",
+                    traits = card.traits,
+                    emptyCopyRes = R.string.who_am_i_discovery_empty
+                )
+                WhoAmISection.STABLE -> WhoAmITraitCard(
+                    titleRes = R.string.who_am_i_stable,
+                    tag = "who_am_i_stable",
+                    traits = card.traits
+                )
+                WhoAmISection.NUANCES -> WhoAmITraitCard(
+                    titleRes = R.string.who_am_i_nuances,
+                    tag = "who_am_i_nuances",
+                    traits = card.traits
+                )
+                WhoAmISection.DISCOVERY -> Column(
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    WhoAmIDiscoveryCard(card.discoveryGaps)
+                    recommendation?.let {
+                        NextQuizRecommendationCard(
+                            recommendation = it,
+                            catalog = catalog,
+                            onStartQuiz = onQuizSelected,
+                            modifier = Modifier.testTag("who_am_i_next_quiz")
+                        )
+                    }
+                }
+                WhoAmISection.EVOLUTION -> WhoAmITraitCard(
+                    titleRes = R.string.who_am_i_evolution,
+                    tag = "who_am_i_evolution",
+                    traits = card.traits,
+                    showTrend = true
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun WhoAmITraitCard(
+    titleRes: Int,
+    tag: String,
+    traits: List<PersonalTrait>,
+    emptyCopyRes: Int? = null,
+    showTrend: Boolean = false
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = RoundedCornerShape(V2Radius.Card),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(tag)
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = stringResource(titleRes),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong,
+                modifier = Modifier.semantics { heading() }
+            )
+            if (traits.isEmpty()) {
+                emptyCopyRes?.let {
+                    Text(
+                        text = stringResource(it),
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Body
+                    )
+                }
+            } else {
+                traits.forEach { trait ->
+                    WhoAmITraitRow(trait, showTrend)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun WhoAmITraitRow(
+    trait: PersonalTrait,
+    showTrend: Boolean = false
+) {
+    val row = WhoAmIUiModel.traitRow(trait)
+    val label = row.labelRes?.let { stringResource(it) }
+        ?: stringResource(R.string.who_am_i_trait_fallback)
+    val certainty = stringResource(row.certaintyRes)
+    val trendRes = if (showTrend) WhoAmIProgressModel.trendLabel(trait.trend) else null
+
+    Column(
+        modifier = Modifier.semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = label,
+            color = V2Colors.TextPrimary,
+            style = V2Type.BodyStrong
+        )
+        Text(
+            text = certainty,
+            color = V2Colors.TextSecondary,
+            style = V2Type.Supporting
+        )
+        trendRes?.let {
+            Text(
+                text = stringResource(it),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Body
+            )
+        }
+    }
+}
+
+@Composable
+private fun WhoAmIDiscoveryCard(gaps: List<TraitDomainCoverage>) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+        shape = RoundedCornerShape(V2Radius.Card),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("who_am_i_discovery")
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.who_am_i_discovering),
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong,
+                modifier = Modifier.semantics { heading() }
+            )
+            if (gaps.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.who_am_i_discovery_empty),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Body
+                )
+            } else {
+                gaps.take(3).forEach { gap ->
+                    val domain = stringResource(WhoAmIProgressModel.domainLabel(gap.domain))
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(
+                            text = domain,
+                            color = V2Colors.TextPrimary,
+                            style = V2Type.BodyStrong
+                        )
+                        Text(
+                            text = stringResource(R.string.who_am_i_gap_copy, domain),
+                            color = V2Colors.TextSecondary,
+                            style = V2Type.Body
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.annotation.StringRes
+
+object WhoAmIProgressModel {
+    @StringRes
+    fun domainLabel(domain: TraitDomain): Int = when (domain) {
+        TraitDomain.SOCIAL -> R.string.who_am_i_domain_social
+        TraitDomain.EMOTIONAL -> R.string.who_am_i_domain_emotional
+        TraitDomain.THINKING -> R.string.who_am_i_domain_thinking
+        TraitDomain.GROWTH -> R.string.who_am_i_domain_growth
+        TraitDomain.SELF_MANAGEMENT -> R.string.who_am_i_domain_self_management
+    }
+
+    @StringRes
+    fun trendLabel(trend: PersonalTrend): Int? = when (trend) {
+        PersonalTrend.RISING -> R.string.who_am_i_trend_rising
+        PersonalTrend.FALLING -> R.string.who_am_i_trend_falling
+        PersonalTrend.VARIABLE -> R.string.who_am_i_trend_variable
+        PersonalTrend.UNKNOWN,
+        PersonalTrend.STABLE -> null
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmISectionModel.kt
+```kotlin
+package com.whoareyou.app
+
+enum class WhoAmISection {
+    PORTRAIT,
+    STABLE,
+    NUANCES,
+    DISCOVERY,
+    EVOLUTION
+}
+
+data class WhoAmISectionModel(
+    val visibleSections: List<WhoAmISection>
+) {
+    companion object {
+        fun from(portrait: WhoAmIPortrait): WhoAmISectionModel {
+            val sections = buildList {
+                add(WhoAmISection.PORTRAIT)
+                if (portrait.stableTraits.isNotEmpty()) add(WhoAmISection.STABLE)
+                if (portrait.nuancedTraits.isNotEmpty()) add(WhoAmISection.NUANCES)
+                add(WhoAmISection.DISCOVERY)
+                if (portrait.evolvingTraits.isNotEmpty()) add(WhoAmISection.EVOLUTION)
+            }
+            return WhoAmISectionModel(sections)
+        }
+    }
+}
+```
+
+## File: src/main/java/com/whoareyou/app/WhoAmIUiModel.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.annotation.StringRes
+
+data class WhoAmITraitRow(
+    @StringRes val labelRes: Int?,
+    @StringRes val certaintyRes: Int,
+    val score: Int,
+    val confidence: Int
+)
+
+object WhoAmIUiModel {
+    fun traitRow(trait: PersonalTrait): WhoAmITraitRow = WhoAmITraitRow(
+        labelRes = WhoAmICopy.traitLabelResource(trait.traitId),
+        certaintyRes = when (trait.certainty) {
+            PersonalCertainty.UNKNOWN,
+            PersonalCertainty.EXPLORING -> R.string.who_am_i_certainty_exploring
+            PersonalCertainty.LIKELY -> R.string.who_am_i_certainty_likely
+            PersonalCertainty.ESTABLISHED -> R.string.who_am_i_certainty_established
+        },
+        score = trait.score,
+        confidence = trait.confidence
+    )
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/WhoAreYouApplication.kt
 ```kotlin
 package com.whoareyou.app
@@ -22963,6 +28546,130 @@ class AchievementUnlockQueueTest {
 }
 ```
 
+## File: src/test/java/com/whoareyou/app/ActivityAggregationTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ActivityAggregationTest {
+    private val zone = ZoneId.of("Europe/Paris")
+
+    @Test
+    fun `unsupported source is reported without reading data`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.UNSUPPORTED, 1234L)
+        val result = ActivityCollector(source, zone).collectDay(LocalDate.of(2026, 9, 24))
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.UNSUPPORTED),
+            result
+        )
+        assertEquals(0, source.readCount)
+    }
+
+    @Test
+    fun `denied authorization is reported without writing a zero`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.PERMISSION_REQUIRED, 0L)
+        val result = ActivityCollector(source, zone).collectDay(LocalDate.of(2026, 9, 24))
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.PERMISSION_REQUIRED),
+            result
+        )
+        assertEquals(0, source.readCount)
+    }
+
+    @Test
+    fun `measured zero remains a real measurement`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.AVAILABLE, 0L)
+        val result = ActivityCollector(source, zone).collectDay(LocalDate.of(2026, 9, 24))
+
+        assertEquals(
+            BehaviorCollectionResult.Data(
+                ActivityDay(LocalDate.of(2026, 9, 24).toEpochDay(), 0L)
+            ),
+            result
+        )
+    }
+
+    @Test
+    fun `missing history stays missing rather than becoming zero`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.AVAILABLE, null)
+        val result = ActivityCollector(source, zone).collectDay(LocalDate.of(2026, 9, 24))
+
+        assertEquals(BehaviorCollectionResult.NoData, result)
+    }
+
+    @Test
+    fun `local day boundaries follow timezone including DST`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.AVAILABLE, 8000L)
+        val date = LocalDate.of(2026, 10, 25)
+        ActivityCollector(source, zone).collectDay(date)
+
+        val expectedStart = date.atStartOfDay(zone).toInstant()
+        val expectedEnd = date.plusDays(1).atStartOfDay(zone).toInstant()
+        assertEquals(expectedStart, source.lastStart)
+        assertEquals(expectedEnd, source.lastEnd)
+        assertEquals(25L * 60L * 60L, expectedEnd.epochSecond - expectedStart.epochSecond)
+    }
+
+    @Test
+    fun `permission revocation is observed on every collection`() = runBlocking {
+        val source = FakeActivityDataSource(BehaviorSourceState.AVAILABLE, 5000L)
+        val collector = ActivityCollector(source, zone)
+        val date = LocalDate.of(2026, 9, 24)
+
+        assertTrue(collector.collectDay(date) is BehaviorCollectionResult.Data)
+        source.currentState = BehaviorSourceState.PERMISSION_REQUIRED
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.PERMISSION_REQUIRED),
+            collector.collectDay(date)
+        )
+        assertEquals(1, source.readCount)
+    }
+
+    @Test
+    fun `collector failures surface as error state`() = runBlocking {
+        val source = object : ActivityDataSource {
+            override suspend fun state() = BehaviorSourceState.AVAILABLE
+            override suspend fun readSteps(start: Instant, end: Instant): Long? {
+                error("provider unavailable")
+            }
+        }
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR),
+            ActivityCollector(source, zone).collectDay(LocalDate.of(2026, 9, 24))
+        )
+    }
+
+    private class FakeActivityDataSource(
+        var currentState: BehaviorSourceState,
+        private var steps: Long?
+    ) : ActivityDataSource {
+        var readCount = 0
+        var lastStart: Instant? = null
+        var lastEnd: Instant? = null
+
+        override suspend fun state(): BehaviorSourceState = currentState
+
+        override suspend fun readSteps(start: Instant, end: Instant): Long? {
+            readCount += 1
+            lastStart = start
+            lastEnd = end
+            return steps
+        }
+    }
+}
+```
+
 ## File: src/test/java/com/whoareyou/app/AppNavigationTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -22982,8 +28689,14 @@ class AppNavigationTest {
     @Test
     fun internalScreensReturnToDiscover() {
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.PROFILE))
+        assertEquals(AppScreen.PROFILE, AppNavigation.backDestination(AppScreen.HABITS))
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.QUIZ))
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.RESULT))
+    }
+
+    @Test
+    fun habitsHasDedicatedDestination() {
+        assertEquals(AppScreen.HABITS, AppNavigation.habitsDestination())
     }
 
     @Test
@@ -23026,11 +28739,961 @@ class AppShellNavigationTest {
     }
 
     @Test
-    fun focusedQuizFlowsHideShell() {
+    fun secondaryAndFocusedFlowsHideShell() {
+        assertNull(AppShellNavigation.tabFor(AppScreen.HABITS))
         assertNull(AppShellNavigation.tabFor(AppScreen.QUIZ))
         assertNull(AppShellNavigation.tabFor(AppScreen.RESULT))
+        assertFalse(AppShellNavigation.isShellVisible(AppScreen.HABITS))
         assertFalse(AppShellNavigation.isShellVisible(AppScreen.QUIZ))
         assertFalse(AppShellNavigation.isShellVisible(AppScreen.RESULT))
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class AppUsageAggregationTest {
+    private val zone = ZoneId.of("Europe/Paris")
+    private val date = LocalDate.of(2026, 9, 24)
+
+    @Test
+    fun `empty event stream is unknown rather than measured zero`() {
+        assertNull(AppUsageAggregator.aggregate(date, zone, emptyList()))
+    }
+
+    @Test
+    fun `sessions are clipped to requested local day`() {
+        val events = listOf(
+            session("a", "2026-09-23T23:50:00Z", "2026-09-24T00:30:00Z"),
+            session("a", "2026-09-24T21:30:00Z", "2026-09-24T23:30:00Z")
+        )
+        val result = AppUsageAggregator.aggregate(date, zone, events)!!
+        val measuredTotal = requireNotNull(result.totalForegroundMillis)
+        assertTrue(measuredTotal > 0L)
+        assertEquals(measuredTotal, result.topApps.sumOf { it.foregroundMillis })
+    }
+
+    @Test
+    fun `repeated sessions increment frequency and aggregate package time`() {
+        val events = listOf(
+            session("b", "2026-09-24T08:00:00Z", "2026-09-24T08:10:00Z"),
+            session("b", "2026-09-24T09:00:00Z", "2026-09-24T09:20:00Z")
+        )
+        val result = AppUsageAggregator.aggregate(date, zone, events)!!
+        assertEquals(2, result.launchesOrSessions)
+        assertEquals(2, result.topApps.single().launchesOrSessions)
+    }
+
+    @Test
+    fun `top apps use deterministic duration then package ordering`() {
+        val events = listOf(
+            session("z.app", "2026-09-24T08:00:00Z", "2026-09-24T08:10:00Z"),
+            session("a.app", "2026-09-24T09:00:00Z", "2026-09-24T09:10:00Z")
+        )
+        val result = AppUsageAggregator.aggregate(date, zone, events)!!
+        assertEquals(listOf("a.app", "z.app"), result.topApps.map { it.packageName })
+    }
+
+    @Test
+    fun `daypart totals exactly equal total foreground time`() {
+        val events = listOf(
+            session("a", "2026-09-24T04:30:00Z", "2026-09-24T05:30:00Z"),
+            session("b", "2026-09-24T11:30:00Z", "2026-09-24T12:30:00Z"),
+            session("c", "2026-09-24T17:30:00Z", "2026-09-24T18:30:00Z"),
+            session("d", "2026-09-24T21:30:00Z", "2026-09-24T22:30:00Z")
+        )
+        val result = AppUsageAggregator.aggregate(date, zone, events)!!
+        assertEquals(requireNotNull(result.totalForegroundMillis), result.daypartUsage.totalMillis)
+    }
+
+    @Test
+    fun `DST local day does not duplicate elapsed time`() {
+        val dstDate = LocalDate.of(2026, 10, 25)
+        val events = listOf(session("a", "2026-10-25T00:30:00Z", "2026-10-25T02:30:00Z"))
+        val result = AppUsageAggregator.aggregate(dstDate, zone, events)!!
+        assertEquals(2 * 60 * 60 * 1000L, requireNotNull(result.totalForegroundMillis))
+        assertEquals(requireNotNull(result.totalForegroundMillis), result.daypartUsage.totalMillis)
+    }
+
+    private fun session(packageName: String, start: String, end: String) = AppUsageSession(
+        packageName = packageName,
+        start = Instant.parse(start),
+        end = Instant.parse(end)
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class AppUsageCollectorTest {
+    private val zone = ZoneId.of("Europe/Paris")
+    private val date = LocalDate.of(2026, 9, 25)
+
+    @Test
+    fun `permission required does not query events`() {
+        val source = FakeSource(BehaviorSourceState.PERMISSION_REQUIRED)
+        val result = AppUsageCollector(source, zone).collectDay(date)
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.PERMISSION_REQUIRED),
+            result
+        )
+        assertEquals(0, source.eventCalls)
+    }
+
+    @Test
+    fun `empty usage event stream is unknown rather than zero`() {
+        val source = FakeSource(BehaviorSourceState.AVAILABLE, emptyList())
+        val result = AppUsageCollector(source, zone).collectDay(date)
+
+        assertEquals(BehaviorCollectionResult.NoData, result)
+    }
+
+    @Test
+    fun `resume pause events become deterministic sessions`() {
+        val source = FakeSource(
+            BehaviorSourceState.AVAILABLE,
+            listOf(
+                resumed("b.app", "2026-09-25T08:00:00Z"),
+                paused("b.app", "2026-09-25T08:10:00Z"),
+                resumed("a.app", "2026-09-25T09:00:00Z"),
+                paused("a.app", "2026-09-25T09:10:00Z")
+            )
+        )
+
+        val result = AppUsageCollector(source, zone).collectDay(date)
+        assertTrue(result is BehaviorCollectionResult.Data)
+        val aggregate = (result as BehaviorCollectionResult.Data).value
+
+        assertEquals(2, aggregate.launchesOrSessions)
+        assertEquals(listOf("a.app", "b.app"), aggregate.topApps.map { it.packageName })
+        assertEquals(20L * 60L * 1000L, aggregate.totalForegroundMillis)
+    }
+
+    @Test
+    fun `unmatched events do not fabricate foreground time`() {
+        val source = FakeSource(
+            BehaviorSourceState.AVAILABLE,
+            listOf(
+                resumed("a.app", "2026-09-25T08:00:00Z"),
+                paused("b.app", "2026-09-25T09:00:00Z")
+            )
+        )
+
+        assertEquals(
+            BehaviorCollectionResult.NoData,
+            AppUsageCollector(source, zone).collectDay(date)
+        )
+    }
+
+    @Test
+    fun `duplicate resume keeps earliest open timestamp`() {
+        val source = FakeSource(
+            BehaviorSourceState.AVAILABLE,
+            listOf(
+                resumed("a.app", "2026-09-25T08:00:00Z"),
+                resumed("a.app", "2026-09-25T08:05:00Z"),
+                paused("a.app", "2026-09-25T08:10:00Z")
+            )
+        )
+
+        val result = AppUsageCollector(source, zone).collectDay(date) as BehaviorCollectionResult.Data
+        assertEquals(10L * 60L * 1000L, result.value.totalForegroundMillis)
+        assertEquals(1, result.value.launchesOrSessions)
+    }
+
+    @Test
+    fun `source failures surface as error state`() {
+        val source = object : AppUsageDataSource {
+            override fun state() = BehaviorSourceState.AVAILABLE
+            override fun events(start: Instant, end: Instant): List<RawAppUsageEvent> {
+                error("usage service unavailable")
+            }
+        }
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR),
+            AppUsageCollector(source, zone).collectDay(date)
+        )
+    }
+
+    private class FakeSource(
+        private val currentState: BehaviorSourceState,
+        private val items: List<RawAppUsageEvent> = emptyList()
+    ) : AppUsageDataSource {
+        var eventCalls = 0
+
+        override fun state(): BehaviorSourceState = currentState
+
+        override fun events(start: Instant, end: Instant): List<RawAppUsageEvent> {
+            eventCalls += 1
+            return items
+        }
+    }
+
+    private fun resumed(packageName: String, timestamp: String) = RawAppUsageEvent(
+        packageName,
+        Instant.parse(timestamp),
+        RawAppUsageEvent.Type.RESUMED
+    )
+
+    private fun paused(packageName: String, timestamp: String) = RawAppUsageEvent(
+        packageName,
+        Instant.parse(timestamp),
+        RawAppUsageEvent.Type.PAUSED
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorInsightEngineTest {
+    @Test
+    fun `no history produces insufficient history only`() {
+        val insights = BehaviorInsightEngine.build(
+            days = emptyList(),
+            sourceStates = mapOf(
+                BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+                BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+            )
+        )
+        assertEquals(listOf(BehaviorInsightCategory.INSUFFICIENT_HISTORY), insights.map { it.category })
+    }
+
+    @Test
+    fun `missing measurements are not converted to zero`() {
+        val days = listOf(
+            day(1, screen = 3_600_000L),
+            day(2, screen = null),
+            day(3, screen = 3_900_000L)
+        )
+        val insights = BehaviorInsightEngine.build(days, availableStates())
+        assertFalse(insights.any { it.supportingValues.any { value -> value == 0L } })
+    }
+
+    @Test
+    fun `input ordering does not change semantic output`() {
+        val days = (1L..7L).map { day(it, screen = it * 1_000_000L, steps = 5_000L + it) }
+        assertEquals(
+            BehaviorInsightEngine.build(days, availableStates()),
+            BehaviorInsightEngine.build(days.reversed(), availableStates())
+        )
+    }
+
+    @Test
+    fun `single extreme day does not become usual baseline`() {
+        val days = listOf(
+            day(1, screen = 3_600_000L), day(2, screen = 3_700_000L),
+            day(3, screen = 3_500_000L), day(4, screen = 36_000_000L),
+            day(5, screen = 3_600_000L), day(6, screen = 3_650_000L), day(7, screen = 3_550_000L)
+        )
+        val insights = BehaviorInsightEngine.build(days, availableStates())
+        assertFalse(insights.any { it.category == BehaviorInsightCategory.SCREEN_TIME_CHANGE })
+    }
+
+    @Test
+    fun `disabled app usage source emits no app usage conclusions`() {
+        val days = (1L..7L).map { day(it, screen = 8_000_000L) }
+        val insights = BehaviorInsightEngine.build(
+            days,
+            mapOf(
+                BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+                BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+            )
+        )
+        assertFalse(insights.any { it.category in setOf(
+            BehaviorInsightCategory.SCREEN_TIME_CHANGE,
+            BehaviorInsightCategory.APP_CONCENTRATION,
+            BehaviorInsightCategory.LATE_USAGE_PATTERN,
+            BehaviorInsightCategory.USAGE_REGULARITY
+        ) })
+    }
+
+    @Test
+    fun `insight vocabulary never emits clinical or personality labels`() {
+        val days = (1L..10L).map { day(it, screen = 4_000_000L, steps = 7_000L) }
+        val forbidden = listOf("addict", "depress", "anxious", "introvert", "lazy")
+        val text = BehaviorInsightEngine.build(days, availableStates())
+            .flatMap { it.copyTokens }
+            .joinToString(" ")
+            .lowercase()
+        assertTrue(forbidden.none { it in text })
+    }
+
+    private fun availableStates() = mapOf(
+        BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+        BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+    )
+
+    private fun day(
+        epochDay: Long,
+        screen: Long? = null,
+        steps: Long? = null
+    ) = DailyBehaviorAggregate(
+        epochDay = epochDay,
+        steps = steps,
+        totalForegroundMillis = screen,
+        topApps = emptyList(),
+        launchesOrSessions = null,
+        daypartUsage = DaypartUsage.EMPTY
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorIntegrationPolicyTest {
+    @Test
+    fun `enable and authorize request permission for activity`() {
+        assertEquals(
+            BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION,
+            BehaviorIntegrationPolicy.command(BehaviorSource.ACTIVITY, BehaviorSourceAction.ENABLE)
+        )
+        assertEquals(
+            BehaviorIntegrationCommand.REQUEST_ACTIVITY_PERMISSION,
+            BehaviorIntegrationPolicy.command(BehaviorSource.ACTIVITY, BehaviorSourceAction.AUTHORIZE)
+        )
+    }
+
+    @Test
+    fun `enable and authorize open usage access for app usage`() {
+        assertEquals(
+            BehaviorIntegrationCommand.OPEN_USAGE_ACCESS,
+            BehaviorIntegrationPolicy.command(BehaviorSource.APP_USAGE, BehaviorSourceAction.ENABLE)
+        )
+        assertEquals(
+            BehaviorIntegrationCommand.OPEN_USAGE_ACCESS,
+            BehaviorIntegrationPolicy.command(BehaviorSource.APP_USAGE, BehaviorSourceAction.AUTHORIZE)
+        )
+    }
+
+    @Test
+    fun `disable clears only selected source`() {
+        assertEquals(
+            BehaviorIntegrationCommand.DISABLE_SOURCE,
+            BehaviorIntegrationPolicy.command(BehaviorSource.ACTIVITY, BehaviorSourceAction.DISABLE)
+        )
+        assertEquals(
+            BehaviorIntegrationCommand.DISABLE_SOURCE,
+            BehaviorIntegrationPolicy.command(BehaviorSource.APP_USAGE, BehaviorSourceAction.DISABLE)
+        )
+    }
+
+    @Test
+    fun `none performs no integration action`() {
+        assertEquals(
+            BehaviorIntegrationCommand.NONE,
+            BehaviorIntegrationPolicy.command(BehaviorSource.ACTIVITY, BehaviorSourceAction.NONE)
+        )
+    }
+
+    @Test
+    fun `activity permission result refreshes only when granted`() {
+        assertTrue(BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(granted = true))
+        assertFalse(BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(granted = false))
+    }
+
+    @Test
+    fun `return from usage access always rechecks source state`() {
+        assertTrue(BehaviorIntegrationPolicy.shouldRefreshAfterUsageAccessReturn())
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorRefreshCoordinatorTest {
+    private val zone = ZoneId.of("Europe/Paris")
+    private val now = Instant.parse("2026-09-25T10:00:00Z")
+    private val date = now.atZone(zone).toLocalDate()
+
+    @Test
+    fun `disabled sources are never queried`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.DISABLED,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+        ))
+        var activityCalls = 0
+        var usageCalls = 0
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                activityCalls += 1
+                BehaviorCollectionResult.Data(ActivityDay(it.toEpochDay(), 1000L))
+            },
+            appUsageCollector = {
+                usageCalls += 1
+                BehaviorCollectionResult.NoData
+            },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+
+        assertEquals(0, activityCalls)
+        assertEquals(0, usageCalls)
+        assertTrue(store.days.isEmpty())
+    }
+
+    @Test
+    fun `revocation changes source state without fabricating zero`() = runBlocking {
+        val existing = day(steps = 4200L, foreground = 60_000L)
+        val store = FakeStore(
+            states = mapOf(
+                BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+                BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+            ),
+            initialDay = existing
+        )
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                BehaviorCollectionResult.Unavailable(BehaviorSourceState.PERMISSION_REQUIRED)
+            },
+            appUsageCollector = { BehaviorCollectionResult.NoData },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+
+        assertEquals(BehaviorSourceState.PERMISSION_REQUIRED, store.states[BehaviorSource.ACTIVITY])
+        assertEquals(4200L, store.days[date.toEpochDay()]?.steps)
+    }
+
+    @Test
+    fun `one collector failure does not erase successful other source data`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+        ))
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR)
+            },
+            appUsageCollector = { usageDay(foreground = 120_000L) },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+
+        val saved = store.days[date.toEpochDay()]!!
+        assertNull(saved.steps)
+        assertEquals(120_000L, saved.totalForegroundMillis)
+        assertEquals(BehaviorSourceState.ERROR, store.states[BehaviorSource.ACTIVITY])
+        assertEquals(BehaviorSourceState.AVAILABLE, store.states[BehaviorSource.APP_USAGE])
+    }
+
+    @Test
+    fun `repeated refresh is idempotent for same local day`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+        ))
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                BehaviorCollectionResult.Data(ActivityDay(it.toEpochDay(), 5000L))
+            },
+            appUsageCollector = { usageDay(foreground = 90_000L) },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+        coordinator.refresh(now)
+
+        assertEquals(1, store.days.size)
+        val saved = store.days.values.single()
+        assertEquals(5000L, saved.steps)
+        assertEquals(90_000L, saved.totalForegroundMillis)
+    }
+
+    @Test
+    fun `concurrent refresh calls are serialized`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+        ))
+        var activeCollectors = 0
+        var maxActiveCollectors = 0
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                activeCollectors += 1
+                maxActiveCollectors = maxOf(maxActiveCollectors, activeCollectors)
+                delay(25)
+                activeCollectors -= 1
+                BehaviorCollectionResult.Data(ActivityDay(it.toEpochDay(), 5000L))
+            },
+            appUsageCollector = { BehaviorCollectionResult.NoData },
+            zone = zone
+        )
+
+        coroutineScope {
+            listOf(
+                async { coordinator.refresh(now) },
+                async { coordinator.refresh(now) }
+            ).awaitAll()
+        }
+
+        assertEquals(1, maxActiveCollectors)
+        assertEquals(1, store.days.size)
+    }
+
+    @Test
+    fun `missing data leaves previous measurement untouched and does not create a day`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+        ))
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = { BehaviorCollectionResult.NoData },
+            appUsageCollector = { BehaviorCollectionResult.NoData },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+
+        assertTrue(store.days.isEmpty())
+        assertEquals(BehaviorSourceState.AVAILABLE, store.states[BehaviorSource.ACTIVITY])
+        assertEquals(BehaviorSourceState.AVAILABLE, store.states[BehaviorSource.APP_USAGE])
+    }
+
+    @Test
+    fun `source merges preserve data collected by the other source`() = runBlocking {
+        val store = FakeStore(states = mapOf(
+            BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+            BehaviorSource.APP_USAGE to BehaviorSourceState.AVAILABLE
+        ))
+        val coordinator = BehaviorRefreshCoordinator(
+            store = store,
+            activityCollector = {
+                BehaviorCollectionResult.Data(ActivityDay(it.toEpochDay(), 7000L))
+            },
+            appUsageCollector = { usageDay(foreground = 180_000L) },
+            zone = zone
+        )
+
+        coordinator.refresh(now)
+
+        val saved = store.days.values.single()
+        assertEquals(7000L, saved.steps)
+        assertEquals(180_000L, saved.totalForegroundMillis)
+        assertEquals(2, saved.topApps.size)
+    }
+
+    private fun usageDay(foreground: Long): BehaviorCollectionResult<DailyBehaviorAggregate> =
+        BehaviorCollectionResult.Data(
+            DailyBehaviorAggregate(
+                epochDay = date.toEpochDay(),
+                steps = null,
+                totalForegroundMillis = foreground,
+                topApps = listOf(
+                    AppUsageAggregate("a.app", foreground / 2, 1),
+                    AppUsageAggregate("b.app", foreground / 2, 1)
+                ),
+                launchesOrSessions = 2,
+                daypartUsage = DaypartUsage(foreground, 0L, 0L, 0L)
+            )
+        )
+
+    private fun day(steps: Long?, foreground: Long?): DailyBehaviorAggregate =
+        DailyBehaviorAggregate(
+            epochDay = date.toEpochDay(),
+            steps = steps,
+            totalForegroundMillis = foreground,
+            topApps = emptyList(),
+            launchesOrSessions = null,
+            daypartUsage = DaypartUsage.EMPTY
+        )
+
+    private class FakeStore(
+        states: Map<BehaviorSource, BehaviorSourceState>,
+        initialDay: DailyBehaviorAggregate? = null
+    ) : BehaviorRefreshStore {
+        val states = states.toMutableMap()
+        val days = mutableMapOf<Long, DailyBehaviorAggregate>().apply {
+            initialDay?.let { put(it.epochDay, it) }
+        }
+
+        override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot =
+            BehaviorRefreshSnapshot(
+                day = days[epochDay],
+                sourceStates = states.toMap()
+            )
+
+        override suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long) {
+            days[day.epochDay] = day
+        }
+
+        override suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState) {
+            states[source] = state
+        }
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorStoreCodecTest {
+    @Test
+    fun `round trip preserves nullable measurements and app aggregates`() {
+        val days = listOf(
+            day(100, steps = null, screen = 3_600_000L),
+            day(101, steps = 7_321L, screen = null)
+        )
+
+        val decoded = BehaviorStoreCodec.decode(BehaviorStoreCodec.encode(days))
+
+        assertEquals(days, decoded)
+        assertNull(decoded.first().steps)
+        assertNull(decoded.last().totalForegroundMillis)
+    }
+
+    @Test
+    fun `retention keeps current local day plus previous thirty days`() {
+        val days = (1L..50L).map { day(it, steps = it, screen = it * 1000L) }
+
+        val retained = BehaviorStoreCodec.retain(days, currentEpochDay = 50L)
+
+        assertEquals(31, retained.size)
+        assertEquals(20L, retained.first().epochDay)
+        assertEquals(50L, retained.last().epochDay)
+    }
+
+    @Test
+    fun `completed history excludes the current partial local day`() {
+        val days = listOf(day(48), day(49), day(50))
+
+        val completed = BehaviorStoreCodec.completed(days, currentEpochDay = 50L)
+
+        assertEquals(listOf(48L, 49L), completed.map { it.epochDay })
+    }
+
+    @Test
+    fun `upsert replaces same day and keeps deterministic day order`() {
+        val days = listOf(day(3), day(1), day(2, steps = 10L))
+        val updated = BehaviorStoreCodec.upsert(days, day(2, steps = 20L), currentEpochDay = 3L)
+
+        assertEquals(listOf(1L, 2L, 3L), updated.map { it.epochDay })
+        assertEquals(20L, updated.first { it.epochDay == 2L }.steps)
+    }
+
+    @Test
+    fun `clearing activity removes only activity measurements`() {
+        val original = listOf(day(7, steps = 9_000L, screen = 5_000L))
+
+        val cleared = BehaviorStoreCodec.clearSource(original, BehaviorSource.ACTIVITY)
+
+        assertNull(cleared.single().steps)
+        assertEquals(5_000L, cleared.single().totalForegroundMillis)
+        assertTrue(cleared.single().topApps.isNotEmpty())
+    }
+
+    @Test
+    fun `clearing app usage removes all app usage derived fields`() {
+        val original = listOf(day(7, steps = 9_000L, screen = 5_000L))
+
+        val cleared = BehaviorStoreCodec.clearSource(original, BehaviorSource.APP_USAGE).single()
+
+        assertEquals(9_000L, cleared.steps)
+        assertNull(cleared.totalForegroundMillis)
+        assertNull(cleared.launchesOrSessions)
+        assertTrue(cleared.topApps.isEmpty())
+        assertEquals(DaypartUsage.EMPTY, cleared.daypartUsage)
+    }
+
+    @Test
+    fun `corrupt payload decodes to empty history`() {
+        assertEquals(emptyList<DailyBehaviorAggregate>(), BehaviorStoreCodec.decode("not-json\u0000broken"))
+    }
+
+    private fun day(
+        epochDay: Long,
+        steps: Long? = null,
+        screen: Long? = null
+    ) = DailyBehaviorAggregate(
+        epochDay = epochDay,
+        steps = steps,
+        totalForegroundMillis = screen,
+        topApps = if (screen == null) emptyList() else listOf(AppUsageAggregate("example.app", screen, 2)),
+        launchesOrSessions = if (screen == null) null else 2,
+        daypartUsage = if (screen == null) DaypartUsage.EMPTY else DaypartUsage(screen, 0L, 0L, 0L)
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class BehaviorUiModelTest {
+    @Test
+    fun `disabled sources produce opt in actions without fabricated metrics`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                sourceStates = mapOf(
+                    BehaviorSource.ACTIVITY to BehaviorSourceState.DISABLED,
+                    BehaviorSource.APP_USAGE to BehaviorSourceState.DISABLED
+                )
+            )
+        )
+
+        assertEquals(2, model.sources.size)
+        assertTrue(model.sources.all { it.action == BehaviorSourceAction.ENABLE })
+        assertTrue(model.today.metrics.isEmpty())
+    }
+
+    @Test
+    fun `sources expose privacy preserving permission explanations`() {
+        val model = BehaviorUiModelFactory.build(BehaviorSnapshot.EMPTY)
+
+        assertEquals(
+            BehaviorCopyKey.SOURCE_ACTIVITY_DETAIL,
+            model.sources.first { it.source == BehaviorSource.ACTIVITY }.detail
+        )
+        assertEquals(
+            BehaviorCopyKey.SOURCE_APP_USAGE_DETAIL,
+            model.sources.first { it.source == BehaviorSource.APP_USAGE }.detail
+        )
+    }
+
+    @Test
+    fun `permission required produces authorization action`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                sourceStates = mapOf(
+                    BehaviorSource.ACTIVITY to BehaviorSourceState.PERMISSION_REQUIRED,
+                    BehaviorSource.APP_USAGE to BehaviorSourceState.UNSUPPORTED
+                )
+            )
+        )
+
+        assertEquals(
+            BehaviorSourceAction.AUTHORIZE,
+            model.sources.first { it.source == BehaviorSource.ACTIVITY }.action
+        )
+        assertEquals(
+            BehaviorSourceAction.NONE,
+            model.sources.first { it.source == BehaviorSource.APP_USAGE }.action
+        )
+    }
+
+    @Test
+    fun `partial today data only exposes measured values`() {
+        val today = DailyBehaviorAggregate(
+            epochDay = 1L,
+            steps = 4200L,
+            totalForegroundMillis = null,
+            topApps = emptyList(),
+            launchesOrSessions = null,
+            daypartUsage = DaypartUsage.EMPTY
+        )
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot(
+                today = today,
+                last7Days = listOf(today),
+                last30Days = listOf(today),
+                sourceStates = mapOf(
+                    BehaviorSource.ACTIVITY to BehaviorSourceState.AVAILABLE,
+                    BehaviorSource.APP_USAGE to BehaviorSourceState.PERMISSION_REQUIRED
+                ),
+                insights = emptyList()
+            )
+        )
+
+        assertEquals(listOf(BehaviorMetricKind.STEPS), model.today.metrics.map { it.kind })
+        assertFalse(model.today.metrics.any { it.kind == BehaviorMetricKind.SCREEN_TIME })
+    }
+
+    @Test
+    fun `seven day history aggregates most used apps deterministically`() {
+        val days = listOf(
+            DailyBehaviorAggregate(
+                epochDay = 1L,
+                steps = null,
+                totalForegroundMillis = 120_000L,
+                topApps = listOf(
+                    AppUsageAggregate("app.beta", 70_000L, 2),
+                    AppUsageAggregate("app.alpha", 50_000L, 1)
+                ),
+                launchesOrSessions = 3,
+                daypartUsage = DaypartUsage.EMPTY
+            ),
+            DailyBehaviorAggregate(
+                epochDay = 2L,
+                steps = null,
+                totalForegroundMillis = 180_000L,
+                topApps = listOf(
+                    AppUsageAggregate("app.alpha", 100_000L, 2),
+                    AppUsageAggregate("app.beta", 80_000L, 2)
+                ),
+                launchesOrSessions = 4,
+                daypartUsage = DaypartUsage.EMPTY
+            )
+        )
+
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(last7Days = days, last30Days = days)
+        )
+
+        assertEquals(
+            listOf(
+                BehaviorAppUsageUi("app.alpha", 150_000L),
+                BehaviorAppUsageUi("app.beta", 150_000L)
+            ),
+            model.last7Days.topApps
+        )
+    }
+
+    @Test
+    fun `sufficient history exposes measured summaries and deterministic insight rows`() {
+        val days = (1L..7L).map { epoch ->
+            DailyBehaviorAggregate(
+                epochDay = epoch,
+                steps = 5000L + epoch,
+                totalForegroundMillis = 60_000L * epoch,
+                topApps = listOf(AppUsageAggregate("example.app", 30_000L * epoch, 1)),
+                launchesOrSessions = epoch.toInt(),
+                daypartUsage = DaypartUsage(0L, 0L, 0L, 60_000L * epoch)
+            )
+        }
+        val snapshot = BehaviorSnapshot(
+            today = days.last(),
+            last7Days = days,
+            last30Days = days,
+            sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.AVAILABLE },
+            insights = listOf(
+                BehaviorInsight(
+                    category = BehaviorInsightCategory.LATE_USAGE_PATTERN,
+                    evidenceTier = BehaviorEvidenceTier.DEVELOPING,
+                    supportingValues = listOf(42L),
+                    copyTokens = listOf("late_usage_pattern")
+                )
+            )
+        )
+
+        val model = BehaviorUiModelFactory.build(snapshot)
+
+        assertTrue(model.last7Days.metrics.any { it.kind == BehaviorMetricKind.AVERAGE_STEPS })
+        assertTrue(model.last7Days.metrics.any { it.kind == BehaviorMetricKind.AVERAGE_SCREEN_TIME })
+        assertEquals(BehaviorInsightCategory.LATE_USAGE_PATTERN, model.patterns.single().category)
+    }
+
+    @Test
+    fun `presentation vocabulary never uses clinical personality or moral labels`() {
+        val forbidden = listOf(
+            "diagnosis", "diagnostic", "addiction", "addicted", "personality",
+            "depression", "anxiety", "lazy", "good", "bad", "healthy", "unhealthy"
+        )
+
+        val vocabulary = BehaviorCopyKey.entries.joinToString(" ") { it.name.lowercase() }
+
+        forbidden.forEach { word ->
+            assertFalse("forbidden word: $word", vocabulary.contains(word))
+        }
+    }
+
+    @Test
+    fun `late usage pattern exposes a separate neutral suggestion`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                insights = listOf(
+                    BehaviorInsight(
+                        category = BehaviorInsightCategory.LATE_USAGE_PATTERN,
+                        evidenceTier = BehaviorEvidenceTier.DEVELOPING
+                    )
+                )
+            )
+        )
+
+        assertEquals(
+            listOf(BehaviorCopyKey.SUGGESTION_REDUCE_EVENING_USE),
+            model.suggestions.map { it.copy }
+        )
+    }
+
+    @Test
+    fun `insufficient history does not fabricate a suggestion`() {
+        val model = BehaviorUiModelFactory.build(
+            BehaviorSnapshot.EMPTY.copy(
+                insights = listOf(
+                    BehaviorInsight(
+                        category = BehaviorInsightCategory.INSUFFICIENT_HISTORY,
+                        evidenceTier = BehaviorEvidenceTier.EARLY
+                    )
+                )
+            )
+        )
+
+        assertTrue(model.suggestions.isEmpty())
+    }
+
+    @Test
+    fun `local only disclosure is always present`() {
+        val model = BehaviorUiModelFactory.build(BehaviorSnapshot.EMPTY)
+        assertEquals(BehaviorCopyKey.LOCAL_ONLY_BODY, model.privacyCopy)
     }
 }
 ```
@@ -23515,6 +30178,52 @@ class GlobalProfileEngineTest {
 }
 ```
 
+## File: src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Test
+
+class GlobalProfilePersonalModelTest {
+    @Test
+    fun `global profile exposes personal model`() {
+        val quiz = testQuiz(
+            id = "curiosity-quiz",
+            traits = listOf(QuizTraitWeight("curiosity", 1.0))
+        )
+
+        val summary = GlobalProfileEngine.build(
+            catalog = listOf(quiz),
+            latestScores = mapOf("curiosity-quiz" to 82),
+            scoreHistory = mapOf("curiosity-quiz" to listOf(82)),
+            timedScoreHistory = emptyMap()
+        )
+
+        assertNotNull(summary.personalModel)
+        assertEquals(PersonalCertainty.EXPLORING, summary.personalModel.traits.single().certainty)
+        assertEquals(PersonalStability.UNKNOWN, summary.personalModel.traits.single().stability)
+    }
+
+    @Test
+    fun `historic sparse profile builds without timed history`() {
+        val quiz = testQuiz(
+            id = "planning-quiz",
+            traits = listOf(QuizTraitWeight("planning", 1.0))
+        )
+
+        val summary = GlobalProfileEngine.build(
+            catalog = listOf(quiz),
+            latestScores = mapOf("planning-quiz" to 68)
+        )
+
+        assertEquals(1, summary.personalModel.traits.size)
+        assertEquals(PersonalStability.UNKNOWN, summary.personalModel.traits.single().stability)
+    }
+}
+```
+
 ## File: src/test/java/com/whoareyou/app/GuidedJourneysTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -23691,6 +30400,609 @@ class LongitudinalTrendEngineTest {
 
         assertEquals(ScoreHistoryEngine.MAX_SCORES_PER_QUIZ, trend.points.size)
     }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class PersonalModelAggregationTest {
+    @Test
+    fun `unknown coverage traits are exposed deterministically`() {
+        val coverage = ProfileCoverage(
+            knownTraitCount = 1,
+            totalTraitCount = 3,
+            coveragePercent = 33,
+            averageConfidence = 70,
+            strongTraitCount = 1,
+            uncertainTraitCount = 2,
+            traits = listOf(
+                TraitCoverage("curiosity", 3, 70, 0, CoverageStatus.STRONG),
+                TraitCoverage("trust_openness", 0, 0, 0, CoverageStatus.UNKNOWN),
+                TraitCoverage("boundaries", 0, 0, 0, CoverageStatus.UNKNOWN)
+            )
+        )
+
+        val model = PersonalModelEngine.build(
+            graph = graphFor("curiosity", 80, 70, 3),
+            coverage = coverage
+        )
+
+        assertEquals(listOf("boundaries", "trust_openness"), model.unknownTraitIds)
+    }
+
+    @Test
+    fun `input ordering does not change semantic personal model`() {
+        val curiosity = profileTrait("curiosity", 78, 72, 3)
+        val planning = profileTrait("planning", 68, 66, 3)
+        val curiosityCoverage = TraitCoverage("curiosity", 3, 72, 0, CoverageStatus.STRONG)
+        val planningCoverage = TraitCoverage("planning", 3, 66, 0, CoverageStatus.STRONG)
+
+        fun model(
+            traits: List<ProfileTrait>,
+            coverageTraits: List<TraitCoverage>
+        ): PersonalModel = PersonalModelEngine.build(
+            graph = TraitGraph(traits, traits.sumOf { it.evidenceCount }),
+            coverage = ProfileCoverage(
+                knownTraitCount = 2,
+                totalTraitCount = 2,
+                coveragePercent = 100,
+                averageConfidence = 69,
+                strongTraitCount = 2,
+                uncertainTraitCount = 0,
+                traits = coverageTraits
+            )
+        )
+
+        val first = model(
+            traits = listOf(curiosity, planning),
+            coverageTraits = listOf(curiosityCoverage, planningCoverage)
+        )
+        val reversed = model(
+            traits = listOf(planning, curiosity),
+            coverageTraits = listOf(planningCoverage, curiosityCoverage)
+        )
+
+        assertEquals(first, reversed)
+    }
+
+    @Test
+    fun `source quiz ids are unique and sorted`() {
+        val trait = ProfileTrait(
+            id = "curiosity",
+            score = 80,
+            confidence = 70,
+            evidence = listOf(
+                evidence("z", 80, 0.8),
+                evidence("a", 80, 0.8),
+                evidence("z", 80, 0.8)
+            ),
+            contradictoryEvidenceCount = 0
+        )
+
+        val model = PersonalModelEngine.build(
+            TraitGraph(listOf(trait), 3),
+            coverageFor("curiosity", 3, 70)
+        )
+
+        assertEquals(listOf("a", "z"), model.traits.single().sourceQuizIds)
+    }
+
+    @Test
+    fun `knowledge domains use deterministic coverage ordering`() {
+        val knowledgeMap = ProfileKnowledgeMap(
+            strong = emptyList(),
+            developing = emptyList(),
+            unknown = emptyList(),
+            domains = listOf(
+                TraitDomainCoverage(TraitDomain.SOCIAL, 1, 4, 0, 25),
+                TraitDomainCoverage(TraitDomain.THINKING, 4, 4, 3, 100),
+                TraitDomainCoverage(TraitDomain.GROWTH, 2, 4, 1, 50),
+                TraitDomainCoverage(TraitDomain.EMOTIONAL, 3, 4, 2, 75)
+            )
+        )
+
+        val model = PersonalModelEngine.build(
+            graph = graphFor("curiosity", 80, 70, 3),
+            coverage = coverageFor("curiosity", 3, 70),
+            knowledgeMap = knowledgeMap
+        )
+
+        assertEquals(
+            listOf(TraitDomain.THINKING, TraitDomain.EMOTIONAL, TraitDomain.GROWTH),
+            model.strongestKnowledgeDomains.map { it.domain }
+        )
+        assertEquals(
+            listOf(TraitDomain.SOCIAL, TraitDomain.GROWTH, TraitDomain.EMOTIONAL),
+            model.knowledgeGaps.map { it.domain }
+        )
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class PersonalModelCertaintyTest {
+    @Test
+    fun `one evidence source can never become established`() {
+        val graph = TraitGraph(
+            traits = listOf(profileTrait("curiosity", 80, 90, evidenceCount = 1)),
+            evidenceCount = 1
+        )
+        val model = PersonalModelEngine.build(graph, coverageFor("curiosity", 1, 90))
+
+        assertEquals(PersonalCertainty.EXPLORING, model.traits.single().certainty)
+    }
+
+    @Test
+    fun `coherent multi source evidence can become established`() {
+        val graph = TraitGraph(
+            traits = listOf(profileTrait("curiosity", 80, 75, evidenceCount = 3)),
+            evidenceCount = 3
+        )
+        val model = PersonalModelEngine.build(graph, coverageFor("curiosity", 3, 75))
+
+        assertEquals(PersonalCertainty.ESTABLISHED, model.traits.single().certainty)
+    }
+
+    @Test
+    fun `well known neutral trait is not distinctive`() {
+        val graph = TraitGraph(
+            traits = listOf(profileTrait("curiosity", 52, 85, evidenceCount = 4)),
+            evidenceCount = 4
+        )
+        val model = PersonalModelEngine.build(graph, coverageFor("curiosity", 4, 85))
+
+        assertFalse(model.traits.single().isDistinctive)
+    }
+
+    @Test
+    fun `directional likely trait is distinctive`() {
+        val graph = TraitGraph(
+            traits = listOf(profileTrait("curiosity", 72, 55, evidenceCount = 2)),
+            evidenceCount = 2
+        )
+        val model = PersonalModelEngine.build(graph, coverageFor("curiosity", 2, 55))
+
+        assertTrue(model.traits.single().isDistinctive)
+    }
+
+    private fun profileTrait(
+        id: String,
+        score: Int,
+        confidence: Int,
+        evidenceCount: Int
+    ): ProfileTrait = ProfileTrait(
+        id = id,
+        score = score,
+        confidence = confidence,
+        evidence = List(evidenceCount) { index ->
+            TraitEvidence(
+                quizId = "q$index",
+                quizTitle = "Q$index",
+                sourceScore = score,
+                weight = 1.0,
+                contribution = score,
+                signalStrength = 0.8
+            )
+        },
+        contradictoryEvidenceCount = 0
+    )
+
+    private fun coverageFor(
+        id: String,
+        evidenceCount: Int,
+        confidence: Int
+    ): ProfileCoverage = ProfileCoverage(
+        knownTraitCount = 1,
+        totalTraitCount = 1,
+        coveragePercent = 100,
+        averageConfidence = confidence,
+        strongTraitCount = 1,
+        uncertainTraitCount = 0,
+        traits = listOf(
+            TraitCoverage(
+                traitId = id,
+                evidenceCount = evidenceCount,
+                confidence = confidence,
+                contradictoryEvidenceCount = 0,
+                status = CoverageStatus.STRONG
+            )
+        )
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class PersonalModelCompatibilityTest {
+    @Test
+    fun `zero weight mapping never becomes personal trait evidence`() {
+        val quiz = testQuiz(
+            id = "neutral-map",
+            traits = listOf(QuizTraitWeight("curiosity", 0.0))
+        )
+
+        val summary = GlobalProfileEngine.build(
+            catalog = listOf(quiz),
+            latestScores = mapOf("neutral-map" to 100)
+        )
+
+        assertTrue(summary.personalModel.traits.none { it.traitId == "curiosity" })
+    }
+
+    @Test
+    fun `personal model does not mutate m771 result connection inputs`() {
+        val graph = TraitGraph(
+            traits = listOf(profileTrait("focus", 82, 80, 2)),
+            evidenceCount = 2
+        )
+
+        PersonalModelEngine.build(
+            graph = graph,
+            coverage = coverageFor("focus", 2, 80)
+        )
+
+        val quiz = testQuiz(
+            id = "focus",
+            traits = listOf(QuizTraitWeight("focus", 1.0))
+        )
+        val connections = ResultProfileConnectionEngine.derive(quiz, 84, graph)
+
+        assertFalse(connections.isEmpty())
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelContractTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Test
+
+class PersonalModelContractTest {
+    @Test
+    fun `personal trait exposes certainty stability contradiction and trend`() {
+        val trait = PersonalTrait(
+            traitId = "curiosity",
+            score = 78,
+            confidence = 72,
+            certainty = PersonalCertainty.LIKELY,
+            stability = PersonalStability.STABLE,
+            contradictionLevel = ContradictionLevel.LOW,
+            evidenceCount = 3,
+            sourceQuizIds = listOf("a", "b", "c"),
+            trend = PersonalTrend.STABLE,
+            isDistinctive = true
+        )
+
+        assertEquals(PersonalCertainty.LIKELY, trait.certainty)
+        assertEquals(PersonalStability.STABLE, trait.stability)
+        assertEquals(ContradictionLevel.LOW, trait.contradictionLevel)
+        assertEquals(PersonalTrend.STABLE, trait.trend)
+        assertFalse(trait.sourceQuizIds.isEmpty())
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class PersonalModelContradictionTest {
+    @Test
+    fun `weak opposing signals stay low contradiction even when they are numerous`() {
+        val trait = ProfileTrait(
+            id = "independence",
+            score = 76,
+            confidence = 78,
+            evidence = listOf(
+                evidence("a", contribution = 82, strength = 0.9),
+                evidence("b", contribution = 77, strength = 0.85),
+                evidence("c", contribution = 48, strength = 0.05),
+                evidence("d", contribution = 47, strength = 0.05)
+            ),
+            contradictoryEvidenceCount = 2
+        )
+
+        val model = PersonalModelEngine.build(
+            TraitGraph(listOf(trait), 4),
+            coverageFor("independence", 4, 78)
+        )
+
+        assertEquals(ContradictionLevel.LOW, model.traits.single().contradictionLevel)
+    }
+
+    @Test
+    fun `moderate contradiction prevents established certainty`() {
+        val trait = ProfileTrait(
+            id = "independence",
+            score = 72,
+            confidence = 80,
+            evidence = listOf(
+                evidence("a", contribution = 82, strength = 0.8),
+                evidence("b", contribution = 78, strength = 0.8),
+                evidence("c", contribution = 74, strength = 0.8),
+                evidence("d", contribution = 20, strength = 0.8)
+            ),
+            contradictoryEvidenceCount = 1
+        )
+
+        val model = PersonalModelEngine.build(
+            TraitGraph(listOf(trait), 4),
+            coverageFor("independence", 4, 80)
+        )
+
+        assertEquals(ContradictionLevel.MODERATE, model.traits.single().contradictionLevel)
+        assertEquals(PersonalCertainty.LIKELY, model.traits.single().certainty)
+    }
+
+    @Test
+    fun `strong opposing signals can produce high contradiction`() {
+        val trait = ProfileTrait(
+            id = "independence",
+            score = 56,
+            confidence = 70,
+            evidence = listOf(
+                evidence("a", contribution = 85, strength = 0.9),
+                evidence("b", contribution = 80, strength = 0.85),
+                evidence("c", contribution = 20, strength = 0.9),
+                evidence("d", contribution = 18, strength = 0.85)
+            ),
+            contradictoryEvidenceCount = 2
+        )
+
+        val model = PersonalModelEngine.build(
+            TraitGraph(listOf(trait), 4),
+            coverageFor("independence", 4, 70)
+        )
+
+        assertEquals(ContradictionLevel.HIGH, model.traits.single().contradictionLevel)
+        assertEquals(PersonalCertainty.EXPLORING, model.traits.single().certainty)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class PersonalModelStabilityTest {
+    @Test
+    fun `missing timeline keeps stability unknown`() {
+        val model = PersonalModelEngine.build(
+            graph = graphFor("planning", 78, 72, 3),
+            coverage = coverageFor("planning", 3, 72),
+            timelines = emptyList()
+        )
+
+        assertEquals(PersonalStability.UNKNOWN, model.traits.single().stability)
+    }
+
+    @Test
+    fun `stable repeated timeline yields stable stability`() {
+        val timeline = timelineFor(
+            traitId = "planning",
+            kind = LongitudinalTrendKind.STABLE,
+            pointCount = 4
+        )
+        val model = PersonalModelEngine.build(
+            graph = graphFor("planning", 78, 72, 3),
+            coverage = coverageFor("planning", 3, 72),
+            timelines = listOf(timeline)
+        )
+
+        assertEquals(PersonalStability.STABLE, model.traits.single().stability)
+        assertEquals(PersonalTrend.STABLE, model.traits.single().trend)
+    }
+
+    @Test
+    fun `volatile history prevents established certainty`() {
+        val timeline = timelineFor(
+            traitId = "planning",
+            kind = LongitudinalTrendKind.VOLATILE,
+            pointCount = 4
+        )
+        val model = PersonalModelEngine.build(
+            graph = graphFor("planning", 78, 80, 4),
+            coverage = coverageFor("planning", 4, 80),
+            timelines = listOf(timeline)
+        )
+
+        assertEquals(PersonalStability.VARIABLE, model.traits.single().stability)
+        assertEquals(PersonalCertainty.LIKELY, model.traits.single().certainty)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt
+```kotlin
+package com.whoareyou.app
+
+fun evidence(
+    quizId: String,
+    contribution: Int,
+    strength: Double = 0.8,
+    weight: Double = 1.0
+): TraitEvidence = TraitEvidence(
+    quizId = quizId,
+    quizTitle = quizId,
+    sourceScore = contribution,
+    weight = weight,
+    contribution = contribution,
+    signalStrength = strength
+)
+
+fun profileTrait(
+    id: String,
+    score: Int,
+    confidence: Int,
+    evidenceCount: Int
+): ProfileTrait = ProfileTrait(
+    id = id,
+    score = score,
+    confidence = confidence,
+    evidence = List(evidenceCount) { index ->
+        evidence("q$index", contribution = score)
+    },
+    contradictoryEvidenceCount = 0
+)
+
+fun graphFor(
+    id: String,
+    score: Int,
+    confidence: Int,
+    evidenceCount: Int
+): TraitGraph = TraitGraph(
+    traits = listOf(profileTrait(id, score, confidence, evidenceCount)),
+    evidenceCount = evidenceCount
+)
+
+fun coverageFor(
+    id: String,
+    evidenceCount: Int,
+    confidence: Int,
+    contradictoryEvidenceCount: Int = 0,
+    status: CoverageStatus = CoverageStatus.STRONG
+): ProfileCoverage = ProfileCoverage(
+    knownTraitCount = 1,
+    totalTraitCount = 1,
+    coveragePercent = 100,
+    averageConfidence = confidence,
+    strongTraitCount = if (status == CoverageStatus.STRONG) 1 else 0,
+    uncertainTraitCount = if (status == CoverageStatus.STRONG) 0 else 1,
+    traits = listOf(
+        TraitCoverage(
+            traitId = id,
+            evidenceCount = evidenceCount,
+            confidence = confidence,
+            contradictoryEvidenceCount = contradictoryEvidenceCount,
+            status = status
+        )
+    )
+)
+
+fun timelineFor(
+    traitId: String,
+    kind: LongitudinalTrendKind,
+    pointCount: Int
+): TraitTimeline {
+    val points = List(pointCount) { index ->
+        TimedTraitSnapshot(
+            epochDay = (index + 1).toLong(),
+            score = 70 + index,
+            confidence = 70,
+            evidenceCount = 3,
+            contradictoryEvidenceCount = 0,
+            changedQuizIds = listOf("q$index"),
+            newEvidenceQuizIds = if (index == 0) listOf("q$index") else emptyList(),
+            retakeQuizIds = if (index == 0) emptyList() else listOf("q$index")
+        )
+    }
+    return TraitTimeline(
+        traitId = traitId,
+        points = points,
+        trend = LongitudinalTrend(
+            quizId = "trait:$traitId",
+            points = points.map { TimedScore(it.score, it.epochDay) },
+            slopePerStep = when (kind) {
+                LongitudinalTrendKind.RISING -> 3.0
+                LongitudinalTrendKind.FALLING -> -3.0
+                else -> 0.0
+            },
+            volatility = if (kind == LongitudinalTrendKind.VOLATILE) 20.0 else 2.0,
+            netChange = when (kind) {
+                LongitudinalTrendKind.RISING -> 12
+                LongitudinalTrendKind.FALLING -> -12
+                else -> 0
+            },
+            kind = kind
+        ),
+        periodComparison = null
+    )
+}
+
+fun testQuiz(
+    id: String,
+    traits: List<QuizTraitWeight>
+): Quiz = Quiz(
+    id = id,
+    title = id,
+    hook = "Hook",
+    time = "1 min",
+    accent = "cyan",
+    lowTitle = "Low",
+    midTitle = "Mid",
+    highTitle = "High",
+    lowDescription = "Low",
+    midDescription = "Mid",
+    highDescription = "High",
+    metricLow = "Low metric",
+    metricHigh = "High metric",
+    questions = listOf(
+        Question(
+            text = "Q",
+            answers = listOf(
+                Answer("A", 0),
+                Answer("B", 1),
+                Answer("C", 2),
+                Answer("D", 3)
+            )
+        )
+    ),
+    traits = traits
+)
+
+fun graphWithTraits(order: List<String>): TraitGraph {
+    val traits = order.mapIndexed { index, id ->
+        profileTrait(
+            id = id,
+            score = if (index % 2 == 0) 78 else 72,
+            confidence = 70,
+            evidenceCount = 3
+        )
+    }
+    return TraitGraph(traits = traits, evidenceCount = traits.sumOf { it.evidenceCount })
+}
+
+fun coverageWithTraits(order: List<String>): ProfileCoverage {
+    val traits = order.map { id ->
+        TraitCoverage(id, 3, 70, 0, CoverageStatus.STRONG)
+    }
+    return ProfileCoverage(
+        knownTraitCount = traits.size,
+        totalTraitCount = traits.size,
+        coveragePercent = 100,
+        averageConfidence = 70,
+        strongTraitCount = traits.size,
+        uncertainTraitCount = 0,
+        traits = traits
+    )
 }
 ```
 
@@ -24611,6 +31923,60 @@ class PurchaseGrantPolicyTest {
 }
 ```
 
+## File: src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class QuizAttemptEvidenceTest {
+    @Test fun `records selected answers as ephemeral contributions`() {
+        val state = QuizAttemptEvidence()
+        state.record(questionIndex = 0, answerIndex = 1, score = 3)
+        state.record(questionIndex = 1, answerIndex = 0, score = 0)
+
+        assertEquals(
+            listOf(
+                AnswerContribution(0, 1, 3),
+                AnswerContribution(1, 0, -3)
+            ),
+            state.snapshot()
+        )
+    }
+
+    @Test fun `centers answer scores so low answers explain low results`() {
+        val state = QuizAttemptEvidence()
+        state.record(0, 0, 0)
+        state.record(1, 1, 1)
+        state.record(2, 2, 2)
+        state.record(3, 3, 3)
+
+        assertEquals(
+            listOf(-3, -1, 1, 3),
+            state.snapshot().map { it.contribution }
+        )
+    }
+
+    @Test fun `re-answering a question replaces its prior contribution`() {
+        val state = QuizAttemptEvidence()
+        state.record(0, 0, 0)
+        state.record(0, 1, 3)
+
+        assertEquals(listOf(AnswerContribution(0, 1, 3)), state.snapshot())
+    }
+
+    @Test fun `clear removes all attempt evidence`() {
+        val state = QuizAttemptEvidence()
+        state.record(0, 1, 3)
+        state.clear()
+
+        assertTrue(state.snapshot().isEmpty())
+    }
+}
+```
+
 ## File: src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -24815,6 +32181,117 @@ class RecommendationTelemetryTest {
 }
 ```
 
+## File: src/test/java/com/whoareyou/app/ResultEvidenceTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ResultEvidenceTest {
+    private val questions = listOf(
+        Question("Q1", listOf(Answer("low", 0), Answer("high", 3))),
+        Question("Q2", listOf(Answer("low", 0), Answer("high", 3))),
+        Question("Q3", listOf(Answer("low", 0), Answer("high", 3))),
+        Question("Q4", listOf(Answer("low", 0), Answer("high", 3)))
+    )
+
+    @Test fun `ranks strongest contributions and caps evidence at three`() {
+        val evidence = ResultEvidenceEngine.derive(
+            questions,
+            listOf(
+                AnswerContribution(0, 0, -3),
+                AnswerContribution(1, 1, 3),
+                AnswerContribution(2, 1, 2),
+                AnswerContribution(3, 0, -1)
+            )
+        )
+        assertEquals(listOf(0, 1, 2), evidence.map { it.questionIndex })
+        assertEquals(listOf(-3, 3, 2), evidence.map { it.contribution })
+    }
+
+    @Test fun `ties preserve original question order`() {
+        val evidence = ResultEvidenceEngine.derive(
+            questions,
+            listOf(AnswerContribution(2, 1, 3), AnswerContribution(0, 1, 3), AnswerContribution(1, 0, -3))
+        )
+        assertEquals(listOf(0, 1, 2), evidence.map { it.questionIndex })
+    }
+
+    @Test fun `missing contributions produce no speculative evidence`() {
+        assertTrue(ResultEvidenceEngine.derive(questions, emptyList()).isEmpty())
+    }
+
+    @Test fun `invalid indices are ignored safely`() {
+        val evidence = ResultEvidenceEngine.derive(
+            questions,
+            listOf(AnswerContribution(99, 0, 9), AnswerContribution(0, 99, 8), AnswerContribution(1, 1, 2))
+        )
+        assertEquals(listOf(1), evidence.map { it.questionIndex })
+        assertEquals("high", evidence.single().answerText)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ResultIntelligenceTest {
+    private val quiz = Quiz(
+        id = "intelligence-test",
+        title = "Test",
+        hook = "Hook",
+        time = "1 min",
+        accent = "cyan",
+        lowTitle = "Low",
+        midTitle = "Mid",
+        highTitle = "High",
+        lowDescription = "Low description",
+        midDescription = "Mid description",
+        highDescription = "High description",
+        metricLow = "Reserved",
+        metricHigh = "Expressive",
+        questions = listOf(Question("Question?", listOf(Answer("A",0), Answer("B",1), Answer("C",2), Answer("D",3)))),
+        resultIntelligence = QuizResultIntelligenceContent(
+            low = ResultInsightContent(listOf("low-strength-1"), listOf("low-watch"), listOf("low-life"), "low-reflection"),
+            balanced = ResultInsightContent(listOf("balanced-strength"), listOf("balanced-watch"), listOf("balanced-life"), "balanced-reflection"),
+            high = ResultInsightContent(listOf("high-strength-1","high-strength-2","high-strength-3","ignored"), listOf("high-watch"), listOf("high-life"), "high-reflection")
+        )
+    )
+
+    @Test fun `strong high result selects high content and caps lists`() {
+        val result = ResultInsightEngine.derive(quiz, 88)!!
+        assertEquals(ResultSignalStrength.STRONG, result.strength)
+        assertEquals(ResultDirection.HIGH, result.direction)
+        assertEquals(listOf("high-strength-1","high-strength-2","high-strength-3"), result.strengths)
+        assertTrue(result.watchOuts.size <= 3)
+        assertEquals("high-reflection", result.reflection)
+    }
+
+    @Test fun `strong low result selects low content`() {
+        val result = ResultInsightEngine.derive(quiz, 12)!!
+        assertEquals(ResultDirection.LOW, result.direction)
+        assertEquals("low-reflection", result.reflection)
+    }
+
+    @Test fun `neutral result uses balanced content rather than high content`() {
+        val result = ResultInsightEngine.derive(quiz, 50)!!
+        assertEquals(ResultSignalStrength.BALANCED, result.strength)
+        assertEquals("balanced-reflection", result.reflection)
+    }
+
+    @Test fun `missing authored intelligence degrades gracefully`() {
+        assertEquals(null, ResultInsightEngine.derive(quiz.copy(resultIntelligence = null), 80))
+    }
+}
+```
+
 ## File: src/test/java/com/whoareyou/app/ResultInterpretationTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -24925,6 +32402,127 @@ class ResultNextExplorationTest {
                 completed = emptySet()
             )
         )
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ResultProfileConnectionTest {
+    private val quiz = Quiz(
+        id = "current",
+        title = "Current",
+        hook = "Hook",
+        time = "1 min",
+        accent = "cyan",
+        lowTitle = "Low",
+        midTitle = "Mid",
+        highTitle = "High",
+        lowDescription = "Low",
+        midDescription = "Mid",
+        highDescription = "High",
+        metricLow = "Low metric",
+        metricHigh = "High metric",
+        questions = listOf(Question("Q", listOf(Answer("A", 0), Answer("B", 1), Answer("C", 2), Answer("D", 3)))),
+        traits = listOf(QuizTraitWeight("focus", 1.0))
+    )
+
+    @Test fun reinforcing_trait_produces_reinforcing_connection() {
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+
+        val result = ResultProfileConnectionEngine.derive(quiz, 84, graph)
+
+        assertEquals(ResultProfileConnectionKind.REINFORCING, result.single().kind)
+        assertEquals("focus", result.single().traitId)
+    }
+
+    @Test fun opposite_trait_direction_produces_contrasting_connection() {
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 18, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+
+        val result = ResultProfileConnectionEngine.derive(quiz, 84, graph)
+
+        assertEquals(ResultProfileConnectionKind.CONTRASTING, result.single().kind)
+    }
+
+    @Test fun sparse_or_low_confidence_profile_stays_silent() {
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 20, emptyList(), 0)),
+            evidenceCount = 1
+        )
+
+        assertTrue(ResultProfileConnectionEngine.derive(quiz, 84, graph).isEmpty())
+    }
+
+    @Test fun zero_weight_mapping_does_not_claim_a_profile_connection() {
+        val zeroWeightQuiz = quiz.copy(traits = listOf(QuizTraitWeight("focus", 0.0)))
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 2)),
+            evidenceCount = 2
+        )
+
+        assertTrue(ResultProfileConnectionEngine.derive(zeroWeightQuiz, 84, graph).isEmpty())
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Test
+
+class ResultScreenIntelligenceTest {
+    @Test
+    fun `derives authored insight and preserves evidence for result screen`() {
+        val quiz = Quiz(
+            id = "screen-intelligence",
+            title = "Test",
+            hook = "Hook",
+            time = "1 min",
+            accent = "cyan",
+            lowTitle = "Low",
+            midTitle = "Mid",
+            highTitle = "High",
+            lowDescription = "Low",
+            midDescription = "Mid",
+            highDescription = "High",
+            metricLow = "Reserved",
+            metricHigh = "Expressive",
+            questions = listOf(Question("Q?", listOf(Answer("A", 0), Answer("D", 3)))),
+            resultIntelligence = QuizResultIntelligenceContent(
+                low = ResultInsightContent(listOf("L"), listOf("LW"), listOf("LL"), "LR"),
+                balanced = ResultInsightContent(listOf("B"), listOf("BW"), listOf("BL"), "BR"),
+                high = ResultInsightContent(listOf("H"), listOf("HW"), listOf("HL"), "HR")
+            )
+        )
+        val evidence = listOf(ResultEvidence(0, "Q?", "D", 3))
+
+        val graph = TraitGraph(
+            traits = listOf(ProfileTrait("focus", 82, 80, emptyList(), 0)),
+            evidenceCount = 2
+        )
+        val quizWithTrait = quiz.copy(traits = listOf(QuizTraitWeight("focus", 1.0)))
+
+        val result = ResultScreenIntelligence.derive(quizWithTrait, 80, evidence, graph)
+
+        assertNotNull(result.insight)
+        assertEquals("HR", result.insight!!.reflection)
+        assertEquals(evidence, result.evidence)
+        assertEquals(ResultProfileConnectionKind.REINFORCING, result.connections.single().kind)
     }
 }
 ```
@@ -25836,6 +33434,431 @@ class TraitTimelineEngineTest {
 }
 ```
 
+## File: src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class WhoAmICardModelTest {
+    @Test
+    fun `cards preserve portrait section order and cap dense trait lists`() {
+        val traits = (1..6).map { i ->
+            PersonalTrait(
+                traitId = if (i == 1) "curiosity" else "trait_$i",
+                score = 75, confidence = 70, certainty = PersonalCertainty.LIKELY,
+                stability = PersonalStability.STABLE, contradictionLevel = ContradictionLevel.NONE,
+                evidenceCount = 2, sourceQuizIds = listOf("q1", "q2"),
+                trend = PersonalTrend.STABLE, isDistinctive = true
+            )
+        }
+        val cards = WhoAmICardModel.from(
+            WhoAmIPortrait(traits.take(3), traits, emptyList(), emptyList(), emptyList(), false)
+        )
+        assertEquals(WhoAmISection.PORTRAIT, cards.first().section)
+        assertEquals(3, cards.first { it.section == WhoAmISection.STABLE }.traits.size)
+    }
+
+    @Test
+    fun `discovery card exists for empty portrait without false conclusions`() {
+        val cards = WhoAmICardModel.from(WhoAmIPortraitEngine.build(PersonalModel.EMPTY))
+        assertEquals(listOf(WhoAmISection.PORTRAIT, WhoAmISection.DISCOVERY), cards.map { it.section })
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmICopyTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Test
+
+class WhoAmICopyTest {
+    @Test
+    fun `known trait IDs resolve to a label resource`() {
+        assertNotNull(WhoAmICopy.traitLabelResource("social_energy"))
+        assertNotNull(WhoAmICopy.traitLabelResource("curiosity"))
+        assertNotNull(WhoAmICopy.traitLabelResource("boundaries"))
+    }
+
+    @Test
+    fun `unknown trait IDs do not become display labels`() {
+        assertNull(WhoAmICopy.traitLabelResource("internal_secret_trait"))
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class WhoAmILegacyCompatibilityTest {
+    @Test
+    fun `empty personal model stays a discovery portrait`() {
+        val portrait = WhoAmIPortraitEngine.build(PersonalModel.EMPTY)
+
+        assertTrue(portrait.isDiscoveryState)
+        assertTrue(portrait.headlineTraits.isEmpty())
+        assertTrue(portrait.stableTraits.isEmpty())
+        assertTrue(portrait.evolvingTraits.isEmpty())
+        assertEquals(
+            listOf(WhoAmISection.PORTRAIT, WhoAmISection.DISCOVERY),
+            WhoAmISectionModel.from(portrait).visibleSections
+        )
+    }
+
+    @Test
+    fun `single-source exploring evidence never becomes headline or stable`() {
+        val exploring = PersonalTrait(
+            traitId = "curiosity",
+            score = 80,
+            confidence = 40,
+            certainty = PersonalCertainty.EXPLORING,
+            stability = PersonalStability.UNKNOWN,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 1,
+            sourceQuizIds = listOf("legacy"),
+            trend = PersonalTrend.UNKNOWN,
+            isDistinctive = false
+        )
+        val model = PersonalModel.EMPTY.copy(
+            traits = listOf(exploring),
+            exploringTraits = listOf(exploring)
+        )
+
+        val portrait = WhoAmIPortraitEngine.build(model)
+
+        assertTrue(portrait.isDiscoveryState)
+        assertTrue(portrait.headlineTraits.isEmpty())
+        assertTrue(portrait.stableTraits.isEmpty())
+        assertTrue(portrait.evolvingTraits.isEmpty())
+    }
+
+    @Test
+    fun `unknown trait id requires generic user-facing fallback`() {
+        val unknown = PersonalTrait(
+            traitId = "internal_future_trait",
+            score = 75,
+            confidence = 70,
+            certainty = PersonalCertainty.LIKELY,
+            stability = PersonalStability.MODERATE,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 2,
+            sourceQuizIds = listOf("q1", "q2"),
+            trend = PersonalTrend.STABLE,
+            isDistinctive = true
+        )
+
+        assertNull(WhoAmICopy.traitLabelResource(unknown.traitId))
+        assertNull(WhoAmIUiModel.traitRow(unknown).labelRes)
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class WhoAmIPortraitTest {
+    @Test
+    fun `distinctive likely and established traits become capped headlines`() {
+        val model = personalModel(
+            traits = listOf(
+                trait("a", 90, PersonalCertainty.ESTABLISHED, distinctive = true),
+                trait("b", 10, PersonalCertainty.LIKELY, distinctive = true),
+                trait("c", 85, PersonalCertainty.LIKELY, distinctive = true),
+                trait("d", 80, PersonalCertainty.LIKELY, distinctive = true)
+            )
+        )
+
+        val portrait = WhoAmIPortraitEngine.build(model)
+
+        assertEquals(listOf("a", "b", "c"), portrait.headlineTraits.map { it.traitId })
+    }
+
+    @Test
+    fun `exploring traits never become headline conclusions`() {
+        val model = personalModel(
+            traits = listOf(
+                trait("curiosity", 90, PersonalCertainty.EXPLORING, distinctive = true)
+            )
+        )
+
+        assertTrue(WhoAmIPortraitEngine.build(model).headlineTraits.isEmpty())
+    }
+
+    @Test
+    fun `stable section requires stable history and likely certainty`() {
+        val likelyStable = trait(
+            "stable",
+            75,
+            PersonalCertainty.LIKELY,
+            stability = PersonalStability.STABLE
+        )
+        val exploringStable = trait(
+            "exploring",
+            75,
+            PersonalCertainty.EXPLORING,
+            stability = PersonalStability.STABLE
+        )
+        val likelyVariable = trait(
+            "variable",
+            75,
+            PersonalCertainty.LIKELY,
+            stability = PersonalStability.VARIABLE
+        )
+
+        val portrait = WhoAmIPortraitEngine.build(
+            personalModel(traits = listOf(likelyStable, exploringStable, likelyVariable))
+        )
+
+        assertEquals(listOf("stable"), portrait.stableTraits.map { it.traitId })
+    }
+
+    @Test
+    fun `nuances deduplicate contradictory and variable traits`() {
+        val both = trait(
+            "both",
+            70,
+            PersonalCertainty.LIKELY,
+            stability = PersonalStability.VARIABLE,
+            contradiction = ContradictionLevel.MODERATE
+        )
+        val model = personalModel(
+            traits = listOf(both),
+            variableTraits = listOf(both),
+            contradictoryTraits = listOf(both)
+        )
+
+        assertEquals(
+            listOf("both"),
+            WhoAmIPortraitEngine.build(model).nuancedTraits.map { it.traitId }
+        )
+    }
+
+    @Test
+    fun `empty model creates discovery state without conclusions`() {
+        val portrait = WhoAmIPortraitEngine.build(PersonalModel.EMPTY)
+
+        assertTrue(portrait.headlineTraits.isEmpty())
+        assertTrue(portrait.stableTraits.isEmpty())
+        assertTrue(portrait.nuancedTraits.isEmpty())
+        assertTrue(portrait.evolvingTraits.isEmpty())
+        assertTrue(portrait.isDiscoveryState)
+    }
+
+
+    @Test
+    fun `input ordering does not change portrait semantics or gap order`() {
+        val alpha = trait("alpha", 82, PersonalCertainty.LIKELY, distinctive = true, confidence = 64)
+        val beta = trait("beta", 18, PersonalCertainty.ESTABLISHED, distinctive = true, confidence = 78)
+        val socialGap = TraitDomainCoverage(
+            domain = TraitDomain.SOCIAL,
+            knownCount = 0,
+            totalCount = 3,
+            strongCount = 0,
+            coveragePercent = 0
+        )
+        val thinkingGap = TraitDomainCoverage(
+            domain = TraitDomain.THINKING,
+            knownCount = 1,
+            totalCount = 4,
+            strongCount = 0,
+            coveragePercent = 25
+        )
+
+        val first = WhoAmIPortraitEngine.build(
+            personalModel(
+                traits = listOf(alpha, beta),
+                knowledgeGaps = listOf(thinkingGap, socialGap)
+            )
+        )
+        val second = WhoAmIPortraitEngine.build(
+            personalModel(
+                traits = listOf(beta, alpha),
+                knowledgeGaps = listOf(socialGap, thinkingGap)
+            )
+        )
+
+        assertEquals(first.headlineTraits.map { it.traitId }, second.headlineTraits.map { it.traitId })
+        assertEquals(
+            listOf(TraitDomain.SOCIAL, TraitDomain.THINKING),
+            first.discoveryGaps.map { it.domain }
+        )
+        assertEquals(first.discoveryGaps.map { it.domain }, second.discoveryGaps.map { it.domain })
+    }
+
+    private fun trait(
+        id: String,
+        score: Int,
+        certainty: PersonalCertainty,
+        stability: PersonalStability = PersonalStability.MODERATE,
+        contradiction: ContradictionLevel = ContradictionLevel.NONE,
+        distinctive: Boolean = false,
+        confidence: Int = 70,
+        trend: PersonalTrend = PersonalTrend.STABLE
+    ) = PersonalTrait(
+        traitId = id,
+        score = score,
+        confidence = confidence,
+        certainty = certainty,
+        stability = stability,
+        contradictionLevel = contradiction,
+        evidenceCount = 3,
+        sourceQuizIds = listOf("quiz-a", "quiz-b", "quiz-c"),
+        trend = trend,
+        isDistinctive = distinctive
+    )
+
+    private fun personalModel(
+        traits: List<PersonalTrait> = emptyList(),
+        variableTraits: List<PersonalTrait> = emptyList(),
+        contradictoryTraits: List<PersonalTrait> = emptyList(),
+        knowledgeGaps: List<TraitDomainCoverage> = emptyList()
+    ) = PersonalModel(
+        traits = traits,
+        establishedTraits = traits.filter { it.certainty == PersonalCertainty.ESTABLISHED },
+        likelyTraits = traits.filter { it.certainty == PersonalCertainty.LIKELY },
+        exploringTraits = traits.filter { it.certainty == PersonalCertainty.EXPLORING },
+        unknownTraitIds = emptyList(),
+        stableTraits = traits.filter { it.stability == PersonalStability.STABLE },
+        variableTraits = variableTraits,
+        contradictoryTraits = contradictoryTraits,
+        strongestKnowledgeDomains = emptyList(),
+        knowledgeGaps = knowledgeGaps
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Test
+
+class WhoAmIProgressModelTest {
+    @Test
+    fun `knowledge gaps map to safe domain labels deterministically`() {
+        val gap = TraitDomainCoverage(
+            domain = TraitDomain.THINKING,
+            knownCount = 1,
+            totalCount = 4,
+            strongCount = 0,
+            coveragePercent = 25
+        )
+
+        assertEquals(R.string.who_am_i_domain_thinking, WhoAmIProgressModel.domainLabel(gap.domain))
+    }
+
+    @Test
+    fun `evolution language is neutral and absent when trend is unknown`() {
+        assertEquals(R.string.who_am_i_trend_rising, WhoAmIProgressModel.trendLabel(PersonalTrend.RISING))
+        assertEquals(R.string.who_am_i_trend_falling, WhoAmIProgressModel.trendLabel(PersonalTrend.FALLING))
+        assertEquals(R.string.who_am_i_trend_variable, WhoAmIProgressModel.trendLabel(PersonalTrend.VARIABLE))
+        assertNull(WhoAmIProgressModel.trendLabel(PersonalTrend.UNKNOWN))
+        assertNull(WhoAmIProgressModel.trendLabel(PersonalTrend.STABLE))
+    }
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class WhoAmISectionModelTest {
+    @Test
+    fun `portrait sections expose five-part hierarchy when evidence supports it`() {
+        val model = WhoAmISectionModel.from(
+            WhoAmIPortrait(
+                headlineTraits = listOf(trait("curiosity", PersonalStability.STABLE, PersonalTrend.STABLE)),
+                stableTraits = listOf(trait("curiosity", PersonalStability.STABLE, PersonalTrend.STABLE)),
+                nuancedTraits = listOf(trait("adaptability", PersonalStability.VARIABLE, PersonalTrend.VARIABLE)),
+                discoveryGaps = listOf(TraitDomainCoverage(TraitDomain.SOCIAL, 1, 3, 0, 33)),
+                evolvingTraits = listOf(trait("adaptability", PersonalStability.VARIABLE, PersonalTrend.VARIABLE)),
+                isDiscoveryState = false
+            )
+        )
+        assertEquals(listOf(
+            WhoAmISection.PORTRAIT, WhoAmISection.STABLE, WhoAmISection.NUANCES,
+            WhoAmISection.DISCOVERY, WhoAmISection.EVOLUTION
+        ), model.visibleSections)
+    }
+
+    @Test
+    fun `sparse portrait hides false stable and evolution conclusions`() {
+        val model = WhoAmISectionModel.from(PersonalModel.EMPTY.let(WhoAmIPortraitEngine::build))
+        assertTrue(model.visibleSections.contains(WhoAmISection.PORTRAIT))
+        assertTrue(model.visibleSections.contains(WhoAmISection.DISCOVERY))
+        assertFalse(model.visibleSections.contains(WhoAmISection.STABLE))
+        assertFalse(model.visibleSections.contains(WhoAmISection.EVOLUTION))
+    }
+
+    private fun trait(id: String, stability: PersonalStability, trend: PersonalTrend) = PersonalTrait(
+        traitId = id, score = 75, confidence = 70, certainty = PersonalCertainty.LIKELY,
+        stability = stability, contradictionLevel = ContradictionLevel.NONE,
+        evidenceCount = 2, sourceQuizIds = listOf("q1", "q2"), trend = trend, isDistinctive = true
+    )
+}
+```
+
+## File: src/test/java/com/whoareyou/app/WhoAmIUiModelTest.kt
+```kotlin
+package com.whoareyou.app
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Test
+
+class WhoAmIUiModelTest {
+    @Test
+    fun `portrait UI model keeps safe labels and certainty`() {
+        val trait = PersonalTrait(
+            traitId = "curiosity", score = 82, confidence = 78,
+            certainty = PersonalCertainty.ESTABLISHED,
+            stability = PersonalStability.STABLE,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 3, sourceQuizIds = listOf("q1", "q2"),
+            trend = PersonalTrend.STABLE, isDistinctive = true
+        )
+        val row = WhoAmIUiModel.traitRow(trait)
+        assertEquals(R.string.trait_curiosity, row.labelRes)
+        assertEquals(R.string.who_am_i_certainty_established, row.certaintyRes)
+    }
+
+    @Test
+    fun `unknown trait IDs never become UI labels`() {
+        val trait = PersonalTrait(
+            traitId = "internal_secret_trait", score = 80, confidence = 70,
+            certainty = PersonalCertainty.LIKELY,
+            stability = PersonalStability.MODERATE,
+            contradictionLevel = ContradictionLevel.NONE,
+            evidenceCount = 2, sourceQuizIds = listOf("q1", "q2"),
+            trend = PersonalTrend.UNKNOWN, isDistinctive = true
+        )
+        assertNull(WhoAmIUiModel.traitRow(trait).labelRes)
+    }
+}
+```
+
 ## File: build.gradle.kts
 ```kotlin
 plugins {
@@ -25987,6 +34010,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     implementation("androidx.datastore:datastore-preferences:1.2.1")
+    implementation("androidx.health.connect:connect-client:1.1.0")
     implementation("androidx.profileinstaller:profileinstaller:1.4.1")
     implementation("com.android.billingclient:billing-ktx:9.1.0")
     implementation("com.google.android.gms:play-services-ads:25.4.0")

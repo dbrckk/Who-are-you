@@ -2,6 +2,11 @@
   "area": "tools-check-play-bundle-budget.py",
   "edges": [
     {
+      "source": "tools/check_play_bundle_budget.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_play_bundle_budget.py",
       "target": "tools/check_play_bundle_budget.py",
       "type": "imports"

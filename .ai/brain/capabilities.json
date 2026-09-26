@@ -3,11 +3,11 @@
   "generated_by": "dbrckk/repo-brain",
   "portable_index": true,
   "ast_grep_outline": true,
-  "ast_index_mode": "incremental",
-  "ast_reparsed_files": 0,
-  "ast_grep_outline_files": 238,
-  "ast_grep_outline_items": 2218,
-  "ast_grep_member_items": 960,
+  "ast_index_mode": "full",
+  "ast_reparsed_files": 309,
+  "ast_grep_outline_files": 309,
+  "ast_grep_outline_items": 2682,
+  "ast_grep_member_items": 1264,
   "ast_symbol_shards": 26,
   "ast_file_outline_shards": 3
 }

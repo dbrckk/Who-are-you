@@ -10,6 +10,11 @@
       "source": "tools/test_m53_publication_contract.py",
       "target": "tools/validate_public_release_inputs.py",
       "type": "imports"
+    },
+    {
+      "source": "tools/validate_public_release_inputs.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

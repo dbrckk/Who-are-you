@@ -18,11 +18,6 @@
     },
     {
       "source": "tools/test_m50_analytics.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_m50_analytics.py",
       "target": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
       "type": "symbol-reference"
     }

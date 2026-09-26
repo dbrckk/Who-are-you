@@ -1,17 +1,1635 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "47fd8ad1fa2668bea842e86cbc5a7db4592fc70c",
-  "head": "9e645840e8cc2e4fe21740eccb7ffcd8d8742b86",
-  "index_mode": "incremental",
+  "base": "HEAD~1",
+  "head": "74f5abac791f76ba85da402e6f71344b3297e766",
+  "index_mode": "full",
   "changed_files": [
     {
-      "path": ".repo-standards.yml",
+      "path": "app/build.gradle.kts",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/res/values-fr/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+      "status": "A"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-24-m774-local-behavioral-insights.md",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_behavior_copy_contract.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_behavior_integration_contract.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_behavior_privacy_contract.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_manifest_security_contract.py",
       "status": "M"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
-  "selected_tests": []
+  "changed_source_files": [
+    "app/build.gradle.kts",
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+    "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+    "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+    "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+    "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+    "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+    "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+    "tools/test_behavior_copy_contract.py",
+    "tools/test_behavior_integration_contract.py",
+    "tools/test_behavior_privacy_contract.py",
+    "tools/test_manifest_security_contract.py"
+  ],
+  "impacted_files": [
+    "app/build.gradle.kts",
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+    "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+    "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+    "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+    "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+    "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+    "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+    "tools/test_behavior_copy_contract.py",
+    "tools/test_behavior_integration_contract.py",
+    "tools/test_behavior_privacy_contract.py",
+    "tools/test_manifest_security_contract.py"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "escapedBuildConfig",
+      "kind": "symbol",
+      "file": "app/build.gradle.kts",
+      "line": 65
+    },
+    {
+      "name": "BehaviorScreenUiTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "line": 21
+    },
+    {
+      "name": "habitsScreenSeparatesFactsPatternsSuggestionsAndControls",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "line": 38
+    },
+    {
+      "name": "compactLargeFontLayoutKeepsDataControlsReachable",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "line": 68
+    },
+    {
+      "name": "deleteAllRequiresExplicitConfirmation",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "line": 92
+    },
+    {
+      "name": "sourceCtaRoutesTypedAction",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "line": 120
+    },
+    {
+      "name": "ProfileScreenWhoAmITest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "line": 9
+    },
+    {
+      "name": "profileScreenContainsWhoAmIPortraitAndDiscovery",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "line": 15
+    },
+    {
+      "name": "ActivityDataSource",
+      "kind": "interface",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 12
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 14
+    },
+    {
+      "name": "readSteps",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 15
+    },
+    {
+      "name": "ActivityCollector",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 17
+    },
+    {
+      "name": "collectDay",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 22
+    },
+    {
+      "name": "HealthConnectActivityDataSource",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 48
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 51
+    },
+    {
+      "name": "readSteps",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 63
+    },
+    {
+      "name": "client",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "line": 73
+    },
+    {
+      "name": "AppScreen",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "line": 2
+    },
+    {
+      "name": "AppNavigation",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "line": 10
+    },
+    {
+      "name": "backDestination",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "line": 12
+    },
+    {
+      "name": "habitsDestination",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "line": 19
+    },
+    {
+      "name": "hasUsableCatalog",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "line": 21
+    },
+    {
+      "name": "premiumScreenTransition",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+      "line": 12
+    },
+    {
+      "name": "navigationDepth",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+      "line": 65
+    },
+    {
+      "name": "AppShellTab",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 51
+    },
+    {
+      "name": "AppShellNavigation",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 52
+    },
+    {
+      "name": "tabFor",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 54
+    },
+    {
+      "name": "destination",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 59
+    },
+    {
+      "name": "isShellVisible",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 64
+    },
+    {
+      "name": "PremiumAppShellBar",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 69
+    },
+    {
+      "name": "ShellTab",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 158
+    },
+    {
+      "name": "AppUsageSession",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 8
+    },
+    {
+      "name": "AppUsageAggregator",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 14
+    },
+    {
+      "name": "aggregate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 16
+    },
+    {
+      "name": "splitIntoDayparts",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 54
+    },
+    {
+      "name": "nextBoundary",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 68
+    },
+    {
+      "name": "classify",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 82
+    },
+    {
+      "name": "Daypart",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "line": 103
+    },
+    {
+      "name": "RawAppUsageEvent",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 9
+    },
+    {
+      "name": "Type",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 15
+    },
+    {
+      "name": "AppUsageDataSource",
+      "kind": "interface",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 17
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 19
+    },
+    {
+      "name": "events",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 20
+    },
+    {
+      "name": "AppUsageCollector",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 22
+    },
+    {
+      "name": "collectDay",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 27
+    },
+    {
+      "name": "reconstructSessions",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 49
+    },
+    {
+      "name": "AndroidAppUsageDataSource",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 76
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 79
+    },
+    {
+      "name": "events",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "line": 81
+    },
+    {
+      "name": "BehaviorInsightEngine",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 4
+    },
+    {
+      "name": "build",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 10
+    },
+    {
+      "name": "screenTimeChange",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 47
+    },
+    {
+      "name": "activityChange",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 62
+    },
+    {
+      "name": "appConcentration",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 77
+    },
+    {
+      "name": "lateUsage",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 92
+    },
+    {
+      "name": "usageRegularity",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 106
+    },
+    {
+      "name": "activityConsistency",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 121
+    },
+    {
+      "name": "median",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 136
+    },
+    {
+      "name": "medianDouble",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 144
+    },
+    {
+      "name": "tier",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "line": 151
+    },
+    {
+      "name": "BehaviorIntegrationCommand",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "line": 2
+    },
+    {
+      "name": "BehaviorIntegrationPolicy",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "line": 9
+    },
+    {
+      "name": "command",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "line": 11
+    },
+    {
+      "name": "shouldRefreshAfterActivityPermission",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "line": 20
+    },
+    {
+      "name": "shouldRefreshAfterUsageAccessReturn",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "line": 22
+    },
+    {
+      "name": "BehaviorRefreshOnResume",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+      "line": 16
+    },
+    {
+      "name": "AppUsageAggregate",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 2
+    },
+    {
+      "name": "DaypartUsage",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 8
+    },
+    {
+      "name": "DailyBehaviorAggregate",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 22
+    },
+    {
+      "name": "BehaviorSource",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 31
+    },
+    {
+      "name": "BehaviorSourceState",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 33
+    },
+    {
+      "name": "BehaviorCollectionResult",
+      "kind": "interface",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 41
+    },
+    {
+      "name": "Data",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 43
+    },
+    {
+      "name": "NoData",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 44
+    },
+    {
+      "name": "Unavailable",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 45
+    },
+    {
+      "name": "ActivityDay",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 47
+    },
+    {
+      "name": "BehaviorEvidenceTier",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 52
+    },
+    {
+      "name": "BehaviorInsightCategory",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 54
+    },
+    {
+      "name": "BehaviorInsight",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 64
+    },
+    {
+      "name": "BehaviorSnapshot",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "line": 71
+    },
+    {
+      "name": "BehaviorRefreshSnapshot",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 10
+    },
+    {
+      "name": "BehaviorRefreshStore",
+      "kind": "interface",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 15
+    },
+    {
+      "name": "snapshot",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 17
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 18
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 19
+    },
+    {
+      "name": "BehaviorRefreshResult",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 21
+    },
+    {
+      "name": "BehaviorRefreshCoordinator",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 27
+    },
+    {
+      "name": "refresh",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 35
+    },
+    {
+      "name": "mergeActivity",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 90
+    },
+    {
+      "name": "mergeAppUsage",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 98
+    },
+    {
+      "name": "emptyDay",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 111
+    },
+    {
+      "name": "createAndroidBehaviorRefreshCoordinator",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 121
+    },
+    {
+      "name": "AndroidBehaviorRefreshStore",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 142
+    },
+    {
+      "name": "snapshot",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 147
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 157
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 161
+    },
+    {
+      "name": "BehaviorRepository",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 22
+    },
+    {
+      "name": "observe",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 28
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 58
+    },
+    {
+      "name": "setSourceEnabled",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 71
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 78
+    },
+    {
+      "name": "clearSource",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 84
+    },
+    {
+      "name": "clearAll",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 93
+    },
+    {
+      "name": "resolvedState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 97
+    },
+    {
+      "name": "enabledKey",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 104
+    },
+    {
+      "name": "stateKey",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 109
+    },
+    {
+      "name": "BehaviorScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 36
+    },
+    {
+      "name": "BehaviorSourceCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 115
+    },
+    {
+      "name": "BehaviorPeriodCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 154
+    },
+    {
+      "name": "BehaviorPatternsCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 188
+    },
+    {
+      "name": "BehaviorSuggestionsCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 209
+    },
+    {
+      "name": "behaviorMetric",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 226
+    },
+    {
+      "name": "appDisplayName",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 235
+    },
+    {
+      "name": "durationLabel",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 244
+    },
+    {
+      "name": "behaviorAction",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 253
+    },
+    {
+      "name": "behaviorCopy",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 261
+    },
+    {
+      "name": "BehaviorSourceAccess",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "line": 4
+    },
+    {
+      "name": "activityState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "line": 6
+    },
+    {
+      "name": "appUsageState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "line": 9
+    },
+    {
+      "name": "BehaviorSourceEffect",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "line": 4
+    },
+    {
+      "name": "BehaviorSourceActionHandler",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "line": 11
+    },
+    {
+      "name": "handle",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "line": 13
+    },
+    {
+      "name": "BehaviorStoreCodec",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 13
+    },
+    {
+      "name": "encode",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 17
+    },
+    {
+      "name": "decode",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 37
+    },
+    {
+      "name": "retain",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 50
+    },
+    {
+      "name": "completed",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 58
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 66
+    },
+    {
+      "name": "clearSource",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 75
+    },
+    {
+      "name": "decodeDay",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 90
+    },
+    {
+      "name": "encodeApps",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 108
+    },
+    {
+      "name": "decodeApps",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 118
+    },
+    {
+      "name": "encodeText",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 131
+    },
+    {
+      "name": "decodeText",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 135
+    },
+    {
+      "name": "nullableLong",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 140
+    },
+    {
+      "name": "nullableInt",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 142
+    },
+    {
+      "name": "parseNullableLong",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 143
+    },
+    {
+      "name": "parseNullableInt",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "line": 144
+    },
+    {
+      "name": "BehaviorMetricKind",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 2
+    },
+    {
+      "name": "BehaviorSourceAction",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 10
+    },
+    {
+      "name": "BehaviorCopyKey",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 17
+    },
+    {
+      "name": "BehaviorMetricUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 43
+    },
+    {
+      "name": "BehaviorAppUsageUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 48
+    },
+    {
+      "name": "BehaviorPeriodUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 53
+    },
+    {
+      "name": "BehaviorSourceUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 58
+    },
+    {
+      "name": "BehaviorPatternUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 67
+    },
+    {
+      "name": "BehaviorSuggestionUi",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 74
+    },
+    {
+      "name": "BehaviorUiModel",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 78
+    },
+    {
+      "name": "BehaviorUiModelFactory",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 88
+    },
+    {
+      "name": "build",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 90
+    },
+    {
+      "name": "history",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 140
+    },
+    {
+      "name": "average",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "line": 168
+    },
+    {
+      "name": "HabitsProfileEntry",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
+      "line": 19
+    },
+    {
+      "name": "MainActivity",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 30
+    },
+    {
+      "name": "attachBaseContext",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 32
+    },
+    {
+      "name": "onCreate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 33
+    },
+    {
+      "name": "WhoAreYouApp",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 37
+    },
+    {
+      "name": "refreshBehavior",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 50
+    },
+    {
+      "name": "navigate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 106
+    },
+    {
+      "name": "resetQuizAttempt",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 108
+    },
+    {
+      "name": "ProfileScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "line": 54
+    },
+    {
+      "name": "UsageAccess",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 10
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 11
+    },
+    {
+      "name": "settingsIntent",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 25
+    },
+    {
+      "name": "ActivityAggregationTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 10
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 91
+    },
+    {
+      "name": "readSteps",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 92
+    },
+    {
+      "name": "FakeActivityDataSource",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 102
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 110
+    },
+    {
+      "name": "readSteps",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "line": 112
+    },
+    {
+      "name": "AppNavigationTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 8
+    },
+    {
+      "name": "discoverLetsSystemBackExit",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 11
+    },
+    {
+      "name": "internalScreensReturnToDiscover",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 16
+    },
+    {
+      "name": "habitsHasDedicatedDestination",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 24
+    },
+    {
+      "name": "emptyCatalogIsRejected",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 29
+    },
+    {
+      "name": "nonEmptyCatalogIsUsable",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "line": 35
+    },
+    {
+      "name": "AppShellNavigationTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+      "line": 8
+    },
+    {
+      "name": "shellTabsMapToPersistentDestinations",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+      "line": 11
+    },
+    {
+      "name": "discoverAndProfileExposeShell",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+      "line": 17
+    },
+    {
+      "name": "secondaryAndFocusedFlowsHideShell",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+      "line": 25
+    },
+    {
+      "name": "AppUsageAggregationTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+      "line": 10
+    },
+    {
+      "name": "session",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+      "line": 73
+    },
+    {
+      "name": "AppUsageCollectorTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 9
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 90
+    },
+    {
+      "name": "events",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 91
+    },
+    {
+      "name": "FakeSource",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 101
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 107
+    },
+    {
+      "name": "events",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 109
+    },
+    {
+      "name": "resumed",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 115
+    },
+    {
+      "name": "paused",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "line": 121
+    },
+    {
+      "name": "BehaviorInsightEngineTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "line": 7
+    },
+    {
+      "name": "availableStates",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "line": 80
+    },
+    {
+      "name": "day",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "line": 85
+    },
+    {
+      "name": "BehaviorIntegrationPolicyTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "line": 7
+    },
+    {
+      "name": "BehaviorRefreshCoordinatorTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 15
+    },
+    {
+      "name": "usageDay",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 196
+    },
+    {
+      "name": "day",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 211
+    },
+    {
+      "name": "FakeStore",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 221
+    },
+    {
+      "name": "snapshot",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 230
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 236
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "line": 240
+    },
+    {
+      "name": "BehaviorStoreCodecTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "line": 7
+    },
+    {
+      "name": "day",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "line": 80
+    },
+    {
+      "name": "BehaviorUiModelTest",
+      "kind": "class",
+      "file": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+      "line": 7
+    },
+    {
+      "name": "BehaviorCopyContractTest",
+      "kind": "class",
+      "file": "tools/test_behavior_copy_contract.py",
+      "line": 32
+    },
+    {
+      "name": "test_habits_copy_stays_non_clinical_and_non_moralizing",
+      "kind": "function",
+      "file": "tools/test_behavior_copy_contract.py",
+      "line": 33
+    },
+    {
+      "name": "BehaviorIntegrationContractTest",
+      "kind": "class",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 8
+    },
+    {
+      "name": "read",
+      "kind": "function",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 9
+    },
+    {
+      "name": "test_profile_exposes_habits_entry",
+      "kind": "function",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 12
+    },
+    {
+      "name": "test_main_activity_connects_profile_to_habits",
+      "kind": "function",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 17
+    },
+    {
+      "name": "test_habits_back_destination_is_profile",
+      "kind": "function",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 21
+    },
+    {
+      "name": "test_behavior_refreshes_on_app_resume",
+      "kind": "function",
+      "file": "tools/test_behavior_integration_contract.py",
+      "line": 25
+    },
+    {
+      "name": "BehaviorPrivacyContractTest",
+      "kind": "class",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 8
+    },
+    {
+      "name": "read",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 9
+    },
+    {
+      "name": "test_behavior_measurements_do_not_enter_telemetry",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 12
+    },
+    {
+      "name": "test_behavior_measurements_do_not_enter_profile_share",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 26
+    },
+    {
+      "name": "test_behavior_measurements_do_not_enter_ad_configuration",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 40
+    },
+    {
+      "name": "test_personal_model_engine_has_no_behavior_dependency",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 55
+    },
+    {
+      "name": "test_behavior_domain_does_not_write_profile_store_or_personal_model",
+      "kind": "function",
+      "file": "tools/test_behavior_privacy_contract.py",
+      "line": 67
+    },
+    {
+      "name": "ManifestSecurityContractTest",
+      "kind": "class",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 9
+    },
+    {
+      "name": "setUp",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 10
+    },
+    {
+      "name": "test_manifest_uses_only_approved_permissions_and_secure_defaults",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 16
+    },
+    {
+      "name": "test_file_provider_is_not_exported_and_paths_are_narrow",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 36
+    },
+    {
+      "name": "test_billing_restore_revokes_missing_entitlement",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 43
+    },
+    {
+      "name": "test_top_level_compose_surfaces_handle_status_bar_insets",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 48
+    },
+    {
+      "name": "test_ad_show_failure_preloads_replacement",
+      "kind": "function",
+      "file": "tools/test_manifest_security_contract.py",
+      "line": 62
+    }
+  ],
+  "selected_tests": [
+    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+    "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+    "tools/test_behavior_copy_contract.py",
+    "tools/test_behavior_integration_contract.py",
+    "tools/test_behavior_privacy_contract.py",
+    "tools/test_manifest_security_contract.py"
+  ]
 }

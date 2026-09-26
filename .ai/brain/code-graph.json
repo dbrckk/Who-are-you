@@ -76,6 +76,51 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
       "type": "symbol-reference"
@@ -87,6 +132,11 @@
     },
     {
       "source": "tools/test_battery_thermal_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
       "type": "symbol-reference"
     },
@@ -111,6 +161,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -126,12 +181,22 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ChallengeUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
@@ -151,7 +216,37 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
@@ -173,6 +268,21 @@
     {
       "source": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
       "type": "symbol-reference"
     },
     {
@@ -261,6 +371,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_healthy_discover_profile_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
       "type": "symbol-reference"
@@ -282,6 +397,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_integration_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
       "type": "symbol-reference"
     },
@@ -361,8 +481,258 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_performance_release_gate_contract.py",
       "target": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
       "type": "symbol-reference"
     },
     {
@@ -521,6 +891,56 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelContractTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
       "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
       "type": "symbol-reference"
@@ -546,6 +966,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
       "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
       "type": "symbol-reference"
@@ -557,6 +982,21 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
       "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
       "type": "symbol-reference"
     },
@@ -598,6 +1038,276 @@
     {
       "source": "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": ".github/scripts/validate-screenshot.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/Achievements.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileEvolutionSummary.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileIdentityMap.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileMomentum.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/RetakeRecommendation.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ScoreHistory.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_publisher.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m33_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_m53_publication_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_reset_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
     {
@@ -696,7 +1406,22 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
       "type": "symbol-reference"
     },
@@ -708,6 +1433,11 @@
     {
       "source": "tools/test_share_storage_safety.py",
       "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
       "type": "symbol-reference"
     },
     {
@@ -776,6 +1506,16 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_m50_analytics.py",
       "target": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
       "type": "symbol-reference"
@@ -811,6 +1551,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+      "target": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_longitudinal_trend_integration.py",
       "target": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
       "type": "symbol-reference"
@@ -836,6 +1581,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
       "target": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
       "type": "symbol-reference"
@@ -851,6 +1601,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "type": "symbol-reference"
@@ -862,6 +1617,11 @@
     },
     {
       "source": "tools/test_actionable_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_integration_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "type": "symbol-reference"
     },
@@ -961,6 +1721,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
       "type": "symbol-reference"
@@ -972,6 +1737,11 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
       "type": "symbol-reference"
     },
@@ -996,6 +1766,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+      "target": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
       "type": "symbol-reference"
@@ -1003,6 +1778,116 @@
     {
       "source": "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
       "type": "symbol-reference"
     },
     {
@@ -1166,7 +2051,22 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_profile_knowledge_map_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
       "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
       "type": "symbol-reference"
     },
@@ -1276,6 +2176,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_longitudinal_trend_integration.py",
       "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "type": "symbol-reference"
@@ -1331,7 +2236,42 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
       "type": "symbol-reference"
     },
@@ -1342,6 +2282,16 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
       "type": "symbol-reference"
     },
@@ -1526,6 +2476,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -1537,6 +2492,16 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
@@ -1576,6 +2541,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -1586,7 +2556,22 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
@@ -1616,38 +2601,13 @@
       "type": "symbol-reference"
     },
     {
-      "source": "tools/test_actionable_knowledge_map_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
       "type": "symbol-reference"
     },
     {
-      "source": "tools/test_m46_accessibility.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_m50_analytics.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_main_flow_recommendation_parity_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_persisted_result_score_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_quiz_commit_interaction_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_quiz_result_persistence_feedback.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "source": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
       "type": "symbol-reference"
     },
     {
@@ -1663,6 +2623,26 @@
     {
       "source": "tools/test_share_rendering_performance.py",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
       "type": "symbol-reference"
     },
     {
@@ -1796,13 +2776,78 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
       "type": "symbol-reference"
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/ResultInterpretationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
       "type": "symbol-reference"
     },
     {
@@ -1823,6 +2868,46 @@
     {
       "source": "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
       "type": "symbol-reference"
     },
     {
@@ -1866,6 +2951,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
       "type": "symbol-reference"
@@ -1876,12 +2966,42 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
       "type": "symbol-reference"
     },
@@ -2186,6 +3306,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
       "type": "symbol-reference"
@@ -2206,6 +3331,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
       "type": "symbol-reference"
@@ -2213,6 +3343,51 @@
     {
       "source": "tools/test_profile_knowledge_map_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
       "type": "symbol-reference"
     },
     {
@@ -2281,12 +3456,32 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
       "type": "symbol-reference"
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
       "type": "symbol-reference"
     },
@@ -2336,6 +3531,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
       "type": "symbol-reference"
@@ -2366,6 +3566,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
       "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
       "type": "symbol-reference"
@@ -2386,6 +3591,121 @@
       "type": "symbol-reference"
     },
     {
+      "source": ".github/scripts/validate-screenshot.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": ".github/scripts/validate-ui-hierarchy.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/check_play_bundle_budget.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_promoter.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_publisher.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_play_publisher.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/validate_public_release_inputs.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_billing_launch_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
@@ -2402,6 +3722,11 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
     },
@@ -2442,6 +3767,11 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
     },
@@ -2521,6 +3851,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
@@ -2566,6 +3901,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_healthy_discover_profile_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
@@ -2593,6 +3933,131 @@
     {
       "source": "tools/test_shell_accessibility_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICopy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmICopyTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICopy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICopy.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/WhoAmIUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
       "type": "symbol-reference"
     }
   ]

@@ -1,0 +1,11 @@
+{
+  "area": "tools-test-m33-readiness.py",
+  "edges": [
+    {
+      "source": "tools/test_m33_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

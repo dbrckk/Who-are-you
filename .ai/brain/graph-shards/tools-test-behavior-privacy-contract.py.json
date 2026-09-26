@@ -1,0 +1,81 @@
+{
+  "area": "tools-test-behavior-privacy-contract.py",
+  "edges": [
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_behavior_privacy_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}

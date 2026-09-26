@@ -23,6 +23,8 @@
     "androidx.compose",
     "androidx.core",
     "androidx.datastore",
+    "androidx.health",
+    "androidx.lifecycle",
     "androidx.test",
     "com.android",
     "com.google",

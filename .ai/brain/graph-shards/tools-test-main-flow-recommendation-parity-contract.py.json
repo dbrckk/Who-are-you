@@ -5,11 +5,6 @@
       "source": "tools/test_main_flow_recommendation_parity_contract.py",
       "target": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
       "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_main_flow_recommendation_parity_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

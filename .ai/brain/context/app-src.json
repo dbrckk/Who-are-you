@@ -2,11 +2,194 @@
   "area": "app-src",
   "files": [
     {
-      "path": "app/src/main/AndroidManifest.xml",
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "reasons": [
-        "entrypoint"
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 40
+      "score": 970
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 685
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 575
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 575
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 545
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 540
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 540
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 525
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 525
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 475
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 470
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 465
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 460
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 460
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 460
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 460
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

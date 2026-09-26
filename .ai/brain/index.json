@@ -1,15 +1,15 @@
 {
   "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
-  "files_indexed": 244,
-  "symbol_count": 1200,
+  "files_indexed": 315,
+  "symbol_count": 1500,
   "edge_count": 10,
   "languages": {
-    "python": 93,
-    "kotlin": 151
+    "python": 98,
+    "kotlin": 217
   },
-  "index_mode": "incremental",
-  "reparsed_files": 0,
+  "index_mode": "full",
+  "reparsed_files": 315,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
@@ -32,6 +32,22 @@
       "symbols": 17
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "symbols": 16
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "symbols": 16
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "symbols": 14
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "symbols": 14
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
       "symbols": 14
     },
@@ -44,6 +60,10 @@
       "symbols": 14
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "symbols": 13
+    },
+    {
       "file": "tools/test_release_workflows_contract.py",
       "symbols": 13
     },
@@ -52,8 +72,20 @@
       "symbols": 12
     },
     {
-      "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
       "symbols": 11
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "symbols": 11
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "symbols": 10
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "symbols": 10
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
@@ -77,6 +109,10 @@
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+      "symbols": 9
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
       "symbols": 9
     },
     {
@@ -108,7 +144,15 @@
       "symbols": 8
     },
     {
+      "file": "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+      "symbols": 8
+    },
+    {
       "file": "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
+      "symbols": 8
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
       "symbols": 8
     },
     {
@@ -148,6 +192,10 @@
       "symbols": 7
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+      "symbols": 7
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
       "symbols": 7
     },
@@ -161,54 +209,6 @@
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt",
-      "symbols": 7
-    },
-    {
-      "file": "tools/test_accessibility_system_contract.py",
-      "symbols": 7
-    },
-    {
-      "file": "tools/test_battery_thermal_contract.py",
-      "symbols": 7
-    },
-    {
-      "file": "tools/test_m46_accessibility.py",
-      "symbols": 7
-    },
-    {
-      "file": "tools/test_manifest_security_contract.py",
       "symbols": 7
     }
   ]

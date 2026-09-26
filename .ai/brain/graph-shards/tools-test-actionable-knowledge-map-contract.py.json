@@ -13,11 +13,6 @@
     },
     {
       "source": "tools/test_actionable_knowledge_map_contract.py",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "tools/test_actionable_knowledge_map_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
       "type": "symbol-reference"
     }

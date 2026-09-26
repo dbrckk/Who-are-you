@@ -1,0 +1,42 @@
+{
+  "area": "tools",
+  "files": [
+    {
+      "path": "tools/test_behavior_privacy_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 675
+    },
+    {
+      "path": "tools/test_behavior_integration_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 490
+    },
+    {
+      "path": "tools/test_manifest_security_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 405
+    }
+  ],
+  "generated_by": "dbrckk/repo-brain-v6",
+  "schema_version": 1
+}

@@ -3,6 +3,11 @@
   "edges": [
     {
       "source": "tools/test_billing_launch_readiness.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_billing_launch_readiness.py",
       "target": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
       "type": "symbol-reference"
     },

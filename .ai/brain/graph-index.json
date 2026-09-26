@@ -2,6 +2,7 @@
   "areas": [
     "app-src",
     "baseline-profile",
+    "github",
     "tools-check-play-bundle-budget.py",
     "tools-play-preflight.py",
     "tools-play-promoter.py",
@@ -9,12 +10,14 @@
     "tools-prepare-play-submission.py",
     "tools-test-actionable-knowledge-map-contract.py",
     "tools-test-battery-thermal-contract.py",
+    "tools-test-behavior-integration-contract.py",
+    "tools-test-behavior-privacy-contract.py",
     "tools-test-billing-launch-readiness.py",
     "tools-test-challenge-landing-contract.py",
     "tools-test-healthy-discover-profile-contract.py",
     "tools-test-large-screen-keyboard-accessibility.py",
     "tools-test-longitudinal-trend-integration.py",
-    "tools-test-m46-accessibility.py",
+    "tools-test-m33-readiness.py",
     "tools-test-m47-ui-test-wiring.py",
     "tools-test-m48-visual-system.py",
     "tools-test-m49-architecture-cleanup.py",
@@ -41,7 +44,6 @@
     "tools-test-progression-journal-integration.py",
     "tools-test-public-launch-experience-contract.py",
     "tools-test-public-result-and-store-positioning.py",
-    "tools-test-quiz-commit-interaction-contract.py",
     "tools-test-quiz-commit-interaction-lock.py",
     "tools-test-quiz-process-recreation-contract.py",
     "tools-test-quiz-replay-window-contract.py",
@@ -64,11 +66,15 @@
   ],
   "central_files": [
     {
-      "dependencies": [],
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt"
+      ],
       "dependents": [
         "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
         "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
         "app/src/main/java/com/whoareyou/app/Achievements.kt",
         "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
@@ -99,9 +105,13 @@
         "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
         "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
         "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt",
         "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
         "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
         "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/ResultShare.kt",
         "app/src/main/java/com/whoareyou/app/RetentionUi.kt",
@@ -112,40 +122,133 @@
         "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
         "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
         "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
         "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
         "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
         "app/src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt",
         "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
         "app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
         "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
         "app/src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt",
         "app/src/test/java/com/whoareyou/app/ResultInterpretationTest.kt",
         "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
         "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
-        "tools/test_actionable_knowledge_map_contract.py",
-        "tools/test_m46_accessibility.py",
         "tools/test_m48_visual_system.py",
         "tools/test_m49_architecture_cleanup.py",
-        "tools/test_m50_analytics.py",
-        "tools/test_main_flow_recommendation_parity_contract.py",
-        "tools/test_persisted_result_score_contract.py",
-        "tools/test_quiz_commit_interaction_contract.py",
-        "tools/test_quiz_result_persistence_feedback.py",
         "tools/test_rendering_performance_contract.py",
         "tools/test_runtime_performance_contract.py",
         "tools/test_share_rendering_performance.py"
       ],
-      "in_degree": 76,
-      "out_degree": 0,
+      "in_degree": 84,
+      "out_degree": 2,
       "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+    },
+    {
+      "dependencies": [],
+      "dependents": [
+        ".github/scripts/validate-screenshot.py",
+        "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/Achievements.kt",
+        "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+        "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+        "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
+        "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+        "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
+        "app/src/main/java/com/whoareyou/app/DiscoverCollectionsUi.kt",
+        "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+        "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+        "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+        "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileEvolutionSummary.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileIdentityMap.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileMomentum.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt",
+        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt",
+        "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
+        "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+        "app/src/main/java/com/whoareyou/app/RetakeRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt",
+        "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+        "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
+        "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+        "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorInsightEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+        "tools/play_preflight.py",
+        "tools/play_publisher.py",
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_billing_launch_readiness.py",
+        "tools/test_m33_readiness.py",
+        "tools/test_m53_publication_contract.py",
+        "tools/test_profile_reset_contract.py"
+      ],
+      "in_degree": 82,
+      "out_degree": 0,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
     },
     {
       "dependencies": [
@@ -157,6 +260,7 @@
         "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
         "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
         "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt",
         "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
         "app/src/main/java/com/whoareyou/app/ChallengeUi.kt",
@@ -165,6 +269,7 @@
         "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
         "app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt",
         "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+        "app/src/main/java/com/whoareyou/app/HabitsProfileEntryUi.kt",
         "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
         "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
@@ -180,6 +285,7 @@
         "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt",
         "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
         "app/src/main/java/com/whoareyou/app/ResultInterpretationUi.kt",
         "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt",
         "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
@@ -189,21 +295,26 @@
         "app/src/main/java/com/whoareyou/app/TraitGraphUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
         "app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
         "tools/test_healthy_discover_profile_contract.py",
         "tools/test_large_screen_keyboard_accessibility.py",
         "tools/test_m48_visual_system.py",
         "tools/test_m49_architecture_cleanup.py",
         "tools/test_shell_accessibility_contract.py"
       ],
-      "in_degree": 42,
+      "in_degree": 46,
       "out_degree": 1,
       "path": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
         "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
         "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
         "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
         "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
@@ -215,6 +326,7 @@
       ],
       "dependents": [
         "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
         "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
         "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
@@ -237,6 +349,8 @@
         "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
         "app/src/test/java/com/whoareyou/app/DiscoverPersonalizationTest.kt",
         "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileEvolutionSummaryTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileIdentityMapTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileInsightsTest.kt",
@@ -244,15 +358,66 @@
         "app/src/test/java/com/whoareyou/app/ProfileStrengthNuanceTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt"
       ],
-      "in_degree": 29,
-      "out_degree": 11,
+      "in_degree": 32,
+      "out_degree": 15,
       "path": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+        "app/src/main/java/com/whoareyou/app/AdManager.kt",
+        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+        "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+        "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+        "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+        "tools/test_actionable_knowledge_map_contract.py",
+        "tools/test_behavior_integration_contract.py",
+        "tools/test_billing_launch_readiness.py",
+        "tools/test_m49_architecture_cleanup.py",
+        "tools/test_m50_analytics.py",
+        "tools/test_m52_play_policy.py",
+        "tools/test_main_activity_architecture.py",
+        "tools/test_persisted_result_score_contract.py",
+        "tools/test_profile_reset_contract.py",
+        "tools/test_quiz_commit_interaction_lock.py",
+        "tools/test_quiz_process_recreation_contract.py",
+        "tools/test_quiz_result_persistence_feedback.py",
+        "tools/test_release_critical_profile_contract.py",
+        "tools/test_restored_quiz_recovery.py",
+        "tools/test_runtime_efficiency_contract.py",
+        "tools/test_runtime_performance_contract.py",
+        "tools/test_startup_loading_state.py",
+        "tools/test_string_resource_parity.py",
+        "tools/test_trait_evolution_integration.py"
+      ],
+      "in_degree": 21,
+      "out_degree": 20,
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt"
     },
     {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/AchievementUnlockQueue.kt",
         "app/src/main/java/com/whoareyou/app/Achievements.kt",
         "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
         "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
         "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
@@ -273,6 +438,7 @@
         "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
         "app/src/main/java/com/whoareyou/app/RetentionUi.kt",
         "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
+        "tools/test_behavior_privacy_contract.py",
         "tools/test_longitudinal_trend_integration.py",
         "tools/test_manifest_security_contract.py",
         "tools/test_persisted_result_score_contract.py",
@@ -284,47 +450,47 @@
         "tools/test_startup_loading_state.py",
         "tools/test_trait_evolution_integration.py"
       ],
-      "in_degree": 23,
-      "out_degree": 8,
+      "in_degree": 24,
+      "out_degree": 9,
       "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AdManager.kt",
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-        "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-        "app/src/main/java/com/whoareyou/app/BillingManager.kt",
-        "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt"
       ],
       "dependents": [
-        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-        "tools/test_actionable_knowledge_map_contract.py",
-        "tools/test_billing_launch_readiness.py",
-        "tools/test_m49_architecture_cleanup.py",
-        "tools/test_m50_analytics.py",
-        "tools/test_m52_play_policy.py",
-        "tools/test_main_activity_architecture.py",
-        "tools/test_persisted_result_score_contract.py",
-        "tools/test_profile_reset_contract.py",
-        "tools/test_quiz_commit_interaction_lock.py",
-        "tools/test_quiz_process_recreation_contract.py",
-        "tools/test_quiz_result_persistence_feedback.py",
-        "tools/test_release_critical_profile_contract.py",
-        "tools/test_restored_quiz_recovery.py",
-        "tools/test_runtime_efficiency_contract.py",
-        "tools/test_runtime_performance_contract.py",
-        "tools/test_startup_loading_state.py",
-        "tools/test_string_resource_parity.py",
-        "tools/test_trait_evolution_integration.py"
+        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
+        "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraphUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt",
+        "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt",
+        "tools/test_profile_coverage_integration.py",
+        "tools/test_trait_graph_contract.py"
       ],
-      "in_degree": 20,
-      "out_degree": 9,
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt"
+      "in_degree": 27,
+      "out_degree": 2,
+      "path": "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
     },
     {
       "dependencies": [
@@ -355,16 +521,54 @@
         "app/src/main/java/com/whoareyou/app/RetentionUi.kt",
         "app/src/main/java/com/whoareyou/app/ShareSafety.kt",
         "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt",
+        "tools/test_behavior_privacy_contract.py",
         "tools/test_healthy_discover_profile_contract.py",
         "tools/test_m50_analytics.py",
         "tools/test_offline_resilience_contract.py"
       ],
-      "in_degree": 20,
+      "in_degree": 21,
       "out_degree": 8,
       "path": "app/src/main/java/com/whoareyou/app/AppEvents.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+        "app/src/test/java/com/whoareyou/app/GlobalProfilePersonalModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelContractTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIUiModelTest.kt",
+        "tools/test_behavior_privacy_contract.py"
+      ],
+      "in_degree": 25,
+      "out_degree": 2,
+      "path": "app/src/main/java/com/whoareyou/app/PersonalModel.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
       ],
@@ -373,6 +577,7 @@
         "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
         "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
         "app/src/main/java/com/whoareyou/app/ProfileCoverageUi.kt",
         "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
         "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt",
@@ -381,15 +586,159 @@
         "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
         "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
         "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt",
         "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
         "tools/test_profile_coverage_integration.py",
         "tools/test_profile_knowledge_map_contract.py"
       ],
-      "in_degree": 17,
-      "out_degree": 2,
+      "in_degree": 21,
+      "out_degree": 3,
       "path": "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+        "app/src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt",
+        "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/SignatureProfileTest.kt",
+        "app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt",
+        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt"
+      ],
+      "in_degree": 22,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+      ],
+      "dependents": [
+        ".github/scripts/validate-screenshot.py",
+        ".github/scripts/validate-ui-hierarchy.py",
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+        "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
+        "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+        "app/src/main/java/com/whoareyou/app/Telemetry.kt",
+        "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+        "tools/check_play_bundle_budget.py",
+        "tools/play_preflight.py",
+        "tools/play_promoter.py",
+        "tools/play_publisher.py",
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_play_publisher.py",
+        "tools/validate_public_release_inputs.py"
+      ],
+      "in_degree": 18,
+      "out_degree": 3,
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
+        "tools/test_longitudinal_trend_integration.py"
+      ],
+      "in_degree": 15,
+      "out_degree": 3,
+      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+        "tools/test_longitudinal_trend_integration.py",
+        "tools/test_release_critical_profile_contract.py"
+      ],
+      "in_degree": 16,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIProgressModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+        "tools/test_profile_knowledge_map_contract.py"
+      ],
+      "in_degree": 15,
+      "out_degree": 2,
+      "path": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt"
     },
     {
       "dependencies": [
@@ -418,97 +767,29 @@
       "path": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt"
     },
     {
-      "dependencies": [],
-      "dependents": [
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-        "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/ProfilePersistenceCodecTest.kt",
-        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
-        "tools/test_longitudinal_trend_integration.py",
-        "tools/test_release_critical_profile_contract.py"
-      ],
-      "in_degree": 15,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
-        "app/src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt",
-        "app/src/test/java/com/whoareyou/app/GlobalProfileEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/SignatureProfileTest.kt",
-        "app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt",
-        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
-        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
-        "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt"
-      ],
-      "in_degree": 15,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
-        "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
-        "app/src/main/java/com/whoareyou/app/TraitGraphUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileCoverageEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/TraitGraphEngineTest.kt",
-        "tools/test_profile_coverage_integration.py",
-        "tools/test_trait_graph_contract.py"
-      ],
-      "in_degree": 14,
-      "out_degree": 1,
-      "path": "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
-    },
-    {
-      "dependencies": [
         "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
       ],
       "dependents": [
-        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
-        "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
         "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
         "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
-        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
         "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
-        "tools/test_longitudinal_trend_integration.py"
+        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+        "tools/test_trait_timeline_integration.py"
       ],
-      "in_degree": 12,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt"
+      "in_degree": 8,
+      "out_degree": 8,
+      "path": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt"
     },
     {
       "dependencies": [
@@ -519,21 +800,95 @@
         "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
         "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
         "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
         "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
         "app/src/main/java/com/whoareyou/app/TraitEvolution.kt",
         "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
+        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt"
       ],
       "dependents": [],
       "in_degree": 0,
-      "out_degree": 14,
+      "out_degree": 16,
       "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt"
     },
     {
-      "dependencies": [],
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+        "tools/test_progression_journal_integration.py"
+      ],
+      "in_degree": 11,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+        "app/src/main/java/com/whoareyou/app/AdManager.kt",
+        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 15,
+      "path": "tools/test_behavior_privacy_contract.py"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
+        "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
+        "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
+        "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+        "tools/test_actionable_knowledge_map_contract.py",
+        "tools/test_behavior_integration_contract.py",
+        "tools/test_m49_architecture_cleanup.py",
+        "tools/test_release_critical_profile_contract.py",
+        "tools/test_restored_quiz_recovery.py",
+        "tools/test_runtime_performance_contract.py"
+      ],
+      "in_degree": 13,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
       "dependents": [
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
@@ -550,74 +905,95 @@
         "app/src/test/java/com/whoareyou/app/ScoreChangeEngineTest.kt"
       ],
       "in_degree": 13,
-      "out_degree": 0,
+      "out_degree": 1,
       "path": "app/src/main/java/com/whoareyou/app/ScoreChange.kt"
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt"
       ],
       "dependents": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt",
-        "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
-        "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
-        "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
-        "tools/test_actionable_knowledge_map_contract.py",
-        "tools/test_m49_architecture_cleanup.py",
-        "tools/test_release_critical_profile_contract.py",
-        "tools/test_restored_quiz_recovery.py",
-        "tools/test_runtime_performance_contract.py"
-      ],
-      "in_degree": 12,
-      "out_degree": 1,
-      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
-        "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
         "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
-        "app/src/test/java/com/whoareyou/app/DimensionJournalEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
-        "tools/test_progression_journal_integration.py"
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt"
       ],
       "in_degree": 10,
       "out_degree": 3,
-      "path": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt"
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt"
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt",
-        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt"
       ],
       "dependents": [
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileNarrativeEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
-        "tools/test_trait_timeline_integration.py"
+        "app/src/test/java/com/whoareyou/app/PersonalModelAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCertaintyTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelContradictionTest.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelStabilityTest.kt",
+        "tools/test_behavior_privacy_contract.py"
       ],
-      "in_degree": 6,
-      "out_degree": 7,
-      "path": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt"
+      "in_degree": 7,
+      "out_degree": 6,
+      "path": "app/src/main/java/com/whoareyou/app/PersonalModelEngine.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileEvolutionShare.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
+        "app/src/main/java/com/whoareyou/app/ShareFileStore.kt",
+        "app/src/main/java/com/whoareyou/app/ShareSafety.kt",
+        "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_share_rendering_performance.py",
+        "tools/test_share_storage_safety.py"
+      ],
+      "in_degree": 4,
+      "out_degree": 9,
+      "path": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+        "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt"
+      ],
+      "in_degree": 10,
+      "out_degree": 2,
+      "path": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt"
     },
     {
       "dependencies": [
@@ -642,6 +1018,8 @@
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
         "app/src/main/java/com/whoareyou/app/ShareSafety.kt"
       ],
@@ -656,48 +1034,33 @@
         "tools/test_m49_architecture_cleanup.py"
       ],
       "in_degree": 8,
-      "out_degree": 2,
+      "out_degree": 4,
       "path": "app/src/main/java/com/whoareyou/app/ChallengeShare.kt"
     },
     {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileEvolutionShare.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
-        "app/src/main/java/com/whoareyou/app/ShareFileStore.kt",
-        "app/src/main/java/com/whoareyou/app/ShareSafety.kt",
-        "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "tools/test_share_rendering_performance.py",
-        "tools/test_share_storage_safety.py"
-      ],
-      "in_degree": 3,
-      "out_degree": 7,
-      "path": "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt",
+        "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
       ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt",
-        "app/src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt",
-        "tools/test_progression_journal_integration.py",
-        "tools/test_trait_evolution_integration.py"
-      ],
-      "in_degree": 6,
-      "out_degree": 3,
-      "path": "app/src/main/java/com/whoareyou/app/TraitEvolution.kt"
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 12,
+      "path": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
         "app/src/main/java/com/whoareyou/app/ShareFileStore.kt",
@@ -711,41 +1074,83 @@
         "tools/test_share_storage_safety.py"
       ],
       "in_degree": 5,
-      "out_degree": 4,
+      "out_degree": 6,
       "path": "app/src/main/java/com/whoareyou/app/ResultShare.kt"
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt",
-        "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
-        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreChange.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
+        "app/src/main/java/com/whoareyou/app/ResultInterpretation.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/ResultInsightCardsTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/test/java/com/whoareyou/app/ResultIntelligenceTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt"
+      ],
+      "in_degree": 7,
+      "out_degree": 3,
+      "path": "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "tools/test_release_critical_profile_contract.py"
+      ],
+      "in_degree": 6,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt",
+        "app/src/test/java/com/whoareyou/app/TraitEvolutionEngineTest.kt",
+        "tools/test_progression_journal_integration.py",
+        "tools/test_trait_evolution_integration.py"
+      ],
+      "in_degree": 6,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/TraitEvolution.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt"
       ],
       "dependents": [],
       "in_degree": 0,
-      "out_degree": 9,
-      "path": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
-        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
-        "app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt",
-        "tools/test_release_critical_profile_contract.py"
-      ],
-      "in_degree": 8,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+      "out_degree": 10,
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt"
     },
     {
       "dependencies": [],
@@ -753,13 +1158,14 @@
         "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
         "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt",
         "app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitEvolutionUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraphUi.kt",
         "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
         "tools/test_profile_knowledge_map_contract.py"
       ],
-      "in_degree": 8,
+      "in_degree": 9,
       "out_degree": 0,
       "path": "app/src/main/java/com/whoareyou/app/TraitLocalization.kt"
     },
@@ -771,18 +1177,56 @@
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/play_preflight.py",
         "tools/test_battery_thermal_contract.py",
+        "tools/test_behavior_privacy_contract.py",
         "tools/test_m52_play_policy.py",
         "tools/test_manifest_security_contract.py",
         "tools/test_runtime_efficiency_contract.py",
         "tools/test_runtime_memory_lifecycle.py"
       ],
-      "in_degree": 7,
+      "in_degree": 8,
       "out_degree": 1,
       "path": "app/src/main/java/com/whoareyou/app/AdManager.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/test/java/com/whoareyou/app/LongitudinalTrendEngineTest.kt",
+        "app/src/test/java/com/whoareyou/app/ScoreHistoryEngineTest.kt",
+        "tools/test_release_critical_profile_contract.py"
+      ],
+      "in_degree": 8,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/ResultProfileConnectionsCardTest.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligenceUi.kt",
+        "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
+        "app/src/test/java/com/whoareyou/app/PersonalModelCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultProfileConnectionTest.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt"
+      ],
+      "in_degree": 6,
+      "out_degree": 3,
+      "path": "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt"
+    },
+    {
+      "dependencies": [
         "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
         "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
         "app/src/main/java/com/whoareyou/app/ShareFileStore.kt",
         "app/src/main/java/com/whoareyou/app/ShareSafety.kt"
@@ -794,11 +1238,12 @@
         "tools/test_share_storage_safety.py"
       ],
       "in_degree": 4,
-      "out_degree": 4,
+      "out_degree": 5,
       "path": "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
         "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
@@ -811,11 +1256,12 @@
         "tools/test_profile_coverage_integration.py"
       ],
       "in_degree": 4,
-      "out_degree": 4,
+      "out_degree": 5,
       "path": "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt"
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
         "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
         "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
@@ -828,8 +1274,110 @@
         "tools/test_profile_narrative_integration.py"
       ],
       "in_degree": 4,
-      "out_degree": 4,
+      "out_degree": 5,
       "path": "app/src/main/java/com/whoareyou/app/ProfileNarrative.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/Achievements.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+        "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt",
+        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+        "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 9,
+      "path": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorIntegrationPolicyTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt"
+      ],
+      "in_degree": 7,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt",
+        "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt",
+        "tools/test_profile_coverage_integration.py",
+        "tools/test_public_result_and_store_positioning.py"
+      ],
+      "in_degree": 4,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt",
+        "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
+        "tools/test_actionable_knowledge_map_contract.py"
+      ],
+      "in_degree": 4,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/TraitExploration.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "tools/test_behavior_integration_contract.py",
+        "tools/test_behavior_privacy_contract.py"
+      ],
+      "in_degree": 3,
+      "out_degree": 5,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultProfileConnection.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+        "app/src/test/java/com/whoareyou/app/ResultScreenIntelligenceTest.kt"
+      ],
+      "in_degree": 2,
+      "out_degree": 6,
+      "path": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt"
     },
     {
       "dependencies": [
@@ -851,22 +1399,6 @@
     {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/Achievements.kt",
-        "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
-        "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 8,
-      "path": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/Achievements.kt",
         "app/src/main/java/com/whoareyou/app/AppEvents.kt",
         "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
         "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt",
@@ -879,6 +1411,22 @@
       "in_degree": 0,
       "out_degree": 8,
       "path": "app/src/main/java/com/whoareyou/app/RetentionUi.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+        "tools/test_behavior_privacy_contract.py"
+      ],
+      "in_degree": 6,
+      "out_degree": 1,
+      "path": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt"
     },
     {
       "dependencies": [
@@ -898,6 +1446,22 @@
     },
     {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt"
+      ],
+      "in_degree": 5,
+      "out_degree": 2,
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt"
+    },
+    {
+      "dependencies": [
         "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
         "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
@@ -914,51 +1478,83 @@
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorStore.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "tools/test_behavior_privacy_contract.py"
+      ],
+      "in_degree": 4,
+      "out_degree": 3,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+        "tools/test_behavior_privacy_contract.py"
+      ],
+      "in_degree": 3,
+      "out_degree": 4,
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
         "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
       ],
       "dependents": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "tools/test_release_critical_profile_contract.py"
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt"
       ],
-      "in_degree": 4,
-      "out_degree": 3,
-      "path": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt"
+      "in_degree": 2,
+      "out_degree": 5,
+      "path": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt"
+      ],
+      "dependents": [
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt"
+      ],
+      "in_degree": 2,
+      "out_degree": 5,
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt"
     },
     {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
         "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt",
-        "app/src/test/java/com/whoareyou/app/ResultNextExplorationTest.kt",
-        "tools/test_profile_coverage_integration.py",
-        "tools/test_public_result_and_store_positioning.py"
-      ],
-      "in_degree": 4,
-      "out_degree": 3,
-      "path": "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+        "app/src/main/java/com/whoareyou/app/ResultIntelligence.kt",
+        "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraph.kt"
       ],
       "dependents": [
-        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-        "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt",
-        "app/src/test/java/com/whoareyou/app/TraitExplorationEngineTest.kt",
-        "tools/test_actionable_knowledge_map_contract.py"
+        "tools/test_m47_ui_test_wiring.py"
       ],
-      "in_degree": 4,
-      "out_degree": 3,
-      "path": "app/src/main/java/com/whoareyou/app/TraitExploration.kt"
+      "in_degree": 1,
+      "out_degree": 6,
+      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt"
     },
     {
       "dependencies": [
@@ -974,6 +1570,36 @@
       "in_degree": 0,
       "out_degree": 7,
       "path": "app/src/main/java/com/whoareyou/app/ChallengeUi.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 7,
+      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt"
+    },
+    {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
+        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
+        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+        "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
+        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 7,
+      "path": "app/src/test/java/com/whoareyou/app/PersonalModelTestFixtures.kt"
     },
     {
       "dependencies": [
@@ -1007,105 +1633,8 @@
     },
     {
       "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
-        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
       ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt"
-      ],
-      "in_degree": 2,
-      "out_degree": 4,
-      "path": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
-        "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DiscoverPersonalization.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileMomentum.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
-        "app/src/main/java/com/whoareyou/app/ResultNextExploration.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "app/src/main/java/com/whoareyou/app/ResultNextExplorationUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
-        "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
-        "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
-        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "tools/test_release_critical_profile_contract.py"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-        "app/src/main/java/com/whoareyou/app/BillingManager.kt",
-        "app/src/main/java/com/whoareyou/app/BillingReconnectPolicy.kt",
-        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 6,
-      "path": "tools/test_runtime_performance_contract.py"
-    },
-    {
-      "dependencies": [],
       "dependents": [
         "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt",
         "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
@@ -1114,224 +1643,12 @@
         "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt"
       ],
       "in_degree": 5,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/DailyQuestion.kt"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
-        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
-        "tools/test_share_rendering_performance.py",
-        "tools/test_share_storage_safety.py"
-      ],
-      "in_degree": 5,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/ShareFileStore.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/RetentionUi.kt"
-      ],
-      "in_degree": 3,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/Achievements.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-        "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-        "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt"
-      ],
-      "in_degree": 3,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/BrandMascotUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
-        "app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt",
-        "app/src/test/java/com/whoareyou/app/DiscoverLibraryEngineTest.kt"
-      ],
-      "in_degree": 3,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
-        "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-        "app/src/test/java/com/whoareyou/app/GuidedJourneysTest.kt"
-      ],
-      "in_degree": 3,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/GuidedJourneys.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-        "app/src/main/java/com/whoareyou/app/ScoreChange.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileEvolutionSummaryTest.kt"
-      ],
-      "in_degree": 3,
-      "out_degree": 2,
-      "path": "app/src/main/java/com/whoareyou/app/ProfileEvolutionSummary.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/ChallengeShare.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [
-        "tools/test_m49_architecture_cleanup.py"
-      ],
-      "in_degree": 1,
-      "out_degree": 4,
-      "path": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/ShareSafety.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/RetentionUi.kt"
-      ],
-      "in_degree": 1,
-      "out_degree": 4,
-      "path": "app/src/main/java/com/whoareyou/app/DailyQuestionShare.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
-        "app/src/main/java/com/whoareyou/app/TraitLocalization.kt",
-        "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 5,
-      "path": "app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/DailyQuestion.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
-        "app/src/main/java/com/whoareyou/app/ProfilePersistenceCodec.kt",
-        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 5,
-      "path": "app/src/test/java/com/whoareyou/app/ProfileIntegrityTest.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/BillingManager.kt",
-        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/Telemetry.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 5,
-      "path": "tools/test_m50_analytics.py"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/CompatibilityShare.kt",
-        "app/src/main/java/com/whoareyou/app/GlobalProfileShare.kt",
-        "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-        "app/src/main/java/com/whoareyou/app/ResultShare.kt",
-        "app/src/main/java/com/whoareyou/app/ShareFileStore.kt"
-      ],
-      "dependents": [],
-      "in_degree": 0,
-      "out_degree": 5,
-      "path": "tools/test_share_rendering_performance.py"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "tools/test_billing_launch_readiness.py",
-        "tools/test_public_launch_experience_contract.py"
-      ],
-      "in_degree": 4,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-        "app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt",
-        "app/src/test/java/com/whoareyou/app/RecommendationAttributionTest.kt",
-        "app/src/test/java/com/whoareyou/app/RecommendationTelemetryTest.kt"
-      ],
-      "in_degree": 4,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/RecommendationTelemetry.kt"
-    },
-    {
-      "dependencies": [],
-      "dependents": [
-        "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-        "app/src/main/java/com/whoareyou/app/ChallengeUi.kt",
-        "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-        "app/src/test/java/com/whoareyou/app/ScoringTest.kt"
-      ],
-      "in_degree": 4,
-      "out_degree": 0,
-      "path": "app/src/main/java/com/whoareyou/app/Scoring.kt"
-    },
-    {
-      "dependencies": [
-        "app/src/main/java/com/whoareyou/app/ProfileCoverage.kt"
-      ],
-      "dependents": [
-        "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt",
-        "app/src/test/java/com/whoareyou/app/ProfileKnowledgeMapEngineTest.kt",
-        "tools/test_profile_knowledge_map_contract.py"
-      ],
-      "in_degree": 3,
       "out_degree": 1,
-      "path": "app/src/main/java/com/whoareyou/app/ProfileKnowledgeMap.kt"
+      "path": "app/src/main/java/com/whoareyou/app/DailyQuestion.kt"
     }
   ],
-  "edge_count": 519,
+  "edge_count": 812,
   "generated_by": "dbrckk/repo-brain-v7-graph",
-  "node_count": 201,
+  "node_count": 269,
   "schema_version": 1
 }

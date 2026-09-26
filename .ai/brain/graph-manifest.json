@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 505,
+      "edge_count": 798,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -13,23 +13,28 @@
       "path": ".ai/brain/graph-shards/baseline-profile.json"
     },
     {
+      "area": "github",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/github.json"
+    },
+    {
       "area": "tools-check-play-bundle-budget.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-check-play-bundle-budget.py.json"
     },
     {
       "area": "tools-play-preflight.py",
-      "edge_count": 4,
+      "edge_count": 6,
       "path": ".ai/brain/graph-shards/tools-play-preflight.py.json"
     },
     {
       "area": "tools-play-promoter.py",
-      "edge_count": 2,
+      "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-play-promoter.py.json"
     },
     {
       "area": "tools-play-publisher.py",
-      "edge_count": 5,
+      "edge_count": 7,
       "path": ".ai/brain/graph-shards/tools-play-publisher.py.json"
     },
     {
@@ -39,7 +44,7 @@
     },
     {
       "area": "tools-test-actionable-knowledge-map-contract.py",
-      "edge_count": 4,
+      "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-test-actionable-knowledge-map-contract.py.json"
     },
     {
@@ -48,8 +53,18 @@
       "path": ".ai/brain/graph-shards/tools-test-battery-thermal-contract.py.json"
     },
     {
-      "area": "tools-test-billing-launch-readiness.py",
+      "area": "tools-test-behavior-integration-contract.py",
       "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-behavior-integration-contract.py.json"
+    },
+    {
+      "area": "tools-test-behavior-privacy-contract.py",
+      "edge_count": 15,
+      "path": ".ai/brain/graph-shards/tools-test-behavior-privacy-contract.py.json"
+    },
+    {
+      "area": "tools-test-billing-launch-readiness.py",
+      "edge_count": 4,
       "path": ".ai/brain/graph-shards/tools-test-billing-launch-readiness.py.json"
     },
     {
@@ -73,9 +88,9 @@
       "path": ".ai/brain/graph-shards/tools-test-longitudinal-trend-integration.py.json"
     },
     {
-      "area": "tools-test-m46-accessibility.py",
+      "area": "tools-test-m33-readiness.py",
       "edge_count": 1,
-      "path": ".ai/brain/graph-shards/tools-test-m46-accessibility.py.json"
+      "path": ".ai/brain/graph-shards/tools-test-m33-readiness.py.json"
     },
     {
       "area": "tools-test-m47-ui-test-wiring.py",
@@ -94,7 +109,7 @@
     },
     {
       "area": "tools-test-m50-analytics.py",
-      "edge_count": 5,
+      "edge_count": 4,
       "path": ".ai/brain/graph-shards/tools-test-m50-analytics.py.json"
     },
     {
@@ -104,7 +119,7 @@
     },
     {
       "area": "tools-test-m53-publication-contract.py",
-      "edge_count": 1,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-m53-publication-contract.py.json"
     },
     {
@@ -124,7 +139,7 @@
     },
     {
       "area": "tools-test-main-flow-recommendation-parity-contract.py",
-      "edge_count": 2,
+      "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-main-flow-recommendation-parity-contract.py.json"
     },
     {
@@ -144,7 +159,7 @@
     },
     {
       "area": "tools-test-persisted-result-score-contract.py",
-      "edge_count": 3,
+      "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-persisted-result-score-contract.py.json"
     },
     {
@@ -159,7 +174,7 @@
     },
     {
       "area": "tools-test-play-publisher.py",
-      "edge_count": 2,
+      "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-test-play-publisher.py.json"
     },
     {
@@ -184,7 +199,7 @@
     },
     {
       "area": "tools-test-profile-reset-contract.py",
-      "edge_count": 2,
+      "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-test-profile-reset-contract.py.json"
     },
     {
@@ -208,11 +223,6 @@
       "path": ".ai/brain/graph-shards/tools-test-public-result-and-store-positioning.py.json"
     },
     {
-      "area": "tools-test-quiz-commit-interaction-contract.py",
-      "edge_count": 1,
-      "path": ".ai/brain/graph-shards/tools-test-quiz-commit-interaction-contract.py.json"
-    },
-    {
       "area": "tools-test-quiz-commit-interaction-lock.py",
       "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-quiz-commit-interaction-lock.py.json"
@@ -229,7 +239,7 @@
     },
     {
       "area": "tools-test-quiz-result-persistence-feedback.py",
-      "edge_count": 2,
+      "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-quiz-result-persistence-feedback.py.json"
     },
     {
@@ -304,7 +314,7 @@
     },
     {
       "area": "tools-validate-public-release-inputs.py",
-      "edge_count": 2,
+      "edge_count": 3,
       "path": ".ai/brain/graph-shards/tools-validate-public-release-inputs.py.json"
     }
   ]

@@ -22,17 +22,19 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-19T07:38:49Z
+Generated: 2026-09-26T15:48:43Z
 
 ### Git
 - Branch: `main`
-- Head: `9e645840e8cc`
-- Commit date: 2026-09-19T09:37:31+02:00
-- Commit: chore(ai): adopt stable repo standards v20
-- Tracked files: 557
+- Head: `74f5abac791f`
+- Commit date: 2026-09-26T17:48:31+02:00
+- Commit: Merge pull request #74 from dbrckk/m774-local-behavioral-insights
+- Tracked files: 637
 
 ### Recently changed files
-- `.repo-standards.yml`
+- `app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt`
+- `app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt`
+- `app/src/main/res/values-fr/strings.xml`
 
 ### Project signals
 - `build.gradle.kts`

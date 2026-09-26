@@ -1,0 +1,21 @@
+{
+  "area": "github",
+  "edges": [
+    {
+      "source": ".github/scripts/validate-screenshot.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": ".github/scripts/validate-screenshot.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": ".github/scripts/validate-ui-hierarchy.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    }
+  ],
+  "schema_version": 1
+}
