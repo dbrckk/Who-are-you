@@ -46,6 +46,7 @@ private fun WhoAreYouApp() {
     val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(
         initial = BehaviorSnapshot(today = null, last7Days = emptyList(), last30Days = emptyList(), sourceStates = BehaviorSource.entries.associateWith { BehaviorSourceState.DISABLED }, insights = emptyList())
     )
+    val behaviorGoalsState = rememberBehaviorGoalsHostState(context, behaviorSnapshot)
     val behaviorRefreshCoordinator = remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }
     fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }
     BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }
@@ -144,7 +145,11 @@ private fun WhoAreYouApp() {
                             BehaviorSourceEffect.NONE -> Unit
                         }
                     } },
-                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } }
+                    onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context) } },
+                    goals = behaviorGoalsState.goals,
+                    onCreateGoal = behaviorGoalsState.onCreate,
+                    onSetGoalPaused = behaviorGoalsState.onSetPaused,
+                    onDeleteGoal = behaviorGoalsState.onDelete
                 )
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz, questionIndex = quizQuestionIndex, score = quizRawScore,
