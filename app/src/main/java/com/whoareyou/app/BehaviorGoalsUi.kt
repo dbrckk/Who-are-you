@@ -39,13 +39,11 @@ fun BehaviorGoalsSection(
     goals: List<BehaviorGoalUiModel>,
     availableApps: List<BehaviorAppUsageUi>,
     onCreate: (BehaviorGoalCreateRequest) -> Unit,
-    onEdit: (String, BehaviorGoalCreateRequest) -> Unit = { _, _ -> },
     onSetPaused: (String, Boolean) -> Unit,
     onDelete: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showCreate by remember { mutableStateOf(false) }
-    var editingGoal by remember { mutableStateOf<BehaviorGoalUiModel?>(null) }
     var pendingDeleteId by remember { mutableStateOf<String?>(null) }
 
     Column(
@@ -70,7 +68,6 @@ fun BehaviorGoalsSection(
         goals.forEach { goal ->
             BehaviorGoalCard(
                 goal = goal,
-                onEdit = { editingGoal = goal },
                 onSetPaused = onSetPaused,
                 onDelete = { pendingDeleteId = goal.id }
             )
@@ -89,24 +86,11 @@ fun BehaviorGoalsSection(
 
     if (showCreate) {
         BehaviorGoalEditorDialog(
-            initial = null,
             availableApps = availableApps,
             onDismiss = { showCreate = false },
             onSubmit = {
                 showCreate = false
                 onCreate(it)
-            }
-        )
-    }
-
-    editingGoal?.let { goal ->
-        BehaviorGoalEditorDialog(
-            initial = goal.toCreateRequest(),
-            availableApps = availableApps,
-            onDismiss = { editingGoal = null },
-            onSubmit = { request ->
-                editingGoal = null
-                onEdit(goal.id, request)
             }
         )
     }
@@ -139,7 +123,6 @@ fun BehaviorGoalsSection(
 @Composable
 private fun BehaviorGoalCard(
     goal: BehaviorGoalUiModel,
-    onEdit: () -> Unit,
     onSetPaused: (String, Boolean) -> Unit,
     onDelete: () -> Unit
 ) {
@@ -200,12 +183,6 @@ private fun BehaviorGoalCard(
                 )
             }
             Row(horizontalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
-                TextButton(
-                    onClick = onEdit,
-                    modifier = Modifier.testTag("behavior_goal_" + tagId + "_edit")
-                ) {
-                    Text(stringResource(R.string.goals_edit))
-                }
                 if (goal.statusCopy != BehaviorGoalCopyKey.STATUS_COMPLETED) {
                     val paused = goal.statusCopy == BehaviorGoalCopyKey.STATUS_PAUSED
                     TextButton(
@@ -230,20 +207,13 @@ private fun BehaviorGoalCard(
 
 @Composable
 private fun BehaviorGoalEditorDialog(
-    initial: BehaviorGoalCreateRequest?,
     availableApps: List<BehaviorAppUsageUi>,
     onDismiss: () -> Unit,
     onSubmit: (BehaviorGoalCreateRequest) -> Unit
 ) {
-    var metric by remember(initial) {
-        mutableStateOf(initial?.metric ?: BehaviorGoalMetric.STEPS_AT_LEAST)
-    }
-    var targetText by remember(initial) {
-        mutableStateOf(initial?.targetText().orEmpty())
-    }
-    var selectedPackage by remember(initial) {
-        mutableStateOf(initial?.packageName)
-    }
+    var metric by remember { mutableStateOf(BehaviorGoalMetric.STEPS_AT_LEAST) }
+    var targetText by remember { mutableStateOf("") }
+    var selectedPackage by remember { mutableStateOf<String?>(null) }
 
     val numericTarget = targetText.toLongOrNull()?.takeIf { it >= 0L }
     val targetValue = numericTarget?.let { value ->
@@ -252,12 +222,10 @@ private fun BehaviorGoalEditorDialog(
     }
     val canSubmit = targetValue != null &&
         (metric != BehaviorGoalMetric.APP_USAGE_AT_MOST || selectedPackage != null)
-    val editing = initial != null
-
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(stringResource(if (editing) R.string.goals_edit else R.string.goals_create))
+            Text(stringResource(R.string.goals_create))
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
@@ -360,11 +328,9 @@ private fun BehaviorGoalEditorDialog(
                         )
                     )
                 },
-                modifier = Modifier.testTag(
-                    if (editing) "behavior_goal_edit_confirm" else "behavior_goal_create_confirm"
-                )
+                modifier = Modifier.testTag("behavior_goal_create_confirm")
             ) {
-                Text(stringResource(if (editing) R.string.goals_update else R.string.goals_save))
+                Text(stringResource(R.string.goals_save))
             }
         },
         dismissButton = {
@@ -374,26 +340,6 @@ private fun BehaviorGoalEditorDialog(
         }
     )
 }
-
-private fun BehaviorGoalCreateRequest.targetText(): String =
-    if (metric == BehaviorGoalMetric.STEPS_AT_LEAST) {
-        targetValue.toString()
-    } else {
-        TimeUnit.MILLISECONDS.toMinutes(targetValue).toString()
-    }
-
-private fun BehaviorGoalUiModel.toCreateRequest(): BehaviorGoalCreateRequest =
-    BehaviorGoalCreateRequest(
-        metric = when (metricCopy) {
-            BehaviorGoalCopyKey.METRIC_STEPS -> BehaviorGoalMetric.STEPS_AT_LEAST
-            BehaviorGoalCopyKey.METRIC_SCREEN_TIME -> BehaviorGoalMetric.SCREEN_TIME_AT_MOST
-            BehaviorGoalCopyKey.METRIC_EVENING_USAGE -> BehaviorGoalMetric.EVENING_USAGE_AT_MOST
-            BehaviorGoalCopyKey.METRIC_APP_USAGE -> BehaviorGoalMetric.APP_USAGE_AT_MOST
-            else -> error("Goal metric copy expected")
-        },
-        targetValue = targetValue,
-        packageName = packageName
-    )
 
 @Composable
 private fun behaviorGoalMetricLabel(metric: BehaviorGoalMetric): String = stringResource(
