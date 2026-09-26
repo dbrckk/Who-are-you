@@ -40,7 +40,6 @@ fun BehaviorScreen(
     onDeleteAll: () -> Unit,
     goals: List<BehaviorGoalUiModel> = emptyList(),
     onCreateGoal: (BehaviorGoalCreateRequest) -> Unit = {},
-    onEditGoal: (String, BehaviorGoalCreateRequest) -> Unit = { _, _ -> },
     onSetGoalPaused: (String, Boolean) -> Unit = { _, _ -> },
     onDeleteGoal: (String) -> Unit = {}
 ) {
@@ -85,7 +84,6 @@ fun BehaviorScreen(
                 goals = goals,
                 availableApps = model.last7Days.topApps,
                 onCreate = onCreateGoal,
-                onEdit = onEditGoal,
                 onSetPaused = onSetGoalPaused,
                 onDelete = onDeleteGoal
             )
