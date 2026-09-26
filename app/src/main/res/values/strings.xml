@@ -244,6 +244,11 @@
     <string name="goals_delete_confirm">Delete this local goal? Your measured habits history will stay on this device.</string>
     <string name="goals_target_format">Your target: %1$s</string>
     <string name="goals_progress_format">%1$d observed days · %2$d days matching your target</string>
+    <string name="goals_select_metric">Choose what you want to experiment with</string>
+    <string name="goals_target_steps_input">Target steps</string>
+    <string name="goals_target_minutes_input">Target minutes</string>
+    <string name="goals_select_app">Choose an app observed in your local history</string>
+    <string name="goals_save">SAVE GOAL</string>
     <string name="habits_steps">%1$d steps</string>
     <string name="habits_screen_time">%1$s screen time</string>
     <string name="habits_sessions">%1$d sessions</string>
