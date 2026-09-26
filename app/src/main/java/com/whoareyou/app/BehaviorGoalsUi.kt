@@ -11,6 +11,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -23,6 +24,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.foundation.text.KeyboardOptions
 import java.util.concurrent.TimeUnit
 
 data class BehaviorGoalCreateRequest(
@@ -208,18 +211,127 @@ private fun BehaviorGoalCreateDialog(
     onDismiss: () -> Unit,
     onCreate: (BehaviorGoalCreateRequest) -> Unit
 ) {
+    var metric by remember { mutableStateOf(BehaviorGoalMetric.STEPS_AT_LEAST) }
+    var targetText by remember { mutableStateOf("") }
+    var selectedPackage by remember { mutableStateOf<String?>(null) }
+
+    val numericTarget = targetText.toLongOrNull()?.takeIf { it >= 0L }
+    val targetValue = numericTarget?.let { value ->
+        if (metric == BehaviorGoalMetric.STEPS_AT_LEAST) value
+        else value * 60_000L
+    }
+    val canCreate = targetValue != null &&
+        (metric != BehaviorGoalMetric.APP_USAGE_AT_MOST || selectedPackage != null)
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.goals_create)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
-                Text(stringResource(R.string.goals_user_defined))
-                if (availableApps.isEmpty()) {
-                    Text(stringResource(R.string.goals_missing_evidence))
+                Text(
+                    stringResource(R.string.goals_user_defined),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting
+                )
+                Text(
+                    stringResource(R.string.goals_select_metric),
+                    color = V2Colors.TextPrimary,
+                    style = V2Type.Caption
+                )
+                BehaviorGoalMetric.entries.forEach { option ->
+                    TextButton(
+                        onClick = {
+                            metric = option
+                            if (option != BehaviorGoalMetric.APP_USAGE_AT_MOST) {
+                                selectedPackage = null
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("behavior_goal_metric_" + option.metricTag())
+                    ) {
+                        Text(
+                            behaviorGoalMetricLabel(option),
+                            color = if (metric == option) V2Colors.AccentCyan else V2Colors.TextSecondary
+                        )
+                    }
+                }
+
+                OutlinedTextField(
+                    value = targetText,
+                    onValueChange = { value ->
+                        targetText = value.filter(Char::isDigit)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("behavior_goal_target_input"),
+                    label = {
+                        Text(
+                            stringResource(
+                                if (metric == BehaviorGoalMetric.STEPS_AT_LEAST) {
+                                    R.string.goals_target_steps_input
+                                } else {
+                                    R.string.goals_target_minutes_input
+                                }
+                            )
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true
+                )
+
+                if (metric == BehaviorGoalMetric.APP_USAGE_AT_MOST) {
+                    Text(
+                        stringResource(R.string.goals_select_app),
+                        color = V2Colors.TextPrimary,
+                        style = V2Type.Caption
+                    )
+                    if (availableApps.isEmpty()) {
+                        Text(
+                            stringResource(R.string.goals_missing_evidence),
+                            color = V2Colors.TextSecondary,
+                            style = V2Type.Supporting
+                        )
+                    } else {
+                        availableApps.forEach { app ->
+                            TextButton(
+                                onClick = { selectedPackage = app.packageName },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .testTag("behavior_goal_app_" + app.packageName.safeTag())
+                            ) {
+                                Text(
+                                    app.packageName,
+                                    color = if (selectedPackage == app.packageName) {
+                                        V2Colors.AccentCyan
+                                    } else {
+                                        V2Colors.TextSecondary
+                                    }
+                                )
+                            }
+                        }
+                    }
                 }
             }
         },
-        confirmButton = {},
+        confirmButton = {
+            TextButton(
+                enabled = canCreate,
+                onClick = {
+                    val value = targetValue ?: return@TextButton
+                    onCreate(
+                        BehaviorGoalCreateRequest(
+                            metric = metric,
+                            targetValue = value,
+                            packageName = selectedPackage
+                        )
+                    )
+                },
+                modifier = Modifier.testTag("behavior_goal_create_confirm")
+            ) {
+                Text(stringResource(R.string.goals_save))
+            }
+        },
         dismissButton = {
             TextButton(onClick = onDismiss) {
                 Text(stringResource(R.string.cancel))
@@ -227,6 +339,25 @@ private fun BehaviorGoalCreateDialog(
         }
     )
 }
+
+@Composable
+private fun behaviorGoalMetricLabel(metric: BehaviorGoalMetric): String = stringResource(
+    when (metric) {
+        BehaviorGoalMetric.STEPS_AT_LEAST -> R.string.goals_metric_steps
+        BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> R.string.goals_metric_screen_time
+        BehaviorGoalMetric.EVENING_USAGE_AT_MOST -> R.string.goals_metric_evening_usage
+        BehaviorGoalMetric.APP_USAGE_AT_MOST -> R.string.goals_metric_app_usage
+    }
+)
+
+private fun BehaviorGoalMetric.metricTag(): String = when (this) {
+    BehaviorGoalMetric.STEPS_AT_LEAST -> "steps"
+    BehaviorGoalMetric.SCREEN_TIME_AT_MOST -> "screen_time"
+    BehaviorGoalMetric.EVENING_USAGE_AT_MOST -> "evening_usage"
+    BehaviorGoalMetric.APP_USAGE_AT_MOST -> "app_usage"
+}
+
+private fun String.safeTag(): String = replace(Regex("[^A-Za-z0-9_-]"), "_")
 
 @Composable
 private fun behaviorGoalTarget(goal: BehaviorGoalUiModel): String = when (goal.valueKind) {
