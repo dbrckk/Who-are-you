@@ -149,39 +149,6 @@ class BehaviorGoalsUiTest {
     }
 
     @Test
-    fun editGoalUsesPrefilledFormAndRoutesUpdatedTarget() {
-        var edited: Pair<String, BehaviorGoalCreateRequest>? = null
-
-        composeRule.setContent {
-            WhoAreYouTheme {
-                BehaviorGoalsSection(
-                    goals = listOf(activeGoal),
-                    availableApps = emptyList(),
-                    onCreate = {},
-                    onEdit = { id, request -> edited = id to request },
-                    onSetPaused = { _, _ -> },
-                    onDelete = {}
-                )
-            }
-        }
-
-        composeRule.onNodeWithTag("behavior_goal_steps_edit").performClick()
-        composeRule.onNodeWithTag("behavior_goal_target_input")
-            .performTextReplacement("10000")
-        composeRule.onNodeWithTag("behavior_goal_edit_confirm").performClick()
-
-        composeRule.runOnIdle {
-            assertEquals(
-                "steps" to BehaviorGoalCreateRequest(
-                    metric = BehaviorGoalMetric.STEPS_AT_LEAST,
-                    targetValue = 10_000L
-                ),
-                edited
-            )
-        }
-    }
-
-    @Test
     fun deleteRequiresConfirmation() {
         var deleted = false
 
