@@ -36,7 +36,6 @@ object BehaviorGoalFactory {
 data class BehaviorGoalsHostState(
     val goals: List<BehaviorGoalUiModel>,
     val onCreate: (BehaviorGoalCreateRequest) -> Unit,
-    val onEdit: (String, BehaviorGoalCreateRequest) -> Unit,
     val onSetPaused: (String, Boolean) -> Unit,
     val onDelete: (String) -> Unit
 )
@@ -71,15 +70,6 @@ fun rememberBehaviorGoalsHostState(
                 )
                 scope.launch {
                     BehaviorGoalRepository.upsert(context.applicationContext, goal)
-                }
-            },
-            onEdit = { id, request ->
-                val existing = goals.firstOrNull { it.id == id }
-                if (existing != null) {
-                    val updated = BehaviorGoalFactory.update(existing, request)
-                    scope.launch {
-                        BehaviorGoalRepository.upsert(context.applicationContext, updated)
-                    }
                 }
             },
             onSetPaused = { id, paused ->
