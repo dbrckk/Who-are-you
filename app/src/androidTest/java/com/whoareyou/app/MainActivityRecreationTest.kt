@@ -1,15 +1,12 @@
 package com.whoareyou.app
 
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
-import androidx.compose.ui.test.onAllNodes
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
@@ -20,8 +17,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import org.junit.Assert.assertEquals
-import org.junit.Test
 import org.junit.Rule
+import org.junit.Test
 
 @OptIn(ExperimentalTestApi::class)
 class MainActivityRecreationTest {
@@ -72,8 +69,7 @@ class MainActivityRecreationTest {
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             waitForTag("app_screen_discover")
-            val tabMatcher = SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
-            composeRule.onAllNodes(tabMatcher)[1].performClick()
+            composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
             waitForTag("app_screen_profile")
             composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
             waitForTag("app_screen_habits")
