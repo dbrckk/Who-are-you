@@ -249,6 +249,8 @@
     <string name="goals_target_minutes_input">Objectif en minutes</string>
     <string name="goals_select_app">Choisis une app observée dans ton historique local</string>
     <string name="goals_save">ENREGISTRER L’OBJECTIF</string>
+    <string name="goals_edit">MODIFIER</string>
+    <string name="goals_update">METTRE À JOUR L’OBJECTIF</string>
     <string name="habits_steps">%1$d pas</string>
     <string name="habits_screen_time">%1$s de temps d’écran</string>
     <string name="habits_sessions">%1$d sessions</string>
