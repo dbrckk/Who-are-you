@@ -1742,6 +1742,14 @@
       "org.junit.Assert.assertTrue",
       "org.junit.Test"
     ],
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": [
+      "java.time.Instant",
+      "java.time.LocalDate",
+      "java.time.ZoneId",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Test"
+    ],
     "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
@@ -1993,6 +2001,11 @@
     "app/src/test/java/com/whoareyou/app/RecommendationTelemetryTest.kt": [
       "org.junit.Assert.assertEquals",
       "org.junit.Assert.assertFalse",
+      "org.junit.Test"
+    ],
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": [
+      "java.util.Locale",
+      "org.junit.Assert.assertEquals",
       "org.junit.Test"
     ],
     "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt": [
@@ -2516,9 +2529,18 @@
       "pathlib",
       "unittest"
     ],
+    "tools/test_release_ci_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_release_critical_profile_contract.py": [
       "pathlib",
       "unittest"
+    ],
+    "tools/test_release_integration_contract.py": [
+      "pathlib",
+      "unittest",
+      "xml.etree.ElementTree"
     ],
     "tools/test_release_workflows_contract.py": [
       "pathlib",

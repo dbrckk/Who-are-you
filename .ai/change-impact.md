@@ -1,37 +1,19 @@
 # Change impact
 
-Base: 74f5abac791f76ba85da402e6f71344b3297e766
-Head: 66aceb4ecfb808e68e9fad90cf66007cb834986f
+Base: 7eebde5cd9c5e15f712a060f58d1e1357080cb5c
+Head: e36ea7d6bf43534ea20107685107f5b8f647c540
 
 ## Changed files
-- A app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt
-- M app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt
-- A app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt
-- M app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt
-- M app/src/main/java/com/whoareyou/app/MainActivity.kt
-- M app/src/main/res/values-fr/strings.xml
-- M app/src/main/res/values/strings.xml
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt
-- A app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt
-- A docs/superpowers/plans/2026-09-25-m775-local-balance-goals.md
-- A docs/superpowers/specs/2026-09-25-m775-local-balance-goals-design.md
-- A tools/test_behavior_goal_copy_contract.py
-- A tools/test_behavior_goal_privacy_contract.py
-- A tools/test_behavior_goal_storage_contract.py
-- A tools/test_behavior_goal_v1_scope_contract.py
+- M .github/workflows/android-ci.yml
+- A app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt
+- A app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt
+- A docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md
+- A docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md
+- A tools/test_release_ci_contract.py
+- A tools/test_release_integration_contract.py
 
 ## Affected areas
+- .github
 - app
 - docs
 - tools

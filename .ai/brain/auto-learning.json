@@ -2,46 +2,28 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 2,
+    "example_count": 3,
     "rejected_count": 0,
     "terms": [
-      "76",
-      "dbrckk/m775-local-balance-goals",
+      "78",
+      "dbrckk/m776-release-integration-hardening",
       "from",
       "merge",
       "pull",
       "request"
     ],
     "test_count": 0,
-    "useful_count": 22
+    "useful_count": 4
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "Merge pull request #76 from dbrckk/m775-local-balance-goals",
+  "task": "Merge pull request #78 from dbrckk/m776-release-integration-hardening",
   "tests_selected": [],
   "useful": [
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-    "tools/test_behavior_goal_copy_contract.py",
-    "tools/test_behavior_goal_privacy_contract.py",
-    "tools/test_behavior_goal_storage_contract.py",
-    "tools/test_behavior_goal_v1_scope_contract.py"
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+    "tools/test_release_ci_contract.py",
+    "tools/test_release_integration_contract.py"
   ]
 }

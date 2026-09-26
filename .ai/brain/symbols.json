@@ -5832,6 +5832,48 @@
       "line": 112
     },
     {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "ActivityCollectorTest",
+      "line": 9
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "state",
+      "line": 63
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "readSteps",
+      "line": 64
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "FakeSource",
+      "line": 74
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "state",
+      "line": 80
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "readSteps",
+      "line": 82
+    },
+    {
       "file": "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt",
       "language": "kotlin",
       "kind": "class",
@@ -6817,6 +6859,13 @@
       "kind": "symbol",
       "name": "guidedRecommendationUsesNeutralGuidedMode",
       "line": 18
+    },
+    {
+      "file": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "ReleaseCompatibilityCodecTest",
+      "line": 6
     },
     {
       "file": "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt",
@@ -10242,6 +10291,20 @@
       "line": 28
     },
     {
+      "file": "tools/test_release_ci_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ReleaseCiContractTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_release_ci_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_ci_builds_release_like_candidate_apk",
+      "line": 9
+    },
+    {
       "file": "tools/test_release_critical_profile_contract.py",
       "language": "python",
       "kind": "class",
@@ -10282,6 +10345,62 @@
       "kind": "function",
       "name": "test_profile_explains_next_quiz",
       "line": 33
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ReleaseIntegrationContractTest",
+      "line": 11
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "read",
+      "line": 12
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_fresh_behavior_state_is_disabled_until_user_action",
+      "line": 15
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_permission_launches_are_confined_to_user_source_actions",
+      "line": 30
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_profile_and_habits_resets_have_separate_scopes",
+      "line": 36
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_goal_progress_is_recomputed_not_persisted",
+      "line": 55
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_release_hardening_adds_no_permission",
+      "line": 66
+    },
+    {
+      "file": "tools/test_release_integration_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_behavior_and_goal_stores_remain_separate",
+      "line": 81
     },
     {
       "file": "tools/test_release_workflows_contract.py",

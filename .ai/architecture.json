@@ -13,15 +13,15 @@
   "dominant_extensions": [
     {
       "extension": ".kt",
-      "count": 228
+      "count": 230
     },
     {
       "extension": ".json",
-      "count": 183
+      "count": 187
     },
     {
       "extension": ".py",
-      "count": 102
+      "count": 104
     },
     {
       "extension": ".xml",
@@ -29,7 +29,7 @@
     },
     {
       "extension": ".md",
-      "count": 56
+      "count": 58
     },
     {
       "extension": ".yml",

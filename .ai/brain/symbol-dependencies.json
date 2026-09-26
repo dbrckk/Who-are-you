@@ -5,1336 +5,79 @@
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
   "symbols": {
-    "BehaviorGoalsUiTest": {
+    "ActivityCollectorTest": {
       "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 23,
-        "end": 307
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorAppUsageUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalValueKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "Rule",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
-              "line": 43,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "activeGoalShowsMeasuredProgressAndRoutesPause",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 61,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "compactLargeFontCreateDialogKeepsLateAppOptionReachable",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 239,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "compactLargeFontLayoutKeepsCreateReachable",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 288,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "createEveningGoalConvertsMinutesToMillis",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 173,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "createScreenTimeGoalConvertsMinutesToMillis",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 117,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "createSelectedAppGoalKeepsPackageIdentity",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 205,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "createStepsGoalUsesExplicitUserValue",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 86,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "deleteRequiresConfirmation",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 266,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "emptyStateExplainsUserDefinedTargetsAndOffersCreate",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 42,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "pausedGoalRoutesResume",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-              "line": 149,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 19
-    },
-    "emptyStateExplainsUserDefinedTargetsAndOffersCreate": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 41,
-        "end": 58
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "activeGoalShowsMeasuredProgressAndRoutesPause": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 60,
-        "end": 83
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "createStepsGoalUsesExplicitUserValue": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 85,
-        "end": 114
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 4
-    },
-    "createScreenTimeGoalConvertsMinutesToMillis": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 116,
-        "end": 146
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 4
-    },
-    "pausedGoalRoutesResume": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 148,
-        "end": 170
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "createEveningGoalConvertsMinutesToMillis": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 172,
-        "end": 202
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 4
-    },
-    "createSelectedAppGoalKeepsPackageIdentity": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 204,
-        "end": 236
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorAppUsageUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 5
-    },
-    "compactLargeFontCreateDialogKeepsLateAppOptionReachable": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 238,
-        "end": 263
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorAppUsageUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "deleteRequiresConfirmation": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 265,
-        "end": 285
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "compactLargeFontLayoutKeepsCreateReachable": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-        "start": 287,
-        "end": 306
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "BehaviorScreenUiTest": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 22,
-        "end": 187
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorEvidenceTier",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 52,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalValueKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorInsight",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 64,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorInsightCategory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 54,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSnapshot",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 71,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorUiModelFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 88,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "Rule",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
-              "line": 43,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "compactLargeFontLayoutKeepsDataControlsReachable",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-              "line": 68,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "deleteAllRequiresExplicitConfirmation",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-              "line": 92,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "habitsScreenRendersGoalsAndRoutesGoalActions",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-              "line": 120,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "habitsScreenSeparatesFactsPatternsSuggestionsAndControls",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-              "line": 38,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "sourceCtaRoutesTypedAction",
-          "definitions": [
-            {
-              "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-              "line": 162,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 18
-    },
-    "habitsScreenSeparatesFactsPatternsSuggestionsAndControls": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 37,
-        "end": 65
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "compactLargeFontLayoutKeepsDataControlsReachable": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 67,
-        "end": 89
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "deleteAllRequiresExplicitConfirmation": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 91,
-        "end": 117
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "habitsScreenRendersGoalsAndRoutesGoalActions": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 119,
-        "end": 159
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalValueKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 5
-    },
-    "sourceCtaRoutesTypedAction": {
-      "source": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-        "start": 161,
-        "end": 186
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 4
-    },
-    "BehaviorGoalMetric": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 3,
-        "end": 8
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorGoal": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
         "start": 10,
-        "end": 85
+        "end": 88
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoalMetric",
+          "symbol": "ActivityCollector",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 17,
               "kind": "class",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "appUsageAtMost",
+          "symbol": "ActivityDataSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 69,
-              "kind": "symbol",
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 12,
+              "kind": "interface",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "eveningUsageAtMost",
+          "symbol": "ActivityDay",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 56,
-              "kind": "symbol",
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 47,
+              "kind": "class",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "screenTimeAtMost",
+          "symbol": "BehaviorCollectionResult",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 41,
+              "kind": "interface",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "Data",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
               "line": 43,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "stepsAtLeast",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 30,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 5
-    },
-    "stepsAtLeast": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 30,
-        "end": 150
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
               "kind": "class",
               "language": "kotlin"
             }
@@ -1342,105 +85,11 @@
           "relation": "class_like"
         },
         {
-          "symbol": "appUsageAtMost",
+          "symbol": "FakeSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 69,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "canonicalDayKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "evaluate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "eveningUsageAtMost",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 56,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "screenTimeAtMost",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 43,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 14
-    },
-    "screenTimeAtMost": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 43,
-        "end": 163
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 74,
               "kind": "class",
               "language": "kotlin"
             }
@@ -1448,71 +97,11 @@
           "relation": "same_file"
         },
         {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
+          "symbol": "NoData",
           "definitions": [
             {
               "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
+              "line": 44,
               "kind": "class",
               "language": "kotlin"
             }
@@ -1520,93 +109,11 @@
           "relation": "class_like"
         },
         {
-          "symbol": "appUsageAtMost",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 69,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "canonicalDayKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "evaluate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "eveningUsageAtMost",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 56,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 13
-    },
-    "eveningUsageAtMost": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 56,
-        "end": 176
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "AppUsageAggregate",
+          "symbol": "Unavailable",
           "definitions": [
             {
               "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 2,
+              "line": 45,
               "kind": "class",
               "language": "kotlin"
             }
@@ -1614,95 +121,17 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoal",
+          "symbol": "readSteps",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 64,
+              "kind": "symbol",
               "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
+            },
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "appUsageAtMost",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 69,
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 82,
               "kind": "symbol",
               "language": "kotlin"
             }
@@ -1710,420 +139,17 @@
           "relation": "same_file"
         },
         {
-          "symbol": "canonicalDayKey",
+          "symbol": "state",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 63,
               "kind": "symbol",
               "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "evaluate",
-          "definitions": [
+            },
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 13
-    },
-    "appUsageAtMost": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 69,
-        "end": 189
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "AppUsageAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "canonicalDayKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "evaluate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 12
-    },
-    "BehaviorGoalStatus": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 87,
-        "end": 91
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorGoalDayResult": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 93,
-        "end": 97
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "BehaviorGoalProgress": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 99,
-        "end": 105
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "BehaviorGoalEngine": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 107,
-        "end": 181
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "AppUsageAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "canonicalDayKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "evaluate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 80,
               "kind": "symbol",
               "language": "kotlin"
             }
@@ -2133,67 +159,19 @@
       ],
       "dependency_count": 11
     },
-    "evaluate": {
+    "state": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 108,
-        "end": 145
+        "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+        "start": 63,
+        "end": 183
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoal",
+          "symbol": "ActivityCollector",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalDayResult",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 92,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalProgress",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 98,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 17,
               "kind": "class",
               "language": "kotlin"
             }
@@ -2201,117 +179,261 @@
           "relation": "class_like"
         },
         {
-          "symbol": "canonicalDayKey",
+          "symbol": "ActivityDataSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 164,
-              "kind": "symbol",
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 12,
+              "kind": "interface",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "measuredValue",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 146,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "meetsTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 157,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 8
-    },
-    "measuredValue": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 147,
-        "end": 156
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "DailyBehaviorAggregate",
+          "symbol": "BehaviorCollectionResult",
           "definitions": [
             {
               "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 22,
+              "line": 41,
+              "kind": "interface",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
               "kind": "class",
               "language": "kotlin"
             }
           ],
           "relation": "class_like"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "meetsTarget": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 158,
-        "end": 163
-      },
-      "symbol_dependencies": [
+        },
         {
-          "symbol": "BehaviorGoalMetric",
+          "symbol": "FakeSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 74,
               "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "Unavailable",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 45,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "readSteps",
+          "definitions": [
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 64,
+              "kind": "symbol",
+              "language": "kotlin"
+            },
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 82,
+              "kind": "symbol",
               "language": "kotlin"
             }
           ],
           "relation": "same_file"
         }
       ],
-      "dependency_count": 1
+      "dependency_count": 7
     },
-    "canonicalDayKey": {
+    "readSteps": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-        "start": 165,
-        "end": 180
+        "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+        "start": 64,
+        "end": 184
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ActivityCollector",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 17,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 12,
+              "kind": "interface",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorCollectionResult",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 41,
+              "kind": "interface",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "FakeSource",
+          "definitions": [
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 74,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "Unavailable",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 45,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "state",
+          "definitions": [
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 63,
+              "kind": "symbol",
+              "language": "kotlin"
+            },
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 80,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 7
+    },
+    "FakeSource": {
+      "source": {
+        "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+        "start": 75,
+        "end": 87
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 12,
+              "kind": "interface",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "readSteps",
+          "definitions": [
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 64,
+              "kind": "symbol",
+              "language": "kotlin"
+            },
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 82,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "state",
+          "definitions": [
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 63,
+              "kind": "symbol",
+              "language": "kotlin"
+            },
+            {
+              "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+              "line": 80,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 4
+    },
+    "ReleaseCompatibilityCodecTest": {
+      "source": {
+        "file": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+        "start": 7,
+        "end": 97
       },
       "symbol_dependencies": [
         {
@@ -2327,6 +449,42 @@
           "relation": "class_like"
         },
         {
+          "symbol": "BehaviorGoal",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+              "line": 9,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorGoalStoreCodec",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+              "line": 5,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorStoreCodec",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+              "line": 13,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
           "symbol": "DailyBehaviorAggregate",
           "definitions": [
             {
@@ -2337,142 +495,71 @@
             }
           ],
           "relation": "class_like"
+        },
+        {
+          "symbol": "DaypartUsage",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 8,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
         }
       ],
-      "dependency_count": 2
+      "dependency_count": 6
     },
-    "BehaviorGoalFactory": {
+    "ReleaseCiContractTest": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-        "start": 13,
-        "end": 26
+        "file": "tools/test_release_ci_contract.py",
+        "start": 8,
+        "end": 22
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoal",
+          "symbol": "test_ci_builds_release_like_candidate_apk",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+              "file": "tools/test_release_ci_contract.py",
               "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "create",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-              "line": 14,
-              "kind": "symbol",
-              "language": "kotlin"
+              "kind": "function",
+              "language": "python"
             }
           ],
           "relation": "same_file"
         }
       ],
-      "dependency_count": 3
+      "dependency_count": 1
     },
-    "create": {
+    "test_ci_builds_release_like_candidate_apk": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-        "start": 14,
-        "end": 24
+        "file": "tools/test_release_ci_contract.py",
+        "start": 9,
+        "end": 22
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "ReleaseIntegrationContractTest": {
+      "source": {
+        "file": "tools/test_release_integration_contract.py",
+        "start": 11,
+        "end": 87
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoal",
+          "symbol": "AppScreen",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 2,
               "kind": "class",
               "language": "kotlin"
             }
           ],
           "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "BehaviorGoalsHostState": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-        "start": 28,
-        "end": 33
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "rememberBehaviorGoalsHostState": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-        "start": 35,
-        "end": 79
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-              "line": 12,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
         },
         {
           "symbol": "BehaviorGoalPresentation",
@@ -2487,6 +574,18 @@
           "relation": "class_like"
         },
         {
+          "symbol": "BehaviorGoalProgress",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+              "line": 98,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
           "symbol": "BehaviorGoalRepository",
           "definitions": [
             {
@@ -2499,93 +598,11 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalsHostState",
+          "symbol": "BehaviorRepository",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-              "line": 27,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorSnapshot",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 71,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "create",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-              "line": 14,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 6
-    },
-    "BehaviorGoalPresentation": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-        "start": 3,
-        "end": 18
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModelFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 35,
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
               "kind": "class",
               "language": "kotlin"
             }
@@ -2605,33 +622,23 @@
           "relation": "class_like"
         },
         {
-          "symbol": "build",
+          "symbol": "BehaviorSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
               "line": 4,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 6
-    },
-    "build": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-        "start": 4,
-        "end": 17
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
               "kind": "class",
               "language": "kotlin"
             }
@@ -2639,163 +646,150 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 106,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModelFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 35,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSnapshot",
+          "symbol": "BehaviorSourceState",
           "definitions": [
             {
               "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 71,
+              "line": 33,
               "kind": "class",
               "language": "kotlin"
             }
           ],
           "relation": "class_like"
+        },
+        {
+          "symbol": "MainActivity",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 30,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "read",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 12,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_behavior_and_goal_stores_remain_separate",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 81,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_fresh_behavior_state_is_disabled_until_user_action",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 15,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_goal_progress_is_recomputed_not_persisted",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 55,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_permission_launches_are_confined_to_user_source_actions",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 30,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_profile_and_habits_resets_have_separate_scopes",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 36,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_release_hardening_adds_no_permission",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 66,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
         }
       ],
-      "dependency_count": 5
+      "dependency_count": 18
     },
-    "BehaviorGoalRepository": {
+    "read": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 19,
-        "end": 62
+        "file": "tools/test_release_integration_contract.py",
+        "start": 12,
+        "end": 13
       },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalStoreCodec",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 5,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "clearAll",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-              "line": 56,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "observe",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-              "line": 21,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "remove",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "setPaused",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-              "line": 38,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "upsert",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-              "line": 29,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 7
+      "symbol_dependencies": [],
+      "dependency_count": 0
     },
-    "observe": {
+    "test_fresh_behavior_state_is_disabled_until_user_action": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 22,
+        "file": "tools/test_release_integration_contract.py",
+        "start": 15,
         "end": 28
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoal",
+          "symbol": "BehaviorSource",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
               "kind": "class",
               "language": "kotlin"
             }
@@ -2803,587 +797,83 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalStoreCodec",
+          "symbol": "BehaviorSourceEffect",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 5,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "upsert": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 30,
-        "end": 37
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalStoreCodec",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 5,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "setPaused": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 39,
-        "end": 46
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalStoreCodec",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 5,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "remove": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 48,
-        "end": 55
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalStoreCodec",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 5,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "clearAll": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "start": 57,
-        "end": 61
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorGoalStoreCodec": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 6,
-        "end": 95
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "canonicalGoalKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 77,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "decode",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 28,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "decodeGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 59,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "decodeText",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 90,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "encode",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 10,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "encodeText",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 86,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "remove",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 56,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "retain",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 41,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "setPaused",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 53,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "upsert",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 50,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 12
-    },
-    "encode": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 11,
-        "end": 27
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "encodeText",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 86,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "retain",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 41,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "decode": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 29,
-        "end": 40
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "decodeGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 59,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "retain",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 41,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "retain": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 42,
-        "end": 49
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "canonicalGoalKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 77,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "decodeGoal": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 60,
-        "end": 76
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "decodeText",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 90,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "canonicalGoalKey": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 78,
-        "end": 85
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoal",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "encodeText": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 87,
-        "end": 89
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "decodeText": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-        "start": 91,
-        "end": 94
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "decode",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-              "line": 28,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "BehaviorGoalTargetParser": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-        "start": 3,
-        "end": 14
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "parse",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
               "line": 4,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "parse": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-        "start": 4,
-        "end": 13
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
               "kind": "class",
               "language": "kotlin"
             }
           ],
           "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "MainActivity",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 30,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "read",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 12,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
         }
       ],
-      "dependency_count": 1
+      "dependency_count": 5
     },
-    "BehaviorGoalCopyKey": {
+    "test_permission_launches_are_confined_to_user_source_actions": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-        "start": 3,
-        "end": 15
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorGoalValueKind": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-        "start": 17,
-        "end": 20
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorGoalUiModel": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-        "start": 22,
+        "file": "tools/test_release_integration_contract.py",
+        "start": 30,
         "end": 34
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoalCopyKey",
+          "symbol": "MainActivity",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 30,
               "kind": "class",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalValueKind",
+          "symbol": "read",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
+              "file": "tools/test_release_integration_contract.py",
+              "line": 12,
+              "kind": "function",
+              "language": "python"
             }
           ],
           "relation": "same_file"
@@ -3391,30 +881,100 @@
       ],
       "dependency_count": 2
     },
-    "BehaviorGoalUiModelFactory": {
+    "test_profile_and_habits_resets_have_separate_scopes": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+        "file": "tools/test_release_integration_contract.py",
         "start": 36,
-        "end": 77
+        "end": 53
       },
       "symbol_dependencies": [
         {
-          "symbol": "BehaviorGoalCopyKey",
+          "symbol": "AppScreen",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
               "line": 2,
               "kind": "class",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
+          "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalMetric",
+          "symbol": "BehaviorGoalRepository",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+              "line": 18,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "MainActivity",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 30,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "read",
+          "definitions": [
+            {
+              "file": "tools/test_release_integration_contract.py",
+              "line": 12,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 6
+    },
+    "test_goal_progress_is_recomputed_not_persisted": {
+      "source": {
+        "file": "tools/test_release_integration_contract.py",
+        "start": 55,
+        "end": 64
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "BehaviorGoalPresentation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
               "line": 2,
               "kind": "class",
               "language": "kotlin"
@@ -3435,1344 +995,12 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorGoalStatus",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 86,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalValueKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "build",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 37,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 7
-    },
-    "BehaviorGoalCreateRequest": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 33,
-        "end": 37
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "BehaviorGoalsSection": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 39,
-        "end": 123
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorAppUsageUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCard",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 126,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalEditorDialog",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 211,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Spacing",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 8
-    },
-    "BehaviorGoalCard": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 125,
-        "end": 208
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Radius",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 51,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Spacing",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "behaviorGoalCopy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 371,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "behaviorGoalTarget",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 365,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 8
-    },
-    "BehaviorGoalEditorDialog": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 210,
-        "end": 343
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorAppUsageUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalTargetParser",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Spacing",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "behaviorGoalMetricLabel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 346,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 8
-    },
-    "behaviorGoalMetricLabel": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 345,
-        "end": 353
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "behaviorGoalTarget": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 364,
-        "end": 368
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalValueKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 16,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "goalDurationLabel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 386,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "behaviorGoalCopy": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 370,
-        "end": 385
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorGoalCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "goalDurationLabel": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-        "start": 387,
-        "end": 392
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "BehaviorScreen": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 35,
-        "end": 125
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "AccessibleBackAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AccessibilityUi.kt",
-              "line": 14,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalCreateRequest",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 32,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorGoalsSection",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-              "line": 40,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorPatternsCard",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 201,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorPeriodCard",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 167,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceCard",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 128,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorSuggestionsCard",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 222,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "BehaviorUiModel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 78,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Spacing",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 14
-    },
-    "BehaviorSourceCard": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 127,
-        "end": 164
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Radius",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 51,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "behaviorAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 266,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "behaviorCopy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 274,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 8
-    },
-    "BehaviorPeriodCard": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 166,
-        "end": 198
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorPeriodUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 53,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Radius",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 51,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "appDisplayName",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 248,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "behaviorMetric",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 239,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "durationLabel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 257,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 7
-    },
-    "BehaviorPatternsCard": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 200,
-        "end": 219
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorPatternUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 67,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Radius",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 51,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "behaviorCopy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 274,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 5
-    },
-    "BehaviorSuggestionsCard": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 221,
-        "end": 236
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorSuggestionUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 74,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Colors",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 8,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Radius",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 51,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "V2Type",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
-              "line": 58,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "behaviorCopy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 274,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 5
-    },
-    "behaviorMetric": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 238,
-        "end": 245
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorMetricKind",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorMetricUi",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 43,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "durationLabel",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 257,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "appDisplayName": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 247,
-        "end": 256
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "durationLabel": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 258,
-        "end": 263
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "behaviorAction": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 265,
-        "end": 271
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorSourceAction",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "behaviorCopy": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-        "start": 273,
-        "end": 300
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "BehaviorCopyKey",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 17,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 1
-    },
-    "MainActivity": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "start": 31,
-        "end": 34
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "WhoAreYouApp",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 37,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "attachBaseContext",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 32,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onCreate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 33,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 4
-    },
-    "attachBaseContext": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "start": 32,
-        "end": 32
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "onCreate": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "start": 33,
-        "end": 33
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "WhoAreYouApp",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 37,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "WhoAreYouTheme",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        }
-      ],
-      "dependency_count": 2
-    },
-    "WhoAreYouApp": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "start": 36,
-        "end": 175
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "AdManager",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AdManager.kt",
-              "line": 14,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppEvents",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppNavigation",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppShellNavigation",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-              "line": 52,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
           "symbol": "BehaviorGoalRepository",
           "definitions": [
             {
               "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
               "line": 18,
               "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorIntegrationPolicy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorRefreshOnResume",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
-              "line": 16,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorRepository",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-              "line": 22,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
               "language": "kotlin"
             }
           ],
@@ -4791,399 +1019,36 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorSource",
+          "symbol": "read",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceActionHandler",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
-              "line": 11,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceEffect",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
-              "line": 4,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceState",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 33,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorUiModelFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 88,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BillingManager",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BillingPriceState",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+              "file": "tools/test_release_integration_contract.py",
               "line": 12,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BrandLoadingScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 267,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "CatalogUnavailableScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 53,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "DiscoverHub",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-              "line": 52,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "GlobalProfileEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "HealthConnectActivityDataSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "OnboardingScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "PremiumAppShellBar",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-              "line": 69,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ProfileScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-              "line": 54,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ProfileStore",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "Quiz",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-              "line": 11,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizAttemptEvidence",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizRepository",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-              "line": 29,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizResultCommitEffect",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
-              "line": 8,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ResultEvidenceEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
-              "line": 17,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ResultScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
-              "line": 54,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "UsageAccess",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "navigate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 107,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onCreate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 33,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "refreshBehavior",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 51,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "resetQuizAttempt",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 109,
-              "kind": "symbol",
-              "language": "kotlin"
+              "kind": "function",
+              "language": "python"
             }
           ],
           "relation": "same_file"
         }
       ],
-      "dependency_count": 39
+      "dependency_count": 5
     },
-    "refreshBehavior": {
+    "test_release_hardening_adds_no_permission": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "start": 51,
-        "end": 171
+        "file": "tools/test_release_integration_contract.py",
+        "start": 66,
+        "end": 79
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_behavior_and_goal_stores_remain_separate": {
+      "source": {
+        "file": "tools/test_release_integration_contract.py",
+        "start": 81,
+        "end": 87
       },
       "symbol_dependencies": [
-        {
-          "symbol": "AdManager",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AdManager.kt",
-              "line": 14,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppEvents",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppNavigation",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "AppScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
         {
           "symbol": "BehaviorGoalRepository",
           "definitions": [
@@ -5191,30 +1056,6 @@
               "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
               "line": 18,
               "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorIntegrationPolicy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
-              "line": 9,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorRefreshOnResume",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
-              "line": 16,
-              "kind": "symbol",
               "language": "kotlin"
             }
           ],
@@ -5233,186 +1074,6 @@
           "relation": "class_like"
         },
         {
-          "symbol": "BehaviorScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-              "line": 36,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 31,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceActionHandler",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
-              "line": 11,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceEffect",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
-              "line": 4,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorSourceState",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-              "line": 33,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BehaviorUiModelFactory",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
-              "line": 88,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BillingManager",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
-              "line": 21,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BillingPriceState",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
-              "line": 12,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "BrandLoadingScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 267,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "CatalogUnavailableScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 53,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "DiscoverHub",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
-              "line": 52,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "GlobalProfileEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
-              "line": 44,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "HealthConnectActivityDataSource",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
-              "line": 48,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "OnboardingScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
-              "line": 108,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ProfileScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-              "line": 54,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
           "symbol": "ProfileStore",
           "definitions": [
             {
@@ -5425,115 +1086,19 @@
           "relation": "class_like"
         },
         {
-          "symbol": "QuizAttemptEvidence",
+          "symbol": "read",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
-              "line": 2,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizResultCommitEffect",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
-              "line": 8,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "QuizScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ResultEvidenceEngine",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
-              "line": 17,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "ResultScreen",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
-              "line": 54,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "UsageAccess",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
-              "line": 10,
-              "kind": "class",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "class_like"
-        },
-        {
-          "symbol": "navigate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 107,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onCreate",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 33,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "resetQuizAttempt",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-              "line": 109,
-              "kind": "symbol",
-              "language": "kotlin"
+              "file": "tools/test_release_integration_contract.py",
+              "line": 12,
+              "kind": "function",
+              "language": "python"
             }
           ],
           "relation": "same_file"
         }
       ],
-      "dependency_count": 33
+      "dependency_count": 4
     }
   }
 }

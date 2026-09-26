@@ -227,10 +227,11 @@
         "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
         "tools/test_behavior_privacy_contract.py"
       ],
-      "in_degree": 6,
+      "in_degree": 7,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/AdManager.kt": {
@@ -307,10 +308,11 @@
         "tools/test_behavior_integration_contract.py",
         "tools/test_m49_architecture_cleanup.py",
         "tools/test_release_critical_profile_contract.py",
+        "tools/test_release_integration_contract.py",
         "tools/test_restored_quiz_recovery.py",
         "tools/test_runtime_performance_contract.py"
       ],
-      "in_degree": 13,
+      "in_degree": 14,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/AppScreenTransitionUi.kt": {
@@ -405,10 +407,12 @@
         "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
         "tools/test_behavior_goal_privacy_contract.py",
-        "tools/test_behavior_goal_storage_contract.py"
+        "tools/test_behavior_goal_storage_contract.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 16,
+      "in_degree": 18,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt": {
@@ -435,9 +439,10 @@
       "dependents": [
         "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-        "tools/test_behavior_goal_privacy_contract.py"
+        "tools/test_behavior_goal_privacy_contract.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 3,
+      "in_degree": 4,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt": {
@@ -451,9 +456,10 @@
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/test_behavior_goal_privacy_contract.py",
         "tools/test_behavior_goal_storage_contract.py",
-        "tools/test_behavior_goal_v1_scope_contract.py"
+        "tools/test_behavior_goal_v1_scope_contract.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 5,
+      "in_degree": 6,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt": {
@@ -462,9 +468,10 @@
       ],
       "dependents": [
         "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt"
+        "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt"
       ],
-      "in_degree": 2,
+      "in_degree": 3,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt": {
@@ -618,6 +625,7 @@
         "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt",
         "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
         "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+        "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
         "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt",
         "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
@@ -627,10 +635,12 @@
         "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
         "tools/test_behavior_privacy_contract.py",
-        "tools/test_billing_launch_readiness.py"
+        "tools/test_billing_launch_readiness.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 85,
+      "in_degree": 88,
       "out_degree": 0
     },
     "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": {
@@ -660,9 +670,10 @@
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/test_behavior_goal_storage_contract.py",
         "tools/test_behavior_goal_v1_scope_contract.py",
-        "tools/test_behavior_privacy_contract.py"
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 6,
+      "in_degree": 7,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": {
@@ -701,9 +712,10 @@
       "dependents": [
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/test_behavior_integration_contract.py",
-        "tools/test_behavior_privacy_contract.py"
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 3,
+      "in_degree": 4,
       "out_degree": 5
     },
     "app/src/main/java/com/whoareyou/app/BehaviorStore.kt": {
@@ -712,9 +724,10 @@
       ],
       "dependents": [
         "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-        "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt"
+        "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt"
       ],
-      "in_degree": 2,
+      "in_degree": 3,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt": {
@@ -1191,6 +1204,7 @@
         "tools/test_quiz_process_recreation_contract.py",
         "tools/test_quiz_result_persistence_feedback.py",
         "tools/test_release_critical_profile_contract.py",
+        "tools/test_release_integration_contract.py",
         "tools/test_restored_quiz_recovery.py",
         "tools/test_runtime_efficiency_contract.py",
         "tools/test_runtime_performance_contract.py",
@@ -1198,7 +1212,7 @@
         "tools/test_string_resource_parity.py",
         "tools/test_trait_evolution_integration.py"
       ],
-      "in_degree": 22,
+      "in_degree": 23,
       "out_degree": 21
     },
     "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt": {
@@ -1618,11 +1632,12 @@
         "tools/test_profile_startup_resilience.py",
         "tools/test_quiz_replay_window_contract.py",
         "tools/test_release_critical_profile_contract.py",
+        "tools/test_release_integration_contract.py",
         "tools/test_runtime_performance_contract.py",
         "tools/test_startup_loading_state.py",
         "tools/test_trait_evolution_integration.py"
       ],
-      "in_degree": 26,
+      "in_degree": 27,
       "out_degree": 9
     },
     "app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt": {
@@ -2525,6 +2540,15 @@
       "in_degree": 0,
       "out_degree": 2
     },
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 2
+    },
     "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
@@ -2976,6 +3000,17 @@
       "dependents": [],
       "in_degree": 0,
       "out_degree": 1
+    },
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorStore.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 4
     },
     "app/src/test/java/com/whoareyou/app/ResultEvidenceTest.kt": {
       "dependencies": [
@@ -3699,6 +3734,22 @@
       "dependents": [],
       "in_degree": 0,
       "out_degree": 6
+    },
+    "tools/test_release_integration_contract.py": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 9
     },
     "tools/test_rendering_performance_contract.py": {
       "dependencies": [

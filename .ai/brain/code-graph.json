@@ -86,6 +86,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
       "type": "symbol-reference"
@@ -107,6 +112,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
@@ -471,6 +481,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_restored_quiz_recovery.py",
       "target": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
       "type": "symbol-reference"
@@ -532,6 +547,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
@@ -651,6 +671,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_behavior_goal_privacy_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
       "type": "symbol-reference"
@@ -751,6 +776,16 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
       "type": "symbol-reference"
@@ -776,12 +811,22 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
       "type": "symbol-reference"
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
       "type": "symbol-reference"
     },
@@ -901,6 +946,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
@@ -922,6 +972,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_integration_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
     },
@@ -991,6 +1046,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
       "type": "symbol-reference"
@@ -1007,6 +1067,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
       "type": "symbol-reference"
     },
@@ -1961,6 +2026,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_restored_quiz_recovery.py",
       "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "type": "symbol-reference"
@@ -2512,6 +2582,11 @@
     },
     {
       "source": "tools/test_release_critical_profile_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_integration_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "type": "symbol-reference"
     },

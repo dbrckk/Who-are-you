@@ -1,862 +1,159 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "74f5abac791f76ba85da402e6f71344b3297e766",
-  "head": "acc32afdb4152e2e9f9523de60020cffaa36129f",
+  "base": "acc32afdb4152e2e9f9523de60020cffaa36129f",
+  "head": "e36ea7d6bf43534ea20107685107f5b8f647c540",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "path": ".github/workflows/android-ci.yml",
       "status": "M"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "path": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
       "status": "A"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+      "path": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
       "status": "A"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+      "path": "docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md",
       "status": "A"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "path": "docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md",
       "status": "A"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+      "path": "tools/test_release_ci_contract.py",
       "status": "A"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "status": "M"
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "status": "M"
-    },
-    {
-      "path": "app/src/main/res/values-fr/strings.xml",
-      "status": "M"
-    },
-    {
-      "path": "app/src/main/res/values/strings.xml",
-      "status": "M"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-      "status": "A"
-    },
-    {
-      "path": "docs/superpowers/plans/2026-09-25-m775-local-balance-goals.md",
-      "status": "A"
-    },
-    {
-      "path": "docs/superpowers/specs/2026-09-25-m775-local-balance-goals-design.md",
-      "status": "A"
-    },
-    {
-      "path": "tools/test_behavior_goal_copy_contract.py",
-      "status": "A"
-    },
-    {
-      "path": "tools/test_behavior_goal_privacy_contract.py",
-      "status": "A"
-    },
-    {
-      "path": "tools/test_behavior_goal_storage_contract.py",
-      "status": "A"
-    },
-    {
-      "path": "tools/test_behavior_goal_v1_scope_contract.py",
+      "path": "tools/test_release_integration_contract.py",
       "status": "A"
     }
   ],
   "changed_source_files": [
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-    "tools/test_behavior_goal_copy_contract.py",
-    "tools/test_behavior_goal_privacy_contract.py",
-    "tools/test_behavior_goal_storage_contract.py",
-    "tools/test_behavior_goal_v1_scope_contract.py"
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+    "tools/test_release_ci_contract.py",
+    "tools/test_release_integration_contract.py"
   ],
   "impacted_files": [
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-    "tools/test_behavior_goal_copy_contract.py",
-    "tools/test_behavior_goal_privacy_contract.py",
-    "tools/test_behavior_goal_storage_contract.py",
-    "tools/test_behavior_goal_v1_scope_contract.py"
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+    "tools/test_release_ci_contract.py",
+    "tools/test_release_integration_contract.py"
   ],
   "impacted_symbols": [
     {
-      "name": "BehaviorGoalsUiTest",
+      "name": "ActivityCollectorTest",
       "kind": "class",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 22
-    },
-    {
-      "name": "emptyStateExplainsUserDefinedTargetsAndOffersCreate",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 42
-    },
-    {
-      "name": "activeGoalShowsMeasuredProgressAndRoutesPause",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 61
-    },
-    {
-      "name": "createStepsGoalUsesExplicitUserValue",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 86
-    },
-    {
-      "name": "createScreenTimeGoalConvertsMinutesToMillis",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 117
-    },
-    {
-      "name": "pausedGoalRoutesResume",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 149
-    },
-    {
-      "name": "createEveningGoalConvertsMinutesToMillis",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 173
-    },
-    {
-      "name": "createSelectedAppGoalKeepsPackageIdentity",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 205
-    },
-    {
-      "name": "compactLargeFontCreateDialogKeepsLateAppOptionReachable",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 239
-    },
-    {
-      "name": "deleteRequiresConfirmation",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 266
-    },
-    {
-      "name": "compactLargeFontLayoutKeepsCreateReachable",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-      "line": 288
-    },
-    {
-      "name": "BehaviorScreenUiTest",
-      "kind": "class",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 21
-    },
-    {
-      "name": "habitsScreenSeparatesFactsPatternsSuggestionsAndControls",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 38
-    },
-    {
-      "name": "compactLargeFontLayoutKeepsDataControlsReachable",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 68
-    },
-    {
-      "name": "deleteAllRequiresExplicitConfirmation",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 92
-    },
-    {
-      "name": "habitsScreenRendersGoalsAndRoutesGoalActions",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 120
-    },
-    {
-      "name": "sourceCtaRoutesTypedAction",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-      "line": 162
-    },
-    {
-      "name": "BehaviorGoalMetric",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 2
-    },
-    {
-      "name": "BehaviorGoal",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
       "line": 9
     },
     {
-      "name": "stepsAtLeast",
+      "name": "state",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 30
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "line": 63
     },
     {
-      "name": "screenTimeAtMost",
+      "name": "readSteps",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 43
-    },
-    {
-      "name": "eveningUsageAtMost",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 56
-    },
-    {
-      "name": "appUsageAtMost",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 69
-    },
-    {
-      "name": "BehaviorGoalStatus",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 86
-    },
-    {
-      "name": "BehaviorGoalDayResult",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 92
-    },
-    {
-      "name": "BehaviorGoalProgress",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 98
-    },
-    {
-      "name": "BehaviorGoalEngine",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 106
-    },
-    {
-      "name": "evaluate",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 108
-    },
-    {
-      "name": "measuredValue",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 146
-    },
-    {
-      "name": "meetsTarget",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 157
-    },
-    {
-      "name": "canonicalDayKey",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
-      "line": 164
-    },
-    {
-      "name": "BehaviorGoalFactory",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-      "line": 12
-    },
-    {
-      "name": "create",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-      "line": 14
-    },
-    {
-      "name": "BehaviorGoalsHostState",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-      "line": 27
-    },
-    {
-      "name": "rememberBehaviorGoalsHostState",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-      "line": 36
-    },
-    {
-      "name": "BehaviorGoalPresentation",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-      "line": 2
-    },
-    {
-      "name": "build",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
-      "line": 4
-    },
-    {
-      "name": "BehaviorGoalRepository",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 18
-    },
-    {
-      "name": "observe",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 21
-    },
-    {
-      "name": "upsert",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 29
-    },
-    {
-      "name": "setPaused",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 38
-    },
-    {
-      "name": "remove",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 47
-    },
-    {
-      "name": "clearAll",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "line": 56
-    },
-    {
-      "name": "BehaviorGoalStoreCodec",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 5
-    },
-    {
-      "name": "encode",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 10
-    },
-    {
-      "name": "decode",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 28
-    },
-    {
-      "name": "retain",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 41
-    },
-    {
-      "name": "upsert",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 50
-    },
-    {
-      "name": "setPaused",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 53
-    },
-    {
-      "name": "remove",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 56
-    },
-    {
-      "name": "decodeGoal",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 59
-    },
-    {
-      "name": "canonicalGoalKey",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 77
-    },
-    {
-      "name": "encodeText",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 86
-    },
-    {
-      "name": "decodeText",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
-      "line": 90
-    },
-    {
-      "name": "BehaviorGoalTargetParser",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-      "line": 2
-    },
-    {
-      "name": "parse",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalTargetParser.kt",
-      "line": 4
-    },
-    {
-      "name": "BehaviorGoalCopyKey",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "line": 2
-    },
-    {
-      "name": "BehaviorGoalValueKind",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "line": 16
-    },
-    {
-      "name": "BehaviorGoalUiModel",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "line": 21
-    },
-    {
-      "name": "BehaviorGoalUiModelFactory",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "line": 35
-    },
-    {
-      "name": "build",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
-      "line": 37
-    },
-    {
-      "name": "BehaviorGoalCreateRequest",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 32
-    },
-    {
-      "name": "BehaviorGoalsSection",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 40
-    },
-    {
-      "name": "BehaviorGoalCard",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 126
-    },
-    {
-      "name": "BehaviorGoalEditorDialog",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 211
-    },
-    {
-      "name": "behaviorGoalMetricLabel",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 346
-    },
-    {
-      "name": "behaviorGoalTarget",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 365
-    },
-    {
-      "name": "behaviorGoalCopy",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 371
-    },
-    {
-      "name": "goalDurationLabel",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-      "line": 386
-    },
-    {
-      "name": "BehaviorScreen",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 36
-    },
-    {
-      "name": "BehaviorSourceCard",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 128
-    },
-    {
-      "name": "BehaviorPeriodCard",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 167
-    },
-    {
-      "name": "BehaviorPatternsCard",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 201
-    },
-    {
-      "name": "BehaviorSuggestionsCard",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 222
-    },
-    {
-      "name": "behaviorMetric",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 239
-    },
-    {
-      "name": "appDisplayName",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 248
-    },
-    {
-      "name": "durationLabel",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 257
-    },
-    {
-      "name": "behaviorAction",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 266
-    },
-    {
-      "name": "behaviorCopy",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-      "line": 274
-    },
-    {
-      "name": "MainActivity",
-      "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 30
-    },
-    {
-      "name": "attachBaseContext",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 32
-    },
-    {
-      "name": "onCreate",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 33
-    },
-    {
-      "name": "WhoAreYouApp",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 37
-    },
-    {
-      "name": "refreshBehavior",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 51
-    },
-    {
-      "name": "navigate",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 107
-    },
-    {
-      "name": "resetQuizAttempt",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 109
-    },
-    {
-      "name": "BehaviorGoalEngineTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-      "line": 6
-    },
-    {
-      "name": "day",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-      "line": 8
-    },
-    {
-      "name": "expectIllegalArgument",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-      "line": 223
-    },
-    {
-      "name": "BehaviorGoalFactoryTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-      "line": 5
-    },
-    {
-      "name": "BehaviorGoalPresentationTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-      "line": 6
-    },
-    {
-      "name": "BehaviorGoalStoreCodecTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-      "line": 7
-    },
-    {
-      "name": "BehaviorGoalTargetParserTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-      "line": 6
-    },
-    {
-      "name": "BehaviorGoalUiModelTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-      "line": 7
-    },
-    {
-      "name": "progress",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-      "line": 9
-    },
-    {
-      "name": "strings",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_copy_contract.py",
-      "line": 38
-    },
-    {
-      "name": "BehaviorGoalCopyContractTest",
-      "kind": "class",
-      "file": "tools/test_behavior_goal_copy_contract.py",
-      "line": 43
-    },
-    {
-      "name": "test_goal_copy_has_en_fr_parity",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_copy_contract.py",
-      "line": 44
-    },
-    {
-      "name": "test_goal_copy_states_targets_as_user_defined",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_copy_contract.py",
-      "line": 50
-    },
-    {
-      "name": "test_full_habits_reset_explicitly_mentions_goals",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_copy_contract.py",
-      "line": 58
-    },
-    {
-      "name": "test_goal_copy_stays_non_clinical_and_non_moralizing",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_copy_contract.py",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
       "line": 64
     },
     {
-      "name": "BehaviorGoalPrivacyContractTest",
+      "name": "FakeSource",
       "kind": "class",
-      "file": "tools/test_behavior_goal_privacy_contract.py",
-      "line": 30
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "line": 74
     },
     {
-      "name": "read",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_privacy_contract.py",
-      "line": 31
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "line": 80
     },
     {
-      "name": "test_goal_data_does_not_enter_telemetry_share_ads_or_personal_model",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_privacy_contract.py",
-      "line": 34
+      "name": "readSteps",
+      "kind": "symbol",
+      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "line": 82
     },
     {
-      "name": "test_goal_domain_does_not_write_profile_or_external_services",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_privacy_contract.py",
-      "line": 45
-    },
-    {
-      "name": "test_goal_feature_declares_no_new_android_permission",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_privacy_contract.py",
-      "line": 62
-    },
-    {
-      "name": "BehaviorGoalStorageContractTest",
+      "name": "ReleaseCompatibilityCodecTest",
       "kind": "class",
-      "file": "tools/test_behavior_goal_storage_contract.py",
+      "file": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+      "line": 6
+    },
+    {
+      "name": "ReleaseCiContractTest",
+      "kind": "class",
+      "file": "tools/test_release_ci_contract.py",
       "line": 8
     },
     {
-      "name": "test_goal_repository_uses_separate_local_datastore",
+      "name": "test_ci_builds_release_like_candidate_apk",
       "kind": "function",
-      "file": "tools/test_behavior_goal_storage_contract.py",
+      "file": "tools/test_release_ci_contract.py",
       "line": 9
     },
     {
-      "name": "test_goal_repository_does_not_write_profile_or_behavior_history",
-      "kind": "function",
-      "file": "tools/test_behavior_goal_storage_contract.py",
-      "line": 22
-    },
-    {
-      "name": "BehaviorGoalV1ScopeContractTest",
+      "name": "ReleaseIntegrationContractTest",
       "kind": "class",
-      "file": "tools/test_behavior_goal_v1_scope_contract.py",
-      "line": 10
+      "file": "tools/test_release_integration_contract.py",
+      "line": 11
     },
     {
       "name": "read",
       "kind": "function",
-      "file": "tools/test_behavior_goal_v1_scope_contract.py",
-      "line": 11
+      "file": "tools/test_release_integration_contract.py",
+      "line": 12
     },
     {
-      "name": "test_v1_has_no_goal_editing_surface",
+      "name": "test_fresh_behavior_state_is_disabled_until_user_action",
       "kind": "function",
-      "file": "tools/test_behavior_goal_v1_scope_contract.py",
-      "line": 14
+      "file": "tools/test_release_integration_contract.py",
+      "line": 15
     },
     {
-      "name": "test_v1_resources_do_not_expose_goal_editing_copy",
+      "name": "test_permission_launches_are_confined_to_user_source_actions",
       "kind": "function",
-      "file": "tools/test_behavior_goal_v1_scope_contract.py",
-      "line": 26
+      "file": "tools/test_release_integration_contract.py",
+      "line": 30
     },
     {
-      "name": "test_full_habits_reset_clears_behavior_and_goal_data",
+      "name": "test_profile_and_habits_resets_have_separate_scopes",
       "kind": "function",
-      "file": "tools/test_behavior_goal_v1_scope_contract.py",
-      "line": 32
+      "file": "tools/test_release_integration_contract.py",
+      "line": 36
+    },
+    {
+      "name": "test_goal_progress_is_recomputed_not_persisted",
+      "kind": "function",
+      "file": "tools/test_release_integration_contract.py",
+      "line": 55
+    },
+    {
+      "name": "test_release_hardening_adds_no_permission",
+      "kind": "function",
+      "file": "tools/test_release_integration_contract.py",
+      "line": 66
+    },
+    {
+      "name": "test_behavior_and_goal_stores_remain_separate",
+      "kind": "function",
+      "file": "tools/test_release_integration_contract.py",
+      "line": 81
     }
   ],
   "selected_tests": [
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalFactoryTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalTargetParserTest.kt",
-    "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
-    "tools/test_behavior_goal_copy_contract.py",
-    "tools/test_behavior_goal_privacy_contract.py",
-    "tools/test_behavior_goal_storage_contract.py",
-    "tools/test_behavior_goal_v1_scope_contract.py"
+    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+    "tools/test_release_ci_contract.py",
+    "tools/test_release_integration_contract.py"
   ]
 }

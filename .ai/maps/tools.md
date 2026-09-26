@@ -115,7 +115,9 @@ test_quiz_process_recreation_contract.py
 test_quiz_replay_window_contract.py
 test_quiz_result_persistence_feedback.py
 test_reduced_motion_large_font_contract.py
+test_release_ci_contract.py
 test_release_critical_profile_contract.py
+test_release_integration_contract.py
 test_release_workflows_contract.py
 test_rendering_performance_contract.py
 test_restored_quiz_recovery.py
@@ -1942,6 +1944,18 @@ def test_editorial_cards_do_not_force_two_line_truncation(self)
 block = self.collections.split('private fun EditorialCard', 1)[1]
 ```
 
+## File: test_release_ci_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/android-ci.yml"
+⋮----
+class ReleaseCiContractTest(unittest.TestCase)
+⋮----
+def test_ci_builds_release_like_candidate_apk(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+```
+
 ## File: test_release_critical_profile_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -1963,6 +1977,45 @@ profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
 def test_retake_cadence_has_hard_minimum(self)
 ⋮----
 def test_profile_explains_next_quiz(self)
+```
+
+## File: test_release_integration_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+MANIFEST = ROOT / "app/src/main/AndroidManifest.xml"
+ANDROID_NS = "http://schemas.android.com/apk/res/android"
+⋮----
+class ReleaseIntegrationContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_fresh_behavior_state_is_disabled_until_user_action(self)
+⋮----
+main = self.read("MainActivity.kt")
+⋮----
+def test_permission_launches_are_confined_to_user_source_actions(self)
+⋮----
+def test_profile_and_habits_resets_have_separate_scopes(self)
+⋮----
+profile_reset = (
+habits_reset = (
+⋮----
+def test_goal_progress_is_recomputed_not_persisted(self)
+⋮----
+repo = self.read("BehaviorGoalRepository.kt")
+presentation = self.read("BehaviorGoalPresentation.kt")
+integration = self.read("BehaviorGoalIntegrationUi.kt")
+⋮----
+def test_release_hardening_adds_no_permission(self)
+⋮----
+root = ET.fromstring(MANIFEST.read_text(encoding="utf-8"))
+declared = {
+⋮----
+def test_behavior_and_goal_stores_remain_separate(self)
+⋮----
+behavior = self.read("BehaviorRepository.kt")
+goals = self.read("BehaviorGoalRepository.kt")
 ```
 
 ## File: test_release_workflows_contract.py

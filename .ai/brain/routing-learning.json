@@ -89,6 +89,25 @@
         "tools/test_behavior_goal_storage_contract.py",
         "tools/test_behavior_goal_v1_scope_contract.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "Merge pull request #78 from dbrckk/m776-release-integration-hardening",
+      "terms": [
+        "78",
+        "dbrckk/m776-release-integration-hardening",
+        "from",
+        "merge",
+        "pull",
+        "request"
+      ],
+      "tests": [],
+      "useful": [
+        "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+        "tools/test_release_ci_contract.py",
+        "tools/test_release_integration_contract.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -158,6 +177,12 @@
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_behavior_goal_v1_scope_contract.py": 4
     },
+    "78": {
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
+    },
     "dbrckk/m774-local-behavioral-insights": {
       "app/build.gradle.kts": 4,
       "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt": 4,
@@ -222,6 +247,12 @@
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_behavior_goal_v1_scope_contract.py": 4
     },
+    "dbrckk/m776-release-integration-hardening": {
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
+    },
     "from": {
       "app/build.gradle.kts": 4,
       "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt": 4,
@@ -257,6 +288,7 @@
       "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/UsageAccess.kt": 4,
       "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt": 4,
@@ -272,6 +304,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
       "tools/test_behavior_copy_contract.py": 4,
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
@@ -279,7 +312,9 @@
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_behavior_integration_contract.py": 4,
       "tools/test_behavior_privacy_contract.py": 4,
-      "tools/test_manifest_security_contract.py": 4
+      "tools/test_manifest_security_contract.py": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
     },
     "merge": {
       "app/build.gradle.kts": 4,
@@ -316,6 +351,7 @@
       "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/UsageAccess.kt": 4,
       "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt": 4,
@@ -331,6 +367,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
       "tools/test_behavior_copy_contract.py": 4,
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
@@ -338,7 +375,9 @@
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_behavior_integration_contract.py": 4,
       "tools/test_behavior_privacy_contract.py": 4,
-      "tools/test_manifest_security_contract.py": 4
+      "tools/test_manifest_security_contract.py": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
     },
     "pull": {
       "app/build.gradle.kts": 4,
@@ -375,6 +414,7 @@
       "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/UsageAccess.kt": 4,
       "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt": 4,
@@ -390,6 +430,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
       "tools/test_behavior_copy_contract.py": 4,
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
@@ -397,7 +438,9 @@
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_behavior_integration_contract.py": 4,
       "tools/test_behavior_privacy_contract.py": 4,
-      "tools/test_manifest_security_contract.py": 4
+      "tools/test_manifest_security_contract.py": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
     },
     "request": {
       "app/build.gradle.kts": 4,
@@ -434,6 +477,7 @@
       "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/UsageAccess.kt": 4,
       "app/src/test/java/com/whoareyou/app/ActivityAggregationTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/AppUsageAggregationTest.kt": 4,
@@ -449,6 +493,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
+      "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
       "tools/test_behavior_copy_contract.py": 4,
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
@@ -456,7 +501,9 @@
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_behavior_integration_contract.py": 4,
       "tools/test_behavior_privacy_contract.py": 4,
-      "tools/test_manifest_security_contract.py": 4
+      "tools/test_manifest_security_contract.py": 4,
+      "tools/test_release_ci_contract.py": 4,
+      "tools/test_release_integration_contract.py": 4
     }
   },
   "term_test_scores": {}

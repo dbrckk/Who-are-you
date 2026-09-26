@@ -2,14 +2,14 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/superpowers/plans/2026-09-25-m775-local-balance-goals.md",
+      "path": "docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": "docs/superpowers/specs/2026-09-25-m775-local-balance-goals-design.md",
+      "path": "docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md",
       "reasons": [
         "changed"
       ],

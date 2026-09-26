@@ -247,6 +247,7 @@ app/
             app/
               AchievementUnlockQueueTest.kt
               ActivityAggregationTest.kt
+              ActivityCollectorTest.kt
               AppNavigationTest.kt
               AppShellNavigationTest.kt
               AppUsageAggregationTest.kt
@@ -293,6 +294,7 @@ app/
               QuizAttemptEvidenceTest.kt
               RecommendationAttributionTest.kt
               RecommendationTelemetryTest.kt
+              ReleaseCompatibilityCodecTest.kt
               ResultEvidenceTest.kt
               ResultIntelligenceTest.kt
               ResultInterpretationTest.kt
@@ -422,7 +424,9 @@ tools/
   test_quiz_replay_window_contract.py
   test_quiz_result_persistence_feedback.py
   test_reduced_motion_large_font_contract.py
+  test_release_ci_contract.py
   test_release_critical_profile_contract.py
+  test_release_integration_contract.py
   test_release_workflows_contract.py
   test_rendering_performance_contract.py
   test_restored_quiz_recovery.py
@@ -1397,6 +1401,22 @@ jobs:
           path: |
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/app-debug.apk.sha256
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Build candidate APK
+        run: gradle :app:assembleCandidate --stacktrace
+
+      - name: Create candidate APK checksum
+        run: sha256sum app/build/outputs/apk/candidate/app-candidate.apk > app/build/outputs/apk/candidate/app-candidate.apk.sha256
+
+      - name: Upload candidate APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-candidate-${{ github.sha }}
+          path: |
+            app/build/outputs/apk/candidate/app-candidate.apk
+            app/build/outputs/apk/candidate/app-candidate.apk.sha256
           if-no-files-found: error
           retention-days: 7
 ```
@@ -32063,6 +32083,98 @@ class ActivityAggregationTest {
 }
 ```
 
+## File: app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class ActivityCollectorTest {
+    private val zone = ZoneId.of("Europe/Paris")
+    private val date = LocalDate.of(2026, 9, 25)
+
+    @Test
+    fun `unsupported Health Connect source is not queried`() = runBlocking {
+        val source = FakeSource(BehaviorSourceState.UNSUPPORTED, 9_000L)
+
+        val result = ActivityCollector(source, zone).collectDay(date)
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.UNSUPPORTED),
+            result
+        )
+        assertEquals(0, source.readCalls)
+    }
+
+    @Test
+    fun `revoked activity permission is not treated as zero steps`() = runBlocking {
+        val source = FakeSource(BehaviorSourceState.PERMISSION_REQUIRED, 0L)
+
+        val result = ActivityCollector(source, zone).collectDay(date)
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.PERMISSION_REQUIRED),
+            result
+        )
+        assertEquals(0, source.readCalls)
+    }
+
+    @Test
+    fun `available source with no aggregate remains unknown`() = runBlocking {
+        val source = FakeSource(BehaviorSourceState.AVAILABLE, null)
+
+        assertEquals(
+            BehaviorCollectionResult.NoData,
+            ActivityCollector(source, zone).collectDay(date)
+        )
+    }
+
+    @Test
+    fun `measured zero steps remains a real measurement`() = runBlocking {
+        val source = FakeSource(BehaviorSourceState.AVAILABLE, 0L)
+
+        assertEquals(
+            BehaviorCollectionResult.Data(ActivityDay(date.toEpochDay(), 0L)),
+            ActivityCollector(source, zone).collectDay(date)
+        )
+    }
+
+    @Test
+    fun `provider failure degrades to error without measurement`() = runBlocking {
+        val source = object : ActivityDataSource {
+            override suspend fun state() = BehaviorSourceState.AVAILABLE
+            override suspend fun readSteps(start: Instant, end: Instant): Long? {
+                error("provider failure")
+            }
+        }
+
+        assertEquals(
+            BehaviorCollectionResult.Unavailable(BehaviorSourceState.ERROR),
+            ActivityCollector(source, zone).collectDay(date)
+        )
+    }
+
+    private class FakeSource(
+        private val sourceState: BehaviorSourceState,
+        private val steps: Long?
+    ) : ActivityDataSource {
+        var readCalls = 0
+
+        override suspend fun state(): BehaviorSourceState = sourceState
+
+        override suspend fun readSteps(start: Instant, end: Instant): Long? {
+            readCalls += 1
+            return steps
+        }
+    }
+}
+```
+
 ## File: app/src/test/java/com/whoareyou/app/AppNavigationTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -36171,6 +36283,107 @@ class RecommendationTelemetryTest {
         assertEquals("signature_guided", params["mode"])
         assertEquals(2, params.size)
         assertFalse(params.keys.any { it.contains("signature_key") || it.contains("target") })
+    }
+}
+```
+
+## File: app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt
+```kotlin
+package com.whoareyou.app
+
+import java.util.Locale
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class ReleaseCompatibilityCodecTest {
+    @Test
+    fun `M774 v1 golden payload remains readable`() {
+        val payload = """
+            v1
+            100|7321|3600000|2|3600000|0|0|0|ZXhhbXBsZS5hcHA:3600000:2
+        """.trimIndent()
+
+        val decoded = BehaviorStoreCodec.decode(payload)
+
+        assertEquals(
+            listOf(
+                DailyBehaviorAggregate(
+                    epochDay = 100L,
+                    steps = 7_321L,
+                    totalForegroundMillis = 3_600_000L,
+                    topApps = listOf(AppUsageAggregate("example.app", 3_600_000L, 2)),
+                    launchesOrSessions = 2,
+                    daypartUsage = DaypartUsage(
+                        morningMillis = 3_600_000L,
+                        afternoonMillis = 0L,
+                        eveningMillis = 0L,
+                        nightMillis = 0L
+                    )
+                )
+            ),
+            decoded
+        )
+    }
+
+    @Test
+    fun `M775 v1 golden payload remains readable`() {
+        val payload = """
+            v1
+            Z29hbC1sZWdhY3k|APP_USAGE_AT_MOST|1200000|200|7|1|Y29tLmV4YW1wbGUudmlkZW8
+        """.trimIndent()
+
+        val decoded = BehaviorGoalStoreCodec.decode(payload)
+
+        assertEquals(
+            listOf(
+                BehaviorGoal.appUsageAtMost(
+                    id = "goal-legacy",
+                    packageName = "com.example.video",
+                    targetMillis = 1_200_000L,
+                    startEpochDay = 200L
+                ).copy(paused = true)
+            ),
+            decoded
+        )
+    }
+
+    @Test
+    fun `behavior and goal encoding are locale independent`() {
+        val original = Locale.getDefault()
+        try {
+            val behavior = listOf(
+                DailyBehaviorAggregate(
+                    epochDay = 300L,
+                    steps = 9_876L,
+                    totalForegroundMillis = 5_432_100L,
+                    topApps = listOf(AppUsageAggregate("example.app", 5_432_100L, 4)),
+                    launchesOrSessions = 4,
+                    daypartUsage = DaypartUsage(1L, 2L, 3L, 4L)
+                )
+            )
+            val goals = listOf(
+                BehaviorGoal.screenTimeAtMost("screen", 5_400_000L, 300L)
+            )
+
+            Locale.setDefault(Locale.FRANCE)
+            val behaviorFr = BehaviorStoreCodec.encode(behavior)
+            val goalsFr = BehaviorGoalStoreCodec.encode(goals)
+
+            Locale.setDefault(Locale.US)
+            val behaviorUs = BehaviorStoreCodec.encode(behavior)
+            val goalsUs = BehaviorGoalStoreCodec.encode(goals)
+
+            assertEquals(behaviorFr, behaviorUs)
+            assertEquals(goalsFr, goalsUs)
+        } finally {
+            Locale.setDefault(original)
+        }
+    }
+
+    @Test
+    fun `unknown future codec versions fail safely to empty state`() {
+        assertEquals(emptyList<DailyBehaviorAggregate>(), BehaviorStoreCodec.decode("v2\nfuture"))
+        assertEquals(emptyList<BehaviorGoal>(), BehaviorGoalStoreCodec.decode("v2\nfuture"))
     }
 }
 ```
@@ -40427,6 +40640,18 @@ def test_editorial_cards_do_not_force_two_line_truncation(self)
 block = self.collections.split('private fun EditorialCard', 1)[1]
 ```
 
+## File: tools/test_release_ci_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/android-ci.yml"
+⋮----
+class ReleaseCiContractTest(unittest.TestCase)
+⋮----
+def test_ci_builds_release_like_candidate_apk(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+```
+
 ## File: tools/test_release_critical_profile_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -40448,6 +40673,45 @@ profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
 def test_retake_cadence_has_hard_minimum(self)
 ⋮----
 def test_profile_explains_next_quiz(self)
+```
+
+## File: tools/test_release_integration_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+APP = ROOT / "app/src/main/java/com/whoareyou/app"
+MANIFEST = ROOT / "app/src/main/AndroidManifest.xml"
+ANDROID_NS = "http://schemas.android.com/apk/res/android"
+⋮----
+class ReleaseIntegrationContractTest(unittest.TestCase)
+⋮----
+def read(self, name: str) -> str
+⋮----
+def test_fresh_behavior_state_is_disabled_until_user_action(self)
+⋮----
+main = self.read("MainActivity.kt")
+⋮----
+def test_permission_launches_are_confined_to_user_source_actions(self)
+⋮----
+def test_profile_and_habits_resets_have_separate_scopes(self)
+⋮----
+profile_reset = (
+habits_reset = (
+⋮----
+def test_goal_progress_is_recomputed_not_persisted(self)
+⋮----
+repo = self.read("BehaviorGoalRepository.kt")
+presentation = self.read("BehaviorGoalPresentation.kt")
+integration = self.read("BehaviorGoalIntegrationUi.kt")
+⋮----
+def test_release_hardening_adds_no_permission(self)
+⋮----
+root = ET.fromstring(MANIFEST.read_text(encoding="utf-8"))
+declared = {
+⋮----
+def test_behavior_and_goal_stores_remain_separate(self)
+⋮----
+behavior = self.read("BehaviorRepository.kt")
+goals = self.read("BehaviorGoalRepository.kt")
 ```
 
 ## File: tools/test_release_workflows_contract.py

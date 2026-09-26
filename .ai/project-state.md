@@ -22,21 +22,27 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-26T15:49:26Z
+Generated: 2026-09-26T16:00:20Z
 
 ### Git
 - Branch: `main`
-- Head: `acc32afdb415`
-- Commit date: 2026-09-26T15:49:15Z
-- Commit: chore(ai): refresh unified AI context
-- Tracked files: 663
+- Head: `e36ea7d6bf43`
+- Commit date: 2026-09-26T18:00:10+02:00
+- Commit: Merge pull request #78 from dbrckk/m776-release-integration-hardening
+- Tracked files: 673
 
 ### Recently changed files
+- `.github/workflows/android-ci.yml`
+- `app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt`
+- `app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt`
+- `docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md`
+- `docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md`
+- `tools/test_release_ci_contract.py`
+- `tools/test_release_integration_contract.py`
 - `app/src/main/res/values-fr/strings.xml`
 - `app/src/main/res/values/strings.xml`
 - `tools/test_behavior_goal_v1_scope_contract.py`
 - `app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt`
-- `app/src/test/java/com/whoareyou/app/BehaviorGoalEngineTest.kt`
 
 ### Project signals
 - `build.gradle.kts`

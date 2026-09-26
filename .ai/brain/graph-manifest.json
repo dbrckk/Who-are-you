@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 860,
+      "edge_count": 875,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -256,6 +256,11 @@
       "area": "tools-test-release-critical-profile-contract.py",
       "edge_count": 6,
       "path": ".ai/brain/graph-shards/tools-test-release-critical-profile-contract.py.json"
+    },
+    {
+      "area": "tools-test-release-integration-contract.py",
+      "edge_count": 9,
+      "path": ".ai/brain/graph-shards/tools-test-release-integration-contract.py.json"
     },
     {
       "area": "tools-test-rendering-performance-contract.py",
