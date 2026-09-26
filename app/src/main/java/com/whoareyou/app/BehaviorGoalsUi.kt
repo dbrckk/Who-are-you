@@ -1,6 +1,7 @@
 package com.whoareyou.app
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import java.util.concurrent.TimeUnit
 
 data class BehaviorGoalCreateRequest(
@@ -224,7 +226,10 @@ private fun BehaviorGoalEditorDialog(
             Text(stringResource(R.string.goals_create))
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(V2Spacing.Compact)
+            ) {
                 Text(
                     stringResource(R.string.goals_user_defined),
                     color = V2Colors.TextSecondary,
