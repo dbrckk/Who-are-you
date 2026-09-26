@@ -9,6 +9,7 @@ class ReleaseCriticalProfileContractTest(unittest.TestCase):
         self.main = (ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt").read_text(encoding="utf-8")
         self.recommendation = (ROOT / "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt").read_text(encoding="utf-8")
         self.profile = (ROOT / "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt").read_text(encoding="utf-8")
+        self.who_am_i = (ROOT / "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt").read_text(encoding="utf-8")
 
     def test_profile_store_decodes_both_histories(self):
         self.assertIn("scoreHistory = ProfilePersistenceCodec.decodeScoreHistory", self.store)
@@ -30,7 +31,10 @@ class ReleaseCriticalProfileContractTest(unittest.TestCase):
         self.assertIn("if (days < MIN_RETAKE_DAYS)", self.recommendation)
 
     def test_profile_explains_next_quiz(self):
-        self.assertIn("NextQuizRecommendationCard(", self.profile)
+        self.assertIn("recommendation = summary.nextQuizRecommendation", self.profile)
+        self.assertIn("NextQuizRecommendationCard(", self.who_am_i)
+        self.assertIn('testTag("who_am_i_next_quiz")', self.who_am_i)
+        self.assertNotIn("NextQuizRecommendationCard(", self.profile)
 
 if __name__ == "__main__":
     unittest.main()

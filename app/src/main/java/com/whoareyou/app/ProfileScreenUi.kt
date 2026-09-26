@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -73,6 +74,9 @@ fun ProfileScreen(
     }
     val sortedDimensions = remember(summary.dimensions) {
         summary.dimensions.sortedByDescending { kotlin.math.abs(it.score - 50) }
+    }
+    val whoAmIPortrait = remember(summary.personalModel) {
+        WhoAmIPortraitEngine.build(summary.personalModel)
     }
     val strongestDimension = sortedDimensions.firstOrNull()
     val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
@@ -146,57 +150,21 @@ fun ProfileScreen(
             }
             Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
             Text(
-                stringResource(R.string.profile_optional_social_actions),
-                color = V2Colors.TextSecondary,
-                style = V2Type.Caption,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                text = stringResource(R.string.who_am_i_title),
+                color = primaryAccent,
+                style = V2Type.Eyebrow,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("who_am_i_title")
+                    .semantics { heading() }
             )
             Spacer(Modifier.height(10.dp))
-            Button(
-                onClick = {
-                    AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
-                    GlobalProfileShare.share(context, summary)
-                },
-                enabled = summary.dimensions.isNotEmpty(),
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
-                shape = RoundedCornerShape(18.dp)
-            ) {
-                Text(stringResource(R.string.share_my_profile), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            }
-            Spacer(Modifier.height(10.dp))
-            Button(
-                enabled = strongestDimension != null && strongestQuiz != null,
-                onClick = {
-                    val dimension = strongestDimension ?: return@Button
-                    val quiz = strongestQuiz ?: return@Button
-                    AppEvents.profileChallenge(quiz.id, dimension.score)
-                    ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
-                },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
-                shape = RoundedCornerShape(18.dp)
-            ) {
-                Text(stringResource(R.string.compare_profile_friend), fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            }
-            Spacer(Modifier.height(8.dp))
-            Text(
-                if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
-                else stringResource(R.string.starts_with_dimension, strongestDimension.title),
-                color = V2Colors.TextSecondary,
-                style = V2Type.Supporting,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+            WhoAmIPortraitCards(
+                portrait = whoAmIPortrait,
+                recommendation = summary.nextQuizRecommendation,
+                catalog = catalog,
+                onQuizSelected = onQuizSelected
             )
-            summary.nextQuizRecommendation?.let { recommendation ->
-                Spacer(Modifier.height(sectionGap))
-                NextQuizRecommendationCard(
-                    recommendation = recommendation,
-                    catalog = catalog,
-                    onStartQuiz = onQuizSelected
-                )
-            }
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
@@ -353,6 +321,68 @@ fun ProfileScreen(
                         }
                     }
                 }
+            }
+        }
+
+        item {
+            Spacer(Modifier.height(sectionGap))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("profile_social_actions")
+            ) {
+                Text(
+                    stringResource(R.string.profile_optional_social_actions),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Caption,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(Modifier.height(10.dp))
+                Button(
+                    onClick = {
+                        AppEvents.profileShare(summary.dominantArchetype, summary.completedCount)
+                        GlobalProfileShare.share(context, summary)
+                    },
+                    enabled = summary.dimensions.isNotEmpty(),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                    shape = RoundedCornerShape(18.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.share_my_profile),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Spacer(Modifier.height(10.dp))
+                Button(
+                    enabled = strongestDimension != null && strongestQuiz != null,
+                    onClick = {
+                        val dimension = strongestDimension ?: return@Button
+                        val quiz = strongestQuiz ?: return@Button
+                        AppEvents.profileChallenge(quiz.id, dimension.score)
+                        ChallengeShare.share(context, quiz.id, quiz.title, dimension.score)
+                    },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = V2Colors.SurfaceElevated),
+                    shape = RoundedCornerShape(18.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.compare_profile_friend),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    if (strongestDimension == null) stringResource(R.string.complete_test_unlock_compare)
+                    else stringResource(R.string.starts_with_dimension, strongestDimension.title),
+                    color = V2Colors.TextSecondary,
+                    style = V2Type.Supporting,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
 
