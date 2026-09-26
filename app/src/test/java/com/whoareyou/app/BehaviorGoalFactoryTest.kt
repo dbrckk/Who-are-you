@@ -26,6 +26,33 @@ class BehaviorGoalFactoryTest {
     }
 
     @Test
+    fun `update preserves experiment identity window and pause state`() {
+        val existing = BehaviorGoal(
+            id = "goal-1",
+            metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
+            targetValue = 30L * 60_000L,
+            startEpochDay = 700L,
+            durationDays = 10,
+            packageName = "com.example.video",
+            paused = true
+        )
+        val request = BehaviorGoalCreateRequest(
+            metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
+            targetValue = 120L * 60_000L
+        )
+
+        val updated = BehaviorGoalFactory.update(existing, request)
+
+        assertEquals("goal-1", updated.id)
+        assertEquals(700L, updated.startEpochDay)
+        assertEquals(10, updated.durationDays)
+        assertEquals(true, updated.paused)
+        assertEquals(BehaviorGoalMetric.SCREEN_TIME_AT_MOST, updated.metric)
+        assertEquals(120L * 60_000L, updated.targetValue)
+        assertEquals(null, updated.packageName)
+    }
+
+    @Test
     fun `app request preserves selected package`() {
         val request = BehaviorGoalCreateRequest(
             metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
