@@ -22,9 +22,11 @@ class AppShellNavigationTest {
     }
 
     @Test
-    fun focusedQuizFlowsHideShell() {
+    fun secondaryAndFocusedFlowsHideShell() {
+        assertNull(AppShellNavigation.tabFor(AppScreen.HABITS))
         assertNull(AppShellNavigation.tabFor(AppScreen.QUIZ))
         assertNull(AppShellNavigation.tabFor(AppScreen.RESULT))
+        assertFalse(AppShellNavigation.isShellVisible(AppScreen.HABITS))
         assertFalse(AppShellNavigation.isShellVisible(AppScreen.QUIZ))
         assertFalse(AppShellNavigation.isShellVisible(AppScreen.RESULT))
     }

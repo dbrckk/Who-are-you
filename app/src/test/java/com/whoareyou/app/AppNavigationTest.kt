@@ -15,8 +15,14 @@ class AppNavigationTest {
     @Test
     fun internalScreensReturnToDiscover() {
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.PROFILE))
+        assertEquals(AppScreen.PROFILE, AppNavigation.backDestination(AppScreen.HABITS))
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.QUIZ))
         assertEquals(AppScreen.DISCOVER, AppNavigation.backDestination(AppScreen.RESULT))
+    }
+
+    @Test
+    fun habitsHasDedicatedDestination() {
+        assertEquals(AppScreen.HABITS, AppNavigation.habitsDestination())
     }
 
     @Test
