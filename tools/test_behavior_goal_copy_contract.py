@@ -55,6 +55,12 @@ class BehaviorGoalCopyContractTest(unittest.TestCase):
         self.assertIn("toi", fr["goals_user_defined"].lower())
         self.assertIn("ton", fr["goals_your_target"].lower())
 
+    def test_full_habits_reset_explicitly_mentions_goals(self):
+        en = strings(EN)
+        fr = strings(FR)
+        self.assertIn("goal", en["habits_delete_confirm"].lower())
+        self.assertIn("objectif", fr["habits_delete_confirm"].lower())
+
     def test_goal_copy_stays_non_clinical_and_non_moralizing(self):
         for path in (EN, FR):
             values = strings(path)
