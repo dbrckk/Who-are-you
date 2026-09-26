@@ -12,7 +12,6 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import org.junit.Assert.assertEquals
@@ -142,6 +141,96 @@ class BehaviorGoalsUiTest {
                 BehaviorGoalCreateRequest(
                     metric = BehaviorGoalMetric.SCREEN_TIME_AT_MOST,
                     targetValue = 90L * 60_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun pausedGoalRoutesResume() {
+        var paused: Pair<String, Boolean>? = null
+        val pausedGoal = activeGoal.copy(statusCopy = BehaviorGoalCopyKey.STATUS_PAUSED)
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = listOf(pausedGoal),
+                    availableApps = emptyList(),
+                    onCreate = {},
+                    onSetPaused = { id, value -> paused = id to value },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_steps_pause").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals("steps" to false, paused)
+        }
+    }
+
+    @Test
+    fun createEveningGoalConvertsMinutesToMillis() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = emptyList(),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_evening_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("45")
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.EVENING_USAGE_AT_MOST,
+                    targetValue = 45L * 60_000L
+                ),
+                request
+            )
+        }
+    }
+
+    @Test
+    fun createSelectedAppGoalKeepsPackageIdentity() {
+        var request: BehaviorGoalCreateRequest? = null
+
+        composeRule.setContent {
+            WhoAreYouTheme {
+                BehaviorGoalsSection(
+                    goals = emptyList(),
+                    availableApps = listOf(BehaviorAppUsageUi("com.example.video", 1_200_000L)),
+                    onCreate = { request = it },
+                    onSetPaused = { _, _ -> },
+                    onDelete = {}
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("behavior_goal_create").performClick()
+        composeRule.onNodeWithTag("behavior_goal_metric_app_usage").performClick()
+        composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("30")
+        composeRule.onNodeWithTag("behavior_goal_app_com_example_video").performClick()
+        composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
+
+        composeRule.runOnIdle {
+            assertEquals(
+                BehaviorGoalCreateRequest(
+                    metric = BehaviorGoalMetric.APP_USAGE_AT_MOST,
+                    targetValue = 30L * 60_000L,
+                    packageName = "com.example.video"
                 ),
                 request
             )
