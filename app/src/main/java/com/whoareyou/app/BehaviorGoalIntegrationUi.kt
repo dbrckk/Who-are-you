@@ -27,6 +27,7 @@ object BehaviorGoalFactory {
 data class BehaviorGoalsHostState(
     val goals: List<BehaviorGoalUiModel>,
     val onCreate: (BehaviorGoalCreateRequest) -> Unit,
+    val onEdit: (String, BehaviorGoalCreateRequest) -> Unit,
     val onSetPaused: (String, Boolean) -> Unit,
     val onDelete: (String) -> Unit
 )
@@ -50,7 +51,7 @@ fun rememberBehaviorGoalsHostState(
         )
     }
 
-    return remember(context, scope, models, currentEpochDay) {
+    return remember(context, scope, goals, models, currentEpochDay) {
         BehaviorGoalsHostState(
             goals = models,
             onCreate = { request ->
@@ -61,6 +62,19 @@ fun rememberBehaviorGoalsHostState(
                 )
                 scope.launch {
                     BehaviorGoalRepository.upsert(context.applicationContext, goal)
+                }
+            },
+            onEdit = { id, request ->
+                val existing = goals.firstOrNull { it.id == id }
+                if (existing != null) {
+                    val updated = existing.copy(
+                        metric = request.metric,
+                        targetValue = request.targetValue,
+                        packageName = request.packageName
+                    )
+                    scope.launch {
+                        BehaviorGoalRepository.upsert(context.applicationContext, updated)
+                    }
                 }
             },
             onSetPaused = { id, paused ->
