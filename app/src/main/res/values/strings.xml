@@ -249,8 +249,6 @@
     <string name="goals_target_minutes_input">Target minutes</string>
     <string name="goals_select_app">Choose an app observed in your local history</string>
     <string name="goals_save">SAVE GOAL</string>
-    <string name="goals_edit">EDIT</string>
-    <string name="goals_update">UPDATE GOAL</string>
     <string name="habits_steps">%1$d steps</string>
     <string name="habits_screen_time">%1$s screen time</string>
     <string name="habits_sessions">%1$d sessions</string>
