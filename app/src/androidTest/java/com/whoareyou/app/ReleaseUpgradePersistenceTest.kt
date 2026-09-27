@@ -1,6 +1,7 @@
 package com.whoareyou.app
 
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import java.time.LocalDate
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -13,6 +14,7 @@ class ReleaseUpgradePersistenceTest {
 
     @Test
     fun seedPersistentState() = runBlocking {
+        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "seed") return@runBlocking
         val today = LocalDate.now().toEpochDay()
 
         ProfileStore.setOnboardingComplete(context, true)
@@ -49,6 +51,7 @@ class ReleaseUpgradePersistenceTest {
 
     @Test
     fun verifyPersistentState() = runBlocking {
+        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "verify") return@runBlocking
         val profile = ProfileStore.observe(context).first()
         assertTrue(profile.onboardingComplete)
         assertTrue(profile.adsRemoved)
