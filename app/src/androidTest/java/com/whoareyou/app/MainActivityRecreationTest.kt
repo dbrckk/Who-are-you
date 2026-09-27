@@ -12,6 +12,7 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -87,6 +88,11 @@ class MainActivityRecreationTest {
             }
             assertEquals(9_000L, persistedGoal.targetValue)
 
+            // ActivityScenario.recreate() can stall on ATD while the numeric IME still owns
+            // the window. Dismiss it explicitly so this test exercises activity recreation,
+            // not emulator/IME teardown behavior.
+            closeSoftKeyboard()
+            composeRule.waitForIdle()
             scenario.recreate()
             waitForTag("app_screen_habits")
             composeRule.onNodeWithTag("behavior_screen")
