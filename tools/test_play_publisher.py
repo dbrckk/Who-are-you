@@ -12,15 +12,15 @@ class PlayPublisherTest(unittest.TestCase):
         config.validate()
         self.assertEqual(config.package_name, "com.whoareyou.app")
         self.assertEqual(config.track, "qa")
-        self.assertEqual(config.version_code, 1)
-        self.assertEqual(config.version_name, "0.1.0")
+        self.assertEqual(config.version_code, 4)
+        self.assertEqual(config.version_name, "0.2.2")
 
     def test_default_release_payload_uses_internal_qa_track(self):
         payload = play_publisher.release_payload()
         self.assertEqual(payload["track"], "qa")
         release = payload["releases"][0]
-        self.assertEqual(release["name"], "0.1.0")
-        self.assertEqual(release["versionCodes"], ["1"])
+        self.assertEqual(release["name"], "0.2.2")
+        self.assertEqual(release["versionCodes"], ["4"])
         self.assertEqual(release["status"], "draft")
 
     def test_open_testing_track_is_supported(self):
