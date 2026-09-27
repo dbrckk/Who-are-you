@@ -16,6 +16,11 @@ on:
           - draft
           - completed
         default: draft
+      telemetry_enabled:
+        description: "Build with the configured production telemetry endpoint"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -83,6 +88,8 @@ jobs:
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
           set -euo pipefail
           required=(
@@ -99,6 +106,10 @@ jobs:
               exit 1
             fi
           done
+          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
+            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+            exit 1
+          fi
 
       - name: Materialize temporary credentials
         env:
@@ -137,10 +148,25 @@ jobs:
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
           UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
           set -euo pipefail
           UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:bundlePlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
+          args=(
+            :app:bundlePlayRelease
+            "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
+            "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"
+            --stacktrace
+          )
+          if [ "$TELEMETRY_ENABLED" = "true" ]; then
+            args+=("-PWHO_ARE_YOU_TELEMETRY_ENDPOINT=$TELEMETRY_ENDPOINT")
+          fi
+          gradle "${args[@]}"
 
       - name: Locate and verify signed bundle
         id: bundle
