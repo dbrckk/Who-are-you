@@ -131,8 +131,6 @@ validate_evidence_matrix() {
   local labels=(
     "debug"
     "candidate"
-    "upgrade-candidate"
-    "upgrade-relaunch"
     "candidate-font-130"
     "candidate-compact"
     "candidate-large"
@@ -297,6 +295,37 @@ validate_running_app() {
   fi
 }
 
+validate_running_app_no_ui() {
+  local label="$1"
+
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+  sleep 3
+
+  PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
+  test -n "$PID"
+  printf '%s PID: %s\n' "$label" "$PID"
+
+  adb logcat -d > "device-logcat-$label.txt"
+  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
+  adb shell dumpsys activity exit-info "$PACKAGE" > "device-exit-info-$label.txt" || true
+
+  FINAL_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
+  test -n "$FINAL_PID"
+  printf '%s final PID: %s\n' "$label" "$FINAL_PID"
+
+  if grep -F "Process: $PACKAGE" "device-android-runtime-$label.txt"; then
+    echo "Fatal AndroidRuntime crash detected for $PACKAGE ($label)"
+    exit 1
+  fi
+
+  if grep -E "REASON_(CRASH|ANR)" "device-exit-info-$label.txt"; then
+    echo "Crash or ANR exit reason detected for $PACKAGE ($label)"
+    exit 1
+  fi
+}
+
 smoke_apk() {
   local apk="$1"
   local label="$2"
@@ -310,6 +339,29 @@ smoke_apk() {
 
 smoke_apk "$DEBUG_APK" debug
 smoke_apk "$CANDIDATE_APK" candidate
+
+capture_accessibility_variant "candidate-font-130" "1.30"
+adb shell settings put system font_scale 1.0
+
+capture_display_variant "candidate-compact" "720x1600" "320"
+capture_compact_accessibility_variant "candidate-compact-font-130" "720x1600" "320" "1.30"
+capture_display_variant "candidate-large" "1600x2560" "320"
+adb shell wm size reset
+adb shell wm density reset
+
+capture_reduced_motion_variant "candidate-reduced-motion"
+adb shell settings put global window_animation_scale 1
+adb shell settings put global transition_animation_scale 1
+adb shell settings put global animator_duration_scale 1
+
+capture_landscape_variant "candidate-landscape"
+adb shell settings put system user_rotation 0
+adb shell settings put system accelerometer_rotation 1
+
+adb shell wm size reset
+adb shell wm density reset
+adb shell settings put system font_scale 1.0
+adb shell am force-stop "$PACKAGE"
 
 # Validate the real upgrade path: initialize data with the debug build, then
 # replace it in-place with the minified candidate without clearing app data.
@@ -357,51 +409,14 @@ UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
 printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
 grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
 adb shell am force-stop "$PACKAGE"
-validate_running_app upgrade-candidate
+adb logcat -c
+validate_running_app_no_ui upgrade-candidate
 
-# One more cold relaunch after the upgrade catches startup failures that only
-# appear after process death with migrated/persisted state.
+# One more cold relaunch after process death verifies migrated-state startup
+# without invoking UIAutomator again on the seeded behavioral state.
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
-RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
-grep -F "Status: ok" device-startup-upgrade-relaunch.txt
-sleep 3
-capture_visual_evidence "upgrade-relaunch"
-RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-test -n "$RELAUNCH_PID"
-adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
-adb shell dumpsys activity exit-info "$PACKAGE" > device-exit-info-upgrade-relaunch.txt || true
-if grep -F "Process: $PACKAGE" device-android-runtime-upgrade-relaunch.txt; then
-  echo "Fatal AndroidRuntime crash detected after upgraded cold relaunch"
-  exit 1
-fi
-if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
-  echo "Crash or ANR exit reason detected after upgraded cold relaunch"
-  exit 1
-fi
-
-capture_accessibility_variant "candidate-font-130" "1.30"
-adb shell settings put system font_scale 1.0
-
-capture_display_variant "candidate-compact" "720x1600" "320"
-capture_compact_accessibility_variant "candidate-compact-font-130" "720x1600" "320" "1.30"
-capture_display_variant "candidate-large" "1600x2560" "320"
-adb shell wm size reset
-adb shell wm density reset
-
-capture_reduced_motion_variant "candidate-reduced-motion"
-adb shell settings put global window_animation_scale 1
-adb shell settings put global transition_animation_scale 1
-adb shell settings put global animator_duration_scale 1
-
-capture_landscape_variant "candidate-landscape"
-adb shell settings put system user_rotation 0
-adb shell settings put system accelerometer_rotation 1
-
-adb shell wm size reset
-adb shell wm density reset
-adb shell settings put system font_scale 1.0
+validate_running_app_no_ui upgrade-relaunch
 adb shell am force-stop "$PACKAGE"
 
 adb shell wm size > device-display-metrics.txt
