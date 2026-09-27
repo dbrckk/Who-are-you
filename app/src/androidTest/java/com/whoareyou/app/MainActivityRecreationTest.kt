@@ -78,11 +78,11 @@ class MainActivityRecreationTest {
             assertGoalDisplayed(persistedGoal)
 
             // Seed persistence before launch so recreation validates restoration itself without
-            // leaving a numeric IME session active. Headless ATD can otherwise deadlock while
-            // ActivityScenario tears down an activity that still owns that IME connection.
+            // leaving a numeric IME session active. The navigation route is also expected to
+            // survive recreation, so wait for Habits directly instead of incorrectly assuming
+            // that MainActivity resets to Discover.
             scenario.recreate()
-            waitForTag("app_screen_discover")
-            openHabits(context)
+            waitForTag("app_screen_habits")
             assertGoalDisplayed(persistedGoal)
 
             val afterRecreation = runBlocking {
