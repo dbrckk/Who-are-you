@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / ".github/scripts/android-device-validation.sh"
 SEED_TEST = ROOT / "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt"
 VERIFY_TEST = ROOT / "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeVerifyTest.kt"
+M59_WORKFLOW = ROOT / ".github/workflows/m59-device-validation.yml"
 
 
 class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
@@ -38,6 +39,10 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         self.assertGreaterEqual(len(test_installs), 2)
         self.assertLess(test_installs[0], candidate_install)
         self.assertGreater(test_installs[-1], candidate_install)
+
+    def test_m59_retains_upgrade_probe_evidence(self):
+        workflow = M59_WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("device-upgrade-state-*.txt", workflow)
 
     def test_post_upgrade_verifier_does_not_link_against_minified_app_symbols(self):
         verifier = VERIFY_TEST.read_text(encoding="utf-8")
