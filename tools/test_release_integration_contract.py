@@ -23,7 +23,19 @@ class ReleaseIntegrationContractTest(unittest.TestCase):
             main,
         )
         self.assertIn(
-            "BehaviorSourceEffect.OPEN_USAGE_ACCESS -> usageAccessLauncher.launch",
+            "BehaviorSourceEffect.OPEN_USAGE_ACCESS -> {",
+            main,
+        )
+        self.assertIn(
+            "val settingsIntent = UsageAccess.settingsIntent(context)",
+            main,
+        )
+        self.assertIn(
+            "usageAccessLauncher.launch(settingsIntent)",
+            main,
+        )
+        self.assertIn(
+            "BehaviorSourceState.UNSUPPORTED",
             main,
         )
 
