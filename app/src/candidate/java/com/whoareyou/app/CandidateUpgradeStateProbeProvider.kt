@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 
 class CandidateUpgradeStateProbeProvider : ContentProvider() {
     override fun onCreate(): Boolean = true
@@ -19,13 +20,14 @@ class CandidateUpgradeStateProbeProvider : ContentProvider() {
         val appContext = requireNotNull(context).applicationContext
         return runCatching {
             runBlocking {
+                withTimeout(5_000) {
                 val profile = ProfileStore.observe(appContext).first()
                 val behavior = BehaviorRepository.observe(appContext).first()
                 val goals = BehaviorGoalRepository.observe(appContext).first()
                 val today = behavior.today
                 val goal = goals.firstOrNull { it.id == "upgrade-probe-goal" }
 
-                Bundle().apply {
+                    Bundle().apply {
                     putString("onboarding", profile.onboardingComplete.toString())
                     putString("ads_removed", profile.adsRemoved.toString())
                     putString(
@@ -36,6 +38,7 @@ class CandidateUpgradeStateProbeProvider : ContentProvider() {
                     putString("goal_id", goal?.id.orEmpty())
                     putString("goal_metric", goal?.metric?.name.orEmpty())
                     putString("goal_target", (goal?.targetValue ?: -1L).toString())
+                    }
                 }
             }
         }.getOrElse { error ->
