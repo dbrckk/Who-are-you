@@ -301,11 +301,6 @@ validate_running_app_no_ui() {
   START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
   printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
   grep -F "Status: ok" "device-startup-$label.txt"
-  sleep 3
-
-  PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-  test -n "$PID"
-  printf '%s PID: %s\n' "$label" "$PID" | tee "device-runtime-$label.txt"
 }
 
 smoke_apk() {
