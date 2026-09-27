@@ -49,6 +49,20 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         self.assertIn('grep -F "goal_metric=STEPS_AT_LEAST"', script)
         self.assertIn('grep -F "goal_target=4000"', script)
 
+    def test_post_upgrade_runtime_checks_do_not_reenter_ui_automation(self):
+        script = SCRIPT.read_text(encoding="utf-8")
+        candidate_replace = script.index('adb install -r "$CANDIDATE_APK"', script.index("ReleaseUpgradeSeedTest#seedPersistentState"))
+        post_upgrade = script[candidate_replace:]
+        self.assertIn("validate_running_app_no_ui upgrade-candidate", post_upgrade)
+        self.assertIn("validate_running_app_no_ui upgrade-relaunch", post_upgrade)
+        self.assertNotIn('capture_visual_evidence "upgrade-candidate"', post_upgrade)
+        self.assertNotIn('capture_visual_evidence "upgrade-relaunch"', post_upgrade)
+        self.assertNotIn('"upgrade-candidate"\n    "upgrade-relaunch"', script)
+        self.assertLess(
+            script.index('capture_accessibility_variant "candidate-font-130"'),
+            script.index("ReleaseUpgradeSeedTest#seedPersistentState"),
+        )
+
     def test_m59_retains_upgrade_probe_evidence(self):
         workflow = M59_WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("device-upgrade-state-*.txt", workflow)
