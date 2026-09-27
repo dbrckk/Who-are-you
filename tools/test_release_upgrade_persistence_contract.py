@@ -23,8 +23,10 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         script = SCRIPT.read_text(encoding="utf-8")
         self.assertTrue(RAW_VERIFIER.is_file())
         self.assertNotIn("ReleaseUpgradeVerifyTest#verifyPersistentState", script)
-        self.assertNotIn("uiautomator dump", script)
-        self.assertIn("adb root", script)
+        candidate_block = script[script.index('adb install -r "$CANDIDATE_APK"', script.index("ReleaseUpgradeSeedTest#seedPersistentState")):]
+        self.assertNotIn("ReleaseUpgradeVerifyTest#verifyPersistentState", candidate_block)
+        self.assertNotIn("dump_upgrade_ui", candidate_block)
+        self.assertIn("adb root", candidate_block)
         self.assertIn("who_are_you_profile.preferences_pb", script)
         self.assertIn("who_are_you_behavior.preferences_pb", script)
         self.assertIn("who_are_you_behavior_goals.preferences_pb", script)
