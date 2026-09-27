@@ -10,9 +10,10 @@ class ReleaseCiContractTest(unittest.TestCase):
     def test_upgrade_verification_decodes_persisted_state_through_repositories(self):
         source = UPGRADE_VERIFY.read_text(encoding="utf-8")
 
-        self.assertIn("ProfileStore.observe(context)", source)
-        self.assertIn("BehaviorRepository.observe(context)", source)
-        self.assertIn("BehaviorGoalRepository.observe(context)", source)
+        self.assertIn("PreferenceDataStoreFactory.create", source)
+        self.assertIn('booleanPreferencesKey("onboarding_complete")', source)
+        self.assertIn('stringPreferencesKey("daily_behavior_v1")', source)
+        self.assertIn('stringPreferencesKey("goals_v1")', source)
         self.assertNotIn("dataStoreBytes(", source)
 
     def test_ci_builds_release_like_candidate_apk(self):
