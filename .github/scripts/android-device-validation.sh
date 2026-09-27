@@ -335,30 +335,26 @@ adb install -r "$CANDIDATE_APK"
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
 
-# Verify the candidate upgrade against its real on-disk DataStore bytes.
-# The visual emulator image is rootable, so this does not require a debuggable app
-# or a test process linked against the minified candidate.
+# Verify upgraded state through a candidate-only, read-only probe.
+# This avoids root, UI automation and post-upgrade instrumentation while
+# exercising the same repositories the minified candidate uses at runtime.
 UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
 printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
 grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
 sleep 3
-adb shell am force-stop "$PACKAGE"
 
-adb root
-adb wait-for-device
-test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1"
-adb pull "/data/user/0/$PACKAGE/files/datastore/who_are_you_profile.preferences_pb" device-upgrade-profile.preferences_pb >/dev/null
-adb pull "/data/user/0/$PACKAGE/files/datastore/who_are_you_behavior.preferences_pb" device-upgrade-behavior.preferences_pb >/dev/null
-adb pull "/data/user/0/$PACKAGE/files/datastore/who_are_you_behavior_goals.preferences_pb" device-upgrade-goals.preferences_pb >/dev/null
-python3 .github/scripts/verify-release-upgrade-state.py \
-  --profile device-upgrade-profile.preferences_pb \
-  --behavior device-upgrade-behavior.preferences_pb \
-  --goals device-upgrade-goals.preferences_pb \
+adb shell am broadcast --receiver-foreground \
+  -a "$PACKAGE.action.CANDIDATE_UPGRADE_STATE" \
+  -n "$PACKAGE/.CandidateUpgradeStateProbeReceiver" \
   | tee device-upgrade-state-verify.txt
-grep -F "profile=onboarded" device-upgrade-state-verify.txt
+grep -F "onboarding=true" device-upgrade-state-verify.txt
 grep -F "ads_removed=true" device-upgrade-state-verify.txt
-grep -F "behavior_steps=4321" device-upgrade-state-verify.txt
+grep -F "activity_state=AVAILABLE" device-upgrade-state-verify.txt
+grep -F "steps=4321" device-upgrade-state-verify.txt
+grep -F "goal_id=upgrade-probe-goal" device-upgrade-state-verify.txt
+grep -F "goal_metric=STEPS_AT_LEAST" device-upgrade-state-verify.txt
 grep -F "goal_target=4000" device-upgrade-state-verify.txt
+grep -Fv "probe_error=" device-upgrade-state-verify.txt >/dev/null
 
 adb shell am force-stop "$PACKAGE"
 validate_running_app upgrade-candidate
