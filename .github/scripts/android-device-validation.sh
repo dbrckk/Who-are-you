@@ -325,7 +325,7 @@ sleep 2
 
 adb shell am instrument -w -r \
   -e releaseUpgradePhase seed \
-  -e class "$PACKAGE.ReleaseUpgradePersistenceTest#seedPersistentState" \
+  -e class "$PACKAGE.ReleaseUpgradeSeedTest#seedPersistentState" \
   "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" \
   | tee device-upgrade-state-seed.txt
 grep -F "OK (1 test)" device-upgrade-state-seed.txt
@@ -337,7 +337,7 @@ adb logcat -c
 
 adb shell am instrument -w -r \
   -e releaseUpgradePhase verify \
-  -e class "$PACKAGE.ReleaseUpgradePersistenceTest#verifyPersistentState" \
+  -e class "$PACKAGE.ReleaseUpgradeVerifyTest#verifyPersistentState" \
   "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" \
   | tee device-upgrade-state-verify.txt
 grep -F "OK (1 test)" device-upgrade-state-verify.txt
