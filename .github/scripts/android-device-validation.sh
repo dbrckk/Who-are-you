@@ -343,9 +343,9 @@ printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-
 grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
 sleep 3
 
-adb shell am broadcast --receiver-foreground \
-  -a "$PACKAGE.action.CANDIDATE_UPGRADE_STATE" \
-  -n "$PACKAGE/.CandidateUpgradeStateProbeReceiver" \
+adb shell content call \
+  --uri "content://$PACKAGE.candidate-upgrade-probe" \
+  --method state \
   | tee device-upgrade-state-verify.txt
 grep -F "onboarding=true" device-upgrade-state-verify.txt
 grep -F "ads_removed=true" device-upgrade-state-verify.txt
