@@ -3,9 +3,9 @@ package com.whoareyou.app
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
-import java.io.File
-import java.nio.charset.StandardCharsets
-import java.util.Base64
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -13,39 +13,27 @@ class ReleaseUpgradeVerifyTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
 
     @Test
-    fun verifyPersistentState() {
-        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "verify") return
+    fun verifyPersistentState() = runBlocking {
+        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "verify") {
+            return@runBlocking
+        }
 
-        val profile = dataStoreBytes("who_are_you_profile")
-        assertContains(profile, "onboarding_complete")
-        assertContains(profile, "ads_removed")
+        val profile = ProfileStore.observe(context).first()
+        assertTrue(profile.onboardingComplete)
+        assertTrue(profile.adsRemoved)
 
-        val behavior = dataStoreBytes("who_are_you_behavior")
-        assertContains(behavior, "daily_behavior_v1")
-        assertContains(behavior, "4321")
-        assertContains(behavior, "activity_enabled")
-        assertContains(behavior, "activity_state")
-        assertContains(behavior, "AVAILABLE")
+        val behavior = BehaviorRepository.observe(context).first()
+        assertEquals(4_321L, behavior.today?.steps)
+        assertEquals(
+            BehaviorSourceState.AVAILABLE,
+            behavior.sourceStates[BehaviorSource.ACTIVITY]
+        )
 
-        val goals = dataStoreBytes("who_are_you_behavior_goals")
-        assertContains(goals, "goals_v1")
-        assertContains(goals, encoded("upgrade-probe-goal"))
-        assertContains(goals, "STEPS_AT_LEAST")
-        assertContains(goals, "4000")
+        val goals = BehaviorGoalRepository.observe(context).first()
+        assertEquals(1, goals.size)
+        val goal = goals.single()
+        assertEquals("upgrade-probe-goal", goal.id)
+        assertEquals(BehaviorGoalMetric.STEPS_AT_LEAST, goal.metric)
+        assertEquals(4_000L, goal.target)
     }
-
-    private fun dataStoreBytes(name: String): ByteArray {
-        val file = File(context.filesDir, "datastore/$name.preferences_pb")
-        assertTrue("Missing persisted DataStore file: ${file.path}", file.isFile)
-        return file.readBytes()
-    }
-
-    private fun assertContains(bytes: ByteArray, expected: String) {
-        val raw = String(bytes, StandardCharsets.ISO_8859_1)
-        assertTrue("Persisted DataStore missing marker: $expected", raw.contains(expected))
-    }
-
-    private fun encoded(value: String): String = Base64.getUrlEncoder()
-        .withoutPadding()
-        .encodeToString(value.toByteArray(StandardCharsets.UTF_8))
 }
