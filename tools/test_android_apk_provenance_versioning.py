@@ -3,6 +3,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/android-apk.yml"
+FALLBACK = ROOT / ".github/workflows/apk-test.yml"
 
 
 class AndroidApkProvenanceVersioningTest(unittest.TestCase):
@@ -15,6 +16,15 @@ class AndroidApkProvenanceVersioningTest(unittest.TestCase):
         self.assertIn('version=${VERSION_NAME}-debug', source)
         self.assertNotIn("who-are-you-0.1.0-debug.apk", source)
         self.assertNotIn("version=0.1.0-debug", source)
+
+    def test_manual_fallback_artifact_uses_current_gradle_version(self):
+        source = FALLBACK.read_text(encoding="utf-8")
+
+        self.assertIn('VERSION_NAME="$(sed -n', source)
+        self.assertIn('VERSION_CODE="$(sed -n', source)
+        self.assertIn('who-are-you-${VERSION_NAME}-${VERSION_CODE}-test.apk', source)
+        self.assertNotIn("who-are-you-0.1.0-test.apk", source)
+        self.assertNotIn("who-are-you-0.1.0-test-apk", source)
 
 
 if __name__ == "__main__":
