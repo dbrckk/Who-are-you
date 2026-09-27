@@ -26,8 +26,8 @@ ANDROID_BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
 
 def load_android_version(path: pathlib.Path = ANDROID_BUILD_GRADLE) -> tuple[int, str]:
     source = path.read_text(encoding="utf-8")
-    code_match = re.search(r"\\bversionCode\\s*=\\s*(\\d+)", source)
-    name_match = re.search(r'\\bversionName\\s*=\\s*"([^"]+)"', source)
+    code_match = re.search(r"\bversionCode\s*=\s*(\d+)", source)
+    name_match = re.search(r'\bversionName\s*=\s*"([^"]+)"', source)
     if code_match is None or name_match is None:
         raise ValueError(f"Unable to resolve Android version from {path}")
     return int(code_match.group(1)), name_match.group(1)
