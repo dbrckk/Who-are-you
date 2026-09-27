@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / ".github/scripts/android-device-validation.sh"
 SEED_TEST = ROOT / "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt"
 CANDIDATE_MANIFEST = ROOT / "app/src/candidate/AndroidManifest.xml"
-CANDIDATE_PROBE = ROOT / "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeReceiver.kt"
+CANDIDATE_PROBE = ROOT / "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt"
 M59_WORKFLOW = ROOT / ".github/workflows/m59-device-validation.yml"
 
 
@@ -20,7 +20,7 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
             script.index('adb install -r "$CANDIDATE_APK"'),
         )
 
-    def test_post_upgrade_verification_uses_candidate_only_probe(self):
+    def test_post_upgrade_verification_uses_candidate_only_provider(self):
         script = SCRIPT.read_text(encoding="utf-8")
         manifest = CANDIDATE_MANIFEST.read_text(encoding="utf-8")
         probe = CANDIDATE_PROBE.read_text(encoding="utf-8")
@@ -28,13 +28,15 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         self.assertTrue(CANDIDATE_MANIFEST.is_file())
         self.assertTrue(CANDIDATE_PROBE.is_file())
         self.assertNotIn("adb root", script)
-        self.assertNotIn("verify-release-upgrade-state.py", script)
-        self.assertIn("CandidateUpgradeStateProbeReceiver", manifest)
-        self.assertIn("CANDIDATE_UPGRADE_STATE", manifest)
-        self.assertIn("ProfileStore.observe(context).first()", probe)
-        self.assertIn("BehaviorRepository.observe(context).first()", probe)
-        self.assertIn("BehaviorGoalRepository.observe(context).first()", probe)
-        self.assertIn("CandidateUpgradeStateProbeReceiver", script)
+        self.assertNotIn("am broadcast", script)
+        self.assertIn("CandidateUpgradeStateProbeProvider", manifest)
+        self.assertIn("candidate-upgrade-probe", manifest)
+        self.assertIn("ProfileStore.observe(appContext).first()", probe)
+        self.assertIn("BehaviorRepository.observe(appContext).first()", probe)
+        self.assertIn("BehaviorGoalRepository.observe(appContext).first()", probe)
+        self.assertIn("adb shell content call", script)
+        self.assertIn('content://$PACKAGE.candidate-upgrade-probe', script)
+        self.assertIn("--method state", script)
         self.assertIn('grep -F "onboarding=true"', script)
         self.assertIn('grep -F "ads_removed=true"', script)
         self.assertIn('grep -F "activity_state=AVAILABLE"', script)
