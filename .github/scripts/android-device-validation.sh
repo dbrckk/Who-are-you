@@ -311,6 +311,72 @@ smoke_apk() {
 smoke_apk "$DEBUG_APK" debug
 smoke_apk "$CANDIDATE_APK" candidate
 
+dump_upgrade_ui() {
+  local label="$1"
+  adb shell uiautomator dump "/sdcard/device-upgrade-$label.xml" >/dev/null
+  adb pull "/sdcard/device-upgrade-$label.xml" "device-upgrade-$label.xml" >/dev/null
+  test -s "device-upgrade-$label.xml"
+}
+
+ui_has_value() {
+  local file="$1"
+  local value="$2"
+  python3 - "$file" "$value" <<'PY'
+import sys
+import xml.etree.ElementTree as ET
+path, needle = sys.argv[1], sys.argv[2]
+root = ET.parse(path).getroot()
+for node in root.iter("node"):
+    values = (node.attrib.get("text", ""), node.attrib.get("content-desc", ""), node.attrib.get("resource-id", ""))
+    if any(value == needle or value.endswith("/" + needle) for value in values):
+        raise SystemExit(0)
+raise SystemExit(1)
+PY
+}
+
+tap_ui_value() {
+  local file="$1"
+  local value="$2"
+  local coordinates
+  coordinates="$(python3 - "$file" "$value" <<'PY'
+import re, sys
+import xml.etree.ElementTree as ET
+path, needle = sys.argv[1], sys.argv[2]
+root = ET.parse(path).getroot()
+for node in root.iter("node"):
+    values = (node.attrib.get("text", ""), node.attrib.get("content-desc", ""), node.attrib.get("resource-id", ""))
+    if not any(value == needle or value.endswith("/" + needle) for value in values):
+        continue
+    match = re.fullmatch(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", node.attrib.get("bounds", ""))
+    if match:
+        x1, y1, x2, y2 = map(int, match.groups())
+        print((x1 + x2) // 2, (y1 + y2) // 2)
+        raise SystemExit(0)
+raise SystemExit(1)
+PY
+)"
+  read -r x y <<<"$coordinates"
+  adb shell input tap "$x" "$y"
+  sleep 1
+}
+
+scroll_until_ui_value() {
+  local value="$1"
+  local label="$2"
+  local attempts="${3:-8}"
+  local index
+  for ((index=0; index<=attempts; index++)); do
+    dump_upgrade_ui "$label-$index"
+    if ui_has_value "device-upgrade-$label-$index.xml" "$value"; then
+      printf '%s\n' "device-upgrade-$label-$index.xml"
+      return 0
+    fi
+    adb shell input swipe 160 520 160 180 250
+    sleep 1
+  done
+  return 1
+}
+
 # Validate the real upgrade path: initialize data with the debug build, then
 # replace it in-place with the minified candidate without clearing app data.
 adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
@@ -332,18 +398,44 @@ grep -F "OK (1 test)" device-upgrade-state-seed.txt
 adb shell am force-stop "$PACKAGE"
 
 adb install -r "$CANDIDATE_APK"
-adb install -r "$TEST_APK"
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
 
-adb shell am instrument -w -r \
-  -e releaseUpgradePhase verify \
-  -e class "$PACKAGE.ReleaseUpgradeVerifyTest#verifyPersistentState" \
-  "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" \
-  | tee device-upgrade-state-verify.txt
-grep -F "OK (1 test)" device-upgrade-state-verify.txt
-adb shell am force-stop "$PACKAGE"
+# Black-box verification against the actual minified candidate.
+UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
+grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
+sleep 3
 
+dump_upgrade_ui "discover"
+ui_has_value "device-upgrade-discover.xml" "PROFILE"
+tap_ui_value "device-upgrade-discover.xml" "PROFILE"
+sleep 2
+
+PROFILE_HABITS_XML="$(scroll_until_ui_value "profile_open_habits" "profile" 10)"
+if ! grep -Fq "LIFETIME UPGRADE ACTIVE" device-upgrade-profile-*.xml; then
+  echo "Persisted ads-removed profile state was not rendered after candidate upgrade"
+  exit 1
+fi
+tap_ui_value "$PROFILE_HABITS_XML" "profile_open_habits"
+sleep 3
+
+dump_upgrade_ui "habits-top"
+if ! grep -Fq "4321 steps" device-upgrade-habits-top.xml; then
+  echo "Persisted behavior aggregate was not rendered after candidate upgrade"
+  exit 1
+fi
+
+GOAL_XML="$(scroll_until_ui_value "Your target: 4000" "habits-goal" 10)"
+ui_has_value "$GOAL_XML" "Your target: 4000"
+{
+  echo "profile=onboarded"
+  echo "ads_removed=rendered"
+  echo "behavior_steps=4321"
+  echo "goal_target=4000"
+} > device-upgrade-state-verify.txt
+
+adb shell am force-stop "$PACKAGE"
 validate_running_app upgrade-candidate
 
 # One more cold relaunch after the upgrade catches startup failures that only
