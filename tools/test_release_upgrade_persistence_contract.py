@@ -59,6 +59,8 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         self.assertNotIn("dumpsys activity exit-info", no_ui)
         self.assertNotIn("adb logcat", no_ui)
         self.assertIn('adb shell pidof "$PACKAGE"', no_ui)
+        terminal = script[script.index("validate_running_app_no_ui upgrade-candidate"):]
+        self.assertNotIn("adb shell", terminal.splitlines()[1:])
         self.assertNotIn('capture_visual_evidence "upgrade-candidate"', post_upgrade)
         self.assertNotIn('capture_visual_evidence "upgrade-relaunch"', post_upgrade)
         self.assertNotIn('"upgrade-candidate"\n    "upgrade-relaunch"', script)
