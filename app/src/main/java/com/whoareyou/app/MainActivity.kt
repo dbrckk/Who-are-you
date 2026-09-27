@@ -141,7 +141,19 @@ private fun WhoAreYouApp() {
                         when (BehaviorSourceActionHandler.handle(context, source, action)) {
                             BehaviorSourceEffect.REFRESH -> refreshBehavior()
                             BehaviorSourceEffect.REQUEST_ACTIVITY_PERMISSION -> activityPermissionLauncher.launch(setOf(HealthConnectActivityDataSource.READ_STEPS_PERMISSION))
-                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> usageAccessLauncher.launch(UsageAccess.settingsIntent())
+                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> {
+                                val settingsIntent = UsageAccess.settingsIntent(context)
+                                if (settingsIntent != null) {
+                                    usageAccessLauncher.launch(settingsIntent)
+                                } else {
+                                    BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)
+                                    BehaviorRepository.setSourceState(
+                                        context,
+                                        BehaviorSource.APP_USAGE,
+                                        BehaviorSourceState.UNSUPPORTED
+                                    )
+                                }
+                            }
                             BehaviorSourceEffect.NONE -> Unit
                         }
                     } },
