@@ -57,6 +57,8 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         self.assertNotIn("validate_running_app_no_ui upgrade-relaunch", post_upgrade)
         no_ui = script[script.index("validate_running_app_no_ui() {"):script.index("smoke_apk() {")]
         self.assertNotIn("dumpsys activity exit-info", no_ui)
+        self.assertNotIn("adb logcat", no_ui)
+        self.assertIn('adb shell pidof "$PACKAGE"', no_ui)
         self.assertNotIn('capture_visual_evidence "upgrade-candidate"', post_upgrade)
         self.assertNotIn('capture_visual_evidence "upgrade-relaunch"', post_upgrade)
         self.assertNotIn('"upgrade-candidate"\n    "upgrade-relaunch"', script)
