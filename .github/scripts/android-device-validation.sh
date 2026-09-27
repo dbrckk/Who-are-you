@@ -5,7 +5,8 @@ PACKAGE="com.whoareyou.app"
 ACTIVITY="$PACKAGE/.MainActivity"
 DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
 CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
-TEST_APK="app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+DEBUG_TEST_APK="app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+CANDIDATE_TEST_APK="app/build/outputs/apk/androidTest/candidate/app-candidate-androidTest.apk"
 HOST_RESOURCE_LOG="device-host-resources.txt"
 HOST_KERNEL_LOG="device-host-kernel.txt"
 HOST_MONITOR_PID=""
@@ -93,11 +94,12 @@ if [[ "$VALIDATION_MODE" == "instrumentation" ]]; then
   exit 0
 fi
 
-gradle :app:assembleDebug :app:assembleCandidate :app:assembleDebugAndroidTest --no-daemon --stacktrace
+gradle :app:assembleDebug :app:assembleCandidate :app:assembleDebugAndroidTest :app:assembleCandidateAndroidTest --no-daemon --stacktrace
 
 test -s "$DEBUG_APK"
 test -s "$CANDIDATE_APK"
-test -s "$TEST_APK"
+test -s "$DEBUG_TEST_APK"
+test -s "$CANDIDATE_TEST_APK"
 
 capture_visual_evidence() {
   local label="$1"
@@ -315,7 +317,7 @@ smoke_apk "$CANDIDATE_APK" candidate
 # replace it in-place with the minified candidate without clearing app data.
 adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
 adb install "$DEBUG_APK"
-adb install -r "$TEST_APK"
+adb install -r "$DEBUG_TEST_APK"
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
 UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
@@ -332,6 +334,7 @@ grep -F "OK (1 test)" device-upgrade-state-seed.txt
 adb shell am force-stop "$PACKAGE"
 
 adb install -r "$CANDIDATE_APK"
+adb install -r "$CANDIDATE_TEST_APK"
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
 
