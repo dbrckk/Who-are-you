@@ -23,5 +23,8 @@ object UsageAccess {
         }
     }
 
-    fun settingsIntent(): Intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+    fun settingsIntent(context: Context): Intent? =
+        Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).takeIf { intent ->
+            intent.resolveActivity(context.packageManager) != null
+        }
 }
