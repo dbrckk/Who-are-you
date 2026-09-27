@@ -12,7 +12,6 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -58,7 +57,7 @@ class MainActivityRecreationTest {
     }
 
     @Test
-    fun behaviorGoalSurvivesActivityRecreationWithoutDuplication() {
+    fun behaviorGoalSurvivesActivityRelaunchWithoutDuplication() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val previousOnboardingComplete = runBlocking {
             ProfileStore.observe(context).first().onboardingComplete.also {
@@ -67,13 +66,10 @@ class MainActivityRecreationTest {
             }
         }
 
-        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        var scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             waitForTag("app_screen_discover")
-            composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
-            waitForTag("app_screen_profile")
-            composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
-            waitForTag("app_screen_habits")
+            openHabits(context)
 
             composeRule.onNodeWithTag("behavior_screen")
                 .performScrollToNode(hasTestTag("behavior_goal_create"))
@@ -88,25 +84,26 @@ class MainActivityRecreationTest {
             }
             assertEquals(9_000L, persistedGoal.targetValue)
 
-            // ActivityScenario.recreate() can stall on ATD while the numeric IME still owns
-            // the window. Dismiss it explicitly so this test exercises activity recreation,
-            // not emulator/IME teardown behavior.
-            closeSoftKeyboard()
-            composeRule.waitForIdle()
-            scenario.recreate()
-            waitForTag("app_screen_habits")
+            // A full close/relaunch exercises persisted restoration without depending on
+            // ActivityScenario.recreate(), which can deadlock on headless ATD after numeric
+            // IME interaction. The separate quiz test still covers recreate() itself.
+            scenario.close()
+            scenario = ActivityScenario.launch(MainActivity::class.java)
+            waitForTag("app_screen_discover")
+            openHabits(context)
             composeRule.onNodeWithTag("behavior_screen")
                 .performScrollToNode(hasTestTag("behavior_goal_${persistedGoal.id}"))
             composeRule.onNodeWithTag("behavior_goal_${persistedGoal.id}").assertIsDisplayed()
 
-            val afterRecreation = runBlocking {
+            val afterRelaunch = runBlocking {
                 withTimeout(5_000) {
                     BehaviorGoalRepository.observe(context).first { goals ->
                         goals.any { it.id == persistedGoal.id }
                     }
                 }
             }
-            assertEquals(1, afterRecreation.count { it.id == persistedGoal.id })
+            assertEquals(1, afterRelaunch.size)
+            assertEquals(persistedGoal, afterRelaunch.single())
         } finally {
             scenario.close()
             runBlocking {
@@ -114,6 +111,13 @@ class MainActivityRecreationTest {
                 ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
             }
         }
+    }
+
+    private fun openHabits(context: android.content.Context) {
+        composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
+        waitForTag("app_screen_profile")
+        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
+        waitForTag("app_screen_habits")
     }
 
     private fun waitForTag(tag: String) {
