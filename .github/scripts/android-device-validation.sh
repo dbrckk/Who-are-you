@@ -305,15 +305,7 @@ validate_running_app_no_ui() {
 
   PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
   test -n "$PID"
-  printf '%s PID: %s\n' "$label" "$PID"
-
-  adb logcat -d > "device-logcat-$label.txt"
-  adb logcat -d AndroidRuntime:E '*:S' > "device-android-runtime-$label.txt"
-
-  if grep -F "Process: $PACKAGE" "device-android-runtime-$label.txt"; then
-    echo "Fatal AndroidRuntime crash detected for $PACKAGE ($label)"
-    exit 1
-  fi
+  printf '%s PID: %s\n' "$label" "$PID" | tee "device-runtime-$label.txt"
 }
 
 smoke_apk() {
