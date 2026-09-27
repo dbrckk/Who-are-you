@@ -345,6 +345,15 @@ adb shell wm density reset
 adb shell settings put system font_scale 1.0
 adb shell am force-stop "$PACKAGE"
 
+adb shell wm size > device-display-metrics.txt
+adb shell wm density >> device-display-metrics.txt
+adb shell settings get system font_scale >> device-display-metrics.txt
+
+validate_evidence_matrix
+python3 .github/scripts/summarize-visual-qa.py \
+  --root . \
+  --output device-visual-qa-summary.md
+
 # Validate the real upgrade path: initialize data with the debug build, then
 # replace it in-place with the minified candidate without clearing app data.
 adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
@@ -395,15 +404,5 @@ adb logcat -c
 # This is the authoritative post-upgrade cold start: the provider process is
 # terminated above, so MainActivity starts from process death with migrated data.
 validate_running_app_no_ui upgrade-candidate
-adb shell am force-stop "$PACKAGE"
-
-adb shell wm size > device-display-metrics.txt
-adb shell wm density >> device-display-metrics.txt
-adb shell settings get system font_scale >> device-display-metrics.txt
-
-validate_evidence_matrix
-python3 .github/scripts/summarize-visual-qa.py \
-  --root . \
-  --output device-visual-qa-summary.md
 
 echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
