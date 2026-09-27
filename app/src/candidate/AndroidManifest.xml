@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <receiver
+            android:name=".CandidateUpgradeStateProbeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.whoareyou.app.action.CANDIDATE_UPGRADE_STATE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
