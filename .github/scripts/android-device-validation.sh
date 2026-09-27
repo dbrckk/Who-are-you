@@ -341,7 +341,11 @@ adb logcat -c
 UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
 printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
 grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
-sleep 3
+# Do not keep MainActivity alive while reading the probe: the seeded AVAILABLE
+# activity source triggers its normal on-resume refresh path, which is unrelated
+# to persistence verification and can destabilize the constrained emulator.
+adb shell am force-stop "$PACKAGE"
+sleep 1
 
 adb shell content call \
   --uri "content://$PACKAGE.candidate-upgrade-probe" \
