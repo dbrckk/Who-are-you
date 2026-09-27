@@ -72,6 +72,7 @@ jobs:
             device-host-kernel.txt
             device-startup-*.txt
             device-upgrade-state-*.txt
+            device-upgrade-*.xml
             device-monkey-*.txt
             device-logcat-*.txt
             device-android-runtime-*.txt
