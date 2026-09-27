@@ -10,7 +10,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
-import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
@@ -57,53 +56,44 @@ class MainActivityRecreationTest {
     }
 
     @Test
-    fun behaviorGoalSurvivesActivityRelaunchWithoutDuplication() {
+    fun persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val persistedGoal = BehaviorGoal.stepsAtLeast(
+            id = "recreation-goal",
+            targetSteps = 9_000L,
+            startEpochDay = 20_000L
+        )
         val previousOnboardingComplete = runBlocking {
             ProfileStore.observe(context).first().onboardingComplete.also {
                 ProfileStore.setOnboardingComplete(context, true)
                 BehaviorGoalRepository.clearAll(context)
+                BehaviorGoalRepository.upsert(context, persistedGoal)
             }
         }
 
-        var scenario = ActivityScenario.launch(MainActivity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         try {
             waitForTag("app_screen_discover")
             openHabits(context)
+            assertGoalDisplayed(persistedGoal)
 
-            composeRule.onNodeWithTag("behavior_screen")
-                .performScrollToNode(hasTestTag("behavior_goal_create"))
-            composeRule.onNodeWithTag("behavior_goal_create").performClick()
-            composeRule.onNodeWithTag("behavior_goal_target_input").performTextInput("9000")
-            composeRule.onNodeWithTag("behavior_goal_create_confirm").performClick()
-
-            val persistedGoal = runBlocking {
-                withTimeout(5_000) {
-                    BehaviorGoalRepository.observe(context).first { it.size == 1 }.single()
-                }
-            }
-            assertEquals(9_000L, persistedGoal.targetValue)
-
-            // A full close/relaunch exercises persisted restoration without depending on
-            // ActivityScenario.recreate(), which can deadlock on headless ATD after numeric
-            // IME interaction. The separate quiz test still covers recreate() itself.
-            scenario.close()
-            scenario = ActivityScenario.launch(MainActivity::class.java)
+            // Seed persistence before launch so recreation validates restoration itself without
+            // leaving a numeric IME session active. Headless ATD can otherwise deadlock while
+            // ActivityScenario tears down an activity that still owns that IME connection.
+            scenario.recreate()
             waitForTag("app_screen_discover")
             openHabits(context)
-            composeRule.onNodeWithTag("behavior_screen")
-                .performScrollToNode(hasTestTag("behavior_goal_${persistedGoal.id}"))
-            composeRule.onNodeWithTag("behavior_goal_${persistedGoal.id}").assertIsDisplayed()
+            assertGoalDisplayed(persistedGoal)
 
-            val afterRelaunch = runBlocking {
+            val afterRecreation = runBlocking {
                 withTimeout(5_000) {
                     BehaviorGoalRepository.observe(context).first { goals ->
                         goals.any { it.id == persistedGoal.id }
                     }
                 }
             }
-            assertEquals(1, afterRelaunch.size)
-            assertEquals(persistedGoal, afterRelaunch.single())
+            assertEquals(1, afterRecreation.size)
+            assertEquals(persistedGoal, afterRecreation.single())
         } finally {
             scenario.close()
             runBlocking {
@@ -111,6 +101,12 @@ class MainActivityRecreationTest {
                 ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
             }
         }
+    }
+
+    private fun assertGoalDisplayed(goal: BehaviorGoal) {
+        composeRule.onNodeWithTag("behavior_screen")
+            .performScrollToNode(hasTestTag("behavior_goal_${goal.id}"))
+        composeRule.onNodeWithTag("behavior_goal_${goal.id}").assertIsDisplayed()
     }
 
     private fun openHabits(context: android.content.Context) {
