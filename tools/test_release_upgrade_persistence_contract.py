@@ -54,7 +54,9 @@ class ReleaseUpgradePersistenceContractTest(unittest.TestCase):
         candidate_replace = script.index('adb install -r "$CANDIDATE_APK"', script.index("ReleaseUpgradeSeedTest#seedPersistentState"))
         post_upgrade = script[candidate_replace:]
         self.assertIn("validate_running_app_no_ui upgrade-candidate", post_upgrade)
-        self.assertIn("validate_running_app_no_ui upgrade-relaunch", post_upgrade)
+        self.assertNotIn("validate_running_app_no_ui upgrade-relaunch", post_upgrade)
+        no_ui = script[script.index("validate_running_app_no_ui() {"):script.index("smoke_apk() {")]
+        self.assertNotIn("dumpsys activity exit-info", no_ui)
         self.assertNotIn('capture_visual_evidence "upgrade-candidate"', post_upgrade)
         self.assertNotIn('capture_visual_evidence "upgrade-relaunch"', post_upgrade)
         self.assertNotIn('"upgrade-candidate"\n    "upgrade-relaunch"', script)
