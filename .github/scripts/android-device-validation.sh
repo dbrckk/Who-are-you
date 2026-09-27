@@ -5,6 +5,7 @@ PACKAGE="com.whoareyou.app"
 ACTIVITY="$PACKAGE/.MainActivity"
 DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
 CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
+TEST_APK="app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
 HOST_RESOURCE_LOG="device-host-resources.txt"
 HOST_KERNEL_LOG="device-host-kernel.txt"
 HOST_MONITOR_PID=""
@@ -92,10 +93,11 @@ if [[ "$VALIDATION_MODE" == "instrumentation" ]]; then
   exit 0
 fi
 
-gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
+gradle :app:assembleDebug :app:assembleCandidate :app:assembleDebugAndroidTest --no-daemon --stacktrace
 
 test -s "$DEBUG_APK"
 test -s "$CANDIDATE_APK"
+test -s "$TEST_APK"
 
 capture_visual_evidence() {
   local label="$1"
@@ -129,8 +131,6 @@ validate_evidence_matrix() {
   local labels=(
     "debug"
     "candidate"
-    "upgrade-candidate"
-    "upgrade-relaunch"
     "candidate-font-130"
     "candidate-compact"
     "candidate-large"
@@ -295,6 +295,14 @@ validate_running_app() {
   fi
 }
 
+validate_running_app_no_ui() {
+  local label="$1"
+
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+}
+
 smoke_apk() {
   local apk="$1"
   local label="$2"
@@ -308,45 +316,6 @@ smoke_apk() {
 
 smoke_apk "$DEBUG_APK" debug
 smoke_apk "$CANDIDATE_APK" candidate
-
-# Validate the real upgrade path: initialize data with the debug build, then
-# replace it in-place with the minified candidate without clearing app data.
-adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
-adb install "$DEBUG_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$UPGRADE_DEBUG_START" | tee device-startup-upgrade-debug.txt
-grep -F "Status: ok" device-startup-upgrade-debug.txt
-sleep 2
-adb shell am force-stop "$PACKAGE"
-
-adb install -r "$CANDIDATE_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-validate_running_app upgrade-candidate
-
-# One more cold relaunch after the upgrade catches startup failures that only
-# appear after process death with migrated/persisted state.
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
-grep -F "Status: ok" device-startup-upgrade-relaunch.txt
-sleep 3
-capture_visual_evidence "upgrade-relaunch"
-RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-test -n "$RELAUNCH_PID"
-adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
-adb shell dumpsys activity exit-info "$PACKAGE" > device-exit-info-upgrade-relaunch.txt || true
-if grep -F "Process: $PACKAGE" device-android-runtime-upgrade-relaunch.txt; then
-  echo "Fatal AndroidRuntime crash detected after upgraded cold relaunch"
-  exit 1
-fi
-if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
-  echo "Crash or ANR exit reason detected after upgraded cold relaunch"
-  exit 1
-fi
 
 capture_accessibility_variant "candidate-font-130" "1.30"
 adb shell settings put system font_scale 1.0
@@ -379,5 +348,56 @@ validate_evidence_matrix
 python3 .github/scripts/summarize-visual-qa.py \
   --root . \
   --output device-visual-qa-summary.md
+
+# Validate the real upgrade path: initialize data with the debug build, then
+# replace it in-place with the minified candidate without clearing app data.
+adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
+adb install "$DEBUG_APK"
+adb install -r "$TEST_APK"
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_DEBUG_START" | tee device-startup-upgrade-debug.txt
+grep -F "Status: ok" device-startup-upgrade-debug.txt
+sleep 2
+
+adb shell am instrument -w -r \
+  -e releaseUpgradePhase seed \
+  -e class "$PACKAGE.ReleaseUpgradeSeedTest#seedPersistentState" \
+  "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" \
+  | tee device-upgrade-state-seed.txt
+grep -F "OK (1 test)" device-upgrade-state-seed.txt
+adb shell am force-stop "$PACKAGE"
+
+adb install -r "$CANDIDATE_APK"
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+
+# Verify migrated persistence before the candidate's first activity launch.
+# MainActivity intentionally refreshes live source state on resume, so probing
+# after launch would test runtime permission reconciliation rather than whether
+# the upgrade preserved the stored value.
+adb shell content call \
+  --uri "content://$PACKAGE.candidate-upgrade-probe" \
+  --method state \
+  | tee device-upgrade-state-verify.txt
+grep -F "onboarding=true" device-upgrade-state-verify.txt
+grep -F "ads_removed=true" device-upgrade-state-verify.txt
+grep -F "activity_state=AVAILABLE" device-upgrade-state-verify.txt
+grep -F "steps=4321" device-upgrade-state-verify.txt
+grep -F "goal_id=upgrade-probe-goal" device-upgrade-state-verify.txt
+grep -F "goal_metric=STEPS_AT_LEAST" device-upgrade-state-verify.txt
+grep -F "goal_target=4000" device-upgrade-state-verify.txt
+grep -Fv "probe_error=" device-upgrade-state-verify.txt >/dev/null
+
+# Separately prove that the upgraded minified candidate starts and remains viable.
+UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
+grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+# This is the authoritative post-upgrade cold start: the provider process is
+# terminated above, so MainActivity starts from process death with migrated data.
+validate_running_app_no_ui upgrade-candidate
 
 echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."

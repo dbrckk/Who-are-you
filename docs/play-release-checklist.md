@@ -10,6 +10,10 @@
 
 The `candidate` build type is intentionally production-like: it inherits release minification/resource shrinking, keeps the production package/version, uses Google test ad IDs, leaves custom telemetry disabled by default, and uses Android's debug signing key only so the APK can be installed directly for acceptance testing. It is not a Play production artifact.
 
+The Candidate APK has external services disabled through `EXTERNAL_SERVICES_ENABLED=false`. Do not use the Candidate APK to validate production AdMob or Play Billing. Use it for local flows, rendering, navigation, offline behavior, persistence, migrations and privacy controls.
+
+Use a Play-signed Internal testing build for production-service acceptance. Validate consent, ads and billing only on the Play-signed Internal testing build, because that variant enables the production external-service configuration and is distributed through Google Play.
+
 ## Performance and Vitals gate
 
 - [ ] Review `play-bundle-budget.json` or `play-internal-bundle-budget.json`; investigate meaningful size growth.
@@ -62,7 +66,7 @@ The `candidate` build type is intentionally production-like: it inherits release
 
 - [ ] Create one-time in-app product `remove_ads_lifetime` in Play Console.
 - [ ] Set and activate the intended localized price(s).
-- [ ] Test purchase, acknowledgement and restore with Play license testers.
+- [ ] Test purchase, acknowledgement and restore with Play license testers on the Play-signed Internal testing build.
 - [ ] Confirm the UI displays Google Play's localized formatted price.
 
 ## Privacy and Play Console declarations
@@ -101,7 +105,8 @@ The `candidate` build type is intentionally production-like: it inherits release
 - [ ] Complete representative quizzes from every theme and verify scoring/results.
 - [ ] Verify profile evolution, Discover, journeys, Daily Question and achievements.
 - [ ] Verify sharing/result image generation and challenge links.
-- [ ] Verify no ad appears during an active quiz; verify consent/privacy options behavior where applicable.
+- [ ] On the Candidate APK, verify local quiz/navigation behavior without relying on Ads or Billing.
+- [ ] On the Play-signed Internal testing build, verify no ad appears during an active quiz and verify consent/privacy options behavior.
 - [ ] Test airplane/offline behavior and recovery after network restoration.
 - [ ] Test French and English device locales.
 - [ ] Test back navigation, rotation/process recreation where practical and small-screen scrolling.
