@@ -77,7 +77,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Guarded Google Play track promotion")
     parser.add_argument("--credentials", type=pathlib.Path, required=True)
     parser.add_argument("--track", required=True)
-    parser.add_argument("--version-code", type=int, default=1)
+    parser.add_argument("--version-code", type=int, default=ReleaseConfig().version_code)
     parser.add_argument("--status", choices=tuple(sorted(RELEASE_STATUSES)), default="draft")
     parser.add_argument("--user-fraction", type=float)
     parser.add_argument("--confirm-production", action="store_true")
