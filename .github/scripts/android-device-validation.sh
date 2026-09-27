@@ -335,18 +335,10 @@ adb install -r "$CANDIDATE_APK"
 adb shell am force-stop "$PACKAGE"
 adb logcat -c
 
-# Verify upgraded state through a candidate-only, read-only probe.
-# This avoids root, UI automation and post-upgrade instrumentation while
-# exercising the same repositories the minified candidate uses at runtime.
-UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
-grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
-# Do not keep MainActivity alive while reading the probe: the seeded AVAILABLE
-# activity source triggers its normal on-resume refresh path, which is unrelated
-# to persistence verification and can destabilize the constrained emulator.
-adb shell am force-stop "$PACKAGE"
-sleep 1
-
+# Verify migrated persistence before the candidate's first activity launch.
+# MainActivity intentionally refreshes live source state on resume, so probing
+# after launch would test runtime permission reconciliation rather than whether
+# the upgrade preserved the stored value.
 adb shell content call \
   --uri "content://$PACKAGE.candidate-upgrade-probe" \
   --method state \
@@ -360,6 +352,10 @@ grep -F "goal_metric=STEPS_AT_LEAST" device-upgrade-state-verify.txt
 grep -F "goal_target=4000" device-upgrade-state-verify.txt
 grep -Fv "probe_error=" device-upgrade-state-verify.txt >/dev/null
 
+# Separately prove that the upgraded minified candidate starts and remains viable.
+UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
+grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
 adb shell am force-stop "$PACKAGE"
 validate_running_app upgrade-candidate
 
