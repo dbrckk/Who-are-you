@@ -20,27 +20,42 @@ jobs:
           java-version: '17'
 
       - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
 
       - name: Build installable debug APK
         run: gradle :app:assembleDebug --stacktrace
 
+      - name: Read app version
+        id: version
+        run: |
+          set -euo pipefail
+          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
+          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
+          test -n "$VERSION_NAME"
+          test -n "$VERSION_CODE"
+          echo "name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+
       - name: Prepare APK
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: |
           set -euo pipefail
           APK="app/build/outputs/apk/debug/app-debug.apk"
-          test -f "$APK"
-          cp "$APK" who-are-you-0.1.0-test.apk
-          sha256sum who-are-you-0.1.0-test.apk | tee who-are-you-0.1.0-test.apk.sha256
+          OUTPUT="who-are-you-${VERSION_NAME}-${VERSION_CODE}-test.apk"
+          test -s "$APK"
+          cp "$APK" "$OUTPUT"
+          sha256sum "$OUTPUT" | tee "${OUTPUT}.sha256"
 
       - name: Upload test APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-0.1.0-test-apk
+          name: who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test-apk
           path: |
-            who-are-you-0.1.0-test.apk
-            who-are-you-0.1.0-test.apk.sha256
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test.apk
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test.apk.sha256
           if-no-files-found: error
           retention-days: 30
