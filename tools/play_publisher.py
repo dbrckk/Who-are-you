@@ -19,8 +19,21 @@ PACKAGE_NAME = "com.whoareyou.app"
 INTERNAL_TRACK = "qa"
 OPEN_TEST_TRACK = "beta"
 PRODUCTION_TRACK = "production"
-VERSION_CODE = 1
-VERSION_NAME = "0.1.0"
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+ANDROID_BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
+
+
+def load_android_version(path: pathlib.Path = ANDROID_BUILD_GRADLE) -> tuple[int, str]:
+    source = path.read_text(encoding="utf-8")
+    code_match = re.search(r"\bversionCode\s*=\s*(\d+)", source)
+    name_match = re.search(r'\bversionName\s*=\s*"([^"]+)"', source)
+    if code_match is None or name_match is None:
+        raise ValueError(f"Unable to resolve Android version from {path}")
+    return int(code_match.group(1)), name_match.group(1)
+
+
+VERSION_CODE, VERSION_NAME = load_android_version()
 API_ROOT = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications"
 UPLOAD_ROOT = "https://androidpublisher.googleapis.com/upload/androidpublisher/v3/applications"
 SCOPE = "https://www.googleapis.com/auth/androidpublisher"
