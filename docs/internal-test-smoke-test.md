@@ -18,6 +18,19 @@ Run this on the build installed from Google Play Internal testing, not only an A
 - [ ] Signature/profile recommendation behavior is coherent.
 - [ ] Post-completion retake recommendation works.
 
+## Local habits and goals
+
+- [ ] My Habits shows the local-only disclosure before any behavioral source is enabled.
+- [ ] Health Connect can be enabled only from the user action in My Habits.
+- [ ] Usage Access can be enabled only from the user action in My Habits.
+- [ ] Permission denial leaves the affected source unavailable without fabricating zero activity or usage.
+- [ ] Permission revocation after prior use is handled without a crash and without inventing a measurement.
+- [ ] Today / 7-day / 30-day views remain distinct; incomplete or missing history is presented as missing/building rather than as zero.
+- [ ] Create, pause, resume and remove a local goal; the chosen target remains clearly user-defined.
+- [ ] A goal persists after relaunch and Activity/process recreation, with progress recomputed from retained local observations.
+- [ ] Full Habits reset clears local behavioral history and local goals, while the questionnaire profile remains intact.
+- [ ] Verify My Habits and goal creation in EN and FR, on compact width, and at 130% font scale with all controls reachable by scrolling.
+
 ## Sharing and challenges
 
 - [ ] Result/profile share sheet opens.
