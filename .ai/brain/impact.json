@@ -1,104 +1,639 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "acc32afdb4152e2e9f9523de60020cffaa36129f",
-  "head": "e36ea7d6bf43534ea20107685107f5b8f647c540",
+  "base": "e36ea7d6bf43534ea20107685107f5b8f647c540",
+  "head": "6e6fb25face012b13f385b60247322d690c004e9",
   "index_mode": "incremental",
   "changed_files": [
+    {
+      "path": ".github/scripts/android-device-validation.sh",
+      "status": "M"
+    },
+    {
+      "path": ".github/workflows/android-apk.yml",
+      "status": "M"
+    },
     {
       "path": ".github/workflows/android-ci.yml",
       "status": "M"
     },
     {
-      "path": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "path": ".github/workflows/apk-test.yml",
+      "status": "M"
+    },
+    {
+      "path": ".github/workflows/m59-device-validation.yml",
+      "status": "M"
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
       "status": "A"
     },
     {
-      "path": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
       "status": "A"
     },
     {
-      "path": "docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md",
+      "path": "app/src/candidate/AndroidManifest.xml",
       "status": "A"
     },
     {
-      "path": "docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md",
+      "path": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
       "status": "A"
     },
     {
-      "path": "tools/test_release_ci_contract.py",
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "status": "M"
+    },
+    {
+      "path": "docs/internal-test-smoke-test.md",
+      "status": "M"
+    },
+    {
+      "path": "docs/play-release-checklist.md",
+      "status": "M"
+    },
+    {
+      "path": "tools/play_promoter.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_android_apk_provenance_versioning.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_gradle_action_alignment.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_habits_release_smoke_checklist.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_play_internal_telemetry_parity.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_play_publisher.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_play_version_sync.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_post_semantic_refresh_validation.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_release_artifact_scope_checklist.py",
       "status": "A"
     },
     {
       "path": "tools/test_release_integration_contract.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_release_upgrade_persistence_contract.py",
+      "status": "A"
+    },
+    {
+      "path": "tools/test_usage_access_launch_safety.py",
       "status": "A"
     }
   ],
   "changed_source_files": [
-    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
-    "tools/test_release_ci_contract.py",
-    "tools/test_release_integration_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+    "tools/play_promoter.py",
+    "tools/play_publisher.py",
+    "tools/test_android_apk_provenance_versioning.py",
+    "tools/test_gradle_action_alignment.py",
+    "tools/test_habits_release_smoke_checklist.py",
+    "tools/test_play_internal_telemetry_parity.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py",
+    "tools/test_post_semantic_refresh_validation.py",
+    "tools/test_release_artifact_scope_checklist.py",
+    "tools/test_release_integration_contract.py",
+    "tools/test_release_upgrade_persistence_contract.py",
+    "tools/test_usage_access_launch_safety.py"
   ],
   "impacted_files": [
-    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
-    "tools/test_release_ci_contract.py",
-    "tools/test_release_integration_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+    "tools/play_promoter.py",
+    "tools/play_publisher.py",
+    "tools/test_android_apk_provenance_versioning.py",
+    "tools/test_gradle_action_alignment.py",
+    "tools/test_habits_release_smoke_checklist.py",
+    "tools/test_play_internal_telemetry_parity.py",
+    "tools/test_play_promoter.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py",
+    "tools/test_post_semantic_refresh_validation.py",
+    "tools/test_release_artifact_scope_checklist.py",
+    "tools/test_release_integration_contract.py",
+    "tools/test_release_upgrade_persistence_contract.py",
+    "tools/test_usage_access_launch_safety.py"
   ],
   "impacted_symbols": [
     {
-      "name": "ActivityCollectorTest",
+      "name": "HabitsPersistenceE2eTest",
       "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "line": 21
+    },
+    {
+      "name": "habitsScreenAndLocalGoalSurviveActivityRecreation",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "line": 27
+    },
+    {
+      "name": "waitForTag",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "line": 83
+    },
+    {
+      "name": "MainActivityRecreationTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 23
+    },
+    {
+      "name": "quizProgressSurvivesActivityRecreation",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 28
+    },
+    {
+      "name": "persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 59
+    },
+    {
+      "name": "assertGoalDisplayed",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 105
+    },
+    {
+      "name": "openHabits",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 111
+    },
+    {
+      "name": "waitForTag",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 118
+    },
+    {
+      "name": "ReleaseUpgradeSeedTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "line": 11
+    },
+    {
+      "name": "seedPersistentState",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "line": 16
+    },
+    {
+      "name": "CandidateUpgradeStateProbeProvider",
+      "kind": "class",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 11
+    },
+    {
+      "name": "onCreate",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 13
+    },
+    {
+      "name": "call",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 14
+    },
+    {
+      "name": "query",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 48
+    },
+    {
+      "name": "getType",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 56
+    },
+    {
+      "name": "insert",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 58
+    },
+    {
+      "name": "delete",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 59
+    },
+    {
+      "name": "update",
+      "kind": "symbol",
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "line": 60
+    },
+    {
+      "name": "MainActivity",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 30
+    },
+    {
+      "name": "attachBaseContext",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 32
+    },
+    {
+      "name": "onCreate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 33
+    },
+    {
+      "name": "WhoAreYouApp",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 37
+    },
+    {
+      "name": "refreshBehavior",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 51
+    },
+    {
+      "name": "navigate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 107
+    },
+    {
+      "name": "resetQuizAttempt",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 109
+    },
+    {
+      "name": "UsageAccess",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 10
+    },
+    {
+      "name": "state",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 11
+    },
+    {
+      "name": "settingsIntent",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "line": 25
+    },
+    {
+      "name": "promote_version",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 24
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 76
+    },
+    {
+      "name": "load_android_version",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 27
+    },
+    {
+      "name": "ReleaseConfig",
+      "kind": "class",
+      "file": "tools/play_publisher.py",
+      "line": 45
+    },
+    {
+      "name": "validate",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 51
+    },
+    {
+      "name": "validate_track",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 61
+    },
+    {
+      "name": "release_payload",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 69
+    },
+    {
+      "name": "endpoint",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 100
+    },
+    {
+      "name": "load_service_account",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 104
+    },
+    {
+      "name": "_authorized_session",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 115
+    },
+    {
+      "name": "publish_bundle",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 128
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 195
+    },
+    {
+      "name": "AndroidApkProvenanceVersioningTest",
+      "kind": "class",
+      "file": "tools/test_android_apk_provenance_versioning.py",
       "line": 9
     },
     {
-      "name": "state",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-      "line": 63
+      "name": "test_android_apk_artifact_uses_current_gradle_version",
+      "kind": "function",
+      "file": "tools/test_android_apk_provenance_versioning.py",
+      "line": 10
     },
     {
-      "name": "readSteps",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-      "line": 64
+      "name": "test_manual_fallback_artifact_uses_current_gradle_version",
+      "kind": "function",
+      "file": "tools/test_android_apk_provenance_versioning.py",
+      "line": 20
     },
     {
-      "name": "FakeSource",
+      "name": "GradleActionAlignmentTest",
       "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-      "line": 74
-    },
-    {
-      "name": "state",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-      "line": 80
-    },
-    {
-      "name": "readSteps",
-      "kind": "symbol",
-      "file": "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-      "line": 82
-    },
-    {
-      "name": "ReleaseCompatibilityCodecTest",
-      "kind": "class",
-      "file": "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
-      "line": 6
-    },
-    {
-      "name": "ReleaseCiContractTest",
-      "kind": "class",
-      "file": "tools/test_release_ci_contract.py",
+      "file": "tools/test_gradle_action_alignment.py",
       "line": 8
     },
     {
-      "name": "test_ci_builds_release_like_candidate_apk",
+      "name": "test_all_android_workflows_use_setup_gradle_v6",
       "kind": "function",
-      "file": "tools/test_release_ci_contract.py",
+      "file": "tools/test_gradle_action_alignment.py",
+      "line": 9
+    },
+    {
+      "name": "HabitsReleaseSmokeChecklistTest",
+      "kind": "class",
+      "file": "tools/test_habits_release_smoke_checklist.py",
+      "line": 8
+    },
+    {
+      "name": "test_smoke_checklist_covers_local_habits_and_goals",
+      "kind": "function",
+      "file": "tools/test_habits_release_smoke_checklist.py",
+      "line": 9
+    },
+    {
+      "name": "PlayInternalTelemetryParityTest",
+      "kind": "class",
+      "file": "tools/test_play_internal_telemetry_parity.py",
+      "line": 8
+    },
+    {
+      "name": "test_internal_publish_can_match_candidate_telemetry_configuration",
+      "kind": "function",
+      "file": "tools/test_play_internal_telemetry_parity.py",
+      "line": 9
+    },
+    {
+      "name": "PlayPromotionPayloadTest",
+      "kind": "class",
+      "file": "tools/test_play_promoter.py",
+      "line": 6
+    },
+    {
+      "name": "test_internal_track_name_matches_current_play_api_contract",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 7
+    },
+    {
+      "name": "test_closed_track_can_be_draft",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 10
+    },
+    {
+      "name": "test_open_track_can_complete",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 14
+    },
+    {
+      "name": "test_production_needs_confirmation",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 18
+    },
+    {
+      "name": "test_staged_production_payload",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 22
+    },
+    {
+      "name": "PlayPublisherTest",
+      "kind": "class",
+      "file": "tools/test_play_publisher.py",
+      "line": 9
+    },
+    {
+      "name": "test_locked_release_config",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 10
+    },
+    {
+      "name": "test_default_release_payload_uses_internal_qa_track",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 19
+    },
+    {
+      "name": "test_open_testing_track_is_supported",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 28
+    },
+    {
+      "name": "test_custom_closed_track_is_supported",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 33
+    },
+    {
+      "name": "test_production_requires_explicit_confirmation",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 37
+    },
+    {
+      "name": "test_production_staged_rollout_is_supported_when_confirmed",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 41
+    },
+    {
+      "name": "test_production_in_progress_requires_fraction",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 52
+    },
+    {
+      "name": "test_non_production_rollout_fraction_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 60
+    },
+    {
+      "name": "test_invalid_status_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 66
+    },
+    {
+      "name": "test_only_locked_package_is_allowed",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 70
+    },
+    {
+      "name": "test_malformed_track_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 74
+    },
+    {
+      "name": "test_service_account_validation_rejects_missing_fields",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 78
+    },
+    {
+      "name": "test_endpoint_shape",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 85
+    },
+    {
+      "name": "PlayVersionSyncTest",
+      "kind": "class",
+      "file": "tools/test_play_version_sync.py",
+      "line": 11
+    },
+    {
+      "name": "test_publisher_version_is_loaded_from_android_gradle",
+      "kind": "function",
+      "file": "tools/test_play_version_sync.py",
+      "line": 12
+    },
+    {
+      "name": "test_promoter_does_not_pin_an_obsolete_version_code",
+      "kind": "function",
+      "file": "tools/test_play_version_sync.py",
+      "line": 19
+    },
+    {
+      "name": "PostSemanticRefreshValidationContractTest",
+      "kind": "class",
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "line": 10
+    },
+    {
+      "name": "assert_revalidates_after_semantic_refresh",
+      "kind": "function",
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "line": 11
+    },
+    {
+      "name": "test_android_ci_revalidates_main_after_semantic_refresh",
+      "kind": "function",
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "line": 20
+    },
+    {
+      "name": "test_device_validation_revalidates_main_after_semantic_refresh",
+      "kind": "function",
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "line": 23
+    },
+    {
+      "name": "ReleaseArtifactScopeChecklistTest",
+      "kind": "class",
+      "file": "tools/test_release_artifact_scope_checklist.py",
+      "line": 8
+    },
+    {
+      "name": "test_candidate_and_play_signed_acceptance_scopes_are_explicit",
+      "kind": "function",
+      "file": "tools/test_release_artifact_scope_checklist.py",
       "line": 9
     },
     {
@@ -123,37 +658,90 @@
       "name": "test_permission_launches_are_confined_to_user_source_actions",
       "kind": "function",
       "file": "tools/test_release_integration_contract.py",
-      "line": 30
+      "line": 42
     },
     {
       "name": "test_profile_and_habits_resets_have_separate_scopes",
       "kind": "function",
       "file": "tools/test_release_integration_contract.py",
-      "line": 36
+      "line": 48
     },
     {
       "name": "test_goal_progress_is_recomputed_not_persisted",
       "kind": "function",
       "file": "tools/test_release_integration_contract.py",
-      "line": 55
+      "line": 67
     },
     {
       "name": "test_release_hardening_adds_no_permission",
       "kind": "function",
       "file": "tools/test_release_integration_contract.py",
-      "line": 66
+      "line": 78
     },
     {
       "name": "test_behavior_and_goal_stores_remain_separate",
       "kind": "function",
       "file": "tools/test_release_integration_contract.py",
-      "line": 81
+      "line": 93
+    },
+    {
+      "name": "ReleaseUpgradePersistenceContractTest",
+      "kind": "class",
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "line": 12
+    },
+    {
+      "name": "test_upgrade_validation_seeds_before_candidate_replacement",
+      "kind": "function",
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "line": 13
+    },
+    {
+      "name": "test_post_upgrade_verification_uses_candidate_only_provider",
+      "kind": "function",
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "line": 23
+    },
+    {
+      "name": "test_post_upgrade_runtime_checks_do_not_reenter_ui_automation",
+      "kind": "function",
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "line": 52
+    },
+    {
+      "name": "test_m59_retains_upgrade_probe_evidence",
+      "kind": "function",
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "line": 73
+    },
+    {
+      "name": "UsageAccessLaunchSafetyTest",
+      "kind": "class",
+      "file": "tools/test_usage_access_launch_safety.py",
+      "line": 9
+    },
+    {
+      "name": "test_usage_access_settings_intent_is_resolved_before_launch",
+      "kind": "function",
+      "file": "tools/test_usage_access_launch_safety.py",
+      "line": 10
     }
   ],
   "selected_tests": [
-    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
-    "tools/test_release_ci_contract.py",
-    "tools/test_release_integration_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+    "tools/test_android_apk_provenance_versioning.py",
+    "tools/test_gradle_action_alignment.py",
+    "tools/test_habits_release_smoke_checklist.py",
+    "tools/test_play_internal_telemetry_parity.py",
+    "tools/test_play_promoter.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py",
+    "tools/test_post_semantic_refresh_validation.py",
+    "tools/test_release_artifact_scope_checklist.py",
+    "tools/test_release_integration_contract.py",
+    "tools/test_release_upgrade_persistence_contract.py",
+    "tools/test_usage_access_launch_safety.py"
   ]
 }

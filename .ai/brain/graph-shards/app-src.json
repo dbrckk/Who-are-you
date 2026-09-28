@@ -72,6 +72,46 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "type": "symbol-reference"
@@ -149,6 +189,31 @@
     {
       "source": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "type": "symbol-reference"
     },
     {
@@ -259,6 +324,26 @@
     {
       "source": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "type": "symbol-reference"
     },
     {
@@ -4212,6 +4297,36 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_upgrade_persistence_contract.py",
+      "target": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_upgrade_persistence_contract.py",
+      "target": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_upgrade_persistence_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_upgrade_persistence_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_upgrade_persistence_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/test_rendering_performance_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -4369,6 +4484,21 @@
     {
       "source": "tools/test_trait_timeline_integration.py",
       "target": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_usage_access_launch_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_usage_access_launch_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_usage_access_launch_safety.py",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
       "type": "symbol-reference"
     },
     {

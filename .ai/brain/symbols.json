@@ -225,25 +225,67 @@
       "line": 162
     },
     {
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "HabitsPersistenceE2eTest",
+      "line": 21
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "habitsScreenAndLocalGoalSurviveActivityRecreation",
+      "line": 27
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "waitForTag",
+      "line": 83
+    },
+    {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "language": "kotlin",
       "kind": "class",
       "name": "MainActivityRecreationTest",
-      "line": 19
+      "line": 23
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "quizProgressSurvivesActivityRecreation",
-      "line": 24
+      "line": 28
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication",
+      "line": 59
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "assertGoalDisplayed",
+      "line": 105
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "openHabits",
+      "line": 111
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "waitForTag",
-      "line": 53
+      "line": 118
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
@@ -407,6 +449,20 @@
       "line": 99
     },
     {
+      "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "ReleaseUpgradeSeedTest",
+      "line": 11
+    },
+    {
+      "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "seedPersistentState",
+      "line": 16
+    },
+    {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt",
       "language": "kotlin",
       "kind": "class",
@@ -517,6 +573,62 @@
       "kind": "symbol",
       "name": "portraitCardsRenderFivePartHierarchyAndSafeLabels",
       "line": 15
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "CandidateUpgradeStateProbeProvider",
+      "line": 11
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "onCreate",
+      "line": 13
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "call",
+      "line": 14
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "query",
+      "line": 48
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "getType",
+      "line": 56
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "insert",
+      "line": 58
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "delete",
+      "line": 59
+    },
+    {
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "update",
+      "line": 60
     },
     {
       "file": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
@@ -7542,65 +7654,72 @@
     {
       "file": "tools/play_publisher.py",
       "language": "python",
+      "kind": "function",
+      "name": "load_android_version",
+      "line": 27
+    },
+    {
+      "file": "tools/play_publisher.py",
+      "language": "python",
       "kind": "class",
       "name": "ReleaseConfig",
-      "line": 32
+      "line": 45
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "validate",
-      "line": 38
+      "line": 51
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "validate_track",
-      "line": 48
+      "line": 61
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "release_payload",
-      "line": 56
+      "line": 69
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "endpoint",
-      "line": 87
+      "line": 100
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "load_service_account",
-      "line": 91
+      "line": 104
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "_authorized_session",
-      "line": 102
-    },
-    {
-      "file": "tools/play_publisher.py",
-      "language": "python",
-      "kind": "function",
-      "name": "publish_bundle",
       "line": 115
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
+      "name": "publish_bundle",
+      "line": 128
+    },
+    {
+      "file": "tools/play_publisher.py",
+      "language": "python",
+      "kind": "function",
       "name": "main",
-      "line": 182
+      "line": 195
     },
     {
       "file": "tools/prepare_play_submission.py",
@@ -7797,6 +7916,27 @@
       "kind": "function",
       "name": "test_profile_can_navigate_directly_to_quiz",
       "line": 26
+    },
+    {
+      "file": "tools/test_android_apk_provenance_versioning.py",
+      "language": "python",
+      "kind": "class",
+      "name": "AndroidApkProvenanceVersioningTest",
+      "line": 9
+    },
+    {
+      "file": "tools/test_android_apk_provenance_versioning.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_android_apk_artifact_uses_current_gradle_version",
+      "line": 10
+    },
+    {
+      "file": "tools/test_android_apk_provenance_versioning.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_manual_fallback_artifact_uses_current_gradle_version",
+      "line": 20
     },
     {
       "file": "tools/test_android_ci_sdk_setup_contract.py",
@@ -8198,6 +8338,20 @@
       "line": 23
     },
     {
+      "file": "tools/test_gradle_action_alignment.py",
+      "language": "python",
+      "kind": "class",
+      "name": "GradleActionAlignmentTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_gradle_action_alignment.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_all_android_workflows_use_setup_gradle_v6",
+      "line": 9
+    },
+    {
       "file": "tools/test_gradle_release_reproducibility.py",
       "language": "python",
       "kind": "class",
@@ -8217,6 +8371,20 @@
       "kind": "function",
       "name": "test_build_scripts_pin_android_and_compose_plugins",
       "line": 22
+    },
+    {
+      "file": "tools/test_habits_release_smoke_checklist.py",
+      "language": "python",
+      "kind": "class",
+      "name": "HabitsReleaseSmokeChecklistTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_habits_release_smoke_checklist.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_smoke_checklist_covers_local_habits_and_goals",
+      "line": 9
     },
     {
       "file": "tools/test_healthy_discover_profile_contract.py",
@@ -9430,6 +9598,20 @@
       "line": 83
     },
     {
+      "file": "tools/test_play_internal_telemetry_parity.py",
+      "language": "python",
+      "kind": "class",
+      "name": "PlayInternalTelemetryParityTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_play_internal_telemetry_parity.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_internal_publish_can_match_candidate_telemetry_configuration",
+      "line": 9
+    },
+    {
       "file": "tools/test_play_promoter.py",
       "language": "python",
       "kind": "class",
@@ -9595,84 +9777,84 @@
       "language": "python",
       "kind": "function",
       "name": "test_default_release_payload_uses_internal_qa_track",
-      "line": 18
+      "line": 19
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_open_testing_track_is_supported",
-      "line": 26
+      "line": 28
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_custom_closed_track_is_supported",
-      "line": 31
+      "line": 33
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_production_requires_explicit_confirmation",
-      "line": 35
+      "line": 37
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_production_staged_rollout_is_supported_when_confirmed",
-      "line": 39
+      "line": 41
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_production_in_progress_requires_fraction",
-      "line": 50
+      "line": 52
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_non_production_rollout_fraction_is_rejected",
-      "line": 58
+      "line": 60
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_invalid_status_is_rejected",
-      "line": 64
+      "line": 66
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_only_locked_package_is_allowed",
-      "line": 68
+      "line": 70
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_malformed_track_is_rejected",
-      "line": 72
+      "line": 74
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_service_account_validation_rejects_missing_fields",
-      "line": 76
+      "line": 78
     },
     {
       "file": "tools/test_play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "test_endpoint_shape",
-      "line": 83
+      "line": 85
     },
     {
       "file": "tools/test_play_release_safety_contract.py",
@@ -9708,6 +9890,55 @@
       "kind": "function",
       "name": "test_play_release_explicitly_reenables_external_services",
       "line": 29
+    },
+    {
+      "file": "tools/test_play_version_sync.py",
+      "language": "python",
+      "kind": "class",
+      "name": "PlayVersionSyncTest",
+      "line": 11
+    },
+    {
+      "file": "tools/test_play_version_sync.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_publisher_version_is_loaded_from_android_gradle",
+      "line": 12
+    },
+    {
+      "file": "tools/test_play_version_sync.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_promoter_does_not_pin_an_obsolete_version_code",
+      "line": 19
+    },
+    {
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "language": "python",
+      "kind": "class",
+      "name": "PostSemanticRefreshValidationContractTest",
+      "line": 10
+    },
+    {
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "language": "python",
+      "kind": "function",
+      "name": "assert_revalidates_after_semantic_refresh",
+      "line": 11
+    },
+    {
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_android_ci_revalidates_main_after_semantic_refresh",
+      "line": 20
+    },
+    {
+      "file": "tools/test_post_semantic_refresh_validation.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_device_validation_revalidates_main_after_semantic_refresh",
+      "line": 23
     },
     {
       "file": "tools/test_prepare_play_submission.py",
@@ -10291,6 +10522,20 @@
       "line": 28
     },
     {
+      "file": "tools/test_release_artifact_scope_checklist.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ReleaseArtifactScopeChecklistTest",
+      "line": 8
+    },
+    {
+      "file": "tools/test_release_artifact_scope_checklist.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_candidate_and_play_signed_acceptance_scopes_are_explicit",
+      "line": 9
+    },
+    {
       "file": "tools/test_release_ci_contract.py",
       "language": "python",
       "kind": "class",
@@ -10372,35 +10617,70 @@
       "language": "python",
       "kind": "function",
       "name": "test_permission_launches_are_confined_to_user_source_actions",
-      "line": 30
+      "line": 42
     },
     {
       "file": "tools/test_release_integration_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_profile_and_habits_resets_have_separate_scopes",
-      "line": 36
+      "line": 48
     },
     {
       "file": "tools/test_release_integration_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_goal_progress_is_recomputed_not_persisted",
-      "line": 55
+      "line": 67
     },
     {
       "file": "tools/test_release_integration_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_release_hardening_adds_no_permission",
-      "line": 66
+      "line": 78
     },
     {
       "file": "tools/test_release_integration_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_behavior_and_goal_stores_remain_separate",
-      "line": 81
+      "line": 93
+    },
+    {
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ReleaseUpgradePersistenceContractTest",
+      "line": 12
+    },
+    {
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_upgrade_validation_seeds_before_candidate_replacement",
+      "line": 13
+    },
+    {
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_post_upgrade_verification_uses_candidate_only_provider",
+      "line": 23
+    },
+    {
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_post_upgrade_runtime_checks_do_not_reenter_ui_automation",
+      "line": 52
+    },
+    {
+      "file": "tools/test_release_upgrade_persistence_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_m59_retains_upgrade_probe_evidence",
+      "line": 73
     },
     {
       "file": "tools/test_release_workflows_contract.py",
@@ -11094,6 +11374,20 @@
       "kind": "function",
       "name": "test_profile_renders_accessible_trait_history",
       "line": 27
+    },
+    {
+      "file": "tools/test_usage_access_launch_safety.py",
+      "language": "python",
+      "kind": "class",
+      "name": "UsageAccessLaunchSafetyTest",
+      "line": 9
+    },
+    {
+      "file": "tools/test_usage_access_launch_safety.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_usage_access_settings_intent_is_resolved_before_launch",
+      "line": 10
     },
     {
       "file": "tools/test_validate_screenshot.py",

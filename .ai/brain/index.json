@@ -1,15 +1,15 @@
 {
   "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
-  "files_indexed": 338,
-  "symbol_count": 1609,
-  "edge_count": 10,
+  "files_indexed": 350,
+  "symbol_count": 1651,
+  "edge_count": 11,
   "languages": {
-    "python": 104,
-    "kotlin": 234
+    "python": 113,
+    "kotlin": 237
   },
   "index_mode": "incremental",
-  "reparsed_files": 4,
+  "reparsed_files": 19,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
@@ -108,6 +108,10 @@
       "symbols": 10
     },
     {
+      "file": "tools/play_publisher.py",
+      "symbols": 10
+    },
+    {
       "file": "tools/prepare_play_submission.py",
       "symbols": 10
     },
@@ -144,8 +148,8 @@
       "symbols": 9
     },
     {
-      "file": "tools/play_publisher.py",
-      "symbols": 9
+      "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "symbols": 8
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
@@ -205,10 +209,6 @@
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-      "symbols": 7
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "symbols": 7
     }
   ]

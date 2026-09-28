@@ -1,36 +1,56 @@
 {
   "files": {
+    ".github/scripts/android-device-validation.sh": {
+      "sha256": "1ae3e7a624e56e10b637ca5c50a212180ca895c3cc725b5acc0150205620de9d",
+      "size": 13103
+    },
+    ".github/workflows/android-apk.yml": {
+      "sha256": "39c27958b4a97dcd17da68f4eba25463d3fbe25f5c5a187a28a65aadb53885a0",
+      "size": 5036
+    },
     ".github/workflows/android-ci.yml": {
-      "sha256": "6d5ad1c4ac0f8577854932b77d752dc2b0460910de6f59f3a1188289005e58a6",
-      "size": 5069
+      "sha256": "8c7fbd3764cd81dcedeb6a4b380830888482e732ec8a01152d88769607d5c8c0",
+      "size": 5293
     },
-    "app/src/main/AndroidManifest.xml": {
-      "sha256": "6e322587ec1df9316dba3a3eeeb648fadd47ff7e641b607d07f6804b3fdafed2",
-      "size": 2647
+    ".github/workflows/apk-test.yml": {
+      "sha256": "6dcc96498471e2780cc26e572ea81c2cdd65857f52cf6e845681669e74a4fee4",
+      "size": 1983
     },
-    "app/src/main/java/com/whoareyou/app/ActivityCollector.kt": {
-      "sha256": "e3227aea67c7e88b9f92eca496acd815a0c4e92b4a8a65f9f3a95a443a022899",
-      "size": 2922
+    ".github/workflows/m59-device-validation.yml": {
+      "sha256": "1ce417639dc5d055cef6ef5a723b917a44b8554a1bdf6d488eb5cbc9e7007c49",
+      "size": 5135
     },
-    "app/src/main/java/com/whoareyou/app/AppNavigation.kt": {
-      "sha256": "ae03d497c2d1b79e53be85f9716526cebcfe6feeea7b1082f13f838623406c93",
-      "size": 522
+    ".github/workflows/play-internal-publish.yml": {
+      "sha256": "0f04419185674a66ace4e82d77527614e4984bc46eba69db22e311d26ad7aa7d",
+      "size": 9909
     },
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt": {
-      "sha256": "754f818c8c3867bc3c7f4a98449fc67497d6b3f7eed38ab8f88dc6e862436a44",
-      "size": 6220
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
+      "sha256": "901dc81055e1cde89606941762839f2cdd34973237cc0722a3bd575aff72864f",
+      "size": 3293
     },
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt": {
-      "sha256": "4757462f46f1a8591953fd186777c0be50146b4a67d99ab952e85976a8d385d9",
-      "size": 546
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": {
+      "sha256": "2346fec00693252eeafb94b3b3d3c91c45f51dbc335401303d6a1e75fbe42e47",
+      "size": 5140
+    },
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt": {
+      "sha256": "938fa29aa6bdb3e0695fbd913d55ad6ec0b9989dace16a9ad03dc2e4ab7ef10a",
+      "size": 1912
+    },
+    "app/src/candidate/AndroidManifest.xml": {
+      "sha256": "b7495ed090fbd6be7c9709d9a4dc90d49f21754fc0c37f285675b61a2de07214",
+      "size": 353
+    },
+    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt": {
+      "sha256": "2477d7404f01ff954f0d6709e72d3fe35f03fbd5e45b3ce96c7b1b081d74a5a8",
+      "size": 2641
+    },
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
+      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
+      "size": 4028
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt": {
       "sha256": "781ca28c90f7bdd95e2a11aa4c754f0636de73b9d1eab2f920ef1908c488d671",
       "size": 2264
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt": {
-      "sha256": "a60f5ec2dfe0a56eb30cab6d3f9cbeccf2b309f2e1829f19e64a00b3e981dd33",
-      "size": 3369
     },
     "app/src/main/java/com/whoareyou/app/BehaviorModels.kt": {
       "sha256": "fa60708a885ca38db27d0481273879ba12e6fd7d422cd58f5061c38fcddf2907",
@@ -40,45 +60,73 @@
       "sha256": "5f9244f87fdac549fa9113c72b9f59f34f9ba36911c6f327e5b9b724114638c4",
       "size": 4718
     },
-    "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt": {
-      "sha256": "803bee3a762e8f24ddd7896b7e1abfae065a96d80e8735e6675b9876c925d4f4",
-      "size": 1767
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorStore.kt": {
-      "sha256": "494534aa77467425d34b3762bb30dcd2f64a207f7d8d2cebd90b615ecb5099ab",
-      "size": 5577
-    },
     "app/src/main/java/com/whoareyou/app/MainActivity.kt": {
-      "sha256": "34771d27965618df397fc68f9687053bd74128e53c370885b9091473c90ad440",
-      "size": 14231
+      "sha256": "102fa011a5fc77111d5d674f516d18c5625caae26353f51f6678b5611b86845a",
+      "size": 14920
     },
     "app/src/main/java/com/whoareyou/app/ProfileStore.kt": {
       "sha256": "b230ffc06003e1d8905252e4ba358778a3273dba29b0851d9793d50e2544a17e",
       "size": 13920
     },
-    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt": {
-      "sha256": "5da5fc5b7859e6beb7318126262a363bad3336182a4678e6c10d064ca631b21f",
-      "size": 2753
+    "app/src/main/java/com/whoareyou/app/UsageAccess.kt": {
+      "sha256": "9710bacc26cba15628bd98fc84e1053163b2f09c2081d6b278a419d85f710c75",
+      "size": 1024
     },
-    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": {
-      "sha256": "c567d234c3869e1db198ac5bcaae384058fc2a88746a734bd7b9c79f02ae26a5",
-      "size": 3191
+    "tools/play_promoter.py": {
+      "sha256": "9bec84dfab14731f0884df442cda0594f025a688949310160c1c8b8bb4c55ff4",
+      "size": 3181
     },
-    "docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md": {
-      "sha256": "ebee0feb97fbcc4b2458cf658ebb36b054fbdcef0fc9054189652c4cb4eb995e",
-      "size": 2635
+    "tools/play_publisher.py": {
+      "sha256": "fe894b088b4db42ccc3ff83c37e9c38e65b5283795e4be95aa46825bd23c4c82",
+      "size": 8898
     },
-    "docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md": {
-      "sha256": "618462648d6b71b4d05a98125124cae18a16e27ee69cf6a7fa71bf7c50b325c3",
-      "size": 5064
+    "tools/test_android_apk_provenance_versioning.py": {
+      "sha256": "e2f42825ed0016317a249e0c36db6f4e06817e6753839f822a69ebe27018850a",
+      "size": 1261
     },
-    "tools/test_release_ci_contract.py": {
-      "sha256": "b551d806efcdfc7d8135f3d98a7f0cfdb216c8f49fa87b927f948a636aaf6869",
-      "size": 775
+    "tools/test_gradle_action_alignment.py": {
+      "sha256": "54af7ceaa0370f2a4481cf3f18349da2f8f6ab874039e75af581db85a3e7bcd9",
+      "size": 831
+    },
+    "tools/test_habits_release_smoke_checklist.py": {
+      "sha256": "0978eb06ce9450b7ee8047bd6af9057aab22c5ab4eb97b58c2672e58b15f85a6",
+      "size": 890
+    },
+    "tools/test_play_internal_telemetry_parity.py": {
+      "sha256": "c2cf202157c0aa88ed4095106cee4c72d9daa786cdf1a527f9935f65b6981191",
+      "size": 856
+    },
+    "tools/test_play_promoter.py": {
+      "sha256": "4b3b47c9345b45218dd86b8b5df8c49b3e1606065d5a55cacc8b659c55b7c9ec",
+      "size": 1240
+    },
+    "tools/test_play_publisher.py": {
+      "sha256": "e7a2f91eaabe7c8f61396c0d9dc6b92793b7b494ac76e0ce3883dbcd5b18e60b",
+      "size": 3798
+    },
+    "tools/test_play_version_sync.py": {
+      "sha256": "c2a5fdfe33247bbe04139352b5c87e8d436e344c72a8d3be8cd7a1901e77067d",
+      "size": 951
+    },
+    "tools/test_post_semantic_refresh_validation.py": {
+      "sha256": "73af2eeb1abe423d1e2b6e7e8e02c5c297262fe1890463717ab4f8aec9fe4ada",
+      "size": 1114
+    },
+    "tools/test_release_artifact_scope_checklist.py": {
+      "sha256": "6184b6429d7af9abf7da0955babe9ca2589489863cc1f876034ec1a4873553bb",
+      "size": 789
     },
     "tools/test_release_integration_contract.py": {
-      "sha256": "5e9fd95a419d9c6d8062b7ac2b47df07984fbec9bab337cab6d6a4fdf894bed4",
-      "size": 3553
+      "sha256": "f7870736f9c0b8fa5ffbba7fa653bcb8dbd4d44c7b9ac9dee60f10b70884a0ea",
+      "size": 3858
+    },
+    "tools/test_release_upgrade_persistence_contract.py": {
+      "sha256": "4304ee1aebf99e1e9ae838059d9dcfd75b84771fb56af53a4f43a10b87544226",
+      "size": 4346
+    },
+    "tools/test_usage_access_launch_safety.py": {
+      "sha256": "89313ea5f272f49897b0021d06f74ecc295c0684d8929a42feb8093f904a9389",
+      "size": 1057
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

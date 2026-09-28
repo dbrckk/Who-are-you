@@ -46,6 +46,7 @@ prepare_play_submission.py
 test_accessibility_launch_contract.py
 test_accessibility_system_contract.py
 test_actionable_knowledge_map_contract.py
+test_android_apk_provenance_versioning.py
 test_android_ci_sdk_setup_contract.py
 test_baseline_profile_manifest_contract.py
 test_battery_thermal_contract.py
@@ -58,7 +59,9 @@ test_behavior_integration_contract.py
 test_behavior_privacy_contract.py
 test_billing_launch_readiness.py
 test_challenge_landing_contract.py
+test_gradle_action_alignment.py
 test_gradle_release_reproducibility.py
+test_habits_release_smoke_checklist.py
 test_healthy_discover_profile_contract.py
 test_large_screen_keyboard_accessibility.py
 test_local_profile_privacy_contract.py
@@ -94,11 +97,14 @@ test_persisted_result_score_contract.py
 test_play_2026_readiness.py
 test_play_bundle_budget.py
 test_play_candidate_workflow.py
+test_play_internal_telemetry_parity.py
 test_play_promoter.py
 test_play_publish_pipeline_contract.py
 test_play_publish_workflow.py
 test_play_publisher.py
 test_play_release_safety_contract.py
+test_play_version_sync.py
+test_post_semantic_refresh_validation.py
 test_prepare_play_submission.py
 test_profile_coverage_integration.py
 test_profile_knowledge_map_contract.py
@@ -115,9 +121,11 @@ test_quiz_process_recreation_contract.py
 test_quiz_replay_window_contract.py
 test_quiz_result_persistence_feedback.py
 test_reduced_motion_large_font_contract.py
+test_release_artifact_scope_checklist.py
 test_release_ci_contract.py
 test_release_critical_profile_contract.py
 test_release_integration_contract.py
+test_release_upgrade_persistence_contract.py
 test_release_workflows_contract.py
 test_rendering_performance_contract.py
 test_restored_quiz_recovery.py
@@ -135,6 +143,7 @@ test_trait_evolution_integration.py
 test_trait_graph_contract.py
 test_trait_taxonomy_v2.py
 test_trait_timeline_integration.py
+test_usage_access_launch_safety.py
 test_validate_screenshot.py
 test_validate_ui_hierarchy.py
 test_workmanager_r8_contract.py
@@ -258,8 +267,16 @@ PACKAGE_NAME = "com.whoareyou.app"
 INTERNAL_TRACK = "qa"
 OPEN_TEST_TRACK = "beta"
 PRODUCTION_TRACK = "production"
-VERSION_CODE = 1
-VERSION_NAME = "0.1.0"
+⋮----
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+ANDROID_BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
+⋮----
+def load_android_version(path: pathlib.Path = ANDROID_BUILD_GRADLE) -> tuple[int, str]
+⋮----
+source = path.read_text(encoding="utf-8")
+code_match = re.search(r"\bversionCode\s*=\s*(\d+)", source)
+name_match = re.search(r'\bversionName\s*=\s*"([^"]+)"', source)
+⋮----
 API_ROOT = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications"
 UPLOAD_ROOT = "https://androidpublisher.googleapis.com/upload/androidpublisher/v3/applications"
 SCOPE = "https://www.googleapis.com/auth/androidpublisher"
@@ -454,6 +471,23 @@ def test_profile_opens_exploration_dialog(self)
 def test_dialog_exposes_evidence_and_next_measurement(self)
 ⋮----
 def test_profile_can_navigate_directly_to_quiz(self)
+```
+
+## File: test_android_apk_provenance_versioning.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/android-apk.yml"
+FALLBACK = ROOT / ".github/workflows/apk-test.yml"
+⋮----
+class AndroidApkProvenanceVersioningTest(unittest.TestCase)
+⋮----
+def test_android_apk_artifact_uses_current_gradle_version(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+⋮----
+def test_manual_fallback_artifact_uses_current_gradle_version(self)
+⋮----
+source = FALLBACK.read_text(encoding="utf-8")
 ```
 
 ## File: test_android_ci_sdk_setup_contract.py
@@ -718,6 +752,20 @@ def test_keyboard_focus_is_visible(self)
 def test_app_and_web_routes_stay_aligned(self)
 ```
 
+## File: test_gradle_action_alignment.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOWS = ROOT / ".github/workflows"
+⋮----
+class GradleActionAlignmentTest(unittest.TestCase)
+⋮----
+def test_all_android_workflows_use_setup_gradle_v6(self)
+⋮----
+offenders = []
+⋮----
+source = path.read_text(encoding="utf-8")
+```
+
 ## File: test_gradle_release_reproducibility.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -735,6 +783,20 @@ match = re.search(r"gradle-version:\s*'([^']+)'", source)
 def test_build_scripts_pin_android_and_compose_plugins(self)
 ⋮----
 root = (ROOT / "build.gradle.kts").read_text(encoding="utf-8")
+```
+
+## File: test_habits_release_smoke_checklist.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+CHECKLIST = ROOT / "docs/internal-test-smoke-test.md"
+⋮----
+class HabitsReleaseSmokeChecklistTest(unittest.TestCase)
+⋮----
+def test_smoke_checklist_covers_local_habits_and_goals(self)
+⋮----
+source = CHECKLIST.read_text(encoding="utf-8").lower()
+⋮----
+required = (
 ```
 
 ## File: test_healthy_discover_profile_contract.py
@@ -1541,6 +1603,18 @@ def test_workflow_does_not_upload_to_play(self)
 lowered = self.workflow.lower()
 ```
 
+## File: test_play_internal_telemetry_parity.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/play-internal-publish.yml"
+⋮----
+class PlayInternalTelemetryParityTest(unittest.TestCase)
+⋮----
+def test_internal_publish_can_match_candidate_telemetry_configuration(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+```
+
 ## File: test_play_promoter.py
 ```python
 class PlayPromotionPayloadTest(unittest.TestCase)
@@ -1666,6 +1740,39 @@ release_block = self.gradle.split("release {", 1)[1].split("}", 1)[0]
 def test_play_release_explicitly_reenables_external_services(self)
 ⋮----
 play_block = self.gradle.split('create("playRelease") {', 1)[1]
+```
+
+## File: test_play_version_sync.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
+PROMOTER = ROOT / "tools" / "play_promoter.py"
+⋮----
+class PlayVersionSyncTest(unittest.TestCase)
+⋮----
+def test_publisher_version_is_loaded_from_android_gradle(self)
+⋮----
+def test_promoter_does_not_pin_an_obsolete_version_code(self)
+⋮----
+source = PROMOTER.read_text(encoding="utf-8")
+```
+
+## File: test_post_semantic_refresh_validation.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+ANDROID_CI = ROOT / ".github/workflows/android-ci.yml"
+DEVICE_CI = ROOT / ".github/workflows/m59-device-validation.yml"
+SEMANTIC_WORKFLOW = "Precise semantic refresh"
+⋮----
+class PostSemanticRefreshValidationContractTest(unittest.TestCase)
+⋮----
+def assert_revalidates_after_semantic_refresh(self, path: Path)
+⋮----
+source = path.read_text(encoding="utf-8")
+⋮----
+def test_android_ci_revalidates_main_after_semantic_refresh(self)
+⋮----
+def test_device_validation_revalidates_main_after_semantic_refresh(self)
 ```
 
 ## File: test_prepare_play_submission.py
@@ -1944,6 +2051,20 @@ def test_editorial_cards_do_not_force_two_line_truncation(self)
 block = self.collections.split('private fun EditorialCard', 1)[1]
 ```
 
+## File: test_release_artifact_scope_checklist.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+CHECKLIST = ROOT / "docs/play-release-checklist.md"
+⋮----
+class ReleaseArtifactScopeChecklistTest(unittest.TestCase)
+⋮----
+def test_candidate_and_play_signed_acceptance_scopes_are_explicit(self)
+⋮----
+source = CHECKLIST.read_text(encoding="utf-8").lower()
+⋮----
+required = (
+```
+
 ## File: test_release_ci_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -2016,6 +2137,43 @@ def test_behavior_and_goal_stores_remain_separate(self)
 ⋮----
 behavior = self.read("BehaviorRepository.kt")
 goals = self.read("BehaviorGoalRepository.kt")
+```
+
+## File: test_release_upgrade_persistence_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / ".github/scripts/android-device-validation.sh"
+SEED_TEST = ROOT / "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt"
+CANDIDATE_MANIFEST = ROOT / "app/src/candidate/AndroidManifest.xml"
+CANDIDATE_PROBE = ROOT / "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt"
+M59_WORKFLOW = ROOT / ".github/workflows/m59-device-validation.yml"
+⋮----
+class ReleaseUpgradePersistenceContractTest(unittest.TestCase)
+⋮----
+def test_upgrade_validation_seeds_before_candidate_replacement(self)
+⋮----
+script = SCRIPT.read_text(encoding="utf-8")
+⋮----
+def test_post_upgrade_verification_uses_candidate_only_provider(self)
+⋮----
+manifest = CANDIDATE_MANIFEST.read_text(encoding="utf-8")
+probe = CANDIDATE_PROBE.read_text(encoding="utf-8")
+⋮----
+probe_call = script.index("adb shell content call")
+start = script.index('UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"')
+⋮----
+def test_post_upgrade_runtime_checks_do_not_reenter_ui_automation(self)
+⋮----
+candidate_replace = script.index('adb install -r "$CANDIDATE_APK"', script.index("ReleaseUpgradeSeedTest#seedPersistentState"))
+post_upgrade = script[candidate_replace:]
+⋮----
+no_ui = script[script.index("validate_running_app_no_ui() {"):script.index("smoke_apk() {")]
+⋮----
+terminal = script[script.index("validate_running_app_no_ui upgrade-candidate"):]
+⋮----
+def test_m59_retains_upgrade_probe_evidence(self)
+⋮----
+workflow = M59_WORKFLOW.read_text(encoding="utf-8")
 ```
 
 ## File: test_release_workflows_contract.py
@@ -2360,6 +2518,20 @@ def test_timeline_distinguishes_retake_and_new_evidence(self)
 def test_trait_period_comparison_tracks_score_and_confidence(self)
 ⋮----
 def test_profile_renders_accessible_trait_history(self)
+```
+
+## File: test_usage_access_launch_safety.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+USAGE_ACCESS = ROOT / "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+MAIN_ACTIVITY = ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt"
+⋮----
+class UsageAccessLaunchSafetyTest(unittest.TestCase)
+⋮----
+def test_usage_access_settings_intent_is_resolved_before_launch(self)
+⋮----
+usage = USAGE_ACCESS.read_text(encoding="utf-8")
+main = MAIN_ACTIVITY.read_text(encoding="utf-8")
 ```
 
 ## File: test_validate_screenshot.py

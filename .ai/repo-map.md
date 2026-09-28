@@ -71,17 +71,25 @@ app/
               AppShellUiTest.kt
               BehaviorGoalsUiTest.kt
               BehaviorScreenUiTest.kt
+              HabitsPersistenceE2eTest.kt
               MainActivityRecreationTest.kt
               MainFlowE2eTest.kt
               ProfileScreenWhoAmITest.kt
               ProfileStorePersistenceTest.kt
               QuizScreenUiTest.kt
+              ReleaseUpgradeSeedTest.kt
               ResultEvidenceCardTest.kt
               ResultInsightCardsTest.kt
               ResultProfileConnectionsCardTest.kt
               ResultScreenUiTest.kt
               WhoAmIDiscoveryUiTest.kt
               WhoAmIPortraitUiTest.kt
+    candidate/
+      java/
+        com/
+          whoareyou/
+            app/
+              CandidateUpgradeStateProbeProvider.kt
     main/
       assets/
         quizzes-extra-fr.json
@@ -355,6 +363,7 @@ tools/
   test_accessibility_launch_contract.py
   test_accessibility_system_contract.py
   test_actionable_knowledge_map_contract.py
+  test_android_apk_provenance_versioning.py
   test_android_ci_sdk_setup_contract.py
   test_baseline_profile_manifest_contract.py
   test_battery_thermal_contract.py
@@ -367,7 +376,9 @@ tools/
   test_behavior_privacy_contract.py
   test_billing_launch_readiness.py
   test_challenge_landing_contract.py
+  test_gradle_action_alignment.py
   test_gradle_release_reproducibility.py
+  test_habits_release_smoke_checklist.py
   test_healthy_discover_profile_contract.py
   test_large_screen_keyboard_accessibility.py
   test_local_profile_privacy_contract.py
@@ -403,11 +414,14 @@ tools/
   test_play_2026_readiness.py
   test_play_bundle_budget.py
   test_play_candidate_workflow.py
+  test_play_internal_telemetry_parity.py
   test_play_promoter.py
   test_play_publish_pipeline_contract.py
   test_play_publish_workflow.py
   test_play_publisher.py
   test_play_release_safety_contract.py
+  test_play_version_sync.py
+  test_post_semantic_refresh_validation.py
   test_prepare_play_submission.py
   test_profile_coverage_integration.py
   test_profile_knowledge_map_contract.py
@@ -424,9 +438,11 @@ tools/
   test_quiz_replay_window_contract.py
   test_quiz_result_persistence_feedback.py
   test_reduced_motion_large_font_contract.py
+  test_release_artifact_scope_checklist.py
   test_release_ci_contract.py
   test_release_critical_profile_contract.py
   test_release_integration_contract.py
+  test_release_upgrade_persistence_contract.py
   test_release_workflows_contract.py
   test_rendering_performance_contract.py
   test_restored_quiz_recovery.py
@@ -444,6 +460,7 @@ tools/
   test_trait_graph_contract.py
   test_trait_taxonomy_v2.py
   test_trait_timeline_integration.py
+  test_usage_access_launch_safety.py
   test_validate_screenshot.py
   test_validate_ui_hierarchy.py
   test_workmanager_r8_contract.py
@@ -496,6 +513,7 @@ PACKAGE="com.whoareyou.app"
 ACTIVITY="$PACKAGE/.MainActivity"
 DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
 CANDIDATE_APK="app/build/outputs/apk/candidate/app-candidate.apk"
+TEST_APK="app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
 HOST_RESOURCE_LOG="device-host-resources.txt"
 HOST_KERNEL_LOG="device-host-kernel.txt"
 HOST_MONITOR_PID=""
@@ -583,10 +601,11 @@ if [[ "$VALIDATION_MODE" == "instrumentation" ]]; then
   exit 0
 fi
 
-gradle :app:assembleDebug :app:assembleCandidate --no-daemon --stacktrace
+gradle :app:assembleDebug :app:assembleCandidate :app:assembleDebugAndroidTest --no-daemon --stacktrace
 
 test -s "$DEBUG_APK"
 test -s "$CANDIDATE_APK"
+test -s "$TEST_APK"
 
 capture_visual_evidence() {
   local label="$1"
@@ -620,8 +639,6 @@ validate_evidence_matrix() {
   local labels=(
     "debug"
     "candidate"
-    "upgrade-candidate"
-    "upgrade-relaunch"
     "candidate-font-130"
     "candidate-compact"
     "candidate-large"
@@ -786,6 +803,14 @@ validate_running_app() {
   fi
 }
 
+validate_running_app_no_ui() {
+  local label="$1"
+
+  START_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
+  printf '%s\n' "$START_OUTPUT" | tee "device-startup-$label.txt"
+  grep -F "Status: ok" "device-startup-$label.txt"
+}
+
 smoke_apk() {
   local apk="$1"
   local label="$2"
@@ -799,45 +824,6 @@ smoke_apk() {
 
 smoke_apk "$DEBUG_APK" debug
 smoke_apk "$CANDIDATE_APK" candidate
-
-# Validate the real upgrade path: initialize data with the debug build, then
-# replace it in-place with the minified candidate without clearing app data.
-adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
-adb install "$DEBUG_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$UPGRADE_DEBUG_START" | tee device-startup-upgrade-debug.txt
-grep -F "Status: ok" device-startup-upgrade-debug.txt
-sleep 2
-adb shell am force-stop "$PACKAGE"
-
-adb install -r "$CANDIDATE_APK"
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-validate_running_app upgrade-candidate
-
-# One more cold relaunch after the upgrade catches startup failures that only
-# appear after process death with migrated/persisted state.
-adb shell am force-stop "$PACKAGE"
-adb logcat -c
-RELAUNCH_OUTPUT="$(adb shell am start -W -n "$ACTIVITY")"
-printf '%s\n' "$RELAUNCH_OUTPUT" | tee device-startup-upgrade-relaunch.txt
-grep -F "Status: ok" device-startup-upgrade-relaunch.txt
-sleep 3
-capture_visual_evidence "upgrade-relaunch"
-RELAUNCH_PID="$(adb shell pidof "$PACKAGE" | tr -d '\r')"
-test -n "$RELAUNCH_PID"
-adb logcat -d AndroidRuntime:E '*:S' > device-android-runtime-upgrade-relaunch.txt
-adb shell dumpsys activity exit-info "$PACKAGE" > device-exit-info-upgrade-relaunch.txt || true
-if grep -F "Process: $PACKAGE" device-android-runtime-upgrade-relaunch.txt; then
-  echo "Fatal AndroidRuntime crash detected after upgraded cold relaunch"
-  exit 1
-fi
-if grep -E "REASON_(CRASH|ANR)" device-exit-info-upgrade-relaunch.txt; then
-  echo "Crash or ANR exit reason detected after upgraded cold relaunch"
-  exit 1
-fi
 
 capture_accessibility_variant "candidate-font-130" "1.30"
 adb shell settings put system font_scale 1.0
@@ -870,6 +856,57 @@ validate_evidence_matrix
 python3 .github/scripts/summarize-visual-qa.py \
   --root . \
   --output device-visual-qa-summary.md
+
+# Validate the real upgrade path: initialize data with the debug build, then
+# replace it in-place with the minified candidate without clearing app data.
+adb uninstall "$PACKAGE" >/dev/null 2>&1 || true
+adb install "$DEBUG_APK"
+adb install -r "$TEST_APK"
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+UPGRADE_DEBUG_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_DEBUG_START" | tee device-startup-upgrade-debug.txt
+grep -F "Status: ok" device-startup-upgrade-debug.txt
+sleep 2
+
+adb shell am instrument -w -r \
+  -e releaseUpgradePhase seed \
+  -e class "$PACKAGE.ReleaseUpgradeSeedTest#seedPersistentState" \
+  "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" \
+  | tee device-upgrade-state-seed.txt
+grep -F "OK (1 test)" device-upgrade-state-seed.txt
+adb shell am force-stop "$PACKAGE"
+
+adb install -r "$CANDIDATE_APK"
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+
+# Verify migrated persistence before the candidate's first activity launch.
+# MainActivity intentionally refreshes live source state on resume, so probing
+# after launch would test runtime permission reconciliation rather than whether
+# the upgrade preserved the stored value.
+adb shell content call \
+  --uri "content://$PACKAGE.candidate-upgrade-probe" \
+  --method state \
+  | tee device-upgrade-state-verify.txt
+grep -F "onboarding=true" device-upgrade-state-verify.txt
+grep -F "ads_removed=true" device-upgrade-state-verify.txt
+grep -F "activity_state=AVAILABLE" device-upgrade-state-verify.txt
+grep -F "steps=4321" device-upgrade-state-verify.txt
+grep -F "goal_id=upgrade-probe-goal" device-upgrade-state-verify.txt
+grep -F "goal_metric=STEPS_AT_LEAST" device-upgrade-state-verify.txt
+grep -F "goal_target=4000" device-upgrade-state-verify.txt
+grep -Fv "probe_error=" device-upgrade-state-verify.txt >/dev/null
+
+# Separately prove that the upgraded minified candidate starts and remains viable.
+UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"
+printf '%s\n' "$UPGRADE_CANDIDATE_START" | tee device-startup-upgrade-candidate-state.txt
+grep -F "Status: ok" device-startup-upgrade-candidate-state.txt
+adb shell am force-stop "$PACKAGE"
+adb logcat -c
+# This is the authoritative post-upgrade cold start: the provider process is
+# terminated above, so MainActivity starts from process death with migrated data.
+validate_running_app_no_ui upgrade-candidate
 
 echo "Android debug + minified candidate + upgrade + accessibility + display-variant validation passed."
 ```
@@ -1225,6 +1262,17 @@ jobs:
       - name: Build installable debug APK
         run: gradle :app:assembleDebug --stacktrace
 
+      - name: Read app version
+        id: version
+        run: |
+          set -euo pipefail
+          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
+          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
+          test -n "$VERSION_NAME"
+          test -n "$VERSION_CODE"
+          echo "name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+
       - name: Upload validation diagnostics
         if: always()
         uses: actions/upload-artifact@v7
@@ -1238,15 +1286,22 @@ jobs:
           retention-days: 14
 
       - name: Prepare APK
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: |
           set -euo pipefail
           APK="app/build/outputs/apk/debug/app-debug.apk"
+          OUTPUT="who-are-you-${VERSION_NAME}-${VERSION_CODE}-debug.apk"
+          CHECKSUM="${OUTPUT}.sha256"
+          PROVENANCE="who-are-you-${VERSION_NAME}-${VERSION_CODE}-debug.provenance.txt"
           test -s "$APK"
-          cp "$APK" who-are-you-0.1.0-debug.apk
-          sha256sum who-are-you-0.1.0-debug.apk | tee who-are-you-0.1.0-debug.apk.sha256
+          cp "$APK" "$OUTPUT"
+          sha256sum "$OUTPUT" | tee "$CHECKSUM"
           {
             echo "project=Who Are You?"
-            echo "version=0.1.0-debug"
+            echo "version=${VERSION_NAME}-debug"
+            echo "version_code=${VERSION_CODE}"
             echo "commit=${GITHUB_SHA}"
             echo "ref=${GITHUB_REF}"
             echo "run_id=${GITHUB_RUN_ID}"
@@ -1256,26 +1311,34 @@ jobs:
             echo "gradle=9.5.0"
             echo "compile_sdk=37"
             echo "build_tools=37.0.0"
-            echo "apk_sha256=$(cut -d' ' -f1 who-are-you-0.1.0-debug.apk.sha256)"
-          } | tee who-are-you-0.1.0-debug.provenance.txt
+            echo "apk_sha256=$(cut -d' ' -f1 "$CHECKSUM")"
+          } | tee "$PROVENANCE"
 
       - name: Verify APK release-candidate bundle
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: |
           set -euo pipefail
-          sha256sum --check who-are-you-0.1.0-debug.apk.sha256
-          test "$(grep '^commit=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$GITHUB_SHA"
-          test "$(grep '^apk_sha256=' who-are-you-0.1.0-debug.provenance.txt | cut -d= -f2-)" = "$(sha256sum who-are-you-0.1.0-debug.apk | cut -d' ' -f1)"
-          test -s who-are-you-0.1.0-debug.apk
-          test -s who-are-you-0.1.0-debug.provenance.txt
+          OUTPUT="who-are-you-${VERSION_NAME}-${VERSION_CODE}-debug.apk"
+          CHECKSUM="${OUTPUT}.sha256"
+          PROVENANCE="who-are-you-${VERSION_NAME}-${VERSION_CODE}-debug.provenance.txt"
+          sha256sum --check "$CHECKSUM"
+          test "$(grep '^commit=' "$PROVENANCE" | cut -d= -f2-)" = "$GITHUB_SHA"
+          test "$(grep '^version=' "$PROVENANCE" | cut -d= -f2-)" = "${VERSION_NAME}-debug"
+          test "$(grep '^version_code=' "$PROVENANCE" | cut -d= -f2-)" = "$VERSION_CODE"
+          test "$(grep '^apk_sha256=' "$PROVENANCE" | cut -d= -f2-)" = "$(sha256sum "$OUTPUT" | cut -d' ' -f1)"
+          test -s "$OUTPUT"
+          test -s "$PROVENANCE"
 
       - name: Upload installable APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-android-apk-${{ github.sha }}
+          name: who-are-you-android-apk-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-${{ github.sha }}
           path: |
-            who-are-you-0.1.0-debug.apk
-            who-are-you-0.1.0-debug.apk.sha256
-            who-are-you-0.1.0-debug.provenance.txt
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-debug.apk
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-debug.apk.sha256
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-debug.provenance.txt
           if-no-files-found: error
           retention-days: 14
 ```
@@ -1290,6 +1353,13 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Precise semantic refresh
+    types:
+      - completed
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -1300,6 +1370,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -1445,28 +1516,43 @@ jobs:
           java-version: '17'
 
       - name: Set up Gradle 9.5
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '9.5.0'
 
       - name: Build installable debug APK
         run: gradle :app:assembleDebug --stacktrace
 
+      - name: Read app version
+        id: version
+        run: |
+          set -euo pipefail
+          VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
+          VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
+          test -n "$VERSION_NAME"
+          test -n "$VERSION_CODE"
+          echo "name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+
       - name: Prepare APK
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: |
           set -euo pipefail
           APK="app/build/outputs/apk/debug/app-debug.apk"
-          test -f "$APK"
-          cp "$APK" who-are-you-0.1.0-test.apk
-          sha256sum who-are-you-0.1.0-test.apk | tee who-are-you-0.1.0-test.apk.sha256
+          OUTPUT="who-are-you-${VERSION_NAME}-${VERSION_CODE}-test.apk"
+          test -s "$APK"
+          cp "$APK" "$OUTPUT"
+          sha256sum "$OUTPUT" | tee "${OUTPUT}.sha256"
 
       - name: Upload test APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-0.1.0-test-apk
+          name: who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test-apk
           path: |
-            who-are-you-0.1.0-test.apk
-            who-are-you-0.1.0-test.apk.sha256
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test.apk
+            who-are-you-${{ steps.version.outputs.name }}-${{ steps.version.outputs.code }}-test.apk.sha256
           if-no-files-found: error
           retention-days: 30
 ```
@@ -1634,6 +1720,13 @@ on:
       - '.github/scripts/android-runtime-stress.sh'
       - '.github/workflows/m59-device-validation.yml'
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Precise semantic refresh
+    types:
+      - completed
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -1644,6 +1737,7 @@ concurrency:
 
 jobs:
   instrumentation_validation:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -1694,6 +1788,8 @@ jobs:
             device-host-resources.txt
             device-host-kernel.txt
             device-startup-*.txt
+            device-upgrade-state-*.txt
+            device-upgrade-*.xml
             device-monkey-*.txt
             device-logcat-*.txt
             device-android-runtime-*.txt
@@ -1702,6 +1798,7 @@ jobs:
           retention-days: 14
 
   visual_validation:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -2015,6 +2112,11 @@ on:
           - draft
           - completed
         default: draft
+      telemetry_enabled:
+        description: "Build with the configured production telemetry endpoint"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -2082,6 +2184,8 @@ jobs:
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
           set -euo pipefail
           required=(
@@ -2098,6 +2202,10 @@ jobs:
               exit 1
             fi
           done
+          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
+            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+            exit 1
+          fi
 
       - name: Materialize temporary credentials
         env:
@@ -2136,10 +2244,25 @@ jobs:
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
           UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
           set -euo pipefail
           UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
-          gradle :app:bundlePlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
+          args=(
+            :app:bundlePlayRelease
+            "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
+            "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"
+            "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"
+            "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"
+            --stacktrace
+          )
+          if [ "$TELEMETRY_ENABLED" = "true" ]; then
+            args+=("-PWHO_ARE_YOU_TELEMETRY_ENDPOINT=$TELEMETRY_ENDPOINT")
+          fi
+          gradle "${args[@]}"
 
       - name: Locate and verify signed bundle
         id: bundle
@@ -2921,6 +3044,102 @@ class BehaviorScreenUiTest {
 }
 ```
 
+## File: app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
+import androidx.test.platform.app.InstrumentationRegistry
+import java.time.LocalDate
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.assertTrue
+import org.junit.Rule
+import org.junit.Test
+
+class HabitsPersistenceE2eTest {
+    @get:Rule
+    val composeRule = createAndroidComposeRule<MainActivity>()
+
+    @Test
+    fun habitsScreenAndLocalGoalSurviveActivityRecreation() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val goalId = "e2e-persist-goal"
+        val goalTag = "behavior_goal_$goalId"
+
+        runBlocking {
+            ProfileStore.setOnboardingComplete(context, true)
+            BehaviorRepository.clearAll(context)
+            BehaviorGoalRepository.clearAll(context)
+            BehaviorGoalRepository.upsert(
+                context,
+                BehaviorGoal.stepsAtLeast(
+                    id = goalId,
+                    targetSteps = 5_000L,
+                    startEpochDay = LocalDate.now().toEpochDay() - 1L
+                )
+            )
+        }
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_discover")
+
+        val tabMatcher = SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
+        composeRule.onAllNodes(tabMatcher)[1].performClick()
+        waitForTag("app_screen_profile")
+
+        composeRule.onNodeWithTag("profile_open_habits")
+            .performScrollTo()
+            .performClick()
+        waitForTag("app_screen_habits")
+
+        val habits = composeRule.onNodeWithTag("behavior_screen")
+        habits.performScrollToNode(hasTestTag(goalTag))
+        composeRule.onNodeWithTag(goalTag).assertExists()
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_habits")
+
+        composeRule.onNodeWithTag("behavior_screen")
+            .performScrollToNode(hasTestTag(goalTag))
+        composeRule.onNodeWithTag(goalTag).assertExists()
+
+        val persisted = runBlocking {
+            withTimeout(5_000) {
+                BehaviorGoalRepository.observe(context).first { goals ->
+                    goals.any { it.id == goalId }
+                }
+            }
+        }
+        assertTrue(persisted.any { it.id == goalId })
+
+        runBlocking {
+            BehaviorGoalRepository.clearAll(context)
+            BehaviorRepository.clearAll(context)
+        }
+    }
+
+    private fun waitForTag(tag: String) {
+        composeRule.waitUntil(timeoutMillis = 15_000) {
+            composeRule.onAllNodesWithTag(tag, useUnmergedTree = true)
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        composeRule.onNodeWithTag(tag, useUnmergedTree = true).assertExists()
+    }
+}
+```
+
 ## File: app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -2931,12 +3150,16 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
@@ -2974,6 +3197,67 @@ class MainActivityRecreationTest {
                 ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
             }
         }
+    }
+
+    @Test
+    fun persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val persistedGoal = BehaviorGoal.stepsAtLeast(
+            id = "recreation-goal",
+            targetSteps = 9_000L,
+            startEpochDay = 20_000L
+        )
+        val previousOnboardingComplete = runBlocking {
+            ProfileStore.observe(context).first().onboardingComplete.also {
+                ProfileStore.setOnboardingComplete(context, true)
+                BehaviorGoalRepository.clearAll(context)
+                BehaviorGoalRepository.upsert(context, persistedGoal)
+            }
+        }
+
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        try {
+            waitForTag("app_screen_discover")
+            openHabits(context)
+            assertGoalDisplayed(persistedGoal)
+
+            // Seed persistence before launch so recreation validates restoration itself without
+            // leaving a numeric IME session active. The navigation route is also expected to
+            // survive recreation, so wait for Habits directly instead of incorrectly assuming
+            // that MainActivity resets to Discover.
+            scenario.recreate()
+            waitForTag("app_screen_habits")
+            assertGoalDisplayed(persistedGoal)
+
+            val afterRecreation = runBlocking {
+                withTimeout(5_000) {
+                    BehaviorGoalRepository.observe(context).first { goals ->
+                        goals.any { it.id == persistedGoal.id }
+                    }
+                }
+            }
+            assertEquals(1, afterRecreation.size)
+            assertEquals(persistedGoal, afterRecreation.single())
+        } finally {
+            scenario.close()
+            runBlocking {
+                BehaviorGoalRepository.clearAll(context)
+                ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
+            }
+        }
+    }
+
+    private fun assertGoalDisplayed(goal: BehaviorGoal) {
+        composeRule.onNodeWithTag("behavior_screen")
+            .performScrollToNode(hasTestTag("behavior_goal_${goal.id}"))
+        composeRule.onNodeWithTag("behavior_goal_${goal.id}").assertIsDisplayed()
+    }
+
+    private fun openHabits(context: android.content.Context) {
+        composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
+        waitForTag("app_screen_profile")
+        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
+        waitForTag("app_screen_habits")
     }
 
     private fun waitForTag(tag: String) {
@@ -3565,6 +3849,61 @@ class QuizScreenUiTest {
 }
 ```
 
+## File: app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
+import java.time.LocalDate
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ReleaseUpgradeSeedTest {
+    private val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+
+    @Test
+    fun seedPersistentState() = runBlocking {
+        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "seed") return@runBlocking
+        val today = LocalDate.now().toEpochDay()
+
+        ProfileStore.setOnboardingComplete(context, true)
+        ProfileStore.setAdsRemoved(context, true)
+
+        BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)
+        BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)
+        BehaviorRepository.upsert(
+            context = context,
+            day = DailyBehaviorAggregate(
+                epochDay = today,
+                steps = 4_321L,
+                totalForegroundMillis = null,
+                topApps = emptyList(),
+                launchesOrSessions = null,
+                daypartUsage = DaypartUsage.EMPTY
+            ),
+            currentEpochDay = today
+        )
+
+        BehaviorGoalRepository.upsert(
+            context,
+            BehaviorGoal.stepsAtLeast(
+                id = "upgrade-probe-goal",
+                targetSteps = 4_000L,
+                startEpochDay = today
+            )
+        )
+
+        assertTrue(ProfileStore.observe(context).first().onboardingComplete)
+        assertEquals(4_321L, BehaviorRepository.observe(context).first().today?.steps)
+        assertEquals("upgrade-probe-goal", BehaviorGoalRepository.observe(context).first().single().id)
+    }
+}
+```
+
 ## File: app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -3967,6 +4306,80 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
         composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
         composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
+    }
+}
+```
+
+## File: app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.ContentProvider
+import android.content.ContentValues
+import android.database.Cursor
+import android.net.Uri
+import android.os.Bundle
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+
+class CandidateUpgradeStateProbeProvider : ContentProvider() {
+    override fun onCreate(): Boolean = true
+
+    override fun call(method: String, arg: String?, extras: Bundle?): Bundle {
+        if (method != METHOD_STATE) {
+            return Bundle().apply { putString("probe_error", "unsupported_method") }
+        }
+
+        val appContext = requireNotNull(context).applicationContext
+        return runCatching {
+            runBlocking {
+                withTimeout(5_000) {
+                val profile = ProfileStore.observe(appContext).first()
+                val behavior = BehaviorRepository.observe(appContext).first()
+                val goals = BehaviorGoalRepository.observe(appContext).first()
+                val today = behavior.today
+                val goal = goals.firstOrNull { it.id == "upgrade-probe-goal" }
+
+                    Bundle().apply {
+                    putString("onboarding", profile.onboardingComplete.toString())
+                    putString("ads_removed", profile.adsRemoved.toString())
+                    putString(
+                        "activity_state",
+                        behavior.sourceStates[BehaviorSource.ACTIVITY]?.name.orEmpty()
+                    )
+                    putString("steps", (today?.steps ?: -1L).toString())
+                    putString("goal_id", goal?.id.orEmpty())
+                    putString("goal_metric", goal?.metric?.name.orEmpty())
+                    putString("goal_target", (goal?.targetValue ?: -1L).toString())
+                    }
+                }
+            }
+        }.getOrElse { error ->
+            Bundle().apply { putString("probe_error", error.javaClass.simpleName) }
+        }
+    }
+
+    override fun query(
+        uri: Uri,
+        projection: Array<out String>?,
+        selection: String?,
+        selectionArgs: Array<out String>?,
+        sortOrder: String?
+    ): Cursor? = null
+
+    override fun getType(uri: Uri): String? = null
+    override fun insert(uri: Uri, values: ContentValues?): Uri? = null
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int = 0
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
+    ): Int = 0
+
+    companion object {
+        const val METHOD_STATE = "state"
     }
 }
 ```
@@ -22958,7 +23371,19 @@ private fun WhoAreYouApp() {
                         when (BehaviorSourceActionHandler.handle(context, source, action)) {
                             BehaviorSourceEffect.REFRESH -> refreshBehavior()
                             BehaviorSourceEffect.REQUEST_ACTIVITY_PERMISSION -> activityPermissionLauncher.launch(setOf(HealthConnectActivityDataSource.READ_STEPS_PERMISSION))
-                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> usageAccessLauncher.launch(UsageAccess.settingsIntent())
+                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> {
+                                val settingsIntent = UsageAccess.settingsIntent(context)
+                                if (settingsIntent != null) {
+                                    usageAccessLauncher.launch(settingsIntent)
+                                } else {
+                                    BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)
+                                    BehaviorRepository.setSourceState(
+                                        context,
+                                        BehaviorSource.APP_USAGE,
+                                        BehaviorSourceState.UNSUPPORTED
+                                    )
+                                }
+                            }
                             BehaviorSourceEffect.NONE -> Unit
                         }
                     } },
@@ -31105,7 +31530,10 @@ object UsageAccess {
         }
     }
 
-    fun settingsIntent(): Intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+    fun settingsIntent(context: Context): Intent? =
+        Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).takeIf { intent ->
+            intent.resolveActivity(context.packageManager) != null
+        }
 }
 ```
 
@@ -38954,8 +39382,16 @@ PACKAGE_NAME = "com.whoareyou.app"
 INTERNAL_TRACK = "qa"
 OPEN_TEST_TRACK = "beta"
 PRODUCTION_TRACK = "production"
-VERSION_CODE = 1
-VERSION_NAME = "0.1.0"
+⋮----
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+ANDROID_BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
+⋮----
+def load_android_version(path: pathlib.Path = ANDROID_BUILD_GRADLE) -> tuple[int, str]
+⋮----
+source = path.read_text(encoding="utf-8")
+code_match = re.search(r"\bversionCode\s*=\s*(\d+)", source)
+name_match = re.search(r'\bversionName\s*=\s*"([^"]+)"', source)
+⋮----
 API_ROOT = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications"
 UPLOAD_ROOT = "https://androidpublisher.googleapis.com/upload/androidpublisher/v3/applications"
 SCOPE = "https://www.googleapis.com/auth/androidpublisher"
@@ -39150,6 +39586,23 @@ def test_profile_opens_exploration_dialog(self)
 def test_dialog_exposes_evidence_and_next_measurement(self)
 ⋮----
 def test_profile_can_navigate_directly_to_quiz(self)
+```
+
+## File: tools/test_android_apk_provenance_versioning.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/android-apk.yml"
+FALLBACK = ROOT / ".github/workflows/apk-test.yml"
+⋮----
+class AndroidApkProvenanceVersioningTest(unittest.TestCase)
+⋮----
+def test_android_apk_artifact_uses_current_gradle_version(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+⋮----
+def test_manual_fallback_artifact_uses_current_gradle_version(self)
+⋮----
+source = FALLBACK.read_text(encoding="utf-8")
 ```
 
 ## File: tools/test_android_ci_sdk_setup_contract.py
@@ -39414,6 +39867,20 @@ def test_keyboard_focus_is_visible(self)
 def test_app_and_web_routes_stay_aligned(self)
 ```
 
+## File: tools/test_gradle_action_alignment.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOWS = ROOT / ".github/workflows"
+⋮----
+class GradleActionAlignmentTest(unittest.TestCase)
+⋮----
+def test_all_android_workflows_use_setup_gradle_v6(self)
+⋮----
+offenders = []
+⋮----
+source = path.read_text(encoding="utf-8")
+```
+
 ## File: tools/test_gradle_release_reproducibility.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -39431,6 +39898,20 @@ match = re.search(r"gradle-version:\s*'([^']+)'", source)
 def test_build_scripts_pin_android_and_compose_plugins(self)
 ⋮----
 root = (ROOT / "build.gradle.kts").read_text(encoding="utf-8")
+```
+
+## File: tools/test_habits_release_smoke_checklist.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+CHECKLIST = ROOT / "docs/internal-test-smoke-test.md"
+⋮----
+class HabitsReleaseSmokeChecklistTest(unittest.TestCase)
+⋮----
+def test_smoke_checklist_covers_local_habits_and_goals(self)
+⋮----
+source = CHECKLIST.read_text(encoding="utf-8").lower()
+⋮----
+required = (
 ```
 
 ## File: tools/test_healthy_discover_profile_contract.py
@@ -40237,6 +40718,18 @@ def test_workflow_does_not_upload_to_play(self)
 lowered = self.workflow.lower()
 ```
 
+## File: tools/test_play_internal_telemetry_parity.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/play-internal-publish.yml"
+⋮----
+class PlayInternalTelemetryParityTest(unittest.TestCase)
+⋮----
+def test_internal_publish_can_match_candidate_telemetry_configuration(self)
+⋮----
+source = WORKFLOW.read_text(encoding="utf-8")
+```
+
 ## File: tools/test_play_promoter.py
 ```python
 class PlayPromotionPayloadTest(unittest.TestCase)
@@ -40362,6 +40855,39 @@ release_block = self.gradle.split("release {", 1)[1].split("}", 1)[0]
 def test_play_release_explicitly_reenables_external_services(self)
 ⋮----
 play_block = self.gradle.split('create("playRelease") {', 1)[1]
+```
+
+## File: tools/test_play_version_sync.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+BUILD_GRADLE = ROOT / "app" / "build.gradle.kts"
+PROMOTER = ROOT / "tools" / "play_promoter.py"
+⋮----
+class PlayVersionSyncTest(unittest.TestCase)
+⋮----
+def test_publisher_version_is_loaded_from_android_gradle(self)
+⋮----
+def test_promoter_does_not_pin_an_obsolete_version_code(self)
+⋮----
+source = PROMOTER.read_text(encoding="utf-8")
+```
+
+## File: tools/test_post_semantic_refresh_validation.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+ANDROID_CI = ROOT / ".github/workflows/android-ci.yml"
+DEVICE_CI = ROOT / ".github/workflows/m59-device-validation.yml"
+SEMANTIC_WORKFLOW = "Precise semantic refresh"
+⋮----
+class PostSemanticRefreshValidationContractTest(unittest.TestCase)
+⋮----
+def assert_revalidates_after_semantic_refresh(self, path: Path)
+⋮----
+source = path.read_text(encoding="utf-8")
+⋮----
+def test_android_ci_revalidates_main_after_semantic_refresh(self)
+⋮----
+def test_device_validation_revalidates_main_after_semantic_refresh(self)
 ```
 
 ## File: tools/test_prepare_play_submission.py
@@ -40640,6 +41166,20 @@ def test_editorial_cards_do_not_force_two_line_truncation(self)
 block = self.collections.split('private fun EditorialCard', 1)[1]
 ```
 
+## File: tools/test_release_artifact_scope_checklist.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+CHECKLIST = ROOT / "docs/play-release-checklist.md"
+⋮----
+class ReleaseArtifactScopeChecklistTest(unittest.TestCase)
+⋮----
+def test_candidate_and_play_signed_acceptance_scopes_are_explicit(self)
+⋮----
+source = CHECKLIST.read_text(encoding="utf-8").lower()
+⋮----
+required = (
+```
+
 ## File: tools/test_release_ci_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -40712,6 +41252,43 @@ def test_behavior_and_goal_stores_remain_separate(self)
 ⋮----
 behavior = self.read("BehaviorRepository.kt")
 goals = self.read("BehaviorGoalRepository.kt")
+```
+
+## File: tools/test_release_upgrade_persistence_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / ".github/scripts/android-device-validation.sh"
+SEED_TEST = ROOT / "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt"
+CANDIDATE_MANIFEST = ROOT / "app/src/candidate/AndroidManifest.xml"
+CANDIDATE_PROBE = ROOT / "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt"
+M59_WORKFLOW = ROOT / ".github/workflows/m59-device-validation.yml"
+⋮----
+class ReleaseUpgradePersistenceContractTest(unittest.TestCase)
+⋮----
+def test_upgrade_validation_seeds_before_candidate_replacement(self)
+⋮----
+script = SCRIPT.read_text(encoding="utf-8")
+⋮----
+def test_post_upgrade_verification_uses_candidate_only_provider(self)
+⋮----
+manifest = CANDIDATE_MANIFEST.read_text(encoding="utf-8")
+probe = CANDIDATE_PROBE.read_text(encoding="utf-8")
+⋮----
+probe_call = script.index("adb shell content call")
+start = script.index('UPGRADE_CANDIDATE_START="$(adb shell am start -W -n "$ACTIVITY")"')
+⋮----
+def test_post_upgrade_runtime_checks_do_not_reenter_ui_automation(self)
+⋮----
+candidate_replace = script.index('adb install -r "$CANDIDATE_APK"', script.index("ReleaseUpgradeSeedTest#seedPersistentState"))
+post_upgrade = script[candidate_replace:]
+⋮----
+no_ui = script[script.index("validate_running_app_no_ui() {"):script.index("smoke_apk() {")]
+⋮----
+terminal = script[script.index("validate_running_app_no_ui upgrade-candidate"):]
+⋮----
+def test_m59_retains_upgrade_probe_evidence(self)
+⋮----
+workflow = M59_WORKFLOW.read_text(encoding="utf-8")
 ```
 
 ## File: tools/test_release_workflows_contract.py
@@ -41056,6 +41633,20 @@ def test_timeline_distinguishes_retake_and_new_evidence(self)
 def test_trait_period_comparison_tracks_score_and_confidence(self)
 ⋮----
 def test_profile_renders_accessible_trait_history(self)
+```
+
+## File: tools/test_usage_access_launch_safety.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+USAGE_ACCESS = ROOT / "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+MAIN_ACTIVITY = ROOT / "app/src/main/java/com/whoareyou/app/MainActivity.kt"
+⋮----
+class UsageAccessLaunchSafetyTest(unittest.TestCase)
+⋮----
+def test_usage_access_settings_intent_is_resolved_before_launch(self)
+⋮----
+usage = USAGE_ACCESS.read_text(encoding="utf-8")
+main = MAIN_ACTIVITY.read_text(encoding="utf-8")
 ```
 
 ## File: tools/test_validate_screenshot.py

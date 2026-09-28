@@ -45,6 +45,11 @@
       "source": "tools/test_release_integration_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_release_integration_contract.py",
+      "target": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+      "type": "symbol-reference"
     }
   ],
   "schema_version": 1

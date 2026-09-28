@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 875,
+      "edge_count": 901,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -34,7 +34,7 @@
     },
     {
       "area": "tools-play-publisher.py",
-      "edge_count": 6,
+      "edge_count": 8,
       "path": ".ai/brain/graph-shards/tools-play-publisher.py.json"
     },
     {
@@ -188,6 +188,11 @@
       "path": ".ai/brain/graph-shards/tools-test-play-publisher.py.json"
     },
     {
+      "area": "tools-test-play-version-sync.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-test-play-version-sync.py.json"
+    },
+    {
       "area": "tools-test-prepare-play-submission.py",
       "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-prepare-play-submission.py.json"
@@ -259,8 +264,13 @@
     },
     {
       "area": "tools-test-release-integration-contract.py",
-      "edge_count": 9,
+      "edge_count": 10,
       "path": ".ai/brain/graph-shards/tools-test-release-integration-contract.py.json"
+    },
+    {
+      "area": "tools-test-release-upgrade-persistence-contract.py",
+      "edge_count": 5,
+      "path": ".ai/brain/graph-shards/tools-test-release-upgrade-persistence-contract.py.json"
     },
     {
       "area": "tools-test-rendering-performance-contract.py",
@@ -326,6 +336,11 @@
       "area": "tools-test-trait-timeline-integration.py",
       "edge_count": 1,
       "path": ".ai/brain/graph-shards/tools-test-trait-timeline-integration.py.json"
+    },
+    {
+      "area": "tools-test-usage-access-launch-safety.py",
+      "edge_count": 3,
+      "path": ".ai/brain/graph-shards/tools-test-usage-access-launch-safety.py.json"
     },
     {
       "area": "tools-validate-public-release-inputs.py",

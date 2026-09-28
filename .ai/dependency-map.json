@@ -11,6 +11,7 @@
   "inferred_imports": [
     "android.app",
     "android.content",
+    "android.database",
     "android.graphics",
     "android.net",
     "android.os",

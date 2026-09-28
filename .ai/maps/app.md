@@ -47,17 +47,25 @@ src/
             AppShellUiTest.kt
             BehaviorGoalsUiTest.kt
             BehaviorScreenUiTest.kt
+            HabitsPersistenceE2eTest.kt
             MainActivityRecreationTest.kt
             MainFlowE2eTest.kt
             ProfileScreenWhoAmITest.kt
             ProfileStorePersistenceTest.kt
             QuizScreenUiTest.kt
+            ReleaseUpgradeSeedTest.kt
             ResultEvidenceCardTest.kt
             ResultInsightCardsTest.kt
             ResultProfileConnectionsCardTest.kt
             ResultScreenUiTest.kt
             WhoAmIDiscoveryUiTest.kt
             WhoAmIPortraitUiTest.kt
+  candidate/
+    java/
+      com/
+        whoareyou/
+          app/
+            CandidateUpgradeStateProbeProvider.kt
   main/
     assets/
       quizzes-extra-fr.json
@@ -846,6 +854,102 @@ class BehaviorScreenUiTest {
 }
 ```
 
+## File: src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
+import androidx.test.platform.app.InstrumentationRegistry
+import java.time.LocalDate
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.assertTrue
+import org.junit.Rule
+import org.junit.Test
+
+class HabitsPersistenceE2eTest {
+    @get:Rule
+    val composeRule = createAndroidComposeRule<MainActivity>()
+
+    @Test
+    fun habitsScreenAndLocalGoalSurviveActivityRecreation() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val goalId = "e2e-persist-goal"
+        val goalTag = "behavior_goal_$goalId"
+
+        runBlocking {
+            ProfileStore.setOnboardingComplete(context, true)
+            BehaviorRepository.clearAll(context)
+            BehaviorGoalRepository.clearAll(context)
+            BehaviorGoalRepository.upsert(
+                context,
+                BehaviorGoal.stepsAtLeast(
+                    id = goalId,
+                    targetSteps = 5_000L,
+                    startEpochDay = LocalDate.now().toEpochDay() - 1L
+                )
+            )
+        }
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_discover")
+
+        val tabMatcher = SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)
+        composeRule.onAllNodes(tabMatcher)[1].performClick()
+        waitForTag("app_screen_profile")
+
+        composeRule.onNodeWithTag("profile_open_habits")
+            .performScrollTo()
+            .performClick()
+        waitForTag("app_screen_habits")
+
+        val habits = composeRule.onNodeWithTag("behavior_screen")
+        habits.performScrollToNode(hasTestTag(goalTag))
+        composeRule.onNodeWithTag(goalTag).assertExists()
+
+        composeRule.activityRule.scenario.recreate()
+        waitForTag("app_screen_habits")
+
+        composeRule.onNodeWithTag("behavior_screen")
+            .performScrollToNode(hasTestTag(goalTag))
+        composeRule.onNodeWithTag(goalTag).assertExists()
+
+        val persisted = runBlocking {
+            withTimeout(5_000) {
+                BehaviorGoalRepository.observe(context).first { goals ->
+                    goals.any { it.id == goalId }
+                }
+            }
+        }
+        assertTrue(persisted.any { it.id == goalId })
+
+        runBlocking {
+            BehaviorGoalRepository.clearAll(context)
+            BehaviorRepository.clearAll(context)
+        }
+    }
+
+    private fun waitForTag(tag: String) {
+        composeRule.waitUntil(timeoutMillis = 15_000) {
+            composeRule.onAllNodesWithTag(tag, useUnmergedTree = true)
+                .fetchSemanticsNodes()
+                .isNotEmpty()
+        }
+        composeRule.onNodeWithTag(tag, useUnmergedTree = true).assertExists()
+    }
+}
+```
+
 ## File: src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -856,12 +960,16 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
@@ -899,6 +1007,67 @@ class MainActivityRecreationTest {
                 ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
             }
         }
+    }
+
+    @Test
+    fun persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val persistedGoal = BehaviorGoal.stepsAtLeast(
+            id = "recreation-goal",
+            targetSteps = 9_000L,
+            startEpochDay = 20_000L
+        )
+        val previousOnboardingComplete = runBlocking {
+            ProfileStore.observe(context).first().onboardingComplete.also {
+                ProfileStore.setOnboardingComplete(context, true)
+                BehaviorGoalRepository.clearAll(context)
+                BehaviorGoalRepository.upsert(context, persistedGoal)
+            }
+        }
+
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+        try {
+            waitForTag("app_screen_discover")
+            openHabits(context)
+            assertGoalDisplayed(persistedGoal)
+
+            // Seed persistence before launch so recreation validates restoration itself without
+            // leaving a numeric IME session active. The navigation route is also expected to
+            // survive recreation, so wait for Habits directly instead of incorrectly assuming
+            // that MainActivity resets to Discover.
+            scenario.recreate()
+            waitForTag("app_screen_habits")
+            assertGoalDisplayed(persistedGoal)
+
+            val afterRecreation = runBlocking {
+                withTimeout(5_000) {
+                    BehaviorGoalRepository.observe(context).first { goals ->
+                        goals.any { it.id == persistedGoal.id }
+                    }
+                }
+            }
+            assertEquals(1, afterRecreation.size)
+            assertEquals(persistedGoal, afterRecreation.single())
+        } finally {
+            scenario.close()
+            runBlocking {
+                BehaviorGoalRepository.clearAll(context)
+                ProfileStore.setOnboardingComplete(context, previousOnboardingComplete)
+            }
+        }
+    }
+
+    private fun assertGoalDisplayed(goal: BehaviorGoal) {
+        composeRule.onNodeWithTag("behavior_screen")
+            .performScrollToNode(hasTestTag("behavior_goal_${goal.id}"))
+        composeRule.onNodeWithTag("behavior_goal_${goal.id}").assertIsDisplayed()
+    }
+
+    private fun openHabits(context: android.content.Context) {
+        composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
+        waitForTag("app_screen_profile")
+        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
+        waitForTag("app_screen_habits")
     }
 
     private fun waitForTag(tag: String) {
@@ -1490,6 +1659,61 @@ class QuizScreenUiTest {
 }
 ```
 
+## File: src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
+import java.time.LocalDate
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class ReleaseUpgradeSeedTest {
+    private val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+
+    @Test
+    fun seedPersistentState() = runBlocking {
+        if (InstrumentationRegistry.getArguments().getString("releaseUpgradePhase") != "seed") return@runBlocking
+        val today = LocalDate.now().toEpochDay()
+
+        ProfileStore.setOnboardingComplete(context, true)
+        ProfileStore.setAdsRemoved(context, true)
+
+        BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)
+        BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)
+        BehaviorRepository.upsert(
+            context = context,
+            day = DailyBehaviorAggregate(
+                epochDay = today,
+                steps = 4_321L,
+                totalForegroundMillis = null,
+                topApps = emptyList(),
+                launchesOrSessions = null,
+                daypartUsage = DaypartUsage.EMPTY
+            ),
+            currentEpochDay = today
+        )
+
+        BehaviorGoalRepository.upsert(
+            context,
+            BehaviorGoal.stepsAtLeast(
+                id = "upgrade-probe-goal",
+                targetSteps = 4_000L,
+                startEpochDay = today
+            )
+        )
+
+        assertTrue(ProfileStore.observe(context).first().onboardingComplete)
+        assertEquals(4_321L, BehaviorRepository.observe(context).first().today?.steps)
+        assertEquals("upgrade-probe-goal", BehaviorGoalRepository.observe(context).first().single().id)
+    }
+}
+```
+
 ## File: src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt
 ```kotlin
 package com.whoareyou.app
@@ -1892,6 +2116,80 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
         composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
         composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
+    }
+}
+```
+
+## File: src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt
+```kotlin
+package com.whoareyou.app
+
+import android.content.ContentProvider
+import android.content.ContentValues
+import android.database.Cursor
+import android.net.Uri
+import android.os.Bundle
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+
+class CandidateUpgradeStateProbeProvider : ContentProvider() {
+    override fun onCreate(): Boolean = true
+
+    override fun call(method: String, arg: String?, extras: Bundle?): Bundle {
+        if (method != METHOD_STATE) {
+            return Bundle().apply { putString("probe_error", "unsupported_method") }
+        }
+
+        val appContext = requireNotNull(context).applicationContext
+        return runCatching {
+            runBlocking {
+                withTimeout(5_000) {
+                val profile = ProfileStore.observe(appContext).first()
+                val behavior = BehaviorRepository.observe(appContext).first()
+                val goals = BehaviorGoalRepository.observe(appContext).first()
+                val today = behavior.today
+                val goal = goals.firstOrNull { it.id == "upgrade-probe-goal" }
+
+                    Bundle().apply {
+                    putString("onboarding", profile.onboardingComplete.toString())
+                    putString("ads_removed", profile.adsRemoved.toString())
+                    putString(
+                        "activity_state",
+                        behavior.sourceStates[BehaviorSource.ACTIVITY]?.name.orEmpty()
+                    )
+                    putString("steps", (today?.steps ?: -1L).toString())
+                    putString("goal_id", goal?.id.orEmpty())
+                    putString("goal_metric", goal?.metric?.name.orEmpty())
+                    putString("goal_target", (goal?.targetValue ?: -1L).toString())
+                    }
+                }
+            }
+        }.getOrElse { error ->
+            Bundle().apply { putString("probe_error", error.javaClass.simpleName) }
+        }
+    }
+
+    override fun query(
+        uri: Uri,
+        projection: Array<out String>?,
+        selection: String?,
+        selectionArgs: Array<out String>?,
+        sortOrder: String?
+    ): Cursor? = null
+
+    override fun getType(uri: Uri): String? = null
+    override fun insert(uri: Uri, values: ContentValues?): Uri? = null
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int = 0
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
+    ): Int = 0
+
+    companion object {
+        const val METHOD_STATE = "state"
     }
 }
 ```
@@ -20883,7 +21181,19 @@ private fun WhoAreYouApp() {
                         when (BehaviorSourceActionHandler.handle(context, source, action)) {
                             BehaviorSourceEffect.REFRESH -> refreshBehavior()
                             BehaviorSourceEffect.REQUEST_ACTIVITY_PERMISSION -> activityPermissionLauncher.launch(setOf(HealthConnectActivityDataSource.READ_STEPS_PERMISSION))
-                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> usageAccessLauncher.launch(UsageAccess.settingsIntent())
+                            BehaviorSourceEffect.OPEN_USAGE_ACCESS -> {
+                                val settingsIntent = UsageAccess.settingsIntent(context)
+                                if (settingsIntent != null) {
+                                    usageAccessLauncher.launch(settingsIntent)
+                                } else {
+                                    BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)
+                                    BehaviorRepository.setSourceState(
+                                        context,
+                                        BehaviorSource.APP_USAGE,
+                                        BehaviorSourceState.UNSUPPORTED
+                                    )
+                                }
+                            }
                             BehaviorSourceEffect.NONE -> Unit
                         }
                     } },
@@ -29030,7 +29340,10 @@ object UsageAccess {
         }
     }
 
-    fun settingsIntent(): Intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+    fun settingsIntent(context: Context): Intent? =
+        Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).takeIf { intent ->
+            intent.resolveActivity(context.packageManager) != null
+        }
 }
 ```
 

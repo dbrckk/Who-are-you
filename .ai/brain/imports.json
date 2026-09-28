@@ -69,6 +69,26 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": [
+      "androidx.compose.ui.semantics.Role",
+      "androidx.compose.ui.semantics.SemanticsProperties",
+      "androidx.compose.ui.test.SemanticsMatcher",
+      "androidx.compose.ui.test.hasTestTag",
+      "androidx.compose.ui.test.junit4.v2.createAndroidComposeRule",
+      "androidx.compose.ui.test.onAllNodesWithTag",
+      "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollTo",
+      "androidx.compose.ui.test.performScrollToNode",
+      "androidx.test.platform.app.InstrumentationRegistry",
+      "java.time.LocalDate",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "kotlinx.coroutines.withTimeout",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Rule",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": [
       "androidx.compose.ui.test.ExperimentalTestApi",
       "androidx.compose.ui.test.assertIsDisplayed",
@@ -76,12 +96,16 @@
       "androidx.compose.ui.test.junit4.v2.createEmptyComposeRule",
       "androidx.compose.ui.test.onAllNodesWithTag",
       "androidx.compose.ui.test.onNodeWithTag",
+      "androidx.compose.ui.test.onNodeWithText",
       "androidx.compose.ui.test.performClick",
+      "androidx.compose.ui.test.performScrollTo",
       "androidx.compose.ui.test.performScrollToNode",
       "androidx.test.core.app.ActivityScenario",
       "androidx.test.platform.app.InstrumentationRegistry",
       "kotlinx.coroutines.flow.first",
       "kotlinx.coroutines.runBlocking",
+      "kotlinx.coroutines.withTimeout",
+      "org.junit.Assert.assertEquals",
       "org.junit.Rule",
       "org.junit.Test"
     ],
@@ -137,6 +161,16 @@
       "org.junit.Rule",
       "org.junit.Test"
     ],
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt": [
+      "androidx.test.core.app.ApplicationProvider",
+      "androidx.test.platform.app.InstrumentationRegistry",
+      "java.time.LocalDate",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "org.junit.Assert.assertEquals",
+      "org.junit.Assert.assertTrue",
+      "org.junit.Test"
+    ],
     "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt": [
       "androidx.compose.ui.test.assertIsDisplayed",
       "androidx.compose.ui.test.junit4.v2.createComposeRule",
@@ -186,6 +220,16 @@
       "androidx.compose.ui.test.onNodeWithText",
       "org.junit.Rule",
       "org.junit.Test"
+    ],
+    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt": [
+      "android.content.ContentProvider",
+      "android.content.ContentValues",
+      "android.database.Cursor",
+      "android.net.Uri",
+      "android.os.Bundle",
+      "kotlinx.coroutines.flow.first",
+      "kotlinx.coroutines.runBlocking",
+      "kotlinx.coroutines.withTimeout"
     ],
     "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt": [
       "androidx.compose.foundation.background",
@@ -2221,6 +2265,10 @@
       "pathlib",
       "unittest"
     ],
+    "tools/test_android_apk_provenance_versioning.py": [
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_android_ci_sdk_setup_contract.py": [
       "pathlib",
       "unittest"
@@ -2272,9 +2320,17 @@
       "pathlib",
       "unittest"
     ],
+    "tools/test_gradle_action_alignment.py": [
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_gradle_release_reproducibility.py": [
       "pathlib",
       "re",
+      "unittest"
+    ],
+    "tools/test_habits_release_smoke_checklist.py": [
+      "pathlib",
       "unittest"
     ],
     "tools/test_healthy_discover_profile_contract.py": [
@@ -2439,6 +2495,10 @@
       "re",
       "unittest"
     ],
+    "tools/test_play_internal_telemetry_parity.py": [
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_play_promoter.py": [
       "play_publisher",
       "unittest"
@@ -2459,6 +2519,15 @@
       "unittest"
     ],
     "tools/test_play_release_safety_contract.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_play_version_sync.py": [
+      "pathlib",
+      "play_publisher",
+      "unittest"
+    ],
+    "tools/test_post_semantic_refresh_validation.py": [
       "pathlib",
       "unittest"
     ],
@@ -2529,6 +2598,10 @@
       "pathlib",
       "unittest"
     ],
+    "tools/test_release_artifact_scope_checklist.py": [
+      "pathlib",
+      "unittest"
+    ],
     "tools/test_release_ci_contract.py": [
       "pathlib",
       "unittest"
@@ -2541,6 +2614,10 @@
       "pathlib",
       "unittest",
       "xml.etree.ElementTree"
+    ],
+    "tools/test_release_upgrade_persistence_contract.py": [
+      "pathlib",
+      "unittest"
     ],
     "tools/test_release_workflows_contract.py": [
       "pathlib",
@@ -2612,6 +2689,10 @@
       "unittest"
     ],
     "tools/test_trait_timeline_integration.py": [
+      "pathlib",
+      "unittest"
+    ],
+    "tools/test_usage_access_launch_safety.py": [
       "pathlib",
       "unittest"
     ],

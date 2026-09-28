@@ -2,7 +2,78 @@
   "area": "tools",
   "files": [
     {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 525
+    },
+    {
+      "path": "tools/test_play_publisher.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 500
+    },
+    {
       "path": "tools/test_release_integration_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 470
+    },
+    {
+      "path": "tools/test_release_upgrade_persistence_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 455
+    },
+    {
+      "path": "tools/test_play_version_sync.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 445
+    },
+    {
+      "path": "tools/test_usage_access_launch_safety.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 440
+    },
+    {
+      "path": "tools/test_post_semantic_refresh_validation.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -10,10 +81,21 @@
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 410
+      "score": 390
     },
     {
-      "path": "tools/test_release_ci_contract.py",
+      "path": "tools/test_android_apk_provenance_versioning.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 385
+    },
+    {
+      "path": "tools/test_gradle_action_alignment.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -22,6 +104,60 @@
         "symbol-indexed"
       ],
       "score": 380
+    },
+    {
+      "path": "tools/test_habits_release_smoke_checklist.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "tools/test_play_internal_telemetry_parity.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "tools/test_release_artifact_scope_checklist.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "tools/play_promoter.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 370
+    },
+    {
+      "path": "tools/test_play_promoter.py",
+      "reasons": [
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 210
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

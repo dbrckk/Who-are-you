@@ -2,7 +2,42 @@
   "area": "github",
   "files": [
     {
+      "path": ".github/scripts/android-device-validation.sh",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/android-apk.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
       "path": ".github/workflows/android-ci.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/apk-test.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/m59-device-validation.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
       "reasons": [
         "changed"
       ],

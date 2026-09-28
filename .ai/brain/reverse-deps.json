@@ -51,8 +51,23 @@
       "in_degree": 0,
       "out_degree": 4
     },
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 6
+    },
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": {
       "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
         "app/src/main/java/com/whoareyou/app/SignatureProfile.kt"
@@ -61,7 +76,7 @@
         "tools/test_main_activity_recreation_sync_contract.py"
       ],
       "in_degree": 1,
-      "out_degree": 3
+      "out_degree": 5
     },
     "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt": {
       "dependencies": [
@@ -107,6 +122,20 @@
       ],
       "in_degree": 1,
       "out_degree": 2
+    },
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
+      ],
+      "dependents": [
+        "tools/test_release_upgrade_persistence_contract.py"
+      ],
+      "in_degree": 1,
+      "out_degree": 5
     },
     "app/src/androidTest/java/com/whoareyou/app/ResultEvidenceCardTest.kt": {
       "dependencies": [
@@ -172,6 +201,19 @@
       ],
       "dependents": [],
       "in_degree": 0,
+      "out_degree": 4
+    },
+    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
+      ],
+      "dependents": [
+        "tools/test_release_upgrade_persistence_contract.py"
+      ],
+      "in_degree": 1,
       "out_degree": 4
     },
     "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt": {
@@ -394,6 +436,9 @@
       ],
       "dependents": [
         "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
@@ -412,7 +457,7 @@
         "tools/test_behavior_goal_storage_contract.py",
         "tools/test_release_integration_contract.py"
       ],
-      "in_degree": 18,
+      "in_degree": 21,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt": {
@@ -452,14 +497,19 @@
         "app/src/main/java/com/whoareyou/app/BehaviorModels.kt"
       ],
       "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+        "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/test_behavior_goal_privacy_contract.py",
         "tools/test_behavior_goal_storage_contract.py",
         "tools/test_behavior_goal_v1_scope_contract.py",
-        "tools/test_release_integration_contract.py"
+        "tools/test_release_integration_contract.py",
+        "tools/test_release_upgrade_persistence_contract.py"
       ],
-      "in_degree": 6,
+      "in_degree": 11,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt": {
@@ -553,6 +603,8 @@
       "dependents": [
         ".github/scripts/validate-screenshot.py",
         "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+        "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
         "app/src/main/java/com/whoareyou/app/Achievements.kt",
         "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
         "app/src/main/java/com/whoareyou/app/AppUsageAggregation.kt",
@@ -638,9 +690,10 @@
         "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
         "tools/test_behavior_privacy_contract.py",
         "tools/test_billing_launch_readiness.py",
-        "tools/test_release_integration_contract.py"
+        "tools/test_release_integration_contract.py",
+        "tools/test_usage_access_launch_safety.py"
       ],
-      "in_degree": 88,
+      "in_degree": 91,
       "out_degree": 0
     },
     "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": {
@@ -665,15 +718,19 @@
         "app/src/main/java/com/whoareyou/app/BehaviorStore.kt"
       ],
       "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+        "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
         "tools/test_behavior_goal_storage_contract.py",
         "tools/test_behavior_goal_v1_scope_contract.py",
         "tools/test_behavior_privacy_contract.py",
-        "tools/test_release_integration_contract.py"
+        "tools/test_release_integration_contract.py",
+        "tools/test_release_upgrade_persistence_contract.py"
       ],
-      "in_degree": 7,
+      "in_degree": 11,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": {
@@ -1188,6 +1245,7 @@
         "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
       ],
       "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
         "tools/test_actionable_knowledge_map_contract.py",
@@ -1210,9 +1268,10 @@
         "tools/test_runtime_performance_contract.py",
         "tools/test_startup_loading_state.py",
         "tools/test_string_resource_parity.py",
-        "tools/test_trait_evolution_integration.py"
+        "tools/test_trait_evolution_integration.py",
+        "tools/test_usage_access_launch_safety.py"
       ],
-      "in_degree": 23,
+      "in_degree": 25,
       "out_degree": 21
     },
     "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt": {
@@ -1609,9 +1668,12 @@
         "app/src/main/java/com/whoareyou/app/ScoreHistory.kt"
       ],
       "dependents": [
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+        "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
         "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
         "app/src/main/java/com/whoareyou/app/Achievements.kt",
         "app/src/main/java/com/whoareyou/app/BillingManager.kt",
@@ -1633,11 +1695,12 @@
         "tools/test_quiz_replay_window_contract.py",
         "tools/test_release_critical_profile_contract.py",
         "tools/test_release_integration_contract.py",
+        "tools/test_release_upgrade_persistence_contract.py",
         "tools/test_runtime_performance_contract.py",
         "tools/test_startup_loading_state.py",
         "tools/test_trait_evolution_integration.py"
       ],
-      "in_degree": 27,
+      "in_degree": 31,
       "out_degree": 9
     },
     "app/src/main/java/com/whoareyou/app/ProfileStrengthNuance.kt": {
@@ -2132,6 +2195,7 @@
         "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
         "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
@@ -2153,7 +2217,7 @@
         "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
         "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt"
       ],
-      "in_degree": 23,
+      "in_degree": 24,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/SignatureProfileUiCopy.kt": {
@@ -2342,9 +2406,11 @@
         "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "tools/test_behavior_privacy_contract.py"
+        "tools/test_behavior_privacy_contract.py",
+        "tools/test_release_integration_contract.py",
+        "tools/test_usage_access_launch_safety.py"
       ],
-      "in_degree": 4,
+      "in_degree": 6,
       "out_degree": 1
     },
     "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt": {
@@ -3303,9 +3369,10 @@
       "dependents": [
         "tools/play_promoter.py",
         "tools/test_play_promoter.py",
-        "tools/test_play_publisher.py"
+        "tools/test_play_publisher.py",
+        "tools/test_play_version_sync.py"
       ],
-      "in_degree": 3,
+      "in_degree": 4,
       "out_degree": 1
     },
     "tools/prepare_play_submission.py": {
@@ -3611,6 +3678,14 @@
       "in_degree": 0,
       "out_degree": 2
     },
+    "tools/test_play_version_sync.py": {
+      "dependencies": [
+        "tools/play_publisher.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1
+    },
     "tools/test_prepare_play_submission.py": {
       "dependencies": [
         "tools/prepare_play_submission.py"
@@ -3745,11 +3820,24 @@
         "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
         "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
         "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 10
+    },
+    "tools/test_release_upgrade_persistence_contract.py": {
+      "dependencies": [
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+        "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
         "app/src/main/java/com/whoareyou/app/ProfileStore.kt"
       ],
       "dependents": [],
       "in_degree": 0,
-      "out_degree": 9
+      "out_degree": 5
     },
     "tools/test_rendering_performance_contract.py": {
       "dependencies": [
@@ -3874,6 +3962,16 @@
       "dependents": [],
       "in_degree": 0,
       "out_degree": 1
+    },
+    "tools/test_usage_access_launch_safety.py": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/UsageAccess.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 3
     },
     "tools/validate_public_release_inputs.py": {
       "dependencies": [

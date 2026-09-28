@@ -2,19 +2,40 @@
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
   "selected_test_files": [
-    "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-    "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt",
-    "tools/test_release_ci_contract.py",
-    "tools/test_release_integration_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+    "tools/test_android_apk_provenance_versioning.py",
+    "tools/test_gradle_action_alignment.py",
+    "tools/test_habits_release_smoke_checklist.py",
+    "tools/test_play_internal_telemetry_parity.py",
+    "tools/test_play_promoter.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py",
+    "tools/test_post_semantic_refresh_validation.py",
+    "tools/test_release_artifact_scope_checklist.py",
+    "tools/test_release_integration_contract.py",
+    "tools/test_release_upgrade_persistence_contract.py",
+    "tools/test_usage_access_launch_safety.py"
   ],
   "commands": [
     {
-      "command": "python -m pytest tools/test_release_ci_contract.py tools/test_release_integration_contract.py",
+      "command": "python -m pytest tools/test_android_apk_provenance_versioning.py tools/test_gradle_action_alignment.py tools/test_habits_release_smoke_checklist.py tools/test_play_internal_telemetry_parity.py tools/test_play_promoter.py tools/test_play_publisher.py tools/test_play_version_sync.py tools/test_post_semantic_refresh_validation.py tools/test_release_artifact_scope_checklist.py tools/test_release_integration_contract.py tools/test_release_upgrade_persistence_contract.py tools/test_usage_access_launch_safety.py",
       "purpose": "targeted tests",
-      "confidence": "high",
+      "confidence": "medium",
       "files": [
-        "tools/test_release_ci_contract.py",
-        "tools/test_release_integration_contract.py"
+        "tools/test_android_apk_provenance_versioning.py",
+        "tools/test_gradle_action_alignment.py",
+        "tools/test_habits_release_smoke_checklist.py",
+        "tools/test_play_internal_telemetry_parity.py",
+        "tools/test_play_promoter.py",
+        "tools/test_play_publisher.py",
+        "tools/test_play_version_sync.py",
+        "tools/test_post_semantic_refresh_validation.py",
+        "tools/test_release_artifact_scope_checklist.py",
+        "tools/test_release_integration_contract.py",
+        "tools/test_release_upgrade_persistence_contract.py",
+        "tools/test_usage_access_launch_safety.py"
       ]
     },
     {
@@ -22,8 +43,9 @@
       "purpose": "targeted area fallback",
       "confidence": "medium",
       "files": [
-        "app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt",
-        "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt"
+        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt"
       ],
       "note": "Exact Gradle test filters are project-specific; inspect these test files first."
     }

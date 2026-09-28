@@ -1,21 +1,15 @@
 # Change impact
 
-Base: 7eebde5cd9c5e15f712a060f58d1e1357080cb5c
-Head: e36ea7d6bf43534ea20107685107f5b8f647c540
+Base: dee11357a91707300c8da00f085eaaed2816023e
+Head: 6e6fb25face012b13f385b60247322d690c004e9
 
 ## Changed files
-- M .github/workflows/android-ci.yml
-- A app/src/test/java/com/whoareyou/app/ActivityCollectorTest.kt
-- A app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt
-- A docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md
-- A docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md
-- A tools/test_release_ci_contract.py
-- A tools/test_release_integration_contract.py
+- M tools/play_promoter.py
+- M tools/play_publisher.py
+- M tools/test_play_publisher.py
+- A tools/test_play_version_sync.py
 
 ## Affected areas
-- .github
-- app
-- docs
 - tools
 
 ## Related test candidates
