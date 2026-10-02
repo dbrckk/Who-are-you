@@ -49,6 +49,24 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
+      - name: Resolve app version
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          source = Path("app/build.gradle.kts").read_text(encoding="utf-8")
+          version_name = re.search(r'versionName\s*=\s*"([^"]+)"', source)
+          version_code = re.search(r"versionCode\s*=\s*(\d+)", source)
+          assert version_name, "versionName not found"
+          assert version_code, "versionCode not found"
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env:
+              env.write(f"VERSION_NAME={version_name.group(1)}\n")
+              env.write(f"VERSION_CODE={version_code.group(1)}\n")
+          PY
+
       - name: Validate localized quiz catalogs
         run: |
           python - <<'PY'
@@ -121,7 +139,7 @@ jobs:
       - name: Upload debug APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-debug-${{ github.sha }}
+          name: who-are-you-debug-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}-${{ github.sha }}
           path: |
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/app-debug.apk.sha256
@@ -137,7 +155,7 @@ jobs:
       - name: Upload candidate APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-candidate-${{ github.sha }}
+          name: who-are-you-candidate-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}-${{ github.sha }}
           path: |
             app/build/outputs/apk/candidate/app-candidate.apk
             app/build/outputs/apk/candidate/app-candidate.apk.sha256
