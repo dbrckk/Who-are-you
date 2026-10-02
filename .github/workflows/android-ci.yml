@@ -49,6 +49,16 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
+      - name: Resolve release metadata
+        shell: bash
+        run: |
+          APP_VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
+          APP_VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
+          test -n "$APP_VERSION_NAME"
+          test -n "$APP_VERSION_CODE"
+          echo "APP_VERSION_NAME=$APP_VERSION_NAME" >> "$GITHUB_ENV"
+          echo "APP_VERSION_CODE=$APP_VERSION_CODE" >> "$GITHUB_ENV"
+
       - name: Validate localized quiz catalogs
         run: |
           python - <<'PY'
@@ -137,7 +147,7 @@ jobs:
       - name: Upload candidate APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-candidate-${{ github.sha }}
+          name: who-are-you-candidate-${{ env.APP_VERSION_NAME }}-${{ env.APP_VERSION_CODE }}-${{ github.sha }}
           path: |
             app/build/outputs/apk/candidate/app-candidate.apk
             app/build/outputs/apk/candidate/app-candidate.apk.sha256
