@@ -1,16 +1,15 @@
 {
-  "area": "tools",
+  "area": "app-build.gradle.kts",
   "files": [
     {
-      "path": "tools/test_release_metadata_contract.py",
+      "path": "app/build.gradle.kts",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
-        "selected-test",
         "symbol-indexed"
       ],
-      "score": 385
+      "score": 305
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

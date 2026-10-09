@@ -1,148 +1,7 @@
 {
   "files": [
     {
-      "path": "tools/play_publisher.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 525
-    },
-    {
-      "path": "tools/test_play_publisher.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 500
-    },
-    {
-      "path": "tools/test_release_integration_contract.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 470
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "reverse-dependency-neighbor",
-        "symbol-indexed"
-      ],
-      "score": 465
-    },
-    {
-      "path": "tools/test_release_upgrade_persistence_contract.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 455
-    },
-    {
-      "path": "tools/test_play_version_sync.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 445
-    },
-    {
-      "path": "tools/test_usage_access_launch_safety.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 440
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 430
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 415
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 405
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 390
-    },
-    {
-      "path": "tools/test_post_semantic_refresh_validation.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 390
-    },
-    {
-      "path": "tools/test_android_apk_provenance_versioning.py",
+      "path": "tools/test_release_metadata_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -153,130 +12,14 @@
       "score": 385
     },
     {
-      "path": "tools/test_gradle_action_alignment.py",
+      "path": "app/build.gradle.kts",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
-        "selected-test",
         "symbol-indexed"
       ],
-      "score": 380
-    },
-    {
-      "path": "tools/test_habits_release_smoke_checklist.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 380
-    },
-    {
-      "path": "tools/test_play_internal_telemetry_parity.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 380
-    },
-    {
-      "path": "tools/test_release_artifact_scope_checklist.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 380
-    },
-    {
-      "path": "tools/play_promoter.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "symbol-indexed"
-      ],
-      "score": 370
-    },
-    {
-      "path": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 365
-    },
-    {
-      "path": "tools/test_play_promoter.py",
-      "reasons": [
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 210
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 175
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 175
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 150
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 150
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
-      "reasons": [
-        "dependency-neighbor",
-        "reverse-dependency-neighbor"
-      ],
-      "score": 105
-    },
-    {
-      "path": ".github/scripts/android-device-validation.sh",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": ".github/workflows/android-apk.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
+      "score": 305
     },
     {
       "path": ".github/workflows/android-ci.yml",
@@ -286,32 +29,18 @@
       "score": 100
     },
     {
-      "path": ".github/workflows/apk-test.yml",
+      "path": "AGENTS.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": ".github/workflows/m59-device-validation.yml",
+      "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
-        "changed"
+        "entrypoint"
       ],
-      "score": 100
-    },
-    {
-      "path": ".github/workflows/play-internal-publish.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "app/src/candidate/AndroidManifest.xml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
+      "score": 40
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

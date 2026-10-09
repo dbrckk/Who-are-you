@@ -2,43 +2,27 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 4,
+    "example_count": 5,
     "rejected_count": 0,
     "terms": [
-      "90",
-      "dbrckk/m785-dynamic-play-version-contract",
-      "from",
-      "merge",
-      "pull",
-      "request"
+      "88-rule",
+      "adopt",
+      "agents",
+      "development",
+      "docs",
+      "pinned",
+      "standard"
     ],
     "test_count": 0,
-    "useful_count": 19
+    "useful_count": 2
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "Merge pull request #90 from dbrckk/m785-dynamic-play-version-contract",
+  "task": "docs(agents): adopt pinned 88-rule development standard",
   "tests_selected": [],
   "useful": [
-    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
-    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
-    "tools/play_promoter.py",
-    "tools/play_publisher.py",
-    "tools/test_android_apk_provenance_versioning.py",
-    "tools/test_gradle_action_alignment.py",
-    "tools/test_habits_release_smoke_checklist.py",
-    "tools/test_play_internal_telemetry_parity.py",
-    "tools/test_play_publisher.py",
-    "tools/test_play_version_sync.py",
-    "tools/test_post_semantic_refresh_validation.py",
-    "tools/test_release_artifact_scope_checklist.py",
-    "tools/test_release_integration_contract.py",
-    "tools/test_release_upgrade_persistence_contract.py",
-    "tools/test_usage_access_launch_safety.py"
+    "app/build.gradle.kts",
+    "tools/test_release_metadata_contract.py"
   ]
 }

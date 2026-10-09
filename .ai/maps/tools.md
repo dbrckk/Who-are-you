@@ -125,6 +125,7 @@ test_release_artifact_scope_checklist.py
 test_release_ci_contract.py
 test_release_critical_profile_contract.py
 test_release_integration_contract.py
+test_release_metadata_contract.py
 test_release_upgrade_persistence_contract.py
 test_release_workflows_contract.py
 test_rendering_performance_contract.py
@@ -2137,6 +2138,23 @@ def test_behavior_and_goal_stores_remain_separate(self)
 ⋮----
 behavior = self.read("BehaviorRepository.kt")
 goals = self.read("BehaviorGoalRepository.kt")
+```
+
+## File: test_release_metadata_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / "app/build.gradle.kts"
+CI = ROOT / ".github/workflows/android-ci.yml"
+⋮----
+class ReleaseMetadataContractTest(unittest.TestCase)
+⋮----
+def test_release_version_is_0_3_0_code_5(self)
+⋮----
+source = BUILD.read_text(encoding="utf-8")
+⋮----
+def test_candidate_artifact_includes_version_code_and_sha(self)
+⋮----
+source = CI.read_text(encoding="utf-8")
 ```
 
 ## File: test_release_upgrade_persistence_contract.py

@@ -2,18 +2,28 @@
   "generated_by": "dbrckk/repo-brain-v6",
   "packets": [
     {
+      "area": "agents.md",
+      "file_count": 1,
+      "path": ".ai/brain/context/agents.md.json"
+    },
+    {
+      "area": "app-build.gradle.kts",
+      "file_count": 1,
+      "path": ".ai/brain/context/app-build.gradle.kts.json"
+    },
+    {
       "area": "app-src",
-      "file_count": 12,
+      "file_count": 1,
       "path": ".ai/brain/context/app-src.json"
     },
     {
       "area": "github",
-      "file_count": 6,
+      "file_count": 1,
       "path": ".ai/brain/context/github.json"
     },
     {
       "area": "tools",
-      "file_count": 14,
+      "file_count": 1,
       "path": ".ai/brain/context/tools.json"
     }
   ],

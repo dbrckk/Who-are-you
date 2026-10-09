@@ -142,6 +142,24 @@
         "tools/test_release_upgrade_persistence_contract.py",
         "tools/test_usage_access_launch_safety.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "docs(agents): adopt pinned 88-rule development standard",
+      "terms": [
+        "88-rule",
+        "adopt",
+        "agents",
+        "development",
+        "docs",
+        "pinned",
+        "standard"
+      ],
+      "tests": [],
+      "useful": [
+        "app/build.gradle.kts",
+        "tools/test_release_metadata_contract.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -217,6 +235,10 @@
       "tools/test_release_ci_contract.py": 4,
       "tools/test_release_integration_contract.py": 4
     },
+    "88-rule": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
+    },
     "90": {
       "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": 4,
       "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": 4,
@@ -237,6 +259,14 @@
       "tools/test_release_integration_contract.py": 4,
       "tools/test_release_upgrade_persistence_contract.py": 4,
       "tools/test_usage_access_launch_safety.py": 4
+    },
+    "adopt": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
+    },
+    "agents": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
     },
     "dbrckk/m774-local-behavioral-insights": {
       "app/build.gradle.kts": 4,
@@ -328,6 +358,14 @@
       "tools/test_release_integration_contract.py": 4,
       "tools/test_release_upgrade_persistence_contract.py": 4,
       "tools/test_usage_access_launch_safety.py": 4
+    },
+    "development": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
+    },
+    "docs": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
     },
     "from": {
       "app/build.gradle.kts": 4,
@@ -461,6 +499,10 @@
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
+    "pinned": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
+    },
     "pull": {
       "app/build.gradle.kts": 4,
       "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt": 4,
@@ -592,6 +634,10 @@
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
+    },
+    "standard": {
+      "app/build.gradle.kts": 4,
+      "tools/test_release_metadata_contract.py": 4
     }
   },
   "term_test_scores": {}

@@ -1,16 +1,13 @@
 # Change impact
 
-Base: dee11357a91707300c8da00f085eaaed2816023e
-Head: 6e6fb25face012b13f385b60247322d690c004e9
+Base: b6216547a3b90b7756321b59bb8419c44d21232b
+Head: d31f1ba7547c050e9a678f87c2871897b58c8832
 
 ## Changed files
-- M tools/play_promoter.py
-- M tools/play_publisher.py
-- M tools/test_play_publisher.py
-- A tools/test_play_version_sync.py
+- M AGENTS.md
 
 ## Affected areas
-- tools
+- (root)
 
 ## Related test candidates
 - No direct filename-based test match detected.

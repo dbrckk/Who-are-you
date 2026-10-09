@@ -2615,6 +2615,11 @@
       "unittest",
       "xml.etree.ElementTree"
     ],
+    "tools/test_release_metadata_contract.py": [
+      "pathlib",
+      "re",
+      "unittest"
+    ],
     "tools/test_release_upgrade_persistence_contract.py": [
       "pathlib",
       "unittest"

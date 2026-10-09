@@ -1,16 +1,16 @@
 # Repo Brain
 
 - Index mode: incremental
-- Files indexed: 350
-- Files reparsed this run: 19
-- Symbols: 1651
+- Files indexed: 351
+- Files reparsed this run: 2
+- Symbols: 1654
 - Internal import edges: 11
-- Impacted files: 20
-- Selected tests: 15
+- Impacted files: 2
+- Selected tests: 1
 
 ## Languages
 - kotlin: 237 files
-- python: 113 files
+- python: 114 files
 
 ## Highest-density symbol files
 - app/src/main/java/com/whoareyou/app/AppEvents.kt: 39 symbols
@@ -43,10 +43,10 @@
 ## ast-grep enrichment
 - ast-grep outline: available
 - AST index mode: incremental
-- AST files reparsed this run: 19
-- outline files retained: 344
-- top-level items retained: 2957
-- direct members retained: 1407
+- AST files reparsed this run: 2
+- outline files retained: 345
+- top-level items retained: 2964
+- direct members retained: 1409
 - symbol shards: 26
 - route named symbols via ast-routing.json, then fetch one ast-symbols/<initial>.json shard
 

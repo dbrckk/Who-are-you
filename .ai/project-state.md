@@ -22,17 +22,20 @@ Status: active
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-09-28T06:11:03Z
+Generated: 2026-10-09T11:21:22Z
 
 ### Git
 - Branch: `main`
-- Head: `6e6fb25face0`
-- Commit date: 2026-09-28T08:10:34+02:00
-- Commit: Merge pull request #90 from dbrckk/m785-dynamic-play-version-contract
-- Tracked files: 687
+- Head: `d31f1ba7547c`
+- Commit date: 2026-10-09T13:20:58+02:00
+- Commit: docs(agents): adopt pinned 88-rule development standard
+- Tracked files: 691
 
 ### Recently changed files
-- No recent source-file changes detected
+- `AGENTS.md`
+- `.github/workflows/android-ci.yml`
+- `app/build.gradle.kts`
+- `tools/test_release_metadata_contract.py`
 
 ### Project signals
 - `build.gradle.kts`

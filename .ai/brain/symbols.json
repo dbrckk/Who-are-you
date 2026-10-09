@@ -10648,6 +10648,27 @@
       "line": 93
     },
     {
+      "file": "tools/test_release_metadata_contract.py",
+      "language": "python",
+      "kind": "class",
+      "name": "ReleaseMetadataContractTest",
+      "line": 10
+    },
+    {
+      "file": "tools/test_release_metadata_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_release_version_is_0_3_0_code_5",
+      "line": 11
+    },
+    {
+      "file": "tools/test_release_metadata_contract.py",
+      "language": "python",
+      "kind": "function",
+      "name": "test_candidate_artifact_includes_version_code_and_sha",
+      "line": 16
+    },
+    {
       "file": "tools/test_release_upgrade_persistence_contract.py",
       "language": "python",
       "kind": "class",

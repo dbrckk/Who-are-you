@@ -442,6 +442,7 @@ tools/
   test_release_ci_contract.py
   test_release_critical_profile_contract.py
   test_release_integration_contract.py
+  test_release_metadata_contract.py
   test_release_upgrade_persistence_contract.py
   test_release_workflows_contract.py
   test_rendering_performance_contract.py
@@ -1396,6 +1397,16 @@ jobs:
         with:
           gradle-version: '9.5.0'
 
+      - name: Resolve release metadata
+        shell: bash
+        run: |
+          APP_VERSION_NAME="$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -n1)"
+          APP_VERSION_CODE="$(sed -n 's/.*versionCode = \([0-9][0-9]*\).*/\1/p' app/build.gradle.kts | head -n1)"
+          test -n "$APP_VERSION_NAME"
+          test -n "$APP_VERSION_CODE"
+          echo "APP_VERSION_NAME=$APP_VERSION_NAME" >> "$GITHUB_ENV"
+          echo "APP_VERSION_CODE=$APP_VERSION_CODE" >> "$GITHUB_ENV"
+
       - name: Validate localized quiz catalogs
         run: |
           python - <<'PY'
@@ -1484,7 +1495,7 @@ jobs:
       - name: Upload candidate APK
         uses: actions/upload-artifact@v7
         with:
-          name: who-are-you-candidate-${{ github.sha }}
+          name: who-are-you-candidate-${{ env.APP_VERSION_NAME }}-${{ env.APP_VERSION_CODE }}-${{ github.sha }}
           path: |
             app/build/outputs/apk/candidate/app-candidate.apk
             app/build/outputs/apk/candidate/app-candidate.apk.sha256
@@ -38557,8 +38568,8 @@ android {
         applicationId = "com.whoareyou.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.2.2"
+        versionCode = 5
+        versionName = "0.3.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         fun escapedBuildConfig(value: String): String = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
@@ -41254,6 +41265,23 @@ behavior = self.read("BehaviorRepository.kt")
 goals = self.read("BehaviorGoalRepository.kt")
 ```
 
+## File: tools/test_release_metadata_contract.py
+```python
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / "app/build.gradle.kts"
+CI = ROOT / ".github/workflows/android-ci.yml"
+⋮----
+class ReleaseMetadataContractTest(unittest.TestCase)
+⋮----
+def test_release_version_is_0_3_0_code_5(self)
+⋮----
+source = BUILD.read_text(encoding="utf-8")
+⋮----
+def test_candidate_artifact_includes_version_code_and_sha(self)
+⋮----
+source = CI.read_text(encoding="utf-8")
+```
+
 ## File: tools/test_release_upgrade_persistence_contract.py
 ```python
 ROOT = Path(__file__).resolve().parents[1]
@@ -41875,6 +41903,15 @@ workflow:
 ```markdown
 # Repository agent instructions
 
+## Shared development policy — 88 validated rules (2026-10-09)
+
+The project adopts the [88-rule standard](https://github.com/dbrckk/repo-standards/blob/db2f86657ada74a0561e07189f9942d6b66ebb4a/standards/88-rules.md), the [operational agent skill](https://github.com/dbrckk/repo-standards/blob/db2f86657ada74a0561e07189f9942d6b66ebb4a/skills/repo-excellence-88/SKILL.md), and the [educational wiki](https://github.com/dbrckk/repo-standards/blob/db2f86657ada74a0561e07189f9942d6b66ebb4a/docs/WIKI-88.md). Read the relevant parts before substantial work and apply conditional rules only where appropriate.
+
+**Owner preference: do not create new unit tests.** Existing tests may be run for diagnostics; prioritize real functional and integration verification, lint, build, and reproducible checks. Never claim an unexecuted check passed.
+
+Preserve repository-specific constraints and authorized scope. The pinned policy commit above governs the 88 rules; `.repo-standards.yml` continues to configure existing repository intelligence and reusable workflows independently. Do not change workflow refs merely to adopt these rules.
+
+
 This repository adopts shared standards from `dbrckk/repo-standards` at the release recorded in `.repo-standards.yml`.
 
 Before substantial work:
@@ -41902,7 +41939,7 @@ Before substantial work:
 Repository-specific rules:
 - Preserve existing architecture and public interfaces unless the task requires a change.
 - Prefer the smallest coherent change.
-- Prefer targeted tests from `.ai/brain/selected-tests.json`; expand validation when impact is ambiguous or targeted tests fail.
+- Prefer targeted functional or integration checks; existing selected tests may be run as diagnostics, but do not create new unit tests. Expand validation when impact is ambiguous.
 - Treat hotset/context packets and graph shards as routing hints, not authoritative source.
 - Verify reference/dependency/impact/AST hits against authoritative source before editing.
 - Treat security signals and static graph edges as heuristics, not proof.
