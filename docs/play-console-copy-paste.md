@@ -18,7 +18,7 @@ Explore your personality patterns and build a visual self-reflection profile.
 
 **Release notes**
 
-Improved public-launch experience with clearer onboarding, resilient quiz/result persistence, better accessibility, localized privacy/support access, safer Google Play purchase states, local profile reset controls and healthier result/recommendation flows. Who Are You? is for entertainment and self-reflection, not diagnosis.
+New optional habit tracking, on-device trends and personal goals, with clearer quiz flows, improved accessibility and more reliable upgrades. Profile and habit information stays on the device; activity sources require explicit opt-in.
 
 ## Français (fr-FR)
 
@@ -28,7 +28,11 @@ Explore tes tendances et construis un profil visuel dédié à l’introspection
 
 **Notes de version**
 
-Expérience de lancement améliorée avec onboarding plus clair, sauvegarde des quiz/résultats plus robuste, meilleure accessibilité, accès localisé à la confidentialité et au support, états d’achat Google Play plus sûrs, réinitialisation du profil local et recommandations plus respectueuses. Who Are You? est destiné au divertissement et à la réflexion personnelle, pas au diagnostic.
+Nouveau suivi facultatif des habitudes, tendances consultables sur l'appareil et objectifs personnalisés. Parcours de quiz, accessibilité et stabilité des mises à jour améliorés. Les données de profil et d'habitudes restent locales ; les sources d'activité nécessitent une activation explicite.
+
+## Upgrade and rollout
+
+Follow [the safe Play update procedure](play-update-0.3.0.md) before publishing; confirm the current Play versionCode and upload signing certificate, and test an in-place update from Google Play.
 
 ## Full descriptions
 
