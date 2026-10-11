@@ -1,23 +1,28 @@
 # Project state
 
-Status: active
+Status: Play 0.3.0 update preparation — source integrated, publishing not verified.
 
 ## Working
-- Central repository standards are configured.
-- Compact AI context is generated through dbrckk/repo-standards.
+- App package: `com.whoareyou.app`; code version `0.3.0 (5)`.
+- Release upgrade persistence validated by M777 debug→minified candidate device flow; this is not Play-to-Play signature/install validation.
+- Latest substantive `main` validation: Android CI, M59, APK and M56 succeeded on `d31f1ba7547c050e9a678f87c2871897b58c8832` (9 October 2026).
+- Play Candidate signed workflow ran successfully historically (11 September 2026), but not for the 0.3.0 head.
 
-## Broken / blockers
-- None documented here yet.
+## Blockers / not verified
+- Google Play Console current highest accepted versionCode and original upload certificate are not accessible through this GitHub connector.
+- Signed `playRelease` AAB using the existing upload keystore has not been built/verified for 0.3.0 (5).
+- Play Internal receipt, actual Play-signed in-place upgrade, Vitals/pre-launch review and Production promotion are not verified.
+- Protected environment signing / AdMob / Play API credentials must be checked in GitHub environment settings; never copy them into repository or chat.
 
 ## Current priority
-- Restore task-specific state here when substantial work resumes.
+- Follow `docs/play-update-0.3.0.md`: verify Google Play app identity, highest versionCode and upload key; run protected Play Candidate; publish to Internal testing; validate actual in-place update without data loss; inspect Vitals and pre-launch; then promote staged Production with explicit confirmations.
 
 ## Validation
-- Standards workflow: configured.
-- Tests/build: use this repository's existing validation commands.
+- Existing CI suites on `main`: success on `d31f1ba7`.
+- Docs-only Play update handoff: not yet merged / PR CI pending.
 
 ## Last verified
-- 2026-09-18
+- 2026-10-11
 
 <!-- AUTO:START -->
 ## Automatic repository state
