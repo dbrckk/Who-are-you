@@ -1,28 +1,14 @@
 {
   "files": [
     {
-      "path": "tools/test_release_metadata_contract.py",
+      "path": "docs/play-console-copy-paste.md",
       "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
+        "changed"
       ],
-      "score": 385
+      "score": 100
     },
     {
-      "path": "app/build.gradle.kts",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 305
-    },
-    {
-      "path": ".github/workflows/android-ci.yml",
+      "path": "docs/play-update-0.3.0.md",
       "reasons": [
         "changed"
       ],
@@ -31,9 +17,23 @@
     {
       "path": "AGENTS.md",
       "reasons": [
-        "changed"
+        "recent-project-state"
       ],
-      "score": 100
+      "score": 60
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
+    },
+    {
+      "path": "tools/test_release_metadata_contract.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
     },
     {
       "path": "app/src/main/AndroidManifest.xml",

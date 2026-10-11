@@ -2,14 +2,14 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/superpowers/plans/2026-09-26-m776-release-integration-hardening.md",
+      "path": "docs/play-console-copy-paste.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": "docs/superpowers/specs/2026-09-26-m776-release-integration-hardening-design.md",
+      "path": "docs/play-update-0.3.0.md",
       "reasons": [
         "changed"
       ],

@@ -1,14 +1,14 @@
 # CI status
 
-Summary: 1 success / 3 failure / 4 active
+Summary: 2 success / 0 failure / 5 active
 
-- M56 Main Release Candidate: queued / pending (d31f1ba7)
-- Android APK: in_progress / pending (d31f1ba7)
-- Android CI: queued / pending (d31f1ba7)
-- M59 Android Device Validation: queued / pending (d31f1ba7)
-- Android APK: completed / success (b6216547)
-- M56 Main Release Candidate: completed / failure (b6216547)
-- Android CI: completed / failure (b6216547)
-- M59 Android Device Validation: completed / failure (b6216547)
+- M59 Android Device Validation: in_progress / pending (e1f67505)
+- Android APK: in_progress / pending (e1f67505)
+- Deploy GitHub Pages: queued / pending (e1f67505)
+- Android CI: in_progress / pending (e1f67505)
+- M56 Main Release Candidate: in_progress / pending (e1f67505)
+- Android CI: completed / cancelled (73a3c7f0)
+- M56 Main Release Candidate: completed / success (d31f1ba7)
+- Android APK: completed / success (d31f1ba7)
 
 > Generated summary only; inspect GitHub Actions for full logs when needed.

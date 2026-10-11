@@ -1,13 +1,14 @@
 # Change impact
 
-Base: b6216547a3b90b7756321b59bb8419c44d21232b
-Head: d31f1ba7547c050e9a678f87c2871897b58c8832
+Base: 9db8537c326dd37d57fb91ea16619b6a06037a69
+Head: e1f67505f72387bff7c49e89315ad39140967876
 
 ## Changed files
-- M AGENTS.md
+- M docs/play-console-copy-paste.md
+- A docs/play-update-0.3.0.md
 
 ## Affected areas
-- (root)
+- docs
 
 ## Related test candidates
 - No direct filename-based test match detected.

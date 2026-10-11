@@ -4,13 +4,9 @@
     {
       "path": "tools/test_release_metadata_contract.py",
       "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
+        "recent-project-state"
       ],
-      "score": 385
+      "score": 60
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

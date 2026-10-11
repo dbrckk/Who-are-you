@@ -4,12 +4,9 @@
     {
       "path": "app/build.gradle.kts",
       "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "symbol-indexed"
+        "recent-project-state"
       ],
-      "score": 305
+      "score": 60
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

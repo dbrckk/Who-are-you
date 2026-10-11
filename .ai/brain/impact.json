@@ -1,62 +1,21 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "6e6fb25face012b13f385b60247322d690c004e9",
-  "head": "d31f1ba7547c050e9a678f87c2871897b58c8832",
+  "base": "d31f1ba7547c050e9a678f87c2871897b58c8832",
+  "head": "e1f67505f72387bff7c49e89315ad39140967876",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": ".github/workflows/android-ci.yml",
+      "path": "docs/play-console-copy-paste.md",
       "status": "M"
     },
     {
-      "path": "AGENTS.md",
-      "status": "M"
-    },
-    {
-      "path": "app/build.gradle.kts",
-      "status": "M"
-    },
-    {
-      "path": "tools/test_release_metadata_contract.py",
+      "path": "docs/play-update-0.3.0.md",
       "status": "A"
     }
   ],
-  "changed_source_files": [
-    "app/build.gradle.kts",
-    "tools/test_release_metadata_contract.py"
-  ],
-  "impacted_files": [
-    "app/build.gradle.kts",
-    "tools/test_release_metadata_contract.py"
-  ],
-  "impacted_symbols": [
-    {
-      "name": "escapedBuildConfig",
-      "kind": "symbol",
-      "file": "app/build.gradle.kts",
-      "line": 65
-    },
-    {
-      "name": "ReleaseMetadataContractTest",
-      "kind": "class",
-      "file": "tools/test_release_metadata_contract.py",
-      "line": 10
-    },
-    {
-      "name": "test_release_version_is_0_3_0_code_5",
-      "kind": "function",
-      "file": "tools/test_release_metadata_contract.py",
-      "line": 11
-    },
-    {
-      "name": "test_candidate_artifact_includes_version_code_and_sha",
-      "kind": "function",
-      "file": "tools/test_release_metadata_contract.py",
-      "line": 16
-    }
-  ],
-  "selected_tests": [
-    "tools/test_release_metadata_contract.py"
-  ]
+  "changed_source_files": [],
+  "impacted_files": [],
+  "impacted_symbols": [],
+  "selected_tests": []
 }

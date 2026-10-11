@@ -1,28 +1,8 @@
 {
-  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": true,
-  "learning_result": {
-    "example_count": 5,
-    "rejected_count": 0,
-    "terms": [
-      "88-rule",
-      "adopt",
-      "agents",
-      "development",
-      "docs",
-      "pinned",
-      "standard"
-    ],
-    "test_count": 0,
-    "useful_count": 2
-  },
-  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
-  "rejected": [],
   "schema_version": 1,
-  "task": "docs(agents): adopt pinned 88-rule development standard",
-  "tests_selected": [],
-  "useful": [
-    "app/build.gradle.kts",
-    "tools/test_release_metadata_contract.py"
-  ]
+  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
+  "learned": false,
+  "reason": "missing-task-or-source-change",
+  "task": "Merge pull request #93 from dbrckk/release/play-0-3-0-upgrade-handoff",
+  "useful": []
 }

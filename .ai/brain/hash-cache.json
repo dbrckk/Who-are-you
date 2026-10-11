@@ -1,9 +1,5 @@
 {
   "files": {
-    ".github/workflows/android-ci.yml": {
-      "sha256": "80b7fac9f1dfd85dfb99cc67a496d355bc8253ee800aeca9ada15f14bc327811",
-      "size": 5862
-    },
     "AGENTS.md": {
       "sha256": "007e06bf4a1e8fe42368fc50922ec73df079831b0106725f9096346203088386",
       "size": 3826
@@ -15,6 +11,14 @@
     "app/src/main/AndroidManifest.xml": {
       "sha256": "6e322587ec1df9316dba3a3eeeb648fadd47ff7e641b607d07f6804b3fdafed2",
       "size": 2647
+    },
+    "docs/play-console-copy-paste.md": {
+      "sha256": "22d5e2c06255c7689e19dfbfa5b2b6f424c75e8dfc80c90507fd13748a82ec7f",
+      "size": 1924
+    },
+    "docs/play-update-0.3.0.md": {
+      "sha256": "53a10c4db925473f3a52254e83a24106b48b9a451ea5dba13d4501fd2453be78",
+      "size": 7024
     },
     "tools/test_release_metadata_contract.py": {
       "sha256": "d9047614df5c87e64806dffa76b64ed05faae7fe1aafe9206314fc33f072721d",
