@@ -129,6 +129,21 @@ jobs:
           print("Service-account JSON structure validated")
           PY
 
+      - name: Check existing Play version before upload
+        run: |
+          set -euo pipefail
+          python tools/play_existing_version_preflight.py \
+            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
+            --receipt play-existing-version-preflight.json
+
+      - name: Save Play version preflight evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-play-version-preflight-${{ github.run_id }}
+          path: play-existing-version-preflight.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Lint real Play release variant
         env:
           ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
@@ -186,6 +201,8 @@ jobs:
           fi
           PLAY_AAB="${bundles[0]}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
+          keytool -printcert -jarfile "$PLAY_AAB" | tee play-upload-certificate.txt
+          test -s play-upload-certificate.txt
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
           {
             echo "Native libraries packaged in the Play bundle:"
@@ -217,6 +234,8 @@ jobs:
             play-internal-upload.sha256
             play-internal-native-libraries.txt
             play-internal-bundle-budget.json
+            play-upload-certificate.txt
+            play-existing-version-preflight.json
             app/build/outputs/mapping/playRelease/mapping.txt
             play-internal-publish-result.json
           if-no-files-found: error
