@@ -12,7 +12,7 @@
 ## Avant tout upload : contrôler l'identité de la mise à jour
 
 1. Dans **la fiche existante** de l'application Play Console (ne pas créer une nouvelle application), confirmer le package `com.whoareyou.app`.
-2. Dans **App bundle explorer / versions déjà livrées**, relever le plus grand `versionCode` accepté sur toutes les pistes et vérifier qu'il est **strictement inférieur à 5**. Sinon, augmenter le versionCode puis reconstruire et revalider (ne pas réutiliser 5).
+2. Dans **App bundle explorer / versions déjà livrées**, vérifier la version existante. Le workflow **Play Internal Publish** contrôle maintenant automatiquement, par l'API Play, les APK/AAB et pistes existantes avant de construire : il bloque si le `versionCode` prévu (5) est déjà utilisé ou n'est pas supérieur au maximum. Si le contrôle bloque, augmenter ce code puis reconstruire et revalider — ne pas réutiliser un code accepté.
 3. Dans **Intégrité de l'application / Play App Signing**, confirmer que l'upload keystore fourni au workflow correspond au **certificat d'upload** enregistré. Ne pas générer un nouveau keystore pour remplacer l'ancien. Si la clé d'upload est perdue, suivre la procédure officielle de réinitialisation de la clé d'upload via Play Console.
 4. Confirmer que l'application installée à mettre à jour vient bien de **Google Play** et utilise la même identité de signature. Un APK Candidate/debug installé manuellement peut ne pas accepter la mise à jour Play par-dessus ; **ne pas désinstaller avant d'avoir protégé les données locales**.
 5. Contrôler les déclarations Play Console (Data safety, publicité, audience, politique de confidentialité), l'état de `remove_ads_lifetime`, la compatibilité des librairies natives et l'absence de blocage politique.
@@ -21,7 +21,7 @@
 
 Depuis [GitHub Actions — Play Candidate](https://github.com/dbrckk/Who-are-you/actions/workflows/play-candidate.yml) : choisir `main`, puis **Run workflow**, avec `telemetry_enabled=false` sauf décision spécifique de production.
 
-Le job `play-internal` exige les secrets protégés (AdMob production et **keystore d'upload existant**) et doit produire `who-are-you-play-candidate-0.3.0-5` contenant notamment l'AAB signé, `play-candidate.sha256`, l'inventaire des bibliothèques natives, le budget du bundle et `mapping.txt`.
+Le job `play-internal` exige les secrets protégés (AdMob production et **keystore d'upload existant**) et doit produire `who-are-you-play-candidate-0.3.0-5` contenant notamment l'AAB signé, `play-candidate.sha256`, `play-upload-certificate.txt` (certificat de signature de l'AAB à comparer avec le certificat d'upload de Play Console), l'inventaire des bibliothèques natives, le budget du bundle et `mapping.txt`.
 
 Vérifier : toutes les étapes vertes, `jarsigner` réussi, bundle non vide, budget accepté et empreinte de l'**upload certificate** compatible avec Play Console. Ne jamais envoyer les secrets dans un ticket, un chat ou un commit.
 
@@ -33,7 +33,7 @@ Depuis [GitHub Actions — Play Internal Publish](https://github.com/dbrckk/Who-
 - `release_status=completed` **uniquement une fois les prérequis confirmés** ; sinon `draft`
 - `telemetry_enabled=false` si aucun traitement externe n'a été validé
 
-Le workflow reconstruit `bundlePlayRelease` avec la clé d'upload, vérifie la signature et utilise l'API Google Play pour déposer `versionCode=5` sur la piste `qa` (Internal testing). Il doit laisser l'artefact `play-internal-publish-result.json` avec `committed=true` et `versionCode=5`.
+Le workflow commence par une vérification via l'API du package Google Play existant et du `versionCode` disponible, enregistrée dans `play-existing-version-preflight.json`, puis reconstruit `bundlePlayRelease` avec la clé d'upload, vérifie la signature et utilise l'API Google Play pour déposer `versionCode=5` sur la piste `qa` (Internal testing). Il doit laisser l'artefact `play-internal-publish-result.json` avec `committed=true` et `versionCode=5`.
 
 Si un prérequis externe ou secret manque, **ne pas tenter un contournement** : configurer l'environnement protégé `play-internal` puis relancer.
 
