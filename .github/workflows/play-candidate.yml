@@ -154,6 +154,8 @@ jobs:
           OUTPUT_AAB="who-are-you-play-${VERSION_NAME}-${VERSION_CODE}.aab"
           ARTIFACT_NAME="who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
+          keytool -printcert -jarfile "$PLAY_AAB" | tee play-upload-certificate.txt
+          test -s play-upload-certificate.txt
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
           {
             echo "Native libraries packaged in the Play candidate:"
@@ -174,6 +176,7 @@ jobs:
             play-candidate.sha256
             play-native-libraries.txt
             play-bundle-budget.json
+            play-upload-certificate.txt
             app/build/outputs/mapping/playRelease/mapping.txt
           if-no-files-found: error
           retention-days: 30
