@@ -97,6 +97,9 @@ jobs:
       - name: Python quality tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
+      - name: Compile Play API preflight helper
+        run: python -m py_compile tools/play_existing_version_preflight.py
+
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
 
