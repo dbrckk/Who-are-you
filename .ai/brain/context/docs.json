@@ -2,13 +2,6 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/play-console-copy-paste.md",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
       "path": "docs/play-update-0.3.0.md",
       "reasons": [
         "changed"

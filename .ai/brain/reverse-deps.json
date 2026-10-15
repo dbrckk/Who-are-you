@@ -420,6 +420,7 @@
         "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
         "tools/check_play_bundle_budget.py",
+        "tools/play_existing_version_preflight.py",
         "tools/play_preflight.py",
         "tools/play_promoter.py",
         "tools/play_publisher.py",
@@ -427,7 +428,7 @@
         "tools/test_play_publisher.py",
         "tools/validate_public_release_inputs.py"
       ],
-      "in_degree": 18,
+      "in_degree": 19,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt": {
@@ -3340,6 +3341,15 @@
       "in_degree": 1,
       "out_degree": 1
     },
+    "tools/play_existing_version_preflight.py": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+        "tools/play_publisher.py"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 2
+    },
     "tools/play_preflight.py": {
       "dependencies": [
         "app/src/main/java/com/whoareyou/app/AdManager.kt",
@@ -3367,12 +3377,13 @@
         "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt"
       ],
       "dependents": [
+        "tools/play_existing_version_preflight.py",
         "tools/play_promoter.py",
         "tools/test_play_promoter.py",
         "tools/test_play_publisher.py",
         "tools/test_play_version_sync.py"
       ],
-      "in_degree": 4,
+      "in_degree": 5,
       "out_degree": 1
     },
     "tools/prepare_play_submission.py": {

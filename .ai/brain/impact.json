@@ -1,21 +1,62 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "d31f1ba7547c050e9a678f87c2871897b58c8832",
-  "head": "e1f67505f72387bff7c49e89315ad39140967876",
+  "base": "e1f67505f72387bff7c49e89315ad39140967876",
+  "head": "8472f2a6a145b7bc8194ee3de370adefdcfbca02",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "docs/play-console-copy-paste.md",
+      "path": ".github/workflows/android-ci.yml",
+      "status": "M"
+    },
+    {
+      "path": ".github/workflows/play-candidate.yml",
+      "status": "M"
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
       "status": "M"
     },
     {
       "path": "docs/play-update-0.3.0.md",
+      "status": "M"
+    },
+    {
+      "path": "tools/play_existing_version_preflight.py",
       "status": "A"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
+  "changed_source_files": [
+    "tools/play_existing_version_preflight.py"
+  ],
+  "impacted_files": [
+    "tools/play_existing_version_preflight.py"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "_version_code",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 25
+    },
+    {
+      "name": "inspect_play_versions",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 35
+    },
+    {
+      "name": "preflight",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 71
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 107
+    }
+  ],
   "selected_tests": []
 }

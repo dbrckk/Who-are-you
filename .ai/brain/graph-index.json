@@ -4,6 +4,7 @@
     "baseline-profile",
     "github",
     "tools-check-play-bundle-budget.py",
+    "tools-play-existing-version-preflight.py",
     "tools-play-preflight.py",
     "tools-play-promoter.py",
     "tools-play-publisher.py",
@@ -714,6 +715,7 @@
         "app/src/test/java/com/whoareyou/app/AppUsageCollectorTest.kt",
         "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
         "tools/check_play_bundle_budget.py",
+        "tools/play_existing_version_preflight.py",
         "tools/play_preflight.py",
         "tools/play_promoter.py",
         "tools/play_publisher.py",
@@ -721,7 +723,7 @@
         "tools/test_play_publisher.py",
         "tools/validate_public_release_inputs.py"
       ],
-      "in_degree": 18,
+      "in_degree": 19,
       "out_degree": 3,
       "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt"
     },
@@ -1737,8 +1739,8 @@
       "path": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt"
     }
   ],
-  "edge_count": 917,
+  "edge_count": 919,
   "generated_by": "dbrckk/repo-brain-v7-graph",
-  "node_count": 295,
+  "node_count": 296,
   "schema_version": 1
 }

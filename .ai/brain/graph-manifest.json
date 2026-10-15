@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 901,
+      "edge_count": 902,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -23,6 +23,11 @@
       "path": ".ai/brain/graph-shards/tools-check-play-bundle-budget.py.json"
     },
     {
+      "area": "tools-play-existing-version-preflight.py",
+      "edge_count": 2,
+      "path": ".ai/brain/graph-shards/tools-play-existing-version-preflight.py.json"
+    },
+    {
       "area": "tools-play-preflight.py",
       "edge_count": 5,
       "path": ".ai/brain/graph-shards/tools-play-preflight.py.json"
@@ -34,7 +39,7 @@
     },
     {
       "area": "tools-play-publisher.py",
-      "edge_count": 8,
+      "edge_count": 9,
       "path": ".ai/brain/graph-shards/tools-play-publisher.py.json"
     },
     {

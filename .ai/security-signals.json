@@ -20,14 +20,14 @@
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 141,
+      "line": 156,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 155,
+      "line": 170,
       "context": "source",
       "severity": "medium"
     },

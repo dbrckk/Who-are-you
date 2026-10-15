@@ -11,6 +11,11 @@
       "type": "imports"
     },
     {
+      "source": "tools/play_existing_version_preflight.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    },
+    {
       "source": "tools/play_preflight.py",
       "target": "tools/validate_public_release_inputs.py",
       "type": "imports"
@@ -4142,6 +4147,11 @@
     },
     {
       "source": "tools/check_play_bundle_budget.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_existing_version_preflight.py",
       "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
       "type": "symbol-reference"
     },

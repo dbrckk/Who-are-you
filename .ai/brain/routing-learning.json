@@ -160,6 +160,22 @@
         "app/build.gradle.kts",
         "tools/test_release_metadata_contract.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "Merge pull request #94 from dbrckk/m787-play-inplace-upgrade-preflight",
+      "terms": [
+        "94",
+        "dbrckk/m787-play-inplace-upgrade-preflight",
+        "from",
+        "merge",
+        "pull",
+        "request"
+      ],
+      "tests": [],
+      "useful": [
+        "tools/play_existing_version_preflight.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -260,6 +276,9 @@
       "tools/test_release_upgrade_persistence_contract.py": 4,
       "tools/test_usage_access_launch_safety.py": 4
     },
+    "94": {
+      "tools/play_existing_version_preflight.py": 4
+    },
     "adopt": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -359,6 +378,9 @@
       "tools/test_release_upgrade_persistence_contract.py": 4,
       "tools/test_usage_access_launch_safety.py": 4
     },
+    "dbrckk/m787-play-inplace-upgrade-preflight": {
+      "tools/play_existing_version_preflight.py": 4
+    },
     "development": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -423,6 +445,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/play_existing_version_preflight.py": 4,
       "tools/play_promoter.py": 4,
       "tools/play_publisher.py": 4,
       "tools/test_android_apk_provenance_versioning.py": 4,
@@ -430,7 +453,6 @@
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
-      "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
     "merge": {
@@ -489,6 +511,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/play_existing_version_preflight.py": 4,
       "tools/play_promoter.py": 4,
       "tools/play_publisher.py": 4,
       "tools/test_android_apk_provenance_versioning.py": 4,
@@ -496,7 +519,6 @@
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
-      "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
     "pinned": {
@@ -559,6 +581,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/play_existing_version_preflight.py": 4,
       "tools/play_promoter.py": 4,
       "tools/play_publisher.py": 4,
       "tools/test_android_apk_provenance_versioning.py": 4,
@@ -566,7 +589,6 @@
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
-      "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
     "request": {
@@ -625,6 +647,7 @@
       "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt": 4,
       "app/src/test/java/com/whoareyou/app/ReleaseCompatibilityCodecTest.kt": 4,
+      "tools/play_existing_version_preflight.py": 4,
       "tools/play_promoter.py": 4,
       "tools/play_publisher.py": 4,
       "tools/test_android_apk_provenance_versioning.py": 4,
@@ -632,7 +655,6 @@
       "tools/test_behavior_goal_copy_contract.py": 4,
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
-      "tools/test_behavior_goal_v1_scope_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
     "standard": {

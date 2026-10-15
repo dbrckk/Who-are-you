@@ -7,6 +7,20 @@
         "changed"
       ],
       "score": 100
+    },
+    {
+      "path": ".github/workflows/play-candidate.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

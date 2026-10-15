@@ -4,9 +4,9 @@
   "portable_index": true,
   "ast_grep_outline": true,
   "ast_index_mode": "incremental",
-  "ast_reparsed_files": 0,
-  "ast_grep_outline_files": 345,
-  "ast_grep_outline_items": 2964,
+  "ast_reparsed_files": 1,
+  "ast_grep_outline_files": 346,
+  "ast_grep_outline_items": 2972,
   "ast_grep_member_items": 1409,
   "ast_symbol_shards": 26,
   "ast_file_outline_shards": 3

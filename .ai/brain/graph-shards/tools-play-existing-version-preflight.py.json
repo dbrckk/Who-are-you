@@ -1,0 +1,16 @@
+{
+  "area": "tools-play-existing-version-preflight.py",
+  "edges": [
+    {
+      "source": "tools/play_existing_version_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/play_existing_version_preflight.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    }
+  ],
+  "schema_version": 1
+}

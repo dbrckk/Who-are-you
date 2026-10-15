@@ -356,6 +356,7 @@ docs/
   public-release-inputs.template.json
 tools/
   check_play_bundle_budget.py
+  play_existing_version_preflight.py
   play_preflight.py
   play_promoter.py
   play_publisher.py
@@ -1445,6 +1446,9 @@ jobs:
       - name: Python quality tests
         run: PYTHONPATH=tools python -m unittest discover -s tools -p 'test_*.py'
 
+      - name: Compile Play API preflight helper
+        run: python -m py_compile tools/play_existing_version_preflight.py
+
       - name: JVM unit tests
         run: gradle :app:testDebugUnitTest --stacktrace
 
@@ -2074,6 +2078,8 @@ jobs:
           OUTPUT_AAB="who-are-you-play-${VERSION_NAME}-${VERSION_CODE}.aab"
           ARTIFACT_NAME="who-are-you-play-candidate-${VERSION_NAME}-${VERSION_CODE}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
+          keytool -printcert -jarfile "$PLAY_AAB" | tee play-upload-certificate.txt
+          test -s play-upload-certificate.txt
           sha256sum "$PLAY_AAB" | tee play-candidate.sha256
           {
             echo "Native libraries packaged in the Play candidate:"
@@ -2094,6 +2100,7 @@ jobs:
             play-candidate.sha256
             play-native-libraries.txt
             play-bundle-budget.json
+            play-upload-certificate.txt
             app/build/outputs/mapping/playRelease/mapping.txt
           if-no-files-found: error
           retention-days: 30
@@ -2236,6 +2243,21 @@ jobs:
           print("Service-account JSON structure validated")
           PY
 
+      - name: Check existing Play version before upload
+        run: |
+          set -euo pipefail
+          python tools/play_existing_version_preflight.py \
+            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
+            --receipt play-existing-version-preflight.json
+
+      - name: Save Play version preflight evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-play-version-preflight-${{ github.run_id }}
+          path: play-existing-version-preflight.json
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Lint real Play release variant
         env:
           ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
@@ -2293,6 +2315,8 @@ jobs:
           fi
           PLAY_AAB="${bundles[0]}"
           jarsigner -verify -verbose -certs "$PLAY_AAB"
+          keytool -printcert -jarfile "$PLAY_AAB" | tee play-upload-certificate.txt
+          test -s play-upload-certificate.txt
           sha256sum "$PLAY_AAB" | tee play-internal-upload.sha256
           {
             echo "Native libraries packaged in the Play bundle:"
@@ -2324,6 +2348,8 @@ jobs:
             play-internal-upload.sha256
             play-internal-native-libraries.txt
             play-internal-bundle-budget.json
+            play-upload-certificate.txt
+            play-existing-version-preflight.json
             app/build/outputs/mapping/playRelease/mapping.txt
             play-internal-publish-result.json
           if-no-files-found: error
@@ -39304,6 +39330,63 @@ args = parser.parse_args()
 report = inspect_bundle(args.bundle)
 ⋮----
 rendered = json.dumps(report, indent=2, sort_keys=True)
+```
+
+## File: tools/play_existing_version_preflight.py
+```python
+#!/usr/bin/env python3
+"""Fail-closed Play version preflight for an in-place app update.
+
+This creates an uncommitted Play edit, reads the app's existing APK, AAB and
+track version codes, then discards that edit. It never uploads or publishes.
+"""
+⋮----
+def _version_code(value: object, source: str) -> int
+⋮----
+code = int(value)
+⋮----
+def inspect_play_versions(session, edit_id: str) -> dict
+⋮----
+"""List previously uploaded versions across APKs, bundles and all tracks."""
+known: set[int] = set()
+tracks: list[dict] = []
+⋮----
+response = session.get(endpoint(PACKAGE_NAME, edit_id, resource), timeout=60)
+⋮----
+payload = response.json()
+entries = payload.get(field, [])
+⋮----
+response = session.get(endpoint(PACKAGE_NAME, edit_id, "tracks"), timeout=60)
+⋮----
+entries = payload.get("tracks", [])
+⋮----
+active_codes: set[int] = set()
+⋮----
+def preflight(credentials: pathlib.Path) -> dict
+⋮----
+session = _authorized_session(credentials)
+edit_response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
+⋮----
+edit_id = edit_response.json()["id"]
+⋮----
+state = inspect_play_versions(session, edit_id)
+⋮----
+# Do not commit a preflight edit. It expires automatically if deletion fails.
+⋮----
+deleted = session.delete(f"{API_ROOT}/{PACKAGE_NAME}/edits/{edit_id}", timeout=30)
+⋮----
+previous = state["existingVersionCodes"]
+highest = max(previous, default=0)
+⋮----
+def main(argv: list[str] | None = None) -> int
+⋮----
+parser = argparse.ArgumentParser(description="Check the existing Play app before uploading an update.")
+⋮----
+args = parser.parse_args(argv)
+⋮----
+report = preflight(args.credentials)
+⋮----
+data = json.dumps(report, indent=2, sort_keys=True) + "\n"
 ```
 
 ## File: tools/play_preflight.py

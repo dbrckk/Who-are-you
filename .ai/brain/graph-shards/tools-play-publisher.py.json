@@ -2,6 +2,11 @@
   "area": "tools-play-publisher.py",
   "edges": [
     {
+      "source": "tools/play_existing_version_preflight.py",
+      "target": "tools/play_publisher.py",
+      "type": "imports"
+    },
+    {
       "source": "tools/play_promoter.py",
       "target": "tools/play_publisher.py",
       "type": "imports"

@@ -1,14 +1,19 @@
 # Change impact
 
-Base: 9db8537c326dd37d57fb91ea16619b6a06037a69
-Head: e1f67505f72387bff7c49e89315ad39140967876
+Base: cbcfb94e6d090f4f74dec9ec6d9f296663a81e97
+Head: 8472f2a6a145b7bc8194ee3de370adefdcfbca02
 
 ## Changed files
-- M docs/play-console-copy-paste.md
-- A docs/play-update-0.3.0.md
+- M .github/workflows/android-ci.yml
+- M .github/workflows/play-candidate.yml
+- M .github/workflows/play-internal-publish.yml
+- M docs/play-update-0.3.0.md
+- A tools/play_existing_version_preflight.py
 
 ## Affected areas
+- .github
 - docs
+- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

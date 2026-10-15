@@ -39,6 +39,7 @@ The content is organized as follows:
 # Directory Structure
 ```
 check_play_bundle_budget.py
+play_existing_version_preflight.py
 play_preflight.py
 play_promoter.py
 play_publisher.py
@@ -179,6 +180,63 @@ args = parser.parse_args()
 report = inspect_bundle(args.bundle)
 ⋮----
 rendered = json.dumps(report, indent=2, sort_keys=True)
+```
+
+## File: play_existing_version_preflight.py
+```python
+#!/usr/bin/env python3
+"""Fail-closed Play version preflight for an in-place app update.
+
+This creates an uncommitted Play edit, reads the app's existing APK, AAB and
+track version codes, then discards that edit. It never uploads or publishes.
+"""
+⋮----
+def _version_code(value: object, source: str) -> int
+⋮----
+code = int(value)
+⋮----
+def inspect_play_versions(session, edit_id: str) -> dict
+⋮----
+"""List previously uploaded versions across APKs, bundles and all tracks."""
+known: set[int] = set()
+tracks: list[dict] = []
+⋮----
+response = session.get(endpoint(PACKAGE_NAME, edit_id, resource), timeout=60)
+⋮----
+payload = response.json()
+entries = payload.get(field, [])
+⋮----
+response = session.get(endpoint(PACKAGE_NAME, edit_id, "tracks"), timeout=60)
+⋮----
+entries = payload.get("tracks", [])
+⋮----
+active_codes: set[int] = set()
+⋮----
+def preflight(credentials: pathlib.Path) -> dict
+⋮----
+session = _authorized_session(credentials)
+edit_response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
+⋮----
+edit_id = edit_response.json()["id"]
+⋮----
+state = inspect_play_versions(session, edit_id)
+⋮----
+# Do not commit a preflight edit. It expires automatically if deletion fails.
+⋮----
+deleted = session.delete(f"{API_ROOT}/{PACKAGE_NAME}/edits/{edit_id}", timeout=30)
+⋮----
+previous = state["existingVersionCodes"]
+highest = max(previous, default=0)
+⋮----
+def main(argv: list[str] | None = None) -> int
+⋮----
+parser = argparse.ArgumentParser(description="Check the existing Play app before uploading an update.")
+⋮----
+args = parser.parse_args(argv)
+⋮----
+report = preflight(args.credentials)
+⋮----
+data = json.dumps(report, indent=2, sort_keys=True) + "\n"
 ```
 
 ## File: play_preflight.py

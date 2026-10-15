@@ -2219,6 +2219,14 @@
       "pathlib",
       "zipfile"
     ],
+    "tools/play_existing_version_preflight.py": [
+      "__future__",
+      "argparse",
+      "json",
+      "pathlib",
+      "play_publisher",
+      "sys"
+    ],
     "tools/play_preflight.py": [
       "argparse",
       "json",

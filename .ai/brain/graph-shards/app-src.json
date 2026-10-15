@@ -3677,6 +3677,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "tools/play_existing_version_preflight.py",
+      "target": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "tools/play_preflight.py",
       "target": "app/src/main/java/com/whoareyou/app/AdManager.kt",
       "type": "symbol-reference"

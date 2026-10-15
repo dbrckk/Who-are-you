@@ -30,21 +30,21 @@ Status: Play 0.3.0 update preparation — source integrated, publishing not veri
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-11T17:27:25Z
+Generated: 2026-10-15T14:01:58Z
 
 ### Git
 - Branch: `main`
-- Head: `e1f67505f723`
-- Commit date: 2026-10-11T19:25:17+02:00
-- Commit: Merge pull request #93 from dbrckk/release/play-0-3-0-upgrade-handoff
-- Tracked files: 693
+- Head: `8472f2a6a145`
+- Commit date: 2026-10-15T16:01:45+02:00
+- Commit: Merge pull request #94 from dbrckk/m787-play-inplace-upgrade-preflight
+- Tracked files: 694
 
 ### Recently changed files
-- `docs/play-console-copy-paste.md`
-- `docs/play-update-0.3.0.md`
-- `AGENTS.md`
 - `.github/workflows/android-ci.yml`
-- `app/build.gradle.kts`
+- `docs/play-update-0.3.0.md`
+- `.github/workflows/play-candidate.yml`
+- `.github/workflows/play-internal-publish.yml`
+- `tools/play_existing_version_preflight.py`
 
 ### Project signals
 - `build.gradle.kts`

@@ -1,7 +1,31 @@
 {
   "files": [
     {
-      "path": "docs/play-console-copy-paste.md",
+      "path": "tools/play_existing_version_preflight.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 320
+    },
+    {
+      "path": ".github/workflows/android-ci.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-candidate.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
       "reasons": [
         "changed"
       ],
@@ -29,18 +53,25 @@
       "score": 60
     },
     {
-      "path": "tools/test_release_metadata_contract.py",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
         "entrypoint"
       ],
       "score": 40
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

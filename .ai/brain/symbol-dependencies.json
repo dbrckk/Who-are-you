@@ -4,5 +4,117 @@
   "scope": "symbols defined in changed source files",
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
-  "symbols": {}
+  "symbols": {
+    "_version_code": {
+      "source": {
+        "file": "tools/play_existing_version_preflight.py",
+        "start": 25,
+        "end": 32
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "inspect_play_versions": {
+      "source": {
+        "file": "tools/play_existing_version_preflight.py",
+        "start": 35,
+        "end": 68
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "_version_code",
+          "definitions": [
+            {
+              "file": "tools/play_existing_version_preflight.py",
+              "line": 25,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 2
+    },
+    "preflight": {
+      "source": {
+        "file": "tools/play_existing_version_preflight.py",
+        "start": 71,
+        "end": 104
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "_authorized_session",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 115,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "inspect_play_versions",
+          "definitions": [
+            {
+              "file": "tools/play_existing_version_preflight.py",
+              "line": 35,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 3
+    },
+    "main": {
+      "source": {
+        "file": "tools/play_existing_version_preflight.py",
+        "start": 107,
+        "end": 121
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "preflight",
+          "definitions": [
+            {
+              "file": "tools/play_existing_version_preflight.py",
+              "line": 71,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 1
+    }
+  }
 }
