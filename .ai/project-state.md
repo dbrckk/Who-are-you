@@ -15,14 +15,17 @@ Status: Play 0.3.0 update preparation — source integrated, publishing not veri
 - Protected environment signing / AdMob / Play API credentials must be checked in GitHub environment settings; never copy them into repository or chat.
 
 ## Current priority
-- Follow `docs/play-update-0.3.0.md`: verify Google Play app identity, highest versionCode and upload key; run protected Play Candidate; publish to Internal testing; validate actual in-place update without data loss; inspect Vitals and pre-launch; then promote staged Production with explicit confirmations.
+- M787 adds a read-only-version Play API preflight to the protected Internal publishing workflow. The workflow must be manually dispatched; its execution, credentials and Play-side result remain unverified. It checks the package, APK/AAB/track version codes and blocks a reused/obsolete code before upload.
+- Run Play Candidate for version 0.3.0 (5); compare `play-upload-certificate.txt` against the existing Play upload certificate. Then publish to Internal, inspect the preflight receipt, validate a real Play-to-Play upgrade without removing local data, review Vitals/pre-launch and only then promote Production.
+- If the existing Play versionCode is >= 5, bump the Android versionCode first and revalidate (never change package name or generate a replacement upload keystore).
 
 ## Validation
 - Existing CI suites on `main`: success on `d31f1ba7`.
-- Docs-only Play update handoff: not yet merged / PR CI pending.
+- Play update handoff PR #93 merged; Android CI/M59 success at `cbcfb94e6d090f4f74dec9ec6d9f296663a81e97` (12 October 2026).
+- Play remote version preflight and certificate evidence: implementation in release branch, validation not yet observed.
 
 ## Last verified
-- 2026-10-11
+- 2026-10-15
 
 <!-- AUTO:START -->
 ## Automatic repository state
