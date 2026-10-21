@@ -129,6 +129,15 @@ jobs:
           print("Service-account JSON structure validated")
           PY
 
+      - name: Verify existing Play upload key password
+        id: upload_key
+        env:
+          UPLOAD_KEYSTORE_PATH: ${{ runner.temp }}/who-are-you-upload.jks
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD }}
+        run: bash tools/verify_play_upload_key.sh
+
       - name: Check existing Play version before upload
         run: |
           set -euo pipefail
@@ -154,6 +163,9 @@ jobs:
         run: |
           set -euo pipefail
           UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
+          if [ "${{ steps.upload_key.outputs.source }}" = "store" ]; then
+            UPLOAD_KEY_PASSWORD="$UPLOAD_KEYSTORE_PASSWORD"
+          fi
           gradle :app:lintPlayRelease             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"             "-PWHO_ARE_YOU_ADMOB_INTERSTITIAL_ID=$ADMOB_INTERSTITIAL_ID"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PATH=$RUNNER_TEMP/who-are-you-upload.jks"             "-PWHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD=$UPLOAD_KEYSTORE_PASSWORD"             "-PWHO_ARE_YOU_UPLOAD_KEY_ALIAS=$UPLOAD_KEY_ALIAS"             "-PWHO_ARE_YOU_UPLOAD_KEY_PASSWORD=$UPLOAD_KEY_PASSWORD"             --stacktrace
 
       - name: Build signed production Play bundle
@@ -168,6 +180,9 @@ jobs:
         run: |
           set -euo pipefail
           UPLOAD_KEY_PASSWORD="${UPLOAD_KEY_PASSWORD:-$UPLOAD_KEYSTORE_PASSWORD}"
+          if [ "${{ steps.upload_key.outputs.source }}" = "store" ]; then
+            UPLOAD_KEY_PASSWORD="$UPLOAD_KEYSTORE_PASSWORD"
+          fi
           args=(
             :app:bundlePlayRelease
             "-PWHO_ARE_YOU_ADMOB_APP_ID=$ADMOB_APP_ID"
