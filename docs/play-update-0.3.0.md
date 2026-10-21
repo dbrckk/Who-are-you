@@ -21,6 +21,8 @@
 
 Depuis [GitHub Actions — Play Candidate](https://github.com/dbrckk/Who-are-you/actions/workflows/play-candidate.yml) : choisir `main`, puis **Run workflow**, avec `telemetry_enabled=false` sauf décision spécifique de production.
 
+**Déclenchement traçable sans interface Actions :** après validation du code, ajouter sur `main` un fichier Markdown inédit sous `.github/play-candidate-requests/` (par exemple `2026-10-21-0.3.0-5.md`). Ce changement déclenche **uniquement** le workflow `Play Candidate` via un filtre `push` sur `main`. Il prépare et conserve l'AAB signé comme artefact GitHub : **aucun appel à l'API Google Play, aucune installation et aucune publication**. Le mode `telemetry_enabled` reste désactivé lors de ce déclenchement. Chaque demande doit utiliser un nouveau nom de fichier, identifier la version visée et ne jamais contenir de secrets.
+
 Le job `play-internal` exige les secrets protégés (AdMob production et **keystore d'upload existant**) et doit produire `who-are-you-play-candidate-0.3.0-5` contenant notamment l'AAB signé, `play-candidate.sha256`, `play-upload-certificate.txt` (certificat de signature de l'AAB à comparer avec le certificat d'upload de Play Console), l'inventaire des bibliothèques natives, le budget du bundle et `mapping.txt`.
 
 Vérifier : toutes les étapes vertes, `jarsigner` réussi, bundle non vide, budget accepté et empreinte de l'**upload certificate** compatible avec Play Console. Ne jamais envoyer les secrets dans un ticket, un chat ou un commit.
