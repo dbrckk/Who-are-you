@@ -25,6 +25,8 @@ Le job `play-internal` exige les secrets protégés (AdMob production et **keyst
 
 Vérifier : toutes les étapes vertes, `jarsigner` réussi, bundle non vide, budget accepté et empreinte de l'**upload certificate** compatible avec Play Console. Ne jamais envoyer les secrets dans un ticket, un chat ou un commit.
 
+**Contrôle du mot de passe de signature :** le lancement [Play Candidate du 21 octobre 2026](https://github.com/dbrckk/Who-are-you/actions/runs/39680459218) a réussi les tests et le lint, puis échoué à `:app:signPlayReleaseBundle` lors du déchiffrement de la clé privée. Une vérification `keytool -certreq` teste désormais sans exporter la clé ni afficher les secrets d'abord `WHO_ARE_YOU_UPLOAD_KEY_PASSWORD` s'il est renseigné, puis le mot de passe existant du keystore. Seul le mot de passe qui déchiffre réellement **la clé existante** est utilisé ; si aucun ne fonctionne, le workflow s'arrête. Le dernier candidat signé avec succès, le 11 septembre 2026, utilisait le mot de passe du keystore comme mot de passe de clé. Ce contrôle **ne prouve pas** que le certificat correspond à Google Play : comparer impérativement `play-upload-certificate.txt` avec le certificat d'upload de l'application existante. Ne jamais remplacer la clé d'upload par une nouvelle clé sans la procédure Play officielle.
+
 ## 2. Publier sur Internal testing
 
 Depuis [GitHub Actions — Play Internal Publish](https://github.com/dbrckk/Who-are-you/actions/workflows/play-internal-publish.yml), sur `main` :
