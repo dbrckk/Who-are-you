@@ -5,29 +5,29 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 ## Working
 - App package: `com.whoareyou.app`; code version `0.3.0 (5)`.
 - Release upgrade persistence validated by M777 debug→minified candidate device flow; this is not Play-to-Play signature/install validation.
-- Latest substantive `main` validation: Android CI, M59, APK and M56 succeeded on `d31f1ba7547c050e9a678f87c2871897b58c8832` (9 October 2026).
+- Latest substantive `main` validation: Android CI, M59, APK and M56 succeeded on `7f9ef430d31076e9b1b7682ffd5bde905fdb11b3` (21 October 2026).
 - Play Candidate signed workflow ran successfully historically (11 September 2026), but not for the 0.3.0 head.
 - On 21 October 2026, Play Candidate run [39590175005](https://github.com/dbrckk/Who-are-you/actions/runs/39590175005) failed at the benchmark Gradle task selector before secrets/signing; Python quality tests, JVM tests, and instrumentation-test compilation passed. Both Play workflows now specify `:baseline-profile:assembleBenchmarkRelease`, matching the successful Android CI task.
-- On 21 October 2026, fresh manually dispatched [Play Candidate run 39680459218](https://github.com/dbrckk/Who-are-you/actions/runs/39680459218) passed Python/JVM/instrumentation compilations, benchmarks, Android lint, protected secrets, upload-keystore materialization and Play release lint; `:app:signPlayReleaseBundle` failed to decrypt the private key using the configured separate upload-key password. Historically successful September workflow used the upload-keystore password as the key password. A guarded `keytool -certreq` preflight now selects only a credential that proves the **existing** private key can sign, or fails without exporting the key; this update has not yet been rerun on GitHub.
+- On 21 October 2026, fresh manually dispatched [Play Candidate run 39680459218](https://github.com/dbrckk/Who-are-you/actions/runs/39680459218) passed Python/JVM/instrumentation compilations, benchmarks, Android lint, protected secrets, upload-keystore materialization and Play release lint; `:app:signPlayReleaseBundle` failed to decrypt the private key using the configured separate upload-key password. Historically successful September workflow used the upload-keystore password as the key password. The initial `keytool -certreq` preflight cannot prove the PKCS12 key password: [run 39684065842](https://github.com/dbrckk/Who-are-you/actions/runs/39684065842) reported source `explicit` but failed to decrypt the key at `:app:signPlayReleaseBundle`. The new patch verifies actual private-key signing with disposable `jarsigner` output and rejects invalid candidates before Gradle.
 
 ## Blockers / not verified
 - Google Play Console current highest accepted versionCode and original upload certificate are not accessible through this GitHub connector.
 - Signed `playRelease` AAB using the existing upload keystore has not been built/verified for 0.3.0 (5).
 - Play Internal receipt, actual Play-signed in-place upgrade, Vitals/pre-launch review and Production promotion are not verified.
-- Protected environment signing / AdMob / Play API credentials must be checked in GitHub environment settings; never copy them into repository or chat. A separate upload-key-password secret appears present but was rejected when signing; successful safe fallback to the keystore password must still be verified in CI.
+- Protected environment signing / AdMob / Play API credentials must be checked in GitHub environment settings; never copy them into repository or chat. Actual `jarsigner` probe with the protected keystore and fallback credentials must be verified by a newly dispatched Play Candidate.
 
 ## Current priority
 - M787 adds a read-only-version Play API preflight to the protected Internal publishing workflow. The workflow must be manually dispatched; its execution, credentials and Play-side result remain unverified. It checks the package, APK/AAB/track version codes and blocks a reused/obsolete code before upload.
-- After the already merged Gradle task-selection fix (PR #95), validate and merge the upload-key-password preflight, then manually rerun Play Candidate on `main` for 0.3.0 (5) and confirm the signed bundle succeeds. Compare `play-upload-certificate.txt` against the existing Google Play upload certificate. Publish only to the existing app's Internal (`qa`) track **after** checking the Play version preflight and signing identity; inspect the API receipt and validate a real Play-to-Play upgrade without removing local data. Keep Production unpublished until separate explicit authorization after Vitals/pre-launch review.
+- After the already merged Gradle task-selection fix (PR #95) and initial key preflight fix (PR #97), validate and merge the `jarsigner` probe fix for the PKCS12 keytool false-positive, then manually rerun Play Candidate on `main` for 0.3.0 (5) and confirm the signed bundle succeeds. Compare `play-upload-certificate.txt` against the existing Google Play upload certificate. Publish only to the existing app's Internal (`qa`) track **after** checking the Play version preflight and signing identity; inspect the API receipt and validate a real Play-to-Play upgrade without removing local data. Keep Production unpublished until separate explicit authorization after Vitals/pre-launch review.
 - If the existing Play versionCode is >= 5, bump the Android versionCode first and revalidate (never change package name or generate a replacement upload keystore).
 
 ## Validation
-- Existing Android CI, M59 device tests, APK and M56 RC on `main`: success on `423dd4a` (21 October 2026).
+- Existing Android CI, M59 device tests, APK and M56 RC on `main`: success on `7f9ef43` (21 October 2026). New `jarsigner` probe tested locally against temporary PKCS12 and JKS keystores: wrong explicit password with fallback, valid explicit passwords, and fail-closed for invalid passwords. Real protected keystore not tested with revised probe.
 - Play update handoff PR #93 merged; Android CI/M59 success at `cbcfb94e6d090f4f74dec9ec6d9f296663a81e97` (12 October 2026).
 - Play remote version preflight and certificate evidence: implementation in release branch, validation not yet observed.
 
 ## Last verified
-- 2026-10-21 (Play Candidate key decryption failure diagnosed and safe preflight patch prepared; new signed build and Google Play state not verified)
+- 2026-10-22 (confirmed PKCS12 keytool false-positive with local reproduction; revised signing probe prepared but real signed bundle and Google Play state still unverified)
 
 <!-- AUTO:START -->
 ## Automatic repository state
