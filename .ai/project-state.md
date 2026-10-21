@@ -32,21 +32,22 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-21T11:34:46Z
+Generated: 2026-10-21T22:05:13Z
 
 ### Git
 - Branch: `main`
-- Head: `423dd4a81af5`
-- Commit date: 2026-10-21T07:34:32-04:00
-- Commit: fix(play): disambiguate Gradle benchmark task in release workflows
-- Tracked files: 695
+- Head: `7f9ef430d310`
+- Commit date: 2026-10-21T18:05:01-04:00
+- Commit: fix(play): verify existing upload key before signing
+- Tracked files: 697
 
 ### Recently changed files
 - `.github/workflows/play-candidate.yml`
 - `.github/workflows/play-internal-publish.yml`
+- `docs/play-update-0.3.0.md`
+- `tools/verify_play_upload_key.sh`
 - `tools/test_performance_release_gate_contract.py`
 - `.github/workflows/android-ci.yml`
-- `docs/play-update-0.3.0.md`
 
 ### Project signals
 - `build.gradle.kts`

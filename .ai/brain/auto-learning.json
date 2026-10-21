@@ -1,27 +1,8 @@
 {
-  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": true,
-  "learning_result": {
-    "example_count": 7,
-    "rejected_count": 0,
-    "terms": [
-      "benchmark",
-      "disambiguate",
-      "gradle",
-      "play",
-      "release",
-      "task",
-      "workflows"
-    ],
-    "test_count": 0,
-    "useful_count": 1
-  },
-  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
-  "rejected": [],
   "schema_version": 1,
-  "task": "fix(play): disambiguate Gradle benchmark task in release workflows",
-  "tests_selected": [],
-  "useful": [
-    "tools/test_performance_release_gate_contract.py"
-  ]
+  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
+  "learned": false,
+  "reason": "missing-task-or-source-change",
+  "task": "fix(play): verify existing upload key before signing",
+  "useful": []
 }

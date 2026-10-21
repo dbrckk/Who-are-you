@@ -1,32 +1,28 @@
 {
   "files": {
     ".github/workflows/play-candidate.yml": {
-      "sha256": "6c1be4fbe4b9325449b4bca6c84d20388aa8c47dcd75b628aac170693608bc38",
-      "size": 8184
+      "sha256": "c9568254916c26806417562826ab102cc4d71b941d80a0273823be86140cb901",
+      "size": 8932
     },
     ".github/workflows/play-internal-publish.yml": {
-      "sha256": "00bd220d4bf2736fb324b2564ac9599725612cee4cbc44bde3132a8e24f264c7",
-      "size": 10726
+      "sha256": "bd2260f2fbd3f2b641d74ad129c6aa12dc8cdc832ab444c13851d01fe9e27e55",
+      "size": 11474
     },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "6e322587ec1df9316dba3a3eeeb648fadd47ff7e641b607d07f6804b3fdafed2",
       "size": 2647
     },
-    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt": {
-      "sha256": "3b471683fa0baf4effe3d197bc426db01bc2290352796af4548c2581a4c9a173",
-      "size": 994
-    },
-    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt": {
-      "sha256": "53d8c6a6bb922bd7a2b9cbae3fb3b4559762fd00ec9654e9f627bf5132f62e81",
-      "size": 1286
-    },
-    "tools/play_existing_version_preflight.py": {
-      "sha256": "1eecd52aad61f72048576dfe194f47a6e501624a5c989db2e9dc5b95645d4803",
-      "size": 5054
+    "docs/play-update-0.3.0.md": {
+      "sha256": "fec999365ae5e51b9845ca50e7b221c3e7071f99724a9794e8049888864903b8",
+      "size": 8524
     },
     "tools/test_performance_release_gate_contract.py": {
       "sha256": "23422b05185f59435bdf9537e52382322d1cbf75ede30a154f9f83c40038af5e",
       "size": 3044
+    },
+    "tools/verify_play_upload_key.sh": {
+      "sha256": "64ac5e5bbe069f648db91f7311ad1d2e4d50b9f516ef7581b8cefd2130faa8bb",
+      "size": 1554
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

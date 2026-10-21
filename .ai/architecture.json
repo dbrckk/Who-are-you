@@ -17,7 +17,7 @@
     },
     {
       "extension": ".json",
-      "count": 193
+      "count": 194
     },
     {
       "extension": ".py",
@@ -40,11 +40,11 @@
       "count": 4
     },
     {
-      "extension": ".html",
-      "count": 2
+      "extension": ".sh",
+      "count": 3
     },
     {
-      "extension": ".sh",
+      "extension": ".html",
       "count": 2
     },
     {

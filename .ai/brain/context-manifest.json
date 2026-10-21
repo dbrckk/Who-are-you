@@ -7,9 +7,9 @@
       "path": ".ai/brain/context/app-src.json"
     },
     {
-      "area": "baseline-profile",
-      "file_count": 2,
-      "path": ".ai/brain/context/baseline-profile.json"
+      "area": "docs",
+      "file_count": 1,
+      "path": ".ai/brain/context/docs.json"
     },
     {
       "area": "github",

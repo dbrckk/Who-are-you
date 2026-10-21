@@ -1,15 +1,17 @@
 # Change impact
 
-Base: 7f1752caec5a8001c94ed8a285d247deaa2241c5
-Head: 423dd4a81af53f0c826c5e276dafd11e6c007874
+Base: c7037b1d76e1459bfafc4b383c9e0cbdc5d20055
+Head: 7f9ef430d31076e9b1b7682ffd5bde905fdb11b3
 
 ## Changed files
 - M .github/workflows/play-candidate.yml
 - M .github/workflows/play-internal-publish.yml
-- M tools/test_performance_release_gate_contract.py
+- M docs/play-update-0.3.0.md
+- A tools/verify_play_upload_key.sh
 
 ## Affected areas
 - .github
+- docs
 - tools
 
 ## Related test candidates

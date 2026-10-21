@@ -6,28 +6,56 @@
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 107,
+      "line": 116,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 121,
+      "line": 118,
+      "context": "source",
+      "severity": "medium"
+    },
+    {
+      "category": "generic_secret_assignment",
+      "path": ".github/workflows/play-candidate.yml",
+      "line": 133,
+      "context": "source",
+      "severity": "medium"
+    },
+    {
+      "category": "generic_secret_assignment",
+      "path": ".github/workflows/play-candidate.yml",
+      "line": 135,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 156,
+      "line": 165,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 170,
+      "line": 167,
+      "context": "source",
+      "severity": "medium"
+    },
+    {
+      "category": "generic_secret_assignment",
+      "path": ".github/workflows/play-internal-publish.yml",
+      "line": 182,
+      "context": "source",
+      "severity": "medium"
+    },
+    {
+      "category": "generic_secret_assignment",
+      "path": ".github/workflows/play-internal-publish.yml",
+      "line": 184,
       "context": "source",
       "severity": "medium"
     },
@@ -47,9 +75,9 @@
     }
   ],
   "risky_tracked_filenames": [],
-  "finding_count": 6,
+  "finding_count": 10,
   "high_severity_count": 0,
-  "medium_severity_count": 4,
+  "medium_severity_count": 8,
   "low_severity_count": 2,
   "risky_filename_count": 0
 }

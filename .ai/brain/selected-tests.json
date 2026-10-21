@@ -1,18 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "selected_test_files": [
-    "tools/test_performance_release_gate_contract.py"
-  ],
-  "commands": [
-    {
-      "command": "python -m pytest tools/test_performance_release_gate_contract.py",
-      "purpose": "targeted tests",
-      "confidence": "high",
-      "files": [
-        "tools/test_performance_release_gate_contract.py"
-      ]
-    }
-  ],
+  "selected_test_files": [],
+  "commands": [],
   "fallback": "Use .ai/commands.json or the repository's canonical full validation when no targeted test is selected."
 }

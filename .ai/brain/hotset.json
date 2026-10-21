@@ -1,17 +1,6 @@
 {
   "files": [
     {
-      "path": "tools/test_performance_release_gate_contract.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 405
-    },
-    {
       "path": ".github/workflows/play-candidate.yml",
       "reasons": [
         "changed"
@@ -26,7 +15,21 @@
       "score": 100
     },
     {
-      "path": "tools/play_existing_version_preflight.py",
+      "path": "docs/play-update-0.3.0.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "tools/verify_play_upload_key.sh",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "tools/test_performance_release_gate_contract.py",
       "reasons": [
         "recent-project-state"
       ],
@@ -38,20 +41,6 @@
         "entrypoint"
       ],
       "score": 40
-    },
-    {
-      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 25
-    },
-    {
-      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

@@ -1,18 +1,18 @@
 # CI status
 
-Summary: 2 success / 2 failure / 4 active
+Summary: 1 success / 2 failure / 5 active
 
-- Android APK: in_progress / pending (423dd4a8)
-- M59 Android Device Validation: in_progress / pending (423dd4a8)
-- Android CI: in_progress / pending (423dd4a8)
-- M56 Main Release Candidate: in_progress / pending (423dd4a8)
-- Android CI: completed / success (3e2b5272)
-- Android CI: completed / failure (0ef70b80)
-- Play Candidate: completed / failure (7f1752ca)
-- M59 Android Device Validation: completed / success (7f1752ca)
+- M59 Android Device Validation: in_progress / pending (7f9ef430)
+- Android APK: in_progress / pending (7f9ef430)
+- M56 Main Release Candidate: in_progress / pending (7f9ef430)
+- Deploy GitHub Pages: in_progress / pending (7f9ef430)
+- Android CI: in_progress / pending (7f9ef430)
+- Android CI: completed / success (868f3fbc)
+- Play Candidate: completed / failure (c7037b1d)
+- Android CI: completed / failure (86f1f25b)
 
 ## Latest failed run structure
-- Job: build
-  - Failed step: Python quality tests
+- Job: play-candidate
+  - Failed step: Build signed Play candidate
 
 > Generated summary only; inspect GitHub Actions for full logs when needed.
