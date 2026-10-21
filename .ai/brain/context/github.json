@@ -2,13 +2,6 @@
   "area": "github",
   "files": [
     {
-      "path": ".github/workflows/android-ci.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
       "path": ".github/workflows/play-candidate.yml",
       "reasons": [
         "changed"

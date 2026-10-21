@@ -31,21 +31,21 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-15T14:01:58Z
+Generated: 2026-10-21T11:34:46Z
 
 ### Git
 - Branch: `main`
-- Head: `8472f2a6a145`
-- Commit date: 2026-10-15T16:01:45+02:00
-- Commit: Merge pull request #94 from dbrckk/m787-play-inplace-upgrade-preflight
-- Tracked files: 694
+- Head: `423dd4a81af5`
+- Commit date: 2026-10-21T07:34:32-04:00
+- Commit: fix(play): disambiguate Gradle benchmark task in release workflows
+- Tracked files: 695
 
 ### Recently changed files
-- `.github/workflows/android-ci.yml`
-- `docs/play-update-0.3.0.md`
 - `.github/workflows/play-candidate.yml`
 - `.github/workflows/play-internal-publish.yml`
-- `tools/play_existing_version_preflight.py`
+- `tools/test_performance_release_gate_contract.py`
+- `.github/workflows/android-ci.yml`
+- `docs/play-update-0.3.0.md`
 
 ### Project signals
 - `build.gradle.kts`

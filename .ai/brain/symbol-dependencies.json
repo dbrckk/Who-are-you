@@ -5,27 +5,66 @@
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
   "symbols": {
-    "_version_code": {
+    "PerformanceReleaseGateContractTest": {
       "source": {
-        "file": "tools/play_existing_version_preflight.py",
-        "start": 25,
-        "end": 32
-      },
-      "symbol_dependencies": [],
-      "dependency_count": 0
-    },
-    "inspect_play_versions": {
-      "source": {
-        "file": "tools/play_existing_version_preflight.py",
-        "start": 35,
-        "end": 68
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 6,
+        "end": 47
       },
       "symbol_dependencies": [
         {
-          "symbol": "_version_code",
+          "symbol": "BaselineProfileGenerator",
           "definitions": [
             {
-              "file": "tools/play_existing_version_preflight.py",
+              "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+              "line": 14,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "StartupBenchmark",
+          "definitions": [
+            {
+              "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+              "line": 16,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "setUp",
+          "definitions": [
+            {
+              "file": "tools/test_performance_release_gate_contract.py",
+              "line": 7,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_baseline_profile_toolchain_is_wired",
+          "definitions": [
+            {
+              "file": "tools/test_performance_release_gate_contract.py",
+              "line": 18,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_benchmark_covers_startup_and_requires_baseline_profile",
+          "definitions": [
+            {
+              "file": "tools/test_performance_release_gate_contract.py",
               "line": 25,
               "kind": "function",
               "language": "python"
@@ -34,87 +73,122 @@
           "relation": "same_file"
         },
         {
-          "symbol": "endpoint",
+          "symbol": "test_play_artifacts_include_bundle_budget",
           "definitions": [
             {
-              "file": "tools/play_publisher.py",
-              "line": 100,
+              "file": "tools/test_performance_release_gate_contract.py",
+              "line": 39,
               "kind": "function",
               "language": "python"
             }
           ],
-          "relation": "imported_module"
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_play_preflight_compiles_benchmark_variants",
+          "definitions": [
+            {
+              "file": "tools/test_performance_release_gate_contract.py",
+              "line": 34,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_production_promotion_requires_vitals_and_prelaunch_review",
+          "definitions": [
+            {
+              "file": "tools/test_performance_release_gate_contract.py",
+              "line": 43,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 8
+    },
+    "setUp": {
+      "source": {
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 7,
+        "end": 16
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "BaselineProfileGenerator",
+          "definitions": [
+            {
+              "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+              "line": 14,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "StartupBenchmark",
+          "definitions": [
+            {
+              "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+              "line": 16,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
         }
       ],
       "dependency_count": 2
     },
-    "preflight": {
+    "test_baseline_profile_toolchain_is_wired": {
       "source": {
-        "file": "tools/play_existing_version_preflight.py",
-        "start": 71,
-        "end": 104
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 18,
+        "end": 23
       },
-      "symbol_dependencies": [
-        {
-          "symbol": "_authorized_session",
-          "definitions": [
-            {
-              "file": "tools/play_publisher.py",
-              "line": 115,
-              "kind": "function",
-              "language": "python"
-            }
-          ],
-          "relation": "imported_module"
-        },
-        {
-          "symbol": "inspect_play_versions",
-          "definitions": [
-            {
-              "file": "tools/play_existing_version_preflight.py",
-              "line": 35,
-              "kind": "function",
-              "language": "python"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "load_service_account",
-          "definitions": [
-            {
-              "file": "tools/play_publisher.py",
-              "line": 104,
-              "kind": "function",
-              "language": "python"
-            }
-          ],
-          "relation": "imported_module"
-        }
-      ],
-      "dependency_count": 3
+      "symbol_dependencies": [],
+      "dependency_count": 0
     },
-    "main": {
+    "test_benchmark_covers_startup_and_requires_baseline_profile": {
       "source": {
-        "file": "tools/play_existing_version_preflight.py",
-        "start": 107,
-        "end": 121
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 25,
+        "end": 32
       },
-      "symbol_dependencies": [
-        {
-          "symbol": "preflight",
-          "definitions": [
-            {
-              "file": "tools/play_existing_version_preflight.py",
-              "line": 71,
-              "kind": "function",
-              "language": "python"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 1
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_play_preflight_compiles_benchmark_variants": {
+      "source": {
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 34,
+        "end": 37
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_play_artifacts_include_bundle_budget": {
+      "source": {
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 39,
+        "end": 41
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_production_promotion_requires_vitals_and_prelaunch_review": {
+      "source": {
+        "file": "tools/test_performance_release_gate_contract.py",
+        "start": 43,
+        "end": 47
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
     }
   }
 }

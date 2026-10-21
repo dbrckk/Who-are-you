@@ -1,0 +1,21 @@
+{
+  "area": "baseline-profile",
+  "files": [
+    {
+      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/BaselineProfileGenerator.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
+    },
+    {
+      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
+    }
+  ],
+  "generated_by": "dbrckk/repo-brain-v6",
+  "schema_version": 1
+}

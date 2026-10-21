@@ -1566,7 +1566,7 @@ def test_benchmark_covers_startup_and_requires_baseline_profile(self)
 ⋮----
 def test_play_preflight_compiles_benchmark_variants(self)
 ⋮----
-expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace"
+expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmarkRelease --stacktrace"
 ⋮----
 def test_play_artifacts_include_bundle_budget(self)
 ⋮----
