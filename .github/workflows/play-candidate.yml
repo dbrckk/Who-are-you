@@ -1,6 +1,13 @@
 name: Play Candidate
 
 on:
+  # An auditable request committed to main prepares a signed candidate only.
+  # This workflow has no Google Play upload/publish operation.
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/play-candidate-requests/**'
   workflow_dispatch:
     inputs:
       telemetry_enabled:
