@@ -41943,7 +41943,7 @@ errors = validate(load(args.path), strict=not args.allow_placeholders)
 ## File: tools/verify_play_upload_key.sh
 ```bash
 #!/usr/bin/env bash
-# Verify an existing Play upload private key without exporting it or logging passwords.
+# Prove the existing Play upload private key can sign, without exposing secrets.
 set -euo pipefail
 umask 077
 
@@ -41954,34 +41954,42 @@ umask 077
 : "${UPLOAD_KEY_ALIAS:?UPLOAD_KEY_ALIAS is required}"
 test -s "$UPLOAD_KEYSTORE_PATH"
 
-csr_file="$(mktemp "$RUNNER_TEMP/play-upload-key-check-XXXXXXXX.csr")"
-trap 'rm -f "$csr_file"' EXIT
+# Keytool -certreq is not a valid key-password proof for PKCS12 keystores:
+# it can accept an incorrect -keypass and still return success. Jarsigner
+# exercises the same Java private-key decryption used by Android bundle signing.
+probe_dir="$(mktemp -d "$RUNNER_TEMP/play-upload-key-probe-XXXXXXXX")"
+trap 'rm -rf "$probe_dir"' EXIT
+printf 'Temporary Play upload key signing probe\n' > "$probe_dir/probe.txt"
+(cd "$probe_dir" && jar --create --file probe.jar probe.txt >/dev/null 2>&1)
 
-can_unlock_key() {
-  rm -f "$csr_file"
-  keytool -certreq \
-    -alias "$UPLOAD_KEY_ALIAS" \
+can_sign_with() {
+  rm -f "$probe_dir/signed.jar"
+  # Passwords are passed by environment names, never as CLI arguments or logs.
+  if ! PLAY_UPLOAD_KEY_PASSWORD_CANDIDATE="$1" jarsigner \
     -keystore "$UPLOAD_KEYSTORE_PATH" \
-    -storepass "$UPLOAD_KEYSTORE_PASSWORD" \
-    -keypass "$1" \
-    -file "$csr_file" </dev/null >/dev/null 2>&1
+    -storepass:env UPLOAD_KEYSTORE_PASSWORD \
+    -keypass:env PLAY_UPLOAD_KEY_PASSWORD_CANDIDATE \
+    -signedjar "$probe_dir/signed.jar" \
+    "$probe_dir/probe.jar" "$UPLOAD_KEY_ALIAS" </dev/null >/dev/null 2>&1; then
+    return 1
+  fi
+  test -s "$probe_dir/signed.jar"
 }
 
-if [[ -n "${UPLOAD_KEY_PASSWORD:-}" ]] && can_unlock_key "$UPLOAD_KEY_PASSWORD"; then
+if [[ -n "${UPLOAD_KEY_PASSWORD:-}" ]] && can_sign_with "$UPLOAD_KEY_PASSWORD"; then
   source="explicit"
-elif can_unlock_key "$UPLOAD_KEYSTORE_PASSWORD"; then
+elif can_sign_with "$UPLOAD_KEYSTORE_PASSWORD"; then
   source="store"
   if [[ -n "${UPLOAD_KEY_PASSWORD:-}" ]]; then
-    echo "::warning::The configured Play upload key password cannot unlock the private key; the existing keystore password works and will be used."
+    echo "::warning::The configured upload key password cannot sign; the existing keystore password works and will be used."
   fi
 else
-  echo "::error::The existing Play upload private key could not be unlocked with either configured password. Verify the protected GitHub secrets and original upload keystore; do not generate a replacement key."
+  echo "::error::The existing Play upload private key cannot sign with either configured password. Verify the protected GitHub secrets; do not create a replacement key."
   exit 1
 fi
 
-test -s "$csr_file"
 printf 'source=%s\n' "$source" >> "$GITHUB_OUTPUT"
-echo "Verified existing Play upload private key (password source: $source)."
+echo "Verified existing Play upload private key by signing a disposable JAR (password source: $source)."
 ```
 
 ## File: .repo-standards.yml

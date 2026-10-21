@@ -3,6 +3,6 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": false,
   "reason": "missing-task-or-source-change",
-  "task": "fix(play): verify existing upload key before signing",
+  "task": "fix(play): verify private key by signing disposable JAR",
   "useful": []
 }

@@ -32,20 +32,20 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-21T22:05:13Z
+Generated: 2026-10-21T22:37:56Z
 
 ### Git
 - Branch: `main`
-- Head: `7f9ef430d310`
-- Commit date: 2026-10-21T18:05:01-04:00
-- Commit: fix(play): verify existing upload key before signing
+- Head: `eba321e0dc62`
+- Commit date: 2026-10-21T18:37:41-04:00
+- Commit: fix(play): verify private key by signing disposable JAR
 - Tracked files: 697
 
 ### Recently changed files
-- `.github/workflows/play-candidate.yml`
-- `.github/workflows/play-internal-publish.yml`
 - `docs/play-update-0.3.0.md`
 - `tools/verify_play_upload_key.sh`
+- `.github/workflows/play-candidate.yml`
+- `.github/workflows/play-internal-publish.yml`
 - `tools/test_performance_release_gate_contract.py`
 - `.github/workflows/android-ci.yml`
 

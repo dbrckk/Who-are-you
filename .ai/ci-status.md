@@ -1,15 +1,15 @@
 # CI status
 
-Summary: 1 success / 2 failure / 5 active
+Summary: 2 success / 1 failure / 5 active
 
-- M59 Android Device Validation: in_progress / pending (7f9ef430)
-- Android APK: in_progress / pending (7f9ef430)
-- M56 Main Release Candidate: in_progress / pending (7f9ef430)
-- Deploy GitHub Pages: in_progress / pending (7f9ef430)
-- Android CI: in_progress / pending (7f9ef430)
-- Android CI: completed / success (868f3fbc)
-- Play Candidate: completed / failure (c7037b1d)
-- Android CI: completed / failure (86f1f25b)
+- M59 Android Device Validation: in_progress / pending (eba321e0)
+- Android APK: in_progress / pending (eba321e0)
+- M56 Main Release Candidate: in_progress / pending (eba321e0)
+- Android CI: in_progress / pending (eba321e0)
+- Deploy GitHub Pages: in_progress / pending (eba321e0)
+- Android CI: completed / success (654452b5)
+- Play Candidate: completed / failure (79bd4178)
+- M59 Android Device Validation: completed / success (7f9ef430)
 
 ## Latest failed run structure
 - Job: play-candidate

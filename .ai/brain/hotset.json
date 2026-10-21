@@ -1,28 +1,15 @@
 {
   "files": [
     {
-      "path": ".github/workflows/play-candidate.yml",
+      "path": "tools/verify_play_upload_key.sh",
       "reasons": [
-        "changed"
+        "changed",
+        "recent-project-state"
       ],
-      "score": 100
-    },
-    {
-      "path": ".github/workflows/play-internal-publish.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
+      "score": 160
     },
     {
       "path": "docs/play-update-0.3.0.md",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "tools/verify_play_upload_key.sh",
       "reasons": [
         "changed"
       ],

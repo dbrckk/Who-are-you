@@ -1,25 +1,17 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "423dd4a81af53f0c826c5e276dafd11e6c007874",
-  "head": "7f9ef430d31076e9b1b7682ffd5bde905fdb11b3",
+  "base": "7f9ef430d31076e9b1b7682ffd5bde905fdb11b3",
+  "head": "eba321e0dc623557a925199a7795aa49b74041f1",
   "index_mode": "incremental",
   "changed_files": [
-    {
-      "path": ".github/workflows/play-candidate.yml",
-      "status": "M"
-    },
-    {
-      "path": ".github/workflows/play-internal-publish.yml",
-      "status": "M"
-    },
     {
       "path": "docs/play-update-0.3.0.md",
       "status": "M"
     },
     {
       "path": "tools/verify_play_upload_key.sh",
-      "status": "A"
+      "status": "M"
     }
   ],
   "changed_source_files": [],
