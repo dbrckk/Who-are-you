@@ -1,12 +1,13 @@
 # Project state
 
-Status: Play 0.3.0 update preparation — source integrated, publishing not verified.
+Status: Existing Google Play app 0.3.0 update preparation — signed build and Internal publishing not verified; do not promote to Production without explicit approval.
 
 ## Working
 - App package: `com.whoareyou.app`; code version `0.3.0 (5)`.
 - Release upgrade persistence validated by M777 debug→minified candidate device flow; this is not Play-to-Play signature/install validation.
 - Latest substantive `main` validation: Android CI, M59, APK and M56 succeeded on `d31f1ba7547c050e9a678f87c2871897b58c8832` (9 October 2026).
 - Play Candidate signed workflow ran successfully historically (11 September 2026), but not for the 0.3.0 head.
+- On 21 October 2026, Play Candidate run [39590175005](https://github.com/dbrckk/Who-are-you/actions/runs/39590175005) failed at the benchmark Gradle task selector before secrets/signing; Python quality tests, JVM tests, and instrumentation-test compilation passed. Both Play workflows now specify `:baseline-profile:assembleBenchmarkRelease`, matching the successful Android CI task.
 
 ## Blockers / not verified
 - Google Play Console current highest accepted versionCode and original upload certificate are not accessible through this GitHub connector.
@@ -16,7 +17,7 @@ Status: Play 0.3.0 update preparation — source integrated, publishing not veri
 
 ## Current priority
 - M787 adds a read-only-version Play API preflight to the protected Internal publishing workflow. The workflow must be manually dispatched; its execution, credentials and Play-side result remain unverified. It checks the package, APK/AAB/track version codes and blocks a reused/obsolete code before upload.
-- Run Play Candidate for version 0.3.0 (5); compare `play-upload-certificate.txt` against the existing Play upload certificate. Then publish to Internal, inspect the preflight receipt, validate a real Play-to-Play upgrade without removing local data, review Vitals/pre-launch and only then promote Production.
+- Verify and merge the Play workflow task-selection fix, then rerun Play Candidate on `main` for 0.3.0 (5); compare `play-upload-certificate.txt` against the existing Play upload certificate. Publish only to the existing app's Internal (`qa`) track after verifying the Play version preflight; inspect the receipt and validate a real Play-to-Play upgrade without removing local data. Keep Production unpublished until a separate explicit authorization after Vitals/pre-launch review.
 - If the existing Play versionCode is >= 5, bump the Android versionCode first and revalidate (never change package name or generate a replacement upload keystore).
 
 ## Validation
@@ -25,7 +26,7 @@ Status: Play 0.3.0 update preparation — source integrated, publishing not veri
 - Play remote version preflight and certificate evidence: implementation in release branch, validation not yet observed.
 
 ## Last verified
-- 2026-10-15
+- 2026-10-21 (Play Candidate failure diagnosed; signed bundle, Google Play state and new fix rerun not verified)
 
 <!-- AUTO:START -->
 ## Automatic repository state
