@@ -32,7 +32,7 @@ class PerformanceReleaseGateContractTest(unittest.TestCase):
         self.assertIn('BaselineProfileMode.Require', self.benchmark)
 
     def test_play_preflight_compiles_benchmark_variants(self):
-        expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmark --stacktrace"
+        expected = "gradle :app:assembleBenchmark :baseline-profile:assembleBenchmarkRelease --stacktrace"
         self.assertIn(expected, self.candidate)
         self.assertIn(expected, self.internal)
 
