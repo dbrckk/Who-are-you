@@ -72,6 +72,17 @@ Applicable to the advertising SDK according to Google's current disclosure guida
 
 Google Play Billing queries/restores the one-time `remove_ads_lifetime` entitlement. The app does not receive or store payment-card details. Purchase tokens are used locally with Play Billing and are not sent through the custom analytics contract.
 
+## Health Connect and local fitness/wellness data
+
+- The sole declared Health Connect permission is `android.permission.health.READ_STEPS` (read-only).
+- User-facing use case: **Fitness and wellness → optional step tracking and step goals** in My Habits. The app displays daily steps, averages and trends over 7/30 days, and checks optional personal step goals.
+- Permission is requested from the My Habits Activity card only when the user opts in; personality quizzes function without it.
+- Raw step records are aggregated on-device; app-owned daily step totals are stored only in Android DataStore for today plus the previous 30 days. Health Connect values and step goals are not transmitted to the app's backend or any advertising/analytics SDK.
+- Disabling Activity deletes app-owned local step observations but does not revoke Health Connect permission. Users revoke it in Android settings. Deleting all Habits data removes local observations and goals.
+- **Do not claim Health Connect steps are transmitted/collected remotely** when the reviewed Play build processes them only on the device. Google's Data Safety terminology must still be reviewed against the final behavior and other SDKs.
+- Google Play declaration must separately justify `READ_STEPS` as fitness/wellness, identifying this precise feature and avoiding unsupported medical claims.
+- Privacy policy source: `docs/privacy/index.html`, published at `https://dbrckk.github.io/Who-are-you/privacy/`. The same page is displayed via the Health Connect permissions-rationale Android activity.
+
 ## Local-only profile data
 
 Quiz scores, completed tests, Daily Question state, streaks and onboarding state are stored locally. They must not be declared as server-collected by the app merely because they exist on-device. Re-evaluate this if future telemetry begins transmitting raw profile values.

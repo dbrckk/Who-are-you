@@ -26,6 +26,10 @@ When you want to go further, you can explore another dimension, revisit previous
 - Reset your local profile data from inside the app.
 - Remove ads forever with one optional lifetime purchase — no subscription.
 
+
+### Optional fitness and wellness: steps and activity goals
+My Habits includes an optional step tracker. If you choose to connect Android Health Connect and allow read access to **step counts only**, Who Are You? displays your daily steps, 7-day and 30-day activity trends and averages, and progress toward personal step-count goals. Your step summaries stay on your device, are kept in a rolling window of up to 31 calendar days, and are not shared with advertisers or used for ad targeting. You can disable this source and delete the step history inside My Habits, and revoke Health Connect access in Android Settings. You can use all personality quizzes without this permission.
+
 No account is required to start.
 
 Who Are You? is designed for entertainment and self-reflection. It is not a psychological or medical diagnostic tool.

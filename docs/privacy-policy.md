@@ -1,6 +1,6 @@
 # Who Are You? — Privacy Policy
 
-Last updated: 2026-09-08
+Last updated: 2026-10-27
 
 Who Are You? is an entertainment and self-reflection app. Its quizzes are not medical or psychological diagnoses.
 
@@ -9,6 +9,22 @@ Who Are You? is an entertainment and self-reflection app. Its quizzes are not me
 The app stores quiz completion, latest and previous quiz scores, Daily Question state, streaks, onboarding completion, social comparison state and the lifetime remove-ads entitlement locally on the device using Android DataStore.
 
 The app does not require a Who Are You? account.
+
+## Health Connect: optional steps, activity trends and personal wellness goals
+
+The optional **My Habits → Activity** feature reads **step counts only** from Android Health Connect using `android.permission.health.READ_STEPS`. It does not request permission to write step records, and it does not request access to heart rate, sleep, medical records or any other Health Connect category.
+
+**Why access is requested:** With your explicit permission, the app reads step totals to display your daily steps, show recent activity averages and patterns (last 7 and 30 days), and let you set and check your own step-count goals. This is an optional fitness/wellness activity-tracking feature. The personality quizzes do not require Health Connect access. No medical or psychological diagnosis is inferred from step counts.
+
+**How data is accessed and stored:** After you select Enable/Authorize for Activity and grant Health Connect access in the Android permission dialog, the app aggregates step counts for the current calendar day on the device. It saves the daily totals and related locally calculated activity observations in Android DataStore. Stored daily observations are limited to the current day plus the 30 preceding days (up to 31 calendar days); older observations are dropped as the local history is updated. Your goal settings are stored locally until you delete them or clear the app's data. No Who Are You? account or remote step-data synchronization is required.
+
+**Collection, use and sharing:** The app reads step totals from Health Connect on-device and retains these totals locally for the stated fitness/wellness purposes. The app does **not** upload step data or step goals to its servers, its custom telemetry, Google Mobile Ads, or other third parties. Advertising SDKs may separately handle device/ad data as described under Advertising and consent, but they are not given Health Connect steps by the app. The app does not sell health data or use it for targeted advertising.
+
+**Your choices and deletion:** You can decline permission and use all quizzes without step tracking. Use **My Habits → Activity → Disable** to erase locally stored activity/step observations and turn off collection, or **My Habits → Delete Habits Data** to delete all locally stored habits observations and goals. These in-app actions do not revoke the separate Android permission. To revoke access, open **Android Settings → Health Connect → App permissions → Who Are You?** and turn off the step permission (the exact path varies by device). Revoking the permission prevents new step reads but does not automatically erase previously stored local observations; use the in-app deletion control if you also want that history erased. You may also clear the app's storage or uninstall it to remove local app data. No health-data deletion request to a remote Who Are You? server is necessary because steps are not transmitted to one.
+
+## Optional app-usage observations
+
+The separately optional **My Habits → App usage** feature requests Android Usage Access so you can see on-device screen-time summaries, time-of-day patterns, and related goals. It reads usage timing and app identifiers, not the contents of other apps. These observations remain in local Android DataStore for the same rolling current-day-plus-30-previous-days window. You can disable this source to delete its locally stored observations, or delete all Habits data. Permission revocation happens separately in Android Settings.
 
 ## Advertising and consent
 
