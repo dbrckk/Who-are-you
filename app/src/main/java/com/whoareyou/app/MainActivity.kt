@@ -48,7 +48,12 @@ private fun WhoAreYouApp() {
     )
     val behaviorGoalsState = rememberBehaviorGoalsHostState(context, behaviorSnapshot)
     val behaviorRefreshCoordinator = remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }
-    fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }
+    fun refreshBehavior() {
+        scope.launch(Dispatchers.IO) {
+            runCatching { BehaviorRepository.pruneExpired(context.applicationContext) }
+            runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) }
+        }
+    }
     BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }
 
     val activityPermissionLauncher = rememberLauncherForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->

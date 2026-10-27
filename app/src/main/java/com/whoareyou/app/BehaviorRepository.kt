@@ -69,6 +69,21 @@ object BehaviorRepository {
         }
     }
 
+    /**
+     * Remove expired local observations when the app becomes active, including if all
+     * sources were disabled. Android cannot expire records while the app never runs.
+     */
+    suspend fun pruneExpired(context: Context, currentEpochDay: Long = LocalDate.now().toEpochDay()) {
+        context.behaviorDataStore.edit { prefs ->
+            val encoded = prefs[historyKey] ?: return@edit
+            val history = BehaviorStoreCodec.decode(encoded)
+            val retained = BehaviorStoreCodec.retain(history, currentEpochDay)
+            if (retained != history) {
+                prefs[historyKey] = BehaviorStoreCodec.encode(retained)
+            }
+        }
+    }
+
     suspend fun setSourceEnabled(context: Context, source: BehaviorSource, enabled: Boolean) {
         context.behaviorDataStore.edit { prefs ->
             prefs[enabledKey(source)] = enabled

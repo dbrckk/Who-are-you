@@ -28,7 +28,7 @@ Si tu veux aller plus loin, tu peux explorer une autre dimension, revoir tes anc
 
 
 ### Suivi facultatif forme et bien-être : pas et objectifs d’activité
-La rubrique Mes habitudes propose un suivi facultatif des pas. En activant la connexion à Santé Connect et en autorisant la **lecture des pas uniquement**, tu peux consulter tes pas quotidiens, les moyennes et tendances sur 7 et 30 jours, ainsi que l’avancement de tes objectifs personnels de marche. Ces données restent sur ton appareil, pendant 31 jours calendaires maximum, et ne sont ni partagées avec les annonceurs ni utilisées pour le ciblage publicitaire. Tu peux désactiver la source et effacer les pas dans Mes habitudes, et révoquer l’autorisation dans les paramètres Android. Les quiz restent accessibles sans cette autorisation.
+La rubrique Mes habitudes propose un suivi facultatif des pas. En activant la connexion à Santé Connect et en autorisant la **lecture des pas uniquement**, tu peux consulter tes pas quotidiens, les moyennes et tendances sur 7 et 30 jours, ainsi que l’avancement de tes objectifs personnels de marche. Ces données restent sur ton appareil, dans un historique glissant de 31 jours (les anciennes observations sont supprimées lors de ta prochaine utilisation), et ne sont ni partagées avec les annonceurs ni utilisées pour le ciblage publicitaire. Tu peux désactiver la source et effacer les pas dans Mes habitudes, et révoquer l’autorisation dans les paramètres Android. Les quiz restent accessibles sans cette autorisation.
 
 Aucun compte n’est nécessaire pour commencer.
 
