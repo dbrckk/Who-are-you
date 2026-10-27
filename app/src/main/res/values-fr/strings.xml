@@ -204,7 +204,7 @@
     <string name="habits_title">MES HABITUDES</string>
     <string name="habits_local_only">Ces observations sont calculées et stockées localement sur cet appareil. Elles restent séparées de ton profil fondé sur les questionnaires.</string>
     <string name="habits_source_activity">Activité</string>
-    <string name="habits_source_activity_detail">Facultatif : lecture des pas via Santé Connect pour les totaux quotidiens, les tendances sur 7/30 jours et les objectifs personnels. Historique local de 31 jours, purgé à la prochaine utilisation, jamais envoyé aux publicités ou à l’analyse d’usage. Désactiver efface les pas locaux ; la révocation se fait séparément dans Santé Connect.</string>
+    <string name="habits_source_activity_detail">Lecture facultative des pas via Santé Connect pour les statistiques quotidiennes, les tendances sur 7/30 jours et les objectifs personnels. Données locales, non utilisées pour la publicité. Désactiver pour effacer.</string>
     <string name="habits_health_privacy_link">SANTÉ CONNECT : DONNÉES ET CONFIDENTIALITÉ</string>
     <string name="habits_source_app_usage">Utilisation des apps</string>
     <string name="habits_source_app_usage_detail">L’accès Android à l’utilisation des apps sert uniquement à créer des résumés locaux de durée et d’horaires. Le contenu n’est pas lu.</string>
