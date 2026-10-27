@@ -1,5 +1,6 @@
 package com.whoareyou.app
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ fun BehaviorScreen(
     onSetGoalPaused: (String, Boolean) -> Unit = { _, _ -> },
     onDeleteGoal: (String) -> Unit = {}
 ) {
+    val context = LocalContext.current
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     LazyColumn(
         modifier = Modifier
@@ -91,6 +93,12 @@ fun BehaviorScreen(
         item {
             Column(Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.habits_data_controls), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            TextButton(
+                onClick = { context.startActivity(Intent(context, HealthConnectPrivacyActivity::class.java)) },
+                modifier = Modifier.testTag("behavior_health_privacy_link")
+            ) {
+                Text(stringResource(R.string.habits_health_privacy_link), color = V2Colors.AccentCyan)
+            }
                 TextButton(onClick = { showDeleteConfirmation = true }, modifier = Modifier.testTag("behavior_delete_all")) {
                     Text(stringResource(R.string.habits_delete_all), color = V2Colors.TextSecondary)
                 }

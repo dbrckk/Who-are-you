@@ -204,7 +204,8 @@
     <string name="habits_title">MY HABITS</string>
     <string name="habits_local_only">These observations are calculated and stored locally on this device. They are separate from your questionnaire-based profile.</string>
     <string name="habits_source_activity">Activity</string>
-    <string name="habits_source_activity_detail">Read-only step totals from Health Connect are used to build local daily activity observations.</string>
+    <string name="habits_source_activity_detail">Optional read-only Health Connect steps for daily activity, 7/30-day trends and personal step goals. Data stays on-device and is not used for ads. Disable to erase.</string>
+    <string name="habits_health_privacy_link">HEALTH CONNECT DATA &amp; PRIVACY POLICY</string>
     <string name="habits_source_app_usage">App usage</string>
     <string name="habits_source_app_usage_detail">Android app-usage access is used only to build local duration and timing summaries. Content is not read.</string>
     <string name="habits_source_disabled">Off</string>

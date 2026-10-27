@@ -146,6 +146,7 @@ class AndroidBehaviorRefreshStore(
     private val appContext = context.applicationContext
 
     override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot {
+        BehaviorRepository.pruneExpired(appContext, epochDay)
         val snapshot = BehaviorRepository.observe(appContext).first()
         val day = (snapshot.last30Days + listOfNotNull(snapshot.today))
             .firstOrNull { it.epochDay == epochDay }

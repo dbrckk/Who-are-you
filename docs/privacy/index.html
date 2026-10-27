@@ -21,11 +21,21 @@
 <body>
 <main>
   <h1>Who Are You? — Privacy Policy</h1>
-  <p class="muted">Last updated: September 8, 2026</p>
+  <p class="muted">Last updated: October 27, 2026</p>
     <p>Who Are You? is an entertainment and self-reflection application. Its quizzes are not medical or psychological diagnoses. No Who Are You? account is required.</p>
 
   <h2>Data stored on your device</h2>
   <p>The app stores quiz completion, latest and previous quiz scores, Daily Question state, streaks, onboarding completion, social comparison state and the lifetime remove-ads entitlement locally on the device using Android DataStore.</p>
+
+  <h2 id="health-connect">Health Connect: optional step tracking and wellness goals</h2>
+  <p>The optional <strong>My Habits → Activity</strong> feature requests <code>android.permission.health.READ_STEPS</code> and reads <strong>step counts only</strong> from Android Health Connect, after you explicitly grant permission. It does not write steps or request heart rate, sleep, medical records or other Health Connect data. You do not need Health Connect for the personality quizzes.</p>
+  <p><strong>Purpose:</strong> The app aggregates your step counts on the device to show daily step totals, recent 7/30-day activity averages and trends, and progress towards optional personal step-count goals. This is a fitness/wellness tracking feature and not a medical or psychological diagnosis.</p>
+  <p><strong>Access, collection and storage:</strong> The step totals are read directly from Health Connect on your device and the aggregated daily totals and activity observations are saved locally in Android DataStore. When you use the app, it keeps a rolling window of observations for the current day and up to the preceding 30 days. Older records are cleared on the next app launch/refresh; if the app is not opened for a long time, old local records can remain until the app runs again or you delete them manually. Goal settings remain locally until you remove them or clear app data.</p>
+  <p><strong>Sharing:</strong> Who Are You? does not upload, sell or share Health Connect steps or step goals with its servers, advertising providers, custom analytics, or other third parties. Health Connect step data is never used for advertising. Advertising services may separately process unrelated advertising/device information as described below.</p>
+  <p><strong>Choice and deletion:</strong> You can refuse the permission without losing access to quizzes. In <strong>My Habits → Activity → Disable</strong>, you can erase the app's local step history and disable the feature. <strong>My Habits → Delete Habits Data</strong> removes all locally stored habits observations and goals. To revoke the Android permission as well, go to <strong>Android Settings → Health Connect → App permissions → Who Are You?</strong> (device paths may vary). Revoking the permission prevents further reads but does not automatically delete stored local step history. You may also clear the app's data or uninstall it. Step data is not stored on Who Are You? servers, so there is no remote step-data copy to request deletion of.</p>
+
+  <h2>Optional app-usage observations</h2>
+  <p>The separate optional <strong>My Habits → App usage</strong> feature requests Android Usage Access to display local screen-time summaries, app-use timing patterns and related goals. It processes app identifiers and time spent, not the contents of other apps. Observations remain locally on the device for the current day and up to the preceding 30 days. Disabling the source deletes its local observations; the Android permission must be revoked separately in device settings.</p>
 
   <h2>Advertising and consent</h2>
   <p>The free version can display Google AdMob interstitial advertising outside active quizzes. Google User Messaging Platform (UMP) is used to request and manage consent where required. Advertising requests are gated by the consent state returned by UMP, and the app exposes privacy options when UMP reports that they must be available.</p>
