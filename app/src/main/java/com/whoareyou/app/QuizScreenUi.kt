@@ -32,6 +32,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -56,6 +59,9 @@ fun QuizScreen(
     onFinished: (Int) -> Unit
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
+    // Lock the first tap immediately, before Compose renders the next question.
+    // A failed final-result commit changes commitFailed and unlocks a fresh retry.
+    var answerAccepted by remember(quiz.id, safeQuestionIndex, commitFailed) { mutableStateOf(false) }
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
     val animatedProgress by animateFloatAsState(
@@ -205,7 +211,9 @@ fun QuizScreen(
                     V2PressableSurface(
                         onClick = {
                             if (isFinishing) return@V2PressableSurface
+                            if (answerAccepted) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
+                            answerAccepted = true
                             onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
                             val newScore = score + answer.score
                             if (safeQuestionIndex == quiz.questions.lastIndex) {
@@ -214,7 +222,7 @@ fun QuizScreen(
                                 onProgress(safeQuestionIndex + 1, newScore)
                             }
                         },
-                        enabled = !isFinishing && animatedIndex == safeQuestionIndex,
+                        enabled = !isFinishing && !answerAccepted && animatedIndex == safeQuestionIndex,
                         modifier = if (animatedIndex == safeQuestionIndex) {
                             Modifier.testTag("quiz_answer_$answerIndex")
                         } else {
