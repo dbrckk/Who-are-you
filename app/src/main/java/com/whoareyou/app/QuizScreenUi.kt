@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -27,6 +28,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,11 +59,12 @@ fun QuizScreen(
     onProgress: (questionIndex: Int, score: Int) -> Unit,
     onAnswerSelected: (questionIndex: Int, answerIndex: Int, score: Int) -> Unit = { _, _, _ -> },
     onBack: () -> Unit,
-    onFinished: (Int) -> Unit
+    onFinished: (Int) -> Unit,
+    onRetrySave: () -> Unit = {}
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
     // Lock the first tap immediately, before Compose renders the next question.
-    // A failed final-result commit changes commitFailed and unlocks a fresh retry.
+    // The first answer locks immediately; a save failure exposes a separate retry action.
     var answerAccepted by remember(quiz.id, safeQuestionIndex, commitFailed) { mutableStateOf(false) }
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
@@ -179,6 +183,24 @@ fun QuizScreen(
                 accent = V2Colors.Peach,
                 tag = "quiz_result_save_failed"
             )
+            Spacer(Modifier.height(10.dp))
+            Button(
+                onClick = onRetrySave,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 52.dp)
+                    .testTag("quiz_result_retry_save"),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = V2Colors.Orchid,
+                    contentColor = V2Colors.Ink
+                )
+            ) {
+                Text(
+                    stringResource(R.string.quiz_result_retry_save),
+                    style = V2Type.BodyStrong,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
         Spacer(Modifier.height(if (constrainedLayout) 20.dp else 26.dp))
 
@@ -211,7 +233,7 @@ fun QuizScreen(
                     V2PressableSurface(
                         onClick = {
                             if (isFinishing) return@V2PressableSurface
-                            if (answerAccepted) return@V2PressableSurface
+                            if (commitFailed || answerAccepted) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
                             answerAccepted = true
                             onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
@@ -222,7 +244,7 @@ fun QuizScreen(
                                 onProgress(safeQuestionIndex + 1, newScore)
                             }
                         },
-                        enabled = !isFinishing && !answerAccepted && animatedIndex == safeQuestionIndex,
+                        enabled = !isFinishing && !commitFailed && !answerAccepted && animatedIndex == safeQuestionIndex,
                         modifier = if (animatedIndex == safeQuestionIndex) {
                             Modifier.testTag("quiz_answer_$answerIndex")
                         } else {
