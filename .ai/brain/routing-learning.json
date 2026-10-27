@@ -254,6 +254,29 @@
         "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
         "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "fix(quiz): retry failed result save without changing answers (#102)",
+      "terms": [
+        "102",
+        "answers",
+        "changing",
+        "failed",
+        "quiz",
+        "result",
+        "retry",
+        "save",
+        "without"
+      ],
+      "tests": [],
+      "useful": [
+        "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+        "tools/test_actionable_knowledge_map_contract.py",
+        "tools/test_release_critical_profile_contract.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -266,6 +289,13 @@
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "102": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "74": {
       "app/build.gradle.kts": 4,
@@ -384,11 +414,25 @@
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
+    "answers": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
+    },
     "benchmark": {
       "tools/test_performance_release_gate_contract.py": 4
     },
     "bilingual": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
+    },
+    "changing": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "connect": {
       "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
@@ -516,6 +560,13 @@
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "failed": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "from": {
       "app/build.gradle.kts": 4,
@@ -761,9 +812,12 @@
       "tools/test_release_integration_contract.py": 8
     },
     "quiz": {
-      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 8,
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
-      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 8,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "rationale": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
@@ -846,10 +900,31 @@
     "resilient": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
+    "result": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
+    },
     "resume": {
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "retry": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
+    },
+    "save": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "standard": {
       "app/build.gradle.kts": 4,
@@ -862,6 +937,13 @@
     },
     "task": {
       "tools/test_performance_release_gate_contract.py": 4
+    },
+    "without": {
+      "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": 4,
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
+      "tools/test_actionable_knowledge_map_contract.py": 4,
+      "tools/test_release_critical_profile_contract.py": 4
     },
     "workflows": {
       "tools/test_performance_release_gate_contract.py": 4

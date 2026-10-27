@@ -38,36 +38,36 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-27T22:06:56Z
+Generated: 2026-10-27T22:30:50Z
 
 ### Git
 - Branch: `main`
-- Head: `cc0ff6657c33`
-- Commit date: 2026-10-27T18:06:46-04:00
-- Commit: fix(quiz): prevent duplicate taps and preserve answer evidence on resume (#101)
+- Head: `d8608ef5b6ac`
+- Commit date: 2026-10-27T18:30:40-04:00
+- Commit: fix(quiz): retry failed result save without changing answers (#102)
 - Tracked files: 700
 
 ### Recently changed files
+- `app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt`
 - `app/src/main/java/com/whoareyou/app/MainActivity.kt`
-- `app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt`
 - `app/src/main/java/com/whoareyou/app/QuizScreenUi.kt`
+- `app/src/main/res/values-fr/strings.xml`
+- `app/src/main/res/values/strings.xml`
+- `tools/test_actionable_knowledge_map_contract.py`
+- `tools/test_release_critical_profile_contract.py`
+- `app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt`
 - `app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt`
 - `docs/privacy/index.html`
 - `app/src/main/AndroidManifest.xml`
 - `app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt`
 - `app/src/main/java/com/whoareyou/app/BehaviorRepository.kt`
 - `app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt`
-- `app/src/main/res/values-fr/strings.xml`
-- `app/src/main/res/values/strings.xml`
 - `docs/play-data-safety.md`
 - `docs/play-health-connect-declaration.md`
 - `docs/privacy-policy.md`
 - `docs/store-listing-en.md`
 - `docs/store-listing-fr.md`
 - `docs/play-update-0.3.0.md`
-- `tools/verify_play_upload_key.sh`
-- `.github/workflows/play-candidate.yml`
-- `.github/workflows/play-internal-publish.yml`
 
 ### Project signals
 - `build.gradle.kts`

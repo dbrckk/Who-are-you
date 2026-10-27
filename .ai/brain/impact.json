@@ -1,34 +1,84 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "740dcdd72d314124a71dd9e8a699092fe3e09f79",
-  "head": "cc0ff6657c3329ba9242f97fea6f489dc514533e",
+  "base": "cc0ff6657c3329ba9242f97fea6f489dc514533e",
+  "head": "d8608ef5b6acd11cd80767efaf5206c6408da38f",
   "index_mode": "incremental",
   "changed_files": [
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "status": "M"
+    },
     {
       "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "status": "M"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
-      "status": "A"
+      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "status": "M"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "path": "app/src/main/res/values-fr/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_actionable_knowledge_map_contract.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_release_critical_profile_contract.py",
       "status": "M"
     }
   ],
   "changed_source_files": [
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
     "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
-    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+    "tools/test_actionable_knowledge_map_contract.py",
+    "tools/test_release_critical_profile_contract.py"
   ],
   "impacted_files": [
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
     "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
-    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+    "tools/test_actionable_knowledge_map_contract.py",
+    "tools/test_release_critical_profile_contract.py"
   ],
   "impacted_symbols": [
+    {
+      "name": "QuizScreenUiTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "line": 15
+    },
+    {
+      "name": "answeringEveryQuestionAdvancesAndReturnsFinalScore",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "line": 21
+    },
+    {
+      "name": "finishingStateBlocksAnswersAndShowsSavingFeedback",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "line": 55
+    },
+    {
+      "name": "commitFailureFeedbackIsVisibleAndRetryable",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "line": 78
+    },
+    {
+      "name": "testQuiz",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "line": 110
+    },
     {
       "name": "MainActivity",
       "kind": "class",
@@ -63,29 +113,109 @@
       "name": "navigate",
       "kind": "symbol",
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 107
+      "line": 108
     },
     {
       "name": "resetQuizAttempt",
       "kind": "symbol",
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 109
+      "line": 110
+    },
+    {
+      "name": "startQuiz",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 111
     },
     {
       "name": "QuizScreen",
       "kind": "symbol",
       "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-      "line": 50
+      "line": 53
     },
     {
       "name": "V2StatusNotice",
       "kind": "symbol",
       "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-      "line": 291
+      "line": 313
+    },
+    {
+      "name": "ActionableKnowledgeMapContractTest",
+      "kind": "class",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 6
+    },
+    {
+      "name": "setUp",
+      "kind": "function",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 7
+    },
+    {
+      "name": "test_traits_are_clickable",
+      "kind": "function",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 13
+    },
+    {
+      "name": "test_profile_opens_exploration_dialog",
+      "kind": "function",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 17
+    },
+    {
+      "name": "test_dialog_exposes_evidence_and_next_measurement",
+      "kind": "function",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 21
+    },
+    {
+      "name": "test_profile_can_navigate_directly_to_quiz",
+      "kind": "function",
+      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "line": 26
+    },
+    {
+      "name": "ReleaseCriticalProfileContractTest",
+      "kind": "class",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 6
+    },
+    {
+      "name": "setUp",
+      "kind": "function",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 7
+    },
+    {
+      "name": "test_profile_store_decodes_both_histories",
+      "kind": "function",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 14
+    },
+    {
+      "name": "test_profile_quiz_navigation_uses_mutable_quiz_id",
+      "kind": "function",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 22
+    },
+    {
+      "name": "test_retake_cadence_has_hard_minimum",
+      "kind": "function",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 32
+    },
+    {
+      "name": "test_profile_explains_next_quiz",
+      "kind": "function",
+      "file": "tools/test_release_critical_profile_contract.py",
+      "line": 36
     }
   ],
   "selected_tests": [
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt"
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+    "tools/test_actionable_knowledge_map_contract.py",
+    "tools/test_release_critical_profile_contract.py"
   ]
 }

@@ -10,7 +10,18 @@
         "impact",
         "symbol-indexed"
       ],
-      "score": 360
+      "score": 415
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 395
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
@@ -23,15 +34,6 @@
       "score": 310
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact"
-      ],
-      "score": 300
-    },
-    {
       "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "reasons": [
         "reverse-dependency-neighbor",
@@ -41,12 +43,32 @@
       "score": 130
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "path": "app/src/main/res/values-fr/strings.xml",
       "reasons": [
-        "selected-test",
-        "symbol-indexed"
+        "changed"
       ],
-      "score": 95
+      "score": 100
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 75
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 75
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
@@ -57,13 +79,6 @@
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 50
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "reasons": [
         "dependency-neighbor"
       ],

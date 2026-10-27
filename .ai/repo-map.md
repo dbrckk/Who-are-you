@@ -3861,6 +3861,7 @@ class QuizScreenUiTest {
     @Test
     fun commitFailureFeedbackIsVisibleAndRetryable() {
         var finalScore: Int? = null
+        var retryCalls = 0
         val quiz = testQuiz()
 
         composeRule.setContent {
@@ -3872,13 +3873,23 @@ class QuizScreenUiTest {
                 commitFailed = true,
                 onProgress = { _, _ -> },
                 onBack = {},
-                onFinished = { finalScore = it }
+                onFinished = { finalScore = it },
+                onRetrySave = { retryCalls++ }
             )
         }
 
         composeRule.onNodeWithTag("quiz_result_save_failed").assertIsDisplayed()
+        // Failure must not let a different answer silently change the prior score.
         composeRule.onNodeWithText("Second high answer").performClick()
-        composeRule.runOnIdle { assertEquals(100, finalScore) }
+        composeRule.runOnIdle {
+            assertEquals(null, finalScore)
+            assertEquals(0, retryCalls)
+        }
+        composeRule.onNodeWithTag("quiz_result_retry_save").assertIsDisplayed().performClick()
+        composeRule.runOnIdle {
+            assertEquals(1, retryCalls)
+            assertEquals(null, finalScore)
+        }
     }
 
     private fun testQuiz() = Quiz(
@@ -23512,17 +23523,19 @@ private fun WhoAreYouApp() {
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var commitFailed by rememberSaveable { mutableStateOf(false) }
+    var failedFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
     val quizFinishing = pendingFinalScore != null
     if (selectedQuiz == null) { LaunchedEffect(selectedQuizId, quizCatalog) { selectedQuizId = quizCatalog.first().id; quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; pendingFinalScore = null; commitFailed = false; finalScore = 0; previousScoreForAttempt = null; screenName = AppScreen.DISCOVER.name }; BrandLoadingScreen(tag = "quiz_session_recovering"); return }
 
     fun navigate(destination: AppScreen) { screenName = destination.name }
-    fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; commitFailed = false }
+    fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; failedFinalScore = null; commitFailed = false }
+    fun startQuiz(quiz: Quiz) { previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) }
     QuizResultCommitEffect(
         screen, selectedQuiz, quizAttemptId, pendingFinalScore,
-        onCommitFailed = { pendingFinalScore = null; commitFailed = true },
-        onCommitted = { persistedScore -> finalScore = persistedScore; navigate(AppScreen.RESULT) }
+        onCommitFailed = { failedFinalScore = pendingFinalScore; pendingFinalScore = null; commitFailed = true },
+        onCommitted = { persistedScore -> failedFinalScore = null; finalScore = persistedScore; navigate(AppScreen.RESULT) }
     )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) }; if (screen == AppScreen.HABITS) refreshBehavior() }
     BackHandler(enabled = screen != AppScreen.DISCOVER) { if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler; if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }; navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER) }
@@ -23536,13 +23549,13 @@ private fun WhoAreYouApp() {
                     quizzes = quizCatalog, profile = globalProfile, storedProfile = storedProfile, completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved, privacyOptionsRequired = privacyOptionsRequired && !adsRemoved,
                     onOpenProfile = { navigate(AppScreen.PROFILE) },
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onRemoveAds = { if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) } },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
                 AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile, catalog = quizCatalog,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onBack = { navigate(AppScreen.DISCOVER) },
                     onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } },
                     onOpenHabits = { navigate(AppNavigation.habitsDestination()) }
@@ -23578,17 +23591,18 @@ private fun WhoAreYouApp() {
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz, questionIndex = quizQuestionIndex, score = quizRawScore,
                     isFinishing = quizFinishing, commitFailed = commitFailed,
+                    onRetrySave = { if (commitFailed && !quizFinishing) failedFinalScore?.let { pendingFinalScore = it; commitFailed = false } },
                     onProgress = { questionIndex, score -> if (!quizFinishing) { quizQuestionIndex = questionIndex; quizRawScore = score } },
                     onAnswerSelected = { questionIndex, answerIndex, answerScore -> if (!quizFinishing) quizAttemptEvidence.record(questionIndex, answerIndex, answerScore) },
                     onBack = { if (!quizFinishing) { runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }; navigate(AppScreen.DISCOVER) } },
-                    onFinished = { score -> if (!quizFinishing) { commitFailed = false; pendingFinalScore = score } }
+                    onFinished = { score -> if (!quizFinishing && !commitFailed) { commitFailed = false; pendingFinalScore = score } }
                 )
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz, score = finalScore, previousScore = previousScoreForAttempt,
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size, totalQuizCount = quizCatalog.size,
                     catalog = quizCatalog, completed = storedProfile.completedQuizIds + selectedQuiz.id,
                     evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()), traitGraph = globalProfile.traitGraph, coverage = globalProfile.coverage,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onDone = { pendingFinalScore = null; val manager = adManager; if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) } }.onFailure { navigate(AppScreen.DISCOVER) } },
                     onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }
                 )
@@ -27417,6 +27431,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -27424,6 +27439,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27453,11 +27470,12 @@ fun QuizScreen(
     onProgress: (questionIndex: Int, score: Int) -> Unit,
     onAnswerSelected: (questionIndex: Int, answerIndex: Int, score: Int) -> Unit = { _, _, _ -> },
     onBack: () -> Unit,
-    onFinished: (Int) -> Unit
+    onFinished: (Int) -> Unit,
+    onRetrySave: () -> Unit = {}
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
     // Lock the first tap immediately, before Compose renders the next question.
-    // A failed final-result commit changes commitFailed and unlocks a fresh retry.
+    // The first answer locks immediately; a save failure exposes a separate retry action.
     var answerAccepted by remember(quiz.id, safeQuestionIndex, commitFailed) { mutableStateOf(false) }
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
@@ -27576,6 +27594,24 @@ fun QuizScreen(
                 accent = V2Colors.Peach,
                 tag = "quiz_result_save_failed"
             )
+            Spacer(Modifier.height(10.dp))
+            Button(
+                onClick = onRetrySave,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 52.dp)
+                    .testTag("quiz_result_retry_save"),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = V2Colors.Orchid,
+                    contentColor = V2Colors.Ink
+                )
+            ) {
+                Text(
+                    stringResource(R.string.quiz_result_retry_save),
+                    style = V2Type.BodyStrong,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
         Spacer(Modifier.height(if (constrainedLayout) 20.dp else 26.dp))
 
@@ -27608,7 +27644,7 @@ fun QuizScreen(
                     V2PressableSurface(
                         onClick = {
                             if (isFinishing) return@V2PressableSurface
-                            if (answerAccepted) return@V2PressableSurface
+                            if (commitFailed || answerAccepted) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
                             answerAccepted = true
                             onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
@@ -27619,7 +27655,7 @@ fun QuizScreen(
                                 onProgress(safeQuestionIndex + 1, newScore)
                             }
                         },
-                        enabled = !isFinishing && !answerAccepted && animatedIndex == safeQuestionIndex,
+                        enabled = !isFinishing && !commitFailed && !answerAccepted && animatedIndex == safeQuestionIndex,
                         modifier = if (animatedIndex == safeQuestionIndex) {
                             Modifier.testTag("quiz_answer_$answerIndex")
                         } else {
@@ -39861,6 +39897,10 @@ def test_profile_opens_exploration_dialog(self)
 def test_dialog_exposes_evidence_and_next_measurement(self)
 ⋮----
 def test_profile_can_navigate_directly_to_quiz(self)
+⋮----
+# All quiz entry points share one handler, including the profile.
+⋮----
+handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
 ```
 
 ## File: tools/test_android_apk_provenance_versioning.py
@@ -41484,6 +41524,8 @@ def test_profile_quiz_navigation_uses_mutable_quiz_id(self)
 ⋮----
 profile_branch = self.main[self.main.index("AppScreen.PROFILE -> ProfileScreen("):]
 profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
+⋮----
+handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
 ⋮----
 def test_retake_cadence_has_hard_minimum(self)
 ⋮----

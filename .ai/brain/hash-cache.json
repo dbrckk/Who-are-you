@@ -13,44 +13,52 @@
       "size": 8476
     },
     "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt": {
-      "sha256": "37782d47460b81a323a0a019c854709848ebcbd90e08ccf93992fccb6842b884",
-      "size": 4486
+      "sha256": "42735ae4a7244698b47d8316b12ee5e8e22abac558170b3dadb320f8627ec936",
+      "size": 4926
     },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
+    },
+    "app/src/main/java/com/whoareyou/app/AppNavigation.kt": {
+      "sha256": "ae03d497c2d1b79e53be85f9716526cebcfe6feeea7b1082f13f838623406c93",
+      "size": 522
     },
     "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt": {
       "sha256": "781ca28c90f7bdd95e2a11aa4c754f0636de73b9d1eab2f920ef1908c488d671",
       "size": 2264
     },
     "app/src/main/java/com/whoareyou/app/MainActivity.kt": {
-      "sha256": "c1a94dd529836be5c984fbd94a5e81e9a77b85d76bf9ac59e42ce2985ae9f1c0",
-      "size": 14977
+      "sha256": "deb479c59978a1ecdefb6a1ed9097ba05aaff84885c87c3144cd18c982c95789",
+      "size": 14978
     },
     "app/src/main/java/com/whoareyou/app/ProfileStore.kt": {
       "sha256": "b230ffc06003e1d8905252e4ba358778a3273dba29b0851d9793d50e2544a17e",
       "size": 13920
-    },
-    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": {
-      "sha256": "fc60669bbd678b6b629f2c7775075c51b4a6d314dac5cb0e6ff4802fb4a5f66f",
-      "size": 823
     },
     "app/src/main/java/com/whoareyou/app/QuizCatalog.kt": {
       "sha256": "2f5fc9eddb1e8a74a23795e0d40170c2b43ec9128322f79c9bdb8b2eb4fd8d2e",
       "size": 6418
     },
     "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": {
-      "sha256": "b7dda7f9691688ca9138eb3982c5e302a7670c53b0e3b6d5fbe406f55b2281cd",
-      "size": 13540
+      "sha256": "54b41833ce49420e91e041ef71b3af9e5083f4aa1a93344431de34fda2acc56a",
+      "size": 14437
     },
     "app/src/main/java/com/whoareyou/app/SignatureProfile.kt": {
       "sha256": "990bc3c224898943e526637c210d1c4ad203231adc6f4ca3690b4e6c5dadb829",
       "size": 15442
     },
+    "app/src/main/res/values-fr/strings.xml": {
+      "sha256": "d26f808248f0b23a88ff2cf1b3e69e4f167eb1107acd0577e826f627a8d5fe9b",
+      "size": 24060
+    },
+    "app/src/main/res/values/strings.xml": {
+      "sha256": "04cdd87637a6e17025d82b0e44073325aecc40be09fa15cae88cb5da8f87ef16",
+      "size": 22147
+    },
     "tools/test_actionable_knowledge_map_contract.py": {
-      "sha256": "86d36c1fa60d43c27c5a24be9ea24efc2940220cdf73a10f688be88d929326d5",
-      "size": 1482
+      "sha256": "83942a04cfffa2bcbfcfc12129c0ecc97bf213919fc7efa68704c0d18c13ad85",
+      "size": 1723
     },
     "tools/test_behavior_goal_v1_scope_contract.py": {
       "sha256": "a7c48223c4462e7175cba3f85199a91af2167b1afd3b307f7d7ce8d708545cd1",
@@ -109,8 +117,8 @@
       "size": 1499
     },
     "tools/test_release_critical_profile_contract.py": {
-      "sha256": "7dc84e2efdca86d0ba160d4f1119c0686423e2c8e2212bdb92b4284f399ec753",
-      "size": 2303
+      "sha256": "d4ff26ca5867f9a8d07df9f89f5f9aac1680f95c0d29b99d61705bac05ab0642",
+      "size": 2526
     },
     "tools/test_release_integration_contract.py": {
       "sha256": "f7870736f9c0b8fa5ffbba7fa653bcb8dbd4d44c7b9ac9dee60f10b70884a0ea",
@@ -119,14 +127,6 @@
     "tools/test_restored_quiz_recovery.py": {
       "sha256": "ef5f879f9382bf573d3b9537154e0806bc2c01fd8d6ba36655c4524fc49cbc1a",
       "size": 1214
-    },
-    "tools/test_runtime_efficiency_contract.py": {
-      "sha256": "c9e4910a9dd0784b29e0fd3ca03320ae5fbf1062481254eaa40a412da47cbc5d",
-      "size": 1675
-    },
-    "tools/test_runtime_performance_contract.py": {
-      "sha256": "3290335afb6be16433de4a811a62f01a3e91bd213f723f9399f35cfcab378d87",
-      "size": 2705
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

@@ -2,30 +2,32 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 10,
+    "example_count": 11,
     "rejected_count": 0,
     "terms": [
-      "101",
-      "answer",
-      "duplicate",
-      "evidence",
-      "preserve",
-      "prevent",
+      "102",
+      "answers",
+      "changing",
+      "failed",
       "quiz",
-      "resume",
-      "taps"
+      "result",
+      "retry",
+      "save",
+      "without"
     ],
     "test_count": 0,
-    "useful_count": 3
+    "useful_count": 5
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "fix(quiz): prevent duplicate taps and preserve answer evidence on resume (#101)",
+  "task": "fix(quiz): retry failed result save without changing answers (#102)",
   "tests_selected": [],
   "useful": [
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
     "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
-    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+    "tools/test_actionable_knowledge_map_contract.py",
+    "tools/test_release_critical_profile_contract.py"
   ]
 }

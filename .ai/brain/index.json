@@ -2,14 +2,14 @@
   "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
   "files_indexed": 354,
-  "symbol_count": 1665,
+  "symbol_count": 1666,
   "edge_count": 12,
   "languages": {
     "python": 115,
     "kotlin": 239
   },
   "index_mode": "incremental",
-  "reparsed_files": 3,
+  "reparsed_files": 5,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
@@ -160,6 +160,10 @@
       "symbols": 8
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "symbols": 8
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/ProfileIntegrity.kt",
       "symbols": 8
     },
@@ -206,10 +210,6 @@
     {
       "file": "tools/test_validate_ui_hierarchy.py",
       "symbols": 8
-    },
-    {
-      "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-      "symbols": 7
     }
   ]
 }

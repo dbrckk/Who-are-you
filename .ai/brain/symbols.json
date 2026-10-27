@@ -446,7 +446,7 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "testQuiz",
-      "line": 99
+      "line": 110
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
@@ -3554,14 +3554,21 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "navigate",
-      "line": 107
+      "line": 108
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "resetQuizAttempt",
-      "line": 109
+      "line": 110
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "startQuiz",
+      "line": 111
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/NextQuizRecommendation.kt",
@@ -4555,14 +4562,14 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "QuizScreen",
-      "line": 50
+      "line": 53
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "V2StatusNotice",
-      "line": 291
+      "line": 313
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
@@ -10659,14 +10666,14 @@
       "language": "python",
       "kind": "function",
       "name": "test_retake_cadence_has_hard_minimum",
-      "line": 29
+      "line": 32
     },
     {
       "file": "tools/test_release_critical_profile_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_profile_explains_next_quiz",
-      "line": 33
+      "line": 36
     },
     {
       "file": "tools/test_release_integration_contract.py",

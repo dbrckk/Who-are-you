@@ -531,6 +531,10 @@ def test_profile_opens_exploration_dialog(self)
 def test_dialog_exposes_evidence_and_next_measurement(self)
 ⋮----
 def test_profile_can_navigate_directly_to_quiz(self)
+⋮----
+# All quiz entry points share one handler, including the profile.
+⋮----
+handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
 ```
 
 ## File: test_android_apk_provenance_versioning.py
@@ -2154,6 +2158,8 @@ def test_profile_quiz_navigation_uses_mutable_quiz_id(self)
 ⋮----
 profile_branch = self.main[self.main.index("AppScreen.PROFILE -> ProfileScreen("):]
 profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
+⋮----
+handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
 ⋮----
 def test_retake_cadence_has_hard_minimum(self)
 ⋮----

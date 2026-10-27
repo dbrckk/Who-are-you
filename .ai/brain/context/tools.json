@@ -4,9 +4,26 @@
     {
       "path": "tools/test_actionable_knowledge_map_contract.py",
       "reasons": [
-        "reverse-dependency-neighbor"
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
       ],
-      "score": 30
+      "score": 430
+    },
+    {
+      "path": "tools/test_release_critical_profile_contract.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 425
     },
     {
       "path": "tools/test_behavior_goal_v1_scope_contract.py",
@@ -101,13 +118,6 @@
     },
     {
       "path": "tools/test_quiz_result_persistence_feedback.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_release_critical_profile_contract.py",
       "reasons": [
         "reverse-dependency-neighbor"
       ],
