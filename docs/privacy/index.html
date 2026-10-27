@@ -24,6 +24,18 @@
   <p class="muted">Last updated: October 27, 2026</p>
     <p>Who Are You? is an entertainment and self-reflection application. Its quizzes are not medical or psychological diagnoses. No Who Are You? account is required.</p>
 
+  <nav aria-label="Language / Langue"><a href="#health-connect-fr">Français — Santé Connect</a> · <a href="#health-connect">English — Health Connect</a></nav>
+
+  <section lang="fr" aria-labelledby="health-connect-fr">
+    <h2 id="health-connect-fr">Santé Connect : accès facultatif aux pas et objectifs de bien-être</h2>
+    <p>Dans <strong>Mes habitudes → Activité</strong>, Who Are You? demande uniquement l'autorisation <code>android.permission.health.READ_STEPS</code> pour <strong>lire le nombre de pas</strong> depuis Santé Connect, après votre accord explicite. L'application ne demande pas l'accès au sommeil, au rythme cardiaque ou aux dossiers médicaux et n'écrit aucune donnée dans Santé Connect. Les questionnaires restent utilisables sans cette autorisation.</p>
+    <p><strong>Finalité :</strong> afficher les pas du jour, les moyennes et les tendances d'activité sur 7 et 30 jours ainsi que la progression des objectifs personnels de marche. Ces informations servent uniquement au suivi facultatif de l'activité physique et ne sont pas utilisées pour établir un diagnostic médical ou psychologique.</p>
+    <p><strong>Accès, collecte et conservation :</strong> la lecture se fait sur votre appareil. Les totaux journaliers agrégés et les observations calculées sont enregistrés localement dans Android DataStore, sans synchronisation avec un serveur Who Are You?. Lorsque l'application fonctionne, l'historique couvre le jour en cours et les 30 jours précédents. Les anciennes observations sont supprimées à la prochaine ouverture ou actualisation ; si vous n'ouvrez plus l'application, elles peuvent donc rester localement au-delà de cette période. Les paramètres d'objectifs sont conservés jusqu'à leur suppression par l'utilisateur.</p>
+    <p><strong>Partage et publicité :</strong> les pas et les objectifs ne sont ni vendus ni envoyés à nos serveurs, aux annonceurs ou à des outils d'analyse externes. Ils ne servent jamais au ciblage publicitaire. Le SDK publicitaire peut traiter séparément des données relatives à l'appareil et aux annonces, comme expliqué dans la section anglaise « Advertising and consent » ci-dessous.</p>
+    <p><strong>Contrôle et suppression :</strong> vous pouvez refuser l'accès à Santé Connect. Dans <strong>Mes habitudes → Activité → Désactiver</strong>, vous pouvez supprimer les observations locales de pas ; <strong>Mes habitudes → Supprimer les données d'habitudes</strong> efface aussi les autres observations et objectifs. Pour empêcher de nouvelles lectures, révoquez séparément l'autorisation dans <strong>Paramètres Android → Santé Connect → Autorisations des applications → Who Are You?</strong> (le chemin exact dépend de l'appareil). Révoquer l'autorisation seule ne supprime pas les observations déjà enregistrées. Effacer les données de l'application ou la désinstaller supprime également les données locales.</p>
+    <p><strong>Contact :</strong> pour les questions de confidentialité, écrivez à <a href="mailto:dbrak7108@gmail.com">dbrak7108@gmail.com</a>.</p>
+  </section>
+
   <h2>Data stored on your device</h2>
   <p>The app stores quiz completion, latest and previous quiz scores, Daily Question state, streaks, onboarding completion, social comparison state and the lifetime remove-ads entitlement locally on the device using Android DataStore.</p>
 
