@@ -12,6 +12,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +33,25 @@ class MainActivity : ComponentActivity() {
     override fun attachBaseContext(newBase: Context) { super.attachBaseContext(localizedAppContext(newBase)) }
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }
 }
+
+// Save per-attempt explanation evidence alongside the existing saveable quiz progress.
+// Only primitive Int values enter the Android saved-state Bundle.
+private val quizAttemptEvidenceSaver = listSaver<QuizAttemptEvidence, Int>(
+    save = { evidence ->
+        evidence.snapshot().flatMap { answer ->
+            listOf(answer.questionIndex, answer.answerIndex, (answer.contribution + 3) / 2)
+        }
+    },
+    restore = { saved ->
+        QuizAttemptEvidence().apply {
+            saved.chunked(3).forEach { entry ->
+                if (entry.size == 3 && entry[0] >= 0 && entry[1] >= 0 && entry[2] in 0..3) {
+                    record(entry[0], entry[1], entry[2])
+                }
+            }
+        }
+    }
+)
 
 @Composable
 private fun WhoAreYouApp() {
@@ -95,7 +115,7 @@ private fun WhoAreYouApp() {
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
-    val quizAttemptEvidence = remember { QuizAttemptEvidence() }
+    val quizAttemptEvidence = rememberSaveable(quizAttemptId, saver = quizAttemptEvidenceSaver) { QuizAttemptEvidence() }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
