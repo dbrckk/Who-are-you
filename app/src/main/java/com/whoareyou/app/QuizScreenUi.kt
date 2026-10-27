@@ -210,7 +210,8 @@ fun QuizScreen(
                 animatedQuestion.answers.forEachIndexed { answerIndex, answer ->
                     V2PressableSurface(
                         onClick = {
-                            if (isFinishing || answerAccepted) return@V2PressableSurface
+                            if (isFinishing) return@V2PressableSurface
+                            if (answerAccepted) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
                             answerAccepted = true
                             onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
