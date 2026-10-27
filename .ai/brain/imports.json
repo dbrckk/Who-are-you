@@ -895,6 +895,7 @@
       "android.os.Bundle",
       "android.webkit.WebResourceError",
       "android.webkit.WebResourceRequest",
+      "android.webkit.WebResourceResponse",
       "android.webkit.WebView",
       "android.webkit.WebViewClient",
       "androidx.activity.ComponentActivity"

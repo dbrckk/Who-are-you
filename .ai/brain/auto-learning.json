@@ -2,30 +2,28 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 8,
+    "example_count": 9,
     "rejected_count": 0,
     "terms": [
-      "99",
+      "100",
+      "bilingual",
       "connect",
       "disclosure",
-      "google",
       "health",
-      "play",
+      "offline",
       "privacy",
-      "rejection"
+      "rationale",
+      "resilient"
     ],
     "test_count": 0,
-    "useful_count": 4
+    "useful_count": 1
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "Fix Google Play Health Connect disclosure and privacy rejection (#99)",
+  "task": "fix(privacy): bilingual Health Connect disclosure and resilient offline rationale (#100)",
   "tests_selected": [],
   "useful": [
-    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
     "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
   ]
 }

@@ -38,27 +38,27 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-27T15:22:55Z
+Generated: 2026-10-27T21:50:22Z
 
 ### Git
 - Branch: `main`
-- Head: `613d6337dcd8`
-- Commit date: 2026-10-27T11:22:44-04:00
-- Commit: Fix Google Play Health Connect disclosure and privacy rejection (#99)
+- Head: `740dcdd72d31`
+- Commit date: 2026-10-27T17:50:11-04:00
+- Commit: fix(privacy): bilingual Health Connect disclosure and resilient offline rationale (#100)
 - Tracked files: 699
 
 ### Recently changed files
+- `app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt`
+- `docs/privacy/index.html`
 - `app/src/main/AndroidManifest.xml`
 - `app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt`
 - `app/src/main/java/com/whoareyou/app/BehaviorRepository.kt`
 - `app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt`
-- `app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt`
 - `app/src/main/res/values-fr/strings.xml`
 - `app/src/main/res/values/strings.xml`
 - `docs/play-data-safety.md`
 - `docs/play-health-connect-declaration.md`
 - `docs/privacy-policy.md`
-- `docs/privacy/index.html`
 - `docs/store-listing-en.md`
 - `docs/store-listing-fr.md`
 - `docs/play-update-0.3.0.md`
@@ -66,7 +66,6 @@ Generated: 2026-10-27T15:22:55Z
 - `.github/workflows/play-candidate.yml`
 - `.github/workflows/play-internal-publish.yml`
 - `tools/test_performance_release_gate_contract.py`
-- `.github/workflows/android-ci.yml`
 
 ### Project signals
 - `build.gradle.kts`

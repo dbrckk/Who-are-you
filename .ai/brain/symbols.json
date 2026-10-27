@@ -3393,28 +3393,42 @@
       "language": "kotlin",
       "kind": "class",
       "name": "HealthConnectPrivacyActivity",
-      "line": 14
+      "line": 15
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "onCreate",
-      "line": 16
+      "line": 18
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "onReceivedError",
-      "line": 25
+      "line": 27
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "onReceivedHttpError",
+      "line": 34
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "showFallback",
+      "line": 47
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "onDestroy",
-      "line": 54
+      "line": 74
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",

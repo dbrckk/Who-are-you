@@ -1,48 +1,8 @@
 {
   "files": {
-    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt": {
-      "sha256": "f842e67330374094d37092deb5b78550a65db5a843572488867df7b52bd6d6f8",
-      "size": 6651
-    },
-    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
-      "sha256": "901dc81055e1cde89606941762839f2cdd34973237cc0722a3bd575aff72864f",
-      "size": 3293
-    },
-    "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt": {
-      "sha256": "938fa29aa6bdb3e0695fbd913d55ad6ec0b9989dace16a9ad03dc2e4ab7ef10a",
-      "size": 1912
-    },
-    "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt": {
-      "sha256": "2477d7404f01ff954f0d6709e72d3fe35f03fbd5e45b3ce96c7b1b081d74a5a8",
-      "size": 2641
-    },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
-    },
-    "app/src/main/java/com/whoareyou/app/ActivityCollector.kt": {
-      "sha256": "e3227aea67c7e88b9f92eca496acd815a0c4e92b4a8a65f9f3a95a443a022899",
-      "size": 2922
-    },
-    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
-      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
-      "size": 4028
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt": {
-      "sha256": "4cc3d2cb504db29224585f787e7d95a7b94f727eba3a6aae98421d8173594124",
-      "size": 2762
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt": {
-      "sha256": "31246b5f5526f8ab4e02c5404779abcde244c246f7dc1b1af3217049e9a9a3e0",
-      "size": 15352
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt": {
-      "sha256": "b277329e495900bb34fee041fa2f07b57bc1dd86b7ffdb1fd858d55d6b5dbff6",
-      "size": 6701
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorModels.kt": {
-      "sha256": "fa60708a885ca38db27d0481273879ba12e6fd7d422cd58f5061c38fcddf2907",
-      "size": 2310
     },
     "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": {
       "sha256": "ce86092e313a064dbdefa8de8a701125660cbcca5b464ae846ed12fd6134c8a3",
@@ -56,21 +16,9 @@
       "sha256": "67c63d874581cf6871bdaa678162dc9319154de95d17a98f0cacb877b00e65eb",
       "size": 14765
     },
-    "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt": {
-      "sha256": "803bee3a762e8f24ddd7896b7e1abfae065a96d80e8735e6675b9876c925d4f4",
-      "size": 1767
-    },
-    "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt": {
-      "sha256": "6a6278604e66b41c7e98b62b502c64741eb1a4e682da58b017184d047c235d7e",
-      "size": 7918
-    },
     "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": {
-      "sha256": "e158b91812830c42ac7a3f810ba87ff75c0ed57bc8b0909a6347b2b84d54a81a",
-      "size": 2736
-    },
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt": {
-      "sha256": "102fa011a5fc77111d5d674f516d18c5625caae26353f51f6678b5611b86845a",
-      "size": 14920
+      "sha256": "0e8cad0ec0714c7bf26d7124c60ab8b69c2dde9d15c9b73d4094b21ca9d92963",
+      "size": 5076
     },
     "app/src/main/res/values-fr/strings.xml": {
       "sha256": "a9e41fcdad7284554e9b1f6d66b5cf17106a94fbbef3941ad26b523c36d66977",
@@ -80,53 +28,17 @@
       "sha256": "c5955442ad7797b9817b2833dbfd2b602fe8e14153d2822724da4797fc9af1ec",
       "size": 22073
     },
-    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt": {
-      "sha256": "6ae82b35ede76df4a8197b07d8a1fec9f7f8b57b8c0f5d8dee7d3761fd3ab99d",
-      "size": 8936
-    },
-    "docs/play-data-safety.md": {
-      "sha256": "5be21fd8e337571c378cbf5602064a29a378945c6e9c198e36bf2381bcea0777",
-      "size": 7344
-    },
-    "docs/play-health-connect-declaration.md": {
-      "sha256": "5d62359b6d9bae16f642211a9ba4e07564bb9488cbc353ac50f4c2b651eba856",
-      "size": 4253
-    },
-    "docs/privacy-policy.md": {
-      "sha256": "9080ace5309a0edb8ec52781d365e6364f3be051142f81353faa82f46b5144a9",
-      "size": 8472
-    },
     "docs/privacy/index.html": {
-      "sha256": "44e5353380bfcef77cf8aee0da5f1e24b9e3d054e3c4ea3ec7a149d176819a6b",
-      "size": 8187
+      "sha256": "ad83e7b03dbf2b5a1eacbf89dfa0646db4c441f37aba7c4b046f232ac964fff0",
+      "size": 11317
     },
-    "docs/store-listing-en.md": {
-      "sha256": "7732abbaa631af24231efd135f0da65cabb940a7dff12683cc910faefda5a597",
-      "size": 2511
+    "tools/test_performance_release_gate_contract.py": {
+      "sha256": "23422b05185f59435bdf9537e52382322d1cbf75ede30a154f9f83c40038af5e",
+      "size": 3044
     },
-    "docs/store-listing-fr.md": {
-      "sha256": "353848141c982bf026fdcf182356eb36e50324bf1771c60a2603aba5bd093653",
-      "size": 2957
-    },
-    "tools/test_behavior_goal_storage_contract.py": {
-      "sha256": "0e22e38bb946e16aeb7b1e65bdf11d4447f3f28cc675260296a048ee732035d5",
-      "size": 1456
-    },
-    "tools/test_behavior_goal_v1_scope_contract.py": {
-      "sha256": "a7c48223c4462e7175cba3f85199a91af2167b1afd3b307f7d7ce8d708545cd1",
-      "size": 1443
-    },
-    "tools/test_behavior_privacy_contract.py": {
-      "sha256": "6518b436160847ef1bc8f22b59a2f09aa79cd920a41d1b799d38a39bfc9fbdf7",
-      "size": 2877
-    },
-    "tools/test_release_integration_contract.py": {
-      "sha256": "f7870736f9c0b8fa5ffbba7fa653bcb8dbd4d44c7b9ac9dee60f10b70884a0ea",
-      "size": 3858
-    },
-    "tools/test_release_upgrade_persistence_contract.py": {
-      "sha256": "4304ee1aebf99e1e9ae838059d9dcfd75b84771fb56af53a4f43a10b87544226",
-      "size": 4346
+    "tools/verify_play_upload_key.sh": {
+      "sha256": "be128362f54058a0333da160b8bd208866eae354dac55dfbd581253afcbbcb1d",
+      "size": 2128
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",
