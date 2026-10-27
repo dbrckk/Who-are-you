@@ -67,7 +67,8 @@
     <string name="start">START  →</string>
     <string name="question_progress">%1$d / %2$d</string>
     <string name="quiz_result_saving">Saving your result…</string>
-    <string name="quiz_result_save_failed">Your result couldn\'t be saved. Check your connection or storage, then tap an answer again to retry.</string>
+    <string name="quiz_result_save_failed">Your result couldn\'t be saved. Your answers are preserved. Check available storage, then retry saving.</string>
+    <string name="quiz_result_retry_save">RETRY SAVING RESULT</string>
     <string name="no_right_answers">No right answers. Pick what feels most like you.</string>
     <string name="your_result">YOUR RESULT</string>
     <string name="profile_progress">PROFILE PROGRESS</string>

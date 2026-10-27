@@ -22,8 +22,11 @@ class ReleaseCriticalProfileContractTest(unittest.TestCase):
     def test_profile_quiz_navigation_uses_mutable_quiz_id(self):
         profile_branch = self.main[self.main.index("AppScreen.PROFILE -> ProfileScreen("):]
         profile_branch = profile_branch[:profile_branch.index("AppScreen.QUIZ ->")]
-        self.assertIn("selectedQuizId = quiz.id", profile_branch)
-        self.assertIn("resetQuizAttempt()", profile_branch)
+        self.assertIn("onQuizSelected = ::startQuiz", profile_branch)
+        handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
+        self.assertIn("selectedQuizId = quiz.id", handler)
+        self.assertIn("resetQuizAttempt()", handler)
+        self.assertIn("navigate(AppScreen.QUIZ)", handler)
         self.assertNotIn("selectedQuiz = quiz", profile_branch)
 
     def test_retake_cadence_has_hard_minimum(self):

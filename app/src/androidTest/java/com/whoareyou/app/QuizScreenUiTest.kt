@@ -77,6 +77,7 @@ class QuizScreenUiTest {
     @Test
     fun commitFailureFeedbackIsVisibleAndRetryable() {
         var finalScore: Int? = null
+        var retryCalls = 0
         val quiz = testQuiz()
 
         composeRule.setContent {
@@ -88,13 +89,23 @@ class QuizScreenUiTest {
                 commitFailed = true,
                 onProgress = { _, _ -> },
                 onBack = {},
-                onFinished = { finalScore = it }
+                onFinished = { finalScore = it },
+                onRetrySave = { retryCalls++ }
             )
         }
 
         composeRule.onNodeWithTag("quiz_result_save_failed").assertIsDisplayed()
+        // Failure must not let a different answer silently change the prior score.
         composeRule.onNodeWithText("Second high answer").performClick()
-        composeRule.runOnIdle { assertEquals(100, finalScore) }
+        composeRule.runOnIdle {
+            assertEquals(null, finalScore)
+            assertEquals(0, retryCalls)
+        }
+        composeRule.onNodeWithTag("quiz_result_retry_save").assertIsDisplayed().performClick()
+        composeRule.runOnIdle {
+            assertEquals(1, retryCalls)
+            assertEquals(null, finalScore)
+        }
     }
 
     private fun testQuiz() = Quiz(

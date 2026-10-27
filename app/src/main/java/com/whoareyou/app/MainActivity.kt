@@ -100,17 +100,19 @@ private fun WhoAreYouApp() {
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var commitFailed by rememberSaveable { mutableStateOf(false) }
+    var failedFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
     var finalScore by rememberSaveable { mutableIntStateOf(0) }
     var previousScoreForAttempt by rememberSaveable { mutableStateOf<Int?>(null) }
     val quizFinishing = pendingFinalScore != null
     if (selectedQuiz == null) { LaunchedEffect(selectedQuizId, quizCatalog) { selectedQuizId = quizCatalog.first().id; quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; pendingFinalScore = null; commitFailed = false; finalScore = 0; previousScoreForAttempt = null; screenName = AppScreen.DISCOVER.name }; BrandLoadingScreen(tag = "quiz_session_recovering"); return }
 
     fun navigate(destination: AppScreen) { screenName = destination.name }
-    fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; commitFailed = false }
+    fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; failedFinalScore = null; commitFailed = false }
+    fun startQuiz(quiz: Quiz) { previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) }
     QuizResultCommitEffect(
         screen, selectedQuiz, quizAttemptId, pendingFinalScore,
-        onCommitFailed = { pendingFinalScore = null; commitFailed = true },
-        onCommitted = { persistedScore -> finalScore = persistedScore; navigate(AppScreen.RESULT) }
+        onCommitFailed = { failedFinalScore = pendingFinalScore; pendingFinalScore = null; commitFailed = true },
+        onCommitted = { persistedScore -> failedFinalScore = null; finalScore = persistedScore; navigate(AppScreen.RESULT) }
     )
     LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) }; if (screen == AppScreen.HABITS) refreshBehavior() }
     BackHandler(enabled = screen != AppScreen.DISCOVER) { if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler; if (screen == AppScreen.QUIZ) runCatching { AppEvents.testAbandon(selectedQuiz.id, "system_back") }; navigate(AppNavigation.backDestination(screen) ?: AppScreen.DISCOVER) }
@@ -124,13 +126,13 @@ private fun WhoAreYouApp() {
                     quizzes = quizCatalog, profile = globalProfile, storedProfile = storedProfile, completed = storedProfile.completedQuizIds,
                     adsRemoved = adsRemoved, privacyOptionsRequired = privacyOptionsRequired && !adsRemoved,
                     onOpenProfile = { navigate(AppScreen.PROFILE) },
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onRemoveAds = { if (!adsRemoved && activity != null) runCatching { billingManager?.launchPurchase(activity) } },
                     onPrivacyOptions = { runCatching { adManager?.showPrivacyOptions(activity) } }
                 )
                 AppScreen.PROFILE -> ProfileScreen(
                     summary = globalProfile, catalog = quizCatalog,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onBack = { navigate(AppScreen.DISCOVER) },
                     onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } },
                     onOpenHabits = { navigate(AppNavigation.habitsDestination()) }
@@ -166,17 +168,18 @@ private fun WhoAreYouApp() {
                 AppScreen.QUIZ -> QuizScreen(
                     quiz = selectedQuiz, questionIndex = quizQuestionIndex, score = quizRawScore,
                     isFinishing = quizFinishing, commitFailed = commitFailed,
+                    onRetrySave = { if (commitFailed && !quizFinishing) failedFinalScore?.let { pendingFinalScore = it; commitFailed = false } },
                     onProgress = { questionIndex, score -> if (!quizFinishing) { quizQuestionIndex = questionIndex; quizRawScore = score } },
                     onAnswerSelected = { questionIndex, answerIndex, answerScore -> if (!quizFinishing) quizAttemptEvidence.record(questionIndex, answerIndex, answerScore) },
                     onBack = { if (!quizFinishing) { runCatching { AppEvents.testAbandon(selectedQuiz.id, "screen_back") }; navigate(AppScreen.DISCOVER) } },
-                    onFinished = { score -> if (!quizFinishing) { commitFailed = false; pendingFinalScore = score } }
+                    onFinished = { score -> if (!quizFinishing && !commitFailed) { commitFailed = false; pendingFinalScore = score } }
                 )
                 AppScreen.RESULT -> ResultScreen(
                     quiz = selectedQuiz, score = finalScore, previousScore = previousScoreForAttempt,
                     completedCount = (storedProfile.completedQuizIds + selectedQuiz.id).size, totalQuizCount = quizCatalog.size,
                     catalog = quizCatalog, completed = storedProfile.completedQuizIds + selectedQuiz.id,
                     evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()), traitGraph = globalProfile.traitGraph, coverage = globalProfile.coverage,
-                    onQuizSelected = { quiz -> previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) }; navigate(AppScreen.QUIZ) },
+                    onQuizSelected = ::startQuiz,
                     onDone = { pendingFinalScore = null; val manager = adManager; if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { navigate(AppScreen.DISCOVER) } }.onFailure { navigate(AppScreen.DISCOVER) } },
                     onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }
                 )

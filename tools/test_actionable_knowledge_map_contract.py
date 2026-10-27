@@ -24,8 +24,11 @@ class ActionableKnowledgeMapContractTest(unittest.TestCase):
         self.assertIn("onStartQuiz(quiz)", self.dialog)
 
     def test_profile_can_navigate_directly_to_quiz(self):
-        self.assertIn("onQuizSelected = { quiz ->", self.main)
-        self.assertIn("navigate(AppScreen.QUIZ)", self.main)
+        # All quiz entry points share one handler, including the profile.
+        self.assertIn("onQuizSelected = ::startQuiz", self.main)
+        handler = self.main.split("fun startQuiz(quiz: Quiz)", 1)[1].split("QuizResultCommitEffect(", 1)[0]
+        self.assertIn("selectedQuizId = quiz.id", handler)
+        self.assertIn("navigate(AppScreen.QUIZ)", handler)
 
 if __name__ == "__main__":
     unittest.main()
