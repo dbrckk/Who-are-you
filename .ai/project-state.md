@@ -38,16 +38,19 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-27T21:50:22Z
+Generated: 2026-10-27T22:06:56Z
 
 ### Git
 - Branch: `main`
-- Head: `740dcdd72d31`
-- Commit date: 2026-10-27T17:50:11-04:00
-- Commit: fix(privacy): bilingual Health Connect disclosure and resilient offline rationale (#100)
-- Tracked files: 699
+- Head: `cc0ff6657c33`
+- Commit date: 2026-10-27T18:06:46-04:00
+- Commit: fix(quiz): prevent duplicate taps and preserve answer evidence on resume (#101)
+- Tracked files: 700
 
 ### Recently changed files
+- `app/src/main/java/com/whoareyou/app/MainActivity.kt`
+- `app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt`
+- `app/src/main/java/com/whoareyou/app/QuizScreenUi.kt`
 - `app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt`
 - `docs/privacy/index.html`
 - `app/src/main/AndroidManifest.xml`
@@ -65,7 +68,6 @@ Generated: 2026-10-27T21:50:22Z
 - `tools/verify_play_upload_key.sh`
 - `.github/workflows/play-candidate.yml`
 - `.github/workflows/play-internal-publish.yml`
-- `tools/test_performance_release_gate_contract.py`
 
 ### Project signals
 - `build.gradle.kts`

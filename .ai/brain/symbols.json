@@ -4555,14 +4555,14 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "QuizScreen",
-      "line": 47
+      "line": 50
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "V2StatusNotice",
-      "line": 283
+      "line": 291
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",

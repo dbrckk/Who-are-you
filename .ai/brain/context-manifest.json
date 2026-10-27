@@ -3,17 +3,12 @@
   "packets": [
     {
       "area": "app-src",
-      "file_count": 7,
+      "file_count": 12,
       "path": ".ai/brain/context/app-src.json"
     },
     {
-      "area": "docs",
-      "file_count": 1,
-      "path": ".ai/brain/context/docs.json"
-    },
-    {
       "area": "tools",
-      "file_count": 2,
+      "file_count": 16,
       "path": ".ai/brain/context/tools.json"
     }
   ],

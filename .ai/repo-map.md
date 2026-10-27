@@ -201,6 +201,7 @@ app/
               ProfileStrengthNuanceUi.kt
               PurchaseGrantPolicy.kt
               QuizAttemptEvidence.kt
+              QuizAttemptEvidenceSaver.kt
               QuizCatalog.kt
               QuizResultCommitEffect.kt
               QuizScreenUi.kt
@@ -23506,7 +23507,7 @@ private fun WhoAreYouApp() {
     var selectedQuizId by rememberSaveable { mutableStateOf(quizCatalog.first().id) }
     val selectedQuiz = quizCatalog.firstOrNull { it.id == selectedQuizId }
     var quizAttemptId by rememberSaveable { mutableStateOf(UUID.randomUUID().toString()) }
-    val quizAttemptEvidence = remember { QuizAttemptEvidence() }
+    val quizAttemptEvidence = rememberSaveable(quizAttemptId, saver = quizAttemptEvidenceSaver) { QuizAttemptEvidence() }
     var quizQuestionIndex by rememberSaveable { mutableIntStateOf(0) }
     var quizRawScore by rememberSaveable { mutableIntStateOf(0) }
     var pendingFinalScore by rememberSaveable { mutableStateOf<Int?>(null) }
@@ -27172,6 +27173,34 @@ class QuizAttemptEvidence {
 }
 ```
 
+## File: app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.runtime.saveable.listSaver
+
+/**
+ * Saves the selected answers as Android Bundle-safe integers, without persisting
+ * additional profile data. Each triple contains a question, answer and 0..3 score.
+ */
+internal val quizAttemptEvidenceSaver = listSaver<QuizAttemptEvidence, Int>(
+    save = { evidence ->
+        evidence.snapshot().flatMap { answer ->
+            listOf(answer.questionIndex, answer.answerIndex, (answer.contribution + 3) / 2)
+        }
+    },
+    restore = { saved ->
+        QuizAttemptEvidence().apply {
+            saved.chunked(3).forEach { entry ->
+                if (entry.size == 3 && entry[0] >= 0 && entry[1] >= 0 && entry[2] in 0..3) {
+                    record(entry[0], entry[1], entry[2])
+                }
+            }
+        }
+    }
+)
+```
+
 ## File: app/src/main/java/com/whoareyou/app/QuizCatalog.kt
 ```kotlin
 package com.whoareyou.app
@@ -27400,6 +27429,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27424,6 +27456,9 @@ fun QuizScreen(
     onFinished: (Int) -> Unit
 ) {
     val safeQuestionIndex = questionIndex.coerceIn(0, quiz.questions.lastIndex)
+    // Lock the first tap immediately, before Compose renders the next question.
+    // A failed final-result commit changes commitFailed and unlocks a fresh retry.
+    var answerAccepted by remember(quiz.id, safeQuestionIndex, commitFailed) { mutableStateOf(false) }
     val progress = (safeQuestionIndex + 1f) / quiz.questions.size
     val reduceMotion = reducedMotionEnabled()
     val animatedProgress by animateFloatAsState(
@@ -27573,7 +27608,9 @@ fun QuizScreen(
                     V2PressableSurface(
                         onClick = {
                             if (isFinishing) return@V2PressableSurface
+                            if (answerAccepted) return@V2PressableSurface
                             if (animatedIndex != safeQuestionIndex) return@V2PressableSurface
+                            answerAccepted = true
                             onAnswerSelected(safeQuestionIndex, answerIndex, answer.score)
                             val newScore = score + answer.score
                             if (safeQuestionIndex == quiz.questions.lastIndex) {
@@ -27582,7 +27619,7 @@ fun QuizScreen(
                                 onProgress(safeQuestionIndex + 1, newScore)
                             }
                         },
-                        enabled = !isFinishing && animatedIndex == safeQuestionIndex,
+                        enabled = !isFinishing && !answerAccepted && animatedIndex == safeQuestionIndex,
                         modifier = if (animatedIndex == safeQuestionIndex) {
                             Modifier.testTag("quiz_answer_$answerIndex")
                         } else {

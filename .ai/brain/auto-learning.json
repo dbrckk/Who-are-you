@@ -2,28 +2,30 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 9,
+    "example_count": 10,
     "rejected_count": 0,
     "terms": [
-      "100",
-      "bilingual",
-      "connect",
-      "disclosure",
-      "health",
-      "offline",
-      "privacy",
-      "rationale",
-      "resilient"
+      "101",
+      "answer",
+      "duplicate",
+      "evidence",
+      "preserve",
+      "prevent",
+      "quiz",
+      "resume",
+      "taps"
     ],
     "test_count": 0,
-    "useful_count": 1
+    "useful_count": 3
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "fix(privacy): bilingual Health Connect disclosure and resilient offline rationale (#100)",
+  "task": "fix(quiz): prevent duplicate taps and preserve answer evidence on resume (#101)",
   "tests_selected": [],
   "useful": [
-    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
   ]
 }

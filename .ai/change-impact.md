@@ -1,15 +1,15 @@
 # Change impact
 
-Base: 7ed7397df0ad693db59eec094c11574af3d3f267
-Head: 740dcdd72d314124a71dd9e8a699092fe3e09f79
+Base: 8fc2ab45722e451363d928e05dae9557d41f4d66
+Head: cc0ff6657c3329ba9242f97fea6f489dc514533e
 
 ## Changed files
-- M app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt
-- M docs/privacy/index.html
+- M app/src/main/java/com/whoareyou/app/MainActivity.kt
+- A app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt
+- M app/src/main/java/com/whoareyou/app/QuizScreenUi.kt
 
 ## Affected areas
 - app
-- docs
 
 ## Related test candidates
 - No direct filename-based test match detected.

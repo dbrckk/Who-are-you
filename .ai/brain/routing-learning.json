@@ -233,6 +233,27 @@
       "useful": [
         "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "fix(quiz): prevent duplicate taps and preserve answer evidence on resume (#101)",
+      "terms": [
+        "101",
+        "answer",
+        "duplicate",
+        "evidence",
+        "preserve",
+        "prevent",
+        "quiz",
+        "resume",
+        "taps"
+      ],
+      "tests": [],
+      "useful": [
+        "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+        "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -240,6 +261,11 @@
   "term_file_scores": {
     "100": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
+    },
+    "101": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
     "74": {
       "app/build.gradle.kts": 4,
@@ -352,6 +378,11 @@
     "agents": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
+    },
+    "answer": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
     "benchmark": {
       "tools/test_performance_release_gate_contract.py": 4
@@ -475,6 +506,16 @@
     "docs": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
+    },
+    "duplicate": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "evidence": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
     "from": {
       "app/build.gradle.kts": 4,
@@ -637,6 +678,16 @@
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4,
       "tools/test_performance_release_gate_contract.py": 4
     },
+    "preserve": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "prevent": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
     "privacy": {
       "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
       "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
@@ -708,6 +759,11 @@
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
+    },
+    "quiz": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
     "rationale": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
@@ -790,9 +846,19 @@
     "resilient": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
+    "resume": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
     "standard": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
+    },
+    "taps": {
+      "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
+      "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
     },
     "task": {
       "tools/test_performance_release_gate_contract.py": 4

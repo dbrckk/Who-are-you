@@ -1302,6 +1302,9 @@
       "androidx.compose.ui.unit.sp",
       "kotlin.math.abs"
     ],
+    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": [
+      "androidx.compose.runtime.saveable.listSaver"
+    ],
     "app/src/main/java/com/whoareyou/app/QuizCatalog.kt": [
       "android.content.Context",
       "java.util.Locale",
@@ -1346,6 +1349,9 @@
       "androidx.compose.runtime.Composable",
       "androidx.compose.runtime.LaunchedEffect",
       "androidx.compose.runtime.getValue",
+      "androidx.compose.runtime.mutableStateOf",
+      "androidx.compose.runtime.remember",
+      "androidx.compose.runtime.setValue",
       "androidx.compose.ui.Alignment",
       "androidx.compose.ui.Modifier",
       "androidx.compose.ui.graphics.Brush",

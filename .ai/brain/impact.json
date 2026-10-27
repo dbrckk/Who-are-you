@@ -1,62 +1,91 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "613d6337dcd8d51122cc9445b9d4633bba658626",
-  "head": "740dcdd72d314124a71dd9e8a699092fe3e09f79",
+  "base": "740dcdd72d314124a71dd9e8a699092fe3e09f79",
+  "head": "cc0ff6657c3329ba9242f97fea6f489dc514533e",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
       "status": "M"
     },
     {
-      "path": "docs/privacy/index.html",
+      "path": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
       "status": "M"
     }
   ],
   "changed_source_files": [
-    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
   ],
   "impacted_files": [
-    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+    "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt"
   ],
   "impacted_symbols": [
     {
-      "name": "HealthConnectPrivacyActivity",
+      "name": "MainActivity",
       "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 15
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 30
+    },
+    {
+      "name": "attachBaseContext",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 32
     },
     {
       "name": "onCreate",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 18
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 33
     },
     {
-      "name": "onReceivedError",
+      "name": "WhoAreYouApp",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 27
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 37
     },
     {
-      "name": "onReceivedHttpError",
+      "name": "refreshBehavior",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 34
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 51
     },
     {
-      "name": "showFallback",
+      "name": "navigate",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 47
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 107
     },
     {
-      "name": "onDestroy",
+      "name": "resetQuizAttempt",
       "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-      "line": 74
+      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "line": 109
+    },
+    {
+      "name": "QuizScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "line": 50
+    },
+    {
+      "name": "V2StatusNotice",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "line": 291
     }
   ],
-  "selected_tests": []
+  "selected_tests": [
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt"
+  ]
 }

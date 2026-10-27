@@ -2,59 +2,100 @@
   "area": "app-src",
   "files": [
     {
-      "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 360
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
-        "recent-project-state",
         "symbol-indexed"
       ],
-      "score": 390
+      "score": 310
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact"
+      ],
+      "score": 300
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 130
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "reasons": [
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 95
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 75
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
     },
     {
       "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
-        "entrypoint",
-        "recent-project-state"
+        "entrypoint"
       ],
-      "score": 100
+      "score": 40
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
       "reasons": [
-        "recent-project-state",
         "reverse-dependency-neighbor"
       ],
-      "score": 90
+      "score": 30
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
       "reasons": [
-        "recent-project-state"
+        "reverse-dependency-neighbor"
       ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/res/values-fr/strings.xml",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/res/values/strings.xml",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
+      "score": 30
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

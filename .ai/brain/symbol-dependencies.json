@@ -5,67 +5,55 @@
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
   "symbols": {
-    "HealthConnectPrivacyActivity": {
+    "MainActivity": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 15,
-        "end": 84
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 31,
+        "end": 34
       },
       "symbol_dependencies": [
+        {
+          "symbol": "WhoAreYouApp",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "WhoAreYouTheme",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
+              "line": 16,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "attachBaseContext",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 32,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
         {
           "symbol": "onCreate",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 18,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onDestroy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 74,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onReceivedError",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 27,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onReceivedHttpError",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 34,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "showFallback",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 47,
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 33,
               "kind": "symbol",
               "language": "kotlin"
             }
@@ -73,21 +61,30 @@
           "relation": "same_file"
         }
       ],
-      "dependency_count": 5
+      "dependency_count": 4
+    },
+    "attachBaseContext": {
+      "source": {
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 32,
+        "end": 32
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
     },
     "onCreate": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 19,
-        "end": 46
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 33,
+        "end": 33
       },
       "symbol_dependencies": [
         {
-          "symbol": "onReceivedError",
+          "symbol": "WhoAreYouApp",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 27,
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 37,
               "kind": "symbol",
               "language": "kotlin"
             }
@@ -95,129 +92,1699 @@
           "relation": "same_file"
         },
         {
-          "symbol": "onReceivedHttpError",
+          "symbol": "WhoAreYouTheme",
           "definitions": [
             {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 34,
+              "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
+              "line": 16,
               "kind": "symbol",
               "language": "kotlin"
             }
           ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "showFallback",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "onReceivedError": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 27,
-        "end": 147
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "onDestroy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 74,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "onReceivedHttpError",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 34,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "showFallback",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        }
-      ],
-      "dependency_count": 3
-    },
-    "onReceivedHttpError": {
-      "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 34,
-        "end": 154
-      },
-      "symbol_dependencies": [
-        {
-          "symbol": "onDestroy",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 74,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
-        },
-        {
-          "symbol": "showFallback",
-          "definitions": [
-            {
-              "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-              "line": 47,
-              "kind": "symbol",
-              "language": "kotlin"
-            }
-          ],
-          "relation": "same_file"
+          "relation": "class_like"
         }
       ],
       "dependency_count": 2
     },
-    "showFallback": {
+    "WhoAreYouApp": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 48,
-        "end": 73
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 36,
+        "end": 187
       },
-      "symbol_dependencies": [],
-      "dependency_count": 0
+      "symbol_dependencies": [
+        {
+          "symbol": "AdManager",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+              "line": 14,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppEvents",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppShellNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 52,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorGoalRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+              "line": 18,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorIntegrationPolicy",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+              "line": 9,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRefreshOnResume",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+              "line": 16,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSnapshot",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 71,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceActionHandler",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 4,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorUiModelFactory",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+              "line": 88,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BillingManager",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+              "line": 21,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BillingPriceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+              "line": 12,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BrandLoadingScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 267,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "CatalogUnavailableScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 53,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "DiscoverHub",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+              "line": 52,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "GlobalProfileEngine",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "HealthConnectActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 48,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "OnboardingScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 108,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "PremiumAppShellBar",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 69,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "Quiz",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizAttemptEvidence",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+              "line": 29,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizResultCommitEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
+              "line": 8,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+              "line": 50,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultEvidenceEngine",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+              "line": 17,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "UsageAccess",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "navigate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 107,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "onCreate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 33,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "refreshBehavior",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 51,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "resetQuizAttempt",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 109,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 39
     },
-    "onDestroy": {
+    "refreshBehavior": {
       "source": {
-        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-        "start": 75,
-        "end": 79
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 51,
+        "end": 171
       },
-      "symbol_dependencies": [],
-      "dependency_count": 0
+      "symbol_dependencies": [
+        {
+          "symbol": "AdManager",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AdManager.kt",
+              "line": 14,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppEvents",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorGoalRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+              "line": 18,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorIntegrationPolicy",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorIntegrationPolicy.kt",
+              "line": 9,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRefreshOnResume",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorLifecycleUi.kt",
+              "line": 16,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceActionHandler",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 4,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorUiModelFactory",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+              "line": 88,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BillingManager",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+              "line": 21,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BillingPriceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BillingPriceState.kt",
+              "line": 12,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BrandLoadingScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 267,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "CatalogUnavailableScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 53,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "DiscoverHub",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+              "line": 52,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "GlobalProfileEngine",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "HealthConnectActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 48,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "OnboardingScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/EntryScreensUi.kt",
+              "line": 108,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizAttemptEvidence",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizResultCommitEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
+              "line": 8,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+              "line": 50,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "UsageAccess",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "navigate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 107,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "onCreate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 33,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "resetQuizAttempt",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 109,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 31
+    },
+    "navigate": {
+      "source": {
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 107,
+        "end": 227
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "AppEvents",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppShellNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 52,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorGoalRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+              "line": 18,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceActionHandler",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 4,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorUiModelFactory",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+              "line": 88,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "DiscoverHub",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+              "line": 52,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "HealthConnectActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 48,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "PremiumAppShellBar",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 69,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizResultCommitEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
+              "line": 8,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+              "line": 50,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultEvidenceEngine",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+              "line": 17,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "UsageAccess",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "onCreate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 33,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "refreshBehavior",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 51,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "resetQuizAttempt",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 109,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 25
+    },
+    "resetQuizAttempt": {
+      "source": {
+        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+        "start": 109,
+        "end": 229
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "AppEvents",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+              "line": 2,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "AppShellNavigation",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 52,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorGoalRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+              "line": 18,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorRepository",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+              "line": 22,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 31,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceActionHandler",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+              "line": 4,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorSourceState",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+              "line": 33,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "BehaviorUiModelFactory",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+              "line": 88,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "DiscoverHub",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+              "line": 52,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "HealthConnectActivityDataSource",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+              "line": 48,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "PremiumAppShellBar",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+              "line": 69,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ProfileStore",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizResultCommitEffect",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizResultCommitEffect.kt",
+              "line": 8,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+              "line": 50,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultEvidenceEngine",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultEvidence.kt",
+              "line": 17,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "ResultScreen",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+              "line": 54,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "UsageAccess",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
+              "line": 10,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "navigate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 107,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "onCreate",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 33,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "refreshBehavior",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+              "line": 51,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 25
+    },
+    "QuizScreen": {
+      "source": {
+        "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+        "start": 49,
+        "end": 287
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "AccessibleBackAction",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AccessibilityUi.kt",
+              "line": 14,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "Question",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+              "line": 9,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "Quiz",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+              "line": 11,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizArtwork",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+              "line": 93,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "QuizVisuals",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizVisualUi.kt",
+              "line": 36,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "Scoring",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/Scoring.kt",
+              "line": 4,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2Colors",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 8,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2Motion",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 111,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2PressableSurface",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt",
+              "line": 37,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2Spacing",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 44,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2StatusNotice",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+              "line": 291,
+              "kind": "symbol",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "V2Type",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 58,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        }
+      ],
+      "dependency_count": 12
+    },
+    "V2StatusNotice": {
+      "source": {
+        "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+        "start": 290,
+        "end": 320
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "V2Colors",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 8,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2Radius",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 51,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "V2Type",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+              "line": 58,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        }
+      ],
+      "dependency_count": 3
     }
   }
 }
