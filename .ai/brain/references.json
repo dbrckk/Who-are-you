@@ -4,5 +4,2244 @@
   "scope": "symbols defined in changed source files",
   "semantic": false,
   "note": "Occurrences are lexical word matches; verify source/LSP/compiler data before relying on them.",
-  "symbols": {}
+  "symbols": {
+    "BehaviorRefreshSnapshot": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 10,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 11,
+          "preview": "data class BehaviorRefreshSnapshot(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 17,
+          "preview": "suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 148,
+          "preview": "override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 153,
+          "preview": "return BehaviorRefreshSnapshot(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 231,
+          "preview": "override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot =",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 232,
+          "preview": "BehaviorRefreshSnapshot(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 6
+    },
+    "BehaviorRefreshStore": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 15,
+        "kind": "interface",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 16,
+          "preview": "interface BehaviorRefreshStore {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 29,
+          "preview": "private val store: BehaviorRefreshStore,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 145,
+          "preview": ") : BehaviorRefreshStore {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 225,
+          "preview": ") : BehaviorRefreshStore {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "snapshot": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 17,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 38,
+          "preview": "snapshot: BehaviorSnapshot",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 46,
+          "preview": "val models = remember(goals, snapshot, currentEpochDay) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 49,
+          "preview": "snapshot = snapshot,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+          "line": 6,
+          "preview": "snapshot: BehaviorSnapshot,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalPresentation.kt",
+          "line": 13,
+          "preview": "days = snapshot.last30Days,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 17,
+          "preview": "suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 39,
+          "preview": "val initial = store.snapshot(epochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 148,
+          "preview": "override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 150,
+          "preview": "val snapshot = BehaviorRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 151,
+          "preview": "val day = (snapshot.last30Days + listOfNotNull(snapshot.today))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 155,
+          "preview": "sourceStates = snapshot.sourceStates",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 90,
+          "preview": "fun build(snapshot: BehaviorSnapshot): BehaviorUiModel = BehaviorUiModel(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 93,
+          "preview": "val state = snapshot.sourceStates[source] ?: BehaviorSourceState.DISABLED",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 111,
+          "preview": "snapshot.today?.steps?.let { add(BehaviorMetricUi(BehaviorMetricKind.STEPS, it)) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 112,
+          "preview": "snapshot.today?.totalForegroundMillis?.let {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 115,
+          "preview": "snapshot.today?.launchesOrSessions?.let {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 119,
+          "preview": "topApps = snapshot.today?.topApps",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 125,
+          "preview": "last7Days = history(snapshot.last7Days),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 126,
+          "preview": "last30Days = history(snapshot.last30Days),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 127,
+          "preview": "patterns = snapshot.insights.map { insight ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+          "line": 135,
+          "preview": "suggestions = snapshot.insights",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 178,
+          "preview": "evidence = ResultEvidenceEngine.derive(selectedQuiz.questions, quizAttemptEvidence.snapshot()), traitGraph = globalProfile.traitGraph, coverage = globalProfile.coverage,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 34,
+          "preview": "val snapshot = ProfileEvolutionSummary.derive(summary.dimensions) ?: return",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 35,
+          "preview": "val dimension = snapshot.mostChanged",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 59,
+          "preview": "snapshot.trackedCount,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 60,
+          "preview": "snapshot.totalDimensions,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 61,
+          "preview": "snapshot.coveragePercent",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileEvolutionUi.kt",
+          "line": 69,
+          "preview": "progress = { snapshot.coveragePercent / 100f },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt",
+          "line": 29,
+          "preview": "val snapshot = remember(summary.dimensions) { ProfileStrengthNuanceEngine.build(summary.dimensions) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt",
+          "line": 46,
+          "preview": "snapshot.strongest.forEachIndexed { index, dimension ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt",
+          "line": 58,
+          "preview": "snapshot.mostNuanced?.let { nuanced ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileStrengthNuanceUi.kt",
+          "line": 87,
+          "preview": "snapshot.contrastPair?.let { (low, high) ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/QuizAttemptEvidence.kt",
+          "line": 14,
+          "preview": "fun snapshot(): List<AnswerContribution> =",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+          "line": 15,
+          "preview": "val snapshot = BehaviorSnapshot.EMPTY.copy(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+          "line": 38,
+          "preview": "snapshot = snapshot,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+          "line": 57,
+          "preview": "snapshot = BehaviorSnapshot.EMPTY,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalPresentationTest.kt",
+          "line": 73,
+          "preview": "snapshot = BehaviorSnapshot.EMPTY,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 231,
+          "preview": "override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot =",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+          "line": 139,
+          "preview": "val snapshot = BehaviorSnapshot(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorUiModelTest.kt",
+          "line": 154,
+          "preview": "val model = BehaviorUiModelFactory.build(snapshot)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+          "line": 18,
+          "preview": "state.snapshot()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+          "line": 31,
+          "preview": "state.snapshot().map { it.contribution }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+          "line": 40,
+          "preview": "assertEquals(listOf(AnswerContribution(0, 1, 3)), state.snapshot())",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/QuizAttemptEvidenceTest.kt",
+          "line": 48,
+          "preview": "assertTrue(state.snapshot().isEmpty())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 74,
+          "preview": "self.assertIn(\"days = snapshot.last30Days\", presentation)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 45
+    },
+    "upsert": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 18,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 36,
+          "preview": "BehaviorGoalRepository.upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 70,
+          "preview": "BehaviorGoalRepository.upsert(context, persistedGoal)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 25,
+          "preview": "BehaviorRepository.upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 38,
+          "preview": "BehaviorGoalRepository.upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 64,
+          "preview": "BehaviorGoalRepository.upsert(context.applicationContext, goal)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+          "line": 30,
+          "preview": "suspend fun upsert(context: Context, goal: BehaviorGoal) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+          "line": 34,
+          "preview": "BehaviorGoalStoreCodec.upsert(current, goal)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalStore.kt",
+          "line": 51,
+          "preview": "fun upsert(goals: List<BehaviorGoal>, goal: BehaviorGoal): List<BehaviorGoal> =",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 18,
+          "preview": "suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long)",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 48,
+          "preview": "store.upsert(requireNotNull(day), epochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 68,
+          "preview": "store.upsert(requireNotNull(day), epochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 159,
+          "preview": "override suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 160,
+          "preview": "BehaviorRepository.upsert(appContext, day, currentEpochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 59,
+          "preview": "suspend fun upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 67,
+          "preview": "BehaviorStoreCodec.upsert(history, day, currentEpochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+          "line": 67,
+          "preview": "fun upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+          "line": 49,
+          "preview": "fun `upsert replaces same id without duplicating goal`() {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorGoalStoreCodecTest.kt",
+          "line": 53,
+          "preview": "val result = BehaviorGoalStoreCodec.upsert(listOf(original), replacement)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 237,
+          "preview": "override suspend fun upsert(day: DailyBehaviorAggregate, currentEpochDay: Long) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+          "line": 44,
+          "preview": "fun `upsert replaces same day and keeps deterministic day order`() {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+          "line": 46,
+          "preview": "val updated = BehaviorStoreCodec.upsert(days, day(2, steps = 20L), currentEpochDay = 3L)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 17,
+          "preview": "self.assertIn(\"suspend fun upsert(context: Context, goal: BehaviorGoal)\", source)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 22
+    },
+    "setSourceState": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 19,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 24,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 19,
+          "preview": "suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState)",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 49,
+          "preview": "store.setSourceState(BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 54,
+          "preview": "store.setSourceState(BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 58,
+          "preview": "store.setSourceState(BehaviorSource.ACTIVITY, result.state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 69,
+          "preview": "store.setSourceState(BehaviorSource.APP_USAGE, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 74,
+          "preview": "store.setSourceState(BehaviorSource.APP_USAGE, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 78,
+          "preview": "store.setSourceState(BehaviorSource.APP_USAGE, result.state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 163,
+          "preview": "override suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 164,
+          "preview": "BehaviorRepository.setSourceState(appContext, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 94,
+          "preview": "suspend fun setSourceState(context: Context, source: BehaviorSource, state: BehaviorSourceState) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 25,
+          "preview": "BehaviorRepository.setSourceState(context, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 35,
+          "preview": "BehaviorRepository.setSourceState(context, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 58,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, if (allowed) BehaviorSourceState.AVAILABLE else BehaviorSourceState.PERMISSION_REQUIRED)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 65,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.APP_USAGE, UsageAccess.state(context))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 150,
+          "preview": "BehaviorRepository.setSourceState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 241,
+          "preview": "override suspend fun setSourceState(source: BehaviorSource, state: BehaviorSourceState) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 17
+    },
+    "BehaviorRefreshResult": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 21,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 22,
+          "preview": "data class BehaviorRefreshResult(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 36,
+          "preview": "suspend fun refresh(now: Instant): BehaviorRefreshResult = refreshMutex.withLock {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 84,
+          "preview": "BehaviorRefreshResult(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "BehaviorRefreshCoordinator": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 27,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 28,
+          "preview": "class BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 125,
+          "preview": "): BehaviorRefreshCoordinator {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 135,
+          "preview": "return BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 29,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 59,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 80,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 104,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 130,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 160,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 180,
+          "preview": "val coordinator = BehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 71,
+          "preview": "\"BehaviorRefreshCoordinator.kt\",",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 11
+    },
+    "refresh": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 35,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 36,
+          "preview": "suspend fun refresh(now: Instant): BehaviorRefreshResult = refreshMutex.withLock {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 51,
+          "preview": "fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/NextQuizRecommendationUi.kt",
+          "line": 83,
+          "preview": "\"Why now? It has been $days days since the last measurement. A retake can refresh: $traits.\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 42,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 68,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 89,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 99,
+          "preview": "fun `repeated refresh is idempotent for same local day`() = runBlocking {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 113,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 114,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 123,
+          "preview": "fun `concurrent refresh calls are serialized`() = runBlocking {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 145,
+          "preview": "async { coordinator.refresh(now) },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 146,
+          "preview": "async { coordinator.refresh(now) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 167,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+          "line": 189,
+          "preview": "coordinator.refresh(now)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_post_semantic_refresh_validation.py",
+          "line": 7,
+          "preview": "SEMANTIC_WORKFLOW = \"Precise semantic refresh\"",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 15
+    },
+    "mergeActivity": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 90,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 47,
+          "preview": "day = mergeActivity(day, result.value)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 91,
+          "preview": "private fun mergeActivity(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "mergeAppUsage": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 98,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 67,
+          "preview": "day = mergeAppUsage(day, result.value)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 99,
+          "preview": "private fun mergeAppUsage(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "emptyDay": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 111,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 96,
+          "preview": "return (existing ?: emptyDay(activity.epochDay)).copy(steps = activity.steps)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 104,
+          "preview": "return (existing ?: emptyDay(usage.epochDay)).copy(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 112,
+          "preview": "private fun emptyDay(epochDay: Long) = DailyBehaviorAggregate(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "createAndroidBehaviorRefreshCoordinator": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 121,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 122,
+          "preview": "fun createAndroidBehaviorRefreshCoordinator(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 50,
+          "preview": "val behaviorRefreshCoordinator = remember(context) { createAndroidBehaviorRefreshCoordinator(context.applicationContext) }",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "AndroidBehaviorRefreshStore": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "line": 142,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 136,
+          "preview": "store = AndroidBehaviorRefreshStore(appContext),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 143,
+          "preview": "class AndroidBehaviorRefreshStore(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "BehaviorRepository": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 22,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 34,
+          "preview": "BehaviorRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 80,
+          "preview": "BehaviorRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 23,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 24,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, BehaviorSourceState.AVAILABLE)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 25,
+          "preview": "BehaviorRepository.upsert(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 48,
+          "preview": "assertEquals(4_321L, BehaviorRepository.observe(context).first().today?.steps)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+          "line": 25,
+          "preview": "val behavior = BehaviorRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 149,
+          "preview": "BehaviorRepository.pruneExpired(appContext, epochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 150,
+          "preview": "val snapshot = BehaviorRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 160,
+          "preview": "BehaviorRepository.upsert(appContext, day, currentEpochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 164,
+          "preview": "BehaviorRepository.setSourceState(appContext, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 22,
+          "preview": "object BehaviorRepository {",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 19,
+          "preview": "BehaviorRepository.clearSource(context, source)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 23,
+          "preview": "BehaviorRepository.setSourceEnabled(context, source, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 25,
+          "preview": "BehaviorRepository.setSourceState(context, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 33,
+          "preview": "BehaviorRepository.setSourceEnabled(context, source, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 35,
+          "preview": "BehaviorRepository.setSourceState(context, source, state)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 46,
+          "preview": "val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 57,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 58,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.ACTIVITY, if (allowed) BehaviorSourceState.AVAILABLE else BehaviorSourceState.PERMISSION_REQUIRED)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 64,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 65,
+          "preview": "BehaviorRepository.setSourceState(context, BehaviorSource.APP_USAGE, UsageAccess.state(context))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 149,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 150,
+          "preview": "BehaviorRepository.setSourceState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 160,
+          "preview": "onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context); BehaviorGoalRepository.clearAll(context) } },",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 26,
+          "preview": "self.assertNotIn(\"BehaviorRepository\", source)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 35,
+          "preview": "self.assertIn(\"BehaviorRepository.clearAll(context)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 46,
+          "preview": "\"BehaviorRepository\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 60,
+          "preview": "\"BehaviorRepository\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 72,
+          "preview": "\"BehaviorRepository.kt\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 56,
+          "preview": "\"onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context); \"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 63,
+          "preview": "\"ProfileStore.clearLocalProfile(context); BehaviorRepository.clearAll(context)\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 94,
+          "preview": "behavior = self.read(\"BehaviorRepository.kt\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_upgrade_persistence_contract.py",
+          "line": 35,
+          "preview": "self.assertIn(\"BehaviorRepository.observe(appContext).first()\", probe)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 34
+    },
+    "observe": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 28,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 71,
+          "preview": "BehaviorGoalRepository.observe(context).first { goals ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 31,
+          "preview": "ProfileStore.observe(context).first().onboardingComplete.also {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 67,
+          "preview": "ProfileStore.observe(context).first().onboardingComplete.also {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 90,
+          "preview": "BehaviorGoalRepository.observe(context).first { goals ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 40,
+          "preview": "val storedBeforeQuiz = runBlocking { ProfileStore.observe(context).first { it.onboardingComplete } }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 68,
+          "preview": "val persisted = runBlocking { ProfileStore.observe(context).first() }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 81,
+          "preview": "ProfileStore.observe(context).first {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 128,
+          "preview": "val stored = runBlocking { ProfileStore.observe(context).first { it.onboardingComplete } }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 165,
+          "preview": "val afterFirstAttempt = runBlocking { ProfileStore.observe(context).first() }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 178,
+          "preview": "val afterRetry = runBlocking { ProfileStore.observe(context).first() }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 41,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 57,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 76,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 114,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 129,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
+          "line": 156,
+          "preview": "val profile = ProfileStore.observe(context).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 47,
+          "preview": "assertTrue(ProfileStore.observe(context).first().onboardingComplete)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 48,
+          "preview": "assertEquals(4_321L, BehaviorRepository.observe(context).first().today?.steps)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 49,
+          "preview": "assertEquals(\"upgrade-probe-goal\", BehaviorGoalRepository.observe(context).first().single().id)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+          "line": 24,
+          "preview": "val profile = ProfileStore.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+          "line": 25,
+          "preview": "val behavior = BehaviorRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+          "line": 26,
+          "preview": "val goals = BehaviorGoalRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
+          "line": 63,
+          "preview": "val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 42,
+          "preview": "BehaviorGoalRepository.observe(context.applicationContext)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+          "line": 22,
+          "preview": "fun observe(context: Context): Flow<List<BehaviorGoal>> = context.behaviorGoalDataStore.data",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 150,
+          "preview": "val snapshot = BehaviorRepository.observe(appContext).first()",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 29,
+          "preview": "fun observe(context: Context): Flow<BehaviorSnapshot> = context.behaviorDataStore.data",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 44,
+          "preview": "val storedProfileFlow = remember(context) { ProfileStore.observe(context) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 46,
+          "preview": "val behaviorSnapshot by remember(context) { BehaviorRepository.observe(context.applicationContext) }.collectAsState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+          "line": 70,
+          "preview": "fun observe(context: Context): Flow<StoredProfile> = context.profileDataStore.data",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/RetentionUi.kt",
+          "line": 56,
+          "preview": "val storedProfile by ProfileStore.observe(context).collectAsState(initial = StoredProfile())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 16,
+          "preview": "self.assertIn(\"fun observe(context: Context): Flow<List<BehaviorGoal>>\", source)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_persisted_result_score_contract.py",
+          "line": 19,
+          "preview": "self.assertNotIn(\"ProfileStore.observe(context).first()\", self.effect)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 75,
+          "preview": "self.assertIn(\"BehaviorGoalRepository.observe\", integration)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_upgrade_persistence_contract.py",
+          "line": 34,
+          "preview": "self.assertIn(\"ProfileStore.observe(appContext).first()\", probe)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_upgrade_persistence_contract.py",
+          "line": 35,
+          "preview": "self.assertIn(\"BehaviorRepository.observe(appContext).first()\", probe)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_upgrade_persistence_contract.py",
+          "line": 36,
+          "preview": "self.assertIn(\"BehaviorGoalRepository.observe(appContext).first()\", probe)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 37
+    },
+    "pruneExpired": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 76,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+          "line": 149,
+          "preview": "BehaviorRepository.pruneExpired(appContext, epochDay)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 76,
+          "preview": "suspend fun pruneExpired(context: Context, currentEpochDay: Long = LocalDate.now().toEpochDay()) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "setSourceEnabled": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 86,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+          "line": 23,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 87,
+          "preview": "suspend fun setSourceEnabled(context: Context, source: BehaviorSource, enabled: Boolean) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 23,
+          "preview": "BehaviorRepository.setSourceEnabled(context, source, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 33,
+          "preview": "BehaviorRepository.setSourceEnabled(context, source, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 57,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.ACTIVITY, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 64,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 149,
+          "preview": "BehaviorRepository.setSourceEnabled(context, BehaviorSource.APP_USAGE, true)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 7
+    },
+    "clearSource": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 99,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 100,
+          "preview": "suspend fun clearSource(context: Context, source: BehaviorSource) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 103,
+          "preview": "prefs[historyKey] = BehaviorStoreCodec.encode(BehaviorStoreCodec.clearSource(history, source))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+          "line": 19,
+          "preview": "BehaviorRepository.clearSource(context, source)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorStore.kt",
+          "line": 76,
+          "preview": "fun clearSource(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+          "line": 56,
+          "preview": "val cleared = BehaviorStoreCodec.clearSource(original, BehaviorSource.ACTIVITY)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/BehaviorStoreCodecTest.kt",
+          "line": 67,
+          "preview": "val cleared = BehaviorStoreCodec.clearSource(original, BehaviorSource.APP_USAGE).single()",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 6
+    },
+    "clearAll": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 108,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 34,
+          "preview": "BehaviorRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 35,
+          "preview": "BehaviorGoalRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 79,
+          "preview": "BehaviorGoalRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 80,
+          "preview": "BehaviorRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 69,
+          "preview": "BehaviorGoalRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 100,
+          "preview": "BehaviorGoalRepository.clearAll(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
+          "line": 57,
+          "preview": "suspend fun clearAll(context: Context) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 109,
+          "preview": "suspend fun clearAll(context: Context) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 160,
+          "preview": "onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context); BehaviorGoalRepository.clearAll(context) } },",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 20,
+          "preview": "self.assertIn(\"suspend fun clearAll(context: Context)\", source)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 35,
+          "preview": "self.assertIn(\"BehaviorRepository.clearAll(context)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 36,
+          "preview": "self.assertIn(\"BehaviorGoalRepository.clearAll(context)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 56,
+          "preview": "\"onDeleteAll = { scope.launch { BehaviorRepository.clearAll(context); \"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 57,
+          "preview": "\"BehaviorGoalRepository.clearAll(context) } }\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_integration_contract.py",
+          "line": 63,
+          "preview": "\"ProfileStore.clearLocalProfile(context); BehaviorRepository.clearAll(context)\",",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 15
+    },
+    "resolvedState": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 112,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 40,
+          "preview": "BehaviorSource.ACTIVITY to resolvedState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 44,
+          "preview": "BehaviorSource.APP_USAGE to resolvedState(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 113,
+          "preview": "private fun resolvedState(enabled: Boolean, stored: String?): BehaviorSourceState {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "enabledKey": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 119,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 89,
+          "preview": "prefs[enabledKey(source)] = enabled",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 104,
+          "preview": "prefs[enabledKey(source)] = false",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 120,
+          "preview": "private fun enabledKey(source: BehaviorSource) = when (source) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "stateKey": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "line": 124,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 90,
+          "preview": "if (!enabled) prefs[stateKey(source)] = BehaviorSourceState.DISABLED.name",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 96,
+          "preview": "prefs[stateKey(source)] = state.name",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 105,
+          "preview": "prefs[stateKey(source)] = BehaviorSourceState.DISABLED.name",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+          "line": 125,
+          "preview": "private fun stateKey(source: BehaviorSource) = when (source) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "BehaviorScreen": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 37,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+          "line": 41,
+          "preview": "BehaviorScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+          "line": 73,
+          "preview": "BehaviorScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+          "line": 97,
+          "preview": "BehaviorScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+          "line": 138,
+          "preview": "BehaviorScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+          "line": 167,
+          "preview": "BehaviorScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 37,
+          "preview": "fun BehaviorScreen(",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 138,
+          "preview": "AppScreen.HABITS -> BehaviorScreen(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 7
+    },
+    "BehaviorSourceCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 136,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 69,
+          "preview": "BehaviorSourceCard(source, onSourceAction)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 136,
+          "preview": "private fun BehaviorSourceCard(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "BehaviorPeriodCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 175,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 73,
+          "preview": "item { BehaviorPeriodCard(R.string.habits_today, model.today, emptyCopy = R.string.habits_empty_today, tag = \"behavior_today\") }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 74,
+          "preview": "item { BehaviorPeriodCard(R.string.habits_7_days, model.last7Days, emptyCopy = R.string.habits_history_building, tag = \"behavior_7_days\") }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 75,
+          "preview": "item { BehaviorPeriodCard(R.string.habits_30_days, model.last30Days, emptyCopy = R.string.habits_history_building, tag = \"behavior_30_days\") }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 175,
+          "preview": "private fun BehaviorPeriodCard(title: Int, period: BehaviorPeriodUi, emptyCopy: Int, tag: String) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "BehaviorPatternsCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 209,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 77,
+          "preview": "BehaviorPatternsCard(model.patterns)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 209,
+          "preview": "private fun BehaviorPatternsCard(patterns: List<BehaviorPatternUi>) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "BehaviorSuggestionsCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 230,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 81,
+          "preview": "BehaviorSuggestionsCard(model.suggestions)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 230,
+          "preview": "private fun BehaviorSuggestionsCard(suggestions: List<BehaviorSuggestionUi>) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "behaviorMetric": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 247,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 187,
+          "preview": "Text(behaviorMetric(metric), color = V2Colors.TextPrimary, style = V2Type.SectionTitle)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 247,
+          "preview": "private fun behaviorMetric(metric: BehaviorMetricUi): String = when (metric.kind) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "appDisplayName": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 256,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 195,
+          "preview": "appDisplayName(app.packageName),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 256,
+          "preview": "private fun appDisplayName(packageName: String): String {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "durationLabel": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 265,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 196,
+          "preview": "durationLabel(app.foregroundMillis)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 249,
+          "preview": "BehaviorMetricKind.SCREEN_TIME -> stringResource(R.string.habits_screen_time, durationLabel(metric.value))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 252,
+          "preview": "BehaviorMetricKind.AVERAGE_SCREEN_TIME -> stringResource(R.string.habits_average_screen_time, durationLabel(metric.value))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 266,
+          "preview": "private fun durationLabel(millis: Long): String {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "behaviorAction": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 274,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 167,
+          "preview": "Text(behaviorAction(source.action))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 274,
+          "preview": "private fun behaviorAction(action: BehaviorSourceAction): String = when (action) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "behaviorCopy": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "line": 282,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 151,
+          "preview": "behaviorCopy(source.title),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 157,
+          "preview": "Text(behaviorCopy(source.detail), color = V2Colors.TextSecondary, style = V2Type.Supporting)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 159,
+          "preview": "Text(behaviorCopy(source.stateCopy), color = V2Colors.TextSecondary, style = V2Type.Caption)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 222,
+          "preview": "Text(behaviorCopy(pattern.copy), color = V2Colors.TextPrimary, style = V2Type.Supporting)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 240,
+          "preview": "Text(behaviorCopy(suggestion.copy), color = V2Colors.TextPrimary, style = V2Type.Supporting)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 282,
+          "preview": "private fun behaviorCopy(key: BehaviorCopyKey): String = stringResource(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 6
+    },
+    "HealthConnectPrivacyActivity": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+        "line": 14,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 97,
+          "preview": "onClick = { context.startActivity(Intent(context, HealthConnectPrivacyActivity::class.java)) },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 14,
+          "preview": "class HealthConnectPrivacyActivity : ComponentActivity() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "onCreate": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+        "line": 16,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 48,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 69,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 94,
+          "preview": "onCreate = { request = it },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 125,
+          "preview": "onCreate = { request = it },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 158,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 181,
+          "preview": "onCreate = { request = it },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 213,
+          "preview": "onCreate = { request = it },",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 249,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 274,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
+          "line": 296,
+          "preview": "onCreate = {},",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+          "line": 13,
+          "preview": "override fun onCreate(): Boolean = true",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 30,
+          "preview": "val onCreate: (BehaviorGoalCreateRequest) -> Unit,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
+          "line": 57,
+          "preview": "onCreate = { request ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+          "line": 43,
+          "preview": "onCreate: (BehaviorGoalCreateRequest) -> Unit,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+          "line": 95,
+          "preview": "onCreate(it)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+          "line": 88,
+          "preview": "onCreate = onCreateGoal,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
+          "line": 17,
+          "preview": "override fun onCreate(savedInstanceState: Bundle?) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
+          "line": 18,
+          "preview": "super.onCreate(savedInstanceState)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 17,
+          "preview": "override fun onCreate(savedInstanceState: Bundle?) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 18,
+          "preview": "super.onCreate(savedInstanceState)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 33,
+          "preview": "override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 162,
+          "preview": "onCreateGoal = behaviorGoalsState.onCreate,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt",
+          "line": 14,
+          "preview": "override fun onCreate() {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt",
+          "line": 15,
+          "preview": "super.onCreate()",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 24
+    },
+    "onReceivedError": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+        "line": 25,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 25,
+          "preview": "override fun onReceivedError(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "onDestroy": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+        "line": 54,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 55,
+          "preview": "override fun onDestroy() {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+          "line": 58,
+          "preview": "super.onDestroy()",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    }
+  }
 }

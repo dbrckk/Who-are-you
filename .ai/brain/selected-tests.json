@@ -1,7 +1,21 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "selected_test_files": [],
-  "commands": [],
+  "selected_test_files": [
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt"
+  ],
+  "commands": [
+    {
+      "command": "./gradlew test",
+      "purpose": "targeted area fallback",
+      "confidence": "medium",
+      "files": [
+        "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+        "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt"
+      ],
+      "note": "Exact Gradle test filters are project-specific; inspect these test files first."
+    }
+  ],
   "fallback": "Use .ai/commands.json or the repository's canonical full validation when no targeted test is selected."
 }

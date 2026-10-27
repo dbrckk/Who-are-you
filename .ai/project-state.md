@@ -38,16 +38,29 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-21T22:37:56Z
+Generated: 2026-10-27T15:22:55Z
 
 ### Git
 - Branch: `main`
-- Head: `eba321e0dc62`
-- Commit date: 2026-10-21T18:37:41-04:00
-- Commit: fix(play): verify private key by signing disposable JAR
-- Tracked files: 697
+- Head: `613d6337dcd8`
+- Commit date: 2026-10-27T11:22:44-04:00
+- Commit: Fix Google Play Health Connect disclosure and privacy rejection (#99)
+- Tracked files: 699
 
 ### Recently changed files
+- `app/src/main/AndroidManifest.xml`
+- `app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt`
+- `app/src/main/java/com/whoareyou/app/BehaviorRepository.kt`
+- `app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt`
+- `app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt`
+- `app/src/main/res/values-fr/strings.xml`
+- `app/src/main/res/values/strings.xml`
+- `docs/play-data-safety.md`
+- `docs/play-health-connect-declaration.md`
+- `docs/privacy-policy.md`
+- `docs/privacy/index.html`
+- `docs/store-listing-en.md`
+- `docs/store-listing-fr.md`
 - `docs/play-update-0.3.0.md`
 - `tools/verify_play_upload_key.sh`
 - `.github/workflows/play-candidate.yml`

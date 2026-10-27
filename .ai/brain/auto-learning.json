@@ -1,8 +1,31 @@
 {
-  "schema_version": 1,
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": false,
-  "reason": "missing-task-or-source-change",
-  "task": "fix(play): verify private key by signing disposable JAR",
-  "useful": []
+  "learned": true,
+  "learning_result": {
+    "example_count": 8,
+    "rejected_count": 0,
+    "terms": [
+      "99",
+      "connect",
+      "disclosure",
+      "google",
+      "health",
+      "play",
+      "privacy",
+      "rejection"
+    ],
+    "test_count": 0,
+    "useful_count": 4
+  },
+  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
+  "rejected": [],
+  "schema_version": 1,
+  "task": "Fix Google Play Health Connect disclosure and privacy rejection (#99)",
+  "tests_selected": [],
+  "useful": [
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+  ]
 }

@@ -1,33 +1,249 @@
 {
   "files": [
     {
-      "path": "tools/verify_play_upload_key.sh",
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
       "reasons": [
         "changed",
-        "recent-project-state"
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
       ],
-      "score": 160
+      "score": 435
     },
     {
-      "path": "docs/play-update-0.3.0.md",
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 345
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "reasons": [
+        "changed",
+        "entrypoint"
+      ],
+      "score": 140
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 135
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 125
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "reasons": [
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/res/values-fr/strings.xml",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": "tools/test_performance_release_gate_contract.py",
+      "path": "app/src/main/res/values/strings.xml",
       "reasons": [
-        "recent-project-state"
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/play-data-safety.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/play-health-connect-declaration.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/privacy-policy.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/privacy/index.html",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/store-listing-en.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/store-listing-fr.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
       ],
       "score": 60
     },
     {
-      "path": "app/src/main/AndroidManifest.xml",
+      "path": "tools/test_behavior_privacy_contract.py",
       "reasons": [
-        "entrypoint"
+        "reverse-dependency-neighbor"
       ],
-      "score": 40
+      "score": 60
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ReleaseUpgradeSeedTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorSourceActionHandler.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_behavior_goal_storage_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_behavior_goal_v1_scope_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_release_integration_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_release_upgrade_persistence_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

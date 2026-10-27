@@ -193,6 +193,27 @@
       "useful": [
         "tools/test_performance_release_gate_contract.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "Fix Google Play Health Connect disclosure and privacy rejection (#99)",
+      "terms": [
+        "99",
+        "connect",
+        "disclosure",
+        "google",
+        "health",
+        "play",
+        "privacy",
+        "rejection"
+      ],
+      "tests": [],
+      "useful": [
+        "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+        "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+        "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -296,6 +317,12 @@
     "94": {
       "tools/play_existing_version_preflight.py": 4
     },
+    "99": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
+    },
     "adopt": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -306,6 +333,12 @@
     },
     "benchmark": {
       "tools/test_performance_release_gate_contract.py": 4
+    },
+    "connect": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
     "dbrckk/m774-local-behavioral-insights": {
       "app/build.gradle.kts": 4,
@@ -408,6 +441,12 @@
     "disambiguate": {
       "tools/test_performance_release_gate_contract.py": 4
     },
+    "disclosure": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
+    },
     "docs": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -478,8 +517,20 @@
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
     },
+    "google": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
+    },
     "gradle": {
       "tools/test_performance_release_gate_contract.py": 4
+    },
+    "health": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
     "merge": {
       "app/build.gradle.kts": 4,
@@ -552,7 +603,17 @@
       "tools/test_release_metadata_contract.py": 4
     },
     "play": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4,
       "tools/test_performance_release_gate_contract.py": 4
+    },
+    "privacy": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
     "pull": {
       "app/build.gradle.kts": 4,
@@ -619,6 +680,12 @@
       "tools/test_behavior_goal_privacy_contract.py": 4,
       "tools/test_behavior_goal_storage_contract.py": 4,
       "tools/test_release_integration_contract.py": 8
+    },
+    "rejection": {
+      "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
+      "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
+      "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
     "release": {
       "tools/test_performance_release_gate_contract.py": 4

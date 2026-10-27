@@ -2112,14 +2112,14 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "upsert",
-      "line": 157
+      "line": 158
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "setSourceState",
-      "line": 161
+      "line": 162
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
@@ -2146,120 +2146,127 @@
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "language": "kotlin",
       "kind": "symbol",
+      "name": "pruneExpired",
+      "line": 76
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
       "name": "setSourceEnabled",
-      "line": 71
+      "line": 86
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "setSourceState",
-      "line": 78
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-      "language": "kotlin",
-      "kind": "symbol",
-      "name": "clearSource",
-      "line": 84
-    },
-    {
-      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
-      "language": "kotlin",
-      "kind": "symbol",
-      "name": "clearAll",
       "line": 93
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "language": "kotlin",
       "kind": "symbol",
+      "name": "clearSource",
+      "line": 99
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "clearAll",
+      "line": 108
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "language": "kotlin",
+      "kind": "symbol",
       "name": "resolvedState",
-      "line": 97
+      "line": 112
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "enabledKey",
-      "line": 104
+      "line": 119
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "stateKey",
-      "line": 109
+      "line": 124
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorScreen",
-      "line": 36
+      "line": 37
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorSourceCard",
-      "line": 128
+      "line": 136
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorPeriodCard",
-      "line": 167
+      "line": 175
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorPatternsCard",
-      "line": 201
+      "line": 209
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "BehaviorSuggestionsCard",
-      "line": 222
+      "line": 230
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorMetric",
-      "line": 239
+      "line": 247
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "appDisplayName",
-      "line": 248
+      "line": 256
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "durationLabel",
-      "line": 257
+      "line": 265
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorAction",
-      "line": 266
+      "line": 274
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "behaviorCopy",
-      "line": 274
+      "line": 282
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorSourceAccess.kt",
@@ -3380,6 +3387,34 @@
       "kind": "symbol",
       "name": "HabitsProfileEntry",
       "line": 19
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "class",
+      "name": "HealthConnectPrivacyActivity",
+      "line": 14
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "onCreate",
+      "line": 16
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "onReceivedError",
+      "line": 25
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "onDestroy",
+      "line": 54
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",

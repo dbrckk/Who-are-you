@@ -167,6 +167,7 @@ app/
               GlobalProfileShare.kt
               GuidedJourneys.kt
               HabitsProfileEntryUi.kt
+              HealthConnectPrivacyActivity.kt
               IdentityAuraUi.kt
               LongitudinalTrend.kt
               LongitudinalTrendUi.kt
@@ -18079,6 +18080,7 @@ class AndroidBehaviorRefreshStore(
     private val appContext = context.applicationContext
 
     override suspend fun snapshot(epochDay: Long): BehaviorRefreshSnapshot {
+        BehaviorRepository.pruneExpired(appContext, epochDay)
         val snapshot = BehaviorRepository.observe(appContext).first()
         val day = (snapshot.last30Days + listOfNotNull(snapshot.today))
             .firstOrNull { it.epochDay == epochDay }
@@ -18171,6 +18173,21 @@ object BehaviorRepository {
         }
     }
 
+    /**
+     * Remove expired local observations when the app becomes active, including if all
+     * sources were disabled. Android cannot expire records while the app never runs.
+     */
+    suspend fun pruneExpired(context: Context, currentEpochDay: Long = LocalDate.now().toEpochDay()) {
+        context.behaviorDataStore.edit { prefs ->
+            val encoded = prefs[historyKey] ?: return@edit
+            val history = BehaviorStoreCodec.decode(encoded)
+            val retained = BehaviorStoreCodec.retain(history, currentEpochDay)
+            if (retained != history) {
+                prefs[historyKey] = BehaviorStoreCodec.encode(retained)
+            }
+        }
+    }
+
     suspend fun setSourceEnabled(context: Context, source: BehaviorSource, enabled: Boolean) {
         context.behaviorDataStore.edit { prefs ->
             prefs[enabledKey(source)] = enabled
@@ -18220,6 +18237,7 @@ object BehaviorRepository {
 ```kotlin
 package com.whoareyou.app
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18263,6 +18281,7 @@ fun BehaviorScreen(
     onSetGoalPaused: (String, Boolean) -> Unit = { _, _ -> },
     onDeleteGoal: (String) -> Unit = {}
 ) {
+    val context = LocalContext.current
     var showDeleteConfirmation by remember { mutableStateOf(false) }
     LazyColumn(
         modifier = Modifier
@@ -18311,6 +18330,12 @@ fun BehaviorScreen(
         item {
             Column(Modifier.fillMaxWidth()) {
                 Text(stringResource(R.string.habits_data_controls), color = V2Colors.AccentCyan, style = V2Type.Eyebrow, modifier = Modifier.semantics { heading() })
+            TextButton(
+                onClick = { context.startActivity(Intent(context, HealthConnectPrivacyActivity::class.java)) },
+                modifier = Modifier.testTag("behavior_health_privacy_link")
+            ) {
+                Text(stringResource(R.string.habits_health_privacy_link), color = V2Colors.AccentCyan)
+            }
                 TextButton(onClick = { showDeleteConfirmation = true }, modifier = Modifier.testTag("behavior_delete_all")) {
                     Text(stringResource(R.string.habits_delete_all), color = V2Colors.TextSecondary)
                 }
@@ -22866,6 +22891,74 @@ fun HabitsProfileEntry(
                 .padding(top = 8.dp)
                 .testTag("profile_habits_privacy_hint")
         )
+    }
+}
+```
+
+## File: app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt
+```kotlin
+package com.whoareyou.app
+
+import android.os.Bundle
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.activity.ComponentActivity
+
+/**
+ * Android 13 (Health Connect app) and Android 14+ (platform Health Connect)
+ * permission rationale. Shows the same public policy that Play Console links to.
+ */
+class HealthConnectPrivacyActivity : ComponentActivity() {
+    private var privacyWebView: WebView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val webView = WebView(this)
+        privacyWebView = webView
+        webView.settings.javaScriptEnabled = false
+        webView.settings.allowFileAccess = false
+        webView.settings.allowContentAccess = false
+        webView.webViewClient = object : WebViewClient() {
+            override fun onReceivedError(
+                view: WebView,
+                request: WebResourceRequest,
+                error: WebResourceError
+            ) {
+                if (!request.isForMainFrame) return
+                // A network outage must not turn the privacy link into a blank screen.
+                view.loadDataWithBaseURL(
+                    null,
+                    """<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+                       <body style="font-family:sans-serif;padding:16px">
+                       <h1>Who Are You? — Health Connect privacy</h1>
+                       <p>Optional READ_STEPS access lets you view your daily steps, recent 7/30-day
+                       activity trends and personal step-count goals. Step totals stay on this device
+                       for up to 31 days and are not uploaded or used for advertising.</p>
+                       <p>Disable Activity in My Habits to erase local step history, and revoke
+                       the permission separately in Android Health Connect settings.</p>
+                       <p>For the full privacy policy, connect to the internet and visit:
+                       <a href="https://dbrckk.github.io/Who-are-you/privacy/">Who Are You? Privacy Policy</a>.</p>
+                       </body></html>""",
+                    "text/html",
+                    "UTF-8",
+                    null
+                )
+            }
+        }
+        setContentView(webView)
+        webView.loadUrl(PRIVACY_POLICY_URL)
+    }
+
+    override fun onDestroy() {
+        privacyWebView?.destroy()
+        privacyWebView = null
+        super.onDestroy()
+    }
+
+    companion object {
+        const val PRIVACY_POLICY_URL = "https://dbrckk.github.io/Who-are-you/privacy/"
     }
 }
 ```

@@ -17,6 +17,7 @@
     "android.os",
     "android.provider",
     "android.util",
+    "android.webkit",
     "android.widget",
     "androidx.activity",
     "androidx.annotation",

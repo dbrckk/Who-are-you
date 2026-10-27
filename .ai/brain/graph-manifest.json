@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 902,
+      "edge_count": 903,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {

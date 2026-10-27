@@ -703,6 +703,11 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
       "type": "symbol-reference"
     },

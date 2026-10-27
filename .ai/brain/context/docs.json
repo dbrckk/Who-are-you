@@ -2,7 +2,42 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/play-update-0.3.0.md",
+      "path": "docs/play-data-safety.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/play-health-connect-declaration.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/privacy-policy.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/privacy/index.html",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/store-listing-en.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/store-listing-fr.md",
       "reasons": [
         "changed"
       ],

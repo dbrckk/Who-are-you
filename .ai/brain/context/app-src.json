@@ -2,11 +2,137 @@
   "area": "app-src",
   "files": [
     {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 435
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 345
+    },
+    {
       "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
+        "changed",
         "entrypoint"
       ],
-      "score": 40
+      "score": 140
+    },
+    {
+      "path": "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 135
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorModels.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 125
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+      "reasons": [
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/res/values-fr/strings.xml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 60
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ActivityCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalUiModel.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorUiModel.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 50
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

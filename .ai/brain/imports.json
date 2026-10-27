@@ -504,6 +504,7 @@
       "kotlinx.coroutines.flow.map"
     ],
     "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": [
+      "android.content.Intent",
       "androidx.compose.foundation.background",
       "androidx.compose.foundation.layout.Arrangement",
       "androidx.compose.foundation.layout.Column",
@@ -889,6 +890,14 @@
       "androidx.compose.ui.res.stringResource",
       "androidx.compose.ui.text.font.FontWeight",
       "androidx.compose.ui.unit.dp"
+    ],
+    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": [
+      "android.os.Bundle",
+      "android.webkit.WebResourceError",
+      "android.webkit.WebResourceRequest",
+      "android.webkit.WebView",
+      "android.webkit.WebViewClient",
+      "androidx.activity.ComponentActivity"
     ],
     "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt": [
       "androidx.compose.foundation.background",

@@ -1,21 +1,325 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "7f9ef430d31076e9b1b7682ffd5bde905fdb11b3",
-  "head": "eba321e0dc623557a925199a7795aa49b74041f1",
+  "base": "eba321e0dc623557a925199a7795aa49b74041f1",
+  "head": "613d6337dcd8d51122cc9445b9d4633bba658626",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "docs/play-update-0.3.0.md",
+      "path": "app/src/main/AndroidManifest.xml",
       "status": "M"
     },
     {
-      "path": "tools/verify_play_upload_key.sh",
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/res/values-fr/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "status": "M"
+    },
+    {
+      "path": "docs/play-data-safety.md",
+      "status": "M"
+    },
+    {
+      "path": "docs/play-health-connect-declaration.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/privacy-policy.md",
+      "status": "M"
+    },
+    {
+      "path": "docs/privacy/index.html",
+      "status": "M"
+    },
+    {
+      "path": "docs/store-listing-en.md",
+      "status": "M"
+    },
+    {
+      "path": "docs/store-listing-fr.md",
       "status": "M"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
-  "selected_tests": []
+  "changed_source_files": [
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+  ],
+  "impacted_files": [
+    "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+    "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "BehaviorRefreshSnapshot",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 10
+    },
+    {
+      "name": "BehaviorRefreshStore",
+      "kind": "interface",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 15
+    },
+    {
+      "name": "snapshot",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 17
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 18
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 19
+    },
+    {
+      "name": "BehaviorRefreshResult",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 21
+    },
+    {
+      "name": "BehaviorRefreshCoordinator",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 27
+    },
+    {
+      "name": "refresh",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 35
+    },
+    {
+      "name": "mergeActivity",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 90
+    },
+    {
+      "name": "mergeAppUsage",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 98
+    },
+    {
+      "name": "emptyDay",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 111
+    },
+    {
+      "name": "createAndroidBehaviorRefreshCoordinator",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 121
+    },
+    {
+      "name": "AndroidBehaviorRefreshStore",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 142
+    },
+    {
+      "name": "snapshot",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 147
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 158
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt",
+      "line": 162
+    },
+    {
+      "name": "BehaviorRepository",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 22
+    },
+    {
+      "name": "observe",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 28
+    },
+    {
+      "name": "upsert",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 58
+    },
+    {
+      "name": "pruneExpired",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 76
+    },
+    {
+      "name": "setSourceEnabled",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 86
+    },
+    {
+      "name": "setSourceState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 93
+    },
+    {
+      "name": "clearSource",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 99
+    },
+    {
+      "name": "clearAll",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 108
+    },
+    {
+      "name": "resolvedState",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 112
+    },
+    {
+      "name": "enabledKey",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 119
+    },
+    {
+      "name": "stateKey",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt",
+      "line": 124
+    },
+    {
+      "name": "BehaviorScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 37
+    },
+    {
+      "name": "BehaviorSourceCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 136
+    },
+    {
+      "name": "BehaviorPeriodCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 175
+    },
+    {
+      "name": "BehaviorPatternsCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 209
+    },
+    {
+      "name": "BehaviorSuggestionsCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 230
+    },
+    {
+      "name": "behaviorMetric",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 247
+    },
+    {
+      "name": "appDisplayName",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 256
+    },
+    {
+      "name": "durationLabel",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 265
+    },
+    {
+      "name": "behaviorAction",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 274
+    },
+    {
+      "name": "behaviorCopy",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
+      "line": 282
+    },
+    {
+      "name": "HealthConnectPrivacyActivity",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "line": 14
+    },
+    {
+      "name": "onCreate",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "line": 16
+    },
+    {
+      "name": "onReceivedError",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "line": 25
+    },
+    {
+      "name": "onDestroy",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+      "line": 54
+    }
+  ],
+  "selected_tests": [
+    "app/src/androidTest/java/com/whoareyou/app/BehaviorScreenUiTest.kt",
+    "app/src/test/java/com/whoareyou/app/BehaviorRefreshCoordinatorTest.kt"
+  ]
 }

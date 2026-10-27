@@ -2,19 +2,39 @@
   "area": "tools",
   "files": [
     {
-      "path": "tools/verify_play_upload_key.sh",
+      "path": "tools/test_behavior_privacy_contract.py",
       "reasons": [
-        "changed",
-        "recent-project-state"
-      ],
-      "score": 160
-    },
-    {
-      "path": "tools/test_performance_release_gate_contract.py",
-      "reasons": [
-        "recent-project-state"
+        "reverse-dependency-neighbor"
       ],
       "score": 60
+    },
+    {
+      "path": "tools/test_behavior_goal_storage_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_behavior_goal_v1_scope_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_release_integration_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
+    },
+    {
+      "path": "tools/test_release_upgrade_persistence_contract.py",
+      "reasons": [
+        "reverse-dependency-neighbor"
+      ],
+      "score": 30
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",
