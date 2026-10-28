@@ -1,0 +1,55 @@
+name: Protected Play Candidate Request
+
+# Signing only, never an upload or Play release. A trusted main-branch marker
+# permits generating a fresh AAB without a separate browser workflow dispatch.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/play-candidate-request.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: protected-play-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate request against Android release identity
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import re
+
+          request = json.loads(pathlib.Path('docs/play-candidate-request.json').read_text(encoding='utf-8'))
+          gradle = pathlib.Path('app/build.gradle.kts').read_text(encoding='utf-8')
+          name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle)
+          code = re.search(r'versionCode\s*=\s*(\d+)', gradle)
+          if not name or not code:
+              raise SystemExit('Cannot resolve Android version identity')
+          if (
+              request.get('versionName') != name.group(1)
+              or request.get('versionCode') != int(code.group(1))
+              or request.get('buildOnly') is not True
+              or request.get('telemetryEnabled') is not False
+          ):
+              raise SystemExit('Play candidate request does not match safe, signed-build-only release identity')
+          print(f'Approved signed build only: {name.group(1)} ({code.group(1)}), telemetry disabled')
+          PY
+
+  signed-candidate:
+    needs: verify-request
+    uses: ./.github/workflows/play-candidate.yml
+    permissions:
+      contents: read
+    secrets: inherit
+    with:
+      telemetry_enabled: false
