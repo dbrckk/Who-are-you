@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -140,7 +141,7 @@ fun PremiumAppShellBar(
                     onClick = { onSelect(AppShellTab.DISCOVER) }
                 )
                 ShellTab(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).testTag("shell_profile_tab"),
                     selected = selected == AppShellTab.PROFILE,
                     iconRes = R.drawable.ic_shell_profile,
                     label = stringResource(R.string.shell_profile),
