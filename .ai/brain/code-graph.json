@@ -2826,6 +2826,16 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -2956,11 +2966,6 @@
       "type": "symbol-reference"
     },
     {
-      "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
       "source": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
@@ -3002,11 +3007,6 @@
     },
     {
       "source": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
-      "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
-      "type": "symbol-reference"
-    },
-    {
-      "source": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
       "target": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "type": "symbol-reference"
     },
@@ -4481,6 +4481,11 @@
       "type": "symbol-reference"
     },
     {
+      "source": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
+      "type": "symbol-reference"
+    },
+    {
       "source": "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
       "target": "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
       "type": "symbol-reference"
@@ -4532,6 +4537,11 @@
     },
     {
       "source": "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+      "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "type": "symbol-reference"
+    },
+    {
+      "source": "tools/test_profile_result_allocation_contract.py",
       "target": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
       "type": "symbol-reference"
     },

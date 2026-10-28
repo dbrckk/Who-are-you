@@ -5,84 +5,571 @@
   "semantic": false,
   "note": "Occurrences are lexical word matches; verify source/LSP/compiler data before relying on them.",
   "symbols": {
-    "QuizScreenUiTest": {
+    "HabitsPersistenceE2eTest": {
       "definition": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "line": 15,
+        "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "line": 21,
         "kind": "class",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 16,
-          "preview": "class QuizScreenUiTest {",
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 22,
+          "preview": "class HabitsPersistenceE2eTest {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "habitsScreenAndLocalGoalSurviveActivityRecreation": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "line": 27,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 27,
+          "preview": "fun habitsScreenAndLocalGoalSurviveActivityRecreation() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "waitForTag": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+        "line": 83,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 47,
+          "preview": "waitForTag(\"app_screen_discover\")",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_m47_ui_test_wiring.py",
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 51,
+          "preview": "waitForTag(\"app_screen_profile\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 56,
+          "preview": "waitForTag(\"app_screen_habits\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 63,
+          "preview": "waitForTag(\"app_screen_habits\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+          "line": 84,
+          "preview": "private fun waitForTag(tag: String) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 38,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 42,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 43,
+          "preview": "waitForTag(\"quiz_question_1\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 45,
+          "preview": "waitForTag(\"quiz_question_2\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 48,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 49,
+          "preview": "waitForTag(\"quiz_question_2\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 76,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 85,
+          "preview": "waitForTag(\"app_screen_habits\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 114,
+          "preview": "waitForTag(\"app_screen_profile\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 118,
+          "preview": "waitForTag(\"app_screen_habits\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 121,
+          "preview": "private fun waitForTag(tag: String) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 37,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 56,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 59,
+          "preview": "waitForTag(\"quiz_question_${index + 1}\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 63,
+          "preview": "waitForTag(\"app_screen_result\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 73,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 77,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 91,
+          "preview": "waitForTag(\"app_screen_profile\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 94,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 102,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 105,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 106,
+          "preview": "waitForTag(\"quiz_question_1\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 109,
+          "preview": "waitForTag(\"quiz_question_2\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 112,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 113,
+          "preview": "waitForTag(\"quiz_question_2\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 117,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 125,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 149,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 151,
+          "preview": "waitForTag(\"quiz_question_${index + 1}\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 158,
+          "preview": "waitForTag(\"app_screen_result\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 162,
+          "preview": "waitForTag(\"app_screen_result\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 169,
+          "preview": "waitForTag(\"app_screen_quiz\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 170,
+          "preview": "waitForTag(\"quiz_question_1\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 173,
+          "preview": "waitForTag(\"quiz_question_${index + 1}\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 177,
+          "preview": "waitForTag(\"app_screen_result\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 183,
+          "preview": "waitForTag(\"app_screen_discover\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
+          "line": 201,
+          "preview": "private fun waitForTag(tag: String) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_main_activity_recreation_sync_contract.py",
+          "line": 26,
+          "preview": "wait_index = test_body.index('waitForTag(\"app_screen_discover\")')",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 43
+    },
+    "MainActivityRecreationTest": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "line": 23,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
           "line": 23,
-          "preview": "\"QuizScreenUiTest.kt\",",
+          "preview": "class MainActivityRecreationTest {",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_main_activity_recreation_sync_contract.py",
+          "line": 6,
+          "preview": "ROOT / \"app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt\"",
           "definition_candidate": false
         }
       ],
       "occurrence_count": 2
     },
-    "answeringEveryQuestionAdvancesAndReturnsFinalScore": {
+    "quizProgressSurvivesActivityRecreation": {
       "definition": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "line": 21,
+        "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "line": 28,
         "kind": "symbol",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 21,
-          "preview": "fun answeringEveryQuestionAdvancesAndReturnsFinalScore() {",
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 28,
+          "preview": "fun quizProgressSurvivesActivityRecreation() {",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_main_activity_recreation_sync_contract.py",
+          "line": 23,
+          "preview": "\"fun quizProgressSurvivesActivityRecreation()\",",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "line": 59,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 59,
+          "preview": "fun persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication() {",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "finishingStateBlocksAnswersAndShowsSavingFeedback": {
+    "assertGoalDisplayed": {
       "definition": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "line": 55,
+        "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "line": 105,
         "kind": "symbol",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 55,
-          "preview": "fun finishingStateBlocksAnswersAndShowsSavingFeedback() {",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "commitFailureFeedbackIsVisibleAndRetryable": {
-      "definition": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "line": 78,
-        "kind": "symbol",
-        "language": "kotlin"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
           "line": 78,
-          "preview": "fun commitFailureFeedbackIsVisibleAndRetryable() {",
+          "preview": "assertGoalDisplayed(persistedGoal)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 86,
+          "preview": "assertGoalDisplayed(persistedGoal)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 106,
+          "preview": "private fun assertGoalDisplayed(goal: BehaviorGoal) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "openHabits": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+        "line": 111,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 77,
+          "preview": "openHabits(context)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "line": 112,
+          "preview": "private fun openHabits(context: android.content.Context) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "ProfileScreenWhoAmITest": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+        "line": 11,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+          "line": 12,
+          "preview": "class ProfileScreenWhoAmITest {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "profileScreenContainsWhoAmIPortraitAndDiscovery": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+        "line": 17,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+          "line": 17,
+          "preview": "fun profileScreenContainsWhoAmIPortraitAndDiscovery() {",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
+    },
+    "ResultScreenUiTest": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 14,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 15,
+          "preview": "class ResultScreenUiTest {",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m47_ui_test_wiring.py",
+          "line": 25,
+          "preview": "\"ResultScreenUiTest.kt\",",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "resultShowsScoreAndExposesRetryAndDoneActions": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 20,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 20,
+          "preview": "fun resultShowsScoreAndExposesRetryAndDoneActions() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "resultRendersProfileConnectionFromRealTraitGraphInput": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 59,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 59,
+          "preview": "fun resultRendersProfileConnectionFromRealTraitGraphInput() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 90,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 90,
+          "preview": "fun historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "emptyCoverage": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 121,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 34,
+          "preview": "coverage = emptyCoverage(),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 79,
+          "preview": "coverage = emptyCoverage(),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 104,
+          "preview": "coverage = emptyCoverage(),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 122,
+          "preview": "private fun emptyCoverage() = ProfileCoverage(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
     },
     "testQuiz": {
       "definition": {
-        "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-        "line": 110,
+        "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+        "line": 131,
         "kind": "symbol",
         "language": "kotlin"
       },
@@ -113,31 +600,31 @@
         },
         {
           "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-          "line": 25,
+          "line": 26,
           "preview": "quiz = testQuiz(),",
           "definition_candidate": false
         },
         {
           "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-          "line": 30,
+          "line": 31,
           "preview": "catalog = listOf(testQuiz()),",
           "definition_candidate": false
         },
         {
           "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-          "line": 56,
+          "line": 60,
           "preview": "val connectedQuiz = testQuiz().copy(",
           "definition_candidate": false
         },
         {
           "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-          "line": 87,
+          "line": 91,
           "preview": "val historicQuiz = testQuiz().copy(resultIntelligence = null, traits = emptyList())",
           "definition_candidate": false
         },
         {
           "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-          "line": 128,
+          "line": 132,
           "preview": "private fun testQuiz() = Quiz(",
           "definition_candidate": false
         },
@@ -174,559 +661,183 @@
       ],
       "occurrence_count": 14
     },
-    "MainActivity": {
+    "WhoAmIPortraitUiTest": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 30,
+        "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+        "line": 17,
         "kind": "class",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-          "line": 24,
-          "preview": "val composeRule = createAndroidComposeRule<MainActivity>()",
+          "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+          "line": 18,
+          "preview": "class WhoAmIPortraitUiTest {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "portraitCardsRenderFivePartHierarchyAndSafeLabels": {
+      "definition": {
+        "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+        "line": 23,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+          "line": 23,
+          "preview": "fun portraitCardsRenderFivePartHierarchyAndSafeLabels() {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "AppShellTab": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 52,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+          "line": 20,
+          "preview": "var selectedTab: AppShellTab? = null",
           "definition_candidate": false
         },
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+          "file": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+          "line": 24,
+          "preview": "selected = AppShellTab.DISCOVER,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
           "line": 36,
-          "preview": "val scenario = ActivityScenario.launch(MainActivity::class.java)",
+          "preview": "assertEquals(AppShellTab.PROFILE, selectedTab)",
           "definition_candidate": false
         },
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-          "line": 74,
-          "preview": "val scenario = ActivityScenario.launch(MainActivity::class.java)",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-          "line": 83,
-          "preview": "// that MainActivity resets to Discover.",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-          "line": 24,
-          "preview": "val composeRule = createAndroidComposeRule<MainActivity>()",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 31,
-          "preview": "class MainActivity : ComponentActivity() {",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 11,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 33,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 18,
-          "preview": "source = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 29,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 12,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m49_architecture_cleanup.py",
-          "line": 10,
-          "preview": "source = (APP / \"MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m50_analytics.py",
-          "line": 43,
-          "preview": "main_source = (APP / \"MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m52_play_policy.py",
-          "line": 20,
-          "preview": "main = self.read(\"app/src/main/java/com/whoareyou/app/MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_main_activity_architecture.py",
-          "line": 7,
-          "preview": "MAIN_ACTIVITY = APP_PACKAGE / \"MainActivity.kt\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_main_activity_architecture.py",
-          "line": 17,
-          "preview": "\"MainActivity.kt should remain a lightweight app shell, not become an all-in-one UI file again.\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_persisted_result_score_contract.py",
-          "line": 13,
-          "preview": "ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_profile_reset_contract.py",
-          "line": 11,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_quiz_commit_interaction_lock.py",
-          "line": 14,
-          "preview": "source = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_quiz_process_recreation_contract.py",
-          "line": 10,
-          "preview": "ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_quiz_process_recreation_contract.py",
-          "line": 28,
-          "preview": "ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_quiz_result_persistence_feedback.py",
-          "line": 9,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 9,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_integration_contract.py",
-          "line": 16,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_integration_contract.py",
-          "line": 43,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_integration_contract.py",
-          "line": 49,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_restored_quiz_recovery.py",
-          "line": 10,
-          "preview": "ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_runtime_efficiency_contract.py",
-          "line": 9,
-          "preview": "self.main = (ROOT / 'app/src/main/java/com/whoareyou/app/MainActivity.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_runtime_performance_contract.py",
-          "line": 8,
-          "preview": "self.main = (ROOT / 'app/src/main/java/com/whoareyou/app/MainActivity.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_startup_loading_state.py",
-          "line": 9,
-          "preview": "source = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_startup_loading_state.py",
-          "line": 17,
-          "preview": "source = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_string_resource_parity.py",
-          "line": 34,
-          "preview": "source = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_string_resource_parity.py",
-          "line": 39,
-          "preview": "f\"MainActivity references missing strings: {sorted(referenced - available)}\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_trait_evolution_integration.py",
-          "line": 11,
-          "preview": "self.main = (ROOT / 'app/src/main/java/com/whoareyou/app/MainActivity.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_usage_access_launch_safety.py",
-          "line": 6,
-          "preview": "MAIN_ACTIVITY = ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\"",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 35
-    },
-    "attachBaseContext": {
-      "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 32,
-        "kind": "symbol",
-        "language": "kotlin"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
-          "line": 13,
-          "preview": "override fun attachBaseContext(newBase: Context) {",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
-          "line": 14,
-          "preview": "super.attachBaseContext(localizedAppContext(newBase))",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 32,
-          "preview": "override fun attachBaseContext(newBase: Context) { super.attachBaseContext(localizedAppContext(newBase)) }",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 3
-    },
-    "onCreate": {
-      "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 33,
-        "kind": "symbol",
-        "language": "kotlin"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 48,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 69,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 94,
-          "preview": "onCreate = { request = it },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 125,
-          "preview": "onCreate = { request = it },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 158,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 181,
-          "preview": "onCreate = { request = it },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 213,
-          "preview": "onCreate = { request = it },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 249,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 274,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/androidTest/java/com/whoareyou/app/BehaviorGoalsUiTest.kt",
-          "line": 296,
-          "preview": "onCreate = {},",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
-          "line": 13,
-          "preview": "override fun onCreate(): Boolean = true",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-          "line": 30,
-          "preview": "val onCreate: (BehaviorGoalCreateRequest) -> Unit,",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalIntegrationUi.kt",
-          "line": 57,
-          "preview": "onCreate = { request ->",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-          "line": 43,
-          "preview": "onCreate: (BehaviorGoalCreateRequest) -> Unit,",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/BehaviorGoalsUi.kt",
-          "line": 95,
-          "preview": "onCreate(it)",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
-          "line": 88,
-          "preview": "onCreate = onCreateGoal,",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
-          "line": 17,
-          "preview": "override fun onCreate(savedInstanceState: Bundle?) {",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/ChallengeActivity.kt",
-          "line": 18,
-          "preview": "super.onCreate(savedInstanceState)",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-          "line": 19,
-          "preview": "override fun onCreate(savedInstanceState: Bundle?) {",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
-          "line": 20,
-          "preview": "super.onCreate(savedInstanceState)",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 33,
-          "preview": "override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }",
-          "definition_candidate": true
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 164,
-          "preview": "onCreateGoal = behaviorGoalsState.onCreate,",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt",
-          "line": 14,
-          "preview": "override fun onCreate() {",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/WhoAreYouApplication.kt",
-          "line": 15,
-          "preview": "super.onCreate()",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 24
-    },
-    "WhoAreYouApp": {
-      "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 37,
-        "kind": "symbol",
-        "language": "kotlin"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 33,
-          "preview": "override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); setContent { WhoAreYouTheme { WhoAreYouApp() } } }",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 37,
-          "preview": "private fun WhoAreYouApp() {",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 2
-    },
-    "refreshBehavior": {
-      "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 51,
-        "kind": "symbol",
-        "language": "kotlin"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 51,
-          "preview": "fun refreshBehavior() { scope.launch(Dispatchers.IO) { runCatching { behaviorRefreshCoordinator.refresh(Instant.now()) } } }",
-          "definition_candidate": true
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
           "line": 52,
-          "preview": "BehaviorRefreshOnResume(context as? ComponentActivity) { refreshBehavior() }",
+          "preview": "enum class AppShellTab { DISCOVER, PROFILE }",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 55,
+          "preview": "fun tabFor(screen: AppScreen): AppShellTab? = when (screen) {",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 59,
-          "preview": "if (BehaviorIntegrationPolicy.shouldRefreshAfterActivityPermission(allowed)) refreshBehavior()",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 56,
+          "preview": "AppScreen.DISCOVER -> AppShellTab.DISCOVER",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 66,
-          "preview": "if (BehaviorIntegrationPolicy.shouldRefreshAfterUsageAccessReturn()) refreshBehavior()",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 57,
+          "preview": "AppScreen.PROFILE -> AppShellTab.PROFILE",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 117,
-          "preview": "LaunchedEffect(screen) { runCatching { AppEvents.screenView(screen) }; if (screen == AppScreen.HABITS) refreshBehavior() }",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 61,
+          "preview": "fun destination(tab: AppShellTab): AppScreen = when (tab) {",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 144,
-          "preview": "BehaviorSourceEffect.REFRESH -> refreshBehavior()",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 62,
+          "preview": "AppShellTab.DISCOVER -> AppScreen.DISCOVER",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 63,
+          "preview": "AppShellTab.PROFILE -> AppScreen.PROFILE",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 71,
+          "preview": "selected: AppShellTab,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 72,
+          "preview": "onSelect: (AppShellTab) -> Unit,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 135,
+          "preview": "selected = selected == AppShellTab.DISCOVER,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 141,
+          "preview": "onClick = { onSelect(AppShellTab.DISCOVER) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 145,
+          "preview": "selected = selected == AppShellTab.PROFILE,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 151,
+          "preview": "onClick = { onSelect(AppShellTab.PROFILE) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 12,
+          "preview": "assertEquals(AppScreen.DISCOVER, AppShellNavigation.destination(AppShellTab.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 13,
+          "preview": "assertEquals(AppScreen.PROFILE, AppShellNavigation.destination(AppShellTab.PROFILE))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 18,
+          "preview": "assertEquals(AppShellTab.DISCOVER, AppShellNavigation.tabFor(AppScreen.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 19,
+          "preview": "assertEquals(AppShellTab.PROFILE, AppShellNavigation.tabFor(AppScreen.PROFILE))",
           "definition_candidate": false
         }
       ],
-      "occurrence_count": 6
+      "occurrence_count": 20
     },
-    "navigate": {
+    "AppShellNavigation": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 108,
-        "kind": "symbol",
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 53,
+        "kind": "class",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 109,
-          "preview": "fun navigate(destination: AppScreen) { screenName = destination.name }",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 111,
-          "preview": "fun startQuiz(quiz: Quiz) { previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) ",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 115,
-          "preview": "onCommitted = { persistedScore -> failedFinalScore = null; finalScore = persistedScore; navigate(AppScreen.RESULT) }",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 118,
-          "preview": "BackHandler(enabled = screen != AppScreen.DISCOVER) { if (screen == AppScreen.QUIZ && quizFinishing) return@BackHandler; if (screen == AppScreen.QUIZ) runCatching { AppEvents.testA",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 128,
-          "preview": "onOpenProfile = { navigate(AppScreen.PROFILE) },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 136,
-          "preview": "onBack = { navigate(AppScreen.DISCOVER) },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 137,
-          "preview": "onResetLocalData = { scope.launch { ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 138,
-          "preview": "onOpenHabits = { navigate(AppNavigation.habitsDestination()) }",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 141,
-          "preview": "model = BehaviorUiModelFactory.build(behaviorSnapshot), onBack = { navigate(AppScreen.PROFILE) },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 174,
-          "preview": "onBack = { if (!quizFinishing) { runCatching { AppEvents.testAbandon(selectedQuiz.id, \"screen_back\") }; navigate(AppScreen.DISCOVER) } },",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 183,
-          "preview": "onDone = { pendingFinalScore = null; val manager = adManager; if (manager == null) navigate(AppScreen.DISCOVER) else runCatching { manager.onResultFinished(activity, adsRemoved) { ",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 184,
-          "preview": "onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 54,
+          "preview": "object AppShellNavigation {",
           "definition_candidate": false
         },
         {
@@ -736,168 +847,1020 @@
           "definition_candidate": false
         },
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 31,
-          "preview": "self.assertIn(\"navigate(AppScreen.QUIZ)\", handler)",
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 12,
+          "preview": "assertEquals(AppScreen.DISCOVER, AppShellNavigation.destination(AppShellTab.DISCOVER))",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_behavior_integration_contract.py",
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 13,
+          "preview": "assertEquals(AppScreen.PROFILE, AppShellNavigation.destination(AppShellTab.PROFILE))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 18,
+          "preview": "assertEquals(AppShellTab.DISCOVER, AppShellNavigation.tabFor(AppScreen.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
           "line": 19,
-          "preview": "self.assertIn(\"onOpenHabits = { navigate(AppNavigation.habitsDestination()) }\", source)",
+          "preview": "assertEquals(AppShellTab.PROFILE, AppShellNavigation.tabFor(AppScreen.PROFILE))",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_release_critical_profile_contract.py",
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 20,
+          "preview": "assertTrue(AppShellNavigation.isShellVisible(AppScreen.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 21,
+          "preview": "assertTrue(AppShellNavigation.isShellVisible(AppScreen.PROFILE))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 26,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.HABITS))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 27,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.QUIZ))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 28,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.RESULT))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
           "line": 29,
-          "preview": "self.assertIn(\"navigate(AppScreen.QUIZ)\", handler)",
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.HABITS))",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_release_integration_contract.py",
-          "line": 53,
-          "preview": "\"ProfileStore.clearLocalProfile(context); navigate(AppScreen.DISCOVER) } }\"",
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 30,
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.QUIZ))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 31,
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.RESULT))",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m49_architecture_cleanup.py",
+          "line": 15,
+          "preview": "self.assertIn(\"AppShellNavigation.tabFor(screen)\", source)",
           "definition_candidate": false
         }
       ],
-      "occurrence_count": 17
+      "occurrence_count": 15
     },
-    "resetQuizAttempt": {
+    "tabFor": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 110,
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 55,
         "kind": "symbol",
         "language": "kotlin"
       },
       "occurrences": [
         {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 55,
+          "preview": "fun tabFor(screen: AppScreen): AppShellTab? = when (screen) {",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 66,
+          "preview": "fun isShellVisible(screen: AppScreen): Boolean = tabFor(screen) != null",
+          "definition_candidate": false
+        },
+        {
           "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 110,
-          "preview": "fun resetQuizAttempt() { quizAttemptId = UUID.randomUUID().toString(); quizQuestionIndex = 0; quizRawScore = 0; quizAttemptEvidence.clear(); pendingFinalScore = null; failedFinalSc",
+          "line": 188,
+          "preview": "AppShellNavigation.tabFor(screen)?.let { selectedTab -> PremiumAppShellBar(selectedTab, { tab -> navigate(AppShellNavigation.destination(tab)) }, Modifier.align(Alignment.BottomCen",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 18,
+          "preview": "assertEquals(AppShellTab.DISCOVER, AppShellNavigation.tabFor(AppScreen.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 19,
+          "preview": "assertEquals(AppShellTab.PROFILE, AppShellNavigation.tabFor(AppScreen.PROFILE))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 26,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.HABITS))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 27,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.QUIZ))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 28,
+          "preview": "assertNull(AppShellNavigation.tabFor(AppScreen.RESULT))",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m49_architecture_cleanup.py",
+          "line": 15,
+          "preview": "self.assertIn(\"AppShellNavigation.tabFor(screen)\", source)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 9
+    },
+    "destination": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 60,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 61,
+          "preview": "fun destination(tab: AppShellTab): AppScreen = when (tab) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 109,
+          "preview": "fun navigate(destination: AppScreen) { screenName = destination.name }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 123,
+          "preview": "AnimatedContent(targetState = screen, transitionSpec = { premiumScreenTransition(initialState, targetState, reduceMotion) }, label = \"screen\", modifier = Modifier.fillMaxSize().tes",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 124,
+          "preview": "when (destination) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 188,
+          "preview": "AppShellNavigation.tabFor(screen)?.let { selectedTab -> PremiumAppShellBar(selectedTab, { tab -> navigate(AppShellNavigation.destination(tab)) }, Modifier.align(Alignment.BottomCen",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 12,
+          "preview": "assertEquals(AppScreen.DISCOVER, AppShellNavigation.destination(AppShellTab.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 13,
+          "preview": "assertEquals(AppScreen.PROFILE, AppShellNavigation.destination(AppShellTab.PROFILE))",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 7
+    },
+    "isShellVisible": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 65,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 66,
+          "preview": "fun isShellVisible(screen: AppScreen): Boolean = tabFor(screen) != null",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 20,
+          "preview": "assertTrue(AppShellNavigation.isShellVisible(AppScreen.DISCOVER))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 21,
+          "preview": "assertTrue(AppShellNavigation.isShellVisible(AppScreen.PROFILE))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 29,
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.HABITS))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 30,
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.QUIZ))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/AppShellNavigationTest.kt",
+          "line": 31,
+          "preview": "assertFalse(AppShellNavigation.isShellVisible(AppScreen.RESULT))",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 6
+    },
+    "PremiumAppShellBar": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 70,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+          "line": 23,
+          "preview": "PremiumAppShellBar(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 70,
+          "preview": "fun PremiumAppShellBar(",
           "definition_candidate": true
         },
         {
           "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 111,
-          "preview": "fun startQuiz(quiz: Quiz) { previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) ",
+          "line": 188,
+          "preview": "AppShellNavigation.tabFor(screen)?.let { selectedTab -> PremiumAppShellBar(selectedTab, { tab -> navigate(AppShellNavigation.destination(tab)) }, Modifier.align(Alignment.BottomCen",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "ShellTab": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+        "line": 159,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 133,
+          "preview": "ShellTab(",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 184,
-          "preview": "onRetry = { previousScoreForAttempt = finalScore; resetQuizAttempt(); runCatching { AppEvents.testStart(selectedQuiz.id) }; navigate(AppScreen.QUIZ) }",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 143,
+          "preview": "ShellTab(",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 28,
-          "preview": "self.assertIn(\"resetQuizAttempt()\", handler)",
+          "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+          "line": 159,
+          "preview": "private fun ShellTab(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "IdentityAura": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+        "line": 25,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+          "line": 25,
+          "preview": "fun IdentityAura(",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt",
+          "line": 99,
+          "preview": "IdentityAura(",
           "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 158,
+          "preview": "IdentityAura(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "LongitudinalTrendsCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "line": 29,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 29,
+          "preview": "fun LongitudinalTrendsCard(",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 249,
+          "preview": "LongitudinalTrendsCard(",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 24,
+          "preview": "self.assertIn(\"LongitudinalTrendsCard(\", self.profile)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "TrendRow": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "line": 84,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 59,
+          "preview": "TrendRow(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 84,
+          "preview": "private fun TrendRow(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "TrendSparkline": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "line": 130,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 116,
+          "preview": "TrendSparkline(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 130,
+          "preview": "private fun TrendSparkline(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "trendSummary": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+        "line": 169,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 90,
+          "preview": "val summary = remember(trend, french) { trendSummary(trend, french) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+          "line": 170,
+          "preview": "private fun trendSummary(trend: LongitudinalTrend, french: Boolean): String = when (trend.kind) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "ProfileIdentityMap": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+        "line": 39,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 39,
+          "preview": "fun ProfileIdentityMap(summary: GlobalProfileSummary) {",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 43,
+          "preview": "ProfileIdentityMap(summary)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "ProfileRadar": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+        "line": 147,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 96,
+          "preview": "ProfileRadar(axes = axes, modifier = Modifier.size(226.dp))",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 147,
+          "preview": "private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modifier) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "point": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+        "line": 162,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/build.gradle.kts",
+          "line": 41,
+          "preview": "\"WHO_ARE_YOU_UPLOAD_KEYSTORE_PATH must point to an existing keystore file\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+          "line": 48,
+          "preview": "val entries = normalized.mapIndexed { index, point ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+          "line": 50,
+          "preview": "val delta = previous?.let { point.score - it.score }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+          "line": 63,
+          "preview": "score = point.score,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
+          "line": 64,
+          "preview": "epochDay = point.epochDay,",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/DimensionJournalUi.kt",
+          "line": 212,
+          "preview": "if (french) \"point de d\u00e9part\" else \"baseline\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+          "line": 97,
+          "preview": "orbitPoints.forEachIndexed { index, point ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+          "line": 105,
+          "preview": "center = point",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
+          "line": 92,
+          "preview": "// A final point is only an outlier when it breaks a relatively stable baseline.",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileCoverageUi.kt",
+          "line": 34,
+          "preview": "\"Ce score mesure combien de traits sont d\u00e9j\u00e0 document\u00e9s, pas \u00e0 quel point ton profil est \u00ab bon \u00bb.\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 163,
+          "preview": "fun point(index: Int, scale: Float): Offset {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 171,
+          "preview": "val spokeEnds = List(axisCount) { index -> point(index, 1f) }",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 175,
+          "preview": "val p = point(index, fraction)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 183,
+          "preview": "point(index, scale)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 61,
+          "preview": "val point = Offset(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 65,
+          "preview": "if (index == 0) ring.moveTo(point.x, point.y) else ring.lineTo(point.x, point.y)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 95,
+          "preview": "val point = Offset(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 99,
+          "preview": "if (index == 0) polygon.moveTo(point.x, point.y) else polygon.lineTo(point.x, point.y)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 122,
+          "preview": "val point = Offset(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileMapPreviewUi.kt",
+          "line": 129,
+          "preview": "center = point",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileNarrativeUi.kt",
+          "line": 86,
+          "preview": "\"$trait: several sources point in different directions. The profile preserves that contradiction instead of drawing a conclusion.\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+          "line": 45,
+          "preview": ".forEach { point ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+          "line": 46,
+          "preview": "if (point.epochDay <= 0L) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+          "line": 47,
+          "preview": "baselineScores[quizId] = point.score.coerceIn(0, 100)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+          "line": 50,
+          "preview": ".getOrPut(point.epochDay) { linkedMapOf() }[quizId] =",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimeline.kt",
+          "line": 51,
+          "preview": "point.score.coerceIn(0, 100)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 176,
+          "preview": "timeline.points.asReversed().forEach { point ->",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 177,
+          "preview": "val date = if (point.epochDay > 0) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 178,
+          "preview": "LocalDate.ofEpochDay(point.epochDay).format(formatter)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 183,
+          "preview": "val retakes = point.retakeQuizIds",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 186,
+          "preview": "val newEvidence = point.newEvidenceQuizIds",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 202,
+          "preview": "\"${point.score}% \u00b7 confiance ${point.confidence}%\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 204,
+          "preview": "\"${point.score}% \u00b7 confidence ${point.confidence}%\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 231,
+          "preview": "if (point.contradictoryEvidenceCount > 0) {",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 234,
+          "preview": "\"${point.contradictoryEvidenceCount} signal contradictoire\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 236,
+          "preview": "\"${point.contradictoryEvidenceCount} contradictory signal\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 274,
+          "preview": "val point = Offset(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 278,
+          "preview": "if (index == 0) path.moveTo(point.x, point.y) else path.lineTo(point.x, point.y)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 279,
+          "preview": "point",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 295,
+          "preview": "LongitudinalTrendKind.OUTLIER -> if (french) \"Dernier point atypique\" else \"Latest point looks atypical\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+          "line": 40,
+          "preview": "val point = TraitTimelineEngine.build(catalog, history)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+          "line": 45,
+          "preview": "assertEquals(listOf(\"b\"), point.newEvidenceQuizIds)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+          "line": 46,
+          "preview": "assertTrue(point.retakeQuizIds.isEmpty())",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/test/java/com/whoareyou/app/TraitTimelineEngineTest.kt",
+          "line": 80,
+          "preview": "fun `unknown-date migration points seed baseline without creating dated point`() {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 44
+    },
+    "DimensionLegendRow": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+        "line": 219,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 109,
+          "preview": "DimensionLegendRow(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 219,
+          "preview": "private fun DimensionLegendRow(index: Int, dimension: ProfileDimension, accent: Color) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "IdentityStat": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+        "line": 260,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 122,
+          "preview": "IdentityStat(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 127,
+          "preview": "IdentityStat(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 132,
+          "preview": "IdentityStat(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+          "line": 260,
+          "preview": "private fun IdentityStat(value: String, label: String, modifier: Modifier = Modifier) {",
+          "definition_candidate": true
         }
       ],
       "occurrence_count": 4
     },
-    "startQuiz": {
+    "InsightCopy": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-        "line": 111,
-        "kind": "symbol",
+        "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+        "line": 26,
+        "kind": "class",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 111,
-          "preview": "fun startQuiz(quiz: Quiz) { previousScoreForAttempt = storedProfile.latestScores[quiz.id]; selectedQuizId = quiz.id; resetQuizAttempt(); runCatching { AppEvents.testStart(quiz.id) ",
-          "definition_candidate": true
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 129,
-          "preview": "onQuizSelected = ::startQuiz,",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 27,
+          "preview": "private data class InsightCopy(val title: String, val body: String)",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 135,
-          "preview": "onQuizSelected = ::startQuiz,",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 117,
+          "preview": "private fun localizedCopy(key: ProfileInsightKey): InsightCopy = when (key) {",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 182,
-          "preview": "onQuizSelected = ::startQuiz,",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 118,
+          "preview": "ProfileInsightKey.STRONG_SIGNATURE -> InsightCopy(",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 28,
-          "preview": "self.assertIn(\"onQuizSelected = ::startQuiz\", self.main)",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 122,
+          "preview": "ProfileInsightKey.BALANCED_CORE -> InsightCopy(",
           "definition_candidate": false
         },
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 29,
-          "preview": "handler = self.main.split(\"fun startQuiz(quiz: Quiz)\", 1)[1].split(\"QuizResultCommitEffect(\", 1)[0]",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 25,
-          "preview": "self.assertIn(\"onQuizSelected = ::startQuiz\", profile_branch)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 26,
-          "preview": "handler = self.main.split(\"fun startQuiz(quiz: Quiz)\", 1)[1].split(\"QuizResultCommitEffect(\", 1)[0]",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 126,
+          "preview": "ProfileInsightKey.BOLD_CONTRAST -> InsightCopy(",
           "definition_candidate": false
         }
       ],
-      "occurrence_count": 8
+      "occurrence_count": 5
     },
-    "QuizScreen": {
+    "ProfileInsightCards": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-        "line": 53,
+        "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+        "line": 30,
         "kind": "symbol",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 28,
-          "preview": "QuizScreen(",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 30,
+          "preview": "fun ProfileInsightCards(summary: GlobalProfileSummary) {",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 286,
+          "preview": "ProfileInsightCards(summary)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "localizedCopy": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+        "line": 117,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 92,
+          "preview": "val copy = localizedCopy(key)",
           "definition_candidate": false
         },
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 60,
-          "preview": "QuizScreen(",
-          "definition_candidate": false
-        },
+          "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+          "line": 117,
+          "preview": "private fun localizedCopy(key: ProfileInsightKey): InsightCopy = when (key) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "ProfileScreen": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+        "line": 55,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
         {
-          "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-          "line": 84,
-          "preview": "QuizScreen(",
+          "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+          "line": 46,
+          "preview": "ProfileScreen(",
           "definition_candidate": false
         },
         {
           "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-          "line": 168,
-          "preview": "AppScreen.QUIZ -> QuizScreen(",
+          "line": 133,
+          "preview": "AppScreen.PROFILE -> ProfileScreen(",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-          "line": 53,
-          "preview": "fun QuizScreen(",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 55,
+          "preview": "fun ProfileScreen(",
           "definition_candidate": true
         },
         {
           "file": "tools/test_main_activity_architecture.py",
-          "line": 24,
-          "preview": "\"private fun QuizScreen(\",",
+          "line": 31,
+          "preview": "for call in (\"DiscoverHub(\", \"ProfileScreen(\", \"QuizScreen(\", \"ResultScreen(\"):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_critical_profile_contract.py",
+          "line": 23,
+          "preview": "profile_branch = self.main[self.main.index(\"AppScreen.PROFILE -> ProfileScreen(\"):]",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 5
+    },
+    "ResultScoreOrbit": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+        "line": 20,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+          "line": 20,
+          "preview": "fun ResultScoreOrbit(",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+          "line": 202,
+          "preview": "ResultScoreOrbit(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "ResultScreen": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+        "line": 56,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 25,
+          "preview": "ResultScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 69,
+          "preview": "ResultScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+          "line": 94,
+          "preview": "ResultScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+          "line": 177,
+          "preview": "AppScreen.RESULT -> ResultScreen(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+          "line": 16,
+          "preview": "* explanation belong to the overlaid Text in ResultScreen, never this canvas.",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+          "line": 17,
+          "preview": "* Its animation is driven by ResultScreen's reduced-motion-aware progress.",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+          "line": 56,
+          "preview": "fun ResultScreen(",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_main_activity_architecture.py",
+          "line": 25,
+          "preview": "\"private fun ResultScreen(\",",
           "definition_candidate": false
         },
         {
@@ -907,49 +1870,396 @@
           "definition_candidate": false
         }
       ],
-      "occurrence_count": 7
+      "occurrence_count": 9
     },
-    "V2StatusNotice": {
+    "TraitTimelineCard": {
       "definition": {
-        "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-        "line": 313,
+        "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "line": 34,
         "kind": "symbol",
         "language": "kotlin"
       },
       "occurrences": [
         {
-          "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-          "line": 174,
-          "preview": "V2StatusNotice(",
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 262,
+          "preview": "TraitTimelineCard(",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-          "line": 181,
-          "preview": "V2StatusNotice(",
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 34,
+          "preview": "fun TraitTimelineCard(",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_trait_timeline_integration.py",
+          "line": 28,
+          "preview": "self.assertIn(\"TraitTimelineCard(\", self.profile)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "TraitTimelineDialog": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "line": 115,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 106,
+          "preview": "TraitTimelineDialog(",
           "definition_candidate": false
         },
         {
-          "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-          "line": 313,
-          "preview": "private fun V2StatusNotice(",
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 115,
+          "preview": "private fun TraitTimelineDialog(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "TraitTimelineSparkline": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "line": 254,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 91,
+          "preview": "TraitTimelineSparkline(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 254,
+          "preview": "private fun TraitTimelineSparkline(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "traitTrendText": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+        "line": 289,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 93,
+          "preview": "description = \"$label. ${traitTrendText(timeline.trend.kind, french)}\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 96,
+          "preview": "text = traitTrendText(timeline.trend.kind, french),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 132,
+          "preview": "text = traitTrendText(timeline.trend.kind, french),",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+          "line": 290,
+          "preview": "private fun traitTrendText(kind: LongitudinalTrendKind, french: Boolean): String = when (kind) {",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "WhoAmIPortraitCards": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "line": 26,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
+          "line": 51,
+          "preview": "WhoAmIPortraitCards(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+          "line": 56,
+          "preview": "WhoAmIPortraitCards(portrait)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 26,
+          "preview": "fun WhoAmIPortraitCards(",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_profile_result_allocation_contract.py",
+          "line": 24,
+          "preview": "self.assertNotIn('WhoAmIPortraitCards(', self.profile)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "WhoAmIPortraitSection": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "line": 50,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+          "line": 223,
+          "preview": "WhoAmIPortraitSection(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 38,
+          "preview": "WhoAmIPortraitSection(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 50,
+          "preview": "fun WhoAmIPortraitSection(",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 3
     },
-    "ActionableKnowledgeMapContractTest": {
+    "WhoAmITraitCard": {
       "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
+        "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "line": 96,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 57,
+          "preview": "WhoAmISection.PORTRAIT -> WhoAmITraitCard(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 63,
+          "preview": "WhoAmISection.STABLE -> WhoAmITraitCard(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 68,
+          "preview": "WhoAmISection.NUANCES -> WhoAmITraitCard(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 86,
+          "preview": "WhoAmISection.EVOLUTION -> WhoAmITraitCard(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 96,
+          "preview": "private fun WhoAmITraitCard(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 5
+    },
+    "WhoAmITraitRow": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "line": 138,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 130,
+          "preview": "WhoAmITraitRow(trait, showTrend)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 138,
+          "preview": "private fun WhoAmITraitRow(",
+          "definition_candidate": true
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+          "line": 5,
+          "preview": "data class WhoAmITraitRow(",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIUiModel.kt",
+          "line": 13,
+          "preview": "fun traitRow(trait: PersonalTrait): WhoAmITraitRow = WhoAmITraitRow(",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 4
+    },
+    "WhoAmIDiscoveryCard": {
+      "definition": {
+        "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+        "line": 209,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 76,
+          "preview": "WhoAmIDiscoveryCard(card.discoveryGaps)",
+          "definition_candidate": false
+        },
+        {
+          "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+          "line": 209,
+          "preview": "private fun WhoAmIDiscoveryCard(gaps: List<TraitDomainCoverage>) {",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "RenderingBenchmark": {
+      "definition": {
+        "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "line": 18,
+        "kind": "class",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+          "line": 18,
+          "preview": "class RenderingBenchmark {",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_rendering_performance_contract.py",
+          "line": 8,
+          "preview": "self.rendering = (ROOT / 'baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "discoverScrollFrames": {
+      "definition": {
+        "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "line": 23,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+          "line": 23,
+          "preview": "fun discoverScrollFrames() = benchmarkRule.measureRepeated(",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_rendering_performance_contract.py",
+          "line": 16,
+          "preview": "self.assertIn('fun discoverScrollFrames()', self.rendering)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "profileScrollFrames": {
+      "definition": {
+        "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "line": 52,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+          "line": 52,
+          "preview": "fun profileScrollFrames() = benchmarkRule.measureRepeated(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "quizToResultFrames": {
+      "definition": {
+        "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "line": 85,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+          "line": 85,
+          "preview": "fun quizToResultFrames() = benchmarkRule.measureRepeated(",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/test_rendering_performance_contract.py",
+          "line": 17,
+          "preview": "self.assertIn('fun quizToResultFrames()', self.rendering)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "resultScrollFrames": {
+      "definition": {
+        "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+        "line": 117,
+        "kind": "symbol",
+        "language": "kotlin"
+      },
+      "occurrences": [
+        {
+          "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+          "line": 117,
+          "preview": "fun resultScrollFrames() = benchmarkRule.measureRepeated(",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "ProfileResultAllocationContractTest": {
+      "definition": {
+        "file": "tools/test_profile_result_allocation_contract.py",
         "line": 6,
         "kind": "class",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "file": "tools/test_profile_result_allocation_contract.py",
           "line": 6,
-          "preview": "class ActionableKnowledgeMapContractTest(unittest.TestCase):",
+          "preview": "class ProfileResultAllocationContractTest(unittest.TestCase):",
           "definition_candidate": true
         }
       ],
@@ -957,7 +2267,7 @@
     },
     "setUp": {
       "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
+        "file": "tools/test_profile_result_allocation_contract.py",
         "line": 7,
         "kind": "function",
         "language": "python"
@@ -979,7 +2289,7 @@
           "file": "tools/test_actionable_knowledge_map_contract.py",
           "line": 7,
           "preview": "def setUp(self):",
-          "definition_candidate": true
+          "definition_candidate": false
         },
         {
           "file": "tools/test_battery_thermal_contract.py",
@@ -1093,7 +2403,7 @@
           "file": "tools/test_profile_result_allocation_contract.py",
           "line": 7,
           "preview": "def setUp(self):",
-          "definition_candidate": false
+          "definition_candidate": true
         },
         {
           "file": "tools/test_profile_startup_resilience.py",
@@ -1224,154 +2534,69 @@
       ],
       "occurrence_count": 43
     },
-    "test_traits_are_clickable": {
+    "test_profile_sort_and_catalog_index_are_remembered": {
       "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
+        "file": "tools/test_profile_result_allocation_contract.py",
         "line": 13,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "file": "tools/test_profile_result_allocation_contract.py",
           "line": 13,
-          "preview": "def test_traits_are_clickable(self):",
+          "preview": "def test_profile_sort_and_catalog_index_are_remembered(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "test_profile_opens_exploration_dialog": {
+    "test_profile_and_result_background_gradients_are_remembered": {
       "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
-        "line": 17,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 17,
-          "preview": "def test_profile_opens_exploration_dialog(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_dialog_exposes_evidence_and_next_measurement": {
-      "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
-        "line": 21,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 21,
-          "preview": "def test_dialog_exposes_evidence_and_next_measurement(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_profile_can_navigate_directly_to_quiz": {
-      "definition": {
-        "file": "tools/test_actionable_knowledge_map_contract.py",
+        "file": "tools/test_profile_result_allocation_contract.py",
         "line": 26,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "file": "tools/test_profile_result_allocation_contract.py",
           "line": 26,
-          "preview": "def test_profile_can_navigate_directly_to_quiz(self):",
+          "preview": "def test_profile_and_result_background_gradients_are_remembered(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "ReleaseCriticalProfileContractTest": {
+    "test_result_recommendation_uses_indexed_catalog_and_stable_brush": {
       "definition": {
-        "file": "tools/test_release_critical_profile_contract.py",
-        "line": 6,
-        "kind": "class",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 6,
-          "preview": "class ReleaseCriticalProfileContractTest(unittest.TestCase):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_profile_store_decodes_both_histories": {
-      "definition": {
-        "file": "tools/test_release_critical_profile_contract.py",
-        "line": 14,
+        "file": "tools/test_profile_result_allocation_contract.py",
+        "line": 31,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 14,
-          "preview": "def test_profile_store_decodes_both_histories(self):",
+          "file": "tools/test_profile_result_allocation_contract.py",
+          "line": 31,
+          "preview": "def test_result_recommendation_uses_indexed_catalog_and_stable_brush(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "test_profile_quiz_navigation_uses_mutable_quiz_id": {
+    "test_identity_aura_uses_draw_cache_for_geometry": {
       "definition": {
-        "file": "tools/test_release_critical_profile_contract.py",
-        "line": 22,
+        "file": "tools/test_profile_result_allocation_contract.py",
+        "line": 37,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 22,
-          "preview": "def test_profile_quiz_navigation_uses_mutable_quiz_id(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_retake_cadence_has_hard_minimum": {
-      "definition": {
-        "file": "tools/test_release_critical_profile_contract.py",
-        "line": 32,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 32,
-          "preview": "def test_retake_cadence_has_hard_minimum(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_profile_explains_next_quiz": {
-      "definition": {
-        "file": "tools/test_release_critical_profile_contract.py",
-        "line": 36,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_release_critical_profile_contract.py",
-          "line": 36,
-          "preview": "def test_profile_explains_next_quiz(self):",
+          "file": "tools/test_profile_result_allocation_contract.py",
+          "line": 37,
+          "preview": "def test_identity_aura_uses_draw_cache_for_geometry(self):",
           "definition_candidate": true
         }
       ],

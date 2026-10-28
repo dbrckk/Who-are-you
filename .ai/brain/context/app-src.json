@@ -2,7 +2,62 @@
   "area": "app-src",
   "files": [
     {
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 400
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 400
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 385
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "reasons": [
         "changed",
         "changed-source",
@@ -10,107 +65,104 @@
         "impact",
         "symbol-indexed"
       ],
-      "score": 415
+      "score": 360
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 395
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "path": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
         "symbol-indexed"
       ],
-      "score": 310
+      "score": 325
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "reasons": [
-        "reverse-dependency-neighbor",
-        "selected-test",
+        "changed",
+        "changed-source",
+        "impact",
         "symbol-indexed"
       ],
-      "score": 130
+      "score": 325
     },
     {
-      "path": "app/src/main/res/values-fr/strings.xml",
+      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
       "reasons": [
-        "changed"
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 100
+      "score": 320
     },
     {
-      "path": "app/src/main/res/values/strings.xml",
+      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
       "reasons": [
-        "changed"
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 100
+      "score": 320
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "path": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
       "reasons": [
-        "dependency-neighbor"
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 75
+      "score": 315
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "path": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
       "reasons": [
-        "dependency-neighbor"
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 75
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
       "reasons": [
         "dependency-neighbor"
       ],
-      "score": 75
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 50
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 50
-    },
-    {
-      "path": "app/src/main/AndroidManifest.xml",
-      "reasons": [
-        "entrypoint"
-      ],
-      "score": 40
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
+      "score": 200
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

@@ -2,7 +2,7 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/privacy/index.html",
+      "path": "docs/performance-validation.md",
       "reasons": [
         "changed"
       ],

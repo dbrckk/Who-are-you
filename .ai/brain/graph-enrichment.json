@@ -1,9 +1,9 @@
 {
   "base_edge_count": 12,
-  "edge_count": 920,
+  "edge_count": 922,
   "generated_by": "dbrckk/repo-brain-symbol-reference-v1",
   "method": "unique type symbol occurrences from persistent search shards",
   "schema_version": 1,
-  "symbol_reference_edges_added": 908,
+  "symbol_reference_edges_added": 910,
   "warning": "Static lexical routing hint; verify authoritative source before edits."
 }

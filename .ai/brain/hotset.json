@@ -1,42 +1,29 @@
 {
   "files": [
     {
-      "path": "tools/test_actionable_knowledge_map_contract.py",
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
-        "reverse-dependency-neighbor",
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 430
+      "score": 400
     },
     {
-      "path": "tools/test_release_critical_profile_contract.py",
+      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
-        "reverse-dependency-neighbor",
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 425
+      "score": 400
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 415
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "path": "tools/test_profile_result_allocation_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -47,23 +34,206 @@
       "score": 395
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 385
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 380
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 360
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
       "reasons": [
         "changed",
         "changed-source",
         "impact",
         "symbol-indexed"
       ],
-      "score": 310
+      "score": 325
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 325
+    },
+    {
+      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 325
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 320
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 320
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 315
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 305
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 200
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 200
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 175
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
       "reasons": [
         "reverse-dependency-neighbor",
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 130
+      "score": 110
+    },
+    {
+      "path": ".github/workflows/ai-repo-map.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/GlobalProfile.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/PersonalModel.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 100
     },
     {
       "path": "app/src/main/res/values-fr/strings.xml",
@@ -80,172 +250,40 @@
       "score": 100
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/AppNavigation.kt",
+      "path": "docs/performance-validation.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "reasons": [
+        "dependency-neighbor",
+        "reverse-dependency-neighbor"
+      ],
+      "score": 80
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
       "reasons": [
         "dependency-neighbor"
       ],
       "score": 75
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
+      "path": "app/src/main/java/com/whoareyou/app/DimensionJournal.kt",
       "reasons": [
         "dependency-neighbor"
       ],
       "score": 75
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizCatalog.kt",
+      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
       "reasons": [
         "dependency-neighbor"
       ],
       "score": 75
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalRepository.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 50
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 50
-    },
-    {
-      "path": "app/src/main/AndroidManifest.xml",
-      "reasons": [
-        "entrypoint"
-      ],
-      "score": 40
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_behavior_goal_v1_scope_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_behavior_integration_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_billing_launch_readiness.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_m47_ui_test_wiring.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_m49_architecture_cleanup.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_m50_analytics.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_m52_play_policy.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_main_activity_architecture.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_main_activity_recreation_sync_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_persisted_result_score_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_profile_reset_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_quiz_commit_interaction_lock.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_quiz_process_recreation_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_quiz_result_persistence_feedback.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_release_integration_contract.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
-    },
-    {
-      "path": "tools/test_restored_quiz_recovery.py",
-      "reasons": [
-        "reverse-dependency-neighbor"
-      ],
-      "score": 30
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

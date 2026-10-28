@@ -1,20 +1,72 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "cc0ff6657c3329ba9242f97fea6f489dc514533e",
-  "head": "d8608ef5b6acd11cd80767efaf5206c6408da38f",
+  "base": "d8608ef5b6acd11cd80767efaf5206c6408da38f",
+  "head": "33bfb20741dfc9b264f1dd749d86043bb1afab0d",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "path": ".github/workflows/ai-repo-map.yml",
       "status": "M"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
       "status": "M"
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
+      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+      "status": "A"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "status": "M"
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "status": "M"
     },
     {
@@ -26,196 +78,437 @@
       "status": "M"
     },
     {
-      "path": "tools/test_actionable_knowledge_map_contract.py",
+      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
       "status": "M"
     },
     {
-      "path": "tools/test_release_critical_profile_contract.py",
+      "path": "docs/performance-validation.md",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_profile_result_allocation_contract.py",
       "status": "M"
     }
   ],
   "changed_source_files": [
-    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-    "tools/test_actionable_knowledge_map_contract.py",
-    "tools/test_release_critical_profile_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+    "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+    "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+    "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+    "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+    "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+    "tools/test_profile_result_allocation_contract.py"
   ],
   "impacted_files": [
-    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-    "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-    "tools/test_actionable_knowledge_map_contract.py",
-    "tools/test_release_critical_profile_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+    "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+    "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+    "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+    "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+    "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+    "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+    "tools/test_profile_result_allocation_contract.py"
   ],
   "impacted_symbols": [
     {
-      "name": "QuizScreenUiTest",
+      "name": "HabitsPersistenceE2eTest",
       "kind": "class",
-      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-      "line": 15
-    },
-    {
-      "name": "answeringEveryQuestionAdvancesAndReturnsFinalScore",
-      "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
       "line": 21
     },
     {
-      "name": "finishingStateBlocksAnswersAndShowsSavingFeedback",
+      "name": "habitsScreenAndLocalGoalSurviveActivityRecreation",
       "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-      "line": 55
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "line": 27
     },
     {
-      "name": "commitFailureFeedbackIsVisibleAndRetryable",
+      "name": "waitForTag",
       "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-      "line": 78
+      "file": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "line": 83
+    },
+    {
+      "name": "MainActivityRecreationTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 23
+    },
+    {
+      "name": "quizProgressSurvivesActivityRecreation",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 28
+    },
+    {
+      "name": "persistedBehaviorGoalSurvivesActivityRecreationWithoutDuplication",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 59
+    },
+    {
+      "name": "assertGoalDisplayed",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 105
+    },
+    {
+      "name": "openHabits",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 111
+    },
+    {
+      "name": "waitForTag",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "line": 120
+    },
+    {
+      "name": "ProfileScreenWhoAmITest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "line": 11
+    },
+    {
+      "name": "profileScreenContainsWhoAmIPortraitAndDiscovery",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "line": 17
+    },
+    {
+      "name": "ResultScreenUiTest",
+      "kind": "class",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 14
+    },
+    {
+      "name": "resultShowsScoreAndExposesRetryAndDoneActions",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 20
+    },
+    {
+      "name": "resultRendersProfileConnectionFromRealTraitGraphInput",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 59
+    },
+    {
+      "name": "historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 90
+    },
+    {
+      "name": "emptyCoverage",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 121
     },
     {
       "name": "testQuiz",
       "kind": "symbol",
-      "file": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-      "line": 110
+      "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+      "line": 131
     },
     {
-      "name": "MainActivity",
+      "name": "WhoAmIPortraitUiTest",
       "kind": "class",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 30
-    },
-    {
-      "name": "attachBaseContext",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 32
-    },
-    {
-      "name": "onCreate",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 33
-    },
-    {
-      "name": "WhoAreYouApp",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 37
-    },
-    {
-      "name": "refreshBehavior",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 51
-    },
-    {
-      "name": "navigate",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 108
-    },
-    {
-      "name": "resetQuizAttempt",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 110
-    },
-    {
-      "name": "startQuiz",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
-      "line": 111
-    },
-    {
-      "name": "QuizScreen",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-      "line": 53
-    },
-    {
-      "name": "V2StatusNotice",
-      "kind": "symbol",
-      "file": "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt",
-      "line": 313
-    },
-    {
-      "name": "ActionableKnowledgeMapContractTest",
-      "kind": "class",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
-      "line": 6
-    },
-    {
-      "name": "setUp",
-      "kind": "function",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
-      "line": 7
-    },
-    {
-      "name": "test_traits_are_clickable",
-      "kind": "function",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
-      "line": 13
-    },
-    {
-      "name": "test_profile_opens_exploration_dialog",
-      "kind": "function",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "line": 17
     },
     {
-      "name": "test_dialog_exposes_evidence_and_next_measurement",
-      "kind": "function",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
-      "line": 21
+      "name": "portraitCardsRenderFivePartHierarchyAndSafeLabels",
+      "kind": "symbol",
+      "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+      "line": 23
     },
     {
-      "name": "test_profile_can_navigate_directly_to_quiz",
-      "kind": "function",
-      "file": "tools/test_actionable_knowledge_map_contract.py",
+      "name": "AppShellTab",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 52
+    },
+    {
+      "name": "AppShellNavigation",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 53
+    },
+    {
+      "name": "tabFor",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 55
+    },
+    {
+      "name": "destination",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 60
+    },
+    {
+      "name": "isShellVisible",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 65
+    },
+    {
+      "name": "PremiumAppShellBar",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 70
+    },
+    {
+      "name": "ShellTab",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "line": 159
+    },
+    {
+      "name": "IdentityAura",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
+      "line": 25
+    },
+    {
+      "name": "LongitudinalTrendsCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "line": 29
+    },
+    {
+      "name": "TrendRow",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "line": 84
+    },
+    {
+      "name": "TrendSparkline",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "line": 130
+    },
+    {
+      "name": "trendSummary",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
+      "line": 169
+    },
+    {
+      "name": "ProfileIdentityMap",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "line": 39
+    },
+    {
+      "name": "ProfileRadar",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "line": 147
+    },
+    {
+      "name": "point",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "line": 162
+    },
+    {
+      "name": "DimensionLegendRow",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "line": 219
+    },
+    {
+      "name": "IdentityStat",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
+      "line": 260
+    },
+    {
+      "name": "InsightCopy",
+      "kind": "class",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
       "line": 26
     },
     {
-      "name": "ReleaseCriticalProfileContractTest",
+      "name": "ProfileInsightCards",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+      "line": 30
+    },
+    {
+      "name": "localizedCopy",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
+      "line": 117
+    },
+    {
+      "name": "ProfileScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
+      "line": 55
+    },
+    {
+      "name": "ResultScoreOrbit",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+      "line": 20
+    },
+    {
+      "name": "ResultScreen",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
+      "line": 56
+    },
+    {
+      "name": "TraitTimelineCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "line": 34
+    },
+    {
+      "name": "TraitTimelineDialog",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "line": 115
+    },
+    {
+      "name": "TraitTimelineSparkline",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "line": 254
+    },
+    {
+      "name": "traitTrendText",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
+      "line": 289
+    },
+    {
+      "name": "WhoAmIPortraitCards",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "line": 26
+    },
+    {
+      "name": "WhoAmIPortraitSection",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "line": 50
+    },
+    {
+      "name": "WhoAmITraitCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "line": 96
+    },
+    {
+      "name": "WhoAmITraitRow",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "line": 138
+    },
+    {
+      "name": "WhoAmIDiscoveryCard",
+      "kind": "symbol",
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "line": 209
+    },
+    {
+      "name": "RenderingBenchmark",
       "kind": "class",
-      "file": "tools/test_release_critical_profile_contract.py",
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "line": 18
+    },
+    {
+      "name": "discoverScrollFrames",
+      "kind": "symbol",
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "line": 23
+    },
+    {
+      "name": "profileScrollFrames",
+      "kind": "symbol",
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "line": 52
+    },
+    {
+      "name": "quizToResultFrames",
+      "kind": "symbol",
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "line": 85
+    },
+    {
+      "name": "resultScrollFrames",
+      "kind": "symbol",
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "line": 117
+    },
+    {
+      "name": "ProfileResultAllocationContractTest",
+      "kind": "class",
+      "file": "tools/test_profile_result_allocation_contract.py",
       "line": 6
     },
     {
       "name": "setUp",
       "kind": "function",
-      "file": "tools/test_release_critical_profile_contract.py",
+      "file": "tools/test_profile_result_allocation_contract.py",
       "line": 7
     },
     {
-      "name": "test_profile_store_decodes_both_histories",
+      "name": "test_profile_sort_and_catalog_index_are_remembered",
       "kind": "function",
-      "file": "tools/test_release_critical_profile_contract.py",
-      "line": 14
+      "file": "tools/test_profile_result_allocation_contract.py",
+      "line": 13
     },
     {
-      "name": "test_profile_quiz_navigation_uses_mutable_quiz_id",
+      "name": "test_profile_and_result_background_gradients_are_remembered",
       "kind": "function",
-      "file": "tools/test_release_critical_profile_contract.py",
-      "line": 22
+      "file": "tools/test_profile_result_allocation_contract.py",
+      "line": 26
     },
     {
-      "name": "test_retake_cadence_has_hard_minimum",
+      "name": "test_result_recommendation_uses_indexed_catalog_and_stable_brush",
       "kind": "function",
-      "file": "tools/test_release_critical_profile_contract.py",
-      "line": 32
+      "file": "tools/test_profile_result_allocation_contract.py",
+      "line": 31
     },
     {
-      "name": "test_profile_explains_next_quiz",
+      "name": "test_identity_aura_uses_draw_cache_for_geometry",
       "kind": "function",
-      "file": "tools/test_release_critical_profile_contract.py",
-      "line": 36
+      "file": "tools/test_profile_result_allocation_contract.py",
+      "line": 37
     }
   ],
   "selected_tests": [
+    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
     "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
-    "tools/test_actionable_knowledge_map_contract.py",
-    "tools/test_release_critical_profile_contract.py"
+    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
+    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
+    "tools/test_profile_result_allocation_contract.py"
   ]
 }

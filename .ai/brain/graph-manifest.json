@@ -4,7 +4,7 @@
   "shards": [
     {
       "area": "app-src",
-      "edge_count": 903,
+      "edge_count": 905,
       "path": ".ai/brain/graph-shards/app-src.json"
     },
     {
@@ -221,6 +221,11 @@
       "area": "tools-test-profile-reset-contract.py",
       "edge_count": 2,
       "path": ".ai/brain/graph-shards/tools-test-profile-reset-contract.py.json"
+    },
+    {
+      "area": "tools-test-profile-result-allocation-contract.py",
+      "edge_count": 1,
+      "path": ".ai/brain/graph-shards/tools-test-profile-result-allocation-contract.py.json"
     },
     {
       "area": "tools-test-profile-startup-resilience.py",

@@ -1659,11 +1659,12 @@
         "app/src/main/java/com/whoareyou/app/TraitExploration.kt",
         "app/src/main/java/com/whoareyou/app/TraitGraph.kt",
         "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt",
+        "app/src/main/java/com/whoareyou/app/WhoAmICardModel.kt",
         "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt"
       ],
       "dependents": [],
       "in_degree": 0,
-      "out_degree": 16
+      "out_degree": 17
     },
     "app/src/main/java/com/whoareyou/app/ProfileStore.kt": {
       "dependencies": [
@@ -2496,10 +2497,11 @@
         "app/src/main/java/com/whoareyou/app/WhoAmISectionModel.kt"
       ],
       "dependents": [
+        "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
         "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
         "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt"
       ],
-      "in_degree": 2,
+      "in_degree": 3,
       "out_degree": 5
     },
     "app/src/main/java/com/whoareyou/app/WhoAmICopy.kt": {
@@ -2528,9 +2530,10 @@
         "app/src/test/java/com/whoareyou/app/WhoAmICardModelTest.kt",
         "app/src/test/java/com/whoareyou/app/WhoAmILegacyCompatibilityTest.kt",
         "app/src/test/java/com/whoareyou/app/WhoAmIPortraitTest.kt",
-        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt"
+        "app/src/test/java/com/whoareyou/app/WhoAmISectionModelTest.kt",
+        "tools/test_profile_result_allocation_contract.py"
       ],
-      "in_degree": 10,
+      "in_degree": 11,
       "out_degree": 3
     },
     "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": {
@@ -3751,6 +3754,14 @@
       "dependents": [],
       "in_degree": 0,
       "out_degree": 2
+    },
+    "tools/test_profile_result_allocation_contract.py": {
+      "dependencies": [
+        "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt"
+      ],
+      "dependents": [],
+      "in_degree": 0,
+      "out_degree": 1
     },
     "tools/test_profile_startup_resilience.py": {
       "dependencies": [

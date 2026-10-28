@@ -285,7 +285,7 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "waitForTag",
-      "line": 118
+      "line": 120
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/MainFlowE2eTest.kt",
@@ -341,14 +341,14 @@
       "language": "kotlin",
       "kind": "class",
       "name": "ProfileScreenWhoAmITest",
-      "line": 9
+      "line": 11
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "profileScreenContainsWhoAmIPortraitAndDiscovery",
-      "line": 15
+      "line": 17
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ProfileStorePersistenceTest.kt",
@@ -509,42 +509,42 @@
       "language": "kotlin",
       "kind": "class",
       "name": "ResultScreenUiTest",
-      "line": 13
+      "line": 14
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "resultShowsScoreAndExposesRetryAndDoneActions",
-      "line": 19
+      "line": 20
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "resultRendersProfileConnectionFromRealTraitGraphInput",
-      "line": 55
+      "line": 59
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "historicResultWithoutIntelligenceOmitsOptionalCardsAndKeepsActionsReachable",
-      "line": 86
+      "line": 90
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "emptyCoverage",
-      "line": 117
+      "line": 121
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "testQuiz",
-      "line": 127
+      "line": 131
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIDiscoveryUiTest.kt",
@@ -565,14 +565,14 @@
       "language": "kotlin",
       "kind": "class",
       "name": "WhoAmIPortraitUiTest",
-      "line": 9
+      "line": 17
     },
     {
       "file": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "portraitCardsRenderFivePartHierarchyAndSafeLabels",
-      "line": 15
+      "line": 23
     },
     {
       "file": "app/src/candidate/java/com/whoareyou/app/CandidateUpgradeStateProbeProvider.kt",
@@ -1251,49 +1251,49 @@
       "language": "kotlin",
       "kind": "class",
       "name": "AppShellTab",
-      "line": 51
+      "line": 52
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "class",
       "name": "AppShellNavigation",
-      "line": 52
+      "line": 53
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "tabFor",
-      "line": 54
+      "line": 55
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "destination",
-      "line": 59
+      "line": 60
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "isShellVisible",
-      "line": 64
+      "line": 65
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "PremiumAppShellBar",
-      "line": 69
+      "line": 70
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "ShellTab",
-      "line": 158
+      "line": 159
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/AppThemeUi.kt",
@@ -3435,7 +3435,7 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "IdentityAura",
-      "line": 24
+      "line": 25
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt",
@@ -3498,21 +3498,21 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "TrendRow",
-      "line": 82
+      "line": 84
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "TrendSparkline",
-      "line": 127
+      "line": 130
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "trendSummary",
-      "line": 166
+      "line": 169
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/MainActivity.kt",
@@ -3897,49 +3897,49 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "ProfileRadar",
-      "line": 143
+      "line": 147
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "point",
-      "line": 154
+      "line": 162
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "DimensionLegendRow",
-      "line": 211
+      "line": 219
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "IdentityStat",
-      "line": 252
+      "line": 260
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
       "language": "kotlin",
       "kind": "class",
       "name": "InsightCopy",
-      "line": 25
+      "line": 26
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "ProfileInsightCards",
-      "line": 29
+      "line": 30
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "localizedCopy",
-      "line": 116
+      "line": 117
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileInsights.kt",
@@ -4275,7 +4275,7 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "ProfileScreen",
-      "line": 54
+      "line": 55
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ProfileStore.kt",
@@ -4915,6 +4915,13 @@
       "line": 18
     },
     {
+      "file": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "ResultScoreOrbit",
+      "line": 20
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt",
       "language": "kotlin",
       "kind": "class",
@@ -4940,7 +4947,7 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "ResultScreen",
-      "line": 54
+      "line": 56
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/ResultShare.kt",
@@ -5640,21 +5647,21 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "TraitTimelineDialog",
-      "line": 114
+      "line": 115
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "TraitTimelineSparkline",
-      "line": 253
+      "line": 254
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "traitTrendText",
-      "line": 288
+      "line": 289
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/UsageAccess.kt",
@@ -5815,28 +5822,35 @@
       "language": "kotlin",
       "kind": "symbol",
       "name": "WhoAmIPortraitCards",
-      "line": 20
+      "line": 26
+    },
+    {
+      "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
+      "language": "kotlin",
+      "kind": "symbol",
+      "name": "WhoAmIPortraitSection",
+      "line": 50
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "WhoAmITraitCard",
-      "line": 74
+      "line": 96
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "WhoAmITraitRow",
-      "line": 116
+      "line": 138
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "WhoAmIDiscoveryCard",
-      "line": 151
+      "line": 209
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/WhoAmIProgressModel.kt",
@@ -7613,15 +7627,22 @@
       "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
       "language": "kotlin",
       "kind": "symbol",
+      "name": "profileScrollFrames",
+      "line": 52
+    },
+    {
+      "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
+      "language": "kotlin",
+      "kind": "symbol",
       "name": "quizToResultFrames",
-      "line": 48
+      "line": 85
     },
     {
       "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
       "language": "kotlin",
       "kind": "symbol",
       "name": "resultScrollFrames",
-      "line": 80
+      "line": 117
     },
     {
       "file": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/StartupBenchmark.kt",
@@ -10260,21 +10281,21 @@
       "language": "python",
       "kind": "function",
       "name": "test_profile_and_result_background_gradients_are_remembered",
-      "line": 20
+      "line": 26
     },
     {
       "file": "tools/test_profile_result_allocation_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_result_recommendation_uses_indexed_catalog_and_stable_brush",
-      "line": 25
+      "line": 31
     },
     {
       "file": "tools/test_profile_result_allocation_contract.py",
       "language": "python",
       "kind": "function",
       "name": "test_identity_aura_uses_draw_cache_for_geometry",
-      "line": 31
+      "line": 37
     },
     {
       "file": "tools/test_profile_startup_resilience.py",

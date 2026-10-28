@@ -192,6 +192,7 @@ src/
             ResultNextExploration.kt
             ResultNextExplorationUi.kt
             ResultProfileConnection.kt
+            ResultScoreOrbitUi.kt
             ResultScreenIntelligence.kt
             ResultScreenUi.kt
             ResultShare.kt
@@ -910,9 +911,9 @@ class HabitsPersistenceE2eTest {
         composeRule.onAllNodes(tabMatcher)[1].performClick()
         waitForTag("app_screen_profile")
 
-        composeRule.onNodeWithTag("profile_open_habits")
-            .performScrollTo()
-            .performClick()
+        composeRule.onNodeWithTag("profile_lazy_list")
+            .performScrollToNode(hasTestTag("profile_open_habits"))
+        composeRule.onNodeWithTag("profile_open_habits").performClick()
         waitForTag("app_screen_habits")
 
         val habits = composeRule.onNodeWithTag("behavior_screen")
@@ -1068,7 +1069,9 @@ class MainActivityRecreationTest {
     private fun openHabits(context: android.content.Context) {
         composeRule.onNodeWithText(context.getString(R.string.shell_profile)).performClick()
         waitForTag("app_screen_profile")
-        composeRule.onNodeWithTag("profile_open_habits").performScrollTo().performClick()
+        composeRule.onNodeWithTag("profile_lazy_list")
+            .performScrollToNode(hasTestTag("profile_open_habits"))
+        composeRule.onNodeWithTag("profile_open_habits").performClick()
         waitForTag("app_screen_habits")
     }
 
@@ -1300,8 +1303,10 @@ package com.whoareyou.app
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
 import org.junit.Rule
 import org.junit.Test
 
@@ -1350,7 +1355,14 @@ class ProfileScreenWhoAmITest {
             }
         }
 
+        composeRule.onNodeWithTag("profile_identity_hero").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_completion_progress").assertIsDisplayed()
+        // Each portrait card is its own LazyColumn item, not precomposed off-screen.
+        composeRule.onNodeWithTag("profile_lazy_list")
+            .performScrollToNode(hasTestTag("who_am_i_portrait"))
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_lazy_list")
+            .performScrollToNode(hasTestTag("profile_open_habits"))
         composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
         composeRule.onNodeWithTag("profile_habits_privacy_hint").performScrollTo().assertIsDisplayed()
     }
@@ -1846,6 +1858,7 @@ class ResultProfileConnectionsCardTest {
 package com.whoareyou.app
 
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -1882,7 +1895,10 @@ class ResultScreenUiTest {
             )
         }
 
+        composeRule.onNodeWithTag("result_title").assertIsDisplayed()
+        composeRule.onNodeWithTag("result_score_card").assertIsDisplayed()
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
+        composeRule.onNodeWithTag("result_profile_progress").performScrollTo()
         composeRule.onNodeWithTag("result_evidence").performScrollTo()
         composeRule.onNodeWithTag("result_strengths_watchouts").performScrollTo()
         composeRule.onNodeWithTag("result_everyday_life").performScrollTo()
@@ -2074,10 +2090,18 @@ class WhoAmIDiscoveryUiTest {
 ```kotlin
 package com.whoareyou.app
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 
@@ -2118,7 +2142,9 @@ class WhoAmIPortraitUiTest {
 
         composeRule.setContent {
             WhoAreYouTheme {
-                WhoAmIPortraitCards(portrait)
+                Box(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                    WhoAmIPortraitCards(portrait)
+                }
             }
         }
 
@@ -2126,9 +2152,10 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_stable").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_nuances").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
-        composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
-        composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
-        composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_evolution").performScrollTo().assertIsDisplayed()
+        composeRule.onAllNodesWithTag("who_am_i_trait_curiosity").assertCountEquals(4)
+        composeRule.onNodeWithText("Thinking style").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("This signal has been moving upward over time.").performScrollTo().assertIsDisplayed()
     }
 }
 ```
@@ -13891,6 +13918,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -13991,7 +14019,7 @@ fun PremiumAppShellBar(
                     onClick = { onSelect(AppShellTab.DISCOVER) }
                 )
                 ShellTab(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).testTag("shell_profile_tab"),
                     selected = selected == AppShellTab.PROFILE,
                     iconRes = R.drawable.ic_shell_profile,
                     label = stringResource(R.string.shell_profile),
@@ -20756,6 +20784,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.cos
 import kotlin.math.sin
@@ -20766,7 +20795,8 @@ fun IdentityAura(
     score: Int,
     modifier: Modifier = Modifier,
     primary: Color = V2Colors.Orchid,
-    secondary: Color = V2Colors.Cyan
+    secondary: Color = V2Colors.Cyan,
+    diameter: Dp = 156.dp
 ) {
     val normalized = score.coerceIn(0, 100) / 100f
     val warm = remember(primary, secondary, normalized) {
@@ -20788,14 +20818,14 @@ fun IdentityAura(
 
     Box(
         modifier = modifier
-            .size(156.dp)
+            .size(diameter)
             .clip(CircleShape)
             .background(outerBrush),
         contentAlignment = Alignment.Center
     ) {
         Box(
             Modifier
-                .size(136.dp)
+                .size(diameter * (136f / 156f))
                 .drawWithCache {
                     val centerPoint = Offset(size.width / 2f, size.height / 2f)
                     val baseRadius = size.minDimension * 0.26f
@@ -21032,7 +21062,9 @@ fun LongitudinalTrendsCard(
 
     selectedTrend?.let { trend ->
         val title = catalogById[trend.quizId]?.title ?: trend.quizId
-        DimensionJournalEngine.build(trend.quizId, trend.points)?.let { journal ->
+        remember(trend.quizId, trend.points) {
+            DimensionJournalEngine.build(trend.quizId, trend.points)
+        }?.let { journal ->
             DimensionJournalDialog(
                 title = title,
                 journal = journal,
@@ -21049,7 +21081,8 @@ private fun TrendRow(
     french: Boolean,
     onClick: () -> Unit
 ) {
-    val summary = trendSummary(trend, french)
+    val summary = remember(trend, french) { trendSummary(trend, french) }
+    val graphPoints = remember(trend.points) { trend.points.map { it.score } }
 
     Column(
         modifier = Modifier
@@ -21075,7 +21108,7 @@ private fun TrendRow(
         }
 
         TrendSparkline(
-            points = trend.points.map { it.score },
+            points = graphPoints,
             description = "$title. $summary"
         )
 
@@ -22568,7 +22601,6 @@ object ProfileIdentityMapEngine {
 ```kotlin
 package com.whoareyou.app
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22588,6 +22620,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -22707,72 +22740,80 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
     }
 }
 
+/**
+ * Cached radar geometry: paths, axis angles and circles are rebuilt only when
+ * the available size or profile axes change, not for every Compose draw frame.
+ */
 @Composable
 private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modifier) {
     val violet = V2Colors.AccentViolet
     val cyan = V2Colors.AccentCyan
     val grid = Color.White.copy(alpha = 0.11f)
     val spokes = Color.White.copy(alpha = 0.08f)
+    val whiteDot = Color.White.copy(alpha = 0.9f)
 
-    Canvas(modifier = modifier) {
-        if (axes.size < 3) return@Canvas
-        val center = Offset(size.width / 2f, size.height / 2f)
-        val radius = size.minDimension * 0.44f
-        val axisCount = axes.size
+    Box(modifier = modifier.drawWithCache {
+        if (axes.size < 3) {
+            onDrawBehind { }
+        } else {
+            val center = Offset(size.width / 2f, size.height / 2f)
+            val radius = size.minDimension * 0.44f
+            val axisCount = axes.size
+            val angleStep = 2 * PI / axisCount
 
-        fun point(index: Int, scale: Float): Offset {
-            val angle = -PI / 2 + index * (2 * PI / axisCount)
-            return Offset(
-                x = center.x + cos(angle).toFloat() * radius * scale,
-                y = center.y + sin(angle).toFloat() * radius * scale
-            )
-        }
-
-        listOf(0.25f, 0.5f, 0.75f, 1f).forEach { ring ->
-            val path = Path()
-            repeat(axisCount) { index ->
-                val p = point(index, ring)
-                if (index == 0) path.moveTo(p.x, p.y) else path.lineTo(p.x, p.y)
+            fun point(index: Int, scale: Float): Offset {
+                val angle = -PI / 2 + index * angleStep
+                return Offset(
+                    x = center.x + cos(angle).toFloat() * radius * scale,
+                    y = center.y + sin(angle).toFloat() * radius * scale
+                )
             }
-            path.close()
-            drawPath(path, color = grid, style = Stroke(width = 1.4f))
-        }
 
-        repeat(axisCount) { index ->
-            drawLine(
-                color = spokes,
-                start = center,
-                end = point(index, 1f),
-                strokeWidth = 1.2f
-            )
-        }
+            val spokeEnds = List(axisCount) { index -> point(index, 1f) }
+            val rings = listOf(0.25f, 0.5f, 0.75f, 1f).map { fraction ->
+                Path().apply {
+                    repeat(axisCount) { index ->
+                        val p = point(index, fraction)
+                        if (index == 0) moveTo(p.x, p.y) else lineTo(p.x, p.y)
+                    }
+                    close()
+                }
+            }
+            val profileDots = axes.mapIndexed { index, dimension ->
+                val scale = 0.24f + dimension.score.coerceIn(0, 100) / 100f * 0.76f
+                point(index, scale)
+            }
+            val profilePath = Path().apply {
+                profileDots.forEachIndexed { index, p ->
+                    if (index == 0) moveTo(p.x, p.y) else lineTo(p.x, p.y)
+                }
+                close()
+            }
+            val gridStroke = Stroke(width = 1.4f)
+            val profileStroke = Stroke(width = 3.4f)
+            val profileFill = violet.copy(alpha = 0.18f)
+            val profileOutline = violet.copy(alpha = 0.92f)
 
-        val profilePath = Path()
-        axes.forEachIndexed { index, dimension ->
-            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
-            val p = point(index, normalized)
-            if (index == 0) profilePath.moveTo(p.x, p.y) else profilePath.lineTo(p.x, p.y)
+            onDrawBehind {
+                rings.forEach { path ->
+                    drawPath(path, color = grid, style = gridStroke)
+                }
+                spokeEnds.forEach { end ->
+                    drawLine(color = spokes, start = center, end = end, strokeWidth = 1.2f)
+                }
+                drawPath(profilePath, color = profileFill)
+                drawPath(profilePath, color = profileOutline, style = profileStroke)
+                profileDots.forEachIndexed { index, p ->
+                    drawCircle(
+                        color = if (index % 2 == 0) violet else cyan,
+                        radius = 6.5f,
+                        center = p
+                    )
+                    drawCircle(color = whiteDot, radius = 2.3f, center = p)
+                }
+            }
         }
-        profilePath.close()
-
-        drawPath(profilePath, color = violet.copy(alpha = 0.18f))
-        drawPath(profilePath, color = violet.copy(alpha = 0.92f), style = Stroke(width = 3.4f))
-
-        axes.forEachIndexed { index, dimension ->
-            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
-            val p = point(index, normalized)
-            drawCircle(
-                color = if (index % 2 == 0) violet else cyan,
-                radius = 6.5f,
-                center = p
-            )
-            drawCircle(
-                color = Color.White.copy(alpha = 0.9f),
-                radius = 2.3f,
-                center = p
-            )
-        }
-    }
+    })
 }
 
 @Composable
@@ -22883,6 +22924,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -22900,8 +22942,8 @@ private data class InsightCopy(val title: String, val body: String)
 @Composable
 fun ProfileInsightCards(summary: GlobalProfileSummary) {
     val signature = summary.signature
-    val insights = ProfileInsights.derive(summary.dimensions)
-    val evolution = ProfileEvolutionSummary.derive(summary.dimensions)
+    val insights = remember(summary.dimensions) { ProfileInsights.derive(summary.dimensions) }
+    val evolution = remember(summary.dimensions) { ProfileEvolutionSummary.derive(summary.dimensions) }
     val hasVisualMap = summary.dimensions.size >= 3
     if (!hasVisualMap && signature == null && insights.isEmpty() && evolution == null) return
 
@@ -23930,6 +23972,7 @@ package com.whoareyou.app
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.snap
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23993,6 +24036,11 @@ fun ProfileScreen(
     val sectionGap = if (constrainedLayout) 14.dp else 18.dp
     val dimensionPadding = if (constrainedLayout) 15.dp else 18.dp
     val reduceMotion = reducedMotionEnabled()
+    val animatedCompletion by animateFloatAsState(
+        targetValue = summary.completionPercent.coerceIn(0, 100) / 100f,
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
+        label = "profileCompletionProgress"
+    )
     var showResetDialog by remember { mutableStateOf(false) }
     var selectedTraitId by remember { mutableStateOf<String?>(null) }
     var selectedJournalTrend by remember { mutableStateOf<LongitudinalTrend?>(null) }
@@ -24005,6 +24053,10 @@ fun ProfileScreen(
     }
     val whoAmIPortrait = remember(summary.personalModel) {
         WhoAmIPortraitEngine.build(summary.personalModel)
+    }
+    val portraitCards = remember(whoAmIPortrait) { WhoAmICardModel.from(whoAmIPortrait) }
+    val hasTraitTimelines = remember(summary.traitTimelines) {
+        summary.traitTimelines.any { it.points.size >= 2 }
     }
     val strongestDimension = sortedDimensions.firstOrNull()
     val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
@@ -24027,6 +24079,11 @@ fun ProfileScreen(
         summary.totalCount,
         summary.completionPercent
     )
+    val archetypeLabel = if (summary.dimensions.isEmpty()) {
+        stringResource(R.string.profile_undiscovered)
+    } else {
+        summary.dominantArchetype
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -24034,49 +24091,88 @@ fun ProfileScreen(
             .readableContentWidth()
             .background(profileBackground)
             .statusBarsPadding()
-            .padding(horizontal = V2Spacing.Screen),
+            .padding(horizontal = V2Spacing.Screen)
+            .testTag("profile_lazy_list"),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item {
+        item(key = "profile_hero", contentType = "profile_hero") {
             Spacer(Modifier.height(12.dp))
             AccessibleBackAction(onClick = onBack)
-            Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.your_profile), color = primaryAccent, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(14.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .semantics(mergeDescendants = true) {
-                        contentDescription = "${summary.dominantArchetype}. $profileProgressText"
-                    },
-                horizontalAlignment = Alignment.CenterHorizontally
+            Spacer(Modifier.height(12.dp))
+            Card(
+                colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+                border = BorderStroke(1.dp, primaryAccent.copy(alpha = 0.24f)),
+                shape = RoundedCornerShape(V2Radius.Card),
+                modifier = Modifier.fillMaxWidth().testTag("profile_identity_hero")
             ) {
-                IdentityAura(
-                    score = strongestDimension?.score ?: summary.completionPercent,
-                    primary = primaryAccent,
-                    secondary = companionAccent
-                )
-                strongestQuiz?.let { quiz ->
-                    Spacer(Modifier.height(12.dp))
-                    QuizArtwork(quiz = quiz, compact = true)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Brush.linearGradient(
+                                listOf(
+                                    primaryAccent.copy(alpha = 0.14f),
+                                    V2Colors.SurfaceElevated,
+                                    companionAccent.copy(alpha = 0.10f)
+                                )
+                            )
+                        )
+                        .padding(if (constrainedLayout) 14.dp else 18.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(if (constrainedLayout) 10.dp else 14.dp)
+                    ) {
+                        IdentityAura(
+                            score = strongestDimension?.score ?: summary.completionPercent,
+                            primary = primaryAccent,
+                            secondary = companionAccent,
+                            diameter = if (constrainedLayout) 94.dp else 110.dp
+                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                stringResource(R.string.your_profile),
+                                color = primaryAccent,
+                                style = V2Type.Eyebrow
+                            )
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                archetypeLabel,
+                                color = V2Colors.TextPrimary,
+                                style = when {
+                                    constrainedLayout -> V2Type.SectionTitle
+                                    configuration.screenWidthDp >= 600 -> V2Type.Hero
+                                    else -> V2Type.Question
+                                },
+                                modifier = Modifier.semantics { heading() }
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(14.dp))
+                    Text(
+                        profileProgressText,
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
+                    Spacer(Modifier.height(9.dp))
+                    LinearProgressIndicator(
+                        progress = { animatedCompletion },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .testTag("profile_completion_progress")
+                            .semantics { contentDescription = profileProgressText },
+                        color = primaryAccent,
+                        trackColor = companionAccent.copy(alpha = 0.16f)
+                    )
                 }
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    summary.dominantArchetype.uppercase(),
-                    color = V2Colors.TextPrimary,
-                    style = V2Type.Hero,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    profileProgressText,
-                    color = V2Colors.TextSecondary,
-                    fontSize = 14.sp,
-                    lineHeight = 20.sp,
-                    textAlign = TextAlign.Center
-                )
             }
-            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
+        }
+
+        // Distinct, stable lazy items prevent off-screen analytics and history from
+        // being measured and recomposed as part of one oversized portrait item.
+        item(key = "profile_portrait_heading", contentType = "profile_heading") {
             Text(
                 text = stringResource(R.string.who_am_i_title),
                 color = primaryAccent,
@@ -24086,66 +24182,86 @@ fun ProfileScreen(
                     .testTag("who_am_i_title")
                     .semantics { heading() }
             )
-            Spacer(Modifier.height(10.dp))
-            WhoAmIPortraitCards(
-                portrait = whoAmIPortrait,
-                recommendation = summary.nextQuizRecommendation,
-                catalog = catalog,
-                onQuizSelected = onQuizSelected
-            )
-            Spacer(Modifier.height(sectionGap))
+        }
+
+        portraitCards.forEach { card ->
+            item(
+                key = "profile_portrait_${card.section}",
+                contentType = "profile_portrait_card"
+            ) {
+                WhoAmIPortraitSection(
+                    card = card,
+                    recommendation = summary.nextQuizRecommendation,
+                    catalog = catalog,
+                    onQuizSelected = onQuizSelected
+                )
+            }
+        }
+
+        item(key = "profile_habits", contentType = "profile_habits") {
             HabitsProfileEntry(onOpenHabits = onOpenHabits)
-            if (summary.coverage.totalTraitCount > 0) {
-                Spacer(Modifier.height(sectionGap))
+        }
+
+        if (summary.coverage.totalTraitCount > 0) {
+            item(key = "profile_coverage", contentType = "profile_analytics") {
                 ProfileCoverageCard(summary.coverage)
-                Spacer(Modifier.height(sectionGap))
+            }
+            item(key = "profile_knowledge_map", contentType = "profile_analytics") {
                 ProfileKnowledgeMapCard(
                     coverage = summary.coverage,
                     onTraitClick = { selectedTraitId = it }
                 )
             }
-            if (summary.longitudinalTrends.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.longitudinalTrends.isNotEmpty()) {
+            item(key = "profile_longitudinal", contentType = "profile_history") {
                 LongitudinalTrendsCard(
                     trends = summary.longitudinalTrends,
                     catalog = catalog
                 )
             }
-            if (summary.narrative.insights.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.narrative.insights.isNotEmpty()) {
+            item(key = "profile_narrative", contentType = "profile_analytics") {
                 ProfileNarrativeCard(summary.narrative)
             }
-            if (summary.traitTimelines.any { it.points.size >= 2 }) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (hasTraitTimelines) {
+            item(key = "profile_trait_timeline", contentType = "profile_history") {
                 TraitTimelineCard(
                     timelines = summary.traitTimelines,
                     catalog = catalog
                 )
             }
-            if (
-                summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
-                summary.traitEvolution.newEvidence.isNotEmpty()
-            ) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (
+            summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
+            summary.traitEvolution.newEvidence.isNotEmpty()
+        ) {
+            item(key = "profile_trait_evolution", contentType = "profile_history") {
                 TraitEvolutionCard(
                     evolution = summary.traitEvolution,
                     catalog = catalog
                 )
             }
-            if (summary.traitGraph.traits.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.traitGraph.traits.isNotEmpty()) {
+            item(key = "profile_trait_graph", contentType = "profile_analytics") {
                 TraitGraphCard(summary.traitGraph)
             }
-            if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
+            item(key = "profile_insights", contentType = "profile_analytics") {
                 ProfileInsightCards(summary)
             }
-            Spacer(Modifier.height(14.dp))
+        }
+        item(key = "profile_dimensions_heading", contentType = "profile_heading") {
+            Spacer(Modifier.height(2.dp))
             Text(stringResource(R.string.all_dimensions), color = companionAccent, style = V2Type.Eyebrow)
         }
 
         if (summary.dimensions.isEmpty()) {
-            item {
+            item(key = "profile_empty", contentType = "profile_empty") {
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(V2Radius.Card),
@@ -24237,7 +24353,36 @@ fun ProfileScreen(
                                 lineHeight = 18.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
-                            Spacer(Modifier.height(3.dp))
+                            Spacer(Modifier.height(10.dp))
+                            Text(
+                                stringResource(R.string.profile_comparison_previous) + " · ${change.previousScore}%",
+                                color = V2Colors.TextSecondary,
+                                style = V2Type.Caption
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            LinearProgressIndicator(
+                                progress = { change.previousScore.coerceIn(0, 100) / 100f },
+                                modifier = Modifier.fillMaxWidth().height(5.dp),
+                                color = companion.copy(alpha = 0.84f),
+                                trackColor = V2Colors.HairlineStrong
+                            )
+                            Spacer(Modifier.height(9.dp))
+                            Text(
+                                stringResource(R.string.profile_comparison_current) + " · ${change.currentScore}%",
+                                color = V2Colors.TextPrimary,
+                                style = V2Type.Caption
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            LinearProgressIndicator(
+                                progress = { animatedProgress },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(6.dp)
+                                    .testTag("profile_dimension_change_current"),
+                                color = accent,
+                                trackColor = V2Colors.HairlineStrong
+                            )
+                            Spacer(Modifier.height(8.dp))
                             Text(
                                 when (change.direction) {
                                     ScoreChangeDirection.HIGHER -> stringResource(R.string.profile_evolution_higher, change.absoluteDelta)
@@ -24254,7 +24399,7 @@ fun ProfileScreen(
             }
         }
 
-        item {
+        item(key = "profile_social", contentType = "profile_actions") {
             Spacer(Modifier.height(sectionGap))
             Column(
                 modifier = Modifier
@@ -24316,7 +24461,7 @@ fun ProfileScreen(
             }
         }
 
-        item {
+        item(key = "profile_reset", contentType = "profile_actions") {
             Spacer(Modifier.height(sectionGap))
             Button(
                 onClick = { showResetDialog = true },
@@ -26564,6 +26709,84 @@ object ResultProfileConnectionEngine {
 }
 ```
 
+## File: src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt
+```kotlin
+package com.whoareyou.app
+
+import androidx.compose.foundation.Canvas
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
+
+/**
+ * Decorative, allocation-light score orbit. Numeric score and accessible
+ * explanation belong to the overlaid Text in ResultScreen, never this canvas.
+ * Its animation is driven by ResultScreen's reduced-motion-aware progress.
+ */
+@Composable
+fun ResultScoreOrbit(
+    progress: Float,
+    accent: Color,
+    companion: Color,
+    modifier: Modifier = Modifier
+) {
+    Canvas(modifier) {
+        val fraction = progress.coerceIn(0f, 1f)
+        val strokeWidth = 12.dp.toPx()
+        val inset = strokeWidth / 2f + 12.dp.toPx()
+        val diameter = (size.minDimension - inset * 2f).coerceAtLeast(0f)
+        val bounds = Size(diameter, diameter)
+        val topLeft = Offset(
+            x = (size.width - diameter) / 2f,
+            y = (size.height - diameter) / 2f
+        )
+
+        drawCircle(
+            brush = Brush.radialGradient(
+                listOf(accent.copy(alpha = 0.16f), companion.copy(alpha = 0.07f), Color.Transparent),
+                center = center,
+                radius = size.minDimension * 0.43f
+            ),
+            radius = size.minDimension * 0.43f
+        )
+        drawCircle(
+            color = companion.copy(alpha = 0.18f),
+            radius = diameter / 2f + strokeWidth,
+            style = Stroke(width = 1.dp.toPx())
+        )
+        drawArc(
+            color = companion.copy(alpha = 0.20f),
+            startAngle = -90f,
+            sweepAngle = 360f,
+            useCenter = false,
+            topLeft = topLeft,
+            size = bounds,
+            style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
+        )
+        if (fraction > 0f) {
+            drawArc(
+                brush = Brush.sweepGradient(
+                    colors = listOf(accent, companion, accent, companion, accent),
+                    center = center
+                ),
+                startAngle = -90f,
+                sweepAngle = fraction * 360f,
+                useCenter = false,
+                topLeft = topLeft,
+                size = bounds,
+                style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
+            )
+        }
+    }
+}
+```
+
 ## File: src/main/java/com/whoareyou/app/ResultScreenIntelligence.kt
 ```kotlin
 package com.whoareyou.app
@@ -26592,8 +26815,10 @@ object ResultScreenIntelligence {
 ```kotlin
 package com.whoareyou.app
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26605,6 +26830,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -26633,7 +26859,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -26666,6 +26891,7 @@ fun ResultScreen(
     val cardPadding = if (constrainedLayout) 18.dp else 24.dp
     val heroScoreSize = if (constrainedLayout) 48.sp else 54.sp
     val heroScoreLineHeight = if (constrainedLayout) 54.sp else 60.sp
+    val profileProgress = if (totalQuizCount > 0) completedCount.coerceIn(0, totalQuizCount) / totalQuizCount.toFloat() else 0f
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
@@ -26686,9 +26912,9 @@ fun ResultScreen(
     val scoreCardBrush = remember(accent, secondaryAccent) {
         Brush.linearGradient(
             listOf(
-                accent.copy(alpha = 0.16f),
-                Color.Transparent,
-                secondaryAccent.copy(alpha = 0.10f)
+                accent.copy(alpha = 0.20f),
+                V2Colors.SurfaceElevated,
+                secondaryAccent.copy(alpha = 0.12f)
             )
         )
     }
@@ -26728,36 +26954,51 @@ fun ResultScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Spacer(Modifier.height(if (constrainedLayout) 22.dp else 32.dp))
-            Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 16.dp))
-            BrandMascot(
-                mood = BrandMascotMood.CELEBRATE,
-                primary = accent,
-                secondary = secondaryAccent
-            )
-            Spacer(Modifier.height(10.dp))
-            QuizArtwork(quiz)
-            Spacer(Modifier.height(sectionGap))
-            Text(
-                resultTitle.uppercase(),
-                color = V2Colors.TextPrimary,
-                style = V2Type.Hero,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .testTag("result_title")
-                    .semantics {
-                        heading()
-                        contentDescription = resultTitle
-                    }
-            )
-            Spacer(Modifier.height(8.dp))
-            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
-            Spacer(Modifier.height(if (constrainedLayout) 18.dp else 26.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 20.dp))
+            // Result and score precede optional decorative imagery on small screens.
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(if (constrainedLayout) 10.dp else 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BrandMascot(
+                    mood = BrandMascotMood.CELEBRATE,
+                    size = if (constrainedLayout) 72.dp else 88.dp,
+                    primary = accent,
+                    secondary = secondaryAccent
+                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
+                    Spacer(Modifier.height(5.dp))
+                    Text(
+                        resultTitle,
+                        color = V2Colors.TextPrimary,
+                        style = when {
+                            constrainedLayout -> V2Type.SectionTitle
+                            configuration.screenWidthDp >= 600 -> V2Type.Hero
+                            else -> V2Type.Question
+                        },
+                        modifier = Modifier
+                            .testTag("result_title")
+                            .semantics {
+                                heading()
+                                contentDescription = resultTitle
+                            }
+                    )
+                    Spacer(Modifier.height(5.dp))
+                    Text(
+                        quiz.title,
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
+                }
+            }
+            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
 
             Card(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, accent.copy(alpha = 0.28f)),
                 shape = RoundedCornerShape(V2Radius.Card),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -26769,32 +27010,33 @@ fun ResultScreen(
                         .padding(cardPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        "$displayedScore%",
-                        color = accent,
-                        fontSize = heroScoreSize,
-                        lineHeight = heroScoreLineHeight,
-                        fontWeight = FontWeight.Black,
-                        modifier = Modifier
-                            .testTag("result_score")
-                            .semantics { contentDescription = scoreAccessibility }
-                    )
-                    Spacer(Modifier.height(8.dp))
+                    Box(
+                        modifier = Modifier.size(if (constrainedLayout) 154.dp else 178.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ResultScoreOrbit(
+                            progress = animatedScore,
+                            accent = accent,
+                            companion = secondaryAccent,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                        Text(
+                            "$displayedScore%",
+                            color = V2Colors.TextPrimary,
+                            fontSize = heroScoreSize,
+                            lineHeight = heroScoreLineHeight,
+                            fontWeight = FontWeight.Black,
+                            modifier = Modifier
+                                .testTag("result_score")
+                                .semantics { contentDescription = scoreAccessibility }
+                        )
+                    }
+                    Spacer(Modifier.height(10.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(quiz.metricLow, color = V2Colors.TextSecondary, style = V2Type.Supporting, modifier = Modifier.weight(1f))
                         Text(quiz.metricHigh, color = V2Colors.TextSecondary, style = V2Type.Supporting, textAlign = TextAlign.End, modifier = Modifier.weight(1f))
                     }
-                    Spacer(Modifier.height(6.dp))
-                    LinearProgressIndicator(
-                        progress = { animatedScore },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(10.dp)
-                            .clearAndSetSemantics { },
-                        color = accent,
-                        trackColor = secondaryAccent.copy(alpha = 0.18f)
-                    )
-                    Spacer(Modifier.height(if (constrainedLayout) 16.dp else 20.dp))
+                    Spacer(Modifier.height(if (constrainedLayout) 12.dp else 16.dp))
                     Text(
                         description,
                         color = V2Colors.TextPrimary,
@@ -26805,6 +27047,8 @@ fun ResultScreen(
                 }
             }
 
+            Spacer(Modifier.height(sectionGap))
+            QuizArtwork(quiz, compact = true, animated = false)
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
 
@@ -26865,6 +27109,13 @@ fun ResultScreen(
                     Text(stringResource(R.string.profile_progress), color = secondaryAccent, style = V2Type.Eyebrow)
                     Spacer(Modifier.height(6.dp))
                     Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
+                    Spacer(Modifier.height(12.dp))
+                    LinearProgressIndicator(
+                        progress = { profileProgress },
+                        modifier = Modifier.fillMaxWidth().height(8.dp).testTag("result_profile_progress"),
+                        color = secondaryAccent,
+                        trackColor = V2Colors.HairlineStrong
+                    )
                 }
             }
 
@@ -29268,6 +29519,7 @@ fun TraitTimelineCard(
             visible.forEach { timeline ->
                 val latest = timeline.points.last()
                 val label = TraitLocalization.label(timeline.traitId, french)
+                val graphPoints = remember(timeline.points) { timeline.points.map { it.score } }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -29291,7 +29543,7 @@ fun TraitTimelineCard(
                         )
                     }
                     TraitTimelineSparkline(
-                        points = timeline.points.map { it.score },
+                        points = graphPoints,
                         description = "$label. ${traitTrendText(timeline.trend.kind, french)}"
                     )
                     Text(
@@ -29996,20 +30248,26 @@ object WhoAmIPortraitEngine {
 ```kotlin
 package com.whoareyou.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -30025,7 +30283,25 @@ fun WhoAmIPortraitCards(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         WhoAmICardModel.from(portrait).forEach { card ->
-            when (card.section) {
+            WhoAmIPortraitSection(
+                card = card,
+                recommendation = recommendation,
+                catalog = catalog,
+                onQuizSelected = onQuizSelected
+            )
+        }
+    }
+}
+
+/** A single independently composed portrait section for the parent LazyColumn. */
+@Composable
+fun WhoAmIPortraitSection(
+    card: WhoAmICard,
+    recommendation: NextQuizRecommendation? = null,
+    catalog: List<Quiz> = emptyList(),
+    onQuizSelected: (Quiz) -> Unit = {}
+) {
+    when (card.section) {
                 WhoAmISection.PORTRAIT -> WhoAmITraitCard(
                     titleRes = R.string.who_am_i_portrait,
                     tag = "who_am_i_portrait",
@@ -30061,8 +30337,6 @@ fun WhoAmIPortraitCards(
                     traits = card.traits,
                     showTrend = true
                 )
-            }
-        }
     }
 }
 
@@ -30119,25 +30393,61 @@ private fun WhoAmITraitRow(
     val certainty = stringResource(row.certaintyRes)
     val trendRes = if (showTrend) WhoAmIProgressModel.trendLabel(trait.trend) else null
 
+    val confidence = trait.confidence.coerceIn(0, 100)
+    val confidenceAccent = if (showTrend) V2Colors.Orchid else V2Colors.Cyan
     Column(
-        modifier = Modifier.semantics(mergeDescendants = true) {},
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(V2Colors.SurfaceRaised.copy(alpha = 0.62f), RoundedCornerShape(V2Radius.Compact))
+            .testTag("who_am_i_trait_${trait.traitId}")
+            .padding(12.dp)
+            .semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.spacedBy(7.dp)
     ) {
-        Text(
-            text = label,
-            color = V2Colors.TextPrimary,
-            style = V2Type.BodyStrong
-        )
-        Text(
-            text = certainty,
-            color = V2Colors.TextSecondary,
-            style = V2Type.Supporting
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = label,
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong,
+                modifier = Modifier.weight(1f)
+            )
+            Text(
+                text = certainty,
+                color = confidenceAccent,
+                style = V2Type.Caption
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.who_am_i_confidence),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption
+            )
+            Text(
+                text = "$confidence%",
+                color = V2Colors.TextPrimary,
+                style = V2Type.Caption,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        LinearProgressIndicator(
+            progress = { confidence / 100f },
+            modifier = Modifier.fillMaxWidth().height(6.dp),
+            color = confidenceAccent,
+            trackColor = V2Colors.HairlineStrong
         )
         trendRes?.let {
             Text(
                 text = stringResource(it),
                 color = V2Colors.TextSecondary,
-                style = V2Type.Body
+                style = V2Type.Supporting
             )
         }
     }
