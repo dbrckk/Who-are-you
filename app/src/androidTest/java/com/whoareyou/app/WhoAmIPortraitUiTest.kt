@@ -3,6 +3,7 @@ package com.whoareyou.app
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import org.junit.Rule
@@ -54,6 +55,7 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_nuances").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("who_am_i_trait_curiosity").assertCountEquals(4)
         composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
         composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
     }
