@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToIndex
 import org.junit.Rule
 import org.junit.Test
 
@@ -54,7 +55,11 @@ class ProfileScreenWhoAmITest {
 
         composeRule.onNodeWithTag("profile_identity_hero").assertIsDisplayed()
         composeRule.onNodeWithTag("profile_completion_progress").assertIsDisplayed()
+        // Each portrait card is its own LazyColumn item, not precomposed off-screen.
+        composeRule.onNodeWithTag("profile_lazy_list").performScrollToIndex(2)
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
+        // This fixture has portrait, stable and discovery cards before Habits.
+        composeRule.onNodeWithTag("profile_lazy_list").performScrollToIndex(5)
         composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
         composeRule.onNodeWithTag("profile_habits_privacy_hint").performScrollTo().assertIsDisplayed()
     }
