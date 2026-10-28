@@ -3,10 +3,12 @@
 Updated: 2026-10-27. Applies to `com.whoareyou.app`.
 
 ## Select in Play Console
+- **Health apps declaration** → **Health and fitness** → **Activity and Fitness**: the optional My Habits step tracker and walking goals. This is a separate form from Android health permissions and must also be completed.
 - Android health permissions → Health Connect → **Fitness and wellness** (optional daily activity monitoring and personal step-count goals).
 - Requested data type: **Steps / read** (`android.permission.health.READ_STEPS`) only. Do not declare write access, sleep, heart rate or medical data.
 - Health privacy-policy URL: `https://dbrckk.github.io/Who-are-you/privacy/`.
 - Update the Play Store listing with the matching EN/FR sections from `docs/store-listing-en.md` and `docs/store-listing-fr.md`. Upload only when these descriptions are actually published.
+- Official guidance: [Google Play Health apps declaration](https://support.google.com/googleplay/android-developer/answer/14738291?hl=en) and [Android health permissions](https://support.google.com/googleplay/android-developer/answer/12991134?hl=en). The declarations must match the actual permission and use case shown in the app.
 
 ## Pasteable English explanation for permission review
 > Who Are You? includes an optional fitness and wellness feature in My Habits. When a user chooses to enable Activity and grants Health Connect READ_STEPS, the app reads step-count totals to display daily step counts, 7- and 30-day activity averages and patterns, and progress on optional personal step-count goals. This benefits the user by supporting awareness of daily physical activity and self-set movement goals. Only READ_STEPS is requested; no steps are written. These observations and goals are processed and stored on-device only. Daily history covers the current day and preceding 30 days when the app is in use; older saved records are removed when the app next runs. Step data is not used for ads, uploaded or shared with third parties. Users can decline access without affecting quizzes, disable Activity to delete local step history, and revoke the permission in Android Health Connect settings.
