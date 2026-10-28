@@ -53,6 +53,7 @@ jobs:
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+          EXPECTED_PLAY_UPLOAD_CERT_SHA256: ${{ vars.WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256 }}
           TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
           TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
         run: |
@@ -71,6 +72,10 @@ jobs:
               exit 1
             fi
           done
+          if [ -z "${EXPECTED_PLAY_UPLOAD_CERT_SHA256:-}" ]; then
+            echo "::error::Set the WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256 variable in the protected play-internal environment using the existing app's UPLOAD certificate from Play Console > App integrity. Do not use the separate app-signing certificate."
+            exit 1
+          fi
           if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
             echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
             exit 1
@@ -232,6 +237,38 @@ jobs:
           test -s app/build/outputs/mapping/playRelease/mapping.txt
           echo "path=$PLAY_AAB" >> "$GITHUB_OUTPUT"
           echo "artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify signed AAB matches existing Play upload certificate
+        env:
+          EXPECTED_PLAY_UPLOAD_CERT_SHA256: ${{ vars.WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256 }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          import pathlib
+          import re
+
+          expected = re.sub(r"[\\s:]", "", os.environ.get("EXPECTED_PLAY_UPLOAD_CERT_SHA256", "")).upper()
+          if re.fullmatch(r"[A-F0-9]{64}", expected) is None:
+              raise SystemExit(
+                  "Missing or invalid expected Play upload certificate SHA-256. "
+                  "Set WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256 in the play-internal environment "
+                  "from the UPLOAD certificate under the existing app's Play Console App integrity."
+              )
+          printout = pathlib.Path("play-upload-certificate.txt").read_text(encoding="utf-8")
+          values = re.findall(r"(?m)^[ \\t]*SHA256:[ \\t]*([0-9A-Fa-f:]+)[ \\t]*$", printout)
+          if len(values) != 1:
+              raise SystemExit("Unable to uniquely read the AAB signing certificate SHA256 from keytool output")
+          actual = values[0].replace(":", "").upper()
+          if re.fullmatch(r"[A-F0-9]{64}", actual) is None:
+              raise SystemExit("Malformed AAB upload signing certificate SHA-256")
+          if actual != expected:
+              raise SystemExit(
+                  "Signed AAB upload certificate DOES NOT MATCH the existing app's Play upload certificate. "
+                  "Do not upload or replace the key; check the existing upload keystore and Play Console."
+              )
+          print("Play upload certificate identity verified against the existing app.")
+          PY
 
       - name: Upload and commit Google Play edit
         env:
