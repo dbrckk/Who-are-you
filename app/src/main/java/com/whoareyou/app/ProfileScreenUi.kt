@@ -106,6 +106,11 @@ fun ProfileScreen(
         summary.totalCount,
         summary.completionPercent
     )
+    val archetypeLabel = if (summary.dimensions.isEmpty()) {
+        stringResource(R.string.profile_undiscovered)
+    } else {
+        summary.dominantArchetype
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -159,7 +164,7 @@ fun ProfileScreen(
                             )
                             Spacer(Modifier.height(6.dp))
                             Text(
-                                summary.dominantArchetype,
+                                archetypeLabel,
                                 color = V2Colors.TextPrimary,
                                 style = when {
                                     constrainedLayout -> V2Type.SectionTitle
