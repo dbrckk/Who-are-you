@@ -158,7 +158,11 @@ fun ResultScreen(
                     Text(
                         resultTitle,
                         color = V2Colors.TextPrimary,
-                        style = if (constrainedLayout) V2Type.SectionTitle else V2Type.Question,
+                        style = when {
+                            constrainedLayout -> V2Type.SectionTitle
+                            configuration.screenWidthDp >= 600 -> V2Type.Hero
+                            else -> V2Type.Question
+                        },
                         modifier = Modifier
                             .testTag("result_title")
                             .semantics {
