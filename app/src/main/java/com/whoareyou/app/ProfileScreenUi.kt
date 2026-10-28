@@ -228,6 +228,8 @@ fun ProfileScreen(
                     onTraitClick = { selectedTraitId = it }
                 )
             }
+        }
+        item(key = "profile_longitudinal", contentType = "profile_section") {
             if (summary.longitudinalTrends.isNotEmpty()) {
                 Spacer(Modifier.height(sectionGap))
                 LongitudinalTrendsCard(
@@ -235,10 +237,14 @@ fun ProfileScreen(
                     catalog = catalog
                 )
             }
+        }
+        item(key = "profile_narrative", contentType = "profile_section") {
             if (summary.narrative.insights.isNotEmpty()) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileNarrativeCard(summary.narrative)
             }
+        }
+        item(key = "profile_timelines", contentType = "profile_section") {
             if (summary.traitTimelines.any { it.points.size >= 2 }) {
                 Spacer(Modifier.height(sectionGap))
                 TraitTimelineCard(
@@ -246,6 +252,8 @@ fun ProfileScreen(
                     catalog = catalog
                 )
             }
+        }
+        item(key = "profile_trait_evolution", contentType = "profile_section") {
             if (
                 summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
                 summary.traitEvolution.newEvidence.isNotEmpty()
@@ -256,10 +264,14 @@ fun ProfileScreen(
                     catalog = catalog
                 )
             }
+        }
+        item(key = "profile_trait_graph", contentType = "profile_section") {
             if (summary.traitGraph.traits.isNotEmpty()) {
                 Spacer(Modifier.height(sectionGap))
                 TraitGraphCard(summary.traitGraph)
             }
+        }
+        item(key = "profile_insight_cards", contentType = "profile_section") {
             if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileInsightCards(summary)
