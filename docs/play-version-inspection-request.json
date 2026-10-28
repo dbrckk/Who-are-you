@@ -1,0 +1,12 @@
+{
+  "packageName": "com.whoareyou.app",
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "inspectOnly": true,
+  "playUploadAuthorized": false,
+  "playPublishAuthorized": false,
+  "releaseState": "inspection-only",
+  "sourceCandidateRunId": 40701274882,
+  "requestedOn": "2026-10-28",
+  "purpose": "Inspect highest existing Play versionCode and tracks for the already signed candidate; no AAB upload, release change, or Play edit commit."
+}
