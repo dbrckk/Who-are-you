@@ -62,7 +62,11 @@ gradle :baseline-profile:connectedBenchmarkAndroidTest
 
 Relevant journeys:
 - `discoverScrollFrames` — scroll down/up through the main Discover surface;
-- `quizToResultFrames` — answer a quiz through the Result transition.
+- `profileScrollFrames` — navigate via the Profile tab and scroll through the lazy profile sections in both directions;
+- `quizToResultFrames` — answer a quiz through the Result transition;
+- `resultScrollFrames` — scroll the finished result screen.
+
+For `profileScrollFrames`, **keep the locally stored quiz results identical** between runs on the same physical device. An empty profile primarily exercises the portrait/empty-state path; a seeded multi-quiz profile also exercises the history and radar sections. This benchmark measures actual frame timing, not just successful compilation. CI compilation and Android emulator test runs do **not** establish physical-device frame-rate improvements.
 
 Inspect `FrameTimingMetric`:
 - `frameDurationCpuMs` P50/P90/P95/P99;
