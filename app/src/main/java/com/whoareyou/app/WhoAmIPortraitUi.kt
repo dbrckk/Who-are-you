@@ -1,19 +1,25 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -123,25 +129,61 @@ private fun WhoAmITraitRow(
     val certainty = stringResource(row.certaintyRes)
     val trendRes = if (showTrend) WhoAmIProgressModel.trendLabel(trait.trend) else null
 
+    val confidence = trait.confidence.coerceIn(0, 100)
+    val confidenceAccent = if (showTrend) V2Colors.Orchid else V2Colors.Cyan
     Column(
-        modifier = Modifier.semantics(mergeDescendants = true) {},
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(V2Colors.SurfaceRaised.copy(alpha = 0.62f), RoundedCornerShape(V2Radius.Compact))
+            .testTag("who_am_i_trait_${trait.traitId}")
+            .padding(12.dp)
+            .semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.spacedBy(7.dp)
     ) {
-        Text(
-            text = label,
-            color = V2Colors.TextPrimary,
-            style = V2Type.BodyStrong
-        )
-        Text(
-            text = certainty,
-            color = V2Colors.TextSecondary,
-            style = V2Type.Supporting
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = label,
+                color = V2Colors.TextPrimary,
+                style = V2Type.BodyStrong,
+                modifier = Modifier.weight(1f)
+            )
+            Text(
+                text = certainty,
+                color = confidenceAccent,
+                style = V2Type.Caption
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.who_am_i_confidence),
+                color = V2Colors.TextSecondary,
+                style = V2Type.Caption
+            )
+            Text(
+                text = "$confidence%",
+                color = V2Colors.TextPrimary,
+                style = V2Type.Caption,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        LinearProgressIndicator(
+            progress = { confidence / 100f },
+            modifier = Modifier.fillMaxWidth().height(6.dp),
+            color = confidenceAccent,
+            trackColor = V2Colors.HairlineStrong
         )
         trendRes?.let {
             Text(
                 text = stringResource(it),
                 color = V2Colors.TextSecondary,
-                style = V2Type.Body
+                style = V2Type.Supporting
             )
         }
     }
