@@ -68,7 +68,7 @@ def inspect_play_versions(session, edit_id: str) -> dict:
     return {"existingVersionCodes": sorted(known), "tracks": tracks}
 
 
-def preflight(credentials: pathlib.Path) -> dict:
+def preflight(credentials: pathlib.Path, *, inspect_only: bool = False) -> dict:
     load_service_account(credentials)
     session = _authorized_session(credentials)
     edit_response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
@@ -86,31 +86,52 @@ def preflight(credentials: pathlib.Path) -> dict:
 
     previous = state["existingVersionCodes"]
     highest = max(previous, default=0)
-    if VERSION_CODE <= highest:
+    can_upload = VERSION_CODE > highest
+    if not inspect_only and not can_upload:
         raise ValueError(
             f"Cannot update existing {PACKAGE_NAME}: Gradle versionCode {VERSION_CODE} "
             f"is not greater than the highest code already in Google Play ({highest}). "
             "Increase versionCode, rebuild and revalidate; do not change package/signing identity."
         )
-    return {
+    report = {
         "packageName": PACKAGE_NAME,
         "candidateVersionName": VERSION_NAME,
         "candidateVersionCode": VERSION_CODE,
         "highestExistingVersionCode": highest,
         "existingVersionCodes": previous,
         "tracks": state["tracks"],
-        "safeToAttemptUpload": True,
+        "safeToAttemptUpload": can_upload,
         "note": "Upload signing certificate and real Play-to-Play upgrade still require separate verification.",
     }
+    if inspect_only:
+        report.update({
+            "inspectionOnly": True,
+            "uploadPerformed": False,
+            "publicationPerformed": False,
+            "temporaryEditCommitted": False,
+            "nextAvailableVersionCode": max(highest + 1, 1),
+            "versionStatus": "AVAILABLE" if can_upload else "ALREADY_USED",
+        })
+        if not can_upload:
+            report["note"] = (
+                "The candidate versionCode is already used by Google Play. "
+                "Do not upload this AAB; bump the code and rebuild with the existing upload key."
+            )
+    return report
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check the existing Play app before uploading an update.")
     parser.add_argument("--credentials", type=pathlib.Path, required=True)
     parser.add_argument("--receipt", type=pathlib.Path)
+    parser.add_argument(
+        "--inspect-only",
+        action="store_true",
+        help="Report Play version availability without uploading or publishing; preserve an already-used version in the receipt",
+    )
     args = parser.parse_args(argv)
     try:
-        report = preflight(args.credentials)
+        report = preflight(args.credentials, inspect_only=args.inspect_only)
     except (OSError, ValueError, KeyError, RuntimeError) as exc:
         print(f"Play existing-version preflight failed: {exc}", file=sys.stderr)
         return 1
