@@ -350,7 +350,36 @@ fun ProfileScreen(
                                 lineHeight = 18.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
-                            Spacer(Modifier.height(3.dp))
+                            Spacer(Modifier.height(10.dp))
+                            Text(
+                                stringResource(R.string.profile_comparison_previous) + " · ${change.previousScore}%",
+                                color = V2Colors.TextSecondary,
+                                style = V2Type.Caption
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            LinearProgressIndicator(
+                                progress = { change.previousScore.coerceIn(0, 100) / 100f },
+                                modifier = Modifier.fillMaxWidth().height(5.dp),
+                                color = companion.copy(alpha = 0.84f),
+                                trackColor = V2Colors.HairlineStrong
+                            )
+                            Spacer(Modifier.height(9.dp))
+                            Text(
+                                stringResource(R.string.profile_comparison_current) + " · ${change.currentScore}%",
+                                color = V2Colors.TextPrimary,
+                                style = V2Type.Caption
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            LinearProgressIndicator(
+                                progress = { animatedProgress },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(6.dp)
+                                    .testTag("profile_dimension_change_current"),
+                                color = accent,
+                                trackColor = V2Colors.HairlineStrong
+                            )
+                            Spacer(Modifier.height(8.dp))
                             Text(
                                 when (change.direction) {
                                     ScoreChangeDirection.HIGHER -> stringResource(R.string.profile_evolution_higher, change.absoluteDelta)
