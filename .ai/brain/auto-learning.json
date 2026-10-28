@@ -1,29 +1,8 @@
 {
-  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": true,
-  "learning_result": {
-    "example_count": 15,
-    "rejected_count": 0,
-    "terms": [
-      "113",
-      "before",
-      "certificate",
-      "existing",
-      "internal",
-      "match",
-      "play",
-      "require",
-      "upload"
-    ],
-    "test_count": 0,
-    "useful_count": 1
-  },
-  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
-  "rejected": [],
   "schema_version": 1,
-  "task": "fix(play): require existing Play upload certificate match before Internal upload (#113)",
-  "tests_selected": [],
-  "useful": [
-    "tools/test_play_publish_pipeline_contract.py"
-  ]
+  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
+  "learned": false,
+  "reason": "missing-task-or-source-change",
+  "task": "docs(play): record verified inspection blocker and signed-upload guard (#114)",
+  "useful": []
 }

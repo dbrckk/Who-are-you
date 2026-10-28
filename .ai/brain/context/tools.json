@@ -2,17 +2,6 @@
   "area": "tools",
   "files": [
     {
-      "path": "tools/test_play_publish_pipeline_contract.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 405
-    },
-    {
       "path": "tools/play_existing_version_preflight.py",
       "reasons": [
         "recent-project-state"
@@ -35,6 +24,13 @@
     },
     {
       "path": "tools/test_m55_release_automation.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
+    },
+    {
+      "path": "tools/test_play_publish_pipeline_contract.py",
       "reasons": [
         "recent-project-state"
       ],

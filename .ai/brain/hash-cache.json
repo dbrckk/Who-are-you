@@ -1,16 +1,12 @@
 {
   "files": {
-    ".github/workflows/play-internal-publish.yml": {
-      "sha256": "06b2e1aa7815afe75456e9cb29c5b8e40afc842f1426fb1fa77e3a20c3deb9b0",
-      "size": 13646
-    },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
     },
-    "docs/play-version-inspection-setup.md": {
-      "sha256": "c2c9970ef0166874c71185997b96047917f3d9dae1a020aede402c71de335f05",
-      "size": 4857
+    "docs/play-update-0.3.0.md": {
+      "sha256": "389d3a36ee946402436080396b311086145167f9faf0fb0f659493184b5dfd38",
+      "size": 12187
     },
     "tools/play_existing_version_preflight.py": {
       "sha256": "f038fd1357bf721c8e64ef230c730ace624b96ea941ad30af33ea1c3519314aa",

@@ -1,25 +1,7 @@
 {
   "files": [
     {
-      "path": "tools/test_play_publish_pipeline_contract.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 405
-    },
-    {
-      "path": ".github/workflows/play-internal-publish.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "docs/play-version-inspection-setup.md",
+      "path": "docs/play-update-0.3.0.md",
       "reasons": [
         "changed"
       ],
@@ -48,6 +30,13 @@
     },
     {
       "path": "tools/test_m55_release_automation.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
+    },
+    {
+      "path": "tools/test_play_publish_pipeline_contract.py",
       "reasons": [
         "recent-project-state"
       ],

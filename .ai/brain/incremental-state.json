@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "indexed_head": "fb18602ccb6b5ad17e6c3966d93fc6a52e707afb",
-  "base_head": "4bf34f2d58ee8cb8177da0e05e97a553ee70a3bc",
+  "indexed_head": "c0edf5867ccaecd7bc97162f3c9989fc4b692121",
+  "base_head": "fb18602ccb6b5ad17e6c3966d93fc6a52e707afb",
   "mode": "incremental",
   "total_source_files": 355,
-  "changed_path_count": 3,
-  "reparsed_files": 1
+  "changed_path_count": 1,
+  "reparsed_files": 0
 }

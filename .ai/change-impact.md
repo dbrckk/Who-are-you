@@ -1,17 +1,13 @@
 # Change impact
 
-Base: 301e835b081623e69c1b94f517e664b7291c9a7d
-Head: fb18602ccb6b5ad17e6c3966d93fc6a52e707afb
+Base: be005eb8017d3da13d20c371b363fd2cca83e01b
+Head: c0edf5867ccaecd7bc97162f3c9989fc4b692121
 
 ## Changed files
-- M .github/workflows/play-internal-publish.yml
-- M docs/play-version-inspection-setup.md
-- M tools/test_play_publish_pipeline_contract.py
+- M docs/play-update-0.3.0.md
 
 ## Affected areas
-- .github
 - docs
-- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

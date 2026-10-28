@@ -38,16 +38,17 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T20:01:57Z
+Generated: 2026-10-28T20:13:18Z
 
 ### Git
 - Branch: `main`
-- Head: `fb18602ccb6b`
-- Commit date: 2026-10-28T16:01:46-04:00
-- Commit: fix(play): require existing Play upload certificate match before Internal upload (#113)
+- Head: `c0edf5867cca`
+- Commit date: 2026-10-28T16:13:03-04:00
+- Commit: docs(play): record verified inspection blocker and signed-upload guard (#114)
 - Tracked files: 707
 
 ### Recently changed files
+- `docs/play-update-0.3.0.md`
 - `.github/workflows/play-internal-publish.yml`
 - `docs/play-version-inspection-setup.md`
 - `tools/test_play_publish_pipeline_contract.py`
@@ -57,13 +58,8 @@ Generated: 2026-10-28T20:01:57Z
 - `tools/test_play_publisher.py`
 - `.github/workflows/play-version-inspection.yml`
 - `docs/play-health-connect-declaration.md`
-- `docs/play-update-0.3.0.md`
 - `docs/play-version-inspection-request.json`
 - `tools/play_existing_version_preflight.py`
-- `.github/workflows/play-candidate-request.yml`
-- `.github/workflows/play-candidate.yml`
-- `docs/m32-play-candidate-workflow.md`
-- `docs/play-candidate-request.json`
 
 ### Project signals
 - `build.gradle.kts`
