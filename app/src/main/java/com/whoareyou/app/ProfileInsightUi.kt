@@ -11,6 +11,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -28,8 +29,8 @@ private data class InsightCopy(val title: String, val body: String)
 @Composable
 fun ProfileInsightCards(summary: GlobalProfileSummary) {
     val signature = summary.signature
-    val insights = ProfileInsights.derive(summary.dimensions)
-    val evolution = ProfileEvolutionSummary.derive(summary.dimensions)
+    val insights = remember(summary.dimensions) { ProfileInsights.derive(summary.dimensions) }
+    val evolution = remember(summary.dimensions) { ProfileEvolutionSummary.derive(summary.dimensions) }
     val hasVisualMap = summary.dimensions.size >= 3
     if (!hasVisualMap && signature == null && insights.isEmpty() && evolution == null) return
 

@@ -16,6 +16,12 @@ class ProfileResultAllocationContractTest(unittest.TestCase):
         self.assertIn('items(sortedDimensions', self.profile)
         self.assertNotIn('items(summary.dimensions.sortedByDescending', self.profile)
         self.assertIn('val dimensionBrush = remember(accent, companion)', self.profile)
+        self.assertIn('val portraitCards = remember(whoAmIPortrait)', self.profile)
+        self.assertIn('portraitCards.forEach { card ->', self.profile)
+        self.assertIn('item(key = "profile_habits", contentType = "profile_habits")', self.profile)
+        self.assertIn('item(key = "profile_trait_timeline", contentType = "profile_history")', self.profile)
+        self.assertIn('item(key = "profile_insights", contentType = "profile_analytics")', self.profile)
+        self.assertNotIn('WhoAmIPortraitCards(', self.profile)
 
     def test_profile_and_result_background_gradients_are_remembered(self):
         self.assertIn('val profileBackground = remember(primaryAccent, companionAccent)', self.profile)

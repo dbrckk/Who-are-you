@@ -50,9 +50,9 @@ class HabitsPersistenceE2eTest {
         composeRule.onAllNodes(tabMatcher)[1].performClick()
         waitForTag("app_screen_profile")
 
-        composeRule.onNodeWithTag("profile_open_habits")
-            .performScrollTo()
-            .performClick()
+        composeRule.onNodeWithTag("profile_lazy_list")
+            .performScrollToNode(hasTestTag("profile_open_habits"))
+        composeRule.onNodeWithTag("profile_open_habits").performClick()
         waitForTag("app_screen_habits")
 
         val habits = composeRule.onNodeWithTag("behavior_screen")

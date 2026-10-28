@@ -65,6 +65,7 @@ fun TraitTimelineCard(
             visible.forEach { timeline ->
                 val latest = timeline.points.last()
                 val label = TraitLocalization.label(timeline.traitId, french)
+                val graphPoints = remember(timeline.points) { timeline.points.map { it.score } }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -88,7 +89,7 @@ fun TraitTimelineCard(
                         )
                     }
                     TraitTimelineSparkline(
-                        points = timeline.points.map { it.score },
+                        points = graphPoints,
                         description = "$label. ${traitTrendText(timeline.trend.kind, french)}"
                     )
                     Text(
