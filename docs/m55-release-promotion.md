@@ -24,7 +24,8 @@ Closed-testing tracks are intentionally not invented by CI. Their identifier mus
 - `inProgress` production requires a rollout fraction;
 - malformed track identifiers are rejected;
 - Play edits are validated before commit;
-- workflows do not commit changes by default.
+- workflows do not commit changes by default;
+- before promotion to any non-`qa` track, Google Play must report **the exact versionCode** on the Internal testing (`qa`) track with release status `completed`; absent, draft, or mismatched versions fail before the destination track is changed. This checks the source track identity, **not** whether human device testing, billing checks, policy review or Android Vitals review were actually completed.
 
 ## Internal upload
 
