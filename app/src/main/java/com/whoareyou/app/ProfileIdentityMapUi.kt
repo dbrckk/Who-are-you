@@ -1,6 +1,5 @@
 package com.whoareyou.app
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -139,72 +139,80 @@ fun ProfileIdentityMap(summary: GlobalProfileSummary) {
     }
 }
 
+/**
+ * Cached radar geometry: paths, axis angles and circles are rebuilt only when
+ * the available size or profile axes change, not for every Compose draw frame.
+ */
 @Composable
 private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modifier) {
     val violet = V2Colors.AccentViolet
     val cyan = V2Colors.AccentCyan
     val grid = Color.White.copy(alpha = 0.11f)
     val spokes = Color.White.copy(alpha = 0.08f)
+    val whiteDot = Color.White.copy(alpha = 0.9f)
 
-    Canvas(modifier = modifier) {
-        if (axes.size < 3) return@Canvas
-        val center = Offset(size.width / 2f, size.height / 2f)
-        val radius = size.minDimension * 0.44f
-        val axisCount = axes.size
+    Box(modifier = modifier.drawWithCache {
+        if (axes.size < 3) {
+            onDrawBehind { }
+        } else {
+            val center = Offset(size.width / 2f, size.height / 2f)
+            val radius = size.minDimension * 0.44f
+            val axisCount = axes.size
+            val angleStep = 2 * PI / axisCount
 
-        fun point(index: Int, scale: Float): Offset {
-            val angle = -PI / 2 + index * (2 * PI / axisCount)
-            return Offset(
-                x = center.x + cos(angle).toFloat() * radius * scale,
-                y = center.y + sin(angle).toFloat() * radius * scale
-            )
-        }
-
-        listOf(0.25f, 0.5f, 0.75f, 1f).forEach { ring ->
-            val path = Path()
-            repeat(axisCount) { index ->
-                val p = point(index, ring)
-                if (index == 0) path.moveTo(p.x, p.y) else path.lineTo(p.x, p.y)
+            fun point(index: Int, scale: Float): Offset {
+                val angle = -PI / 2 + index * angleStep
+                return Offset(
+                    x = center.x + cos(angle).toFloat() * radius * scale,
+                    y = center.y + sin(angle).toFloat() * radius * scale
+                )
             }
-            path.close()
-            drawPath(path, color = grid, style = Stroke(width = 1.4f))
-        }
 
-        repeat(axisCount) { index ->
-            drawLine(
-                color = spokes,
-                start = center,
-                end = point(index, 1f),
-                strokeWidth = 1.2f
-            )
-        }
+            val spokeEnds = List(axisCount) { index -> point(index, 1f) }
+            val rings = listOf(0.25f, 0.5f, 0.75f, 1f).map { fraction ->
+                Path().apply {
+                    repeat(axisCount) { index ->
+                        val p = point(index, fraction)
+                        if (index == 0) moveTo(p.x, p.y) else lineTo(p.x, p.y)
+                    }
+                    close()
+                }
+            }
+            val profileDots = axes.mapIndexed { index, dimension ->
+                val scale = 0.24f + dimension.score.coerceIn(0, 100) / 100f * 0.76f
+                point(index, scale)
+            }
+            val profilePath = Path().apply {
+                profileDots.forEachIndexed { index, p ->
+                    if (index == 0) moveTo(p.x, p.y) else lineTo(p.x, p.y)
+                }
+                close()
+            }
+            val gridStroke = Stroke(width = 1.4f)
+            val profileStroke = Stroke(width = 3.4f)
+            val profileFill = violet.copy(alpha = 0.18f)
+            val profileOutline = violet.copy(alpha = 0.92f)
 
-        val profilePath = Path()
-        axes.forEachIndexed { index, dimension ->
-            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
-            val p = point(index, normalized)
-            if (index == 0) profilePath.moveTo(p.x, p.y) else profilePath.lineTo(p.x, p.y)
+            onDrawBehind {
+                rings.forEach { path ->
+                    drawPath(path, color = grid, style = gridStroke)
+                }
+                spokeEnds.forEach { end ->
+                    drawLine(color = spokes, start = center, end = end, strokeWidth = 1.2f)
+                }
+                drawPath(profilePath, color = profileFill)
+                drawPath(profilePath, color = profileOutline, style = profileStroke)
+                profileDots.forEachIndexed { index, p ->
+                    drawCircle(
+                        color = if (index % 2 == 0) violet else cyan,
+                        radius = 6.5f,
+                        center = p
+                    )
+                    drawCircle(color = whiteDot, radius = 2.3f, center = p)
+                }
+            }
         }
-        profilePath.close()
-
-        drawPath(profilePath, color = violet.copy(alpha = 0.18f))
-        drawPath(profilePath, color = violet.copy(alpha = 0.92f), style = Stroke(width = 3.4f))
-
-        axes.forEachIndexed { index, dimension ->
-            val normalized = 0.24f + (dimension.score.coerceIn(0, 100) / 100f) * 0.76f
-            val p = point(index, normalized)
-            drawCircle(
-                color = if (index % 2 == 0) violet else cyan,
-                radius = 6.5f,
-                center = p
-            )
-            drawCircle(
-                color = Color.White.copy(alpha = 0.9f),
-                radius = 2.3f,
-                center = p
-            )
-        }
-    }
+    })
 }
 
 @Composable
