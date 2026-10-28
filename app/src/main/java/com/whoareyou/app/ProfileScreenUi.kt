@@ -85,6 +85,10 @@ fun ProfileScreen(
     val whoAmIPortrait = remember(summary.personalModel) {
         WhoAmIPortraitEngine.build(summary.personalModel)
     }
+    val portraitCards = remember(whoAmIPortrait) { WhoAmICardModel.from(whoAmIPortrait) }
+    val hasTraitTimelines = remember(summary.traitTimelines) {
+        summary.traitTimelines.any { it.points.size >= 2 }
+    }
     val strongestDimension = sortedDimensions.firstOrNull()
     val strongestQuiz = strongestDimension?.let { dimension -> catalogById[dimension.quizId] }
     val primaryAccent = strongestQuiz?.let(QuizVisuals::accentFor) ?: V2Colors.Orchid
@@ -118,7 +122,8 @@ fun ProfileScreen(
             .readableContentWidth()
             .background(profileBackground)
             .statusBarsPadding()
-            .padding(horizontal = V2Spacing.Screen),
+            .padding(horizontal = V2Spacing.Screen)
+            .testTag("profile_lazy_list"),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
@@ -194,7 +199,11 @@ fun ProfileScreen(
                     )
                 }
             }
-            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
+        }
+
+        // Distinct, stable lazy items prevent off-screen analytics and history from
+        // being measured and recomposed as part of one oversized portrait item.
+        item(key = "profile_portrait_heading", contentType = "profile_heading") {
             Text(
                 text = stringResource(R.string.who_am_i_title),
                 color = primaryAccent,
@@ -204,61 +213,81 @@ fun ProfileScreen(
                     .testTag("who_am_i_title")
                     .semantics { heading() }
             )
-            Spacer(Modifier.height(10.dp))
-            WhoAmIPortraitCards(
-                portrait = whoAmIPortrait,
-                recommendation = summary.nextQuizRecommendation,
-                catalog = catalog,
-                onQuizSelected = onQuizSelected
-            )
-            Spacer(Modifier.height(sectionGap))
+        }
+
+        portraitCards.forEach { card ->
+            item(
+                key = "profile_portrait_${card.section}",
+                contentType = "profile_portrait_card"
+            ) {
+                WhoAmIPortraitSection(
+                    card = card,
+                    recommendation = summary.nextQuizRecommendation,
+                    catalog = catalog,
+                    onQuizSelected = onQuizSelected
+                )
+            }
+        }
+
+        item(key = "profile_habits", contentType = "profile_habits") {
             HabitsProfileEntry(onOpenHabits = onOpenHabits)
-            if (summary.coverage.totalTraitCount > 0) {
-                Spacer(Modifier.height(sectionGap))
+        }
+
+        if (summary.coverage.totalTraitCount > 0) {
+            item(key = "profile_coverage", contentType = "profile_analytics") {
                 ProfileCoverageCard(summary.coverage)
-                Spacer(Modifier.height(sectionGap))
+            }
+            item(key = "profile_knowledge_map", contentType = "profile_analytics") {
                 ProfileKnowledgeMapCard(
                     coverage = summary.coverage,
                     onTraitClick = { selectedTraitId = it }
                 )
             }
-            if (summary.longitudinalTrends.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.longitudinalTrends.isNotEmpty()) {
+            item(key = "profile_longitudinal", contentType = "profile_history") {
                 LongitudinalTrendsCard(
                     trends = summary.longitudinalTrends,
                     catalog = catalog
                 )
             }
-            if (summary.narrative.insights.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.narrative.insights.isNotEmpty()) {
+            item(key = "profile_narrative", contentType = "profile_analytics") {
                 ProfileNarrativeCard(summary.narrative)
             }
-            if (summary.traitTimelines.any { it.points.size >= 2 }) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (hasTraitTimelines) {
+            item(key = "profile_trait_timeline", contentType = "profile_history") {
                 TraitTimelineCard(
                     timelines = summary.traitTimelines,
                     catalog = catalog
                 )
             }
-            if (
-                summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
-                summary.traitEvolution.newEvidence.isNotEmpty()
-            ) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (
+            summary.traitEvolution.meaningfulChanges.isNotEmpty() ||
+            summary.traitEvolution.newEvidence.isNotEmpty()
+        ) {
+            item(key = "profile_trait_evolution", contentType = "profile_history") {
                 TraitEvolutionCard(
                     evolution = summary.traitEvolution,
                     catalog = catalog
                 )
             }
-            if (summary.traitGraph.traits.isNotEmpty()) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.traitGraph.traits.isNotEmpty()) {
+            item(key = "profile_trait_graph", contentType = "profile_analytics") {
                 TraitGraphCard(summary.traitGraph)
             }
-            if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
-                Spacer(Modifier.height(sectionGap))
+        }
+        if (summary.dimensions.size >= 3 || summary.signature != null || summary.dimensions.any { it.scoreChange != null }) {
+            item(key = "profile_insights", contentType = "profile_analytics") {
                 ProfileInsightCards(summary)
             }
-            Spacer(Modifier.height(14.dp))
+        }
+        item(key = "profile_dimensions_heading", contentType = "profile_heading") {
+            Spacer(Modifier.height(2.dp))
             Text(stringResource(R.string.all_dimensions), color = companionAccent, style = V2Type.Eyebrow)
         }
 
