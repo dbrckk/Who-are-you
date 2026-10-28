@@ -188,16 +188,20 @@ private fun ProfileRadar(axes: List<ProfileDimension>, modifier: Modifier = Modi
                 }
                 close()
             }
+            val gridStroke = Stroke(width = 1.4f)
+            val profileStroke = Stroke(width = 3.4f)
+            val profileFill = violet.copy(alpha = 0.18f)
+            val profileOutline = violet.copy(alpha = 0.92f)
 
             onDrawBehind {
                 rings.forEach { path ->
-                    drawPath(path, color = grid, style = Stroke(width = 1.4f))
+                    drawPath(path, color = grid, style = gridStroke)
                 }
                 spokeEnds.forEach { end ->
                     drawLine(color = spokes, start = center, end = end, strokeWidth = 1.2f)
                 }
-                drawPath(profilePath, color = violet.copy(alpha = 0.18f))
-                drawPath(profilePath, color = violet.copy(alpha = 0.92f), style = Stroke(width = 3.4f))
+                drawPath(profilePath, color = profileFill)
+                drawPath(profilePath, color = profileOutline, style = profileStroke)
                 profileDots.forEachIndexed { index, p ->
                     drawCircle(
                         color = if (index % 2 == 0) violet else cyan,
