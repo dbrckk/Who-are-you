@@ -23,13 +23,6 @@
       "score": 60
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "reasons": [
         "recent-project-state"
@@ -38,13 +31,6 @@
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
       "reasons": [
         "recent-project-state"
       ],
@@ -79,13 +65,6 @@
       "score": 60
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
       "reasons": [
         "recent-project-state"
@@ -100,18 +79,18 @@
       "score": 60
     },
     {
-      "path": "app/src/main/res/values-fr/strings.xml",
+      "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
-        "recent-project-state"
+        "entrypoint"
       ],
-      "score": 60
+      "score": 40
     },
     {
-      "path": "app/src/main/res/values/strings.xml",
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
       "reasons": [
-        "recent-project-state"
+        "dependency-neighbor"
       ],
-      "score": 60
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

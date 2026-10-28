@@ -4,5 +4,836 @@
   "scope": "symbols defined in changed source files",
   "semantic": false,
   "note": "Occurrences are lexical word matches; verify source/LSP/compiler data before relying on them.",
-  "symbols": {}
+  "symbols": {
+    "_version_code": {
+      "definition": {
+        "file": "tools/play_existing_version_preflight.py",
+        "line": 25,
+        "kind": "function",
+        "language": "python"
+      },
+      "occurrences": [
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 25,
+          "preview": "def _version_code(value: object, source: str) -> int:",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 49,
+          "preview": "known.add(_version_code(item[\"versionCode\"], resource))",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 65,
+          "preview": "active_codes.add(_version_code(code, \"tracks\"))",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 3
+    },
+    "inspect_play_versions": {
+      "definition": {
+        "file": "tools/play_existing_version_preflight.py",
+        "line": 35,
+        "kind": "function",
+        "language": "python"
+      },
+      "occurrences": [
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 35,
+          "preview": "def inspect_play_versions(session, edit_id: str) -> dict:",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 78,
+          "preview": "state = inspect_play_versions(session, edit_id)",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 2
+    },
+    "preflight": {
+      "definition": {
+        "file": "tools/play_existing_version_preflight.py",
+        "line": 71,
+        "kind": "function",
+        "language": "python"
+      },
+      "occurrences": [
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 2,
+          "preview": "\"\"\"Fail-closed Play version preflight for an in-place app update.",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 71,
+          "preview": "def preflight(credentials: pathlib.Path, *, inspect_only: bool = False) -> dict:",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 80,
+          "preview": "# Do not commit a preflight edit. It expires automatically if deletion fails.",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 134,
+          "preview": "report = preflight(args.credentials, inspect_only=args.inspect_only)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 136,
+          "preview": "print(f\"Play existing-version preflight failed: {exc}\", file=sys.stderr)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 71,
+          "preview": "parser = argparse.ArgumentParser(description=\"Autonomous Google Play release readiness preflight\")",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 6
+    },
+    "main": {
+      "definition": {
+        "file": "tools/play_existing_version_preflight.py",
+        "line": 123,
+        "kind": "function",
+        "language": "python"
+      },
+      "occurrences": [
+        {
+          "file": ".github/scripts/summarize-visual-qa.py",
+          "line": 39,
+          "preview": "def main(root: Path, output: Path) -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": ".github/scripts/summarize-visual-qa.py",
+          "line": 81,
+          "preview": "raise SystemExit(main(Path(args.root), Path(args.output)))",
+          "definition_candidate": false
+        },
+        {
+          "file": ".github/scripts/validate-screenshot.py",
+          "line": 150,
+          "preview": "def main(path: str, expected: str) -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": ".github/scripts/validate-screenshot.py",
+          "line": 195,
+          "preview": "raise SystemExit(main(args.png, args.size))",
+          "definition_candidate": false
+        },
+        {
+          "file": ".github/scripts/validate-ui-hierarchy.py",
+          "line": 44,
+          "preview": "def main(path: str, package: str, display_size: str | None, density_dpi: int, screenshot: str | None = None) -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": ".github/scripts/validate-ui-hierarchy.py",
+          "line": 152,
+          "preview": "raise SystemExit(main(args.xml, args.package, args.size, args.density, args.screenshot))",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/check_play_bundle_budget.py",
+          "line": 30,
+          "preview": "def main() -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/check_play_bundle_budget.py",
+          "line": 61,
+          "preview": "raise SystemExit(main())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 123,
+          "preview": "def main(argv: list[str] | None = None) -> int:",
+          "definition_candidate": true
+        },
+        {
+          "file": "tools/play_existing_version_preflight.py",
+          "line": 146,
+          "preview": "sys.exit(main())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 19,
+          "preview": "manifest = (root / \"app/src/main/AndroidManifest.xml\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 20,
+          "preview": "ad_manager = (root / \"app/src/main/java/com/whoareyou/app/AdManager.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 21,
+          "preview": "billing = (root / \"app/src/main/java/com/whoareyou/app/BillingManager.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 70,
+          "preview": "def main() -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_preflight.py",
+          "line": 88,
+          "preview": "raise SystemExit(main())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_promoter.py",
+          "line": 76,
+          "preview": "def main(argv: list[str] | None = None) -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_promoter.py",
+          "line": 104,
+          "preview": "sys.exit(main())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_publisher.py",
+          "line": 195,
+          "preview": "def main(argv: list[str] | None = None) -> int:",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/play_publisher.py",
+          "line": 236,
+          "preview": "sys.exit(main())",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/prepare_play_submission.py",
+          "line": 163,
+          "preview": "def main():",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/prepare_play_submission.py",
+          "line": 177,
+          "preview": "main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_launch_contract.py",
+          "line": 9,
+          "preview": "self.personalized = (ROOT / \"app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_launch_contract.py",
+          "line": 10,
+          "preview": "self.library = (ROOT / \"app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_launch_contract.py",
+          "line": 11,
+          "preview": "self.interactive = (ROOT / \"app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_launch_contract.py",
+          "line": 25,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_system_contract.py",
+          "line": 8,
+          "preview": "self.interactive = (ROOT / 'app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_system_contract.py",
+          "line": 9,
+          "preview": "self.design = (ROOT / 'app/src/main/java/com/whoareyou/app/V2DesignSystem.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_system_contract.py",
+          "line": 10,
+          "preview": "self.library = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_accessibility_system_contract.py",
+          "line": 35,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 8,
+          "preview": "self.map_ui = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 9,
+          "preview": "self.profile = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 10,
+          "preview": "self.dialog = (ROOT / \"app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 11,
+          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 28,
+          "preview": "self.assertIn(\"onQuizSelected = ::startQuiz\", self.main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 29,
+          "preview": "handler = self.main.split(\"fun startQuiz(quiz: Quiz)\", 1)[1].split(\"QuizResultCommitEffect(\", 1)[0]",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 34,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_android_apk_provenance_versioning.py",
+          "line": 31,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_android_ci_sdk_setup_contract.py",
+          "line": 26,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_baseline_profile_manifest_contract.py",
+          "line": 5,
+          "preview": "MANIFEST = (ROOT / 'baseline-profile/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_baseline_profile_manifest_contract.py",
+          "line": 16,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 8,
+          "preview": "self.motion = (ROOT / 'app/src/main/java/com/whoareyou/app/V2MotionPreferences.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 9,
+          "preview": "self.visual = (ROOT / 'app/src/main/java/com/whoareyou/app/QuizVisualUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 10,
+          "preview": "self.ads = (ROOT / 'app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 21,
+          "preview": "discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 36,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_copy_contract.py",
+          "line": 7,
+          "preview": "ROOT / \"app/src/main/res/values/strings.xml\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_copy_contract.py",
+          "line": 8,
+          "preview": "ROOT / \"app/src/main/res/values-fr/strings.xml\",",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_copy_contract.py",
+          "line": 50,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_copy_contract.py",
+          "line": 6,
+          "preview": "EN = ROOT / \"app/src/main/res/values/strings.xml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_copy_contract.py",
+          "line": 7,
+          "preview": "FR = ROOT / \"app/src/main/res/values-fr/strings.xml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_copy_contract.py",
+          "line": 75,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_privacy_contract.py",
+          "line": 6,
+          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_privacy_contract.py",
+          "line": 7,
+          "preview": "MANIFEST = ROOT / \"app/src/main/AndroidManifest.xml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_privacy_contract.py",
+          "line": 84,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_storage_contract.py",
+          "line": 33,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 6,
+          "preview": "EN = ROOT / \"app/src/main/res/values/strings.xml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 7,
+          "preview": "FR = ROOT / \"app/src/main/res/values-fr/strings.xml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 33,
+          "preview": "main = self.read(\"MainActivity.kt\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 35,
+          "preview": "self.assertIn(\"BehaviorRepository.clearAll(context)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 36,
+          "preview": "self.assertIn(\"BehaviorGoalRepository.clearAll(context)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_goal_v1_scope_contract.py",
+          "line": 40,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_integration_contract.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_integration_contract.py",
+          "line": 29,
+          "preview": "main = self.read(\"MainActivity.kt\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_integration_contract.py",
+          "line": 30,
+          "preview": "self.assertIn(\"BehaviorRefreshOnResume(context as? ComponentActivity)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_integration_contract.py",
+          "line": 31,
+          "preview": "self.assertIn(\"BehaviorSourceActionHandler.handle(context, source, action)\", main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_integration_contract.py",
+          "line": 35,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_behavior_privacy_contract.py",
+          "line": 88,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 9,
+          "preview": "self.state = (ROOT / \"app/src/main/java/com/whoareyou/app/BillingPriceState.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 10,
+          "preview": "self.manager = (ROOT / \"app/src/main/java/com/whoareyou/app/BillingManager.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 11,
+          "preview": "self.discover = (ROOT / \"app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 12,
+          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 28,
+          "preview": "self.assertIn(\"BillingPriceState.markLoading()\", self.main)",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 32,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_challenge_landing_contract.py",
+          "line": 9,
+          "preview": "self.manifest = (ROOT / 'app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_challenge_landing_contract.py",
+          "line": 10,
+          "preview": "self.share = (ROOT / 'app/src/main/java/com/whoareyou/app/ChallengeShare.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_challenge_landing_contract.py",
+          "line": 30,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_gradle_action_alignment.py",
+          "line": 26,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_gradle_release_reproducibility.py",
+          "line": 28,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_habits_release_smoke_checklist.py",
+          "line": 30,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 8,
+          "preview": "self.discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 9,
+          "preview": "self.profile = (ROOT / 'app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 10,
+          "preview": "self.en = (ROOT / 'app/src/main/res/values/strings.xml').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 11,
+          "preview": "self.fr = (ROOT / 'app/src/main/res/values-fr/strings.xml').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 33,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 8,
+          "preview": "self.adaptive = (ROOT / 'app/src/main/java/com/whoareyou/app/AdaptiveLayoutUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 9,
+          "preview": "self.shell = (ROOT / 'app/src/main/java/com/whoareyou/app/AppShellUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 10,
+          "preview": "self.library = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 11,
+          "preview": "self.theme = (ROOT / 'app/src/main/java/com/whoareyou/app/AppThemeUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 12,
+          "preview": "self.entry = (ROOT / 'app/src/main/java/com/whoareyou/app/EntryScreensUi.kt').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 33,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_local_profile_privacy_contract.py",
+          "line": 8,
+          "preview": "manifest = (ROOT / 'app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_local_profile_privacy_contract.py",
+          "line": 13,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_localization_parity.py",
+          "line": 7,
+          "preview": "RES = ROOT / \"app/src/main/res\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_localization_parity.py",
+          "line": 44,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 8,
+          "preview": "self.store = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileStore.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 9,
+          "preview": "self.global_profile = (ROOT / \"app/src/main/java/com/whoareyou/app/GlobalProfile.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 10,
+          "preview": "self.profile = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 11,
+          "preview": "self.ui = (ROOT / \"app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 12,
+          "preview": "self.engine = (ROOT / \"app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 33,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m33_readiness.py",
+          "line": 25,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m46_accessibility.py",
+          "line": 6,
+          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m46_accessibility.py",
+          "line": 45,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m47_ui_test_wiring.py",
+          "line": 6,
+          "preview": "MAIN_RC = ROOT / \".github\" / \"workflows\" / \"m56-main-rc.yml\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m47_ui_test_wiring.py",
+          "line": 31,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m48_visual_system.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m48_visual_system.py",
+          "line": 72,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m49_architecture_cleanup.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m49_architecture_cleanup.py",
+          "line": 48,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m50_analytics.py",
+          "line": 5,
+          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m50_analytics.py",
+          "line": 65,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m51_release_readiness.py",
+          "line": 23,
+          "preview": "manifest = (ROOT / \"app/src/main/AndroidManifest.xml\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m51_release_readiness.py",
+          "line": 30,
+          "preview": "config = (ROOT / \".github/workflows/m56-main-rc.yml\").read_text(encoding=\"utf-8\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m51_release_readiness.py",
+          "line": 48,
+          "preview": "unittest.main()",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m52_play_policy.py",
+          "line": 12,
+          "preview": "ad = self.read(\"app/src/main/java/com/whoareyou/app/AdManager.kt\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m52_play_policy.py",
+          "line": 20,
+          "preview": "main = self.read(\"app/src/main/java/com/whoareyou/app/MainActivity.kt\")",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_m52_play_policy.py",
+          "line": 21,
+          "preview": "hub = self.read(\"app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt\")",
+          "definition_candidate": false
+        }
+      ],
+      "occurrence_count": 120
+    }
+  }
 }

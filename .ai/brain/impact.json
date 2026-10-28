@@ -1,33 +1,62 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "33bfb20741dfc9b264f1dd749d86043bb1afab0d",
-  "head": "2555674a20f03d3e21c81634d80e21e0fd3c804f",
+  "base": "2555674a20f03d3e21c81634d80e21e0fd3c804f",
+  "head": "51b993a7a1113639f9815be13f20181ebc05b964",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": ".github/workflows/play-candidate-request.yml",
+      "path": ".github/workflows/play-version-inspection.yml",
       "status": "A"
     },
     {
-      "path": ".github/workflows/play-candidate.yml",
+      "path": "docs/play-health-connect-declaration.md",
       "status": "M"
     },
     {
-      "path": ".github/workflows/play-internal-publish.yml",
+      "path": "docs/play-update-0.3.0.md",
       "status": "M"
     },
     {
-      "path": "docs/m32-play-candidate-workflow.md",
-      "status": "M"
-    },
-    {
-      "path": "docs/play-candidate-request.json",
+      "path": "docs/play-version-inspection-request.json",
       "status": "A"
+    },
+    {
+      "path": "tools/play_existing_version_preflight.py",
+      "status": "M"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
+  "changed_source_files": [
+    "tools/play_existing_version_preflight.py"
+  ],
+  "impacted_files": [
+    "tools/play_existing_version_preflight.py"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "_version_code",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 25
+    },
+    {
+      "name": "inspect_play_versions",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 35
+    },
+    {
+      "name": "preflight",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 71
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 123
+    }
+  ],
   "selected_tests": []
 }

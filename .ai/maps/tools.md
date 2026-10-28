@@ -213,7 +213,7 @@ entries = payload.get("tracks", [])
 ⋮----
 active_codes: set[int] = set()
 ⋮----
-def preflight(credentials: pathlib.Path) -> dict
+def preflight(credentials: pathlib.Path, *, inspect_only: bool = False) -> dict
 ⋮----
 session = _authorized_session(credentials)
 edit_response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
@@ -228,6 +228,9 @@ deleted = session.delete(f"{API_ROOT}/{PACKAGE_NAME}/edits/{edit_id}", timeout=3
 ⋮----
 previous = state["existingVersionCodes"]
 highest = max(previous, default=0)
+can_upload = VERSION_CODE > highest
+⋮----
+report = {
 ⋮----
 def main(argv: list[str] | None = None) -> int
 ⋮----
@@ -235,7 +238,7 @@ parser = argparse.ArgumentParser(description="Check the existing Play app before
 ⋮----
 args = parser.parse_args(argv)
 ⋮----
-report = preflight(args.credentials)
+report = preflight(args.credentials, inspect_only=args.inspect_only)
 ⋮----
 data = json.dumps(report, indent=2, sort_keys=True) + "\n"
 ```

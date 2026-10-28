@@ -1,18 +1,19 @@
 # Change impact
 
-Base: 903d9d90214800fd8dcf979a466a54a17e33d75a
-Head: 2555674a20f03d3e21c81634d80e21e0fd3c804f
+Base: 7260194d6912f3946c8935d41e60b515e08ed65a
+Head: 51b993a7a1113639f9815be13f20181ebc05b964
 
 ## Changed files
-- A .github/workflows/play-candidate-request.yml
-- M .github/workflows/play-candidate.yml
-- M .github/workflows/play-internal-publish.yml
-- M docs/m32-play-candidate-workflow.md
-- A docs/play-candidate-request.json
+- A .github/workflows/play-version-inspection.yml
+- M docs/play-health-connect-declaration.md
+- M docs/play-update-0.3.0.md
+- A docs/play-version-inspection-request.json
+- M tools/play_existing_version_preflight.py
 
 ## Affected areas
 - .github
 - docs
+- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

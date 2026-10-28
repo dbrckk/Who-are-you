@@ -2,11 +2,28 @@
   "area": "tools",
   "files": [
     {
+      "path": "tools/play_existing_version_preflight.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 320
+    },
+    {
       "path": "tools/test_profile_result_allocation_contract.py",
       "reasons": [
         "recent-project-state"
       ],
       "score": 60
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

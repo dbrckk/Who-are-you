@@ -2,14 +2,21 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/m32-play-candidate-workflow.md",
+      "path": "docs/play-health-connect-declaration.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": "docs/play-candidate-request.json",
+      "path": "docs/play-update-0.3.0.md",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "docs/play-version-inspection-request.json",
       "reasons": [
         "changed"
       ],

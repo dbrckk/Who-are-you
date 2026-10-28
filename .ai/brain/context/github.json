@@ -2,21 +2,7 @@
   "area": "github",
   "files": [
     {
-      "path": ".github/workflows/play-candidate-request.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": ".github/workflows/play-candidate.yml",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": ".github/workflows/play-internal-publish.yml",
+      "path": ".github/workflows/play-version-inspection.yml",
       "reasons": [
         "changed"
       ],

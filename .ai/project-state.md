@@ -38,16 +38,21 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T13:57:48Z
+Generated: 2026-10-28T18:35:12Z
 
 ### Git
 - Branch: `main`
-- Head: `2555674a20f0`
-- Commit date: 2026-10-28T09:57:37-04:00
-- Commit: release: build a current signed Play AAB from a protected main-only request (#109)
-- Tracked files: 704
+- Head: `51b993a7a111`
+- Commit date: 2026-10-28T14:34:59-04:00
+- Commit: feat(play): inspect existing Google Play versions safely before uploading (#110)
+- Tracked files: 706
 
 ### Recently changed files
+- `.github/workflows/play-version-inspection.yml`
+- `docs/play-health-connect-declaration.md`
+- `docs/play-update-0.3.0.md`
+- `docs/play-version-inspection-request.json`
+- `tools/play_existing_version_preflight.py`
 - `.github/workflows/play-candidate-request.yml`
 - `.github/workflows/play-candidate.yml`
 - `.github/workflows/play-internal-publish.yml`
@@ -63,11 +68,6 @@ Generated: 2026-10-28T13:57:48Z
 - `app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt`
 - `app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt`
 - `app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt`
-- `app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt`
-- `app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt`
-- `app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt`
-- `tools/test_profile_result_allocation_contract.py`
-- `app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt`
 
 ### Project signals
 - `build.gradle.kts`

@@ -1,8 +1,30 @@
 {
-  "schema_version": 1,
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": false,
-  "reason": "missing-task-or-source-change",
-  "task": "release: build a current signed Play AAB from a protected main-only request (#109)",
-  "useful": []
+  "learned": true,
+  "learning_result": {
+    "example_count": 13,
+    "rejected_count": 0,
+    "terms": [
+      "110",
+      "before",
+      "existing",
+      "feat",
+      "google",
+      "inspect",
+      "play",
+      "safely",
+      "uploading",
+      "versions"
+    ],
+    "test_count": 0,
+    "useful_count": 1
+  },
+  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
+  "rejected": [],
+  "schema_version": 1,
+  "task": "feat(play): inspect existing Google Play versions safely before uploading (#110)",
+  "tests_selected": [],
+  "useful": [
+    "tools/play_existing_version_preflight.py"
+  ]
 }

@@ -1,35 +1,38 @@
 {
   "files": [
     {
-      "path": ".github/workflows/play-candidate-request.yml",
+      "path": "tools/play_existing_version_preflight.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "symbol-indexed"
+      ],
+      "score": 320
+    },
+    {
+      "path": ".github/workflows/play-version-inspection.yml",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": ".github/workflows/play-candidate.yml",
+      "path": "docs/play-health-connect-declaration.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": ".github/workflows/play-internal-publish.yml",
+      "path": "docs/play-update-0.3.0.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
-      "path": "docs/m32-play-candidate-workflow.md",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "docs/play-candidate-request.json",
+      "path": "docs/play-version-inspection-request.json",
       "reasons": [
         "changed"
       ],
@@ -57,13 +60,6 @@
       "score": 60
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
       "reasons": [
         "recent-project-state"
@@ -72,13 +68,6 @@
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
       "reasons": [
         "recent-project-state"
       ],
@@ -113,13 +102,6 @@
       "score": 60
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
       "reasons": [
         "recent-project-state"
@@ -128,20 +110,6 @@
     },
     {
       "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/res/values-fr/strings.xml",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/res/values/strings.xml",
       "reasons": [
         "recent-project-state"
       ],
@@ -167,6 +135,20 @@
         "entrypoint"
       ],
       "score": 40
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

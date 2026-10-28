@@ -50,6 +50,7 @@ m33-readiness.json
 play-candidate-request.json
 play-internal-test-metadata.json
 play-signing-contract.json
+play-version-inspection-request.json
 public-release-inputs.template.json
 ```
 
@@ -390,6 +391,22 @@ public-release-inputs.template.json
   "telemetryOptionalHttpsOnly": true,
   "signatureVerification": "jarsigner -verify -verbose -certs",
   "keystoreMayBeCommitted": false
+}
+```
+
+## File: play-version-inspection-request.json
+```json
+{
+  "packageName": "com.whoareyou.app",
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "inspectOnly": true,
+  "playUploadAuthorized": false,
+  "playPublishAuthorized": false,
+  "releaseState": "inspection-only",
+  "sourceCandidateRunId": 40701274882,
+  "requestedOn": "2026-10-28",
+  "purpose": "Inspect highest existing Play versionCode and tracks for the already signed candidate; no AAB upload, release change, or Play edit commit."
 }
 ```
 

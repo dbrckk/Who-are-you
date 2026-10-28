@@ -59,6 +59,7 @@ The content is organized as follows:
     play-candidate.yml
     play-internal-publish.yml
     play-promote.yml
+    play-version-inspection.yml
     semantic-refresh.yml
 .serena/
   project.yml
@@ -358,6 +359,7 @@ docs/
   play-candidate-request.json
   play-internal-test-metadata.json
   play-signing-contract.json
+  play-version-inspection-request.json
   public-release-inputs.template.json
 tools/
   check_play_bundle_budget.py
@@ -2596,6 +2598,114 @@ jobs:
         with:
           name: who-are-you-play-promotion-${{ inputs.target_track }}-run-${{ github.run_number }}
           path: play-promotion-result.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove temporary credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/google-play-service-account.json"
+```
+
+## File: .github/workflows/play-version-inspection.yml
+```yaml
+name: Protected Play Version Inspection
+
+# Trusted main-only request. This job never uploads an AAB, changes a track,
+# or commits a Google Play edit. It reports existing version codes only.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/play-version-inspection-request.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: protected-play-inspection-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    environment: play-internal
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate version-bound nonpublishing request
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          from tools.play_publisher import PACKAGE_NAME, VERSION_CODE, VERSION_NAME
+          request = json.loads(pathlib.Path('docs/play-version-inspection-request.json').read_text(encoding='utf-8'))
+          safe = (
+              request.get('packageName') == PACKAGE_NAME
+              and request.get('versionName') == VERSION_NAME
+              and request.get('versionCode') == VERSION_CODE
+              and request.get('inspectOnly') is True
+              and request.get('playUploadAuthorized') is False
+              and request.get('playPublishAuthorized') is False
+              and request.get('releaseState') == 'inspection-only'
+              and isinstance(request.get('sourceCandidateRunId'), int)
+              and request['sourceCandidateRunId'] > 0
+          )
+          if not safe:
+              raise SystemExit('Version inspection request is not a safe, version-matched inspection-only request')
+          print(f'Inspecting existing Play versions of {PACKAGE_NAME} for candidate {VERSION_NAME} ({VERSION_CODE}); upload disabled')
+          PY
+
+      - name: Verify existing Play API credential is configured
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+        run: |
+          if [ -z "$PLAY_SERVICE_ACCOUNT_JSON_B64" ]; then
+            echo "::error::GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 is missing from the protected play-internal environment; no Play API request made"
+            exit 1
+          fi
+
+      - name: Install Google Play API client dependencies
+        run: python -m pip install --disable-pip-version-check google-auth requests
+
+      - name: Materialize temporary service-account credential
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON_B64" | base64 --decode > "$RUNNER_TEMP/google-play-service-account.json"
+          test -s "$RUNNER_TEMP/google-play-service-account.json"
+          chmod 600 "$RUNNER_TEMP/google-play-service-account.json"
+          python - <<'PY'
+          import pathlib
+          from tools.play_publisher import load_service_account
+          load_service_account(pathlib.Path('${{ runner.temp }}/google-play-service-account.json'))
+          print('Google Play service-account structure verified')
+          PY
+
+      - name: Inspect Play APK/AAB and track version codes without committing
+        run: |
+          set -euo pipefail
+          python tools/play_existing_version_preflight.py \
+            --credentials "$RUNNER_TEMP/google-play-service-account.json" \
+            --inspect-only \
+            --receipt play-version-inspection.json
+          test -s play-version-inspection.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('play-version-inspection.json').read_text(encoding='utf-8'))
+          if report.get('inspectionOnly') is not True or report.get('uploadPerformed') is not False or report.get('publicationPerformed') is not False or report.get('temporaryEditCommitted') is not False:
+              raise SystemExit('Unsafe inspection receipt; refusing artifact')
+          print(f"Candidate version availability: {report['versionStatus']}; highest existing code: {report['highestExistingVersionCode']}")
+          PY
+
+      - name: Upload version-inspection receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: who-are-you-play-version-inspection-${{ github.run_id }}
+          path: play-version-inspection.json
           if-no-files-found: error
           retention-days: 30
 
@@ -39940,6 +40050,22 @@ dependencies {
 }
 ```
 
+## File: docs/play-version-inspection-request.json
+```json
+{
+  "packageName": "com.whoareyou.app",
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "inspectOnly": true,
+  "playUploadAuthorized": false,
+  "playPublishAuthorized": false,
+  "releaseState": "inspection-only",
+  "sourceCandidateRunId": 40701274882,
+  "requestedOn": "2026-10-28",
+  "purpose": "Inspect highest existing Play versionCode and tracks for the already signed candidate; no AAB upload, release change, or Play edit commit."
+}
+```
+
 ## File: docs/public-release-inputs.template.json
 ```json
 {
@@ -40015,7 +40141,7 @@ entries = payload.get("tracks", [])
 ⋮----
 active_codes: set[int] = set()
 ⋮----
-def preflight(credentials: pathlib.Path) -> dict
+def preflight(credentials: pathlib.Path, *, inspect_only: bool = False) -> dict
 ⋮----
 session = _authorized_session(credentials)
 edit_response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
@@ -40030,6 +40156,9 @@ deleted = session.delete(f"{API_ROOT}/{PACKAGE_NAME}/edits/{edit_id}", timeout=3
 ⋮----
 previous = state["existingVersionCodes"]
 highest = max(previous, default=0)
+can_upload = VERSION_CODE > highest
+⋮----
+report = {
 ⋮----
 def main(argv: list[str] | None = None) -> int
 ⋮----
@@ -40037,7 +40166,7 @@ parser = argparse.ArgumentParser(description="Check the existing Play app before
 ⋮----
 args = parser.parse_args(argv)
 ⋮----
-report = preflight(args.credentials)
+report = preflight(args.credentials, inspect_only=args.inspect_only)
 ⋮----
 data = json.dumps(report, indent=2, sort_keys=True) + "\n"
 ```
