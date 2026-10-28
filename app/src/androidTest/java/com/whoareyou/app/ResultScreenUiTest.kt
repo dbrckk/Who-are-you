@@ -1,6 +1,7 @@
 package com.whoareyou.app
 
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
@@ -37,7 +38,10 @@ class ResultScreenUiTest {
             )
         }
 
+        composeRule.onNodeWithTag("result_title").assertIsDisplayed()
+        composeRule.onNodeWithTag("result_score_card").assertIsDisplayed()
         composeRule.onNodeWithTag("result_score").assertTextEquals("75%")
+        composeRule.onNodeWithTag("result_profile_progress").performScrollTo()
         composeRule.onNodeWithTag("result_evidence").performScrollTo()
         composeRule.onNodeWithTag("result_strengths_watchouts").performScrollTo()
         composeRule.onNodeWithTag("result_everyday_life").performScrollTo()

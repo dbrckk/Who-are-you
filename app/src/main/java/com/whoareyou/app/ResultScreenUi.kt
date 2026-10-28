@@ -1,7 +1,9 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +15,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -41,7 +44,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -74,6 +76,7 @@ fun ResultScreen(
     val cardPadding = if (constrainedLayout) 18.dp else 24.dp
     val heroScoreSize = if (constrainedLayout) 48.sp else 54.sp
     val heroScoreLineHeight = if (constrainedLayout) 54.sp else 60.sp
+    val profileProgress = if (totalQuizCount > 0) completedCount.coerceIn(0, totalQuizCount) / totalQuizCount.toFloat() else 0f
     val resultTitle = quiz.resultTitleFor(score)
     val description = quiz.resultDescriptionFor(score)
     val scoreChange = remember(previousScore, score) { ScoreChangeEngine.compare(previousScore, score) }
@@ -94,9 +97,9 @@ fun ResultScreen(
     val scoreCardBrush = remember(accent, secondaryAccent) {
         Brush.linearGradient(
             listOf(
-                accent.copy(alpha = 0.16f),
-                Color.Transparent,
-                secondaryAccent.copy(alpha = 0.10f)
+                accent.copy(alpha = 0.20f),
+                V2Colors.SurfaceElevated,
+                secondaryAccent.copy(alpha = 0.12f)
             )
         )
     }
@@ -136,36 +139,51 @@ fun ResultScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Spacer(Modifier.height(if (constrainedLayout) 22.dp else 32.dp))
-            Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 16.dp))
-            BrandMascot(
-                mood = BrandMascotMood.CELEBRATE,
-                primary = accent,
-                secondary = secondaryAccent
-            )
-            Spacer(Modifier.height(10.dp))
-            QuizArtwork(quiz)
-            Spacer(Modifier.height(sectionGap))
-            Text(
-                resultTitle.uppercase(),
-                color = V2Colors.TextPrimary,
-                style = V2Type.Hero,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .testTag("result_title")
-                    .semantics {
-                        heading()
-                        contentDescription = resultTitle
-                    }
-            )
-            Spacer(Modifier.height(8.dp))
-            Text(quiz.title, color = V2Colors.TextSecondary, fontSize = 14.sp, lineHeight = 20.sp, textAlign = TextAlign.Center)
-            Spacer(Modifier.height(if (constrainedLayout) 18.dp else 26.dp))
+            Spacer(Modifier.height(if (constrainedLayout) 12.dp else 20.dp))
+            // Result and score precede optional decorative imagery on small screens.
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(if (constrainedLayout) 10.dp else 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BrandMascot(
+                    mood = BrandMascotMood.CELEBRATE,
+                    size = if (constrainedLayout) 72.dp else 88.dp,
+                    primary = accent,
+                    secondary = secondaryAccent
+                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(stringResource(R.string.your_result), color = accent, style = V2Type.Eyebrow)
+                    Spacer(Modifier.height(5.dp))
+                    Text(
+                        resultTitle,
+                        color = V2Colors.TextPrimary,
+                        style = when {
+                            constrainedLayout -> V2Type.SectionTitle
+                            configuration.screenWidthDp >= 600 -> V2Type.Hero
+                            else -> V2Type.Question
+                        },
+                        modifier = Modifier
+                            .testTag("result_title")
+                            .semantics {
+                                heading()
+                                contentDescription = resultTitle
+                            }
+                    )
+                    Spacer(Modifier.height(5.dp))
+                    Text(
+                        quiz.title,
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
+                }
+            }
+            Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
 
             Card(
                 colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                border = BorderStroke(1.dp, accent.copy(alpha = 0.28f)),
                 shape = RoundedCornerShape(V2Radius.Card),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -177,32 +195,33 @@ fun ResultScreen(
                         .padding(cardPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        "$displayedScore%",
-                        color = accent,
-                        fontSize = heroScoreSize,
-                        lineHeight = heroScoreLineHeight,
-                        fontWeight = FontWeight.Black,
-                        modifier = Modifier
-                            .testTag("result_score")
-                            .semantics { contentDescription = scoreAccessibility }
-                    )
-                    Spacer(Modifier.height(8.dp))
+                    Box(
+                        modifier = Modifier.size(if (constrainedLayout) 154.dp else 178.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ResultScoreOrbit(
+                            progress = animatedScore,
+                            accent = accent,
+                            companion = secondaryAccent,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                        Text(
+                            "$displayedScore%",
+                            color = V2Colors.TextPrimary,
+                            fontSize = heroScoreSize,
+                            lineHeight = heroScoreLineHeight,
+                            fontWeight = FontWeight.Black,
+                            modifier = Modifier
+                                .testTag("result_score")
+                                .semantics { contentDescription = scoreAccessibility }
+                        )
+                    }
+                    Spacer(Modifier.height(10.dp))
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(quiz.metricLow, color = V2Colors.TextSecondary, style = V2Type.Supporting, modifier = Modifier.weight(1f))
                         Text(quiz.metricHigh, color = V2Colors.TextSecondary, style = V2Type.Supporting, textAlign = TextAlign.End, modifier = Modifier.weight(1f))
                     }
-                    Spacer(Modifier.height(6.dp))
-                    LinearProgressIndicator(
-                        progress = { animatedScore },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(10.dp)
-                            .clearAndSetSemantics { },
-                        color = accent,
-                        trackColor = secondaryAccent.copy(alpha = 0.18f)
-                    )
-                    Spacer(Modifier.height(if (constrainedLayout) 16.dp else 20.dp))
+                    Spacer(Modifier.height(if (constrainedLayout) 12.dp else 16.dp))
                     Text(
                         description,
                         color = V2Colors.TextPrimary,
@@ -213,6 +232,8 @@ fun ResultScreen(
                 }
             }
 
+            Spacer(Modifier.height(sectionGap))
+            QuizArtwork(quiz, compact = true, animated = false)
             Spacer(Modifier.height(sectionGap))
             ResultInterpretationPanel(quiz = quiz, score = score)
 
@@ -273,6 +294,13 @@ fun ResultScreen(
                     Text(stringResource(R.string.profile_progress), color = secondaryAccent, style = V2Type.Eyebrow)
                     Spacer(Modifier.height(6.dp))
                     Text(stringResource(R.string.profile_dimensions_discovered, completedCount, totalQuizCount), color = V2Colors.TextPrimary, fontSize = 15.sp, lineHeight = 21.sp, fontWeight = FontWeight.SemiBold)
+                    Spacer(Modifier.height(12.dp))
+                    LinearProgressIndicator(
+                        progress = { profileProgress },
+                        modifier = Modifier.fillMaxWidth().height(8.dp).testTag("result_profile_progress"),
+                        color = secondaryAccent,
+                        trackColor = V2Colors.HairlineStrong
+                    )
                 }
             }
 
