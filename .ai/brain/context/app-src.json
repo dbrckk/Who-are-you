@@ -2,53 +2,11 @@
   "area": "app-src",
   "files": [
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
       "reasons": [
-        "recent-project-state"
+        "dependency-neighbor"
       ],
-      "score": 60
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
+      "score": 100
     },
     {
       "path": "app/src/main/AndroidManifest.xml",

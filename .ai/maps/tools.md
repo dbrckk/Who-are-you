@@ -301,11 +301,11 @@ edit_id = response.json()["id"]
 ⋮----
 update = session.put(
 ⋮----
-validation = session.post(endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)
+validation = session.post(edit_action_endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)
 ⋮----
 result: dict[str, Any] = {
 ⋮----
-committed = session.post(endpoint(PACKAGE_NAME, edit_id, "commit"), json={}, timeout=60)
+committed = session.post(
 ⋮----
 def main(argv: list[str] | None = None) -> int
 ⋮----
@@ -362,6 +362,10 @@ release: dict[str, Any] = {
 ⋮----
 def endpoint(package_name: str, edit_id: str, resource: str) -> str
 ⋮----
+def edit_action_endpoint(package_name: str, edit_id: str, action: str) -> str
+⋮----
+"""Play edit actions use ':validate' / ':commit', not child REST paths."""
+⋮----
 def load_service_account(path: pathlib.Path) -> dict[str, Any]
 ⋮----
 data = json.loads(path.read_text(encoding="utf-8"))
@@ -392,11 +396,11 @@ uploaded_version = int(upload.json()["versionCode"])
 track_url = endpoint(config.package_name, edit_id, f"tracks/{track}")
 track_update = session.put(track_url, json=payload, timeout=60)
 ⋮----
-validate = session.post(endpoint(config.package_name, edit_id, "validate"), json={}, timeout=60)
+validate = session.post(edit_action_endpoint(config.package_name, edit_id, "validate"), json={}, timeout=60)
 ⋮----
 result: dict[str, Any] = {
 ⋮----
-commit_response = session.post(endpoint(config.package_name, edit_id, "commit"), json={}, timeout=60)
+commit_response = session.post(
 ⋮----
 def main(argv: list[str] | None = None) -> int
 ⋮----

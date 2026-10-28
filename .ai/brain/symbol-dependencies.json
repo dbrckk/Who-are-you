@@ -4,5 +4,1087 @@
   "scope": "symbols defined in changed source files",
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
-  "symbols": {}
+  "symbols": {
+    "promote_version": {
+      "source": {
+        "file": "tools/play_promoter.py",
+        "start": 25,
+        "end": 79
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "_authorized_session",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 122,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "edit_action_endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 111,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 7
+    },
+    "main": {
+      "source": {
+        "file": "tools/play_promoter.py",
+        "start": 82,
+        "end": 106
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "promote_version",
+          "definitions": [
+            {
+              "file": "tools/play_promoter.py",
+              "line": 25,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 2
+    },
+    "load_android_version": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 27,
+        "end": 33
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "ReleaseConfig": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 45,
+        "end": 58
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "validate_track",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 61,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 2
+    },
+    "validate": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 51,
+        "end": 58
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "validate_track",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 61,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "validate_track": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 61,
+        "end": 66
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "release_payload": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 69,
+        "end": 97
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "validate_track",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 61,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "endpoint": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 100,
+        "end": 101
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "edit_action_endpoint": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 104,
+        "end": 108
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "load_service_account": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 111,
+        "end": 119
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "_authorized_session": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 122,
+        "end": 132
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "publish_bundle": {
+      "source": {
+        "file": "tools/play_publisher.py",
+        "start": 135,
+        "end": 204
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "Type",
+          "definitions": [
+            {
+              "file": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+              "line": 15,
+              "kind": "class",
+              "language": "kotlin"
+            }
+          ],
+          "relation": "class_like"
+        },
+        {
+          "symbol": "_authorized_session",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 122,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "edit_action_endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 111,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 8
+    },
+    "M55ReleaseAutomationTest": {
+      "source": {
+        "file": "tools/test_m55_release_automation.py",
+        "start": 7,
+        "end": 43
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "test_promotion_helper_exists_without_bundle_upload",
+          "definitions": [
+            {
+              "file": "tools/test_m55_release_automation.py",
+              "line": 18,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_promotion_workflow_is_manual_and_safe_by_default",
+          "definitions": [
+            {
+              "file": "tools/test_m55_release_automation.py",
+              "line": 27,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_public_preflight_remains_available",
+          "definitions": [
+            {
+              "file": "tools/test_m55_release_automation.py",
+              "line": 39,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_publisher_uses_current_internal_track_and_production_guard",
+          "definitions": [
+            {
+              "file": "tools/test_m55_release_automation.py",
+              "line": 8,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 4
+    },
+    "test_publisher_uses_current_internal_track_and_production_guard": {
+      "source": {
+        "file": "tools/test_m55_release_automation.py",
+        "start": 8,
+        "end": 16
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_promotion_helper_exists_without_bundle_upload": {
+      "source": {
+        "file": "tools/test_m55_release_automation.py",
+        "start": 18,
+        "end": 25
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_promotion_workflow_is_manual_and_safe_by_default": {
+      "source": {
+        "file": "tools/test_m55_release_automation.py",
+        "start": 27,
+        "end": 37
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "test_public_preflight_remains_available": {
+      "source": {
+        "file": "tools/test_m55_release_automation.py",
+        "start": 39,
+        "end": 43
+      },
+      "symbol_dependencies": [],
+      "dependency_count": 0
+    },
+    "PlayPublisherTest": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 9,
+        "end": 97
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "edit_action_endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "load_android_version",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 27,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 111,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "test_custom_closed_track_is_supported",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 33,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_default_release_payload_uses_internal_qa_track",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 19,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_endpoint_shape",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 85,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_invalid_status_is_rejected",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 66,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_locked_release_config",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 10,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_malformed_track_is_rejected",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 74,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_non_production_rollout_fraction_is_rejected",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 60,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_only_locked_package_is_allowed",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 70,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_open_testing_track_is_supported",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 28,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_production_in_progress_requires_fraction",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 52,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_production_requires_explicit_confirmation",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 37,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_production_staged_rollout_is_supported_when_confirmed",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 41,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "test_service_account_validation_rejects_missing_fields",
+          "definitions": [
+            {
+              "file": "tools/test_play_publisher.py",
+              "line": 78,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 20
+    },
+    "test_locked_release_config": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 10,
+        "end": 17
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "load_android_version",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 27,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 3
+    },
+    "test_default_release_payload_uses_internal_qa_track": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 19,
+        "end": 26
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "load_android_version",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 27,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 2
+    },
+    "test_open_testing_track_is_supported": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 28,
+        "end": 31
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_custom_closed_track_is_supported": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 33,
+        "end": 35
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_production_requires_explicit_confirmation": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 37,
+        "end": 39
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_production_staged_rollout_is_supported_when_confirmed": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 41,
+        "end": 50
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_production_in_progress_requires_fraction": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 52,
+        "end": 58
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_non_production_rollout_fraction_is_rejected": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 60,
+        "end": 64
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_invalid_status_is_rejected": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 66,
+        "end": 68
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_only_locked_package_is_allowed": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 70,
+        "end": 72
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 2
+    },
+    "test_malformed_track_is_rejected": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 74,
+        "end": 76
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_service_account_validation_rejects_missing_fields": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 78,
+        "end": 83
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 111,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 1
+    },
+    "test_endpoint_shape": {
+      "source": {
+        "file": "tools/test_play_publisher.py",
+        "start": 85,
+        "end": 97
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "edit_action_endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 3
+    }
+  }
 }

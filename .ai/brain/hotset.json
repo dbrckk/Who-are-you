@@ -1,81 +1,85 @@
 {
   "files": [
     {
-      "path": ".github/workflows/play-version-inspection.yml",
+      "path": "tools/play_publisher.py",
       "reasons": [
-        "changed"
+        "changed",
+        "changed-source",
+        "dependency-neighbor",
+        "impact",
+        "symbol-indexed"
       ],
-      "score": 100
+      "score": 555
     },
     {
-      "path": "docs/play-version-inspection-setup.md",
+      "path": "tools/test_play_publisher.py",
       "reasons": [
-        "changed"
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
       ],
-      "score": 100
+      "score": 500
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
+      "path": "tools/test_m55_release_automation.py",
       "reasons": [
-        "recent-project-state"
+        "changed",
+        "changed-source",
+        "impact",
+        "selected-test",
+        "symbol-indexed"
       ],
-      "score": 60
+      "score": 395
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
+      "path": "tools/play_promoter.py",
       "reasons": [
-        "recent-project-state"
+        "changed",
+        "changed-source",
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
       ],
-      "score": 60
+      "score": 370
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
+      "path": "tools/test_play_version_sync.py",
       "reasons": [
-        "recent-project-state"
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
       ],
-      "score": 60
+      "score": 225
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
+      "path": "tools/test_play_promoter.py",
       "reasons": [
-        "recent-project-state"
+        "impact",
+        "reverse-dependency-neighbor",
+        "selected-test",
+        "symbol-indexed"
       ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
+      "score": 210
     },
     {
       "path": "tools/play_existing_version_preflight.py",
       "reasons": [
-        "recent-project-state"
+        "impact",
+        "reverse-dependency-neighbor",
+        "symbol-indexed"
       ],
-      "score": 60
+      "score": 130
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 100
     },
     {
       "path": "app/src/main/AndroidManifest.xml",

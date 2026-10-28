@@ -1,21 +1,318 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "51b993a7a1113639f9815be13f20181ebc05b964",
-  "head": "571d1666f989f4c45fe850ce5a8b4bba25c70625",
+  "base": "571d1666f989f4c45fe850ce5a8b4bba25c70625",
+  "head": "4bf34f2d58ee8cb8177da0e05e97a553ee70a3bc",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": ".github/workflows/play-version-inspection.yml",
+      "path": "tools/play_promoter.py",
       "status": "M"
     },
     {
-      "path": "docs/play-version-inspection-setup.md",
-      "status": "A"
+      "path": "tools/play_publisher.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_m55_release_automation.py",
+      "status": "M"
+    },
+    {
+      "path": "tools/test_play_publisher.py",
+      "status": "M"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
-  "selected_tests": []
+  "changed_source_files": [
+    "tools/play_promoter.py",
+    "tools/play_publisher.py",
+    "tools/test_m55_release_automation.py",
+    "tools/test_play_publisher.py"
+  ],
+  "impacted_files": [
+    "tools/play_existing_version_preflight.py",
+    "tools/play_promoter.py",
+    "tools/play_publisher.py",
+    "tools/test_m55_release_automation.py",
+    "tools/test_play_promoter.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "_version_code",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 25
+    },
+    {
+      "name": "inspect_play_versions",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 35
+    },
+    {
+      "name": "preflight",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 71
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_existing_version_preflight.py",
+      "line": 123
+    },
+    {
+      "name": "promote_version",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 25
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 82
+    },
+    {
+      "name": "load_android_version",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 27
+    },
+    {
+      "name": "ReleaseConfig",
+      "kind": "class",
+      "file": "tools/play_publisher.py",
+      "line": 45
+    },
+    {
+      "name": "validate",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 51
+    },
+    {
+      "name": "validate_track",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 61
+    },
+    {
+      "name": "release_payload",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 69
+    },
+    {
+      "name": "endpoint",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 100
+    },
+    {
+      "name": "edit_action_endpoint",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 104
+    },
+    {
+      "name": "load_service_account",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 111
+    },
+    {
+      "name": "_authorized_session",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 122
+    },
+    {
+      "name": "publish_bundle",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 135
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_publisher.py",
+      "line": 207
+    },
+    {
+      "name": "M55ReleaseAutomationTest",
+      "kind": "class",
+      "file": "tools/test_m55_release_automation.py",
+      "line": 7
+    },
+    {
+      "name": "test_publisher_uses_current_internal_track_and_production_guard",
+      "kind": "function",
+      "file": "tools/test_m55_release_automation.py",
+      "line": 8
+    },
+    {
+      "name": "test_promotion_helper_exists_without_bundle_upload",
+      "kind": "function",
+      "file": "tools/test_m55_release_automation.py",
+      "line": 18
+    },
+    {
+      "name": "test_promotion_workflow_is_manual_and_safe_by_default",
+      "kind": "function",
+      "file": "tools/test_m55_release_automation.py",
+      "line": 27
+    },
+    {
+      "name": "test_public_preflight_remains_available",
+      "kind": "function",
+      "file": "tools/test_m55_release_automation.py",
+      "line": 39
+    },
+    {
+      "name": "PlayPromotionPayloadTest",
+      "kind": "class",
+      "file": "tools/test_play_promoter.py",
+      "line": 6
+    },
+    {
+      "name": "test_internal_track_name_matches_current_play_api_contract",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 7
+    },
+    {
+      "name": "test_closed_track_can_be_draft",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 10
+    },
+    {
+      "name": "test_open_track_can_complete",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 14
+    },
+    {
+      "name": "test_production_needs_confirmation",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 18
+    },
+    {
+      "name": "test_staged_production_payload",
+      "kind": "function",
+      "file": "tools/test_play_promoter.py",
+      "line": 22
+    },
+    {
+      "name": "PlayPublisherTest",
+      "kind": "class",
+      "file": "tools/test_play_publisher.py",
+      "line": 9
+    },
+    {
+      "name": "test_locked_release_config",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 10
+    },
+    {
+      "name": "test_default_release_payload_uses_internal_qa_track",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 19
+    },
+    {
+      "name": "test_open_testing_track_is_supported",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 28
+    },
+    {
+      "name": "test_custom_closed_track_is_supported",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 33
+    },
+    {
+      "name": "test_production_requires_explicit_confirmation",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 37
+    },
+    {
+      "name": "test_production_staged_rollout_is_supported_when_confirmed",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 41
+    },
+    {
+      "name": "test_production_in_progress_requires_fraction",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 52
+    },
+    {
+      "name": "test_non_production_rollout_fraction_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 60
+    },
+    {
+      "name": "test_invalid_status_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 66
+    },
+    {
+      "name": "test_only_locked_package_is_allowed",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 70
+    },
+    {
+      "name": "test_malformed_track_is_rejected",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 74
+    },
+    {
+      "name": "test_service_account_validation_rejects_missing_fields",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 78
+    },
+    {
+      "name": "test_endpoint_shape",
+      "kind": "function",
+      "file": "tools/test_play_publisher.py",
+      "line": 85
+    },
+    {
+      "name": "PlayVersionSyncTest",
+      "kind": "class",
+      "file": "tools/test_play_version_sync.py",
+      "line": 11
+    },
+    {
+      "name": "test_publisher_version_is_loaded_from_android_gradle",
+      "kind": "function",
+      "file": "tools/test_play_version_sync.py",
+      "line": 12
+    },
+    {
+      "name": "test_promoter_does_not_pin_an_obsolete_version_code",
+      "kind": "function",
+      "file": "tools/test_play_version_sync.py",
+      "line": 19
+    }
+  ],
+  "selected_tests": [
+    "tools/test_m55_release_automation.py",
+    "tools/test_play_promoter.py",
+    "tools/test_play_publisher.py",
+    "tools/test_play_version_sync.py"
+  ]
 }

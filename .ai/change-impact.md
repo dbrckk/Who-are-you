@@ -1,15 +1,16 @@
 # Change impact
 
-Base: 11b26a77d80d168254cbf0b343e8d1bbb29085df
-Head: 571d1666f989f4c45fe850ce5a8b4bba25c70625
+Base: 0b68d7083a8754b9b994c9711e198e833fbfbb3a
+Head: 4bf34f2d58ee8cb8177da0e05e97a553ee70a3bc
 
 ## Changed files
-- M .github/workflows/play-version-inspection.yml
-- A docs/play-version-inspection-setup.md
+- M tools/play_promoter.py
+- M tools/play_publisher.py
+- M tools/test_m55_release_automation.py
+- M tools/test_play_publisher.py
 
 ## Affected areas
-- .github
-- docs
+- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

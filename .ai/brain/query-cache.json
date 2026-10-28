@@ -1752,6 +1752,95 @@
       },
       "task": "income progression"
     },
+    "209b2e9115f86e4b621fd39310c46a6628b8c6405572f638a39c3790a6ba59bd": {
+      "route": {
+        "budget": {
+          "confidence": "high",
+          "expand_to": 12,
+          "max_files": 3,
+          "requested_max_files": 12,
+          "score_margin": 6,
+          "tier": "narrow",
+          "top_score": 43
+        },
+        "candidate_count": 27,
+        "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+        "files": [
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "billing",
+              "purchase"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/BillingManager.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 43,
+            "symbols": [
+              "BillingManager",
+              "close",
+              "connect",
+              "grantPremium",
+              "handlePurchases",
+              "launchPurchase",
+              "onBillingServiceDisconnected",
+              "onBillingSetupFinished",
+              "queryProduct",
+              "recordBillingError",
+              "restorePurchases",
+              "scheduleProductQueryRetry",
+              "scheduleReconnect",
+              "start"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "billing",
+              "purchase"
+            ],
+            "path": "tools/test_m52_play_policy.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 37,
+            "symbols": [
+              "M52PlayPolicyTests",
+              "read",
+              "test_billing_uses_play_billing_and_acknowledges_purchases",
+              "test_file_provider_exports_only_shared_result_cache",
+              "test_https_app_link_is_scoped_to_challenges",
+              "test_manifest_is_minimal_and_hardened",
+              "test_privacy_entry_point_is_user_visible_when_required",
+              "test_ump_refreshes_and_exposes_privacy_options"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "purchase"
+            ],
+            "path": "app/src/test/java/com/whoareyou/app/PurchaseGrantPolicyTest.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 27,
+            "symbols": [
+              "PurchaseGrantPolicyTest"
+            ]
+          }
+        ],
+        "generated_by": "dbrckk/repo-brain-v8",
+        "schema_version": 1,
+        "task": "purchase billing",
+        "terms": [
+          "purchase",
+          "billing"
+        ]
+      },
+      "task": "purchase billing"
+    },
     "20a6801de92091a2170836ddfe8e42d116d87aa588d563cfe4a399a9fe9a9c24": {
       "route": {
         "budget": {
@@ -4722,6 +4811,153 @@
       },
       "task": "privacy consent"
     },
+    "4f5da80964a90e5dec899546dac304b9a5ea3ab4cf4f685926c33a41c3c08a7e": {
+      "route": {
+        "budget": {
+          "confidence": "medium",
+          "expand_to": 12,
+          "max_files": 6,
+          "requested_max_files": 12,
+          "score_margin": 6,
+          "tier": "bounded",
+          "top_score": 35
+        },
+        "candidate_count": 27,
+        "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+        "files": [
+          {
+            "learning_score": 8,
+            "matched_terms": [
+              "privacy"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+            "reasons": [
+              "learning",
+              "search-index"
+            ],
+            "score": 35,
+            "symbols": [
+              "HealthConnectPrivacyActivity",
+              "onCreate",
+              "onDestroy",
+              "onReceivedError",
+              "onReceivedHttpError",
+              "showFallback"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "consent",
+              "privacy"
+            ],
+            "path": "tools/play_preflight.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 29,
+            "symbols": [
+              "add",
+              "check_repository",
+              "main",
+              "run"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "privacy"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "DiscoverHeroHeader",
+              "DiscoverHub",
+              "DiscoverMomentumCard",
+              "GuidedJourneySection",
+              "JourneyCard",
+              "MomentumStat",
+              "PremiumDiscoverCard",
+              "PrivacyAndSupportCard",
+              "PrivacyOptionsCard"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "privacy"
+            ],
+            "path": "tools/prepare_play_submission.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "InputError",
+              "_required_string",
+              "generate",
+              "main",
+              "render_assetlinks",
+              "render_gradle_properties",
+              "render_privacy_html",
+              "render_privacy_policy",
+              "render_summary",
+              "validate_inputs"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "privacy"
+            ],
+            "path": "tools/test_m53_publication_contract.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "M53PublicationContractTest",
+              "test_app_links_docs_explain_root_domain_dependency",
+              "test_data_safety_tracks_current_admob_disclosures",
+              "test_privacy_page_is_publication_ready",
+              "test_public_release_inputs_contract_is_safe",
+              "test_strict_public_release_gate_rejects_template_placeholders"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "privacy"
+            ],
+            "path": "tools/test_prepare_play_submission.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "PlaySubmissionGeneratorTest",
+              "test_inactive_billing_product_is_rejected",
+              "test_malformed_admob_id_is_rejected",
+              "test_malformed_fingerprint_is_rejected",
+              "test_non_https_privacy_url_is_rejected",
+              "test_placeholder_is_rejected",
+              "test_valid_inputs_generate_all_files"
+            ]
+          }
+        ],
+        "generated_by": "dbrckk/repo-brain-v8",
+        "schema_version": 1,
+        "task": "privacy consent",
+        "terms": [
+          "privacy",
+          "consent"
+        ]
+      },
+      "task": "privacy consent"
+    },
     "4fc71a4df09d7fe42f0efc3dc464515a6120994e963d570dec5ef5674e129326": {
       "route": {
         "budget": {
@@ -6432,6 +6668,157 @@
       },
       "task": "game engine"
     },
+    "6fd00e5ea731c948f4ebfc046466126a5082691c37bbbced25960c26cccd4cb1": {
+      "route": {
+        "budget": {
+          "confidence": "medium",
+          "expand_to": 12,
+          "max_files": 6,
+          "requested_max_files": 12,
+          "score_margin": 7,
+          "tier": "bounded",
+          "top_score": 17
+        },
+        "candidate_count": 9,
+        "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+        "files": [
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progression"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 17,
+            "symbols": [
+              "ProgressPath",
+              "RecommendationPath",
+              "Requirement",
+              "Rule",
+              "SignaturePathProgress",
+              "SignatureProfileCopy",
+              "SignatureProfileKey",
+              "SignatureProfileMatch",
+              "SignatureProfiles",
+              "SignatureRecommendation",
+              "copy",
+              "matches",
+              "pathProgress",
+              "primary",
+              "recommendNext",
+              "requirementStrength",
+              "satisfies"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progression"
+            ],
+            "path": "tools/test_progression_journal_integration.py",
+            "reasons": [],
+            "score": 10,
+            "symbols": [
+              "ProgressionJournalIntegrationContractTest",
+              "test_journal_keeps_dates_and_period_comparison",
+              "test_journal_ui_formats_real_dates",
+              "test_new_trait_evidence_keeps_source_quiz_ids",
+              "test_profile_opens_journal_from_dimension"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [],
+            "path": "tools/play_promoter.py",
+            "reasons": [
+              "impact",
+              "recently-changed"
+            ],
+            "score": 9,
+            "symbols": [
+              "main",
+              "promote_version"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [],
+            "path": "tools/play_publisher.py",
+            "reasons": [
+              "impact",
+              "recently-changed"
+            ],
+            "score": 9,
+            "symbols": [
+              "ReleaseConfig",
+              "_authorized_session",
+              "edit_action_endpoint",
+              "endpoint",
+              "load_android_version",
+              "load_service_account",
+              "main",
+              "publish_bundle",
+              "release_payload",
+              "validate",
+              "validate_track"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [],
+            "path": "tools/test_m55_release_automation.py",
+            "reasons": [
+              "impact",
+              "recently-changed"
+            ],
+            "score": 9,
+            "symbols": [
+              "M55ReleaseAutomationTest",
+              "test_promotion_helper_exists_without_bundle_upload",
+              "test_promotion_workflow_is_manual_and_safe_by_default",
+              "test_public_preflight_remains_available",
+              "test_publisher_uses_current_internal_track_and_production_guard"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [],
+            "path": "tools/test_play_publisher.py",
+            "reasons": [
+              "impact",
+              "recently-changed"
+            ],
+            "score": 9,
+            "symbols": [
+              "PlayPublisherTest",
+              "test_custom_closed_track_is_supported",
+              "test_default_release_payload_uses_internal_qa_track",
+              "test_endpoint_shape",
+              "test_invalid_status_is_rejected",
+              "test_locked_release_config",
+              "test_malformed_track_is_rejected",
+              "test_non_production_rollout_fraction_is_rejected",
+              "test_only_locked_package_is_allowed",
+              "test_open_testing_track_is_supported",
+              "test_production_in_progress_requires_fraction",
+              "test_production_requires_explicit_confirmation",
+              "test_production_staged_rollout_is_supported_when_confirmed",
+              "test_service_account_validation_rejects_missing_fields"
+            ]
+          }
+        ],
+        "generated_by": "dbrckk/repo-brain-v8",
+        "schema_version": 1,
+        "task": "income progression",
+        "terms": [
+          "income",
+          "progression"
+        ]
+      },
+      "task": "income progression"
+    },
     "7123d1776d9884d615bbe6c291e5c66f091449ff93ae78b3593f3037884c92d3": {
       "route": {
         "budget": {
@@ -7530,6 +7917,150 @@
         ]
       },
       "task": "privacy consent"
+    },
+    "7e6b751674ec18bc21c0ebadf21b81faddd241c342d917610a4ddb9369ea23e4": {
+      "route": {
+        "budget": {
+          "confidence": "medium",
+          "expand_to": 12,
+          "max_files": 6,
+          "requested_max_files": 12,
+          "score_margin": 4,
+          "tier": "bounded",
+          "top_score": 21
+        },
+        "candidate_count": 59,
+        "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+        "files": [
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "tools/test_longitudinal_trend_integration.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "LongitudinalTrendIntegrationContractTest",
+              "setUp",
+              "test_dated_history_is_persisted",
+              "test_engine_distinguishes_outlier_volatility_and_direction",
+              "test_global_profile_carries_longitudinal_trends",
+              "test_profile_renders_accessible_sparklines"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "tools/test_profile_narrative_integration.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 17,
+            "symbols": [
+              "ProfileNarrativeIntegrationContractTest",
+              "setUp",
+              "test_global_profile_contains_narrative",
+              "test_narrative_separates_change_from_more_evidence",
+              "test_profile_surfaces_factual_summary",
+              "test_uncertainty_blocks_overconfident_directional_copy"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "tools/test_trait_timeline_integration.py",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 17,
+            "symbols": [
+              "TraitTimelineIntegrationContractTest",
+              "test_global_profile_carries_trait_timelines",
+              "test_profile_renders_accessible_trait_history",
+              "test_timeline_distinguishes_retake_and_new_evidence",
+              "test_trait_period_comparison_tracks_score_and_confidence"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/BehaviorGoalEngine.kt",
+            "reasons": [],
+            "score": 10,
+            "symbols": [
+              "BehaviorGoal",
+              "BehaviorGoalDayResult",
+              "BehaviorGoalEngine",
+              "BehaviorGoalMetric",
+              "BehaviorGoalProgress",
+              "BehaviorGoalStatus",
+              "appUsageAtMost",
+              "canonicalDayKey",
+              "evaluate",
+              "eveningUsageAtMost",
+              "measuredValue",
+              "meetsTarget",
+              "screenTimeAtMost",
+              "stepsAtLeast"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/BehaviorInsightEngine.kt",
+            "reasons": [],
+            "score": 10,
+            "symbols": [
+              "BehaviorInsightEngine",
+              "activityChange",
+              "activityConsistency",
+              "appConcentration",
+              "build",
+              "lateUsage",
+              "median",
+              "medianDouble",
+              "screenTimeChange",
+              "tier",
+              "usageRegularity"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "engine"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/DiscoverLibraryEngine.kt",
+            "reasons": [],
+            "score": 10,
+            "symbols": [
+              "DiscoverLibraryEngine",
+              "DiscoverThemeSummary",
+              "search",
+              "summaries",
+              "uncoveredThemes"
+            ]
+          }
+        ],
+        "generated_by": "dbrckk/repo-brain-v8",
+        "schema_version": 1,
+        "task": "game engine",
+        "terms": [
+          "game",
+          "engine"
+        ]
+      },
+      "task": "game engine"
     },
     "7ec276df47f408ff729f7ca7b72740c36023433c19b4dd568fadb7fc8da922c4": {
       "route": {
@@ -12012,6 +12543,163 @@
       },
       "task": "purchase billing"
     },
+    "f2ce6a9ef0ab15f4e00cea2bbd70149774b48b92a119d942ebf9fe6bfd4ee34f": {
+      "route": {
+        "budget": {
+          "confidence": "medium",
+          "expand_to": 12,
+          "max_files": 6,
+          "requested_max_files": 12,
+          "score_margin": 0,
+          "tier": "bounded",
+          "top_score": 21
+        },
+        "candidate_count": 44,
+        "fallback": "If bounded context is insufficient, expand only to budget.expand_to, then use architecture/segmented maps and targeted source search.",
+        "files": [
+          {
+            "learning_score": 4,
+            "matched_terms": [
+              "offline"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt",
+            "reasons": [
+              "learning",
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "HealthConnectPrivacyActivity",
+              "onCreate",
+              "onDestroy",
+              "onReceivedError",
+              "onReceivedHttpError",
+              "showFallback"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progress"
+            ],
+            "path": "app/src/main/java/com/whoareyou/app/SignatureProfile.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "ProgressPath",
+              "RecommendationPath",
+              "Requirement",
+              "Rule",
+              "SignaturePathProgress",
+              "SignatureProfileCopy",
+              "SignatureProfileKey",
+              "SignatureProfileMatch",
+              "SignatureProfiles",
+              "SignatureRecommendation",
+              "copy",
+              "matches",
+              "pathProgress",
+              "primary",
+              "recommendNext",
+              "requirementStrength",
+              "satisfies"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progress"
+            ],
+            "path": "app/src/test/java/com/whoareyou/app/BehaviorGoalUiModelTest.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "BehaviorGoalUiModelTest",
+              "progress"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progress"
+            ],
+            "path": "app/src/test/java/com/whoareyou/app/SignatureProfilesTest.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 21,
+            "symbols": [
+              "SignatureProfilesTest",
+              "contradictoryEvidenceBlocksAdaptiveDiplomat",
+              "doesNotMatchIndependentExplorerBelowRequirement",
+              "matchesAllSignatureFamilies",
+              "matchesIndependentExplorerAtBoundary",
+              "outOfRangeScoresAreClampedForMatching",
+              "pathProgressIgnoresContradictedEvidence",
+              "pathProgressNeedsExistingPlausibleSignal",
+              "pathProgressTracksBestPartialPathWithoutIdentity",
+              "recommendationFollowsStrongPartialSignature",
+              "recommendationIgnoresContradictedPath",
+              "recommendationNeedsExistingSignal",
+              "recommendationNeverReturnsCompletedRequirement",
+              "recommendationRankingIsDeterministic",
+              "requiresEnoughCompletedDimensions",
+              "strongerMatchingSignatureWinsRanking",
+              "withEvidence"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progress"
+            ],
+            "path": "app/src/androidTest/java/com/whoareyou/app/QuizScreenUiTest.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 17,
+            "symbols": [
+              "QuizScreenUiTest",
+              "answeringEveryQuestionAdvancesAndReturnsFinalScore",
+              "commitFailureFeedbackIsVisibleAndRetryable",
+              "finishingStateBlocksAnswersAndShowsSavingFeedback",
+              "testQuiz"
+            ]
+          },
+          {
+            "learning_score": 0,
+            "matched_terms": [
+              "progress"
+            ],
+            "path": "app/src/main/java/androidx/compose/foundation/lazy/WhoAreYouQuizItems.kt",
+            "reasons": [
+              "search-index"
+            ],
+            "score": 17,
+            "symbols": [
+              "DiscoverIntegratedLibrary",
+              "GuidedJourneyCard",
+              "IntegratedLibraryChip",
+              "integratedThemeLabel",
+              "journeyBody",
+              "journeyTitle"
+            ]
+          }
+        ],
+        "generated_by": "dbrckk/repo-brain-v8",
+        "schema_version": 1,
+        "task": "offline progress",
+        "terms": [
+          "offline",
+          "progress"
+        ]
+      },
+      "task": "offline progress"
+    },
     "f3f7e0177bb9721b865a924cadbf28fe4131e3e55c952828c64816a6d99b05c2": {
       "route": {
         "budget": {
@@ -13062,7 +13750,12 @@
     "da9e49ce03027b6b36b0577247ab5a46229f2bb8ffe990f915d9a2c4f5fe2c75",
     "2b16524321803535c463e6088f09e01084786d410312222b03d00f413f20be00",
     "e8836d37f0e09f4a13873a067860df2d08a5fdc8b76926381fac0dbfcf0f1c67",
-    "6e6999b758f9835b729bfd0b4a8355d6ac79560c4e2ef6f90cbc356c3a28eb4a"
+    "6e6999b758f9835b729bfd0b4a8355d6ac79560c4e2ef6f90cbc356c3a28eb4a",
+    "209b2e9115f86e4b621fd39310c46a6628b8c6405572f638a39c3790a6ba59bd",
+    "6fd00e5ea731c948f4ebfc046466126a5082691c37bbbced25960c26cccd4cb1",
+    "4f5da80964a90e5dec899546dac304b9a5ea3ab4cf4f685926c33a41c3c08a7e",
+    "f2ce6a9ef0ab15f4e00cea2bbd70149774b48b92a119d942ebf9fe6bfd4ee34f",
+    "7e6b751674ec18bc21c0ebadf21b81faddd241c342d917610a4ddb9369ea23e4"
   ],
   "schema_version": 1
 }

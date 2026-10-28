@@ -1,8 +1,34 @@
 {
-  "schema_version": 1,
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": false,
-  "reason": "missing-task-or-source-change",
-  "task": "fix(play): clarify missing Play API credential and secure smartphone setup (#111)",
-  "useful": []
+  "learned": true,
+  "learning_result": {
+    "example_count": 14,
+    "rejected_count": 0,
+    "terms": [
+      "112",
+      "action",
+      "android",
+      "correct",
+      "edit",
+      "endpoints",
+      "ongoing",
+      "play",
+      "protect",
+      "publisher",
+      "review"
+    ],
+    "test_count": 0,
+    "useful_count": 4
+  },
+  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
+  "rejected": [],
+  "schema_version": 1,
+  "task": "fix(play): correct Android Publisher edit action endpoints and protect ongoing review (#112)",
+  "tests_selected": [],
+  "useful": [
+    "tools/play_promoter.py",
+    "tools/play_publisher.py",
+    "tools/test_m55_release_automation.py",
+    "tools/test_play_publisher.py"
+  ]
 }

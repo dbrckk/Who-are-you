@@ -2,14 +2,14 @@
   "schema_version": 2,
   "generated_by": "dbrckk/repo-brain",
   "files_indexed": 355,
-  "symbol_count": 1669,
+  "symbol_count": 1670,
   "edge_count": 12,
   "languages": {
     "python": 115,
     "kotlin": 240
   },
   "index_mode": "incremental",
-  "reparsed_files": 0,
+  "reparsed_files": 4,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",
@@ -96,6 +96,10 @@
       "symbols": 11
     },
     {
+      "file": "tools/play_publisher.py",
+      "symbols": 11
+    },
+    {
       "file": "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt",
       "symbols": 10
     },
@@ -105,10 +109,6 @@
     },
     {
       "file": "app/src/main/java/com/whoareyou/app/RecommendationAttribution.kt",
-      "symbols": 10
-    },
-    {
-      "file": "tools/play_publisher.py",
       "symbols": 10
     },
     {

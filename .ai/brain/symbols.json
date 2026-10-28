@@ -7747,14 +7747,14 @@
       "language": "python",
       "kind": "function",
       "name": "promote_version",
-      "line": 24
+      "line": 25
     },
     {
       "file": "tools/play_promoter.py",
       "language": "python",
       "kind": "function",
       "name": "main",
-      "line": 76
+      "line": 82
     },
     {
       "file": "tools/play_publisher.py",
@@ -7802,29 +7802,36 @@
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
-      "name": "load_service_account",
+      "name": "edit_action_endpoint",
       "line": 104
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
+      "name": "load_service_account",
+      "line": 111
+    },
+    {
+      "file": "tools/play_publisher.py",
+      "language": "python",
+      "kind": "function",
       "name": "_authorized_session",
-      "line": 115
+      "line": 122
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "publish_bundle",
-      "line": 128
+      "line": 135
     },
     {
       "file": "tools/play_publisher.py",
       "language": "python",
       "kind": "function",
       "name": "main",
-      "line": 195
+      "line": 207
     },
     {
       "file": "tools/prepare_play_submission.py",
@@ -9077,21 +9084,21 @@
       "language": "python",
       "kind": "function",
       "name": "test_promotion_helper_exists_without_bundle_upload",
-      "line": 15
+      "line": 18
     },
     {
       "file": "tools/test_m55_release_automation.py",
       "language": "python",
       "kind": "function",
       "name": "test_promotion_workflow_is_manual_and_safe_by_default",
-      "line": 21
+      "line": 27
     },
     {
       "file": "tools/test_m55_release_automation.py",
       "language": "python",
       "kind": "function",
       "name": "test_public_preflight_remains_available",
-      "line": 33
+      "line": 39
     },
     {
       "file": "tools/test_m56_release_candidate.py",

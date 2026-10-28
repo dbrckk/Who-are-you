@@ -38,16 +38,20 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T19:12:30Z
+Generated: 2026-10-28T19:25:43Z
 
 ### Git
 - Branch: `main`
-- Head: `571d1666f989`
-- Commit date: 2026-10-28T15:12:18-04:00
-- Commit: fix(play): clarify missing Play API credential and secure smartphone setup (#111)
+- Head: `4bf34f2d58ee`
+- Commit date: 2026-10-28T15:25:30-04:00
+- Commit: fix(play): correct Android Publisher edit action endpoints and protect ongoing review (#112)
 - Tracked files: 707
 
 ### Recently changed files
+- `tools/play_promoter.py`
+- `tools/play_publisher.py`
+- `tools/test_m55_release_automation.py`
+- `tools/test_play_publisher.py`
 - `.github/workflows/play-version-inspection.yml`
 - `docs/play-version-inspection-setup.md`
 - `docs/play-health-connect-declaration.md`
@@ -60,10 +64,6 @@ Generated: 2026-10-28T19:12:30Z
 - `docs/m32-play-candidate-workflow.md`
 - `docs/play-candidate-request.json`
 - `.github/workflows/ai-repo-map.yml`
-- `app/src/main/java/com/whoareyou/app/AppShellUi.kt`
-- `app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt`
-- `baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt`
-- `docs/performance-validation.md`
 
 ### Project signals
 - `build.gradle.kts`

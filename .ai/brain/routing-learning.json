@@ -335,6 +335,30 @@
       "useful": [
         "tools/play_existing_version_preflight.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "fix(play): correct Android Publisher edit action endpoints and protect ongoing review (#112)",
+      "terms": [
+        "112",
+        "action",
+        "android",
+        "correct",
+        "edit",
+        "endpoints",
+        "ongoing",
+        "play",
+        "protect",
+        "publisher",
+        "review"
+      ],
+      "tests": [],
+      "useful": [
+        "tools/play_promoter.py",
+        "tools/play_publisher.py",
+        "tools/test_m55_release_automation.py",
+        "tools/test_play_publisher.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -395,6 +419,12 @@
     },
     "110": {
       "tools/play_existing_version_preflight.py": 4
+    },
+    "112": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "74": {
       "app/build.gradle.kts": 4,
@@ -500,6 +530,12 @@
       "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
+    "action": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
+    },
     "adopt": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -545,6 +581,12 @@
       "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": 4,
       "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": 4,
       "tools/test_profile_result_allocation_contract.py": 4
+    },
+    "android": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "answer": {
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
@@ -636,6 +678,12 @@
       "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": 4,
       "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": 4,
       "tools/test_profile_result_allocation_contract.py": 4
+    },
+    "correct": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "dbrckk/m774-local-behavioral-insights": {
       "app/build.gradle.kts": 4,
@@ -752,6 +800,18 @@
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizAttemptEvidenceSaver.kt": 4,
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4
+    },
+    "edit": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
+    },
+    "endpoints": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "evidence": {
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
@@ -963,6 +1023,12 @@
     "offline": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
+    "ongoing": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
+    },
     "pinned": {
       "app/build.gradle.kts": 4,
       "tools/test_release_metadata_contract.py": 4
@@ -973,7 +1039,11 @@
       "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4,
       "tools/play_existing_version_preflight.py": 4,
-      "tools/test_performance_release_gate_contract.py": 4
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_performance_release_gate_contract.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "preserve": {
       "app/src/main/java/com/whoareyou/app/MainActivity.kt": 4,
@@ -990,6 +1060,18 @@
       "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
       "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 8
+    },
+    "protect": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
+    },
+    "publisher": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "pull": {
       "app/build.gradle.kts": 4,
@@ -1164,6 +1246,12 @@
       "app/src/main/java/com/whoareyou/app/QuizScreenUi.kt": 4,
       "tools/test_actionable_knowledge_map_contract.py": 4,
       "tools/test_release_critical_profile_contract.py": 4
+    },
+    "review": {
+      "tools/play_promoter.py": 4,
+      "tools/play_publisher.py": 4,
+      "tools/test_m55_release_automation.py": 4,
+      "tools/test_play_publisher.py": 4
     },
     "safely": {
       "tools/play_existing_version_preflight.py": 4

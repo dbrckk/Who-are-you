@@ -1,52 +1,40 @@
 {
   "files": {
-    ".github/workflows/play-version-inspection.yml": {
-      "sha256": "5a1d3d6ece6fe504c42017906385c8749af9ff79caa942350f53c3e0bb3ace19",
-      "size": 4735
-    },
-    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
-      "sha256": "272451441a7eb8e62cb3a44d2f44451cb6f08961c74d21a562caf5f95c51011a",
-      "size": 3372
-    },
-    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt": {
-      "sha256": "fa4ee4bdc53ad5db1af6baa18f207ed2f333b7089507b63791517efe24adfb9a",
-      "size": 5245
-    },
-    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt": {
-      "sha256": "c7e814c479801b4c23c5399623b09733a7f29af0ffb861b21d3b84c223c4a68f",
-      "size": 2580
-    },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
     },
-    "app/src/main/java/com/whoareyou/app/AppShellUi.kt": {
-      "sha256": "9ed6aafb5ef4611fa79886f7b25b8071ae75e499e6f81102e790d4a8e8976e76",
-      "size": 10686
-    },
-    "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt": {
-      "sha256": "18e4ac6fb7f21d04a0afdd7e7bb35f7ef43ac87b05c36a2a4ccb5df2d64c9455",
-      "size": 7316
-    },
-    "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt": {
-      "sha256": "f09700b3aef2753c0333c8e7191fa603b6b16dcfb44fa38297dd713554559697",
-      "size": 10408
-    },
-    "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt": {
-      "sha256": "b5cc1b1682c78a0fa42190ee7253ab44d1fcb9cbd5a64235fc5c5de8f213d0fb",
-      "size": 5204
-    },
-    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": {
-      "sha256": "838f07451ff4991b366455e61d246e18fc70b777cb5e8a76b0265595a1e07b2d",
-      "size": 6103
-    },
-    "docs/play-version-inspection-setup.md": {
-      "sha256": "b827c0515bd69744d92d54b64a56564e1735261934b44bc67fd89f1dea8d3704",
-      "size": 3613
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
+      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
+      "size": 4028
     },
     "tools/play_existing_version_preflight.py": {
       "sha256": "f038fd1357bf721c8e64ef230c730ace624b96ea941ad30af33ea1c3519314aa",
       "size": 6013
+    },
+    "tools/play_promoter.py": {
+      "sha256": "fe68b0b382778b7cab192bada2ef07e6a1c3b2718549ae5a8cdfb028cb2e1ecb",
+      "size": 3348
+    },
+    "tools/play_publisher.py": {
+      "sha256": "27a088b134b0d29f45e29f764ef4ebbb60ff45a9333e1606e037d6e64d2f0762",
+      "size": 9377
+    },
+    "tools/test_m55_release_automation.py": {
+      "sha256": "76bc59bf9f1bce1474a24539ed9689df74058ad6a4b359391f5b4c707563a1b0",
+      "size": 2303
+    },
+    "tools/test_play_promoter.py": {
+      "sha256": "4b3b47c9345b45218dd86b8b5df8c49b3e1606065d5a55cacc8b659c55b7c9ec",
+      "size": 1240
+    },
+    "tools/test_play_publisher.py": {
+      "sha256": "bf677cde4bc38127ebf066352406fc0457af78ee8fa88c283f213c3fbc26fb66",
+      "size": 4256
+    },
+    "tools/test_play_version_sync.py": {
+      "sha256": "c2a5fdfe33247bbe04139352b5c87e8d436e344c72a8d3be8cd7a1901e77067d",
+      "size": 951
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",
