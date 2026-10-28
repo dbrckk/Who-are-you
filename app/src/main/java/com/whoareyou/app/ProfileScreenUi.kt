@@ -126,7 +126,7 @@ fun ProfileScreen(
             .testTag("profile_lazy_list"),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item {
+        item(key = "profile_hero", contentType = "profile_hero") {
             Spacer(Modifier.height(12.dp))
             AccessibleBackAction(onClick = onBack)
             Spacer(Modifier.height(12.dp))
@@ -292,7 +292,7 @@ fun ProfileScreen(
         }
 
         if (summary.dimensions.isEmpty()) {
-            item {
+            item(key = "profile_empty", contentType = "profile_empty") {
                 Card(
                     colors = CardDefaults.cardColors(containerColor = V2Colors.Surface),
                     shape = RoundedCornerShape(V2Radius.Card),
@@ -430,7 +430,7 @@ fun ProfileScreen(
             }
         }
 
-        item {
+        item(key = "profile_social", contentType = "profile_actions") {
             Spacer(Modifier.height(sectionGap))
             Column(
                 modifier = Modifier
@@ -492,7 +492,7 @@ fun ProfileScreen(
             }
         }
 
-        item {
+        item(key = "profile_reset", contentType = "profile_actions") {
             Spacer(Modifier.height(sectionGap))
             Button(
                 onClick = { showResetDialog = true },
