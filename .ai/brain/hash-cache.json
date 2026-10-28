@@ -1,12 +1,16 @@
 {
   "files": {
+    ".github/workflows/play-internal-publish.yml": {
+      "sha256": "06b2e1aa7815afe75456e9cb29c5b8e40afc842f1426fb1fa77e3a20c3deb9b0",
+      "size": 13646
+    },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
     },
-    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
-      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
-      "size": 4028
+    "docs/play-version-inspection-setup.md": {
+      "sha256": "c2c9970ef0166874c71185997b96047917f3d9dae1a020aede402c71de335f05",
+      "size": 4857
     },
     "tools/play_existing_version_preflight.py": {
       "sha256": "f038fd1357bf721c8e64ef230c730ace624b96ea941ad30af33ea1c3519314aa",
@@ -24,17 +28,13 @@
       "sha256": "76bc59bf9f1bce1474a24539ed9689df74058ad6a4b359391f5b4c707563a1b0",
       "size": 2303
     },
-    "tools/test_play_promoter.py": {
-      "sha256": "4b3b47c9345b45218dd86b8b5df8c49b3e1606065d5a55cacc8b659c55b7c9ec",
-      "size": 1240
+    "tools/test_play_publish_pipeline_contract.py": {
+      "sha256": "02496513faccd9e5a4adef66e2162d6d3cfe653f6a2d6cf3316a32fb74d5af57",
+      "size": 2267
     },
     "tools/test_play_publisher.py": {
       "sha256": "bf677cde4bc38127ebf066352406fc0457af78ee8fa88c283f213c3fbc26fb66",
       "size": 4256
-    },
-    "tools/test_play_version_sync.py": {
-      "sha256": "c2a5fdfe33247bbe04139352b5c87e8d436e344c72a8d3be8cd7a1901e77067d",
-      "size": 951
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

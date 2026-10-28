@@ -2,33 +2,28 @@
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
   "learned": true,
   "learning_result": {
-    "example_count": 14,
+    "example_count": 15,
     "rejected_count": 0,
     "terms": [
-      "112",
-      "action",
-      "android",
-      "correct",
-      "edit",
-      "endpoints",
-      "ongoing",
+      "113",
+      "before",
+      "certificate",
+      "existing",
+      "internal",
+      "match",
       "play",
-      "protect",
-      "publisher",
-      "review"
+      "require",
+      "upload"
     ],
     "test_count": 0,
-    "useful_count": 4
+    "useful_count": 1
   },
   "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
   "rejected": [],
   "schema_version": 1,
-  "task": "fix(play): correct Android Publisher edit action endpoints and protect ongoing review (#112)",
+  "task": "fix(play): require existing Play upload certificate match before Internal upload (#113)",
   "tests_selected": [],
   "useful": [
-    "tools/play_promoter.py",
-    "tools/play_publisher.py",
-    "tools/test_m55_release_automation.py",
-    "tools/test_play_publisher.py"
+    "tools/test_play_publish_pipeline_contract.py"
   ]
 }

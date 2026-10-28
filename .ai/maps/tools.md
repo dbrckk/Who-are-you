@@ -1722,6 +1722,9 @@ build = self.internal.index('Build signed production Play bundle')
 ⋮----
 def test_internal_publish_uses_dynamic_versioned_receipt(self)
 ⋮----
+# Never permit a real Play edit before comparing the signed AAB to
+# the existing app's UPLOAD certificate (not its app-signing key).
+⋮----
 def test_internal_publish_uses_optional_key_password_fallback(self)
 ⋮----
 def test_promotion_receipt_is_not_pinned_to_old_version(self)

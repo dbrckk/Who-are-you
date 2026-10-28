@@ -2,7 +2,7 @@
   "area": "github",
   "files": [
     {
-      "path": ".github/workflows/play-version-inspection.yml",
+      "path": ".github/workflows/play-internal-publish.yml",
       "reasons": [
         "changed"
       ],

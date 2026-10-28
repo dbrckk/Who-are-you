@@ -1,30 +1,7 @@
 {
   "files": [
     {
-      "path": "tools/play_publisher.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "dependency-neighbor",
-        "impact",
-        "symbol-indexed"
-      ],
-      "score": 555
-    },
-    {
-      "path": "tools/test_play_publisher.py",
-      "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 500
-    },
-    {
-      "path": "tools/test_m55_release_automation.py",
+      "path": "tools/test_play_publish_pipeline_contract.py",
       "reasons": [
         "changed",
         "changed-source",
@@ -32,54 +9,56 @@
         "selected-test",
         "symbol-indexed"
       ],
-      "score": 395
+      "score": 405
     },
     {
-      "path": "tools/play_promoter.py",
+      "path": ".github/workflows/play-internal-publish.yml",
       "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "reverse-dependency-neighbor",
-        "symbol-indexed"
+        "changed"
       ],
-      "score": 370
+      "score": 100
     },
     {
-      "path": "tools/test_play_version_sync.py",
+      "path": "docs/play-version-inspection-setup.md",
       "reasons": [
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
+        "changed"
       ],
-      "score": 225
-    },
-    {
-      "path": "tools/test_play_promoter.py",
-      "reasons": [
-        "impact",
-        "reverse-dependency-neighbor",
-        "selected-test",
-        "symbol-indexed"
-      ],
-      "score": 210
+      "score": 100
     },
     {
       "path": "tools/play_existing_version_preflight.py",
       "reasons": [
-        "impact",
-        "reverse-dependency-neighbor",
-        "symbol-indexed"
+        "recent-project-state"
       ],
-      "score": 130
+      "score": 60
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "path": "tools/play_promoter.py",
       "reasons": [
-        "dependency-neighbor"
+        "recent-project-state"
       ],
-      "score": 100
+      "score": 60
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
+    },
+    {
+      "path": "tools/test_m55_release_automation.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
+    },
+    {
+      "path": "tools/test_play_publisher.py",
+      "reasons": [
+        "recent-project-state"
+      ],
+      "score": 60
     },
     {
       "path": "app/src/main/AndroidManifest.xml",

@@ -5,1800 +5,372 @@
   "semantic": false,
   "note": "Occurrences are lexical word matches; verify source/LSP/compiler data before relying on them.",
   "symbols": {
-    "promote_version": {
+    "PlayPublishPipelineContractTest": {
       "definition": {
-        "file": "tools/play_promoter.py",
-        "line": 25,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_promoter.py",
-          "line": 25,
-          "preview": "def promote_version(",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 96,
-          "preview": "result = promote_version(",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 2
-    },
-    "main": {
-      "definition": {
-        "file": "tools/play_promoter.py",
-        "line": 82,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": ".github/scripts/summarize-visual-qa.py",
-          "line": 39,
-          "preview": "def main(root: Path, output: Path) -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": ".github/scripts/summarize-visual-qa.py",
-          "line": 81,
-          "preview": "raise SystemExit(main(Path(args.root), Path(args.output)))",
-          "definition_candidate": false
-        },
-        {
-          "file": ".github/scripts/validate-screenshot.py",
-          "line": 150,
-          "preview": "def main(path: str, expected: str) -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": ".github/scripts/validate-screenshot.py",
-          "line": 195,
-          "preview": "raise SystemExit(main(args.png, args.size))",
-          "definition_candidate": false
-        },
-        {
-          "file": ".github/scripts/validate-ui-hierarchy.py",
-          "line": 44,
-          "preview": "def main(path: str, package: str, display_size: str | None, density_dpi: int, screenshot: str | None = None) -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": ".github/scripts/validate-ui-hierarchy.py",
-          "line": 152,
-          "preview": "raise SystemExit(main(args.xml, args.package, args.size, args.density, args.screenshot))",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/check_play_bundle_budget.py",
-          "line": 30,
-          "preview": "def main() -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/check_play_bundle_budget.py",
-          "line": 61,
-          "preview": "raise SystemExit(main())",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 123,
-          "preview": "def main(argv: list[str] | None = None) -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 146,
-          "preview": "sys.exit(main())",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_preflight.py",
-          "line": 19,
-          "preview": "manifest = (root / \"app/src/main/AndroidManifest.xml\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_preflight.py",
-          "line": 20,
-          "preview": "ad_manager = (root / \"app/src/main/java/com/whoareyou/app/AdManager.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_preflight.py",
-          "line": 21,
-          "preview": "billing = (root / \"app/src/main/java/com/whoareyou/app/BillingManager.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_preflight.py",
-          "line": 70,
-          "preview": "def main() -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_preflight.py",
-          "line": 88,
-          "preview": "raise SystemExit(main())",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 82,
-          "preview": "def main(argv: list[str] | None = None) -> int:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 110,
-          "preview": "sys.exit(main())",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 207,
-          "preview": "def main(argv: list[str] | None = None) -> int:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 248,
-          "preview": "sys.exit(main())",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/prepare_play_submission.py",
-          "line": 163,
-          "preview": "def main():",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/prepare_play_submission.py",
-          "line": 177,
-          "preview": "main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_launch_contract.py",
-          "line": 9,
-          "preview": "self.personalized = (ROOT / \"app/src/main/java/com/whoareyou/app/PersonalizedDiscoverUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_launch_contract.py",
-          "line": 10,
-          "preview": "self.library = (ROOT / \"app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_launch_contract.py",
-          "line": 11,
-          "preview": "self.interactive = (ROOT / \"app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_launch_contract.py",
-          "line": 25,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_system_contract.py",
-          "line": 8,
-          "preview": "self.interactive = (ROOT / 'app/src/main/java/com/whoareyou/app/V2InteractiveUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_system_contract.py",
-          "line": 9,
-          "preview": "self.design = (ROOT / 'app/src/main/java/com/whoareyou/app/V2DesignSystem.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_system_contract.py",
-          "line": 10,
-          "preview": "self.library = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_accessibility_system_contract.py",
-          "line": 35,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 8,
-          "preview": "self.map_ui = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileKnowledgeMapUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 9,
-          "preview": "self.profile = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 10,
-          "preview": "self.dialog = (ROOT / \"app/src/main/java/com/whoareyou/app/TraitExplorationUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 11,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 28,
-          "preview": "self.assertIn(\"onQuizSelected = ::startQuiz\", self.main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 29,
-          "preview": "handler = self.main.split(\"fun startQuiz(quiz: Quiz)\", 1)[1].split(\"QuizResultCommitEffect(\", 1)[0]",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_actionable_knowledge_map_contract.py",
-          "line": 34,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_android_apk_provenance_versioning.py",
-          "line": 31,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_android_ci_sdk_setup_contract.py",
-          "line": 26,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_baseline_profile_manifest_contract.py",
-          "line": 5,
-          "preview": "MANIFEST = (ROOT / 'baseline-profile/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_baseline_profile_manifest_contract.py",
-          "line": 16,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_battery_thermal_contract.py",
-          "line": 8,
-          "preview": "self.motion = (ROOT / 'app/src/main/java/com/whoareyou/app/V2MotionPreferences.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_battery_thermal_contract.py",
-          "line": 9,
-          "preview": "self.visual = (ROOT / 'app/src/main/java/com/whoareyou/app/QuizVisualUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_battery_thermal_contract.py",
-          "line": 10,
-          "preview": "self.ads = (ROOT / 'app/src/main/java/com/whoareyou/app/AdManager.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_battery_thermal_contract.py",
-          "line": 21,
-          "preview": "discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_battery_thermal_contract.py",
-          "line": 36,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_copy_contract.py",
-          "line": 7,
-          "preview": "ROOT / \"app/src/main/res/values/strings.xml\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_copy_contract.py",
-          "line": 8,
-          "preview": "ROOT / \"app/src/main/res/values-fr/strings.xml\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_copy_contract.py",
-          "line": 50,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_copy_contract.py",
-          "line": 6,
-          "preview": "EN = ROOT / \"app/src/main/res/values/strings.xml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_copy_contract.py",
-          "line": 7,
-          "preview": "FR = ROOT / \"app/src/main/res/values-fr/strings.xml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_copy_contract.py",
-          "line": 75,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_privacy_contract.py",
-          "line": 6,
-          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_privacy_contract.py",
-          "line": 7,
-          "preview": "MANIFEST = ROOT / \"app/src/main/AndroidManifest.xml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_privacy_contract.py",
-          "line": 84,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_storage_contract.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_storage_contract.py",
-          "line": 33,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 6,
-          "preview": "EN = ROOT / \"app/src/main/res/values/strings.xml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 7,
-          "preview": "FR = ROOT / \"app/src/main/res/values-fr/strings.xml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 33,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 35,
-          "preview": "self.assertIn(\"BehaviorRepository.clearAll(context)\", main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 36,
-          "preview": "self.assertIn(\"BehaviorGoalRepository.clearAll(context)\", main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_goal_v1_scope_contract.py",
-          "line": 40,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 29,
-          "preview": "main = self.read(\"MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 30,
-          "preview": "self.assertIn(\"BehaviorRefreshOnResume(context as? ComponentActivity)\", main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 31,
-          "preview": "self.assertIn(\"BehaviorSourceActionHandler.handle(context, source, action)\", main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_integration_contract.py",
-          "line": 35,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_privacy_contract.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app/src/main/java/com/whoareyou/app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_behavior_privacy_contract.py",
-          "line": 88,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 9,
-          "preview": "self.state = (ROOT / \"app/src/main/java/com/whoareyou/app/BillingPriceState.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 10,
-          "preview": "self.manager = (ROOT / \"app/src/main/java/com/whoareyou/app/BillingManager.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 11,
-          "preview": "self.discover = (ROOT / \"app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 12,
-          "preview": "self.main = (ROOT / \"app/src/main/java/com/whoareyou/app/MainActivity.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 28,
-          "preview": "self.assertIn(\"BillingPriceState.markLoading()\", self.main)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_billing_launch_readiness.py",
-          "line": 32,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_challenge_landing_contract.py",
-          "line": 9,
-          "preview": "self.manifest = (ROOT / 'app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_challenge_landing_contract.py",
-          "line": 10,
-          "preview": "self.share = (ROOT / 'app/src/main/java/com/whoareyou/app/ChallengeShare.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_challenge_landing_contract.py",
-          "line": 30,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_gradle_action_alignment.py",
-          "line": 26,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_gradle_release_reproducibility.py",
-          "line": 28,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_habits_release_smoke_checklist.py",
-          "line": 30,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_healthy_discover_profile_contract.py",
-          "line": 8,
-          "preview": "self.discover = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_healthy_discover_profile_contract.py",
-          "line": 9,
-          "preview": "self.profile = (ROOT / 'app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_healthy_discover_profile_contract.py",
-          "line": 10,
-          "preview": "self.en = (ROOT / 'app/src/main/res/values/strings.xml').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_healthy_discover_profile_contract.py",
-          "line": 11,
-          "preview": "self.fr = (ROOT / 'app/src/main/res/values-fr/strings.xml').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_healthy_discover_profile_contract.py",
-          "line": 33,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 8,
-          "preview": "self.adaptive = (ROOT / 'app/src/main/java/com/whoareyou/app/AdaptiveLayoutUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 9,
-          "preview": "self.shell = (ROOT / 'app/src/main/java/com/whoareyou/app/AppShellUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 10,
-          "preview": "self.library = (ROOT / 'app/src/main/java/com/whoareyou/app/DiscoverLibraryUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 11,
-          "preview": "self.theme = (ROOT / 'app/src/main/java/com/whoareyou/app/AppThemeUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 12,
-          "preview": "self.entry = (ROOT / 'app/src/main/java/com/whoareyou/app/EntryScreensUi.kt').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_large_screen_keyboard_accessibility.py",
-          "line": 33,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_local_profile_privacy_contract.py",
-          "line": 8,
-          "preview": "manifest = (ROOT / 'app/src/main/AndroidManifest.xml').read_text(encoding='utf-8')",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_local_profile_privacy_contract.py",
-          "line": 13,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_localization_parity.py",
-          "line": 7,
-          "preview": "RES = ROOT / \"app/src/main/res\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_localization_parity.py",
-          "line": 44,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 8,
-          "preview": "self.store = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileStore.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 9,
-          "preview": "self.global_profile = (ROOT / \"app/src/main/java/com/whoareyou/app/GlobalProfile.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 10,
-          "preview": "self.profile = (ROOT / \"app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 11,
-          "preview": "self.ui = (ROOT / \"app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 12,
-          "preview": "self.engine = (ROOT / \"app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_longitudinal_trend_integration.py",
-          "line": 33,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m33_readiness.py",
-          "line": 25,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m46_accessibility.py",
-          "line": 6,
-          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m46_accessibility.py",
-          "line": 45,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m47_ui_test_wiring.py",
-          "line": 6,
-          "preview": "MAIN_RC = ROOT / \".github\" / \"workflows\" / \"m56-main-rc.yml\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m47_ui_test_wiring.py",
-          "line": 31,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m48_visual_system.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m48_visual_system.py",
-          "line": 72,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m49_architecture_cleanup.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m49_architecture_cleanup.py",
-          "line": 48,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m50_analytics.py",
-          "line": 5,
-          "preview": "APP = ROOT / \"app\" / \"src\" / \"main\" / \"java\" / \"com\" / \"whoareyou\" / \"app\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m50_analytics.py",
-          "line": 65,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m51_release_readiness.py",
-          "line": 23,
-          "preview": "manifest = (ROOT / \"app/src/main/AndroidManifest.xml\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m51_release_readiness.py",
-          "line": 30,
-          "preview": "config = (ROOT / \".github/workflows/m56-main-rc.yml\").read_text(encoding=\"utf-8\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m51_release_readiness.py",
-          "line": 48,
-          "preview": "unittest.main()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m52_play_policy.py",
-          "line": 12,
-          "preview": "ad = self.read(\"app/src/main/java/com/whoareyou/app/AdManager.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m52_play_policy.py",
-          "line": 20,
-          "preview": "main = self.read(\"app/src/main/java/com/whoareyou/app/MainActivity.kt\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m52_play_policy.py",
-          "line": 21,
-          "preview": "hub = self.read(\"app/src/main/java/com/whoareyou/app/DiscoverHubUi.kt\")",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 120
-    },
-    "load_android_version": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 27,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_publisher.py",
-          "line": 27,
-          "preview": "def load_android_version(path: pathlib.Path = ANDROID_BUILD_GRADLE) -> tuple[int, str]:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 36,
-          "preview": "VERSION_CODE, VERSION_NAME = load_android_version()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 15,
-          "preview": "version_code, version_name = play_publisher.load_android_version()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 23,
-          "preview": "version_code, version_name = play_publisher.load_android_version()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_version_sync.py",
-          "line": 13,
-          "preview": "code, name = play_publisher.load_android_version(BUILD_GRADLE)",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 5
-    },
-    "ReleaseConfig": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 45,
+        "file": "tools/test_play_publish_pipeline_contract.py",
+        "line": 6,
         "kind": "class",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/play_promoter.py",
-          "line": 16,
-          "preview": "ReleaseConfig,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 35,
-          "preview": "config = ReleaseConfig(track=track, version_code=version_code)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 86,
-          "preview": "parser.add_argument(\"--version-code\", type=int, default=ReleaseConfig().version_code)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 45,
-          "preview": "class ReleaseConfig:",
+          "file": "tools/test_play_publish_pipeline_contract.py",
+          "line": 6,
+          "preview": "class PlayPublishPipelineContractTest(unittest.TestCase):",
           "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 145,
-          "preview": "config = ReleaseConfig(track=track)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 219,
-          "preview": "config = ReleaseConfig(track=args.track)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 11,
-          "preview": "config = play_publisher.ReleaseConfig()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 72,
-          "preview": "play_publisher.ReleaseConfig(package_name=\"example.invalid\").validate()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_version_sync.py",
-          "line": 16,
-          "preview": "self.assertEqual(code, play_publisher.ReleaseConfig().version_code)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_version_sync.py",
-          "line": 17,
-          "preview": "self.assertEqual(name, play_publisher.ReleaseConfig().version_name)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_version_sync.py",
-          "line": 21,
-          "preview": "self.assertIn('default=ReleaseConfig().version_code', source)",
-          "definition_candidate": false
         }
       ],
-      "occurrence_count": 11
+      "occurrence_count": 1
     },
-    "validate": {
+    "setUp": {
       "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 51,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_preflight.py",
-          "line": 7,
-          "preview": "from validate_public_release_inputs import validate as validate_public_inputs",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 36,
-          "preview": "config.validate(allow_production=allow_production)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 58,
-          "preview": "validation = session.post(edit_action_endpoint(PACKAGE_NAME, edit_id, \"validate\"), json={}, timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 51,
-          "preview": "def validate(self, *, allow_production: bool = False) -> None:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 105,
-          "preview": "\"\"\"Play edit actions use ':validate' / ':commit', not child REST paths.\"\"\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 106,
-          "preview": "if action not in {\"validate\", \"commit\"}:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 146,
-          "preview": "config.validate(allow_production=allow_production)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 183,
-          "preview": "validate = session.post(edit_action_endpoint(config.package_name, edit_id, \"validate\"), json={}, timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 184,
-          "preview": "validate.raise_for_status()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 216,
-          "preview": "parser.add_argument(\"--validate-only\", action=\"store_true\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 220,
-          "preview": "config.validate(allow_production=args.confirm_production)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 232,
-          "preview": "parser.error(\"--bundle and --credentials are required unless --validate-only is used\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m33_readiness.py",
-          "line": 20,
-          "preview": "['insert', 'bundle_upload', 'track_update', 'validate', 'commit'],",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m53_publication_contract.py",
-          "line": 5,
-          "preview": "from validate_public_release_inputs import validate",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m53_publication_contract.py",
-          "line": 49,
-          "preview": "errors = validate(payload, strict=True)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 14,
-          "preview": "self.assertIn('edit_action_endpoint(config.package_name, edit_id, \"validate\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 23,
-          "preview": "self.assertIn('edit_action_endpoint(PACKAGE_NAME, edit_id, \"validate\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m769_landscape_viewport.py",
-          "line": 9,
-          "preview": "VALIDATOR = ROOT / \".github\" / \"scripts\" / \"validate-ui-hierarchy.py\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 12,
-          "preview": "config.validate()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 72,
-          "preview": "play_publisher.ReleaseConfig(package_name=\"example.invalid\").validate()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 90,
-          "preview": "for action in (\"validate\", \"commit\"):",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_artifact_scope_checklist.py",
-          "line": 14,
-          "preview": "\"do not use the candidate apk to validate production admob or play billing\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_release_artifact_scope_checklist.py",
-          "line": 16,
-          "preview": "\"validate consent, ads and billing only on the play-signed internal testing build\",",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_validate_screenshot.py",
-          "line": 11,
-          "preview": "SCRIPT = ROOT / \".github\" / \"scripts\" / \"validate-screenshot.py\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_validate_ui_hierarchy.py",
-          "line": 8,
-          "preview": "SCRIPT = ROOT / \".github\" / \"scripts\" / \"validate-ui-hierarchy.py\"",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/validate_public_release_inputs.py",
-          "line": 27,
-          "preview": "def validate(payload: dict, strict: bool = True) -> list[str]:",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/validate_public_release_inputs.py",
-          "line": 100,
-          "preview": "errors = validate(load(args.path), strict=not args.allow_placeholders)",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 27
-    },
-    "validate_track": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 61,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_publisher.py",
-          "line": 54,
-          "preview": "validate_track(self.track, allow_production=allow_production)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 61,
-          "preview": "def validate_track(track: str, *, allow_production: bool = False) -> str:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 77,
-          "preview": "validate_track(track, allow_production=allow_production)",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 3
-    },
-    "release_payload": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 69,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_promoter.py",
-          "line": 20,
-          "preview": "release_payload,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 37,
-          "preview": "payload = release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 69,
-          "preview": "def release_payload(",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 147,
-          "preview": "payload = release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 221,
-          "preview": "payload = release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_promoter.py",
-          "line": 11,
-          "preview": "payload = play_publisher.release_payload(track=\"closed-test\", status=\"draft\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_promoter.py",
-          "line": 15,
-          "preview": "payload = play_publisher.release_payload(track=\"beta\", status=\"completed\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_promoter.py",
-          "line": 20,
-          "preview": "play_publisher.release_payload(track=\"production\", status=\"completed\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_promoter.py",
-          "line": 23,
-          "preview": "payload = play_publisher.release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 20,
-          "preview": "payload = play_publisher.release_payload()",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 29,
-          "preview": "payload = play_publisher.release_payload(track=\"beta\", status=\"completed\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 34,
-          "preview": "payload = play_publisher.release_payload(track=\"closed-alpha\", status=\"draft\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 39,
-          "preview": "play_publisher.release_payload(track=\"production\", status=\"completed\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 42,
-          "preview": "payload = play_publisher.release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 54,
-          "preview": "play_publisher.release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 62,
-          "preview": "play_publisher.release_payload(",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 68,
-          "preview": "play_publisher.release_payload(status=\"unknown\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 76,
-          "preview": "play_publisher.release_payload(track=\"../../bad\")",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 18
-    },
-    "endpoint": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 100,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
-          "line": 65,
-          "preview": "internal class HttpEventSink(private val endpoint: String) : EventSink {",
-          "definition_candidate": false
-        },
-        {
-          "file": "app/src/main/java/com/whoareyou/app/Telemetry.kt",
-          "line": 102,
-          "preview": "val connection = (URL(endpoint).openConnection() as HttpURLConnection).apply {",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 20,
-          "preview": "endpoint,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 40,
-          "preview": "response = session.get(endpoint(PACKAGE_NAME, edit_id, resource), timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 51,
-          "preview": "response = session.get(endpoint(PACKAGE_NAME, edit_id, \"tracks\"), timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 17,
-          "preview": "endpoint,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 52,
-          "preview": "endpoint(PACKAGE_NAME, edit_id, f\"tracks/{track}\"),",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 100,
-          "preview": "def endpoint(package_name: str, edit_id: str, resource: str) -> str:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 179,
-          "preview": "track_url = endpoint(config.package_name, edit_id, f\"tracks/{track}\")",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 87,
-          "preview": "play_publisher.endpoint(\"com.whoareyou.app\", \"abc\", \"tracks/qa\"),",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 10
-    },
-    "edit_action_endpoint": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 104,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_promoter.py",
-          "line": 18,
-          "preview": "edit_action_endpoint,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 58,
-          "preview": "validation = session.post(edit_action_endpoint(PACKAGE_NAME, edit_id, \"validate\"), json={}, timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 72,
-          "preview": "edit_action_endpoint(PACKAGE_NAME, edit_id, \"commit\"),",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 104,
-          "preview": "def edit_action_endpoint(package_name: str, edit_id: str, action: str) -> str:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 183,
-          "preview": "validate = session.post(edit_action_endpoint(config.package_name, edit_id, \"validate\"), json={}, timeout=60)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 197,
-          "preview": "edit_action_endpoint(config.package_name, edit_id, \"commit\"),",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 14,
-          "preview": "self.assertIn('edit_action_endpoint(config.package_name, edit_id, \"validate\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 15,
-          "preview": "self.assertIn('edit_action_endpoint(config.package_name, edit_id, \"commit\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 23,
-          "preview": "self.assertIn('edit_action_endpoint(PACKAGE_NAME, edit_id, \"validate\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 24,
-          "preview": "self.assertIn('edit_action_endpoint(PACKAGE_NAME, edit_id, \"commit\")', text)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 92,
-          "preview": "play_publisher.edit_action_endpoint(\"com.whoareyou.app\", \"abc\", action),",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 97,
-          "preview": "play_publisher.edit_action_endpoint(\"com.whoareyou.app\", \"abc\", \"delete\")",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 12
-    },
-    "load_service_account": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 111,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 21,
-          "preview": "load_service_account,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 72,
-          "preview": "load_service_account(credentials)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 19,
-          "preview": "load_service_account,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 44,
-          "preview": "load_service_account(credentials_path)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 111,
-          "preview": "def load_service_account(path: pathlib.Path) -> dict[str, Any]:",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 156,
-          "preview": "load_service_account(credentials_path)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 83,
-          "preview": "play_publisher.load_service_account(path)",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 7
-    },
-    "_authorized_session": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 122,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 19,
-          "preview": "_authorized_session,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_existing_version_preflight.py",
-          "line": 73,
-          "preview": "session = _authorized_session(credentials)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 21,
-          "preview": "_authorized_session,",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_promoter.py",
-          "line": 45,
-          "preview": "session = _authorized_session(credentials_path)",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 122,
-          "preview": "def _authorized_session(credentials_path: pathlib.Path):",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 158,
-          "preview": "session = _authorized_session(credentials_path)",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 6
-    },
-    "publish_bundle": {
-      "definition": {
-        "file": "tools/play_publisher.py",
-        "line": 135,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/play_publisher.py",
-          "line": 5,
-          "preview": "credentials. Network calls are made only by publish_bundle(). Production is",
-          "definition_candidate": false
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 135,
-          "preview": "def publish_bundle(",
-          "definition_candidate": true
-        },
-        {
-          "file": "tools/play_publisher.py",
-          "line": 234,
-          "preview": "result = publish_bundle(",
-          "definition_candidate": false
-        }
-      ],
-      "occurrence_count": 3
-    },
-    "M55ReleaseAutomationTest": {
-      "definition": {
-        "file": "tools/test_m55_release_automation.py",
+        "file": "tools/test_play_publish_pipeline_contract.py",
         "line": 7,
-        "kind": "class",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 7,
-          "preview": "class M55ReleaseAutomationTest(unittest.TestCase):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_publisher_uses_current_internal_track_and_production_guard": {
-      "definition": {
-        "file": "tools/test_m55_release_automation.py",
-        "line": 8,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_m55_release_automation.py",
+          "file": "tools/test_accessibility_launch_contract.py",
           "line": 8,
-          "preview": "def test_publisher_uses_current_internal_track_and_production_guard(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_promotion_helper_exists_without_bundle_upload": {
-      "definition": {
-        "file": "tools/test_m55_release_automation.py",
-        "line": 18,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
         {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 18,
-          "preview": "def test_promotion_helper_exists_without_bundle_upload(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_promotion_workflow_is_manual_and_safe_by_default": {
-      "definition": {
-        "file": "tools/test_m55_release_automation.py",
-        "line": 27,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
+          "file": "tools/test_accessibility_system_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
         {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 27,
-          "preview": "def test_promotion_workflow_is_manual_and_safe_by_default(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_public_preflight_remains_available": {
-      "definition": {
-        "file": "tools/test_m55_release_automation.py",
-        "line": 39,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
+          "file": "tools/test_actionable_knowledge_map_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
         {
-          "file": "tools/test_m55_release_automation.py",
-          "line": 39,
-          "preview": "def test_public_preflight_remains_available(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "PlayPublisherTest": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 9,
-        "kind": "class",
-        "language": "python"
-      },
-      "occurrences": [
+          "file": "tools/test_battery_thermal_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
         {
-          "file": "tools/test_play_publisher.py",
-          "line": 9,
-          "preview": "class PlayPublisherTest(unittest.TestCase):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_locked_release_config": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 10,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
+          "file": "tools/test_billing_launch_readiness.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
         {
-          "file": "tools/test_play_publisher.py",
+          "file": "tools/test_challenge_landing_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_healthy_discover_profile_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_large_screen_keyboard_accessibility.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_longitudinal_trend_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_manifest_security_contract.py",
           "line": 10,
-          "preview": "def test_locked_release_config(self):",
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_offline_resilience_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_performance_release_gate_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_persisted_result_score_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_play_2026_readiness.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_play_candidate_workflow.py",
+          "line": 10,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_play_publish_pipeline_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
           "definition_candidate": true
+        },
+        {
+          "file": "tools/test_play_release_safety_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_coverage_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_knowledge_map_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_narrative_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_reset_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_result_allocation_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_profile_startup_resilience.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_progression_journal_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_public_launch_experience_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_public_result_and_store_positioning.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_quiz_commit_interaction_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_quiz_result_persistence_feedback.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_reduced_motion_large_font_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_critical_profile_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_release_workflows_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_rendering_performance_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_restored_quiz_recovery.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_result_visual_hierarchy_contract.py",
+          "line": 8,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_runtime_efficiency_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_runtime_memory_lifecycle.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_runtime_performance_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_share_rendering_performance.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_share_storage_safety.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_shell_accessibility_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_trait_evolution_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_trait_graph_contract.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
+        },
+        {
+          "file": "tools/test_trait_timeline_integration.py",
+          "line": 7,
+          "preview": "def setUp(self):",
+          "definition_candidate": false
         }
       ],
-      "occurrence_count": 1
+      "occurrence_count": 43
     },
-    "test_default_release_payload_uses_internal_qa_track": {
+    "test_internal_publish_runs_quality_gates_before_bundle": {
       "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 19,
+        "file": "tools/test_play_publish_pipeline_contract.py",
+        "line": 12,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_play_publisher.py",
-          "line": 19,
-          "preview": "def test_default_release_payload_uses_internal_qa_track(self):",
+          "file": "tools/test_play_publish_pipeline_contract.py",
+          "line": 12,
+          "preview": "def test_internal_publish_runs_quality_gates_before_bundle(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "test_open_testing_track_is_supported": {
+    "test_internal_publish_uses_dynamic_versioned_receipt": {
       "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 28,
+        "file": "tools/test_play_publish_pipeline_contract.py",
+        "line": 17,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_play_publisher.py",
-          "line": 28,
-          "preview": "def test_open_testing_track_is_supported(self):",
+          "file": "tools/test_play_publish_pipeline_contract.py",
+          "line": 17,
+          "preview": "def test_internal_publish_uses_dynamic_versioned_receipt(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "test_custom_closed_track_is_supported": {
+    "test_internal_publish_uses_optional_key_password_fallback": {
       "definition": {
-        "file": "tools/test_play_publisher.py",
+        "file": "tools/test_play_publish_pipeline_contract.py",
+        "line": 29,
+        "kind": "function",
+        "language": "python"
+      },
+      "occurrences": [
+        {
+          "file": "tools/test_play_publish_pipeline_contract.py",
+          "line": 29,
+          "preview": "def test_internal_publish_uses_optional_key_password_fallback(self):",
+          "definition_candidate": true
+        }
+      ],
+      "occurrence_count": 1
+    },
+    "test_promotion_receipt_is_not_pinned_to_old_version": {
+      "definition": {
+        "file": "tools/test_play_publish_pipeline_contract.py",
         "line": 33,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_play_publisher.py",
+          "file": "tools/test_play_publish_pipeline_contract.py",
           "line": 33,
-          "preview": "def test_custom_closed_track_is_supported(self):",
+          "preview": "def test_promotion_receipt_is_not_pinned_to_old_version(self):",
           "definition_candidate": true
         }
       ],
       "occurrence_count": 1
     },
-    "test_production_requires_explicit_confirmation": {
+    "test_project_proguard_rules_do_not_keep_unused_room_or_workmanager": {
       "definition": {
-        "file": "tools/test_play_publisher.py",
+        "file": "tools/test_play_publish_pipeline_contract.py",
         "line": 37,
         "kind": "function",
         "language": "python"
       },
       "occurrences": [
         {
-          "file": "tools/test_play_publisher.py",
+          "file": "tools/test_play_publish_pipeline_contract.py",
           "line": 37,
-          "preview": "def test_production_requires_explicit_confirmation(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_production_staged_rollout_is_supported_when_confirmed": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 41,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 41,
-          "preview": "def test_production_staged_rollout_is_supported_when_confirmed(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_production_in_progress_requires_fraction": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 52,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 52,
-          "preview": "def test_production_in_progress_requires_fraction(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_non_production_rollout_fraction_is_rejected": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 60,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 60,
-          "preview": "def test_non_production_rollout_fraction_is_rejected(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_invalid_status_is_rejected": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 66,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 66,
-          "preview": "def test_invalid_status_is_rejected(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_only_locked_package_is_allowed": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 70,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 70,
-          "preview": "def test_only_locked_package_is_allowed(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_malformed_track_is_rejected": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 74,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 74,
-          "preview": "def test_malformed_track_is_rejected(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_service_account_validation_rejects_missing_fields": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 78,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 78,
-          "preview": "def test_service_account_validation_rejects_missing_fields(self):",
-          "definition_candidate": true
-        }
-      ],
-      "occurrence_count": 1
-    },
-    "test_endpoint_shape": {
-      "definition": {
-        "file": "tools/test_play_publisher.py",
-        "line": 85,
-        "kind": "function",
-        "language": "python"
-      },
-      "occurrences": [
-        {
-          "file": "tools/test_play_publisher.py",
-          "line": 85,
-          "preview": "def test_endpoint_shape(self):",
+          "preview": "def test_project_proguard_rules_do_not_keep_unused_room_or_workmanager(self):",
           "definition_candidate": true
         }
       ],

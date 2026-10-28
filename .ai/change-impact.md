@@ -1,15 +1,16 @@
 # Change impact
 
-Base: 0b68d7083a8754b9b994c9711e198e833fbfbb3a
-Head: 4bf34f2d58ee8cb8177da0e05e97a553ee70a3bc
+Base: 301e835b081623e69c1b94f517e664b7291c9a7d
+Head: fb18602ccb6b5ad17e6c3966d93fc6a52e707afb
 
 ## Changed files
-- M tools/play_promoter.py
-- M tools/play_publisher.py
-- M tools/test_m55_release_automation.py
-- M tools/test_play_publisher.py
+- M .github/workflows/play-internal-publish.yml
+- M docs/play-version-inspection-setup.md
+- M tools/test_play_publish_pipeline_contract.py
 
 ## Affected areas
+- .github
+- docs
 - tools
 
 ## Related test candidates

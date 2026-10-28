@@ -34,28 +34,28 @@
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 165,
+      "line": 170,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 167,
+      "line": 172,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 182,
+      "line": 187,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-internal-publish.yml",
-      "line": 184,
+      "line": 189,
       "context": "source",
       "severity": "medium"
     },
@@ -69,7 +69,7 @@
     {
       "category": "generic_secret_assignment",
       "path": "tools/test_play_publish_pipeline_contract.py",
-      "line": 23,
+      "line": 31,
       "context": "test_fixture_candidate",
       "severity": "low"
     }

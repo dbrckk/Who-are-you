@@ -2,13 +2,6 @@
   "area": "app-src",
   "files": [
     {
-      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 100
-    },
-    {
       "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
         "entrypoint"
