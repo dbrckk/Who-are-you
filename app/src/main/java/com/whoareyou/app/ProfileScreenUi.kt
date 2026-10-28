@@ -3,6 +3,7 @@ package com.whoareyou.app
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.snap
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -66,6 +67,11 @@ fun ProfileScreen(
     val sectionGap = if (constrainedLayout) 14.dp else 18.dp
     val dimensionPadding = if (constrainedLayout) 15.dp else 18.dp
     val reduceMotion = reducedMotionEnabled()
+    val animatedCompletion by animateFloatAsState(
+        targetValue = summary.completionPercent.coerceIn(0, 100) / 100f,
+        animationSpec = if (reduceMotion) snap() else tween(V2Motion.EmphasizedMillis),
+        label = "profileCompletionProgress"
+    )
     var showResetDialog by remember { mutableStateOf(false) }
     var selectedTraitId by remember { mutableStateOf<String?>(null) }
     var selectedJournalTrend by remember { mutableStateOf<LongitudinalTrend?>(null) }
@@ -113,41 +119,75 @@ fun ProfileScreen(
         item {
             Spacer(Modifier.height(12.dp))
             AccessibleBackAction(onClick = onBack)
-            Spacer(Modifier.height(14.dp))
-            Text(stringResource(R.string.your_profile), color = primaryAccent, style = V2Type.Eyebrow)
-            Spacer(Modifier.height(14.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .semantics(mergeDescendants = true) {
-                        contentDescription = "${summary.dominantArchetype}. $profileProgressText"
-                    },
-                horizontalAlignment = Alignment.CenterHorizontally
+            Spacer(Modifier.height(12.dp))
+            Card(
+                colors = CardDefaults.cardColors(containerColor = V2Colors.SurfaceElevated),
+                border = BorderStroke(1.dp, primaryAccent.copy(alpha = 0.24f)),
+                shape = RoundedCornerShape(V2Radius.Card),
+                modifier = Modifier.fillMaxWidth().testTag("profile_identity_hero")
             ) {
-                IdentityAura(
-                    score = strongestDimension?.score ?: summary.completionPercent,
-                    primary = primaryAccent,
-                    secondary = companionAccent
-                )
-                strongestQuiz?.let { quiz ->
-                    Spacer(Modifier.height(12.dp))
-                    QuizArtwork(quiz = quiz, compact = true)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Brush.linearGradient(
+                                listOf(
+                                    primaryAccent.copy(alpha = 0.14f),
+                                    V2Colors.SurfaceElevated,
+                                    companionAccent.copy(alpha = 0.10f)
+                                )
+                            )
+                        )
+                        .padding(if (constrainedLayout) 14.dp else 18.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(if (constrainedLayout) 10.dp else 14.dp)
+                    ) {
+                        IdentityAura(
+                            score = strongestDimension?.score ?: summary.completionPercent,
+                            primary = primaryAccent,
+                            secondary = companionAccent,
+                            diameter = if (constrainedLayout) 94.dp else 110.dp
+                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                stringResource(R.string.your_profile),
+                                color = primaryAccent,
+                                style = V2Type.Eyebrow
+                            )
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                summary.dominantArchetype,
+                                color = V2Colors.TextPrimary,
+                                style = when {
+                                    constrainedLayout -> V2Type.SectionTitle
+                                    configuration.screenWidthDp >= 600 -> V2Type.Hero
+                                    else -> V2Type.Question
+                                },
+                                modifier = Modifier.semantics { heading() }
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(14.dp))
+                    Text(
+                        profileProgressText,
+                        color = V2Colors.TextSecondary,
+                        style = V2Type.Supporting
+                    )
+                    Spacer(Modifier.height(9.dp))
+                    LinearProgressIndicator(
+                        progress = { animatedCompletion },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(8.dp)
+                            .testTag("profile_completion_progress")
+                            .semantics { contentDescription = profileProgressText },
+                        color = primaryAccent,
+                        trackColor = companionAccent.copy(alpha = 0.16f)
+                    )
                 }
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    summary.dominantArchetype.uppercase(),
-                    color = V2Colors.TextPrimary,
-                    style = V2Type.Hero,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    profileProgressText,
-                    color = V2Colors.TextSecondary,
-                    fontSize = 14.sp,
-                    lineHeight = 20.sp,
-                    textAlign = TextAlign.Center
-                )
             }
             Spacer(Modifier.height(if (constrainedLayout) 14.dp else 20.dp))
             Text(
