@@ -44,6 +44,43 @@ class RenderingBenchmark {
         device.waitForIdle()
     }
 
+    /**
+     * Benchmark the actual lazy Profile surface (rather than an isolated chart).
+     * Use the same pre-seeded profile and physical device when comparing runs.
+     */
+    @Test
+    fun profileScrollFrames() = benchmarkRule.measureRepeated(
+        packageName = PACKAGE_NAME,
+        metrics = listOf(FrameTimingMetric()),
+        compilationMode = CompilationMode.Partial(
+            baselineProfileMode = BaselineProfileMode.Require
+        ),
+        iterations = 7,
+        setupBlock = {
+            device.executeShellCommand("am force-stop $PACKAGE_NAME")
+            startActivityAndWait()
+            device.findObject(By.res("onboarding_start"))?.click()
+            check(device.wait(Until.hasObject(By.res("shell_profile_tab")), 5_000)) {
+                "Profile tab was not ready"
+            }
+            device.findObject(By.res("shell_profile_tab")).click()
+            check(device.wait(Until.hasObject(By.res("profile_lazy_list")), 5_000)) {
+                "Profile lazy list was not ready"
+            }
+        }
+    ) {
+        val list = device.findObject(By.res("profile_lazy_list"))
+        list.setGestureMargin(device.displayWidth / 5)
+        repeat(3) {
+            list.fling(Direction.UP)
+            device.waitForIdle()
+        }
+        repeat(3) {
+            list.fling(Direction.DOWN)
+            device.waitForIdle()
+        }
+    }
+
     @Test
     fun quizToResultFrames() = benchmarkRule.measureRepeated(
         packageName = PACKAGE_NAME,
