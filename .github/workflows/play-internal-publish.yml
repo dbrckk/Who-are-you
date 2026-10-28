@@ -248,7 +248,7 @@ jobs:
           import pathlib
           import re
 
-          expected = re.sub(r"[\\s:]", "", os.environ.get("EXPECTED_PLAY_UPLOAD_CERT_SHA256", "")).upper()
+          expected = re.sub(r"[\s:]", "", os.environ.get("EXPECTED_PLAY_UPLOAD_CERT_SHA256", "")).upper()
           if re.fullmatch(r"[A-F0-9]{64}", expected) is None:
               raise SystemExit(
                   "Missing or invalid expected Play upload certificate SHA-256. "
@@ -256,7 +256,7 @@ jobs:
                   "from the UPLOAD certificate under the existing app's Play Console App integrity."
               )
           printout = pathlib.Path("play-upload-certificate.txt").read_text(encoding="utf-8")
-          values = re.findall(r"(?m)^[ \\t]*SHA256:[ \\t]*([0-9A-Fa-f:]+)[ \\t]*$", printout)
+          values = re.findall(r"(?m)^[ \t]*SHA256:[ \t]*([0-9A-Fa-f:]+)[ \t]*$", printout)
           if len(values) != 1:
               raise SystemExit("Unable to uniquely read the AAB signing certificate SHA256 from keytool output")
           actual = values[0].replace(":", "").upper()
