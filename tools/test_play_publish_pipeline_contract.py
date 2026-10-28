@@ -17,6 +17,14 @@ class PlayPublishPipelineContractTest(unittest.TestCase):
     def test_internal_publish_uses_dynamic_versioned_receipt(self):
         self.assertIn('artifact_name=who-are-you-play-internal-publish-${VERSION_NAME}-${VERSION_CODE}', self.internal)
         self.assertNotIn('who-are-you-play-internal-publish-0.2.2-4', self.internal)
+        # Never permit a real Play edit before comparing the signed AAB to
+        # the existing app's UPLOAD certificate (not its app-signing key).
+        self.assertIn('vars.WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256', self.internal)
+        self.assertIn('Verify signed AAB matches existing Play upload certificate', self.internal)
+        self.assertLess(
+            self.internal.index('Verify signed AAB matches existing Play upload certificate'),
+            self.internal.index('Upload and commit Google Play edit'),
+        )
 
     def test_internal_publish_uses_optional_key_password_fallback(self):
         self.assertIn('secrets.WHO_ARE_YOU_UPLOAD_KEY_PASSWORD', self.internal)
