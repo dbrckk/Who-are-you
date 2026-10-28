@@ -87,6 +87,14 @@ class PlayPublisherTest(unittest.TestCase):
             play_publisher.endpoint("com.whoareyou.app", "abc", "tracks/qa"),
             "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/com.whoareyou.app/edits/abc/tracks/qa",
         )
+        for action in ("validate", "commit"):
+            self.assertEqual(
+                play_publisher.edit_action_endpoint("com.whoareyou.app", "abc", action),
+                "https://androidpublisher.googleapis.com/androidpublisher/v3/"
+                f"applications/com.whoareyou.app/edits/abc:{action}",
+            )
+        with self.assertRaises(ValueError):
+            play_publisher.edit_action_endpoint("com.whoareyou.app", "abc", "delete")
 
 
 if __name__ == "__main__":
