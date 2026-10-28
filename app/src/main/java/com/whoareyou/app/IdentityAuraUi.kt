@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.cos
 import kotlin.math.sin
@@ -25,7 +26,8 @@ fun IdentityAura(
     score: Int,
     modifier: Modifier = Modifier,
     primary: Color = V2Colors.Orchid,
-    secondary: Color = V2Colors.Cyan
+    secondary: Color = V2Colors.Cyan,
+    diameter: Dp = 156.dp
 ) {
     val normalized = score.coerceIn(0, 100) / 100f
     val warm = remember(primary, secondary, normalized) {
@@ -47,14 +49,14 @@ fun IdentityAura(
 
     Box(
         modifier = modifier
-            .size(156.dp)
+            .size(diameter)
             .clip(CircleShape)
             .background(outerBrush),
         contentAlignment = Alignment.Center
     ) {
         Box(
             Modifier
-                .size(136.dp)
+                .size(diameter * (136f / 156f))
                 .drawWithCache {
                     val centerPoint = Offset(size.width / 2f, size.height / 2f)
                     val baseRadius = size.minDimension * 0.26f
