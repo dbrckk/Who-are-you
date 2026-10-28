@@ -1,11 +1,17 @@
 package com.whoareyou.app
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 
@@ -46,7 +52,9 @@ class WhoAmIPortraitUiTest {
 
         composeRule.setContent {
             WhoAreYouTheme {
-                WhoAmIPortraitCards(portrait)
+                Box(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                    WhoAmIPortraitCards(portrait)
+                }
             }
         }
 
@@ -54,9 +62,9 @@ class WhoAmIPortraitUiTest {
         composeRule.onNodeWithTag("who_am_i_stable").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_nuances").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_discovery").assertIsDisplayed()
-        composeRule.onNodeWithTag("who_am_i_evolution").assertIsDisplayed()
+        composeRule.onNodeWithTag("who_am_i_evolution").performScrollTo().assertIsDisplayed()
         composeRule.onAllNodesWithTag("who_am_i_trait_curiosity").assertCountEquals(4)
-        composeRule.onNodeWithText("Thinking style").assertIsDisplayed()
-        composeRule.onNodeWithText("This signal has been moving upward over time.").assertIsDisplayed()
+        composeRule.onNodeWithText("Thinking style").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("This signal has been moving upward over time.").performScrollTo().assertIsDisplayed()
     }
 }
