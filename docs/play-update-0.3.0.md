@@ -6,8 +6,17 @@
 - Package **inchangé** : `com.whoareyou.app`.
 - Version du code source : `versionName = "0.3.0"`, `versionCode = 5`, `minSdk = 26`, `targetSdk = 36`.
 - Android CI, M59, Android APK et M56 Release Candidate ont réussi sur le commit `d31f1ba7547c050e9a678f87c2871897b58c8832` le 9 octobre 2026. Le commit `9db8537c326dd37d57fb91ea16619b6a06037a69` suivant ne modifie que le contexte généré.
-- **Non vérifiés / non exécutés pour cette version** : construction du `playRelease` signé avec la clé actuelle ; état, versionCode maximal et certificat d'upload de l'application dans Play Console ; envoi en piste Internal ; validation d'une mise à jour par-dessus l'ancienne version distribuée par Google Play ; publication Production.
+- **AAB signé et vérifié le 28 octobre 2026** : [Protected Play Candidate Request, exécution 40701274882](https://github.com/dbrckk/Who-are-you/actions/runs/40701274882) a réussi tous les contrôles, construit `bundlePlayRelease`, vérifié la signature avec `jarsigner` et conservé l'artefact `who-are-you-play-candidate-0.3.0-5` (expiration prévue le 27 novembre 2026). C'est une construction candidate, **pas un envoi à Google Play**.
+- **Non vérifiés** : versionCode maximal déjà accepté, correspondance du certificat d'upload avec Play Console, déclarations Play Console réellement appliquées, envoi Internal, validation de la mise à jour par-dessus l'installation distribuée par Google Play et publication Production.
 - Un APK Candidate/RC signé avec une clé de débogage et un AAB `release` non signé **ne doivent jamais être envoyés à Google Play**.
+
+## Vérification automatique des versions Play (sans publication)
+
+La [demande protégée](play-version-inspection-request.json) lance sur `main` le workflow [Protected Play Version Inspection](https://github.com/dbrckk/Who-are-you/actions/workflows/play-version-inspection.yml). Celui-ci utilise le compte de service déjà configuré pour `play-internal`, crée une édition Google Play temporaire, consulte les codes des APK/AAB et des pistes, puis supprime l'édition **sans commit, sans upload et sans publication**.
+
+Le rapport `who-are-you-play-version-inspection-<run_id>` contient `highestExistingVersionCode`, `versionStatus`, `safeToAttemptUpload` et `nextAvailableVersionCode`. Le rapport est informatif ; la procédure réelle de publication conserve son propre contrôle bloquant du `versionCode`. Une édition temporaire n'est jamais publiée. Si les identifiants API sont absents ou refusés, aucun état Play ne doit être présumé connu.
+
+Le contrôle n'établit **pas** la correspondance du certificat d'upload avec celui de Play Console. Vérifier séparément l'empreinte du certificat de l'AAB, `play-upload-certificate.txt`, avec le certificat **d'upload** de l'application existante. Ne pas confondre avec le certificat Play App Signing utilisé sur les appareils.
 
 ## Avant tout upload : contrôler l'identité de la mise à jour
 
