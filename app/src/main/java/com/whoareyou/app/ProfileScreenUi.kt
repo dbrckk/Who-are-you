@@ -204,6 +204,8 @@ fun ProfileScreen(
                     .testTag("who_am_i_title")
                     .semantics { heading() }
             )
+        }
+        item(key = "profile_portrait", contentType = "profile_portrait") {
             Spacer(Modifier.height(10.dp))
             WhoAmIPortraitCards(
                 portrait = whoAmIPortrait,
@@ -211,8 +213,12 @@ fun ProfileScreen(
                 catalog = catalog,
                 onQuizSelected = onQuizSelected
             )
+        }
+        item(key = "profile_habits", contentType = "profile_habits") {
             Spacer(Modifier.height(sectionGap))
             HabitsProfileEntry(onOpenHabits = onOpenHabits)
+        }
+        item(key = "profile_insights", contentType = "profile_insights") {
             if (summary.coverage.totalTraitCount > 0) {
                 Spacer(Modifier.height(sectionGap))
                 ProfileCoverageCard(summary.coverage)
@@ -258,6 +264,8 @@ fun ProfileScreen(
                 Spacer(Modifier.height(sectionGap))
                 ProfileInsightCards(summary)
             }
+        }
+        item(key = "profile_dimensions_header", contentType = "profile_section_header") {
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.all_dimensions), color = companionAccent, style = V2Type.Eyebrow)
         }
