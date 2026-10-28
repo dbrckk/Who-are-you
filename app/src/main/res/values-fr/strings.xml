@@ -158,6 +158,9 @@
     <string name="who_am_i_nuances">TES NUANCES</string>
     <string name="who_am_i_discovering">CE QUE NOUS DÉCOUVRONS ENCORE</string>
     <string name="who_am_i_evolution">TON ÉVOLUTION</string>
+    <string name="who_am_i_confidence">Confiance des indices</string>
+    <string name="profile_comparison_previous">Avant</string>
+    <string name="profile_comparison_current">Maintenant</string>
     <string name="who_am_i_certainty_exploring">À explorer</string>
     <string name="who_am_i_certainty_likely">Probable</string>
     <string name="who_am_i_certainty_established">Bien établi</string>
