@@ -55,6 +55,7 @@ The content is organized as follows:
     m56-main-rc.yml
     m59-device-validation.yml
     pages.yml
+    play-candidate-request.yml
     play-candidate.yml
     play-internal-publish.yml
     play-promote.yml
@@ -354,6 +355,7 @@ docs/
   m32-play-candidate-contract.json
   m32-readiness.json
   m33-readiness.json
+  play-candidate-request.json
   play-internal-test-metadata.json
   play-signing-contract.json
   public-release-inputs.template.json
@@ -1929,11 +1931,79 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
+## File: .github/workflows/play-candidate-request.yml
+```yaml
+name: Protected Play Candidate Request
+
+# Signing only, never an upload or Play release. A trusted main-branch marker
+# permits generating a fresh AAB without a separate browser workflow dispatch.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/play-candidate-request.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: protected-play-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate request against Android release identity
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import re
+
+          request = json.loads(pathlib.Path('docs/play-candidate-request.json').read_text(encoding='utf-8'))
+          gradle = pathlib.Path('app/build.gradle.kts').read_text(encoding='utf-8')
+          name = re.search(r'versionName\s*=\s*"([^"]+)"', gradle)
+          code = re.search(r'versionCode\s*=\s*(\d+)', gradle)
+          if not name or not code:
+              raise SystemExit('Cannot resolve Android version identity')
+          if (
+              request.get('versionName') != name.group(1)
+              or request.get('versionCode') != int(code.group(1))
+              or request.get('buildOnly') is not True
+              or request.get('telemetryEnabled') is not False
+          ):
+              raise SystemExit('Play candidate request does not match safe, signed-build-only release identity')
+          print(f'Approved signed build only: {name.group(1)} ({code.group(1)}), telemetry disabled')
+          PY
+
+  signed-candidate:
+    needs: verify-request
+    uses: ./.github/workflows/play-candidate.yml
+    permissions:
+      contents: read
+    secrets: inherit
+    with:
+      telemetry_enabled: false
+```
+
 ## File: .github/workflows/play-candidate.yml
 ```yaml
 name: Play Candidate
 
 on:
+  # Reusable only from the trusted main-branch request workflow. This workflow
+  # still never runs directly on a repository push or untrusted pull request.
+  workflow_call:
+    inputs:
+      telemetry_enabled:
+        description: "Build with the configured production telemetry endpoint"
+        required: false
+        type: boolean
+        default: false
   workflow_dispatch:
     inputs:
       telemetry_enabled:
@@ -2183,6 +2253,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Validate publishing secrets
+        env:
+          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
+          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
+          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
+          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
+          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
+          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
+        run: |
+          set -euo pipefail
+          required=(
+            ADMOB_APP_ID
+            ADMOB_INTERSTITIAL_ID
+            UPLOAD_KEYSTORE_B64
+            UPLOAD_KEYSTORE_PASSWORD
+            UPLOAD_KEY_ALIAS
+            PLAY_SERVICE_ACCOUNT_JSON_B64
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing required Play publishing secret: $name"
+              exit 1
+            fi
+          done
+          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
+            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
+            exit 1
+          fi
+
       - name: Set up JDK 17
         uses: actions/setup-java@v6
         with:
@@ -2217,37 +2318,6 @@ jobs:
 
       - name: Set up Python publishing dependencies
         run: python -m pip install --disable-pip-version-check google-auth requests
-
-      - name: Validate publishing secrets
-        env:
-          ADMOB_APP_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_APP_ID }}
-          ADMOB_INTERSTITIAL_ID: ${{ secrets.WHO_ARE_YOU_ADMOB_INTERSTITIAL_ID }}
-          UPLOAD_KEYSTORE_B64: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_B64 }}
-          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEYSTORE_PASSWORD }}
-          UPLOAD_KEY_ALIAS: ${{ secrets.WHO_ARE_YOU_UPLOAD_KEY_ALIAS }}
-          PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
-          TELEMETRY_ENDPOINT: ${{ secrets.WHO_ARE_YOU_TELEMETRY_ENDPOINT }}
-          TELEMETRY_ENABLED: ${{ inputs.telemetry_enabled }}
-        run: |
-          set -euo pipefail
-          required=(
-            ADMOB_APP_ID
-            ADMOB_INTERSTITIAL_ID
-            UPLOAD_KEYSTORE_B64
-            UPLOAD_KEYSTORE_PASSWORD
-            UPLOAD_KEY_ALIAS
-            PLAY_SERVICE_ACCOUNT_JSON_B64
-          )
-          for name in "${required[@]}"; do
-            if [ -z "${!name:-}" ]; then
-              echo "Missing required Play publishing secret: $name"
-              exit 1
-            fi
-          done
-          if [ "$TELEMETRY_ENABLED" = "true" ] && [ -z "${TELEMETRY_ENDPOINT:-}" ]; then
-            echo "telemetry_enabled=true requires WHO_ARE_YOU_TELEMETRY_ENDPOINT"
-            exit 1
-          fi
 
       - name: Materialize temporary credentials
         env:
@@ -39787,6 +39857,20 @@ dependencies {
     "production_admob_secrets_configured",
     "upload_key_secrets_configured"
   ]
+}
+```
+
+## File: docs/play-candidate-request.json
+```json
+{
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "buildOnly": true,
+  "telemetryEnabled": false,
+  "requestedOn": "2026-10-28",
+  "purpose": "Generate a current signed Play AAB after profile optimization and Health Connect privacy updates; no Google Play upload or publication.",
+  "playUploadAuthorized": false,
+  "releaseState": "candidate-only"
 }
 ```
 

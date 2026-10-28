@@ -1,12 +1,16 @@
 {
   "files": {
-    ".github/workflows/ai-repo-map.yml": {
-      "sha256": "22ba48e099a6a17fe36edfc17805ab927f2bf20a01f774ed96dd6780b9b98e19",
-      "size": 636
+    ".github/workflows/play-candidate-request.yml": {
+      "sha256": "04d1fc7602da0b7a7bba0f4ced90f1d8246a35760ec7df5ecca768fba7717474",
+      "size": 1827
     },
-    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt": {
-      "sha256": "58a0960d287a1afe3a219e922a1c8a6806532d9d383ba94978b2f7ce2860f2a1",
-      "size": 1188
+    ".github/workflows/play-candidate.yml": {
+      "sha256": "6d8b7e45aeed34d94680f944197b722f3c603ac1b454b5d78baf242dbbf116a1",
+      "size": 9291
+    },
+    ".github/workflows/play-internal-publish.yml": {
+      "sha256": "e0355fcb112202e4358479a6beec7d536e6da730384d683e4d551eba2c1e5a1f",
+      "size": 11474
     },
     "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
       "sha256": "272451441a7eb8e62cb3a44d2f44451cb6f08961c74d21a562caf5f95c51011a",
@@ -28,41 +32,21 @@
       "sha256": "294fb17d382719e2dc142bc5ca0ec63309ad04d57396d6e135e7619ca0f25a0f",
       "size": 2829
     },
-    "app/src/main/java/com/whoareyou/app/AppEvents.kt": {
-      "sha256": "d9fdd2a26918a87b3c39990d32d5854a4e9385800cb99c0072929dfb8e0b213a",
-      "size": 7132
+    "app/src/main/AndroidManifest.xml": {
+      "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
+      "size": 3549
     },
     "app/src/main/java/com/whoareyou/app/AppShellUi.kt": {
       "sha256": "9ed6aafb5ef4611fa79886f7b25b8071ae75e499e6f81102e790d4a8e8976e76",
       "size": 10686
     },
-    "app/src/main/java/com/whoareyou/app/DimensionJournal.kt": {
-      "sha256": "d686cf0661a338f9b51adabb600828caedc3b31fb0daf09f228c2a971de96a98",
-      "size": 3126
-    },
-    "app/src/main/java/com/whoareyou/app/GlobalProfile.kt": {
-      "sha256": "29bd48cc1e9e9e503455a063bb72787285af724b6cbfbe9b58c3b986061aba44",
-      "size": 4996
-    },
     "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt": {
       "sha256": "c5ddaf6d212a19cb2b6402ce4fe5ca4e7494c3be6b4068034d3bc48c48ccbd26",
       "size": 4602
     },
-    "app/src/main/java/com/whoareyou/app/LongitudinalTrend.kt": {
-      "sha256": "00020587a2f954c4544da051d944378b3187ff6a8571f7c6f61adbf955555219",
-      "size": 3259
-    },
     "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt": {
       "sha256": "18e4ac6fb7f21d04a0afdd7e7bb35f7ef43ac87b05c36a2a4ccb5df2d64c9455",
       "size": 7316
-    },
-    "app/src/main/java/com/whoareyou/app/MainActivity.kt": {
-      "sha256": "deb479c59978a1ecdefb6a1ed9097ba05aaff84885c87c3144cd18c982c95789",
-      "size": 14978
-    },
-    "app/src/main/java/com/whoareyou/app/PersonalModel.kt": {
-      "sha256": "3fe8ab56a20ef672c2928196fbb68bab4c081227c8edd8d361cd78c10823612e",
-      "size": 1717
     },
     "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt": {
       "sha256": "f09700b3aef2753c0333c8e7191fa603b6b16dcfb44fa38297dd713554559697",
@@ -76,33 +60,13 @@
       "sha256": "c2f1a89db228b51f3114f8eb53edc1d93104dc19e0858f2c7889e0110adaee09",
       "size": 27537
     },
-    "app/src/main/java/com/whoareyou/app/QuizCatalog.kt": {
-      "sha256": "2f5fc9eddb1e8a74a23795e0d40170c2b43ec9128322f79c9bdb8b2eb4fd8d2e",
-      "size": 6418
-    },
     "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt": {
       "sha256": "973912018b210efec22f749121336eeb4cadb77b8394e7599eccb14c762ba78c",
       "size": 2559
     },
-    "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt": {
-      "sha256": "3e05a1f4dc8abd669bffba64582bb390db8f49fda182485368c2f801b771be4c",
-      "size": 18041
-    },
-    "app/src/main/java/com/whoareyou/app/SignatureProfile.kt": {
-      "sha256": "990bc3c224898943e526637c210d1c4ad203231adc6f4ca3690b4e6c5dadb829",
-      "size": 15442
-    },
     "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt": {
       "sha256": "72b520387cb2c55cd3470a6f895cf09c51365de2b0821b4c1a801a9e6e447378",
       "size": 13176
-    },
-    "app/src/main/java/com/whoareyou/app/V2DesignSystem.kt": {
-      "sha256": "63c1cfabdcd0c88bfa647bd84c8803ad175f1c01590a87b610f826a78e73b6ed",
-      "size": 3200
-    },
-    "app/src/main/java/com/whoareyou/app/WhoAmIPortrait.kt": {
-      "sha256": "ef5fb61d1219aa455ad1fcd99ae565957e13399c710a739b39acaaf794fdcfc2",
-      "size": 1977
     },
     "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": {
       "sha256": "198cdf4ba535d29fcf92a50430501b5c4f5d270bc1d01e34f25130582ea28d48",
@@ -120,9 +84,13 @@
       "sha256": "838f07451ff4991b366455e61d246e18fc70b777cb5e8a76b0265595a1e07b2d",
       "size": 6103
     },
-    "docs/performance-validation.md": {
-      "sha256": "97eea13bba9ef120e674ac10f756152f91c61de1ee09750717b7b8966ce035a9",
-      "size": 4408
+    "docs/m32-play-candidate-workflow.md": {
+      "sha256": "7dd3059d9c361b3e372664b46369825c5f51a132d62ce0a2293bb9baaf112bf5",
+      "size": 4262
+    },
+    "docs/play-candidate-request.json": {
+      "sha256": "c38f95f3f2569b4084b31a62971c1430f529fd02fd5531ca8b476dfd19d75c33",
+      "size": 351
     },
     "tools/test_profile_result_allocation_contract.py": {
       "sha256": "9e98cd894644485141902bd1cd0fd0631c98e80d61dcf81945fca9c281129659",

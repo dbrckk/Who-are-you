@@ -2,7 +2,21 @@
   "area": "github",
   "files": [
     {
-      "path": ".github/workflows/ai-repo-map.yml",
+      "path": ".github/workflows/play-candidate-request.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-candidate.yml",
+      "reasons": [
+        "changed"
+      ],
+      "score": 100
+    },
+    {
+      "path": ".github/workflows/play-internal-publish.yml",
       "reasons": [
         "changed"
       ],

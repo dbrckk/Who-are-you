@@ -47,6 +47,7 @@ m31-readiness.json
 m32-play-candidate-contract.json
 m32-readiness.json
 m33-readiness.json
+play-candidate-request.json
 play-internal-test-metadata.json
 play-signing-contract.json
 public-release-inputs.template.json
@@ -309,6 +310,20 @@ public-release-inputs.template.json
     "production_admob_secrets_configured",
     "upload_key_secrets_configured"
   ]
+}
+```
+
+## File: play-candidate-request.json
+```json
+{
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "buildOnly": true,
+  "telemetryEnabled": false,
+  "requestedOn": "2026-10-28",
+  "purpose": "Generate a current signed Play AAB after profile optimization and Health Connect privacy updates; no Google Play upload or publication.",
+  "playUploadAuthorized": false,
+  "releaseState": "candidate-only"
 }
 ```
 

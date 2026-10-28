@@ -6,28 +6,28 @@
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 116,
+      "line": 125,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 118,
+      "line": 127,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 133,
+      "line": 142,
       "context": "source",
       "severity": "medium"
     },
     {
       "category": "generic_secret_assignment",
       "path": ".github/workflows/play-candidate.yml",
-      "line": 135,
+      "line": 144,
       "context": "source",
       "severity": "medium"
     },

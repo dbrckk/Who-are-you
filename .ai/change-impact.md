@@ -1,13 +1,18 @@
 # Change impact
 
-Base: 52351348358d113382136622f60de47d1ee228ab
-Head: 33bfb20741dfc9b264f1dd749d86043bb1afab0d
+Base: 903d9d90214800fd8dcf979a466a54a17e33d75a
+Head: 2555674a20f03d3e21c81634d80e21e0fd3c804f
 
 ## Changed files
-- M .github/workflows/ai-repo-map.yml
+- A .github/workflows/play-candidate-request.yml
+- M .github/workflows/play-candidate.yml
+- M .github/workflows/play-internal-publish.yml
+- M docs/m32-play-candidate-workflow.md
+- A docs/play-candidate-request.json
 
 ## Affected areas
 - .github
+- docs
 
 ## Related test candidates
 - No direct filename-based test match detected.

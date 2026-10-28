@@ -1,48 +1,8 @@
 {
-  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": true,
-  "learning_result": {
-    "example_count": 12,
-    "rejected_count": 0,
-    "terms": [
-      "1.6mb",
-      "108",
-      "ai",
-      "allow",
-      "bounded",
-      "ci",
-      "context",
-      "input",
-      "map",
-      "supported",
-      "via",
-      "workflow"
-    ],
-    "test_count": 0,
-    "useful_count": 17
-  },
-  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
-  "rejected": [],
   "schema_version": 1,
-  "task": "fix(ci): allow bounded 1.6MB AI context map via supported workflow input (#108)",
-  "tests_selected": [],
-  "useful": [
-    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
-    "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
-    "app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt",
-    "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt",
-    "app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt",
-    "app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt",
-    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-    "app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt",
-    "app/src/main/java/com/whoareyou/app/ResultScreenUi.kt",
-    "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
-    "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
-    "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt",
-    "tools/test_profile_result_allocation_contract.py"
-  ]
+  "generated_by": "dbrckk/repo-brain-auto-learning-v1",
+  "learned": false,
+  "reason": "missing-task-or-source-change",
+  "task": "release: build a current signed Play AAB from a protected main-only request (#109)",
+  "useful": []
 }

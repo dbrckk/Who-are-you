@@ -4,13 +4,9 @@
     {
       "path": "tools/test_profile_result_allocation_contract.py",
       "reasons": [
-        "changed",
-        "changed-source",
-        "impact",
-        "selected-test",
-        "symbol-indexed"
+        "recent-project-state"
       ],
-      "score": 395
+      "score": 60
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

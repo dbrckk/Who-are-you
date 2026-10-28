@@ -38,16 +38,21 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T12:33:07Z
+Generated: 2026-10-28T13:57:48Z
 
 ### Git
 - Branch: `main`
-- Head: `33bfb20741df`
-- Commit date: 2026-10-28T08:32:45-04:00
-- Commit: fix(ci): allow bounded 1.6MB AI context map via supported workflow input (#108)
-- Tracked files: 701
+- Head: `2555674a20f0`
+- Commit date: 2026-10-28T09:57:37-04:00
+- Commit: release: build a current signed Play AAB from a protected main-only request (#109)
+- Tracked files: 704
 
 ### Recently changed files
+- `.github/workflows/play-candidate-request.yml`
+- `.github/workflows/play-candidate.yml`
+- `.github/workflows/play-internal-publish.yml`
+- `docs/m32-play-candidate-workflow.md`
+- `docs/play-candidate-request.json`
 - `.github/workflows/ai-repo-map.yml`
 - `app/src/main/java/com/whoareyou/app/AppShellUi.kt`
 - `app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt`
@@ -63,11 +68,6 @@ Generated: 2026-10-28T12:33:07Z
 - `app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt`
 - `tools/test_profile_result_allocation_contract.py`
 - `app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt`
-- `app/src/main/java/com/whoareyou/app/IdentityAuraUi.kt`
-- `app/src/main/res/values-fr/strings.xml`
-- `app/src/main/res/values/strings.xml`
-- `app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt`
-- `app/src/main/java/com/whoareyou/app/ResultScoreOrbitUi.kt`
 
 ### Project signals
 - `build.gradle.kts`

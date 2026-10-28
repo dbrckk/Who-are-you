@@ -1,38 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "selected_test_files": [
-    "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
-    "tools/test_profile_result_allocation_contract.py"
-  ],
-  "commands": [
-    {
-      "command": "python -m pytest tools/test_profile_result_allocation_contract.py",
-      "purpose": "targeted tests",
-      "confidence": "high",
-      "files": [
-        "tools/test_profile_result_allocation_contract.py"
-      ]
-    },
-    {
-      "command": "./gradlew test",
-      "purpose": "targeted area fallback",
-      "confidence": "medium",
-      "files": [
-        "app/src/androidTest/java/com/whoareyou/app/AppShellUiTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/ResultScreenUiTest.kt",
-        "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt"
-      ],
-      "note": "Exact Gradle test filters are project-specific; inspect these test files first."
-    }
-  ],
+  "selected_test_files": [],
+  "commands": [],
   "fallback": "Use .ai/commands.json or the repository's canonical full validation when no targeted test is selected."
 }
