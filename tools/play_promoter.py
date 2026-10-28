@@ -10,6 +10,7 @@ from typing import Any
 
 from play_publisher import (
     API_ROOT,
+    INTERNAL_TRACK,
     PACKAGE_NAME,
     PRODUCTION_TRACK,
     RELEASE_STATUSES,
@@ -47,6 +48,40 @@ def promote_version(
     response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
     response.raise_for_status()
     edit_id = response.json()["id"]
+
+    # A tested track is the only supported source for subsequent promotions.
+    # Reading the current Play edit protects against promoting an arbitrary
+    # version code that was uploaded to a different track but never reached qa.
+    # A qa-to-qa edit is intentionally exempt (used to change a draft status).
+    if track != INTERNAL_TRACK:
+        source = session.get(
+            endpoint(PACKAGE_NAME, edit_id, f"tracks/{INTERNAL_TRACK}"),
+            timeout=60,
+        )
+        source.raise_for_status()
+        source_track = source.json()
+        if not isinstance(source_track, dict) or source_track.get("track") != INTERNAL_TRACK:
+            raise ValueError("Unexpected Google Play Internal testing track response")
+        releases = source_track.get("releases", [])
+        if not isinstance(releases, list):
+            raise ValueError("Malformed Google Play Internal testing releases")
+        eligible = False
+        for release in releases:
+            if not isinstance(release, dict):
+                raise ValueError("Malformed Google Play Internal testing release")
+            codes = release.get("versionCodes", [])
+            if not isinstance(codes, list):
+                raise ValueError("Malformed Google Play Internal testing version codes")
+            if str(version_code) in [str(code) for code in codes]:
+                eligible = release.get("status") == "completed"
+                break
+        if not eligible:
+            raise ValueError(
+                f"Cannot promote versionCode {version_code} to {track}: "
+                "the same version must already have a completed release "
+                "on Google Play Internal testing (qa). "
+                "Complete Internal testing and review the upgrade first."
+            )
 
     update = session.put(
         endpoint(PACKAGE_NAME, edit_id, f"tracks/{track}"),
