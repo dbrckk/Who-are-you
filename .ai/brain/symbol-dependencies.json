@@ -4,5 +4,134 @@
   "scope": "symbols defined in changed source files",
   "semantic": false,
   "note": "Dependencies are known symbol names lexically present inside the symbol's AST/source range.",
-  "symbols": {}
+  "symbols": {
+    "promote_version": {
+      "source": {
+        "file": "tools/play_promoter.py",
+        "start": 26,
+        "end": 114
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "_authorized_session",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 122,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "edit_action_endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 104,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "endpoint",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 100,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "load_service_account",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 111,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "release_payload",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 69,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "validate",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 51,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        }
+      ],
+      "dependency_count": 7
+    },
+    "main": {
+      "source": {
+        "file": "tools/play_promoter.py",
+        "start": 117,
+        "end": 141
+      },
+      "symbol_dependencies": [
+        {
+          "symbol": "ReleaseConfig",
+          "definitions": [
+            {
+              "file": "tools/play_publisher.py",
+              "line": 45,
+              "kind": "class",
+              "language": "python"
+            }
+          ],
+          "relation": "imported_module"
+        },
+        {
+          "symbol": "promote_version",
+          "definitions": [
+            {
+              "file": "tools/play_promoter.py",
+              "line": 26,
+              "kind": "function",
+              "language": "python"
+            }
+          ],
+          "relation": "same_file"
+        }
+      ],
+      "dependency_count": 2
+    }
+  }
 }

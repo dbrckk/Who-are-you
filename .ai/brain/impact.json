@@ -1,17 +1,40 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "fb18602ccb6b5ad17e6c3966d93fc6a52e707afb",
-  "head": "c0edf5867ccaecd7bc97162f3c9989fc4b692121",
+  "base": "c0edf5867ccaecd7bc97162f3c9989fc4b692121",
+  "head": "5bc371a55b1ca16c85d590f00914ee9cf58817d2",
   "index_mode": "incremental",
   "changed_files": [
     {
-      "path": "docs/play-update-0.3.0.md",
+      "path": "docs/m55-release-promotion.md",
+      "status": "M"
+    },
+    {
+      "path": "tools/play_promoter.py",
       "status": "M"
     }
   ],
-  "changed_source_files": [],
-  "impacted_files": [],
-  "impacted_symbols": [],
-  "selected_tests": []
+  "changed_source_files": [
+    "tools/play_promoter.py"
+  ],
+  "impacted_files": [
+    "tools/play_promoter.py"
+  ],
+  "impacted_symbols": [
+    {
+      "name": "promote_version",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 26
+    },
+    {
+      "name": "main",
+      "kind": "function",
+      "file": "tools/play_promoter.py",
+      "line": 117
+    }
+  ],
+  "selected_tests": [
+    "tools/test_play_promoter.py"
+  ]
 }

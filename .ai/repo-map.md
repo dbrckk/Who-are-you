@@ -40264,6 +40264,23 @@ response = session.post(f"{API_ROOT}/{PACKAGE_NAME}/edits", json={}, timeout=60)
 ⋮----
 edit_id = response.json()["id"]
 ⋮----
+# A tested track is the only supported source for subsequent promotions.
+# Reading the current Play edit protects against promoting an arbitrary
+# version code that was uploaded to a different track but never reached qa.
+# A qa-to-qa edit is intentionally exempt (used to change a draft status).
+⋮----
+source = session.get(
+⋮----
+source_track = source.json()
+⋮----
+releases = source_track.get("releases", [])
+⋮----
+eligible = False
+⋮----
+codes = release.get("versionCodes", [])
+⋮----
+eligible = release.get("status") == "completed"
+⋮----
 update = session.put(
 ⋮----
 validation = session.post(edit_action_endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)

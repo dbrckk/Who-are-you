@@ -1,28 +1,41 @@
 {
   "files": [
     {
-      "path": "docs/play-update-0.3.0.md",
+      "path": "tools/play_promoter.py",
+      "reasons": [
+        "changed",
+        "changed-source",
+        "impact",
+        "recent-project-state",
+        "symbol-indexed"
+      ],
+      "score": 370
+    },
+    {
+      "path": "tools/play_publisher.py",
+      "reasons": [
+        "dependency-neighbor",
+        "recent-project-state"
+      ],
+      "score": 135
+    },
+    {
+      "path": "docs/m55-release-promotion.md",
       "reasons": [
         "changed"
       ],
       "score": 100
     },
     {
+      "path": "tools/test_play_promoter.py",
+      "reasons": [
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 100
+    },
+    {
       "path": "tools/play_existing_version_preflight.py",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "tools/play_promoter.py",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "tools/play_publisher.py",
       "reasons": [
         "recent-project-state"
       ],
@@ -55,6 +68,13 @@
         "entrypoint"
       ],
       "score": 40
+    },
+    {
+      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
+      "reasons": [
+        "dependency-neighbor"
+      ],
+      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",

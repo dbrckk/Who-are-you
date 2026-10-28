@@ -2,21 +2,34 @@
   "area": "tools",
   "files": [
     {
-      "path": "tools/play_existing_version_preflight.py",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "tools/play_promoter.py",
       "reasons": [
-        "recent-project-state"
+        "changed",
+        "changed-source",
+        "impact",
+        "recent-project-state",
+        "symbol-indexed"
       ],
-      "score": 60
+      "score": 370
     },
     {
       "path": "tools/play_publisher.py",
+      "reasons": [
+        "dependency-neighbor",
+        "recent-project-state"
+      ],
+      "score": 135
+    },
+    {
+      "path": "tools/test_play_promoter.py",
+      "reasons": [
+        "selected-test",
+        "symbol-indexed"
+      ],
+      "score": 100
+    },
+    {
+      "path": "tools/play_existing_version_preflight.py",
       "reasons": [
         "recent-project-state"
       ],

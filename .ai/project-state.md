@@ -38,28 +38,26 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T20:13:18Z
+Generated: 2026-10-28T20:16:54Z
 
 ### Git
 - Branch: `main`
-- Head: `c0edf5867cca`
-- Commit date: 2026-10-28T16:13:03-04:00
-- Commit: docs(play): record verified inspection blocker and signed-upload guard (#114)
+- Head: `5bc371a55b1c`
+- Commit date: 2026-10-28T16:16:43-04:00
+- Commit: fix(play): reject promotion unless version has completed Internal-track release (#115)
 - Tracked files: 707
 
 ### Recently changed files
+- `docs/m55-release-promotion.md`
+- `tools/play_promoter.py`
 - `docs/play-update-0.3.0.md`
 - `.github/workflows/play-internal-publish.yml`
 - `docs/play-version-inspection-setup.md`
 - `tools/test_play_publish_pipeline_contract.py`
-- `tools/play_promoter.py`
 - `tools/play_publisher.py`
 - `tools/test_m55_release_automation.py`
 - `tools/test_play_publisher.py`
 - `.github/workflows/play-version-inspection.yml`
-- `docs/play-health-connect-declaration.md`
-- `docs/play-version-inspection-request.json`
-- `tools/play_existing_version_preflight.py`
 
 ### Project signals
 - `build.gradle.kts`

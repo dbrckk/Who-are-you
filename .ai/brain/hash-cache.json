@@ -4,17 +4,21 @@
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
     },
-    "docs/play-update-0.3.0.md": {
-      "sha256": "389d3a36ee946402436080396b311086145167f9faf0fb0f659493184b5dfd38",
-      "size": 12187
+    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
+      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
+      "size": 4028
+    },
+    "docs/m55-release-promotion.md": {
+      "sha256": "96b20d644f5913524c4187da285493e7671e7cc9c6dafc06531ef13defa8fb12",
+      "size": 2835
     },
     "tools/play_existing_version_preflight.py": {
       "sha256": "f038fd1357bf721c8e64ef230c730ace624b96ea941ad30af33ea1c3519314aa",
       "size": 6013
     },
     "tools/play_promoter.py": {
-      "sha256": "fe68b0b382778b7cab192bada2ef07e6a1c3b2718549ae5a8cdfb028cb2e1ecb",
-      "size": 3348
+      "sha256": "ecdaff5126cf492002164918149d7897eabaa9d5a19d8a1f9b433af9431a22d0",
+      "size": 5150
     },
     "tools/play_publisher.py": {
       "sha256": "27a088b134b0d29f45e29f764ef4ebbb60ff45a9333e1606e037d6e64d2f0762",
@@ -23,6 +27,10 @@
     "tools/test_m55_release_automation.py": {
       "sha256": "76bc59bf9f1bce1474a24539ed9689df74058ad6a4b359391f5b4c707563a1b0",
       "size": 2303
+    },
+    "tools/test_play_promoter.py": {
+      "sha256": "4b3b47c9345b45218dd86b8b5df8c49b3e1606065d5a55cacc8b659c55b7c9ec",
+      "size": 1240
     },
     "tools/test_play_publish_pipeline_contract.py": {
       "sha256": "02496513faccd9e5a4adef66e2162d6d3cfe653f6a2d6cf3316a32fb74d5af57",

@@ -1,13 +1,15 @@
 # Change impact
 
-Base: be005eb8017d3da13d20c371b363fd2cca83e01b
-Head: c0edf5867ccaecd7bc97162f3c9989fc4b692121
+Base: e8843dbedbf06af5e0df98c8dff58307bc53a06b
+Head: 5bc371a55b1ca16c85d590f00914ee9cf58817d2
 
 ## Changed files
-- M docs/play-update-0.3.0.md
+- M docs/m55-release-promotion.md
+- M tools/play_promoter.py
 
 ## Affected areas
 - docs
+- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

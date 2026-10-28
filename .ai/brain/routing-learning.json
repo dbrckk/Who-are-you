@@ -378,6 +378,26 @@
       "useful": [
         "tools/test_play_publish_pipeline_contract.py"
       ]
+    },
+    {
+      "rejected": [],
+      "task": "fix(play): reject promotion unless version has completed Internal-track release (#115)",
+      "terms": [
+        "115",
+        "completed",
+        "has",
+        "internal-track",
+        "play",
+        "promotion",
+        "reject",
+        "release",
+        "unless",
+        "version"
+      ],
+      "tests": [],
+      "useful": [
+        "tools/play_promoter.py"
+      ]
     }
   ],
   "generated_by": "dbrckk/repo-brain-learning-v1",
@@ -447,6 +467,9 @@
     },
     "113": {
       "tools/test_play_publish_pipeline_contract.py": 4
+    },
+    "115": {
+      "tools/play_promoter.py": 4
     },
     "74": {
       "app/build.gradle.kts": 4,
@@ -679,6 +702,9 @@
       "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": 4,
       "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": 4,
       "tools/test_profile_result_allocation_contract.py": 4
+    },
+    "completed": {
+      "tools/play_promoter.py": 4
     },
     "connect": {
       "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
@@ -934,6 +960,9 @@
     "gradle": {
       "tools/test_performance_release_gate_contract.py": 4
     },
+    "has": {
+      "tools/play_promoter.py": 4
+    },
     "health": {
       "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
       "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
@@ -964,6 +993,9 @@
     },
     "internal": {
       "tools/test_play_publish_pipeline_contract.py": 4
+    },
+    "internal-track": {
+      "tools/play_promoter.py": 4
     },
     "map": {
       "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": 4,
@@ -1072,7 +1104,7 @@
       "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4,
       "tools/play_existing_version_preflight.py": 4,
-      "tools/play_promoter.py": 4,
+      "tools/play_promoter.py": 8,
       "tools/play_publisher.py": 4,
       "tools/test_m55_release_automation.py": 4,
       "tools/test_performance_release_gate_contract.py": 4,
@@ -1094,6 +1126,9 @@
       "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
       "app/src/main/java/com/whoareyou/app/BehaviorScreenUi.kt": 4,
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 8
+    },
+    "promotion": {
+      "tools/play_promoter.py": 4
     },
     "protect": {
       "tools/play_promoter.py": 4,
@@ -1184,6 +1219,9 @@
     "rationale": {
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
+    "reject": {
+      "tools/play_promoter.py": 4
+    },
     "rejection": {
       "app/src/main/java/com/whoareyou/app/BehaviorRefreshCoordinator.kt": 4,
       "app/src/main/java/com/whoareyou/app/BehaviorRepository.kt": 4,
@@ -1191,6 +1229,7 @@
       "app/src/main/java/com/whoareyou/app/HealthConnectPrivacyActivity.kt": 4
     },
     "release": {
+      "tools/play_promoter.py": 4,
       "tools/test_performance_release_gate_contract.py": 4
     },
     "request": {
@@ -1331,11 +1370,17 @@
     "task": {
       "tools/test_performance_release_gate_contract.py": 4
     },
+    "unless": {
+      "tools/play_promoter.py": 4
+    },
     "upload": {
       "tools/test_play_publish_pipeline_contract.py": 4
     },
     "uploading": {
       "tools/play_existing_version_preflight.py": 4
+    },
+    "version": {
+      "tools/play_promoter.py": 4
     },
     "versions": {
       "tools/play_existing_version_preflight.py": 4

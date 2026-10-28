@@ -1,8 +1,30 @@
 {
-  "schema_version": 1,
   "generated_by": "dbrckk/repo-brain-auto-learning-v1",
-  "learned": false,
-  "reason": "missing-task-or-source-change",
-  "task": "docs(play): record verified inspection blocker and signed-upload guard (#114)",
-  "useful": []
+  "learned": true,
+  "learning_result": {
+    "example_count": 16,
+    "rejected_count": 0,
+    "terms": [
+      "115",
+      "completed",
+      "has",
+      "internal-track",
+      "play",
+      "promotion",
+      "reject",
+      "release",
+      "unless",
+      "version"
+    ],
+    "test_count": 0,
+    "useful_count": 1
+  },
+  "note": "Selected tests are routing hints; this artifact does not claim they executed successfully.",
+  "rejected": [],
+  "schema_version": 1,
+  "task": "fix(play): reject promotion unless version has completed Internal-track release (#115)",
+  "tests_selected": [],
+  "useful": [
+    "tools/play_promoter.py"
+  ]
 }

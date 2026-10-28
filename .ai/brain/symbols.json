@@ -7747,14 +7747,14 @@
       "language": "python",
       "kind": "function",
       "name": "promote_version",
-      "line": 25
+      "line": 26
     },
     {
       "file": "tools/play_promoter.py",
       "language": "python",
       "kind": "function",
       "name": "main",
-      "line": 82
+      "line": 117
     },
     {
       "file": "tools/play_publisher.py",
