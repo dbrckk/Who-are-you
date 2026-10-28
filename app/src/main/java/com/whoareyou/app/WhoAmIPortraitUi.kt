@@ -35,7 +35,25 @@ fun WhoAmIPortraitCards(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         WhoAmICardModel.from(portrait).forEach { card ->
-            when (card.section) {
+            WhoAmIPortraitSection(
+                card = card,
+                recommendation = recommendation,
+                catalog = catalog,
+                onQuizSelected = onQuizSelected
+            )
+        }
+    }
+}
+
+/** A single independently composed portrait section for the parent LazyColumn. */
+@Composable
+fun WhoAmIPortraitSection(
+    card: WhoAmICard,
+    recommendation: NextQuizRecommendation? = null,
+    catalog: List<Quiz> = emptyList(),
+    onQuizSelected: (Quiz) -> Unit = {}
+) {
+    when (card.section) {
                 WhoAmISection.PORTRAIT -> WhoAmITraitCard(
                     titleRes = R.string.who_am_i_portrait,
                     tag = "who_am_i_portrait",
@@ -71,8 +89,6 @@ fun WhoAmIPortraitCards(
                     traits = card.traits,
                     showTrend = true
                 )
-            }
-        }
     }
 }
 
