@@ -17,6 +17,14 @@ A signed 0.3.0 / versionCode 5 AAB was generated in [candidate run 40701274882](
 
 If the inspection reports that versionCode 5 is already present, **do not upload it again**: increment the versionCode, rebuild the signed AAB with the existing upload key and repeat CI. If the API returns 403, check Play Console service-account permissions and app access rather than widening permissions indiscriminately. If Play Console's app entry or API access is unavailable, the existing Play owner must grant access.
 
+## Mandatory signing-identity check before any Internal upload
+
+The Play Internal Publish workflow also requires **one non-secret environment variable**, `WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256`. In [Play Console](https://play.google.com/console), open the *existing* app → **App integrity** → **App signing** → **Upload key certificate** and copy its **SHA-256 certificate fingerprint** (not the *app signing key certificate* fingerprint).
+
+Open [GitHub Environments](https://github.com/dbrckk/Who-are-you/settings/environments) → `play-internal` → **Environment variables** → add `WHO_ARE_YOU_PLAY_UPLOAD_CERT_SHA256` with that fingerprint. The Play Internal workflow extracts the certificate from the **AAB it just signed**, normalizes the fingerprints, and refuses to upload if the variable is missing, malformed or different. Certificate fingerprints are public identifiers; **never supply the private keystore, passwords, or service-account key in this variable**.
+
+The signing check is deliberately distinct from the version-code inspection and from Android App Links: the Play **upload certificate** verifies that the existing app accepts the AAB, whereas Android App Links normally need the Play **app signing certificate**.
+
 ## Separate release checks
 
 Before any Internal-track upload, compare `play-upload-certificate.txt` in the signed candidate artifact against the **upload certificate** in Play Console, review the Health Connect `READ_STEPS` declaration and public privacy policy, and test an in-place Play-signed upgrade. A green version inspection alone does not authorize a Play upload or production release.
