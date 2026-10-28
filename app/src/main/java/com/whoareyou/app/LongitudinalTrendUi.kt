@@ -68,7 +68,9 @@ fun LongitudinalTrendsCard(
 
     selectedTrend?.let { trend ->
         val title = catalogById[trend.quizId]?.title ?: trend.quizId
-        DimensionJournalEngine.build(trend.quizId, trend.points)?.let { journal ->
+        remember(trend.quizId, trend.points) {
+            DimensionJournalEngine.build(trend.quizId, trend.points)
+        }?.let { journal ->
             DimensionJournalDialog(
                 title = title,
                 journal = journal,
@@ -85,7 +87,8 @@ private fun TrendRow(
     french: Boolean,
     onClick: () -> Unit
 ) {
-    val summary = trendSummary(trend, french)
+    val summary = remember(trend, french) { trendSummary(trend, french) }
+    val graphPoints = remember(trend.points) { trend.points.map { it.score } }
 
     Column(
         modifier = Modifier
@@ -111,7 +114,7 @@ private fun TrendRow(
         }
 
         TrendSparkline(
-            points = trend.points.map { it.score },
+            points = graphPoints,
             description = "$title. $summary"
         )
 
