@@ -15,6 +15,7 @@ from play_publisher import (
     RELEASE_STATUSES,
     ReleaseConfig,
     endpoint,
+    edit_action_endpoint,
     load_service_account,
     release_payload,
     _authorized_session,
@@ -54,7 +55,7 @@ def promote_version(
     )
     update.raise_for_status()
 
-    validation = session.post(endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)
+    validation = session.post(edit_action_endpoint(PACKAGE_NAME, edit_id, "validate"), json={}, timeout=60)
     validation.raise_for_status()
 
     result: dict[str, Any] = {
@@ -67,7 +68,12 @@ def promote_version(
         "committed": False,
     }
     if commit:
-        committed = session.post(endpoint(PACKAGE_NAME, edit_id, "commit"), json={}, timeout=60)
+        committed = session.post(
+            edit_action_endpoint(PACKAGE_NAME, edit_id, "commit"),
+            params={"changesInReviewBehavior": "ERROR_IF_IN_REVIEW"},
+            json={},
+            timeout=60,
+        )
         committed.raise_for_status()
         result["committed"] = True
     return result

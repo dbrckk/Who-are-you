@@ -11,12 +11,18 @@ class M55ReleaseAutomationTest(unittest.TestCase):
         self.assertIn('PRODUCTION_TRACK = "production"', text)
         self.assertIn('Production publishing requires explicit confirmation', text)
         self.assertIn('userFraction', text)
+        self.assertIn('edit_action_endpoint(config.package_name, edit_id, "validate")', text)
+        self.assertIn('edit_action_endpoint(config.package_name, edit_id, "commit")', text)
+        self.assertIn('"changesInReviewBehavior": "ERROR_IF_IN_REVIEW"', text)
 
     def test_promotion_helper_exists_without_bundle_upload(self):
         text = (ROOT / "tools/play_promoter.py").read_text(encoding="utf-8")
         self.assertIn('Promote an already-uploaded Play version', text)
         self.assertIn('tracks/{track}', text)
         self.assertNotIn('/bundles', text)
+        self.assertIn('edit_action_endpoint(PACKAGE_NAME, edit_id, "validate")', text)
+        self.assertIn('edit_action_endpoint(PACKAGE_NAME, edit_id, "commit")', text)
+        self.assertIn('"changesInReviewBehavior": "ERROR_IF_IN_REVIEW"', text)
 
     def test_promotion_workflow_is_manual_and_safe_by_default(self):
         text = (ROOT / ".github/workflows/play-promote.yml").read_text(encoding="utf-8")
