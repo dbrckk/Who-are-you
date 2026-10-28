@@ -52,6 +52,8 @@ class ProfileScreenWhoAmITest {
             }
         }
 
+        composeRule.onNodeWithTag("profile_identity_hero").assertIsDisplayed()
+        composeRule.onNodeWithTag("profile_completion_progress").assertIsDisplayed()
         composeRule.onNodeWithTag("who_am_i_portrait").assertIsDisplayed()
         composeRule.onNodeWithTag("profile_open_habits").performScrollTo().assertIsDisplayed()
         composeRule.onNodeWithTag("profile_habits_privacy_hint").performScrollTo().assertIsDisplayed()
