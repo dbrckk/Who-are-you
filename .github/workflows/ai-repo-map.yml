@@ -18,3 +18,8 @@ concurrency:
 jobs:
   repository-standards:
     uses: dbrckk/repo-standards/.github/workflows/reusable-unified.yml@main
+    with:
+      # The 2026-10-28 generated map reached 1,512,872 bytes, above the
+      # former 1,500,000-byte cap. Keep a bounded budget without truncating
+      # source context or changing the shared standards workflow.
+      ai_map_max_bytes: 1600000
