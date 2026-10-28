@@ -1,6 +1,15 @@
 name: Play Candidate
 
 on:
+  # Reusable only from the trusted main-branch request workflow. This workflow
+  # still never runs directly on a repository push or untrusted pull request.
+  workflow_call:
+    inputs:
+      telemetry_enabled:
+        description: "Build with the configured production telemetry endpoint"
+        required: false
+        type: boolean
+        default: false
   workflow_dispatch:
     inputs:
       telemetry_enabled:

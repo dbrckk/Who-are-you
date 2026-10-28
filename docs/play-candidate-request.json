@@ -1,0 +1,10 @@
+{
+  "versionName": "0.3.0",
+  "versionCode": 5,
+  "buildOnly": true,
+  "telemetryEnabled": false,
+  "requestedOn": "2026-10-28",
+  "purpose": "Generate a current signed Play AAB after profile optimization and Health Connect privacy updates; no Google Play upload or publication.",
+  "playUploadAuthorized": false,
+  "releaseState": "candidate-only"
+}
