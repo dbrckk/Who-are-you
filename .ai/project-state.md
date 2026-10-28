@@ -38,17 +38,18 @@ Status: Existing Google Play app 0.3.0 update preparation — signed build and I
 <!-- AUTO:START -->
 ## Automatic repository state
 
-Generated: 2026-10-28T18:35:12Z
+Generated: 2026-10-28T19:12:30Z
 
 ### Git
 - Branch: `main`
-- Head: `51b993a7a111`
-- Commit date: 2026-10-28T14:34:59-04:00
-- Commit: feat(play): inspect existing Google Play versions safely before uploading (#110)
-- Tracked files: 706
+- Head: `571d1666f989`
+- Commit date: 2026-10-28T15:12:18-04:00
+- Commit: fix(play): clarify missing Play API credential and secure smartphone setup (#111)
+- Tracked files: 707
 
 ### Recently changed files
 - `.github/workflows/play-version-inspection.yml`
+- `docs/play-version-inspection-setup.md`
 - `docs/play-health-connect-declaration.md`
 - `docs/play-update-0.3.0.md`
 - `docs/play-version-inspection-request.json`
@@ -63,11 +64,6 @@ Generated: 2026-10-28T18:35:12Z
 - `app/src/main/java/com/whoareyou/app/ProfileIdentityMapUi.kt`
 - `baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt`
 - `docs/performance-validation.md`
-- `app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt`
-- `app/src/androidTest/java/com/whoareyou/app/MainActivityRecreationTest.kt`
-- `app/src/androidTest/java/com/whoareyou/app/ProfileScreenWhoAmITest.kt`
-- `app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt`
-- `app/src/main/java/com/whoareyou/app/ProfileInsightUi.kt`
 
 ### Project signals
 - `build.gradle.kts`

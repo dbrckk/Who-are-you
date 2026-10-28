@@ -2,21 +2,7 @@
   "area": "docs",
   "files": [
     {
-      "path": "docs/play-health-connect-declaration.md",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "docs/play-update-0.3.0.md",
-      "reasons": [
-        "changed"
-      ],
-      "score": 100
-    },
-    {
-      "path": "docs/play-version-inspection-request.json",
+      "path": "docs/play-version-inspection-setup.md",
       "reasons": [
         "changed"
       ],

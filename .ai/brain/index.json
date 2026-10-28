@@ -9,7 +9,7 @@
     "kotlin": 240
   },
   "index_mode": "incremental",
-  "reparsed_files": 1,
+  "reparsed_files": 0,
   "top_symbol_files": [
     {
       "file": "app/src/main/java/com/whoareyou/app/AppEvents.kt",

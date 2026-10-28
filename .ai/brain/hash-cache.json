@@ -1,8 +1,8 @@
 {
   "files": {
     ".github/workflows/play-version-inspection.yml": {
-      "sha256": "3b3fbe1def24f90cc74e9e07ab13b5e6a1a40640a28bb0a25e34e1532438f256",
-      "size": 4551
+      "sha256": "5a1d3d6ece6fe504c42017906385c8749af9ff79caa942350f53c3e0bb3ace19",
+      "size": 4735
     },
     "app/src/androidTest/java/com/whoareyou/app/HabitsPersistenceE2eTest.kt": {
       "sha256": "272451441a7eb8e62cb3a44d2f44451cb6f08961c74d21a562caf5f95c51011a",
@@ -16,10 +16,6 @@
       "sha256": "c7e814c479801b4c23c5399623b09733a7f29af0ffb861b21d3b84c223c4a68f",
       "size": 2580
     },
-    "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt": {
-      "sha256": "294fb17d382719e2dc142bc5ca0ec63309ad04d57396d6e135e7619ca0f25a0f",
-      "size": 2829
-    },
     "app/src/main/AndroidManifest.xml": {
       "sha256": "65b872b702ed85d3399377c55ce3f8d370790ba8db00ebed8854ce281ee0a6ca",
       "size": 3549
@@ -27,10 +23,6 @@
     "app/src/main/java/com/whoareyou/app/AppShellUi.kt": {
       "sha256": "9ed6aafb5ef4611fa79886f7b25b8071ae75e499e6f81102e790d4a8e8976e76",
       "size": 10686
-    },
-    "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt": {
-      "sha256": "612886482e0f29cf1a22ebc8fe319286aadf48a8ecbe42d471675e2b7c7de1ee",
-      "size": 4028
     },
     "app/src/main/java/com/whoareyou/app/LongitudinalTrendUi.kt": {
       "sha256": "18e4ac6fb7f21d04a0afdd7e7bb35f7ef43ac87b05c36a2a4ccb5df2d64c9455",
@@ -44,45 +36,17 @@
       "sha256": "b5cc1b1682c78a0fa42190ee7253ab44d1fcb9cbd5a64235fc5c5de8f213d0fb",
       "size": 5204
     },
-    "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt": {
-      "sha256": "c2f1a89db228b51f3114f8eb53edc1d93104dc19e0858f2c7889e0110adaee09",
-      "size": 27537
-    },
-    "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt": {
-      "sha256": "72b520387cb2c55cd3470a6f895cf09c51365de2b0821b4c1a801a9e6e447378",
-      "size": 13176
-    },
-    "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt": {
-      "sha256": "198cdf4ba535d29fcf92a50430501b5c4f5d270bc1d01e34f25130582ea28d48",
-      "size": 8966
-    },
     "baseline-profile/src/main/java/com/whoareyou/app/baselineprofile/RenderingBenchmark.kt": {
       "sha256": "838f07451ff4991b366455e61d246e18fc70b777cb5e8a76b0265595a1e07b2d",
       "size": 6103
     },
-    "docs/play-health-connect-declaration.md": {
-      "sha256": "e692f175980e070f6dff11d432ee5794199178906f6234c016a07a311d7877f2",
-      "size": 4811
-    },
-    "docs/play-update-0.3.0.md": {
-      "sha256": "e0d9a675bc2de59cf7dc65d44312062f81cdae002d2fd4db803b49c8ddbb31c9",
-      "size": 10922
-    },
-    "docs/play-version-inspection-request.json": {
-      "sha256": "a9e11f902b5acc4250ed2c86008183e1668e135e27dc1ad5a496881f5e77b462",
-      "size": 439
+    "docs/play-version-inspection-setup.md": {
+      "sha256": "b827c0515bd69744d92d54b64a56564e1735261934b44bc67fd89f1dea8d3704",
+      "size": 3613
     },
     "tools/play_existing_version_preflight.py": {
       "sha256": "f038fd1357bf721c8e64ef230c730ace624b96ea941ad30af33ea1c3519314aa",
       "size": 6013
-    },
-    "tools/play_publisher.py": {
-      "sha256": "fe894b088b4db42ccc3ff83c37e9c38e65b5283795e4be95aa46825bd23c4c82",
-      "size": 8898
-    },
-    "tools/test_profile_result_allocation_contract.py": {
-      "sha256": "9e98cd894644485141902bd1cd0fd0631c98e80d61dcf81945fca9c281129659",
-      "size": 2701
     }
   },
   "generated_by": "dbrckk/repo-brain-v6",

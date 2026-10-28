@@ -1,19 +1,15 @@
 # Change impact
 
-Base: 7260194d6912f3946c8935d41e60b515e08ed65a
-Head: 51b993a7a1113639f9815be13f20181ebc05b964
+Base: 11b26a77d80d168254cbf0b343e8d1bbb29085df
+Head: 571d1666f989f4c45fe850ce5a8b4bba25c70625
 
 ## Changed files
-- A .github/workflows/play-version-inspection.yml
-- M docs/play-health-connect-declaration.md
-- M docs/play-update-0.3.0.md
-- A docs/play-version-inspection-request.json
-- M tools/play_existing_version_preflight.py
+- M .github/workflows/play-version-inspection.yml
+- A docs/play-version-inspection-setup.md
 
 ## Affected areas
 - .github
 - docs
-- tools
 
 ## Related test candidates
 - No direct filename-based test match detected.

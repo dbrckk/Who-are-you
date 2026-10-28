@@ -1,62 +1,21 @@
 {
   "schema_version": 1,
   "generated_by": "dbrckk/repo-brain",
-  "base": "2555674a20f03d3e21c81634d80e21e0fd3c804f",
-  "head": "51b993a7a1113639f9815be13f20181ebc05b964",
+  "base": "51b993a7a1113639f9815be13f20181ebc05b964",
+  "head": "571d1666f989f4c45fe850ce5a8b4bba25c70625",
   "index_mode": "incremental",
   "changed_files": [
     {
       "path": ".github/workflows/play-version-inspection.yml",
+      "status": "M"
+    },
+    {
+      "path": "docs/play-version-inspection-setup.md",
       "status": "A"
-    },
-    {
-      "path": "docs/play-health-connect-declaration.md",
-      "status": "M"
-    },
-    {
-      "path": "docs/play-update-0.3.0.md",
-      "status": "M"
-    },
-    {
-      "path": "docs/play-version-inspection-request.json",
-      "status": "A"
-    },
-    {
-      "path": "tools/play_existing_version_preflight.py",
-      "status": "M"
     }
   ],
-  "changed_source_files": [
-    "tools/play_existing_version_preflight.py"
-  ],
-  "impacted_files": [
-    "tools/play_existing_version_preflight.py"
-  ],
-  "impacted_symbols": [
-    {
-      "name": "_version_code",
-      "kind": "function",
-      "file": "tools/play_existing_version_preflight.py",
-      "line": 25
-    },
-    {
-      "name": "inspect_play_versions",
-      "kind": "function",
-      "file": "tools/play_existing_version_preflight.py",
-      "line": 35
-    },
-    {
-      "name": "preflight",
-      "kind": "function",
-      "file": "tools/play_existing_version_preflight.py",
-      "line": 71
-    },
-    {
-      "name": "main",
-      "kind": "function",
-      "file": "tools/play_existing_version_preflight.py",
-      "line": 123
-    }
-  ],
+  "changed_source_files": [],
+  "impacted_files": [],
+  "impacted_symbols": [],
   "selected_tests": []
 }

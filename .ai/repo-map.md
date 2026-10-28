@@ -2662,7 +2662,7 @@ jobs:
           PLAY_SERVICE_ACCOUNT_JSON_B64: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 }}
         run: |
           if [ -z "$PLAY_SERVICE_ACCOUNT_JSON_B64" ]; then
-            echo "::error::GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 is missing from the protected play-internal environment; no Play API request made"
+            echo "::error::Google Play version inspection blocked: configure GOOGLE_PLAY_SERVICE_ACCOUNT_JSON_B64 in GitHub Settings > Environments > play-internal > Environment secrets. Use the base64-encoded existing Google Play API service-account JSON; see docs/play-version-inspection-setup.md. No Play API request was made."
             exit 1
           fi
 

@@ -23,13 +23,6 @@
       "score": 60
     },
     {
-      "path": "app/src/androidTest/java/com/whoareyou/app/WhoAmIPortraitUiTest.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/main/java/com/whoareyou/app/AppShellUi.kt",
       "reasons": [
         "recent-project-state"
@@ -58,39 +51,11 @@
       "score": 60
     },
     {
-      "path": "app/src/main/java/com/whoareyou/app/ProfileScreenUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/TraitTimelineUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/WhoAmIPortraitUi.kt",
-      "reasons": [
-        "recent-project-state"
-      ],
-      "score": 60
-    },
-    {
       "path": "app/src/main/AndroidManifest.xml",
       "reasons": [
         "entrypoint"
       ],
       "score": 40
-    },
-    {
-      "path": "app/src/main/java/com/whoareyou/app/AppUsageCollector.kt",
-      "reasons": [
-        "dependency-neighbor"
-      ],
-      "score": 25
     }
   ],
   "generated_by": "dbrckk/repo-brain-v6",
